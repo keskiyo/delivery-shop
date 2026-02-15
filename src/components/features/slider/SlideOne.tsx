@@ -2,8 +2,7 @@ import Image from 'next/image'
 
 const SlideOne = () => {
 	return (
-		<div className="relative bg-[url('/images/graphics/pattern-slider.png')] bg-repeat bg-contain overflow-hidden flex justify-center h-20 md:h-40 xl:h-60">
-			{/* Затемнение поверх фона, но под контентом */}
+		<div className="relative bg-[url('/images/graphics/pattern-slider.png')] bg-repeat bg-contain overflow-hidden flex justify-center h-20 md:h-40 xl:h-50">
 			<div className='absolute inset-0 bg-white/70'></div>
 
 			<div className='flex flex-row gap-x-2 xl:gap-x-4 items-center z-10 relative'>

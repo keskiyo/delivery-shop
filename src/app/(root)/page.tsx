@@ -1,6 +1,6 @@
 import { Loader } from '@/components/features/common/loader'
-import TestPage from '@/components/features/common/Test'
 import Slider from '@/components/features/slider/Slider'
+import Actions from '@/components/layout/Actions'
 import { Suspense } from 'react'
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
 			<Suspense fallback={<Loader text='слайдера' />}>
 				<Slider />
 			</Suspense>
-			<TestPage />
+			<Actions />
 		</div>
 	)
 }
