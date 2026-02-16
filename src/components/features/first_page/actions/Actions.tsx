@@ -1,7 +1,7 @@
 import Container from '@/components/ui/container'
 import database from '@/data/database.json'
 import { ChevronRight } from 'lucide-react'
-import ProductCard from './ProductCard'
+import ProductCard from '../../common/ProductCard'
 
 const Actions = () => {
 	const actionProducts = database.products.filter(p =>
@@ -9,7 +9,7 @@ const Actions = () => {
 	)
 
 	return (
-		<section>
+		<section className='pb-8 md:pb-16 xl:pb-20'>
 			<Container>
 				<div className='mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between'>
 					<h2 className='text-2xl xl:text-4xl text-left font-bold'>

@@ -4,8 +4,9 @@ export interface ProductCardProps {
 	img: string
 	basePrice: number
 	description: string
-	discountPercent: number
+	discountPercent?: number
 	rating: number
 	weight?: string
 	volume?: string
+	categories: string[]
 }

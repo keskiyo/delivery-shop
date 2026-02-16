@@ -1,3 +1,4 @@
+import StarRating from '@/components/features/common/StarRating'
 import { ProductCardProps } from '@/types/product'
 import { formatPrice } from '@/utils/formatPrice'
 import { Heart } from 'lucide-react'
@@ -9,8 +10,9 @@ const ProductCard = ({
 	img,
 	description,
 	basePrice,
-	discountPercent,
+	discountPercent = 0,
 	rating,
+	categories,
 }: ProductCardProps) => {
 	const calculateFinalPrice = (price: number, discount: number): number => {
 		return discount > 0 ? price * (1 - discount / 100) : price
@@ -20,9 +22,14 @@ const ProductCard = ({
 		return calculateFinalPrice(price, discount)
 	}
 
-	const finalPrice = calculateFinalPrice(basePrice, discountPercent)
+	const isNewProduct = categories?.includes('new')
+	const finalPrice = isNewProduct
+		? basePrice
+		: calculateFinalPrice(basePrice, discountPercent)
 
-	const priceByCard = calculatePriceByCard(finalPrice, cardDiscountPercent)
+	const priceByCard = isNewProduct
+		? basePrice
+		: calculatePriceByCard(finalPrice, cardDiscountPercent)
 
 	return (
 		<div className='flex flex-col justify-between w-40 rounded overflow-hidden bg-white text-[#414141] md:w-56 xl:w-68 align-top p-0 hover:shadow-(--shadow-article) duration-300'>
@@ -31,7 +38,7 @@ const ProductCard = ({
 					src={img}
 					alt='Акция'
 					fill
-					className='object-cover'
+					className='object-contain'
 					sizes='(max-width: 768px) 160px, (max-width: 1200px) 224px, 272px'
 				/>
 				<button className='w-8 h-8 p-2 bg-[#f3f2f1] hover:bg-[#fcd5ba] absolute top-2 right-2 opacity-50 rounded cursor-pointer duration-300 flex items-center'>
@@ -51,7 +58,7 @@ const ProductCard = ({
 							<span>{formatPrice(priceByCard)}</span>
 							<span>₽</span>
 						</div>
-						{cardDiscountPercent > 0 && (
+						{discountPercent > 0 && (
 							<p className='text-[#bfbfbf] text-[8px] md:text-xs'>
 								С картой
 							</p>
@@ -63,7 +70,7 @@ const ProductCard = ({
 								<span>{formatPrice(finalPrice)}</span>
 								<span>₽</span>
 							</div>
-							<p className='text-[#bfbfbf] text-[8px] md:text-xs'>
+							<p className='text-[#bfbfbf] text-[8px] md:text-xs text-right'>
 								Обычная
 							</p>
 						</div>
@@ -72,7 +79,7 @@ const ProductCard = ({
 				<div className='h-13.5 text-xs md:text-base line-clamp-3 md:line-clamp-2 leading-normal'>
 					{description}
 				</div>
-				{rating > 0 && <p>Рейтинг {rating}</p>}
+				{rating > 0 && <StarRating rating={rating} />}
 				<button className='border border-[#414141] hover:text-white hover:bg-[#ff6633] hover:border-transparent active:shadow-(--shadow-button-active) w-full h-10 rounded p-2 justify-center items-center transition-all duration-300 cursor-pointer select-none'>
 					В корзину
 				</button>
