@@ -1,12 +1,28 @@
+import ViewAllLink from '@/components/features/common/ViewAllLink'
 import Container from '@/components/ui/container'
-import database from '@/data/database.json'
-import { ChevronRight } from 'lucide-react'
+import { ProductCardProps } from '@/types/product'
+import { shuffleArray } from '@/utils/shuffleArray'
 import ProductCard from '../../common/ProductCard'
 
-const Actions = () => {
-	const actionProducts = database.products.filter(p =>
-		p.categories.includes('actions'),
-	)
+const Actions = async () => {
+	let error = null
+	let products: ProductCardProps[] = []
+
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PUBLIC_BASE_URL!}/api/products?categories=actions`,
+		)
+		products = await res.json()
+
+		products = shuffleArray(products)
+	} catch (err) {
+		error = 'Ошибка получения акционных продуктов'
+		console.error('Ошибка получения акционных продуктов', err)
+	}
+
+	if (error) {
+		return <div className='text-red-600'> Ошибка: {error} </div>
+	}
 
 	return (
 		<section className='pb-8 md:pb-16 xl:pb-20'>
@@ -15,15 +31,12 @@ const Actions = () => {
 					<h2 className='text-2xl xl:text-4xl text-left font-bold'>
 						Акции
 					</h2>
-					<button className='flex flex-row items-center gap-x-2 cursor-pointer'>
-						<p className='text-base text-center'>Все акции</p>
-						<ChevronRight size={24} />
-					</button>
+					<ViewAllLink href='actions' btnText='Все акции' />
 				</div>
 				<ul className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-10 justify-items-center'>
-					{actionProducts.slice(0, 4).map((item, index) => (
+					{products.slice(0, 4).map((item, index) => (
 						<li
-							key={item.id}
+							key={item._id}
 							className={`${index >= 4 ? 'hidden' : ''}
             ${index >= 3 ? 'md:hidden xl:block' : ''}
             ${index >= 4 ? 'xl:hidden' : ''}

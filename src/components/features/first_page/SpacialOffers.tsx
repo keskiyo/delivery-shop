@@ -7,7 +7,7 @@ const SpecialOffers = () => {
 			<Container>
 				<div className='flex mb-4 md:mb-8 xl:mb-10'>
 					<div className='flex flex-col gap-4 md:w-184.25 xl:w-full mx-auto'>
-						<h2 className='text-2xl xl:text-4xl text-left font-bold mb-4 md:mb-8'>
+						<h2 className='mb-4 mb:mb-8 xl:mb-10 text-2xl xl:text-4xl text-left font-bold'>
 							Специальные предложения
 						</h2>
 						<div className='flex justify-center md:flex-row gap-4 items-center xl:w-auto '>

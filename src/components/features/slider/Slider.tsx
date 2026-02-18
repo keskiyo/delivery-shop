@@ -8,26 +8,17 @@ const Slider = () => {
 	const slides = [<SlideOne key='slide1' />, <SlideTwo key='slide2' />]
 
 	return (
-		<div className='relative h-20 md:h-40 xl:h-80 w-full mb-10 md:mb-15 xl:mb-10'>
+		<div className='relative h-20 md:h-40 xl:h-60 w-full mb-10 md:mb-15 xl:mb-10'>
 			{slides.map((slide, index) => (
 				<motion.div
 					key={`slide-${index}`}
 					initial={{
 						opacity: 0,
-						scale: 0.98,
-						filter: 'blur(4px)',
+						scale: 1,
 					}}
 					animate={{
 						opacity: [0, 1, 1, 0],
-						scale: [0.98, 1, 1, 0.98],
-						filter: [
-							'blur(4px)',
-							'blur(0px)',
-							'blur(0px)',
-							'blur(4px)',
-						],
 						rotateX: [0, 0, 0, 2],
-						transformOrigin: 'center center',
 					}}
 					transition={{
 						duration: 5,
