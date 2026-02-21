@@ -1,9 +1,9 @@
+import Articles from '@/app/(root)/(articles)/Articles'
+import Actions from '@/app/(root)/(products)/Actions'
+import NewProducts from '@/app/(root)/(products)/NewProducts'
+import Purchases from '@/app/(root)/(user)/Purchases'
 import { Loader } from '@/components/features/common/loader'
-import Actions from '@/components/features/first_page/actions/Actions'
-import { Articles } from '@/components/features/first_page/articles/Articles'
 import Maps from '@/components/features/first_page/Maps'
-import NewProducts from '@/components/features/first_page/new_products/NewProducts'
-import Purchases from '@/components/features/first_page/purchases/Purchases'
 import SpecialOffers from '@/components/features/first_page/SpacialOffers'
 import Slider from '@/components/features/slider/Slider'
 import { Suspense } from 'react'
@@ -15,12 +15,14 @@ export default function Home() {
 			<Suspense fallback={<Loader text='слайдера' />}>
 				<Slider />
 			</Suspense>
-			<Actions />
-			<NewProducts />
-			<Purchases />
-			<SpecialOffers />
-			<Maps />
-			<Articles />
+			<div className='px-[max(12px,calc((100%-1208px)/2))] flex flex-col gap-y-20 md:mb-25 xl:mb-30'>
+				<Actions />
+				<NewProducts />
+				<Purchases />
+				<SpecialOffers />
+				<Maps />
+				<Articles />
+			</div>
 		</div>
 	)
 }

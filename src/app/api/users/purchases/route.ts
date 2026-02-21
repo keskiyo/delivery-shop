@@ -1,14 +1,12 @@
 import { getDB } from '@/lib/api-routes'
 import { NextResponse } from 'next/server'
-export const revalidate = 3600
 
 export async function GET() {
 	try {
 		const db = await getDB()
 
-		const user = await db.collection('users').findOne({
-			role: 'user',
-		})
+		const user = await db.collection('users').findOne({})
+
 		if (!user?.purchases?.length) {
 			return NextResponse.json([])
 		}
@@ -18,7 +16,7 @@ export async function GET() {
 		const products = await db
 			.collection('products')
 			.find({
-				_id: { $in: productsIds },
+				id: { $in: productsIds },
 			})
 			.toArray()
 

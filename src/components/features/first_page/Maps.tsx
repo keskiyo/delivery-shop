@@ -1,6 +1,5 @@
 'use client'
 
-import Container from '@/components/ui/container'
 import { locations } from '@/data/locations'
 import { Map, Placemark, YMaps } from '@iminside/react-yandex-maps'
 import { useState } from 'react'
@@ -19,59 +18,57 @@ const Maps = () => {
 			}}
 		>
 			<section>
-				<Container className='flex flex-col justify-center'>
-					<h2 className='mb-4 mb:mb-8 xl:mb-10 text-2xl xl:text-4xl text-left font-bold'>
-						Наши магазины
-					</h2>
+				<h2 className='mb-4 mb:mb-8 xl:mb-10 text-2xl xl:text-4xl text-left font-bold'>
+					Наши магазины
+				</h2>
 
-					<div className='flex flex-wrap gap-x-2 gap-y-3 mb-5'>
-						{Object.keys(locations).map(key => {
-							const isActive = currentLocation === key
-							return (
-								<button
-									key={key}
-									onClick={() => setCurrentLocation(key)}
-									className={`p-2 text-xs justify-center items-center active:shadow-(--shadow-button-active) border-none rounded cursor-pointer transition-colors duration-300 ${
-										isActive
-											? 'bg-green-500 text-white hover: shadow-(--shadow-button-default)'
-											: 'bg-[#f3f2f1] text-gray-500 hover:shadow-(--shadow-button-secondary)'
-									}`}
-								>
-									{locations[key].name}
-								</button>
-							)
-						})}
-					</div>
+				<div className='flex flex-wrap gap-x-2 gap-y-3 mb-5'>
+					{Object.keys(locations).map(key => {
+						const isActive = currentLocation === key
+						return (
+							<button
+								key={key}
+								onClick={() => setCurrentLocation(key)}
+								className={`p-2 text-xs justify-center items-center active:shadow-(--shadow-button-active) border-none rounded cursor-pointer transition-colors duration-300 ${
+									isActive
+										? 'bg-green-500 text-white hover: shadow-(--shadow-button-default)'
+										: 'bg-[#f3f2f1] text-gray-500 hover:shadow-(--shadow-button-secondary)'
+								}`}
+							>
+								{locations[key].name}
+							</button>
+						)
+					})}
+				</div>
 
-					<Map
-						defaultState={{
-							center: currentLocationData.center,
-							zoom: 15,
-						}}
-						state={{
-							center: currentLocationData.center,
-							zoom: 15,
-						}}
-						width='100%'
-						height='350px'
-					>
-						{locations[currentLocation].shops.map(shop => (
-							<Placemark
-								key={shop.id}
-								geometry={shop.coordinates}
-								properties={{
-									hintContent: shop.name,
-								}}
-								options={{
-									iconLayout: 'default#image',
-									iconImageHref: mapPinIcon,
-									iconImageSize: [32, 32],
-									iconImageOffset: [-12, -24],
-								}}
-							/>
-						))}
-					</Map>
-				</Container>
+				<Map
+					defaultState={{
+						center: currentLocationData.center,
+						zoom: 15,
+					}}
+					state={{
+						center: currentLocationData.center,
+						zoom: 15,
+					}}
+					width='100%'
+					height='350px'
+				>
+					{locations[currentLocation].shops.map(shop => (
+						<Placemark
+							key={shop.id}
+							geometry={shop.coordinates}
+							properties={{
+								hintContent: shop.name,
+							}}
+							options={{
+								iconLayout: 'default#image',
+								iconImageHref: mapPinIcon,
+								iconImageSize: [32, 32],
+								iconImageOffset: [-12, -24],
+							}}
+						/>
+					))}
+				</Map>
 			</section>
 		</YMaps>
 	)

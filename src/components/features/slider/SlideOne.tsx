@@ -10,7 +10,6 @@ const SlideOne = () => {
 					<Image
 						src='/images/graphics/food.png'
 						alt='Слайд'
-						quality={100}
 						fill
 						sizes='(max-width: 768px) 50px, (max-width: 1200px) 75px, 100px'
 					/>

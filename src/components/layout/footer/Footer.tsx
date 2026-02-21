@@ -21,7 +21,7 @@ const Footer = () => {
 	}
 
 	return (
-		<footer className='bg-[#242525] text-gray-300 mb-14 md:mb-0 w-full mt-10'>
+		<footer className='bg-[#242525] text-gray-300 mb-14 md:mb-0 w-full mt-20'>
 			<div className='max-w-302 mx-auto px-7 py-10'>
 				{/* Общая обертка для всех элементов футера */}
 				<div className='flex flex-col md:flex-row justify-between items-center gap-6 md:gap-10'>

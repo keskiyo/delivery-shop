@@ -9,7 +9,7 @@ const rubik = Rubik({
 })
 
 export const metadata: Metadata = {
-	title: 'Delivery-shop',
+	title: 'Фудмаркет',
 	description: 'Разработка магазина доставки',
 }
 
