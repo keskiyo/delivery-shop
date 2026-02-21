@@ -3,7 +3,7 @@ import { ProductCardProps } from '@/types/product'
 const fetchPurchases = async () => {
 	try {
 		const res = await fetch(
-			`${process.env.NEXT_PUBLIC_BASE_URL!}/api/users/purchases`,
+			`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/purchases`,
 			{ next: { revalidate: 3600 } },
 		)
 

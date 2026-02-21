@@ -207,6 +207,10 @@
 /* Установка шрифта по умолчанию */
 body {
 	font-family: var(--font-sans);
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 /* Базовые стили для всех элементов */
@@ -216,26 +220,5 @@ body {
 	}
 	body {
 		@apply bg-background text-foreground;
-	}
-}
-
-/* Animation keyframes */
-@keyframes float {
-	0%,
-	100% {
-		transform: translateY(0);
-	}
-	50% {
-		transform: translateY(-15px);
-	}
-}
-
-@keyframes pulse {
-	0%,
-	100% {
-		opacity: 0.7;
-	}
-	50% {
-		opacity: 1;
 	}
 }

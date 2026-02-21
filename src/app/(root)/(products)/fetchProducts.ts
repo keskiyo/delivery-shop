@@ -1,10 +1,9 @@
 import { ProductCardProps } from '@/types/product'
-import { shuffleArray } from '@/utils/shuffleArray'
 
 const fetchProductsByCategory = async (category: string) => {
 	try {
 		const res = await fetch(
-			`${process.env.NEXT_PUBLIC_BASE_URL!}/api/products?category=${category}`,
+			`${process.env.NEXT_PUBLIC_BASE_URL}/api/products?category=${category}`,
 			{ next: { revalidate: 3600 } },
 		)
 
@@ -18,7 +17,7 @@ const fetchProductsByCategory = async (category: string) => {
 			products => products.quantity > 0,
 		)
 
-		return shuffleArray(availableProducts)
+		return availableProducts
 	} catch (err) {
 		console.error(`Ошибка получения ${category}`, err)
 		throw err

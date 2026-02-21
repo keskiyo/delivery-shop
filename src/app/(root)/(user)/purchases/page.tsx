@@ -1,25 +1,22 @@
+import GenericListPage from '@/app/(root)/(products)/GenericListPage'
 import fetchPurchases from '@/app/(root)/(user)/fetchPurchases'
-import ProductsSections from '@/components/shared/ProductsSections'
-// import { getPurchases } from '@/lib/services/purchase.service'
 
-const AllPurchases = async () => {
-	try {
-		const purchases = await fetchPurchases()
-
-		return (
-			<ProductsSections
-				title='Все покупки'
-				viewAllLink={{ text: 'На главную', href: '/' }}
-				products={purchases}
-			/>
-		)
-	} catch {
-		return (
-			<div className='text-red-500'>
-				Ошибка: Не удалось загрузить прошлые покупки
-			</div>
-		)
-	}
+const AllPurchases = async ({
+	searchParams,
+}: {
+	searchParams: Promise<{ page?: string; itemsPerPage?: string }>
+}) => {
+	return (
+		<GenericListPage
+			searchParams={searchParams}
+			props={{
+				fetchData: () => fetchPurchases(),
+				pageTitle: ' Все покупки',
+				basePath: '/purchases',
+				errorMessage: 'Ошибка: не удалось загрузить покупки',
+			}}
+		/>
+	)
 }
 
 export default AllPurchases

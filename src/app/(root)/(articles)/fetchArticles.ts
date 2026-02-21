@@ -3,7 +3,7 @@ import { ArticlesProps } from '@/types/articles'
 const fetchArticles = async () => {
 	try {
 		const res = await fetch(
-			`${process.env.NEXT_PUBLIC_BASE_URL!}/api/articles`,
+			`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles`,
 			{ next: { revalidate: 3600 } },
 		)
 

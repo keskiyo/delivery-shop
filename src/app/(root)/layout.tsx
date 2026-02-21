@@ -10,7 +10,7 @@ export default function HomeLayout({
 	return (
 		<ThemeProvider>
 			<Header />
-			<main className='min-h-screen'>
+			<main>
 				<div>{children}</div>
 			</main>
 			<Footer />

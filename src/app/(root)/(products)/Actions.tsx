@@ -1,9 +1,11 @@
 import fetchProductsByCategory from '@/app/(root)/(products)/fetchProducts'
 import ProductsSections from '@/components/shared/ProductsSections'
+import { shuffleArray } from '@/utils/shuffleArray'
 
 const Actions = async () => {
 	try {
-		const products = await fetchProductsByCategory('actions')
+		let products = await fetchProductsByCategory('actions')
+		products = shuffleArray(products)
 
 		return (
 			<ProductsSections

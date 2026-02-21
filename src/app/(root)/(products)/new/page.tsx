@@ -1,30 +1,26 @@
 import fetchProductsByCategory from '@/app/(root)/(products)/fetchProducts'
-import ProductsSections from '@/components/shared/ProductsSections'
-// import { getProductsByCategory } from '@/lib/services/product.service'
+import GenericListPage from '@/app/(root)/(products)/GenericListPage'
 
 export const metadata = {
 	title: 'Новинка магазина "Фудмаркет"',
 	description: 'Новые товары магазина "Фудмаркет"',
 }
 
-const AllNew = async () => {
-	try {
-		const products = await fetchProductsByCategory('new')
-
-		return (
-			<ProductsSections
-				title='Все новинки'
-				viewAllLink={{ text: 'На главную', href: '/' }}
-				products={products}
-			/>
-		)
-	} catch {
-		return (
-			<div className='text-red-500'>
-				Ошибка: Не удалось загрузить новинки
-			</div>
-		)
-	}
+const AllNew = async ({
+	searchParams,
+}: {
+	searchParams: Promise<{ page?: string; itemsPerPage?: string }>
+}) => {
+	return (
+		<GenericListPage
+			searchParams={searchParams}
+			props={{
+				fetchData: () => fetchProductsByCategory('new'),
+				pageTitle: ' Все новинки',
+				basePath: '/new',
+				errorMessage: 'Ошибка: не удалось загрузить новинки',
+			}}
+		/>
+	)
 }
-
 export default AllNew
