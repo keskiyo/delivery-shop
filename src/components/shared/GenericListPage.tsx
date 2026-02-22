@@ -1,10 +1,10 @@
+import ProductsSections from '@/app/(root)/(products)/ProductsSections'
 import PaginationWrapper from '@/components/shared/PaginationWrapper'
-import ProductsSections from '@/components/shared/ProductsSections'
 import { ArticlesProps } from '@/types/articles'
 import { GenericListPageProps } from '@/types/genericListPageProps'
 import { ProductCardProps } from '@/types/product'
-import ArticleSection from '../(articles)/ArticlesSection'
-import { CONFIG } from '../../../../config/config'
+import { CONFIG } from '../../../config/config'
+import ArticleSection from '../../app/(root)/(articles)/ArticlesSection'
 
 const GenericListPage = async ({
 	searchParams,
@@ -29,13 +29,11 @@ const GenericListPage = async ({
 				{!props.contentType ? (
 					<ProductsSections
 						title={props.pageTitle}
-						viewAllLink={{ text: 'На главную', href: '/' }}
 						products={paginatedItems as ProductCardProps[]}
 					/>
 				) : (
 					<ArticleSection
 						title={props.pageTitle}
-						viewAllLink={{ text: 'На главную', href: '/' }}
 						articles={paginatedItems as ArticlesProps[]}
 					/>
 				)}

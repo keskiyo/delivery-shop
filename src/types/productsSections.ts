@@ -2,7 +2,7 @@ import { ProductCardProps } from '@/types/product'
 
 export interface ProductsSectionsProps {
 	title: string
-	viewAllLink: {
+	viewAllLink?: {
 		text: string
 		href: string
 	}

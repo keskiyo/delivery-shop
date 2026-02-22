@@ -1,5 +1,5 @@
-import GenericListPage from '@/app/(root)/(products)/GenericListPage'
 import fetchPurchases from '@/app/(root)/(user)/fetchPurchases'
+import GenericListPage from '@/components/shared/GenericListPage'
 
 const AllPurchases = async ({
 	searchParams,

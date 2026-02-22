@@ -1,6 +1,7 @@
 import { Providers } from '@/components/features/common/providers'
 import type { Metadata } from 'next'
 import { Rubik } from 'next/font/google'
+import { cookies } from 'next/headers'
 import './globals.css'
 
 const rubik = Rubik({
@@ -13,13 +14,24 @@ export const metadata: Metadata = {
 	description: 'Разработка магазина доставки',
 }
 
-export default function RootLayout({
+async function getInitialTheme() {
+	const cookiesList = await cookies()
+	const themeCookie = cookiesList.get('theme')?.value
+	if (themeCookie === 'dark' || themeCookie === 'light') {
+		return themeCookie
+	}
+	return 'light'
+}
+
+export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode
 }>) {
+	const initialTheme = await getInitialTheme()
+
 	return (
-		<html lang='en' suppressHydrationWarning>
+		<html lang='ru' className={initialTheme} suppressHydrationWarning>
 			<body className={`${rubik.variable} font-sans`}>
 				<Providers>{children}</Providers>
 			</body>

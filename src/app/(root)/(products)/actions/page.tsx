@@ -1,5 +1,5 @@
 import fetchProductsByCategory from '@/app/(root)/(products)/fetchProducts'
-import GenericListPage from '@/app/(root)/(products)/GenericListPage'
+import GenericListPage from '@/components/shared/GenericListPage'
 
 export const metadata = {
 	title: 'Акции магазина "Фудмаркет"',

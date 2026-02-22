@@ -1,4 +1,4 @@
-import ProductsSections from '@/components/shared/ProductsSections'
+import ProductsSections from '@/app/(root)/(products)/ProductsSections'
 import fetchPurchases from './fetchPurchases'
 
 const Purchases = async () => {

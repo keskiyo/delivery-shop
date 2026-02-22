@@ -23,7 +23,7 @@ export function ThemeToggle() {
 	return (
 		<button
 			onClick={toggleTheme}
-			className='p-2 text-gray-400 hover:text-gray-200 cursor-pointer transition-colors'
+			className='p-2 text-foreground hover:text-primary cursor-pointer transition-colors'
 			aria-label={title}
 			title={title}
 		>

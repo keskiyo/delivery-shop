@@ -2,7 +2,7 @@ import { ArticlesProps } from '@/types/articles'
 
 export interface ArticlesSectionsProps {
 	title: string
-	viewAllLink: {
+	viewAllLink?: {
 		text: string
 		href: string
 	}
