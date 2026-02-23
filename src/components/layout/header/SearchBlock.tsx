@@ -5,23 +5,23 @@ import Link from 'next/link'
 
 export default function SearchBlock() {
 	return (
-		<div className='flex items-center gap-2 w-full text-gray-300'>
+		<div className='flex flex-row gap-4 items-center grow text-gray-300'>
 			<Link
 				href='catalog'
-				className='hidden md:flex w-auto min-w-18 px-3 py-2 gap-2 items-center shrink-0 rounded hover:text-white transition-colors cursor-pointer'
+				className='hidden md:flex w-auto min-w-18 px-3 py-2 gap-2 items-center shrink-0 rounded hover:text-white transition-colors cursor-pointer bg-orange-500 hover:bg-orange-400'
 			>
 				<Menu size={24} />
-				<span className='text-sm hidden lg:inline'>Каталог</span>
+				<span className='text-base hidden lg:block'>Каталог</span>
 			</Link>
 
-			<div className='relative w-full pl-1'>
+			<div className='relative min-w-65.25 grow'>
 				<input
 					type='text'
 					placeholder='Найти товар'
-					className='w-full h-10 rounded-lg border border-gray-300 bg-transparent px-4 py-2 outline-none placeholder-gray-300 text-base'
+					className='w-full h-10 rounded p-2 outline outline-gray-300 text-[#8f8f8f] text-base leading-[150%]'
 				/>
-				<button className='absolute inset-y-0 right-3 flex items-center cursor-pointer hover:text-white'>
-					<Search size={20} />
+				<button className='absolute top-2 right-2 cursor-pointer'>
+					<Search size={24} />
 				</button>
 			</div>
 		</div>
