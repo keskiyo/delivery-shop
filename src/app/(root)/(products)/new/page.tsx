@@ -1,8 +1,8 @@
-import fetchProductsByCategory from '@/app/(root)/(products)/fetchProducts'
+import fetchProductsByTag from '@/app/(root)/(products)/fetchProducts'
 import GenericListPage from '@/components/shared/GenericListPage'
 
 export const metadata = {
-	title: 'Новинка магазина "Фудмаркет"',
+	title: 'Новинки магазина "Фудмаркет"',
 	description: 'Новые товары магазина "Фудмаркет"',
 }
 
@@ -15,7 +15,10 @@ const AllNew = async ({
 		<GenericListPage
 			searchParams={searchParams}
 			props={{
-				fetchData: () => fetchProductsByCategory('new'),
+				fetchData: ({ pagination: { startIdx, perPage } }) =>
+					fetchProductsByTag('new', {
+						pagination: { startIdx, perPage },
+					}),
 				pageTitle: ' Все новинки',
 				basePath: '/new',
 				errorMessage: 'Ошибка: не удалось загрузить новинки',

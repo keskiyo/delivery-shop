@@ -1,27 +1,38 @@
-import { ProductCardProps } from '@/types/product'
-
-const fetchProductsByCategory = async (category: string) => {
+const fetchProductsByTag = async (
+	tag: string,
+	options?: {
+		limitItems?: number
+		pagination?: { startIdx: number; perPage: number }
+	},
+) => {
 	try {
-		const res = await fetch(
-			`${process.env.NEXT_PUBLIC_BASE_URL}/api/products?category=${category}`,
-			{ next: { revalidate: 3600 } },
-		)
+		const url = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`)
+		url.searchParams.append('tag', tag)
 
-		if (!res.ok) {
-			throw new Error(`Ошибка получения продуктов ${category}`)
+		if (options?.limitItems) {
+			url.searchParams.append('limitItems', options.limitItems.toString())
+		} else if (options?.pagination) {
+			const { startIdx, perPage } = options.pagination
+			url.searchParams.append('startIdx', startIdx.toString())
+			url.searchParams.append('perPage', perPage.toString())
 		}
 
-		const products: ProductCardProps[] = await res.json()
+		const res = await fetch(url.toString(), { next: { revalidate: 3600 } })
 
-		const availableProducts = products.filter(
-			products => products.quantity > 0,
-		)
+		if (!res.ok) {
+			throw new Error(`Ошибка получения продуктов ${tag}`)
+		}
 
-		return availableProducts
+		const data = await res.json()
+
+		return {
+			items: data.products || data,
+			totalCount: data.totalCount || data.length,
+		}
 	} catch (err) {
-		console.error(`Ошибка получения ${category}`, err)
+		console.error(`Ошибка получения ${tag}`, err)
 		throw err
 	}
 }
 
-export default fetchProductsByCategory
+export default fetchProductsByTag

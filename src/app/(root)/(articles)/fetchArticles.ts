@@ -1,19 +1,33 @@
-import { ArticlesProps } from '@/types/articles'
-
-const fetchArticles = async () => {
+const fetchArticles = async (options?: {
+	articlesLimit?: number
+	pagination?: { startIdx: number; perPage: number }
+}) => {
 	try {
-		const res = await fetch(
-			`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles`,
-			{ next: { revalidate: 3600 } },
-		)
+		const url = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles`)
+
+		if (options?.articlesLimit) {
+			url.searchParams.append(
+				'articlesLimit',
+				options.articlesLimit.toString(),
+			)
+		} else if (options?.pagination) {
+			const { startIdx, perPage } = options.pagination
+			url.searchParams.append('startIdx', startIdx.toString())
+			url.searchParams.append('perPage', perPage.toString())
+		}
+
+		const res = await fetch(url.toString(), { next: { revalidate: 3600 } })
 
 		if (!res.ok) {
 			throw new Error('Ошибка получения статей')
 		}
 
-		const articles: ArticlesProps[] = await res.json()
+		const data = await res.json()
 
-		return articles
+		return {
+			items: data.articles || data,
+			totalCount: data.totalCount || data.length,
+		}
 	} catch (err) {
 		console.error('Ошибка получения статей', err)
 		throw err

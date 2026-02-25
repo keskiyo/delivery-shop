@@ -16,12 +16,24 @@ export default function Home() {
 				<Slider />
 			</Suspense>
 			<div className='px-[max(12px,calc((100%-1208px)/2))] flex flex-col gap-y-20 md:mb-25 xl:mb-30'>
-				<Actions />
-				<NewProducts />
-				<Purchases />
-				<SpecialOffers />
-				<Maps />
-				<Articles />
+				{[
+					{ component: <Actions />, text: 'акций' },
+					{ component: <NewProducts />, text: 'новинок' },
+					{ component: <Purchases />, text: 'ваших прошлых покупок' },
+					{
+						component: <SpecialOffers />,
+						text: 'специальных приложений',
+					},
+					{ component: <Maps />, text: 'карты' },
+					{ component: <Articles />, text: 'статей' },
+				].map((item, index) => (
+					<Suspense
+						key={index}
+						fallback={<Loader text={item.text} />}
+					>
+						{item.component}
+					</Suspense>
+				))}
 			</div>
 		</div>
 	)

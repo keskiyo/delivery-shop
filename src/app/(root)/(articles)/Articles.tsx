@@ -1,16 +1,18 @@
 import ArticlesSection from '@/app/(root)/(articles)/ArticlesSection'
 import fetchArticles from '@/app/(root)/(articles)/fetchArticles'
+import { CONFIG } from '../../../../config/config'
 
 const Articles = async () => {
 	try {
-		const articles = await fetchArticles()
+		const { items } = await fetchArticles({
+			articlesLimit: CONFIG.ITEMS_PER_PAGE_MAIN_ARTICLES,
+		})
 
 		return (
 			<ArticlesSection
 				title='Статьи'
-				articles={articles}
+				articles={items}
 				viewAllLink={{ text: 'Все статьи', href: 'articles' }}
-				compact
 			/>
 		)
 	} catch {

@@ -1,18 +1,18 @@
-import fetchProductsByCategory from '@/app/(root)/(products)/fetchProducts'
+import fetchProductsByTag from '@/app/(root)/(products)/fetchProducts'
 import ProductsSections from '@/app/(root)/(products)/ProductsSections'
-import { shuffleArray } from '@/utils/shuffleArray'
+import { CONFIG } from '../../../../config/config'
 
 const Actions = async () => {
 	try {
-		let products = await fetchProductsByCategory('actions')
-		products = shuffleArray(products)
+		const { items } = await fetchProductsByTag('actions', {
+			limitItems: CONFIG.ITEMS_PER_PAGE_MAIN_PRODUCTS,
+		})
 
 		return (
 			<ProductsSections
 				title='Акции'
 				viewAllLink={{ text: 'Все акции', href: 'actions' }}
-				products={products}
-				compact
+				products={items}
 			/>
 		)
 	} catch {

@@ -1,16 +1,18 @@
 import ProductsSections from '@/app/(root)/(products)/ProductsSections'
+import { CONFIG } from '../../../../config/config'
 import fetchPurchases from './fetchPurchases'
 
 const Purchases = async () => {
 	try {
-		const purchases = await fetchPurchases()
+		const { items } = await fetchPurchases({
+			usersPurchasesLimit: CONFIG.ITEMS_PER_PAGE_MAIN_PRODUCTS,
+		})
 
 		return (
 			<ProductsSections
 				title='Покупали ранее'
-				products={purchases}
+				products={items}
 				viewAllLink={{ text: 'Все покупки', href: 'purchases' }}
-				compact
 			/>
 		)
 	} catch {

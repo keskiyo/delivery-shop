@@ -1,5 +1,7 @@
-// сколько будет товаров на 1 странице
+// сколько будет товаров на странице
 
 export const CONFIG = {
 	ITEMS_PER_PAGE: 3,
+	ITEMS_PER_PAGE_MAIN_PRODUCTS: 4,
+	ITEMS_PER_PAGE_MAIN_ARTICLES: 3,
 }

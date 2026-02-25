@@ -13,5 +13,6 @@ export interface ProductCardProps {
 	weight?: string
 	volume?: string
 	categories: string[]
+	tags: string[]
 	quantity: number
 }

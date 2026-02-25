@@ -9,7 +9,7 @@ const Profile = () => {
 			<button className='hidden xl:block cursor-pointer p-2'>
 				<ChevronDown size={24} />
 			</button>
-			<span className='text-gray-400 text-[35px] pb-2'>|</span>
+			<span className='text-gray-500 text-[35px] pb-2'>|</span>
 			<ThemeToggle />
 		</div>
 	)

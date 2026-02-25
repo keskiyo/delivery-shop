@@ -64,11 +64,9 @@ const CatalogPage = () => {
 				),
 			})
 
-			const result = await response.json()
+			if (!response.ok) throw new Error('Ошибка при обновлении порядка')
 
-			if (result.success) {
-				console.log('Успешно обновлено порядок категорий')
-			}
+			await response.json()
 		} catch (error) {
 			console.error('Ошибка обновления порядка категорий', error)
 			setError('Ошибка обновления порядка категорий')

@@ -11,6 +11,7 @@ const ArticleCard = ({ img, title, createdAt, text }: ArticlesProps) => {
 					src={img}
 					alt={title}
 					fill
+					priority={false}
 					className='object-cover'
 					quality={100}
 					sizes='(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw'
