@@ -1,4 +1,4 @@
-import { SearchProduct } from '@/type/searchProduct'
+import { SearchProduct } from '@/types/searchProduct'
 import { NextResponse } from 'next/server'
 import { getDB } from '../../../lib/api-routes'
 
@@ -11,9 +11,14 @@ export async function GET(request: Request) {
 		const products = (await db
 			.collection('products')
 			.find({
-				$or: [
-					{ title: { $regex: query, $options: 'i' } },
-					{ description: { $regex: query, $options: 'i' } },
+				$and: [
+					{
+						$or: [
+							{ title: { $regex: query, $options: 'i' } },
+							{ description: { $regex: query, $options: 'i' } },
+						],
+					},
+					{ quantity: { $gt: 0 } },
 				],
 			})
 			.project({ id: 1, title: 1, categories: 1 })

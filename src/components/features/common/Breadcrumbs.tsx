@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation'
 const BreadCrumbs = () => {
 	const pathname = usePathname()
 
-	if (pathname === '/') return null
+	if (pathname === '/' || pathname === '/search') return null
 
 	const pathSegments = pathname.split('/').filter(segment => segment !== '')
 

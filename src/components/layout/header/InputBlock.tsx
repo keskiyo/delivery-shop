@@ -6,9 +6,11 @@ import { SearchProduct } from '@/types/searchProduct'
 import { TRANSLATIONS } from '@/utils/translations'
 import { Menu, Search } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 
 const InputBlock = () => {
+	const router = useRouter()
 	const [isOpen, setIsOpen] = useState(false)
 	const [query, setQuery] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
@@ -61,27 +63,45 @@ const InputBlock = () => {
 		setQuery('')
 		setIsOpen(false)
 	}
+
+	const handleSearch = () => {
+		if (query.trim()) {
+			router.push(`/search?query=${encodeURIComponent(query)}`)
+			setIsOpen(false)
+		}
+	}
 	return (
 		<div
 			className='relative min-w-65.25 grow text-gray-900'
 			ref={searchRef}
 		>
 			<div className='relative rounded border border-gray-300 leading-[150%]'>
-				<input
-					type='text'
-					value={query}
-					placeholder='Найти продукт'
-					className='w-full h-10  p-2 outline-none bg-white text-base'
-					onFocus={handleInputFocus}
-					onChange={e => setQuery(e.target.value)}
-				/>
-
-				<Search size={24} className='absolute top-2 right-2' />
+				<form
+					onSubmit={e => {
+						e.preventDefault()
+						handleSearch()
+					}}
+				>
+					<input
+						type='text'
+						value={query}
+						placeholder='Найти продукт'
+						className='w-full h-10  p-2 outline-none bg-white text-base'
+						onFocus={handleInputFocus}
+						onChange={e => setQuery(e.target.value)}
+					/>
+					<button
+						className='absolute top-2 right-2 w-6 h-6 cursor-pointer'
+						type='submit'
+					>
+						<Search size={24} />
+					</button>
+				</form>
 			</div>
 			{isOpen && (
 				<div className='absolute -mt-0.5 left-0 right-0 z-100 max-h-75 overflow-y-auto bg-white rounded-b border border-gray-300 border-t-0 wrap-break-word'>
 					{isLoading ? (
-						<Loader text='данных' />
+						<Loader />
 					) : groupedProducts.length > 0 ? (
 						<div className='flex flex-col gap-2 p-2'>
 							{groupedProducts.map(group => (

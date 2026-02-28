@@ -8,7 +8,7 @@ const Slider = () => {
 	const slides = [<SlideOne key='slide1' />, <SlideTwo key='slide2' />]
 
 	return (
-		<div className='relative h-20 md:h-40 xl:h-60 w-full mb-10 md:mb-15 xl:mb-10'>
+		<div className='relative h-20 md:h-40 xl:h-60 w-full'>
 			{slides.map((slide, index) => (
 				<motion.div
 					key={`slide-${index}`}

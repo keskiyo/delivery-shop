@@ -14,14 +14,14 @@ const Footer = () => {
 
 	if (!isClient) {
 		return (
-			<footer className='bg-[#242525] text-gray-300 mb-0 w-full mt-10 relative'>
+			<footer className='bg-[#242525] text-gray-300 mb-0 w-full relative'>
 				<div className='px-7 py-10'></div>
 			</footer>
 		)
 	}
 
 	return (
-		<footer className='bg-[#242525] text-gray-300 mb-0 w-full mt-20 relative'>
+		<footer className='bg-[#242525] text-gray-300 mb-0 w-full relative'>
 			<div className='max-w-302 mx-auto px-7 py-10 pb-24'>
 				{/* Общая обертка для всех элементов футера */}
 				<div className='flex flex-col md:flex-row justify-between items-center gap-6 md:gap-10'>

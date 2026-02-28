@@ -17,12 +17,10 @@ export default function Loading() {
 
 			{/* Текст с пульсацией */}
 			<div className='text-center space-y-2'>
-				<p className='text-xl font-medium text-gray-700 animate-pulse'>
+				<p className='text-xl font-medium animate-pulse'>
 					Загрузка ...
 				</p>
-				<p className='text-sm text-gray-500'>
-					Это займет всего несколько секунд
-				</p>
+				<p className='text-sm'>Это займет всего несколько секунд</p>
 			</div>
 		</div>
 	)

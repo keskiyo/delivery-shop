@@ -20,6 +20,7 @@ const Header = () => {
 								src='/web-app-manifest-192x192.png'
 								alt='logo'
 								fill
+								sizes='96px'
 							/>
 						</div>
 					</Link>
