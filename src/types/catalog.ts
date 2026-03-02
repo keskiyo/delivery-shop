@@ -7,4 +7,5 @@ export interface CatalogProps {
 	colSpan: string
 	tabletColSpan: string
 	mobileColSpan: string
+	slug: string
 }

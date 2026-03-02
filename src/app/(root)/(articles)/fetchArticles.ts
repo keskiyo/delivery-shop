@@ -29,7 +29,6 @@ const fetchArticles = async (options?: {
 			totalCount: data.totalCount || data.length,
 		}
 	} catch (err) {
-		console.error('Ошибка получения статей', err)
 		throw err
 	}
 }

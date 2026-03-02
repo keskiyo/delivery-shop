@@ -30,7 +30,6 @@ const fetchProductsByTag = async (
 			totalCount: data.totalCount || data.length,
 		}
 	} catch (err) {
-		console.error(`Ошибка получения ${tag}`, err)
 		throw err
 	}
 }

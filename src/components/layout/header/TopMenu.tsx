@@ -1,12 +1,16 @@
 import { Heart, Menu, Package, ShoppingCart } from 'lucide-react'
+import Link from 'next/link'
 
 const TopMenu = () => {
 	return (
 		<ul className='flex flex-row gap-x-6 items-end'>
-			<li className='flex flex-col items-center gap-2.5 md:hidden w-11 cursor-pointer'>
-				<Menu size={24} />
-				<span>Каталог</span>
-			</li>
+			<Link href='/catalog'>
+				<li className='flex flex-col items-center gap-2.5 md:hidden w-11 cursor-pointer'>
+					<Menu size={24} />
+					<span>Каталог</span>
+				</li>
+			</Link>
+
 			<li className='group flex flex-col items-center gap-2 w-11 cursor-pointer'>
 				<Heart size={24} className=' group-hover:text-red-400' />
 				<span>Избранное</span>

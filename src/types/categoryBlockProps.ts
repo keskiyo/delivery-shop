@@ -1,5 +1,6 @@
 export interface CategoryBlockProps {
-	id: number
 	title: string
 	img: string
+	slug: string
+	priority: boolean
 }

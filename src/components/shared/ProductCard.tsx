@@ -4,8 +4,9 @@ import { formatPrice } from '@/utils/formatPrice'
 import { Heart } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { CONFIG } from '../../../config/config'
 
-const cardDiscountPercent = 6
+const cardDiscountPercent = CONFIG.CARD_DISCOUNT_PERCENT
 
 const ProductCard = ({
 	_id,

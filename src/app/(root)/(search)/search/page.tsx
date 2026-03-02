@@ -1,16 +1,30 @@
 'use client'
 
 import ProductsSections from '@/app/(root)/(products)/ProductsSections'
-import Loading from '@/components/ui/loading'
+import ErrorComponent from '@/components/features/common/ErrorComponent'
+import { Loader } from '@/components/features/common/loader'
 import { ProductCardProps } from '@/types/product'
 import { useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
+
+const SearchPage = () => {
+	return (
+		<Suspense fallback={<Loader />}>
+			{' '}
+			<SearchResult />
+		</Suspense>
+	)
+}
 
 const SearchResult = () => {
 	const searchParams = useSearchParams()
 	const query = searchParams.get('query') || ''
 	const [products, setProducts] = useState<ProductCardProps[]>([])
 	const [isLoading, setIsLoading] = useState(true)
+	const [error, setError] = useState<{
+		error: Error
+		userMessage: string
+	} | null>(null)
 
 	useEffect(() => {
 		const fetchSearchResults = async () => {
@@ -22,7 +36,13 @@ const SearchResult = () => {
 				const data = await response.json()
 				setProducts(data)
 			} catch (error) {
-				console.error('Не найдена категория или продукт:', error)
+				setError({
+					error:
+						error instanceof Error
+							? error
+							: new Error('Неизвестная ошибка'),
+					userMessage: 'Ошибка при получении результатов поиска',
+				})
 			} finally {
 				setIsLoading(false)
 			}
@@ -30,7 +50,15 @@ const SearchResult = () => {
 		if (query) fetchSearchResults()
 	}, [query])
 
-	if (isLoading) return <Loading />
+	if (isLoading) return <Loader />
+
+	if (error)
+		return (
+			<ErrorComponent
+				error={error.error}
+				userMessage={error.userMessage}
+			/>
+		)
 
 	return (
 		<div className='px-[max(12px,calc((100%-1208px)/2))] my-20 '>
@@ -46,10 +74,14 @@ const SearchResult = () => {
 			{products.length === 0 ? (
 				<p className='text-lg'>Ничего не нашлось</p>
 			) : (
-				<ProductsSections title={''} products={products} />
+				<ProductsSections
+					title={''}
+					products={products}
+					applyIndexStyles={false}
+				/>
 			)}
 		</div>
 	)
 }
 
-export default SearchResult
+export default SearchPage

@@ -1,10 +1,19 @@
+import ErrorComponent from '@/components/features/common/ErrorComponent'
+
 const ProductPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 	let productId: string = ''
 
 	try {
 		productId = (await params).id
 	} catch (error) {
-		console.error('Ошибка получения категории:', error)
+		return (
+			<ErrorComponent
+				error={
+					error instanceof Error ? error : new Error(String(error))
+				}
+				userMessage='Не удалось загрузить данные продукта'
+			/>
+		)
 	}
 
 	return <div>Страница продукта: {productId}</div>

@@ -1,4 +1,5 @@
 import ProductsSections from '@/app/(root)/(products)/ProductsSections'
+import ErrorComponent from '@/components/features/common/ErrorComponent'
 import { CONFIG } from '../../../../config/config'
 import fetchPurchases from './fetchPurchases'
 
@@ -15,11 +16,14 @@ const Purchases = async () => {
 				viewAllLink={{ text: 'Все покупки', href: 'purchases' }}
 			/>
 		)
-	} catch {
+	} catch (error) {
 		return (
-			<div className='text-red-500'>
-				Ошибка: Не удалось загрузить прошлые покупки
-			</div>
+			<ErrorComponent
+				error={
+					error instanceof Error ? error : new Error(String(error))
+				}
+				userMessage='Не удалось загрузить прошлые покупки'
+			/>
 		)
 	}
 }
