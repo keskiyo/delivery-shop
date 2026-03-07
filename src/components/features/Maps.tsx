@@ -14,7 +14,7 @@ const Maps = () => {
 			query={{
 				lang: 'ru_RU',
 				apikey: '851b4ba9-1554-4325-8250-70775f167344',
-				load: 'package.full',
+				// load: 'package.full',
 			}}
 		>
 			<section>

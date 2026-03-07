@@ -9,6 +9,7 @@
 		"lint": "eslint"
 	},
 	"dependencies": {
+		"@faker-js/faker": "^10.3.0",
 		"@fortawesome/react-fontawesome": "^3.2.0",
 		"@iminside/react-yandex-maps": "^1.2.7",
 		"class-variance-authority": "^0.7.1",
@@ -24,6 +25,7 @@
 		"next-auth": "^4.24.13",
 		"nextjs-toploader": "^3.9.17",
 		"radix-ui": "^1.4.3",
+		"rc-slider": "^11.1.9",
 		"react": "19.2.3",
 		"react-dom": "19.2.3",
 		"react-hot-toast": "^2.6.0",

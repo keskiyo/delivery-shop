@@ -29,7 +29,7 @@ const BreadCrumbs = () => {
 
 	return (
 		<nav className='px-[max(12px,calc((100%-1208px)/2))] my-6'>
-			<ol className='flex items-center gap-4 text-[8px] md:text-xs'>
+			<ol className='flex items-center gap-4 text-[10px] md:text-xs'>
 				{breadcrumbs.map((item, index) => (
 					<li key={index} className='flex items-center gap-4'>
 						<div

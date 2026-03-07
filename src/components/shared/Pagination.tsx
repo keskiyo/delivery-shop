@@ -1,6 +1,12 @@
 'use client'
 
 import { PaginationProps } from '@/types/paginationProps'
+import {
+	ChevronLeft,
+	ChevronRight,
+	ChevronsLeft,
+	ChevronsRight,
+} from 'lucide-react'
 import Link from 'next/link'
 
 const createPageUrl = (
@@ -60,7 +66,7 @@ const Pagination = ({
 	const pageButtonClass = `border border-[#ff6633] ${buttonSize}`
 
 	return (
-		<div className='flex justify-center mt-10 mb-20 text-white text-sm md:text-base'>
+		<div className='flex justify-center mt-10 text-white text-sm md:text-base'>
 			<nav className='flex gap-1 md:gap-2 items-center'>
 				<Link
 					href={createPageUrl(basePath, params, 1)}
@@ -70,7 +76,7 @@ const Pagination = ({
 						currentPage === 1 ? buttonDisabled : buttonActive
 					}`}
 				>
-					&laquo;
+					<ChevronsLeft size={22} />
 				</Link>
 				<Link
 					href={createPageUrl(basePath, params, currentPage - 1)}
@@ -80,7 +86,7 @@ const Pagination = ({
 						currentPage === 1 ? buttonDisabled : buttonActive
 					}`}
 				>
-					&lsaquo;
+					<ChevronLeft size={22} />
 				</Link>
 
 				{visiblePages.map((page, index) => {
@@ -123,7 +129,7 @@ const Pagination = ({
 							: buttonActive
 					}`}
 				>
-					&rsaquo;
+					<ChevronRight size={22} />
 				</Link>
 
 				<Link
@@ -136,7 +142,7 @@ const Pagination = ({
 							: buttonActive
 					}`}
 				>
-					&raquo;
+					<ChevronsRight size={22} />
 				</Link>
 			</nav>
 		</div>

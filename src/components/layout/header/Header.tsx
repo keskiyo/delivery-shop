@@ -19,6 +19,7 @@ const Header = () => {
 								alt='logo'
 								fill
 								sizes='96px'
+								loading='eager'
 							/>
 						</div>
 					</Link>

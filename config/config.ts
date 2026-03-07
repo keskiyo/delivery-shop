@@ -1,9 +1,8 @@
-// сколько будет товаров на странице
-
 export const CONFIG = {
 	ITEMS_PER_PAGE: 3,
 	ITEMS_PER_PAGE_MAIN_PRODUCTS: 4,
 	ITEMS_PER_PAGE_MAIN_ARTICLES: 3,
 	CARD_DISCOUNT_PERCENT: 6,
 	ITEMS_PER_PAGE_CATEGORY: 6,
+	FALLBACK_PRICE_RANGE: { min: 0, max: 3000 },
 }
