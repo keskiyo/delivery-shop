@@ -18,4 +18,6 @@ export const TRANSLATIONS: Record<string, string> = {
 	meat: 'Мясо, птица, колбаса',
 	'non-food': 'Непродовольственные товары',
 	category: 'Категория',
+	register: 'Регистрация',
+	login: 'Авторизация',
 }

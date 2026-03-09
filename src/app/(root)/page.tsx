@@ -19,7 +19,10 @@ export default function Home() {
 				{[
 					{ component: <Actions />, text: 'акций' },
 					{ component: <NewProducts />, text: 'новинок' },
-					{ component: <Purchases />, text: 'ваших прошлых покупок' },
+					{
+						component: <Purchases />,
+						text: 'ваших прошлых покупок',
+					},
 					{
 						component: <SpecialOffers />,
 						text: 'специальных приложений',

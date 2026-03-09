@@ -151,14 +151,14 @@
 .dark {
 	/* ОСНОВНОЙ ФОН СТРАНИЦЫ В ТЕМНОЙ ТЕМЕ */
 	--background: oklch(
-		33.289% 0.00004 271.152
+		26.033% 0.00003 271.152
 	); /* ТЕМНЫЙ ФОН (около черного) */
 
 	/* ОСНОВНОЙ ТЕКСТ В ТЕМНОЙ ТЕМЕ */
 	--foreground: oklch(95.815% 0.00011 271.152); /* СВЕТЛЫЙ ТЕКСТ */
 
 	/* Фон карточек в темной теме */
-	--card: oklch(26.448% 0.00003 271.152); /* Темный фон карточек */
+	--card: oklch(38.666% 0.00004 271.152); /* Темный фон карточек */
 	--card-foreground: oklch(0.985 0 0); /* Светлый текст в карточках */
 
 	/* Фон всплывающих окон */
@@ -344,5 +344,30 @@ body {
 	}
 	100% {
 		stroke-dasharray: 0 380 320 40 320 40;
+	}
+}
+
+/* PASSWORD ANIMATION */
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-5px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+.animate-fadeIn {
+	animation: fadeIn 0.2s ease-out forwards;
+}
+
+@keyframes progress {
+	0% {
+		width: 0%;
+	}
+	100% {
+		width: 100%;
 	}
 }

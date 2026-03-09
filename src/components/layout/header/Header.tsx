@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 const Header = () => {
 	return (
-		<header className='w-full bg-[#242525] text-gray-300 relative z-50 shadow-(--shadow-default)'>
+		<header className='w-full text-gray-300 bg-[#353535] relative z-50 shadow-(--shadow-default)'>
 			<div className='flex flex-col md:flex-row justify-between items-center p-2 md:py-3 mx-auto max-w-7xl px-4 md:px-6'>
 				{/* Левая часть: логотип + SearchBlock */}
 				<div className='flex flex-row gap-4 xl:gap-10 items-center w-full md:w-auto grow px-2'>

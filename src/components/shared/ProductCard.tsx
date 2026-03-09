@@ -37,9 +37,9 @@ const ProductCard = ({
 	const ratingValue = rating?.rate || 5
 
 	return (
-		<div className='relative flex flex-col justify-between w-40 rounded overflow-hidden bg-[#fff5fd] text-[#414141] h-87.5 md:w-56 xl:w-68 align-top p-0 hover:shadow-(--shadow-article) duration-300'>
+		<div className='relative flex flex-col justify-between w-40 rounded overflow-hidden bg-[#fff5fd] h-87.5 md:w-56 xl:w-68 align-top p-0 hover:shadow-(--shadow-article) duration-300'>
 			<button className='absolute w-8 h-8 p-2 bg-[#f3f2f1] hover:bg-[#fcd5ba] top-2 right-2 opacity-50 rounded cursor-pointer duration-300 flex items-center z-20'>
-				<Heart size={24} />
+				<Heart size={24} className='text-gray-700' />
 			</button>
 			<Link href={`/product/${_id}`}>
 				<div className='w-40 h-40 md:w-56 xl:w-68 aspect-square relative'>
@@ -58,7 +58,7 @@ const ProductCard = ({
 					)}
 				</div>
 
-				<div className='flex flex-col p-2 h-47.5'>
+				<div className='flex flex-col p-2 h-47.5 bg-card'>
 					<div className='flex flex-row justify-between items-start h-11.25'>
 						<div className='flex flex-col gap-x-1'>
 							<div className='flex flex-row gap-x-1 text-sm md:text-lg font-bold'>
@@ -74,7 +74,7 @@ const ProductCard = ({
 						{finalPrice !== basePrice &&
 							cardDiscountPercent > 0 && (
 								<div className='flex flex-col gap-x-1'>
-									<div className='flex flex-row gap-x-1 text-xs md:text-base text-[#606060]'>
+									<div className='flex flex-row gap-x-1 text-xs md:text-base'>
 										<span>{formatPrice(finalPrice)}</span>
 										<span>₽</span>
 									</div>
@@ -90,7 +90,7 @@ const ProductCard = ({
 					{ratingValue > 0 && <StarRating rating={ratingValue} />}
 				</div>
 			</Link>
-			<button className='absolute bottom-2 left-2 right-2 border border-[#414141] hover:text-white hover:bg-[#ff6633] hover:border-transparent active:shadow-(--shadow-button-active) h-10 rounded justify-center items-center transition-all duration-300 cursor-pointer select-none'>
+			<button className='absolute bottom-2 left-2 right-2 border bg-[#eeeeee] text-gray-700 border-[#414141] hover:text-white hover:bg-[#ff6633] hover:border-transparent active:shadow-(--shadow-button-active) h-10 rounded justify-center items-center transition-all duration-300 cursor-pointer select-none'>
 				В корзину
 			</button>
 		</div>
