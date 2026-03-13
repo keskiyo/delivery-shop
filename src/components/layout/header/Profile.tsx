@@ -10,7 +10,7 @@ const Profile = () => {
 		: { href: '/login', text: 'Войти' }
 
 	return (
-		<div className='flex items-center'>
+		<div className='flex items-center flex-wrap'>
 			<Link
 				href={linkProps.href}
 				className='ml-6 w-10 xl:w-28 flex justify-center items-center gap-x-2 p-2 rounded text-white text-base bg-[#ff6633] hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) duration-300'

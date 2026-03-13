@@ -1,6 +1,6 @@
 'use client'
 
-import Tooltip from '@/app/(root)/(auth)/(reg)/Tooltip'
+import Tooltip from '@/app/(root)/(auth)/_components/Tooltip'
 import IconVision from '@/components/svg/IconVision'
 import { ChangeEvent, useState } from 'react'
 import { formStyles } from '../styles'

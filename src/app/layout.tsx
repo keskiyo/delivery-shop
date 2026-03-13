@@ -1,3 +1,4 @@
+import { RegFormProvider } from '@/app/contexts/RegFormContext'
 import { Providers } from '@/components/features/common/providers'
 import type { Metadata } from 'next'
 import { Rubik } from 'next/font/google'
@@ -33,7 +34,9 @@ export default async function RootLayout({
 	return (
 		<html lang='ru' className={initialTheme} suppressHydrationWarning>
 			<body className={`${rubik.variable} font-sans`}>
-				<Providers>{children}</Providers>
+				<RegFormProvider>
+					<Providers>{children}</Providers>
+				</RegFormProvider>
 			</body>
 		</html>
 	)

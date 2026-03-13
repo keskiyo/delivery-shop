@@ -1,6 +1,6 @@
 'use client'
 
-import Tooltip from '@/app/(root)/(auth)/(reg)/Tooltip'
+import Tooltip from '@/app/(root)/(auth)/_components/Tooltip'
 import { formStyles } from '@/app/(root)/(auth)/styles'
 import { validateBirthDate } from '@/utils/validation/validateBirthDate'
 import { CalendarDays } from 'lucide-react'

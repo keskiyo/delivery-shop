@@ -1,5 +1,5 @@
 export const buttonStyles = {
-	base: 'w-50 h-12 my-5 mx-auto text-base rounded cursor-pointer transition-all duration-200 hover:bg-orange-100',
+	base: 'w-65 h-13 my-5 mx-auto text-2xl rounded cursor-pointer transition-all duration-200',
 	active: 'bg-[#ff6633] text-white hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active)',
 	inactive: 'bg-[#fcd5ba] text-[#ff6633]',
 }
@@ -12,3 +12,10 @@ export const formStyles = {
 	radioLabel: 'px-4 py-2 border rounded-lg cursor-pointer transition-colors',
 	radioLabelActive: 'bg-blue-500 text-white border-blue-500',
 }
+
+export const verificationButtonStyles = `
+    w-60 md:w-80 group relative flex flex-col items-center justify-center p-3 
+    border-2 border-gray-200 rounded-xl hover:border-[#ff6633] 
+    hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) 
+    cursor-pointer duration-300
+  `

@@ -7,7 +7,7 @@ const CheckboxCard = ({
 	checked,
 	onChangeAction,
 }: {
-	checked: boolean
+	checked: boolean | undefined
 	onChangeAction: (e: ChangeEvent<HTMLInputElement>) => void
 }) => {
 	return (

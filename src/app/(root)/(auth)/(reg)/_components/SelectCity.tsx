@@ -3,7 +3,7 @@
 import { cities } from '@/data/city'
 import { Check, ChevronDown, ChevronUp } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-import { formStyles } from '../styles'
+import { formStyles } from '../../styles'
 
 const SelectCity = ({
 	value,

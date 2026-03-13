@@ -15,7 +15,7 @@ export default function Home() {
 			<Suspense fallback={<Loader text='слайдера' />}>
 				<Slider />
 			</Suspense>
-			<div className='px-[max(12px,calc((100%-1208px)/2))] flex flex-col gap-y-20 md:mb-25 xl:mb-30'>
+			<div className='px-[max(12px,calc((100%-1208px)/2))] flex flex-col gap-y-20 md:mb-25 xl:mb-30 md:mt-25 xl:mt-30'>
 				{[
 					{ component: <Actions />, text: 'акций' },
 					{ component: <NewProducts />, text: 'новинок' },

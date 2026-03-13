@@ -1,13 +1,13 @@
 'use client'
 
 import { ChangeEvent } from 'react'
-import { formStyles } from '../styles'
+import { formStyles } from '../../styles'
 
 const EmailInput = ({
 	value,
 	onChangeAction,
 }: {
-	value: string
+	value?: string
 	onChangeAction: (e: ChangeEvent<HTMLInputElement>) => void
 }) => {
 	return (
