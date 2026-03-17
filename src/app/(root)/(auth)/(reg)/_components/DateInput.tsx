@@ -121,7 +121,7 @@ const DateInput = ({
 					<CalendarDays size={24} className='text-gray-600' />
 				</button>
 			</div>
-			{showTooltip && error && <Tooltip text={error} show={true} />}
+			{showTooltip && error && <Tooltip text={error} />}
 		</div>
 	)
 }

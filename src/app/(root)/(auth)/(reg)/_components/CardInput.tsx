@@ -15,7 +15,9 @@ const CardInput = ({
 }) => {
 	return (
 		<div className='flex flex-col mb-4'>
-			<label htmlFor='card'>{'Номер карты лояльности'}</label>
+			<label htmlFor='card' className='text-[#8f8f8f]'>
+				{'Номер карты лояльности'}
+			</label>
 			<InputMask
 				mask='____ ____ ____ ____'
 				replacement={{ _: /\d/ }}

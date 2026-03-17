@@ -1,5 +1,6 @@
 import { RegFormProvider } from '@/app/contexts/RegFormContext'
 import { Providers } from '@/components/features/common/providers'
+import AuthProvider from '@/store/AuthProvider'
 import type { Metadata } from 'next'
 import { Rubik } from 'next/font/google'
 import { cookies } from 'next/headers'
@@ -34,9 +35,11 @@ export default async function RootLayout({
 	return (
 		<html lang='ru' className={initialTheme} suppressHydrationWarning>
 			<body className={`${rubik.variable} font-sans`}>
-				<RegFormProvider>
-					<Providers>{children}</Providers>
-				</RegFormProvider>
+				<AuthProvider>
+					<RegFormProvider>
+						<Providers>{children}</Providers>
+					</RegFormProvider>
+				</AuthProvider>
 			</body>
 		</html>
 	)

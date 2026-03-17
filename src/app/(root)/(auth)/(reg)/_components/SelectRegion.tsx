@@ -77,7 +77,7 @@ const SelectRegion = ({
 						>
 							<span>{region.label}</span>
 							{region.value === value && (
-								<Check size={16} className='text-primary' />
+								<Check size={16} className='text-green-600' />
 							)}
 						</button>
 					))}

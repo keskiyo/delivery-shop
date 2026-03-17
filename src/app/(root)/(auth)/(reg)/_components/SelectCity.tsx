@@ -74,7 +74,7 @@ const SelectCity = ({
 						>
 							<span>{city.label}</span>
 							{city.value === value && (
-								<Check size={16} className='text-primary' />
+								<Check size={16} className='text-green-600' />
 							)}
 						</button>
 					))}

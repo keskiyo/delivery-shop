@@ -2,6 +2,7 @@
 
 import Tooltip from '@/app/(root)/(auth)/_components/Tooltip'
 import IconVision from '@/components/svg/IconVision'
+import { isPasswordValid } from '@/utils/validation/passwordValid'
 import { ChangeEvent, useState } from 'react'
 import { formStyles } from '../styles'
 
@@ -15,6 +16,7 @@ interface PasswordInputProps {
 	showRequirements?: boolean
 	compareWith?: string
 	placeholder?: string
+	inputClass?: string
 }
 
 const PasswordInput = ({
@@ -27,18 +29,15 @@ const PasswordInput = ({
 	showRequirements,
 	compareWith,
 	placeholder = '',
+	inputClass = '',
 }: PasswordInputProps) => {
 	const [isFocused, setIsFocused] = useState(false)
-
-	const isPasswordValid = () => {
-		return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/.test(value)
-	}
 
 	const shouldShowTooltip = () => {
 		if (!isFocused) return false
 
 		if (showRequirements) {
-			return value.length > 0 && !isPasswordValid()
+			return value.length > 0 && !isPasswordValid(value)
 		}
 
 		if (compareWith) {
@@ -73,8 +72,8 @@ const PasswordInput = ({
 					onFocus={() => setIsFocused(true)}
 					onBlur={() => setIsFocused(false)}
 					placeholder={placeholder}
-					className={formStyles.input}
-					autoComplete='off'
+					className={`${formStyles.input} ${inputClass}`}
+					// autoComplete='off'
 				/>
 				<button
 					type='button'
@@ -84,9 +83,7 @@ const PasswordInput = ({
 					<IconVision showPassword={showPassword} />
 				</button>
 			</div>
-			{shouldShowTooltip() && (
-				<Tooltip text={getTooltipText()} show={true} />
-			)}
+			{shouldShowTooltip() && <Tooltip text={getTooltipText()} />}
 		</div>
 	)
 }
