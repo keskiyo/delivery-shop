@@ -14,8 +14,22 @@ const Profile = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const [isLoggingOut, setIsLoggingOut] = useState(false)
 	const [isMobile, setIsMobile] = useState(false)
+	const [avatarSrc, setAvatarSrc] = useState<string>('')
+	const [lastUpdate, setLastUpdate] = useState(Date.now())
 	const menuRef = useRef<HTMLDivElement>(null)
 	const router = useRouter()
+
+	useEffect(() => {
+		setLastUpdate(Date.now())
+	}, [user])
+
+	useEffect(() => {
+		if (user?.id) {
+			setAvatarSrc(`/api/auth/avatar/${user.id}?t=${lastUpdate}`)
+		} else if (user?.gender) {
+			setAvatarSrc(getAvatarByGender(user.gender))
+		}
+	}, [user, lastUpdate])
 
 	useEffect(() => {
 		checkAuth()
@@ -58,6 +72,12 @@ const Profile = () => {
 		}
 	}
 
+	const handleAvatarError = () => {
+		if (user?.gender) {
+			setAvatarSrc(getAvatarByGender(user?.gender))
+		}
+	}
+
 	if (isLoading) {
 		return (
 			<div className='ml-6 w-10 h-10 rounded-full bg-gray-200 animate-pulse'></div>
@@ -89,24 +109,25 @@ const Profile = () => {
 					onClick={toggleMenu}
 				>
 					<Image
-						src={getAvatarByGender(user?.gender)}
+						src={avatarSrc || getAvatarByGender(user?.gender)}
 						alt='Ваш профиль'
 						width={40}
 						height={40}
+						onError={handleAvatarError}
 						className='min-w-10 min-h-10 md:block xl:block rounded-full object-cover'
 					/>
-					<p className='hidden xl:block cursor-pointer p-2.5'>
+					<p className='hidden xl:block text-base cursor-pointer p-2.5'>
 						{isLoading ? 'Загрузка...' : user?.name}
 					</p>
 				</div>
 
 				{/* Выпадающее меню */}
 				<div
-					className={`absolute right-0 bg-[#353535] rounded shadow-button-secondary overflow-hidden z-50 ${
+					className={`absolute right-0 bg-[#353535] rounded shadow-button-secondary overflow-hidden flex flex-col items-center z-50 ${
 						isMenuOpen
 							? 'opacity-100 translate-y-0'
 							: 'opacity-0 -translate-y-2 pointer-events-none'
-					} transition-all duration-300 min-w-50 ${
+					} transition-all duration-300 min-w-40 ${
 						isMobile ? 'bottom-full top-auto mb-6' : 'top-full mt-6'
 					}`}
 				>
@@ -124,16 +145,16 @@ const Profile = () => {
 					>
 						Главная
 					</Link>
+					<ThemeToggle />
 					<button
 						onClick={handleLogout}
 						disabled={isLoggingOut}
-						className='w-full text-left px-4 py-3 text-gray-300 hover:text-[#ff6633] duration-300 border-t border-gray-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
+						className='w-full text-center px-4 py-3 text-gray-300 hover:text-[#ff6633] duration-300 border-t border-gray-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
 					>
 						{isLoggingOut ? 'Выход...' : 'Выйти'}
 					</button>
 				</div>
 			</div>
-			<ThemeToggle />
 		</>
 	)
 }

@@ -49,7 +49,7 @@ export const ErrorContent = ({
 				{secondaryAction && (
 					<button
 						onClick={secondaryAction.onClick}
-						className={`w-full py-3 px-4 border border-gray-300 text-gray-700 rounded hover:bg-gray-200 duration-300 flex items-center justify-center space-x-2 cursor-pointer ${secondaryAction.className}`}
+						className={`w-full py-3 px-4 border bg-gray-300 border-gray-300 text-gray-900 rounded hover:bg-gray-200 duration-300 flex items-center justify-center space-x-2 cursor-pointer ${secondaryAction.className}`}
 					>
 						<RotateCw size={24} />
 						<span>{secondaryAction.label}</span>

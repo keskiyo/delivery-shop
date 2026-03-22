@@ -14,7 +14,7 @@ export async function GET(request: Request) {
 			url.searchParams.get('perPage') || CONFIG.ITEMS_PER_PAGE.toString(),
 		)
 
-		const user = await db.collection('users').findOne({})
+		const user = await db.collection('user').findOne({})
 
 		if (!user?.purchases?.length) {
 			return NextResponse.json({ products: [], totalCount: 0 })
@@ -61,7 +61,7 @@ export async function GET(request: Request) {
 			totalCount,
 		})
 	} catch (error) {
-		console.error('Ошибка api users purchases', error)
+		console.error('Ошибка api user purchases', error)
 		return NextResponse.error()
 	}
 }

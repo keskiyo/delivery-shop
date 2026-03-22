@@ -11,6 +11,10 @@ const client = new MongoClient(process.env.FOOD_DELIVERY_DB_URL!)
 const db = client.db('deliveryshop')
 const resend = new Resend(process.env.RESEND_API_KEY)
 
+// ! При входе email и password, phone и OTP сессия создается от better-auth
+// ! При входе через phone и password сессия создается кастомно ( в таком же ввиде как и от better-auth)
+// ! Кастомное создание сессии в api/auth/login
+
 export const auth = betterAuth({
 	database: mongodbAdapter(db),
 

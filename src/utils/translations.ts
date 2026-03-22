@@ -20,4 +20,5 @@ export const TRANSLATIONS: Record<string, string> = {
 	category: 'Категория',
 	register: 'Регистрация',
 	login: 'Авторизация',
+	'user-profile': 'Профиль пользователя',
 }

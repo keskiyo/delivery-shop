@@ -12,7 +12,7 @@ export async function POST(request: Request) {
 				? { email: login }
 				: { phoneNumber: login.replace(/\D/g, '') }
 
-		const user = await db.collection('users').findOne(query)
+		const user = await db.collection('user').findOne(query)
 
 		if (!user) {
 			return NextResponse.json({ exists: false, verified: false })
