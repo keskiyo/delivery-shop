@@ -135,10 +135,10 @@ const ProfileAvatar = ({ gender }: { gender: string }) => {
 				/>
 			</div>
 			<div className='mt-3 text-center'>
-				<p className='text-sm text-gray-600 mb-1'>
+				<p className='text-sm mb-1'>
 					Нажмите на иконку для смены аватара
 				</p>
-				<p className='text-xs text-gray-500'>
+				<p className='text-xs'>
 					{isUploading
 						? 'Загрузка...'
 						: 'Загрузить файл или сделать фото'}

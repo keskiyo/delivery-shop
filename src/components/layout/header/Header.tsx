@@ -20,6 +20,7 @@ const Header = () => {
 								fill
 								sizes='96px'
 								loading='eager'
+								unoptimized
 							/>
 						</div>
 					</Link>

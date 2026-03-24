@@ -9,17 +9,15 @@ import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { CONFIG } from '../../../../../../config/config'
 import { buttonStyles } from '../../styles'
-
-const MAX_ATTEMPTS = 3
-const TIMEOUT_PERIOD = 180
 
 export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 	const [code, setCode] = useState('')
 	const [error, setError] = useState('')
 	const { regFormData } = useRegFormContext()
-	const [attemptsLeft, setAttemptsLeft] = useState(MAX_ATTEMPTS)
-	const { timeLeft, canResend, startTimer } = useTimer(TIMEOUT_PERIOD)
+	const [attemptsLeft, setAttemptsLeft] = useState(CONFIG.MAX_ATTEMPTS)
+	const { timeLeft, canResend, startTimer } = useTimer(CONFIG.TIMEOUT_PERIOD)
 	const router = useRouter()
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -44,7 +42,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 
 			if (verifyError) throw verifyError
 
-			setAttemptsLeft(MAX_ATTEMPTS)
+			setAttemptsLeft(CONFIG.MAX_ATTEMPTS)
 
 			const passwordResponse = await fetch('/api/auth/set-password', {
 				method: 'POST',
@@ -94,7 +92,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 					onSuccess: () => {
 						startTimer()
 						setError('')
-						setAttemptsLeft(MAX_ATTEMPTS)
+						setAttemptsLeft(CONFIG.MAX_ATTEMPTS)
 					},
 					onError: ctx => {
 						setError(

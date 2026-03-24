@@ -50,6 +50,7 @@ const ProductCard = ({
 						className='object-contain'
 						priority={false}
 						sizes='(max-width: 768px) 160px, (max-width: 1200px) 224px, 272px'
+						unoptimized
 					/>
 					{discountPercent > 0 && (
 						<div className='absolute bg-[#ff6633] py-1 px-2 rounded text-white bottom-2.5 left-2.5'>

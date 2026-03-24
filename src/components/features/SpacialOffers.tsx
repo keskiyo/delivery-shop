@@ -18,6 +18,7 @@ const SpecialOffers = () => {
 								height={200}
 								className='w-full h-full object-cover rounded'
 								priority
+								unoptimized
 							/>
 						</div>
 					</button>

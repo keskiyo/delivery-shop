@@ -14,8 +14,6 @@ const SecuritySection: React.FC = () => {
 	const { user, logout } = useAuthStore()
 	const router = useRouter()
 
-	const editProfile = () => {}
-
 	const logoutFromProfile = async () => {
 		try {
 			await logout()
@@ -83,19 +81,12 @@ const SecuritySection: React.FC = () => {
 						{error}
 					</div>
 				)}
-				<div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+				<div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
 					<button
 						onClick={logoutFromProfile}
 						className={`${buttonStyles.active} flex flex-1 items-center hover:bg-orange-400 justify-center h-12 bg-[#f3f2f1] text-[#606060] px-4 py-2 rounded font-medium hover:shadow-button-cancel active:shadow-button-cancel-active duration-300 cursor-pointer`}
 					>
 						Выйти из личного кабинета
-					</button>
-
-					<button
-						onClick={editProfile}
-						className='flex-1 cursor-pointer h-12 px-5 py-2 bg-green-600 hover:bg-green-500 active:bg-green-700 text-white font-medium rounded shadow-sm transition-all duration-300 ease-in-out focus:outline-none flex items-center justify-center gap-2'
-					>
-						Редактировать профиль
 					</button>
 
 					<button

@@ -1,10 +1,19 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-	/* config options here */
 	reactCompiler: true,
 	images: {
-		qualities: [100, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 75],
+		localPatterns: [
+			// Avatar API - omit 'search' to allow any query params (?t=...)
+			{
+				pathname: '/api/auth/avatar/**',
+			},
+			// All static images in public folder
+			{
+				pathname: '/images/**',
+				search: '',
+			},
+		],
 	},
 }
 

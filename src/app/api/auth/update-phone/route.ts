@@ -1,0 +1,66 @@
+import { getDB } from '@/lib/api-routes'
+import { ObjectId } from 'mongodb'
+import { NextRequest, NextResponse } from 'next/server'
+
+export async function POST(request: NextRequest) {
+	const db = await getDB()
+
+	try {
+		const { phoneNumber, userId } = await request.json()
+
+		if (!phoneNumber || !userId) {
+			return NextResponse.json(
+				{ error: 'phoneNumber и userId обязательны' },
+				{ status: 400 },
+			)
+		}
+
+		// Конвертируем userId в ObjectId
+		let objectId
+		try {
+			objectId = ObjectId.createFromHexString(userId)
+		} catch {
+			return NextResponse.json(
+				{ error: 'Неверный формат userId' },
+				{ status: 400 },
+			)
+		}
+
+		const existingUser = await db.collection('user').findOne({
+			phoneNumber: phoneNumber,
+			_id: { $ne: objectId },
+		})
+
+		if (existingUser) {
+			return NextResponse.json(
+				{ error: 'Пользователь с таким phoneNumber уже существует' },
+				{ status: 409 },
+			)
+		}
+
+		const result = await db
+			.collection('user')
+			.updateOne(
+				{ _id: objectId },
+				{ $set: { phoneNumber: phoneNumber } },
+			)
+
+		return NextResponse.json({
+			success: true,
+			message: 'phoneNumber обновлен',
+			modified: result.modifiedCount > 0,
+		})
+	} catch (error) {
+		console.error('Ошибка при обновлении phoneNumber:', error)
+
+		return NextResponse.json(
+			{
+				error:
+					error instanceof Error
+						? error.message
+						: 'Внутренняя ошибка сервера',
+			},
+			{ status: 500 },
+		)
+	}
+}

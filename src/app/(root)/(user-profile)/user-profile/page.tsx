@@ -1,7 +1,10 @@
 'use client'
 
 import { ErrorContent } from '@/app/(root)/(auth)/(reg)/_components/ErrorContent'
+import LocationSection from '@/app/(root)/(user-profile)/_components/LocationSection'
+import ProfilePhoneSettings from '@/app/(root)/(user-profile)/_components/profile-phone/ProfilePhoneSettings'
 import ProfileAvatar from '@/app/(root)/(user-profile)/_components/ProfileAvatar'
+import ProfileEmail from '@/app/(root)/(user-profile)/_components/ProfileEmail'
 import { Loader } from '@/components/features/common/loader'
 import { useAuthStore } from '@/store/authStore'
 import { MailWarning, Phone } from 'lucide-react'
@@ -61,39 +64,33 @@ const ProfilePage = () => {
 	}
 
 	return (
-		<div className='px-4 md:px-6 xl:px-8'>
-			<div className='max-w-4xl mx-auto'>
-				<div className='animate-slide-in opacity translate-y-8'>
-					<div className='bg-card rounded-xl shadow-xl overflow-hidden duration-300 ease-out'>
-						<ProfileHeader
-							name={user.name}
-							surname={user.surname}
-						/>
+		<div className='px-4 md:px-6 xl:px-8 max-w-4xl mx-auto'>
+			<div className='animate-slide-in opacity translate-y-8 bg-card rounded-xl shadow-xl overflow-hidden duration-300 ease-out'>
+				<ProfileHeader name={user.name} surname={user.surname} />
 
-						<div className='p-6 md:p-8'>
-							<div className='flex items-center justify-center mb-6'>
-								<div className='bg-green-600 text-white px-3 py-1 rounded-full text-sm flex items-center'>
-									{isPhoneRegistration ? (
-										<>
-											<Phone className='h-4 w-4 mr-1' />
-											<span>
-												Зарегистрирован по телефону
-											</span>
-										</>
-									) : (
-										<>
-											<MailWarning className='h-4 w-4 mr-1' />
-											<span>
-												Зарегистрирован по email
-											</span>
-										</>
-									)}
-								</div>
-							</div>
-							<ProfileAvatar gender={user.gender || 'male'} />
-							<SecuritySection />
+				<div className='p-6 md:p-8'>
+					<div className='flex items-center justify-center mb-6'>
+						<div className='bg-green-600 text-white px-3 py-1 rounded-full text-sm flex items-center'>
+							{isPhoneRegistration ? (
+								<>
+									<Phone className='h-4 w-4 mr-1' />
+									<span>Зарегистрирован по телефону</span>
+								</>
+							) : (
+								<>
+									<MailWarning className='h-4 w-4 mr-1' />
+									<span>Зарегистрирован по email</span>
+								</>
+							)}
 						</div>
 					</div>
+					<ProfileAvatar gender={user.gender || 'male'} />
+					<LocationSection />
+					<div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+						<ProfileEmail />
+						<ProfilePhoneSettings />
+					</div>
+					<SecuritySection />
 				</div>
 			</div>
 		</div>

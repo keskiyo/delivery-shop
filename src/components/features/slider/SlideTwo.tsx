@@ -9,6 +9,7 @@ const SlideTwo = () => {
 				fill
 				priority
 				className='object-cover'
+				unoptimized
 			/>
 		</div>
 	)
