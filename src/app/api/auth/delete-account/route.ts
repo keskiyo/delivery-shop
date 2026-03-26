@@ -1,6 +1,7 @@
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
+import { deleteUserAvatar } from '../../../../../utils/deleteUserAvatar'
 
 export async function POST(request: NextRequest) {
 	try {
@@ -19,6 +20,8 @@ export async function POST(request: NextRequest) {
 				{ status: 404 },
 			)
 		}
+
+		await deleteUserAvatar(userId)
 
 		return NextResponse.json(
 			{ message: 'Аккаунт успешно удален' },

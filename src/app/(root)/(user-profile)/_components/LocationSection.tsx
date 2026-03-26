@@ -2,7 +2,6 @@ import SelectCity from '@/app/(root)/(auth)/(reg)/_components/SelectCity'
 import SelectRegion from '@/app/(root)/(auth)/(reg)/_components/SelectRegion'
 import { profileStyles } from '@/app/(root)/(auth)/styles'
 import { useAuthStore } from '@/store/authStore'
-import { Edit } from 'lucide-react'
 import { ChangeEvent, useEffect, useState } from 'react'
 
 interface ProfileFormData {
@@ -10,9 +9,8 @@ interface ProfileFormData {
 	location: string
 }
 
-const LocationSection = () => {
+const LocationSection = ({ isEditing }: { isEditing: boolean }) => {
 	const { user, fetchUserData } = useAuthStore()
-	const [isEditing, setIsEditing] = useState(false)
 	const [isSaving, setIsSaving] = useState(false)
 	const [formData, setFormData] = useState<ProfileFormData>({
 		region: '',
@@ -30,12 +28,10 @@ const LocationSection = () => {
 
 	const handleRegionChange = (e: ChangeEvent<HTMLSelectElement>) => {
 		setFormData(prev => ({ ...prev, region: e.target.value }))
-		setIsEditing(true)
 	}
 
 	const handleCityChange = (e: ChangeEvent<HTMLSelectElement>) => {
 		setFormData(prev => ({ ...prev, location: e.target.value }))
-		setIsEditing(true)
 	}
 
 	const handleCancel = () => {
@@ -43,7 +39,6 @@ const LocationSection = () => {
 			region: user?.region || '',
 			location: user?.location || '',
 		})
-		setIsEditing(false)
 	}
 
 	const handleSave = async () => {
@@ -69,7 +64,6 @@ const LocationSection = () => {
 			}
 
 			await fetchUserData()
-			setIsEditing(false)
 		} catch (error) {
 			console.error('Ошибка при сохранении:', error)
 			alert('Не удалось сохранить изменения')
@@ -82,15 +76,28 @@ const LocationSection = () => {
 		<div className='mb-8'>
 			<div className='flex flex-wrap justify-between items-center mb-4 gap-4'>
 				<h3 className={profileStyles.sectionTitle}>Местоположение</h3>
-				{!isEditing ? (
-					<button
-						onClick={() => setIsEditing(true)}
-						className={profileStyles.editButton}
+
+				{!isEditing && (
+					<div
+						className='flex gap-2 w-full md:w-auto invisible'
+						aria-hidden='true'
 					>
-						<Edit className='h-4 w-4 mr-1' />
-						Редактировать
-					</button>
-				) : (
+						<button
+							className={profileStyles.cancelButton}
+							tabIndex={-1}
+						>
+							Отмена
+						</button>
+						<button
+							className={profileStyles.saveButton}
+							tabIndex={-1}
+						>
+							Сохранить
+						</button>
+					</div>
+				)}
+
+				{isEditing && (
 					<div className='flex gap-2 w-full md:w-auto'>
 						<button
 							onClick={handleCancel}

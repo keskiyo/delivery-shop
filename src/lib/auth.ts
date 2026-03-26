@@ -3,10 +3,11 @@ import PasswordResetEmail from '@/app/(root)/(auth)/(update-pass)/_components/Pa
 import EmailChangeVerification from '@/app/(root)/(user-profile)/_components/EmailChangeVerification'
 import { betterAuth } from 'better-auth'
 import { mongodbAdapter } from 'better-auth/adapters/mongodb'
-import { phoneNumber } from 'better-auth/plugins'
+import { admin, phoneNumber } from 'better-auth/plugins'
 import { MongoClient } from 'mongodb'
 import { Resend } from 'resend'
 import { CONFIG } from '../../config/config'
+import { deleteUserAvatar } from '../../utils/deleteUserAvatar'
 
 const client = new MongoClient(process.env.FOOD_DELIVERY_DB_URL!)
 const db = client.db('deliveryshop')
@@ -93,6 +94,7 @@ export const auth = betterAuth({
 			expiresIn: 300,
 			requireVerification: true,
 		}),
+		admin(),
 	],
 
 	user: {
@@ -123,6 +125,12 @@ export const auth = betterAuth({
 				})
 			},
 		},
+		deleteUser: {
+			enabled: true,
+			afterDelete: async user => {
+				await deleteUserAvatar(user.id)
+			},
+		},
 		additionalFields: {
 			phoneNumber: { type: 'string', input: true, required: true },
 			surname: { type: 'string', input: true, required: true },
@@ -132,6 +140,12 @@ export const auth = betterAuth({
 			gender: { type: 'string', input: true, required: true },
 			card: { type: 'string', input: true, required: false },
 			hasCard: { type: 'boolean', input: true, required: false },
+			role: {
+				type: 'string',
+				input: false,
+				required: false,
+				default: 'user',
+			},
 		},
 	},
 })

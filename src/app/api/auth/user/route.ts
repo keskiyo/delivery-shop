@@ -1,10 +1,10 @@
+import { NextResponse } from 'next/server'
 import {
 	getBetterAuthSession,
 	getCustomSessionToken,
 	getUserById,
 	getValidCustomSession,
-} from '@/utils/auth-helpers'
-import { NextResponse } from 'next/server'
+} from '../../../../../utils/auth-helpers'
 
 export async function GET(request: Request) {
 	try {

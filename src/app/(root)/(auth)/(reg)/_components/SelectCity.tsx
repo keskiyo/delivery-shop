@@ -2,7 +2,7 @@
 
 import { cities } from '@/data/city'
 import { ChevronDown } from 'lucide-react'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { formStyles } from '../../styles'
 
 interface SelectCityProps {
@@ -18,6 +18,8 @@ const SelectCity = ({
 	className,
 	disabled,
 }: SelectCityProps) => {
+	const [isFocused, setIsFocused] = useState(false)
+
 	return (
 		<div>
 			<label htmlFor='location' className={formStyles.label}>
@@ -30,6 +32,8 @@ const SelectCity = ({
 					value={value}
 					disabled={disabled}
 					onChange={onChangeAction}
+					onFocus={() => setIsFocused(true)}
+					onBlur={() => setIsFocused(false)}
 					className={`${formStyles.input} ${className} appearance-none pr-8 cursor-pointer disabled:cursor-not-allowed disabled:bg-[#f3f2f1]`}
 				>
 					{cities.map(city => (
@@ -40,7 +44,12 @@ const SelectCity = ({
 				</select>
 				{!disabled && (
 					<div className='absolute right-2 top-2 transform -transform-y-1/2 pointer-events-none'>
-						<ChevronDown size={24} />
+						<ChevronDown
+							size={24}
+							className={`transform transition-transform duration-300 ${
+								isFocused ? 'rotate-180' : 'rotate-0'
+							}`}
+						/>
 					</div>
 				)}
 			</div>

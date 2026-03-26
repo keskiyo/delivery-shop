@@ -4,7 +4,9 @@ import { ErrorContent } from '@/app/(root)/(auth)/(reg)/_components/ErrorContent
 import LocationSection from '@/app/(root)/(user-profile)/_components/LocationSection'
 import ProfilePhoneSettings from '@/app/(root)/(user-profile)/_components/profile-phone/ProfilePhoneSettings'
 import ProfileAvatar from '@/app/(root)/(user-profile)/_components/ProfileAvatar'
+import ProfileCard from '@/app/(root)/(user-profile)/_components/ProfileCard'
 import ProfileEmail from '@/app/(root)/(user-profile)/_components/ProfileEmail'
+import ProfilePassword from '@/app/(root)/(user-profile)/_components/ProfilePassword'
 import { Loader } from '@/components/features/common/loader'
 import { useAuthStore } from '@/store/authStore'
 import { MailWarning, Phone } from 'lucide-react'
@@ -16,6 +18,7 @@ import SecuritySection from '../_components/SecuritySection'
 const ProfilePage = () => {
 	const { user, isAuth, checkAuth } = useAuthStore()
 	const [isCheckingAuth, setIsCheckingAuth] = useState(true)
+	const [isEditing, setIsEditing] = useState(false)
 	const router = useRouter()
 	const isPhoneRegistration = user?.phoneNumberVerified
 
@@ -64,7 +67,7 @@ const ProfilePage = () => {
 	}
 
 	return (
-		<div className='px-4 md:px-6 xl:px-8 max-w-4xl mx-auto'>
+		<div className='px-4 md:px-6 xl:px-8 max-w-5xl mx-auto'>
 			<div className='animate-slide-in opacity translate-y-8 bg-card rounded-xl shadow-xl overflow-hidden duration-300 ease-out'>
 				<ProfileHeader name={user.name} surname={user.surname} />
 
@@ -85,12 +88,19 @@ const ProfilePage = () => {
 						</div>
 					</div>
 					<ProfileAvatar gender={user.gender || 'male'} />
-					<LocationSection />
+					<LocationSection isEditing={isEditing} />
 					<div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-						<ProfileEmail />
-						<ProfilePhoneSettings />
+						<ProfileEmail isEditing={isEditing} />
+						<ProfilePhoneSettings isEditing={isEditing} />
 					</div>
-					<SecuritySection />
+					<div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+						<ProfilePassword />
+						<ProfileCard isEditing={isEditing} />
+					</div>
+					<SecuritySection
+						isEditing={isEditing}
+						setIsEditing={setIsEditing}
+					/>
 				</div>
 			</div>
 		</div>

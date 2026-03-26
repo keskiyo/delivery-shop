@@ -4,12 +4,11 @@ import AlertMessage from '@/app/(root)/(user-profile)/_components/AlertMessage'
 import { SuccessChangeEmail } from '@/app/(root)/(user-profile)/_components/SuccessChangeEmail'
 import { authClient } from '@/lib/auth-client'
 import { useAuthStore } from '@/store/authStore'
-import { Edit, Mail } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { CONFIG } from '../../../../../config/config'
 
-const ProfileEmail = () => {
-	const [isEditing, setIsEditing] = useState(false)
+const ProfileEmail = ({ isEditing }: { isEditing: boolean }) => {
 	const [isSaving, setIsSaving] = useState(false)
 	const [email, setEmail] = useState<string>('')
 	const [showSuccess, setShowSuccess] = useState(false)
@@ -33,7 +32,6 @@ const ProfileEmail = () => {
 
 	const handleCancel = () => {
 		setEmail(isTempEmail ? '' : user?.email || '')
-		setIsEditing(false)
 		setError('')
 	}
 
@@ -53,7 +51,6 @@ const ProfileEmail = () => {
 
 		await fetchUserData()
 		alert('Email успешно обновлен!')
-		setIsEditing(false)
 	}
 
 	const handleSave = async () => {
@@ -96,7 +93,6 @@ const ProfileEmail = () => {
 				}
 
 				setShowSuccess(true)
-				setIsEditing(false)
 			}
 		} catch (error) {
 			console.error('Ошибка при сохранении:', error)
@@ -126,15 +122,28 @@ const ProfileEmail = () => {
 		<div className='mb-8'>
 			<div className='flex flex-wrap justify-between items-center mb-4 gap-4'>
 				<h3 className={profileStyles.sectionTitle}>Email</h3>
-				{!isEditing ? (
-					<button
-						onClick={() => setIsEditing(true)}
-						className={profileStyles.editButton}
+
+				{!isEditing && (
+					<div
+						className='flex gap-2 w-full md:w-auto invisible'
+						aria-hidden='true'
 					>
-						<Edit className='h-4 w-4 mr-1' />
-						Редактировать
-					</button>
-				) : (
+						<button
+							className={profileStyles.cancelButton}
+							tabIndex={-1}
+						>
+							Отмена
+						</button>
+						<button
+							className={profileStyles.saveButton}
+							tabIndex={-1}
+						>
+							Сохранить
+						</button>
+					</div>
+				)}
+
+				{isEditing && (
 					<div className='flex gap-2 w-full md:w-auto'>
 						<button
 							onClick={handleCancel}

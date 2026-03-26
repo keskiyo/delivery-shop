@@ -1,10 +1,10 @@
 import StarRating from '@/components/shared/StarRating'
 import { ProductCardProps } from '@/types/product'
-import { formatPrice } from '@/utils/formatPrice'
 import { Heart } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CONFIG } from '../../../config/config'
+import { formatPrice } from '../../../utils/formatPrice'
 
 const cardDiscountPercent = CONFIG.CARD_DISCOUNT_PERCENT
 

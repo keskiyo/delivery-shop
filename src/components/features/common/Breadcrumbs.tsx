@@ -1,9 +1,9 @@
 'use client'
 
-import { TRANSLATIONS } from '@/utils/translations'
 import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { TRANSLATIONS } from '../../../../utils/translations'
 
 const BreadCrumbs = () => {
 	const pathname = usePathname()

@@ -4,10 +4,10 @@ import ConfirmAvatarModal from '@/app/(root)/(user-profile)/_components/ConfirmA
 import IconAvatarChange from '@/components/svg/IconAvatarChange'
 import useAvatar from '@/hooks/useAvatar'
 import { useAuthStore } from '@/store/authStore'
-import { getAvatarByGender } from '@/utils/getAvatar'
-import { optimizeImage } from '@/utils/optimizeImage'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
+import { getAvatarByGender } from '../../../../../utils/getAvatar'
+import { optimizeImage } from '../../../../../utils/optimizeImage'
 
 const ProfileAvatar = ({ gender }: { gender: string }) => {
 	const { user } = useAuthStore()
@@ -101,15 +101,17 @@ const ProfileAvatar = ({ gender }: { gender: string }) => {
 	return (
 		<div className='flex flex-col items-center mb-8'>
 			<div className='relative'>
-				<Image
-					src={displayAvatar}
-					width={128}
-					height={128}
-					alt='Аватар профиля'
-					className='w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover'
-					onError={handleImageError}
-					priority
-				/>
+				<div className='animate-rgb-border inline-block rounded-full overflow-hidden'>
+					<Image
+						src={displayAvatar}
+						width={128}
+						height={128}
+						alt='Аватар профиля'
+						className='w-32 h-32 rounded-full object-cover'
+						onError={handleImageError}
+						priority
+					/>
+				</div>
 				{isUploading && (
 					<div className='absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-full'>
 						<div className='animate-spin rounded-full h-8 w-8 border-b-2 border-white'></div>
@@ -138,10 +140,10 @@ const ProfileAvatar = ({ gender }: { gender: string }) => {
 				<p className='text-sm mb-1'>
 					Нажмите на иконку для смены аватара
 				</p>
-				<p className='text-xs'>
+				<p className='text-xs text-[#8f8f8f]'>
 					{isUploading
 						? 'Загрузка...'
-						: 'Загрузить файл или сделать фото'}
+						: 'Загрузите файл JPEG, PNG, WEBP, GIF'}
 				</p>
 			</div>
 		</div>

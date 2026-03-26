@@ -1,5 +1,4 @@
 import { profileStyles } from '@/app/(root)/(auth)/styles'
-import EditButton from '@/app/(root)/(user-profile)/_components/profile-phone/EditButton'
 import PhoneEditView from '@/app/(root)/(user-profile)/_components/profile-phone/PhoneEditView'
 import PhoneVerifyView from '@/app/(root)/(user-profile)/_components/profile-phone/PhoneVerifyView'
 import ProfilePhoneInput from '@/app/(root)/(user-profile)/_components/profile-phone/ProfilePhoneInput'
@@ -10,8 +9,7 @@ import { useEffect, useState } from 'react'
 import { CONFIG } from '../../../../../../config/config'
 import AlertMessage from '../AlertMessage'
 
-const ProfilePhoneSetting = () => {
-	const [isEditing, setIsEditing] = useState(false)
+const ProfilePhoneSetting = ({ isEditing }: { isEditing: boolean }) => {
 	const [isSaving, setIsSaving] = useState(false)
 	const [newPhoneNumber, setNewPhoneNumber] = useState<string>('')
 	const [isSendingOTP, setIsSendingOTP] = useState(false)
@@ -39,7 +37,6 @@ const ProfilePhoneSetting = () => {
 
 	const handleCancel = () => {
 		setNewPhoneNumber(currentPhone)
-		setIsEditing(false)
 		setVerificationStep('edit')
 		setError('')
 		setCode('')
@@ -65,7 +62,6 @@ const ProfilePhoneSetting = () => {
 
 		await fetchUserData()
 		alert('Номер телефона успешно обновлен!')
-		setIsEditing(false)
 	}
 
 	const handleSave = async () => {
@@ -84,7 +80,6 @@ const ProfilePhoneSetting = () => {
 				await updatePhoneDirectly()
 			} else {
 				await sendVerificationCode()
-				setIsEditing(false)
 			}
 		} catch (error) {
 			console.error('Ошибка при сохранении:', error)
@@ -177,23 +172,43 @@ const ProfilePhoneSetting = () => {
 		<div className='mb-8'>
 			<div className='flex flex-wrap justify-between items-center mb-4 gap-4'>
 				<h3 className={profileStyles.sectionTitle}>Телефон</h3>
-				{verificationStep === 'edit' && !isEditing ? (
-					<EditButton onEdit={() => setIsEditing(true)} />
-				) : verificationStep === 'edit' && isEditing ? (
+
+				{!isEditing && (
+					<div
+						className='flex gap-2 w-full md:w-auto invisible'
+						aria-hidden='true'
+					>
+						<button
+							className={profileStyles.cancelButton}
+							tabIndex={-1}
+						>
+							Отмена
+						</button>
+						<button
+							className={profileStyles.saveButton}
+							tabIndex={-1}
+						>
+							Сохранить
+						</button>
+					</div>
+				)}
+
+				{isEditing && verificationStep === 'edit' && (
 					<PhoneEditView
 						onCancel={handleCancel}
 						isSaving={isSaving}
 						onSave={handleSave}
 						isSendingOTP={isSendingOTP}
 					/>
-				) : verificationStep === 'verify' ? (
+				)}
+				{isEditing && verificationStep === 'verify' && (
 					<PhoneEditView
 						onCancel={handleCancel}
 						isSaving={isSaving}
 						isSendingOTP={isSendingOTP}
 						isVerificationMode={true}
 					/>
-				) : null}
+				)}
 			</div>
 
 			<ProfilePhoneInput

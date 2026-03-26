@@ -1,9 +1,9 @@
 import { Loader } from '@/components/features/common/loader'
 import HighlightText from '@/components/layout/header/HighlightText'
 import { SearchProduct } from '@/types/searchProduct'
-import { TRANSLATIONS } from '@/utils/translations'
 import { Menu } from 'lucide-react'
 import Link from 'next/link'
+import { TRANSLATIONS } from '../../../../../utils/translations'
 const SearchResults = ({
 	isLoading,
 	groupedProducts,

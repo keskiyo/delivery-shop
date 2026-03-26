@@ -5,8 +5,8 @@ import FilterControls from '@/app/(root)/(category)/category/FilterControls'
 import PriceFilter from '@/app/(root)/(category)/category/PriceFilter'
 import { Loader } from '@/components/features/common/loader'
 import GenericListPage from '@/components/shared/GenericListPage'
-import { TRANSLATIONS } from '@/utils/translations'
 import { Suspense } from 'react'
+import { TRANSLATIONS } from '../../../../../../utils/translations'
 
 export async function generateMetadata({
 	params,

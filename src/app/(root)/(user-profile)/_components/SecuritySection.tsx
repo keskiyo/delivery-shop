@@ -7,7 +7,13 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import DeleteAccountModal from './DeleteAccountModal'
 
-const SecuritySection: React.FC = () => {
+const SecuritySection = ({
+	isEditing,
+	setIsEditing,
+}: {
+	isEditing: boolean
+	setIsEditing: (value: boolean) => void
+}) => {
 	const [isLoading, setIsLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
 	const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
@@ -22,6 +28,10 @@ const SecuritySection: React.FC = () => {
 			console.error('Ошибка при выходе:', error)
 			setError('Не удалось выйти из приложения')
 		}
+	}
+
+	const handleChangeProfile = () => {
+		setIsEditing(!isEditing)
 	}
 
 	const handleDeleteAccount = async () => {
@@ -81,17 +91,24 @@ const SecuritySection: React.FC = () => {
 						{error}
 					</div>
 				)}
-				<div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+				<div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
 					<button
 						onClick={logoutFromProfile}
-						className={`${buttonStyles.active} flex flex-1 items-center hover:bg-orange-400 justify-center h-12 bg-[#f3f2f1] text-[#606060] px-4 py-2 rounded font-medium hover:shadow-button-cancel active:shadow-button-cancel-active duration-300 cursor-pointer`}
+						className={`${buttonStyles.active} flex flex-1 items-center hover:bg-orange-500 justify-center h-12 bg-orange-600 text-[#606060] px-4 py-2 rounded font-medium hover:shadow-button-cancel active:shadow-button-cancel-active duration-300 cursor-pointer`}
 					>
 						Выйти из личного кабинета
 					</button>
 
 					<button
+						onClick={handleChangeProfile}
+						className={`${buttonStyles.active} flex flex-1 items-center hover:bg-green-500 justify-center h-12 bg-green-600 text-white px-4 py-2 rounded font-medium hover:shadow-button-default active:shadow-button-cancel-active duration-300 cursor-pointer`}
+					>
+						{isEditing ? 'Готово' : 'Редактировать профиль'}
+					</button>
+
+					<button
 						onClick={handleOpenDeleteModal}
-						className='bg-[#ffc7c7] hover:bg-[#d80000] text-[#d80000] hover:text-[#f2f2f2] px-4 py-2 h-12 rounded font-medium duration-300 text-center cursor-pointer'
+						className='bg-[#ffc7c7] hover:bg-[#d80000] text-[#d80000] hover:text-[#f2f2f2] px-4 py-2 h-12 rounded font-medium duration-300 text-center cursor-pointer w-full active:shadow-button-cancel-active'
 					>
 						Удалить аккаунт
 					</button>

@@ -2,8 +2,8 @@
 
 import Tooltip from '@/app/(root)/(auth)/_components/Tooltip'
 import IconVision from '@/components/svg/IconVision'
-import { isPasswordValid } from '@/utils/validation/passwordValid'
 import { ChangeEvent, useState } from 'react'
+import { isPasswordValid } from '../../../../../utils/validation/passwordValid'
 import { formStyles } from '../styles'
 
 interface PasswordInputProps {

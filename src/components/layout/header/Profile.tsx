@@ -1,13 +1,15 @@
 'use client'
 
+import { Loader } from '@/components/features/common/loader'
 import { ThemeToggle } from '@/components/ui/theme/ThemeToggle'
 import { useAuthStore } from '@/store/authStore'
-import { getAvatarByGender } from '@/utils/getAvatar'
 import { LogIn } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
+import { checkAvatarExist } from '../../../../utils/avatarUtils'
+import { getAvatarByGender } from '../../../../utils/getAvatar'
 
 const Profile = () => {
 	const { isAuth, user, logout, checkAuth, isLoading } = useAuthStore()
@@ -19,16 +21,48 @@ const Profile = () => {
 	const menuRef = useRef<HTMLDivElement>(null)
 	const router = useRouter()
 
+	const getDisplayName = () => {
+		if (!user?.name) return <Loader />
+
+		if (user.role === 'manager') {
+			return 'Менеджер'
+		} else if (user.role === 'admin') {
+			return 'Администратор'
+		}
+
+		return user.name
+	}
+
+	const isManagerOrAdmin = () => {
+		return user?.role === 'manager' || user?.role === 'admin'
+	}
+
 	useEffect(() => {
 		setLastUpdate(Date.now())
 	}, [user])
 
 	useEffect(() => {
-		if (user?.id) {
-			setAvatarSrc(`/api/auth/avatar/${user.id}?t=${lastUpdate}`)
-		} else if (user?.gender) {
-			setAvatarSrc(getAvatarByGender(user.gender))
+		const checkAvatar = async () => {
+			if (user?.id) {
+				try {
+					const exists = await checkAvatarExist(user.id)
+
+					if (exists) {
+						setAvatarSrc(
+							`/api/auth/avatar/${user.id}?t=${lastUpdate}`,
+						)
+					} else {
+						setAvatarSrc(getAvatarByGender(user.gender))
+					}
+				} catch {
+					setAvatarSrc(getAvatarByGender(user.gender))
+				}
+			} else if (user?.gender) {
+				setAvatarSrc(getAvatarByGender(user.gender))
+			}
 		}
+
+		checkAvatar()
 	}, [user, lastUpdate])
 
 	useEffect(() => {
@@ -117,7 +151,7 @@ const Profile = () => {
 						className='min-w-10 min-h-10 md:block xl:block rounded-full object-cover'
 					/>
 					<p className='hidden xl:block text-base cursor-pointer p-2.5'>
-						{isLoading ? 'Загрузка...' : user?.name}
+						{getDisplayName()}
 					</p>
 				</div>
 
@@ -145,6 +179,15 @@ const Profile = () => {
 					>
 						Главная
 					</Link>
+					{isManagerOrAdmin() && (
+						<Link
+							href='/administrator'
+							className='block px-4 py-3 text-gray-300 hover:text-[#ff6633] duration-300'
+							onClick={() => setIsMenuOpen(false)}
+						>
+							Панель управления
+						</Link>
+					)}
 					<ThemeToggle />
 					<button
 						onClick={handleLogout}

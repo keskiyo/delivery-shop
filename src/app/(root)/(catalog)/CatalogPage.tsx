@@ -4,6 +4,7 @@ import CatalogAdminControls from '@/app/(root)/(catalog)/CatalogAdminControls'
 import CatalogGrid from '@/app/(root)/(catalog)/CatalogGrid'
 import ErrorComponent from '@/components/features/common/ErrorComponent'
 import { Loader } from '@/components/features/common/loader'
+import { useAuthStore } from '@/store/authStore'
 import { CatalogProps } from '@/types/catalog'
 import { useEffect, useState } from 'react'
 
@@ -26,7 +27,9 @@ const CatalogPage = () => {
 	const [hoveredCategoryId, setHoveredCategoryId] = useState<string | null>(
 		null,
 	)
-	const isAdmin = true
+	const { user } = useAuthStore()
+
+	const isAdmin = user?.role === 'admin'
 
 	const fetchCategories = async () => {
 		try {

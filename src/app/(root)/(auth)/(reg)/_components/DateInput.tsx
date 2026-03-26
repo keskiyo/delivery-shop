@@ -2,9 +2,9 @@
 
 import Tooltip from '@/app/(root)/(auth)/_components/Tooltip'
 import { formStyles } from '@/app/(root)/(auth)/styles'
-import { validateBirthDate } from '@/utils/validation/validateBirthDate'
 import { CalendarDays } from 'lucide-react'
 import { ChangeEvent, useRef, useState } from 'react'
+import { validateBirthDate } from '../../../../../../utils/validation/validateBirthDate'
 
 const DateInput = ({
 	value,

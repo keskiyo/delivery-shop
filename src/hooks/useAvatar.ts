@@ -1,8 +1,8 @@
 'use client'
 
 import { useAuthStore } from '@/store/authStore'
-import { getAvatarByGender } from '@/utils/getAvatar'
 import { useCallback, useEffect, useState } from 'react'
+import { getAvatarByGender } from '../../utils/getAvatar'
 
 interface UseAvatarProps {
 	userId?: string

@@ -1,10 +1,10 @@
 'use client'
 
 import { authClient } from '@/lib/auth-client'
-import { isPasswordValid } from '@/utils/validation/passwordValid'
 import { Loader2, MessageCircle } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { isPasswordValid } from '../../../../../../utils/validation/passwordValid'
 import { AuthFormLayout } from '../../_components/AuthFormLayout'
 import PasswordInput from '../../_components/PasswordInput'
 import { buttonStyles } from '../../styles'

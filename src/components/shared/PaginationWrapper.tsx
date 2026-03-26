@@ -1,9 +1,9 @@
 'use client'
 import Pagination from '@/components/shared/Pagination'
-import { debounce } from '@/utils/debounce'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { CONFIG } from '../../../config/config'
+import { debounce } from '../../../utils/debounce'
 
 function getItemsPerPAgeByWidth(contentType?: string) {
 	const width = window.innerWidth

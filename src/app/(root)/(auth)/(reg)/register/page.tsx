@@ -18,9 +18,9 @@ import ErrorComponent from '@/components/features/common/ErrorComponent'
 import { Loader } from '@/components/features/common/loader'
 import { initialRegFormData } from '@/constants/RegFormData'
 import { RegFormData } from '@/types/regFormData'
-import { validateRegisterForm } from '@/utils/validation/form'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { validateRegisterForm } from '../../../../../../utils/validation/form'
 
 const RegisterPage = () => {
 	const [isLoading, setIsLoading] = useState(false)
@@ -188,21 +188,11 @@ const RegisterPage = () => {
 						/>
 						<SelectRegion
 							value={registerForm.region}
-							onChangeAction={value =>
-								setRegisterForm(prev => ({
-									...prev,
-									region: value,
-								}))
-							}
+							onChangeAction={handleChange}
 						/>
 						<SelectCity
 							value={registerForm.location}
-							onChangeAction={value =>
-								setRegisterForm(prev => ({
-									...prev,
-									location: value,
-								}))
-							}
+							onChangeAction={handleChange}
 						/>
 						<GenderSelect
 							value={registerForm.gender}

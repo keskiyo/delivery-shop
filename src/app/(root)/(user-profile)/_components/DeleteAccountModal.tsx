@@ -16,9 +16,9 @@ const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({
 	if (!isOpen) return null
 
 	return (
-		<div className='fixed inset-0 bg-card flex items-center justify-center z-50'>
-			<div className='bg-white rounded p-6 w-96'>
-				<h3 className='text-xl font-bold text-[#414141] mb-4'>
+		<div className='fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50'>
+			<div className='bg-card rounded p-6 w-96'>
+				<h3 className='text-xl font-bold mb-4'>
 					Подтверждение удаления
 				</h3>
 
@@ -28,7 +28,7 @@ const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({
 					</div>
 				)}
 
-				<p className='text-[#414141] mb-6'>
+				<p className='mb-6'>
 					Вы уверены, что хотите удалить свой аккаунт? Это действие
 					нельзя отменить.
 				</p>
