@@ -59,8 +59,15 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 				throw new Error(errorData.error || 'Ошибка установки пароля')
 			}
 
+			let userDataToUpdate = { ...regFormData }
+
+			if (verifyData.user.phoneNumberVerified) {
+				const { email, ...rest } = userDataToUpdate
+				userDataToUpdate = rest as typeof regFormData
+			}
+
 			const { error: updateError } =
-				await authClient.updateUser(regFormData)
+				await authClient.updateUser(userDataToUpdate)
 
 			if (updateError) throw updateError
 

@@ -1,6 +1,6 @@
 export const buttonStyles = {
 	base: 'w-65 h-13 my-5 mx-auto text-2xl rounded cursor-pointer transition-all duration-200',
-	active: 'bg-[#ff6633] text-white hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active)',
+	active: 'bg-[#ff6633] text-white hover:shadow-(--shadow-article) rounded active:shadow-(--shadow-button-active)',
 	inactive: 'bg-[#fcd5ba] text-[#ff6633]',
 }
 
