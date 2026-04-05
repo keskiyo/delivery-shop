@@ -2,7 +2,7 @@
 
 import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { TRANSLATIONS } from '../../../../utils/translations'
 
 const BreadCrumbs = () => {
@@ -12,11 +12,29 @@ const BreadCrumbs = () => {
 
 	const pathSegments = pathname.split('/').filter(segment => segment !== '')
 
+	const searchParams = useSearchParams()
+	const productsDesc = searchParams.get('desc')
+
 	const breadcrumbs = pathSegments.map((segment, index) => {
 		const href = '/' + pathSegments.slice(0, index + 1).join('/')
+
+		let label = TRANSLATIONS[segment] || segment
+
+		if (
+			index === pathSegments.length - 1 &&
+			productsDesc &&
+			pathSegments.includes('catalog') &&
+			pathSegments.length >= 3
+		) {
+			label = productsDesc
+		}
+
 		return {
-			label: TRANSLATIONS[segment] || segment,
-			href,
+			label,
+			href:
+				index === pathSegments.length - 1
+					? `${href}?desc=${productsDesc}`
+					: href,
 			isLast: index === pathSegments.length - 1,
 		}
 	})

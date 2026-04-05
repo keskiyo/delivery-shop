@@ -1,4 +1,5 @@
 import { buttonStyles } from '@/app/(root)/(auth)/styles'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 const Pagination = ({
 	currentPage,
@@ -43,7 +44,7 @@ const Pagination = ({
 					disabled={currentPage === 1}
 					className='px-3 py-1 border border-gray-300 rounded disabled:opacity-50 hover:bg-gray-50 duration-300 cursor-pointer disabled:cursor-not-allowed'
 				>
-					Назад
+					<ArrowLeft size={24} />
 				</button>
 
 				{getVisiblePages().map(page => (
@@ -65,7 +66,7 @@ const Pagination = ({
 					disabled={currentPage === totalPages}
 					className='px-3 py-1 border border-gray-300 rounded disabled:opacity-50 hover:bg-gray-50 cursor-pointer disabled:cursor-not-allowed'
 				>
-					Вперед
+					<ArrowRight size={24} />
 				</button>
 			</div>
 		</div>

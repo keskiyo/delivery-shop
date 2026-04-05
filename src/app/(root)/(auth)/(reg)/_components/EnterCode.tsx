@@ -23,7 +23,6 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 
 	useEffect(() => {
 		startTimer()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const handleSubmit = async (e: React.SyntheticEvent) => {
@@ -38,6 +37,11 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 					phoneNumber,
 					code,
 					disableSession: false,
+					surname: regFormData.surname,
+					birthdayDate: regFormData.birthdayDate,
+					region: regFormData.region,
+					location: regFormData.location,
+					gender: regFormData.gender,
 				})
 
 			if (verifyError) throw verifyError
@@ -62,7 +66,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 			let userDataToUpdate = { ...regFormData }
 
 			if (verifyData.user.phoneNumberVerified) {
-				const { email, ...rest } = userDataToUpdate
+				const { email, phoneNumber, ...rest } = userDataToUpdate
 				userDataToUpdate = rest as typeof regFormData
 			}
 
@@ -123,7 +127,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 			<div className='flex flex-col gap-y-8'>
 				<h1 className='text-2xl font-bold text-center'>Регистрация</h1>
 				<div>
-					<p className='text-center text-gray-400'>Код из SMS</p>
+					<p className='text-center'>Код из SMS</p>
 					<form
 						onSubmit={handleSubmit}
 						className='w-65 mx-auto max-h-screen flex flex-col justify-center items-center'
@@ -139,7 +143,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 								setCode(e.target.value)
 								setError('')
 							}}
-							className='flex justify-center w-27.5 h-15 text-center text-2xl px-4 py-3 border border-[#bfbfbf] rounded focus:border-[#70c05b] focus:shadow-(--shadow-button-default) focus:bg-white focus:outline-none'
+							className='flex justify-center w-27.5 h-15 text-center text-2xl px-4 py-3 border border-[#bfbfbf] rounded focus:border-[#70c05b] focus:shadow-(--shadow-button-default) text-gray-500 focus:bg-white focus:outline-none'
 							autoComplete='one-time-code'
 							required
 						/>

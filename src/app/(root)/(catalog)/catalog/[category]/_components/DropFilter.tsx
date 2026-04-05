@@ -1,8 +1,8 @@
 'use client'
 
-import FilterButtons from '@/app/(root)/(category)/category/FilterButtons'
-import FilterControls from '@/app/(root)/(category)/category/FilterControls'
-import PriceFilter from '@/app/(root)/(category)/category/PriceFilter'
+import FilterButtons from '@/app/(root)/(catalog)/catalog/[category]/_components/FilterButtons'
+import FilterControls from '@/app/(root)/(catalog)/catalog/[category]/_components/FilterControls'
+import PriceFilter from '@/app/(root)/(catalog)/catalog/[category]/_components/PriceFilter'
 import { X } from 'lucide-react'
 import { useState } from 'react'
 

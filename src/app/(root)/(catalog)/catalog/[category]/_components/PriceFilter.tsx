@@ -1,14 +1,14 @@
 'use client'
 
-import InStockToggle from '@/app/(root)/(category)/category/InStockToggle'
-import PriceFilterHeader from '@/app/(root)/(category)/category/PriceFilterHeader'
-import PriceInputs from '@/app/(root)/(category)/category/PriceInputs'
-import PriceRangeFilter from '@/app/(root)/(category)/category/PriceRangeSlider'
+import InStockToggle from '@/app/(root)/(catalog)/catalog/[category]/_components/InStockToggle'
+import PriceFilterHeader from '@/app/(root)/(catalog)/catalog/[category]/_components/PriceFilterHeader'
+import PriceInputs from '@/app/(root)/(catalog)/catalog/[category]/_components/PriceInputs'
+import PriceRangeFilter from '@/app/(root)/(catalog)/catalog/[category]/_components/PriceRangeSlider'
 import ErrorComponent from '@/components/features/common/ErrorComponent'
 import { Loader } from '@/components/features/common/loader'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { SyntheticEvent, useCallback, useEffect, useState } from 'react'
-import { CONFIG } from '../../../../../config/config'
+import { CONFIG } from '../../../../../../../config/config'
 
 type PriceRange = {
 	min: number

@@ -19,7 +19,7 @@ const NavAndInfo = ({
 		<div className={tableStyles.spacing.section}>
 			<Link
 				href='/administrator'
-				className='hover:underline mb-3 lg:mb-4 flex flex-row items-center gap-3 text-sm lg:text-base'
+				className='hover:underline mb-3 lg:mb-4 flex flex-row items-center gap-3 text-sm max-w-62.5 lg:text-base'
 			>
 				<ArrowLeft className='h-4 w-4 ml-1' />
 				Назад в панель управления

@@ -33,11 +33,11 @@ export default function VerifySuccessPage() {
 					<CheckCircle className='h-10 w-10 text-white' />
 				</div>
 
-				<h1 className='text-2xl font-bold text-[#414141] mb-2'>
+				<h1 className='text-2xl font-bold mb-2'>
 					Email успешно подтвержден!
 				</h1>
 
-				<p className='text-gray-600 mb-6'>
+				<p className='text-gray-400 mb-6'>
 					Ваш адрес электронной почты был успешно подтвержден. Теперь
 					Вы можете войти в свой аккаунт.
 				</p>
@@ -50,7 +50,7 @@ export default function VerifySuccessPage() {
 						Перейти к авторизации
 					</button>
 
-					<p className='text-sm text-gray-500'>
+					<p className='text-sm text-gray-300'>
 						Автоматический переход через {secondsLeft}{' '}
 						{secondsLeft % 10 === 1 && secondsLeft % 100 !== 11
 							? 'секунду'
@@ -66,7 +66,7 @@ export default function VerifySuccessPage() {
 			</div>
 
 			<div className='bg-gray-50 px-8 py-4 border-t border-gray-200'>
-				<p className='text-xs text-gray-500 text-center'>
+				<p className='text-xs text-gray-400 text-center'>
 					Нужна помощь?{' '}
 					<Link
 						href='/contacts'

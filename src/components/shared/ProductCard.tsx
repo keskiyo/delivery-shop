@@ -9,13 +9,14 @@ import { formatPrice } from '../../../utils/formatPrice'
 const cardDiscountPercent = CONFIG.CARD_DISCOUNT_PERCENT
 
 const ProductCard = ({
-	_id,
+	id,
 	img,
 	description,
 	basePrice,
 	discountPercent = 0,
 	rating,
 	tags,
+	categories,
 }: ProductCardProps) => {
 	const calculateFinalPrice = (price: number, discount: number): number => {
 		return discount > 0 ? price * (1 - discount / 100) : price
@@ -34,14 +35,19 @@ const ProductCard = ({
 		? basePrice
 		: calculatePriceByCard(finalPrice, cardDiscountPercent)
 
-	const ratingValue = rating?.rate || 5
+	const ratingValue = rating?.average ?? 5.0
+
+	const productId = id
+	const mainCategory = categories?.[0]
+
+	const productUrl = `/catalog/${encodeURIComponent(mainCategory)}/${productId}?desc=${encodeURIComponent(description.substring(0, 50))}`
 
 	return (
 		<div className='relative flex flex-col justify-between w-40 rounded overflow-hidden bg-[#fff5fd] h-87.5 md:w-56 xl:w-68 align-top p-0 hover:shadow-(--shadow-article) duration-300'>
 			<button className='absolute w-8 h-8 p-2 bg-[#f3f2f1] hover:bg-[#fcd5ba] top-2 right-2 opacity-50 rounded cursor-pointer duration-300 flex items-center z-20'>
 				<Heart size={24} className='text-gray-700' />
 			</button>
-			<Link href={`/product/${_id}`}>
+			<Link href={productUrl}>
 				<div className='w-40 h-40 md:w-56 xl:w-68 aspect-square relative'>
 					<Image
 						src={img}
@@ -88,7 +94,7 @@ const ProductCard = ({
 					<div className='h-13.5 text-xs md:text-base line-clamp-3 md:line-clamp-2 leading-normal'>
 						{description}
 					</div>
-					{ratingValue > 0 && <StarRating rating={ratingValue} />}
+					{<StarRating rating={ratingValue} />}
 				</div>
 			</Link>
 			<button className='absolute bottom-2 left-2 right-2 border bg-[#eeeeee] text-gray-700 border-[#414141] hover:text-white hover:bg-[#ff6633] hover:border-transparent active:shadow-(--shadow-button-active) h-10 rounded justify-center items-center transition-all duration-300 cursor-pointer select-none'>

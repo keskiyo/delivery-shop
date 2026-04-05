@@ -123,9 +123,9 @@ const Profile = () => {
 			<>
 				<Link
 					href='/login'
-					className='ml-6 w-10 xl:w-39.25 flex justify-between items-center gap-x-2 p-2 rounded text-white text-base bg-[#ff6633] hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) duration-300 cursor-pointer'
+					className='ml-6 w-10 xl:w-30 flex justify-between items-center gap-x-2 p-2 rounded text-white text-base bg-[#ff6633] hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) duration-300 cursor-pointer'
 				>
-					<div className='w-27.25 justify-center hidden xl:flex'>
+					<div className='w-27 justify-center hidden xl:flex'>
 						<p>Войти</p>
 					</div>
 					<LogIn size={24} />

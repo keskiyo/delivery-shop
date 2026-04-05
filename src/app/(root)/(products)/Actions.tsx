@@ -3,10 +3,18 @@ import ProductsSections from '@/app/(root)/(products)/ProductsSections'
 import ErrorComponent from '@/components/features/common/ErrorComponent'
 import { CONFIG } from '../../../../config/config'
 
-const Actions = async () => {
+interface ActionProps {
+	limitItems?: number
+	mobileItemsLimit?: number
+}
+
+const Actions = async ({
+	limitItems = CONFIG.ITEMS_PER_PAGE_MAIN_PRODUCTS,
+	mobileItemsLimit = 4,
+}: ActionProps) => {
 	try {
 		const { items } = await fetchProductsByTag('actions', {
-			limitItems: CONFIG.ITEMS_PER_PAGE_MAIN_PRODUCTS,
+			limitItems,
 		})
 
 		return (
@@ -14,6 +22,7 @@ const Actions = async () => {
 				title='Акции'
 				viewAllLink={{ text: 'Все акции', href: 'actions' }}
 				products={items}
+				mobileItemsLimit={mobileItemsLimit}
 			/>
 		)
 	} catch (error) {

@@ -12,8 +12,14 @@ const rubik = Rubik({
 })
 
 export const metadata: Metadata = {
+	metadataBase: new URL(
+		process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
+	),
 	title: 'Фудмаркет',
 	description: 'Разработка магазина доставки',
+	icons: {
+		icon: '/icon.png',
+	},
 }
 
 async function getInitialTheme() {

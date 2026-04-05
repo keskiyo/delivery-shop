@@ -36,11 +36,14 @@ const TopMenu = () => {
 			)}
 
 			<li className='group flex flex-col items-center gap-2 w-11 cursor-pointer'>
-				{!isManagerOrAdmin ? (
-					<Package size={24} className=' group-hover:text-blue-400' />
-				) : (
-					<Package size={24} className='group:text-orange-600' />
-				)}
+				<Package
+					size={24}
+					className={`${
+						!isManagerOrAdmin
+							? 'group-hover:text-blue-400'
+							: 'group-hover:text-orange-600'
+					}`}
+				/>
 				<span>Заказы</span>
 			</li>
 

@@ -4,7 +4,6 @@ import { MongoClient } from 'mongodb'
 
 async function seedDatabase() {
 	try {
-		// Подключение к базе данных
 		const client = new MongoClient(process.env.FOOD_DELIVERY_DB_URL!)
 		await client.connect()
 		console.log('Соединение с MongoDB')
@@ -55,3 +54,5 @@ async function seedDatabase() {
 
 // Запускаем скрипт
 seedDatabase()
+
+// Команды для запуска: npx tsc seed-db.ts node seed-db.js

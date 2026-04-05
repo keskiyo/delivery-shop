@@ -46,7 +46,7 @@ const SelectCity = ({
 					<div className='absolute right-2 top-2 transform -transform-y-1/2 pointer-events-none'>
 						<ChevronDown
 							size={24}
-							className={`transform transition-transform duration-300 ${
+							className={`transform transition-transform duration-300 text-black ${
 								isFocused ? 'rotate-180' : 'rotate-0'
 							}`}
 						/>

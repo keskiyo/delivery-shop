@@ -8,4 +8,5 @@ export interface ProductsSectionsProps {
 	}
 	products: ProductCardProps[]
 	compact?: boolean
+	mobileItemsLimit?: number
 }

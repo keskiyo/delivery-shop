@@ -1,18 +1,31 @@
+export interface ProductRating {
+	average: number
+	count: number
+	rate: number
+	distribution: {
+		'1': number
+		'2': number
+		'3': number
+		'4': number
+		'5': number
+	}
+}
+
 export interface ProductCardProps {
 	_id: string
 	id: number
-	title: string
 	img: string
-	basePrice: number
+	title: string
 	description: string
-	discountPercent?: number
-	rating: {
-		rate: number
-		count: number
-	}
-	weight?: string
-	volume?: string
-	categories: string[]
+	basePrice: number
+	discountPercent: number
+	rating: ProductRating
 	tags: string[]
+	weight: number
 	quantity: number
+	categories: string[]
+	article: string
+	brand: string
+	manufacturer: string
+	isHealthyFood: boolean
 }

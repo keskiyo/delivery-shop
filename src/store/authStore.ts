@@ -1,10 +1,10 @@
 import { authClient } from '@/lib/auth-client'
-import { UserData } from '@/types/userData'
+import { UserDataOrNull } from '@/types/userData'
 import { create } from 'zustand'
 
 type AuthState = {
 	isAuth: boolean
-	user: UserData
+	user: UserDataOrNull
 	isLoading: boolean
 	login: () => void
 	logout: () => Promise<void>

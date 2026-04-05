@@ -30,7 +30,7 @@ const TableHeader = ({ sortBy, sortDirection, onSort }: TableHeaderProps) => {
 				return (
 					<div
 						key={key}
-						className={`${span} text-xs break-all font-semibold ${key !== 'createdAt' ? tableStyles.border.right : ''} ${
+						className={`${span} text-xs break-all font-semibold text-gray-700 ${key !== 'createdAt' ? tableStyles.border.right : ''} ${
 							sortable
 								? 'cursor-default'
 								: 'cursor-not-allowed opacity-50'

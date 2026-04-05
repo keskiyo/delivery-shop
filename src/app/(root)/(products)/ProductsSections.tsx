@@ -8,6 +8,7 @@ const ProductsSections = ({
 	products,
 	applyIndexStyles = true,
 	contentType,
+	mobileItemsLimit = 4,
 }: ProductsSectionsProps & {
 	applyIndexStyles?: boolean
 	contentType?: string
@@ -40,9 +41,9 @@ const ProductsSections = ({
 								key={item._id}
 								className={
 									applyIndexStyles
-										? index >= 3
-											? 'md:hidden xl:block'
-											: ''
+										? `${index >= mobileItemsLimit ? 'hidden md:block' : ''}
+										${index >= 3 ? 'md:hidden xl:block' : ''} 
+										${index >= 4 ? 'xl:hidden' : ''}`
 										: ''
 								}
 							>
