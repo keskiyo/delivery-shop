@@ -45,7 +45,7 @@ const SimilarProducts = async ({ currentProduct }: SimilarProductsProps) => {
 		}
 
 		return (
-			<div className='mx-auto flex flex-col items-center bg-card'>
+			<div className='mx-auto flex flex-col items-center'>
 				<div className='w-full max-w-82 md:max-w-172 xl:max-w-42'>
 					<h3 className='text-sm md:text-lg font-semibold mb-2 text-left'>
 						Похожие
@@ -57,7 +57,7 @@ const SimilarProducts = async ({ currentProduct }: SimilarProductsProps) => {
 						<Link
 							key={product.id}
 							href={`/catalog/product/${product.id}`}
-							className='text-main-text text-sm md:text-lg flex flex-col w-19.5 h-15.5 md:w-43 md:h-39.5 xl:w-42 xl:h-26 rounded bg-white shadow-image-block duration-300 hover:shadow-lg'
+							className='text-sm md:text-lg flex flex-col w-19.5 h-15.5 md:w-43 md:h-39.5 xl:w-42 xl:h-26 rounded bg-white shadow-image-block duration-300 hover:shadow-lg'
 						>
 							<div className='relative w-full h-6.25 md:h-27.75 xl:h-14.25 shrink-0'>
 								<Image
@@ -68,7 +68,7 @@ const SimilarProducts = async ({ currentProduct }: SimilarProductsProps) => {
 									sizes='(max-width: 768px) 78px, (max-width: 1280px) 172px, 168px'
 								/>
 							</div>
-							<div className='flex items-center font-bold p-2 md:p-2.5'>
+							<div className='flex items-center font-bold p-2 md:p-2.5 text-gray-700'>
 								{calculatePrice(product)} ₽
 							</div>
 						</Link>

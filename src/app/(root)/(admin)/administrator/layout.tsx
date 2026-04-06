@@ -1,9 +1,8 @@
 'use client'
 
-import { Loader } from '@/components/features/common/loader'
 import { useAuthStore } from '@/store/authStore'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 export default function AdminLayout({
 	children,
@@ -14,31 +13,31 @@ export default function AdminLayout({
 	const [isChecking, setIsChecking] = useState(true)
 	const router = useRouter()
 
-	useEffect(() => {
-		const verifyAccess = async () => {
-			await checkAuth()
-			setIsChecking(false)
-		}
-		verifyAccess()
-	}, [checkAuth])
+	// useEffect(() => {
+	// 	const verifyAccess = async () => {
+	// 		await checkAuth()
+	// 		setIsChecking(false)
+	// 	}
+	// 	verifyAccess()
+	// }, [checkAuth])
 
-	useEffect(() => {
-		if (!isChecking) {
-			const hasAccess =
-				user && (user.role === 'admin' || user.role === 'manager')
-			if (!hasAccess) {
-				router.replace('/')
-			}
-		}
-	}, [isChecking, router, user])
+	// useEffect(() => {
+	// 	if (!isChecking) {
+	// 		const hasAccess =
+	// 			user && (user.role === 'admin' || user.role === 'manager')
+	// 		if (!hasAccess) {
+	// 			router.replace('/')
+	// 		}
+	// 	}
+	// }, [isChecking, router, user])
 
-	if (isLoading || isChecking) {
-		return <Loader />
-	}
+	// if (isLoading || isChecking) {
+	// 	return <Loader />
+	// }
 
-	if (!user || (user.role !== 'admin' && user.role !== 'manager')) {
-		return null
-	}
+	// if (!user || (user.role !== 'admin' && user.role !== 'manager')) {
+	// 	return null
+	// }
 
 	return <>{children}</>
 }

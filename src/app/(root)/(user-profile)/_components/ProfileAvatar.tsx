@@ -101,17 +101,16 @@ const ProfileAvatar = ({ gender }: { gender: string }) => {
 	return (
 		<div className='flex flex-col items-center mb-8'>
 			<div className='relative'>
-				<div className='animate-rgb-border inline-block rounded-full overflow-hidden'>
-					<Image
-						src={displayAvatar}
-						width={128}
-						height={128}
-						alt='Аватар профиля'
-						className='w-32 h-32 rounded-full object-cover'
-						onError={handleImageError}
-						priority
-					/>
-				</div>
+				<Image
+					src={displayAvatar}
+					unoptimized
+					width={128}
+					height={128}
+					alt='Аватар профиля'
+					className='w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover'
+					onError={handleImageError}
+					priority
+				/>
 				{isUploading && (
 					<div className='absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-full'>
 						<div className='animate-spin rounded-full h-8 w-8 border-b-2 border-white'></div>

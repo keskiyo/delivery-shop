@@ -24,7 +24,7 @@ const ProductPageContent = ({ product }: { product: ProductCardProps }) => {
 	const bonusesAmount = cardPrice * 0.05
 
 	return (
-		<div className='px-[max(12px,calc((100%-1208px)/2))] md:px-[max(16px,calc((100%-1208px)/2))] text-main-text'>
+		<div className='px-[max(12px,calc((100%-1208px)/2))] md:px-[max(16px,calc((100%-1208px)/2))]'>
 			<h1 className='text-2xl font-bold mb-4'>{product.description}</h1>
 			<div className='flex flex-row flex-wrap items-center gap-6 mb-4 md:mb-6'>
 				<div className='text-xs'>арт. {product.article}</div>
@@ -61,7 +61,7 @@ const ProductPageContent = ({ product }: { product: ProductCardProps }) => {
 				</div>
 				<SameBrandProducts currentProduct={product} />
 				<div>
-					<h2 className='text-2xl xl:text-4xl text-left font-bold text-main-text mb-4 md:mb-8 xl:mb-10'>
+					<h2 className='text-2xl xl:text-4xl text-left font-bold mb-4 md:mb-8 xl:mb-10'>
 						Отзывы
 					</h2>
 					<div className='flex flex-col md:flex-row flex-wrap gap-4 md:gap-x-8 xl:gap-x-36'>

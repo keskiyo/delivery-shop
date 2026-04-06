@@ -5,7 +5,11 @@ export async function getProduct(id: string): Promise<ProductCardProps> {
 		const response = await fetch(
 			`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${id}`,
 			{
-				next: { revalidate: 3600 },
+				cache: 'no-store',
+				// next: {
+				// 	revalidate: 3600,
+				// 	tags: [`product-${id}`]
+				// },
 			},
 		)
 

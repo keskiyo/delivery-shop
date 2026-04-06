@@ -12,8 +12,8 @@ const AdditionalInfo = ({
 	weight,
 }: AdditionalInfoProps) => {
 	return (
-		<div className='space-y-1 text-xs bg-card'>
-			<div className='flex justify-between py-1 px-2'>
+		<div className='space-y-1 text-xs '>
+			<div className='flex justify-between py-1 px-2 bg-card'>
 				<span className='font-medium'>Бренд:</span>
 				<span>{brand}</span>
 			</div>
@@ -21,7 +21,7 @@ const AdditionalInfo = ({
 				<span className='font-medium'>Страна производителя:</span>
 				<span>{manufacturer}</span>
 			</div>
-			<div className='flex justify-between py-1 px-2'>
+			<div className='flex justify-between py-1 px-2 bg-card'>
 				<span className='font-medium'>Упаковка:</span>
 				<span>{formatWeight(weight)}</span>
 			</div>

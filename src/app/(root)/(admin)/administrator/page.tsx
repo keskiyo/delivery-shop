@@ -13,9 +13,18 @@ const AdminPanel = () => {
 				>
 					Управление пользователями
 				</Link>
+				<Link
+					href='/administrator/products/add-product'
+					className={`${buttonStyles.active} [&&]:justify-start px-4 py-2 w-full md:w-1/2`}
+				>
+					Добавление товара
+				</Link>
 			</div>
 		</div>
 	)
 }
 
 export default AdminPanel
+
+// ! Проверить страницу добавления товара в админке и страницу продукта
+// ! text-gray-300 если нужно серый текст text-[#bfbfbf]

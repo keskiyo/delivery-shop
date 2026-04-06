@@ -1,23 +1,103 @@
 import { getDB } from '@/lib/api-routes'
+import { ObjectId } from 'mongodb'
+import { revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
 
 export async function GET(
-	_request: NextRequest,
+	request: NextRequest,
 	{ params }: { params: Promise<{ id: string }> },
 ) {
 	try {
 		const { id } = await params
 		const db = await getDB()
 
+		// Получаем параметры пагинации из query string
+		const url = new URL(request.url)
+		const limit = parseInt(url.searchParams.get('limit') || '5')
+		const skip = parseInt(url.searchParams.get('skip') || '0')
+
+		// Получаем общее количество отзывов
+		const total = await db
+			.collection('reviews')
+			.countDocuments({ productId: id })
+
+		// Aggregation pipeline для получения отзывов с данными о пользователе и аватаре
+		const pipeline = [
+			{ $match: { productId: id } },
+			{ $sort: { createdAt: -1 } },
+
+			// Lookup для получения gender из коллекции users
+			{
+				$lookup: {
+					from: 'users',
+					let: { userIdStr: '$userId' },
+					pipeline: [
+						{
+							$match: {
+								$expr: {
+									$eq: [{ $toString: '$_id' }, '$$userIdStr'],
+								},
+							},
+						},
+					],
+					as: 'userInfo',
+				},
+			},
+
+			// Lookup для проверки наличия аватара
+			{
+				$lookup: {
+					from: 'avatars.files',
+					let: { userIdStr: '$userId' },
+					pipeline: [
+						{
+							$match: {
+								$expr: {
+									$eq: [
+										{ $toString: '$metadata.userId' },
+										'$$userIdStr',
+									],
+								},
+							},
+						},
+					],
+					as: 'avatarInfo',
+				},
+			},
+
+			// Добавляем поля userGender и hasAvatar
+			{
+				$addFields: {
+					userGender: { $arrayElemAt: ['$userInfo.gender', 0] },
+					hasAvatar: { $gt: [{ $size: '$avatarInfo' }, 0] },
+				},
+			},
+
+			// Убираем временные поля
+			{
+				$project: {
+					userInfo: 0,
+					avatarInfo: 0,
+				},
+			},
+
+			// Пагинация
+			{ $skip: skip },
+			{ $limit: limit },
+		]
+
 		const reviews = await db
 			.collection('reviews')
-			.find({ productId: id })
-			.sort({ createdAt: -1 })
+			.aggregate(pipeline)
 			.toArray()
 
-		return NextResponse.json(reviews)
+		return NextResponse.json({
+			reviews,
+			total,
+			hasMore: skip + reviews.length < total,
+		})
 	} catch (error) {
 		console.error('Ошибка при получении отзывов:', error)
 		return NextResponse.json(
@@ -61,6 +141,7 @@ export async function POST(
 		const product = await db.collection('products').findOne({
 			id: parseInt(productId),
 		})
+		const category = product?.categories[0]
 
 		if (!product) {
 			return NextResponse.json(
@@ -68,6 +149,11 @@ export async function POST(
 				{ status: 400 },
 			)
 		}
+
+		// Получаем gender пользователя из коллекции users
+		const user = await db.collection('users').findOne({
+			_id: new ObjectId(userId),
+		})
 
 		// ОБНОВЛЯЕМ DISTRIBUTION В КОЛЛЕКЦИИ PRODUCTS
 		const newDistribution = { ...product.rating.distribution }
@@ -103,6 +189,7 @@ export async function POST(
 			productId,
 			userId,
 			userName,
+			userGender: user?.gender || 'male',
 			rating: Number(rating),
 			comment: comment.trim(),
 			createdAt: new Date(),
@@ -110,6 +197,8 @@ export async function POST(
 		}
 
 		await db.collection('reviews').insertOne(newReview)
+
+		revalidatePath(`/catalog/${category}/${productId}`, 'page')
 
 		return NextResponse.json({ success: true }, { status: 201 })
 	} catch (error) {

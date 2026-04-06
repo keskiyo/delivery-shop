@@ -114,8 +114,8 @@ const AddReviewForm = ({ productId, onReviewAdded }: AddReviewFormProps) => {
 								setShowValidationError(false)
 							}}
 							rows={4}
-							className='w-full max-w-136 bg-white px-4 py-2 border border-[#bfbfbf] rounded focus:outline-none focus:ring-1 focus:ring-primary'
-							placeholder='Отзыв'
+							className='w-full max-w-136 bg-white px-4 py-2 border border-[#bfbfbf] rounded focus:outline-none focus:ring-1 focus:ring-green-600 text-gray-700'
+							placeholder='Оставьте свой отзыв'
 							style={{ resize: 'vertical' }}
 						/>
 					</div>

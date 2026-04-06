@@ -10,7 +10,7 @@ const ProductOffer = ({ discountedPrice, cardPrice }: ProductOfferProps) => {
 	return (
 		<div className='flex flex-row justify-between gap-2 leading-1.5 h-19 mb-4'>
 			<div className='flex flex-col justify-end'>
-				<p className='text-[#6e6e6e] text-xl md:text-lg xl:text-2xl mb-1.5'>
+				<p className='text-[#bfbfbf] text-xl md:text-lg xl:text-2xl mb-1.5'>
 					{discountedPrice.toFixed(2)} ₽
 				</p>
 				<p className='text-[#bfbfbf] text-[8px] md:text-xs'>
@@ -19,7 +19,7 @@ const ProductOffer = ({ discountedPrice, cardPrice }: ProductOfferProps) => {
 			</div>
 
 			<div className='flex flex-col justify-end'>
-				<p className='text-main-text text-2xl xl:text-4xl font-bold mb-1.5 text-right'>
+				<p className='text-2xl xl:text-4xl font-bold mb-1.5 text-right'>
 					{cardPrice.toFixed(2)} ₽
 				</p>
 				<div className='flex flex-row gap-x-1 items-center relative'>

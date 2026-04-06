@@ -44,7 +44,7 @@ const RatingDistribution = ({
 		return (
 			<div className='text-center py-4'>
 				<div className='text-lg font-bold mb-2'>0 из 5</div>
-				<div className='text-main-text'>Пока нет оценок</div>
+				<div className='text-base'>Пока нет оценок</div>
 			</div>
 		)
 	}
@@ -56,7 +56,7 @@ const RatingDistribution = ({
 				<div className='text-lg font-bold'>{averageRating} из 5</div>
 			</div>
 
-			<div className='space-y-2 text-main-text'>
+			<div className='space-y-2'>
 				{[5, 4, 3, 2, 1].map(rating => (
 					<div key={rating} className='flex items-center gap-x-2'>
 						<span className='w-5 text-base'>{rating}</span>
