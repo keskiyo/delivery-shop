@@ -1,21 +1,29 @@
-import ImageUploader from '@/app/(root)/(admin)/administrator/products/add-product/_components/ImageUploader'
+import ImageUploader from '@/app/(root)/(admin)/administrator/products/_components/ImageUploader'
 import { X } from 'lucide-react'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface ImageUploadSectionProps {
 	onImageChange: (file: File | null) => void
 	uploading: boolean
 	loading: boolean
+	existingImage?: string
 }
 
 const ImageUploadSection = ({
+	existingImage,
 	onImageChange,
 	uploading,
 	loading,
 }: ImageUploadSectionProps) => {
 	const [image, setImage] = useState<File | null>(null)
 	const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+
+	useEffect(() => {
+		if (existingImage) {
+			setPreviewUrl(existingImage)
+		}
+	}, [existingImage])
 
 	const handleImageUpload = (file: File) => {
 		setImage(file)
@@ -29,7 +37,7 @@ const ImageUploadSection = ({
 		setImage(null)
 		onImageChange(null)
 
-		if (previewUrl) {
+		if (previewUrl && previewUrl.startsWith('blob:')) {
 			URL.revokeObjectURL(previewUrl)
 		}
 		setPreviewUrl(null)
@@ -60,8 +68,17 @@ const ImageUploadSection = ({
 						</button>
 					</div>
 					<p className='mt-2 text-sm text-green-600'>
-						Выбрано: {image?.name} (
-						{(image ? image.size / 1024 / 1024 : 0).toFixed(2)} MB)
+						{image ? (
+							<>
+								Выбрано: {image?.name} (
+								{(image ? image.size / 1024 / 1024 : 0).toFixed(
+									2,
+								)}{' '}
+								MB)
+							</>
+						) : (
+							'Текущее изображение'
+						)}
 					</p>
 				</div>
 			) : (

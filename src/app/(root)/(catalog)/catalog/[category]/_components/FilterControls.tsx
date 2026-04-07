@@ -3,13 +3,14 @@
 import { X } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 
-const FilterControls = ({
+function FilterControlsContent({
 	basePath,
 }: {
 	activeFilter?: string | string[]
 	basePath: string
-}) => {
+}) {
 	const searchParams = useSearchParams()
 
 	const minPrice = searchParams.get('priceFrom')
@@ -87,6 +88,27 @@ const FilterControls = ({
 				</div>
 			)}
 		</div>
+	)
+}
+
+const FilterControls = ({
+	basePath,
+}: {
+	activeFilter?: string | string[]
+	basePath: string
+}) => {
+	return (
+		<Suspense
+			fallback={
+				<div className='flex flex-wrap flex-row gap-4'>
+					<div className='h-8 p-2 rounded text-xs bg-[#f3f2f1] text-[#606060] animate-pulse'>
+						Фильтры
+					</div>
+				</div>
+			}
+		>
+			<FilterControlsContent basePath={basePath} />
+		</Suspense>
 	)
 }
 

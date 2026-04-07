@@ -3,9 +3,10 @@
 import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 import { TRANSLATIONS } from '../../../../utils/translations'
 
-const BreadCrumbs = () => {
+function BreadcrumbsContent() {
 	const pathname = usePathname()
 
 	if (pathname === '/' || pathname === '/search') return null
@@ -63,7 +64,7 @@ const BreadCrumbs = () => {
 								<Link href={item.href}>{item.label}</Link>
 							)}
 						</div>
-						{!item.isLast && <ChevronRight size={22} />}
+						{!item.isLast && <ChevronRight size={24} />}
 					</li>
 				))}
 			</ol>
@@ -71,4 +72,20 @@ const BreadCrumbs = () => {
 	)
 }
 
-export default BreadCrumbs
+const Breadcrumbs = () => {
+	return (
+		<Suspense
+			fallback={
+				<nav className='px-[max(12px,calc((100%-1208px)/2))] my-6'>
+					<div className='flex items-center gap-4 text-[8px] md:text-xs'>
+						<div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div>
+					</div>
+				</nav>
+			}
+		>
+			<BreadcrumbsContent />
+		</Suspense>
+	)
+}
+
+export default Breadcrumbs

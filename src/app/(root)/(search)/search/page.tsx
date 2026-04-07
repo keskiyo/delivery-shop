@@ -10,7 +10,6 @@ import { Suspense, useEffect, useState } from 'react'
 const SearchPage = () => {
 	return (
 		<Suspense fallback={<Loader />}>
-			{' '}
 			<SearchResult />
 		</Suspense>
 	)

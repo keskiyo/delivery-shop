@@ -7,7 +7,13 @@ import PriceRangeFilter from '@/app/(root)/(catalog)/catalog/[category]/_compone
 import ErrorComponent from '@/components/features/common/ErrorComponent'
 import { Loader } from '@/components/features/common/loader'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { SyntheticEvent, useCallback, useEffect, useState } from 'react'
+import {
+	Suspense,
+	SyntheticEvent,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react'
 import { CONFIG } from '../../../../../../../config/config'
 
 type PriceRange = {
@@ -15,7 +21,7 @@ type PriceRange = {
 	max: number
 }
 
-const PriceFilter = ({
+function PriceFilterContent({
 	basePath,
 	category,
 	setIsFilterOpenAction,
@@ -23,7 +29,7 @@ const PriceFilter = ({
 	basePath: string
 	category: string
 	setIsFilterOpenAction?: (value: boolean) => void
-}) => {
+}) {
 	const [isLoading, setIsLoading] = useState(true)
 	const [error, setError] = useState<{
 		error: Error
@@ -199,6 +205,26 @@ const PriceFilter = ({
 				Применить
 			</button>
 		</form>
+	)
+}
+
+const PriceFilter = ({
+	basePath,
+	category,
+	setIsFilterOpenAction,
+}: {
+	basePath: string
+	category: string
+	setIsFilterOpenAction?: (value: boolean) => void
+}) => {
+	return (
+		<Suspense fallback={<Loader />}>
+			<PriceFilterContent
+				basePath={basePath}
+				category={category}
+				setIsFilterOpenAction={setIsFilterOpenAction}
+			/>
+		</Suspense>
 	)
 }
 

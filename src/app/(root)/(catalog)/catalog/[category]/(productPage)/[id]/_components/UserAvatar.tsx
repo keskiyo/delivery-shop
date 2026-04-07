@@ -32,7 +32,6 @@ const UserAvatar = ({
 	}, [userId, userGender, hasAvatar])
 
 	const handleError = () => {
-		// Fallback на дефолтный аватар при ошибке загрузки
 		setAvatarSrc(getAvatarByGender(userGender || 'male'))
 	}
 

@@ -11,7 +11,7 @@ const ImagesBlock = ({ product }: { product: ProductCardProps }) => {
 						className='relative bg-[#fff5fd] w-16 h-9.25 xl:h-21.5 flex items-center justify-center overflow-hidden shrink-0'
 					>
 						<Image
-							src={product.img}
+							src={`${product.img}?t=${Date.now()}`}
 							alt={`${product.title} - миниатюра ${index + 1}`}
 							fill
 							className='object-cover'

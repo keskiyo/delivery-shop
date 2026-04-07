@@ -1,6 +1,6 @@
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
-import { revalidatePath } from 'next/cache'
+import { revalidateTag } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
@@ -198,7 +198,7 @@ export async function POST(
 
 		await db.collection('reviews').insertOne(newReview)
 
-		revalidatePath(`/catalog/${category}/${productId}`, 'page')
+		revalidateTag(`product-${productId}`, 'default')
 
 		return NextResponse.json({ success: true }, { status: 201 })
 	} catch (error) {

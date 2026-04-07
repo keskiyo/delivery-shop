@@ -1,7 +1,7 @@
 'use client'
 import Pagination from '@/components/shared/Pagination'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { CONFIG } from '../../../config/config'
 import { debounce } from '../../../utils/debounce'
 
@@ -21,7 +21,7 @@ function getItemsPerPAgeByWidth(contentType?: string) {
 	return 4
 }
 
-const PaginationWrapper = ({
+function PaginationWrapperContent({
 	totalItems,
 	currentPage,
 	basePath,
@@ -31,7 +31,7 @@ const PaginationWrapper = ({
 	currentPage: number
 	basePath: string
 	contentType?: string
-}) => {
+}) {
 	let initialItemsPerPage
 
 	if (contentType === 'article') {
@@ -81,6 +81,33 @@ const PaginationWrapper = ({
 				searchQuery={searchParams.toString()}
 			/>
 		</>
+	)
+}
+
+const PaginationWrapper = ({
+	totalItems,
+	currentPage,
+	basePath,
+	contentType,
+}: {
+	totalItems: number
+	currentPage: number
+	basePath: string
+	contentType?: string
+}) => {
+	return (
+		<Suspense
+			fallback={
+				<div className='h-8 bg-gray-200 animate-pulse rounded'></div>
+			}
+		>
+			<PaginationWrapperContent
+				totalItems={totalItems}
+				currentPage={currentPage}
+				basePath={basePath}
+				contentType={contentType}
+			/>
+		</Suspense>
 	)
 }
 

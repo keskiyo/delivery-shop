@@ -1,4 +1,4 @@
-import CustomCheckbox from '@/app/(root)/(admin)/administrator/products/add-product/_components/CustomCheckbox'
+import CustomCheckbox from '@/app/(root)/(admin)/administrator/products/_components/CustomCheckbox'
 
 interface CheckboxItem {
 	name: string
