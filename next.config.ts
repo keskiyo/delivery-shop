@@ -11,7 +11,6 @@ const nextConfig: NextConfig = {
 			// All static images in public folder
 			{
 				pathname: '/images/**',
-				search: '',
 			},
 		],
 	},

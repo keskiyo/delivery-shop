@@ -1,9 +1,5 @@
 'use client'
 
-import InStockToggle from '@/app/(root)/(catalog)/catalog/[category]/_components/InStockToggle'
-import PriceFilterHeader from '@/app/(root)/(catalog)/catalog/[category]/_components/PriceFilterHeader'
-import PriceInputs from '@/app/(root)/(catalog)/catalog/[category]/_components/PriceInputs'
-import PriceRangeFilter from '@/app/(root)/(catalog)/catalog/[category]/_components/PriceRangeSlider'
 import ErrorComponent from '@/components/features/common/ErrorComponent'
 import { Loader } from '@/components/features/common/loader'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -14,22 +10,31 @@ import {
 	useEffect,
 	useState,
 } from 'react'
-import { CONFIG } from '../../../../../../../config/config'
+import { CONFIG } from '../../../../config/config'
+import InStockToggle from '../InStockToggle'
+import PriceFilterHeader from './PriceFilterHeader'
+import PriceInputs from './PriceInputs'
+import PriceRangeFilter from './PriceRangeSlider'
 
 type PriceRange = {
 	min: number
 	max: number
 }
 
-function PriceFilterContent({
-	basePath,
-	category,
-	setIsFilterOpenAction,
-}: {
+function PriceFilterContent(props: {
 	basePath: string
 	category: string
 	setIsFilterOpenAction?: (value: boolean) => void
+	userId?: string | null
+	apiEndpoint?: string
 }) {
+	const {
+		basePath,
+		category,
+		setIsFilterOpenAction,
+		userId,
+		apiEndpoint = '/category',
+	} = props
 	const [isLoading, setIsLoading] = useState(true)
 	const [error, setError] = useState<{
 		error: Error
@@ -63,7 +68,11 @@ function PriceFilterContent({
 			params.set('category', currentCategory)
 			params.set('getPriceRangeOnly', 'true')
 
-			const response = await fetch(`/api/category?${params.toString()}`)
+			if (userId) params.set('userId', userId)
+
+			const response = await fetch(
+				`/api/${apiEndpoint}?${params.toString()}`,
+			)
 
 			if (!response.ok)
 				throw new Error(`Ошибка сервера: ${response.status}`)
@@ -98,7 +107,7 @@ function PriceFilterContent({
 		} finally {
 			setIsLoading(false)
 		}
-	}, [category, searchParams, urlPriceFrom, urlPriceTo])
+	}, [category, searchParams, urlPriceFrom, urlPriceTo, userId, apiEndpoint])
 
 	useEffect(() => {
 		fetchPriceData()
@@ -166,7 +175,8 @@ function PriceFilterContent({
 		router.push(`${basePath}?${params.toString()}`)
 	}, [basePath, priceRange.max, priceRange.min, router, searchParams])
 
-	if (isLoading) return <Loader />
+	if (isLoading || isNaN(priceRange.min) || isNaN(priceRange.max))
+		return <Loader />
 
 	if (error)
 		return (
@@ -197,7 +207,11 @@ function PriceFilterContent({
 				values={sliderValues}
 				handleSliderChange={handleSliderChange}
 			/>
-			<InStockToggle checked={inStock} handleInStockChange={setInStock} />
+			<InStockToggle
+				checked={inStock}
+				handleInStockChange={setInStock}
+				labelText='В наличии'
+			/>
 			<button
 				type='submit'
 				className='bg-[#ff6633] text-white hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) h-10 rounded justify-center items-center duration-300 cursor-pointer'
@@ -208,22 +222,16 @@ function PriceFilterContent({
 	)
 }
 
-const PriceFilter = ({
-	basePath,
-	category,
-	setIsFilterOpenAction,
-}: {
+const PriceFilter = (props: {
 	basePath: string
 	category: string
 	setIsFilterOpenAction?: (value: boolean) => void
+	userId?: string | null
+	apiEndpoint?: string
 }) => {
 	return (
 		<Suspense fallback={<Loader />}>
-			<PriceFilterContent
-				basePath={basePath}
-				category={category}
-				setIsFilterOpenAction={setIsFilterOpenAction}
-			/>
+			<PriceFilterContent {...props} />
 		</Suspense>
 	)
 }

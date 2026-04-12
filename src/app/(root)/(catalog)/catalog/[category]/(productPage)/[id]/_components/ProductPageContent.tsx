@@ -9,47 +9,60 @@ import SameBrandProducts from '@/app/(root)/(catalog)/catalog/[category]/(produc
 import ShareButton from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[id]/_components/ShareButton'
 import SimilarProducts from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[id]/_components/SimilarProducts'
 import Actions from '@/app/(root)/(products)/Actions'
+import FavoriteButton from '@/components/shared/FavoriteButton'
 import StarRating from '@/components/shared/StarRating'
 import { ProductCardProps } from '@/types/product'
-import { Heart } from 'lucide-react'
 import { CONFIG } from '../../../../../../../../../config/config'
-import { getReviewsWord } from '../../../../../../../../../utils/reviewsWord'
+import {
+	calculateFinalPrice,
+	calculatePriceByCard,
+} from '../../../../../../../../../utils/calcPrices'
+import { getWordEnding } from '../../../../../../../../../utils/getWordEnding'
 
 const ProductPageContent = ({ product }: { product: ProductCardProps }) => {
-	const discountedPrice = product.discountPercent
-		? product.basePrice * (1 - product.discountPercent / 100)
-		: product.basePrice
+	const priceWithDiscount = calculateFinalPrice(
+		product.basePrice,
+		product.discountPercent,
+	)
 
-	const cardPrice = discountedPrice * (1 - CONFIG.CARD_DISCOUNT_PERCENT / 100)
-	const bonusesAmount = cardPrice * 0.05
+	const cardPrice = calculatePriceByCard(
+		priceWithDiscount,
+		CONFIG.BONUSES_PERCENT,
+	)
+
+	const bonusesAmount = Math.round(
+		(priceWithDiscount * CONFIG.BONUSES_PERCENT) / 100,
+	)
 
 	return (
 		<div className='px-[max(12px,calc((100%-1208px)/2))] md:px-[max(16px,calc((100%-1208px)/2))]'>
-			<h1 className='text-2xl font-bold mb-4'>{product.description}</h1>
+			<h1 className='text-xl md:text-2xl font-bold mb-4'>
+				{product.description}
+			</h1>
 			<div className='flex flex-row flex-wrap items-center gap-6 mb-4 md:mb-6'>
 				<div className='text-xs'>арт. {product.article}</div>
 				<div className='flex flex-row flex-wrap gap-2 items-center'>
 					<StarRating rating={product.rating.rate || 5} />
 					<p className='text-sm underline'>
 						{product.rating.count || 0}{' '}
-						{getReviewsWord(product.rating.count || 0)}
+						{`отзыв${getWordEnding(product.rating.count || 0)}`}
 					</p>
 				</div>
 				<ShareButton title={product.title} />
-				<button className='flex flex-row flex-wrap gap-2 items-center cursor-pointer'>
-					<Heart size={24} />
-					<p className='text-sm'>В избранное</p>
-				</button>
+				<FavoriteButton
+					productId={product.id.toString()}
+					variant='onProductPage'
+				/>
 			</div>
 			<div className='flex flex-col gap-y-25 md:gap-y-20 xl:gap-y-30'>
 				<div className='flex flex-col md:flex-row md:flex-wrap gap-10 w-full justify-center'>
 					<ImagesBlock product={product} />
 					<div className='md:w-86 lg:w-94 flex flex-col'>
 						<ProductOffer
-							discountedPrice={discountedPrice}
+							discountedPrice={priceWithDiscount}
 							cardPrice={cardPrice}
 						/>
-						<CartButton />
+						<CartButton productId={product.id.toString()} />
 						<Bonuses bonus={bonusesAmount} />
 						<AdditionalInfo
 							brand={product.brand}

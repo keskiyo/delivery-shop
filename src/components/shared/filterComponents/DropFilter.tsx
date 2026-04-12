@@ -1,17 +1,21 @@
 'use client'
 
-import FilterButtons from '@/app/(root)/(catalog)/catalog/[category]/_components/FilterButtons'
-import FilterControls from '@/app/(root)/(catalog)/catalog/[category]/_components/FilterControls'
-import PriceFilter from '@/app/(root)/(catalog)/catalog/[category]/_components/PriceFilter'
 import { X } from 'lucide-react'
 import { useState } from 'react'
+import FilterButtons from './FilterButtons'
+import FilterControls from './FilterControls'
+import PriceFilter from './PriceFilter'
 
 const DropFilter = ({
 	basePath,
 	category,
+	apiEndpoint = '/category',
+	userId,
 }: {
 	basePath: string
 	category: string
+	apiEndpoint?: string
+	userId?: string | null
 }) => {
 	const [isFilterOpen, setIsFilterOpen] = useState(false)
 
@@ -41,6 +45,8 @@ const DropFilter = ({
 					basePath={basePath}
 					category={category}
 					setIsFilterOpenAction={setIsFilterOpen}
+					userId={userId}
+					apiEndpoint={apiEndpoint}
 				/>
 			</div>
 		</div>

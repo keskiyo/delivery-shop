@@ -20,9 +20,7 @@ const SearchProductResult = ({
 	return (
 		<div>
 			<div className='flex justify-between items-center mb-4'>
-				<p className='text-main-text'>
-					Найдено товаров: {products.length}
-				</p>
+				<p>Найдено товаров: {products.length}</p>
 				{products.length > 0 && (
 					<button
 						onClick={onClearResults}

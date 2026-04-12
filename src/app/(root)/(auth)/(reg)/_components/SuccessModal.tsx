@@ -21,9 +21,9 @@ const SuccessModal = () => {
 			<p className='text-lg mb-6'>
 				Сейчас вы будете перенаправлены на страницу входа
 			</p>
-			<div className='w-full bg-gray-200 rounded-full h-2.5'>
+			<div className='w-full bg-gray-200 rounded-full h-2'>
 				<div
-					className='bg-green-600 h-2.5 rounded-full animate-[progress_3s_linear]'
+					className='bg-green-600 h-2 rounded-full animate-[progress_3s_linear]'
 					style={{ animationFillMode: 'forwards' }}
 				></div>
 			</div>

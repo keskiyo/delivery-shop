@@ -52,7 +52,9 @@ const ProductsSections = ({
 						))}
 					</ul>
 				) : (
-					<div> Нет товаров </div>
+					<div className='flex justify-center items-center min-h-100 min-w-200'>
+						<span> Нет товаров</span>
+					</div>
 				)}
 			</div>
 		</section>

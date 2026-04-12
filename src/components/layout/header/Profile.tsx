@@ -139,7 +139,7 @@ const Profile = () => {
 		<>
 			<div className='relative ml-6' ref={menuRef}>
 				<div
-					className='flex items-center gap-2.5 cursor-pointer'
+					className='flex items-center gap-2 cursor-pointer'
 					onClick={toggleMenu}
 				>
 					<Image
@@ -150,7 +150,7 @@ const Profile = () => {
 						onError={handleAvatarError}
 						className='min-w-10 min-h-10 md:block xl:block rounded-full object-cover'
 					/>
-					<p className='hidden xl:block text-base cursor-pointer p-2.5'>
+					<p className='hidden xl:block text-base cursor-pointer p-2'>
 						{getDisplayName()}
 					</p>
 				</div>

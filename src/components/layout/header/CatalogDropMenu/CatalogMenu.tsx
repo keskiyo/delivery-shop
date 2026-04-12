@@ -65,9 +65,11 @@ const CatalogMenu = ({
 								))}
 							</div>
 						) : (
-							<p className='py-2 text-center'>
-								Категории не найдены
-							</p>
+							!isLoading && (
+								<p className='py-2 text-center'>
+									Категории не найдены
+								</p>
+							)
 						)}
 					</div>
 				</div>

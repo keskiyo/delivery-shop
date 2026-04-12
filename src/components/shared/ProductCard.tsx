@@ -1,9 +1,14 @@
+import AddToCardButton from '@/components/shared/AddToCardButton'
+import FavoriteButton from '@/components/shared/FavoriteButton'
 import StarRating from '@/components/shared/StarRating'
 import { ProductCardProps } from '@/types/product'
-import { Heart } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CONFIG } from '../../../config/config'
+import {
+	calculateFinalPrice,
+	calculatePriceByCard,
+} from '../../../utils/calcPrices'
 import { formatPrice } from '../../../utils/formatPrice'
 
 const cardDiscountPercent = CONFIG.CARD_DISCOUNT_PERCENT
@@ -18,14 +23,6 @@ const ProductCard = ({
 	tags,
 	categories,
 }: ProductCardProps) => {
-	const calculateFinalPrice = (price: number, discount: number): number => {
-		return discount > 0 ? price * (1 - discount / 100) : price
-	}
-
-	const calculatePriceByCard = (price: number, discount: number): number => {
-		return calculateFinalPrice(price, discount)
-	}
-
 	const isNewProduct = tags?.includes('new')
 	const finalPrice = isNewProduct
 		? basePrice
@@ -44,9 +41,7 @@ const ProductCard = ({
 
 	return (
 		<div className='relative flex flex-col justify-between w-40 rounded overflow-hidden bg-[#fff5fd] h-87.5 md:w-56 xl:w-68 align-top p-0 hover:shadow-(--shadow-article) duration-300'>
-			<button className='absolute w-8 h-8 p-2 bg-[#f3f2f1] hover:bg-[#fcd5ba] top-2 right-2 opacity-50 rounded cursor-pointer duration-300 flex items-center z-20'>
-				<Heart size={24} className='text-gray-700' />
-			</button>
+			<FavoriteButton productId={productId.toString()} />
 			<Link href={productUrl}>
 				<div className='w-40 h-40 md:w-56 xl:w-68 aspect-square relative'>
 					<Image
@@ -59,7 +54,7 @@ const ProductCard = ({
 						unoptimized
 					/>
 					{discountPercent > 0 && (
-						<div className='absolute bg-[#ff6633] py-1 px-2 rounded text-white bottom-2.5 left-2.5'>
+						<div className='absolute bg-[#ff6633] py-1 px-2 rounded text-white bottom-2 left-2'>
 							-{discountPercent}%
 						</div>
 					)}
@@ -97,9 +92,7 @@ const ProductCard = ({
 					{<StarRating rating={ratingValue} />}
 				</div>
 			</Link>
-			<button className='absolute bottom-2 left-2 right-2 border bg-[#eeeeee] text-gray-700 border-[#414141] hover:text-white hover:bg-[#ff6633] hover:border-transparent active:shadow-(--shadow-button-active) h-10 rounded justify-center items-center transition-all duration-300 cursor-pointer select-none'>
-				В корзину
-			</button>
+			<AddToCardButton productId={productId.toString()} />
 		</div>
 	)
 }

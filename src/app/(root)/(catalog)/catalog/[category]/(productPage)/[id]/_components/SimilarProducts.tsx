@@ -68,7 +68,7 @@ const SimilarProducts = async ({ currentProduct }: SimilarProductsProps) => {
 									sizes='(max-width: 768px) 78px, (max-width: 1280px) 172px, 168px'
 								/>
 							</div>
-							<div className='flex items-center font-bold p-2 md:p-2.5 text-gray-700'>
+							<div className='flex items-center font-bold p-2 md:p-2 text-gray-700'>
 								{calculatePrice(product)} ₽
 							</div>
 						</Link>

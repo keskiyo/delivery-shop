@@ -1,5 +1,6 @@
 import { Info } from 'lucide-react'
 import { CONFIG } from '../../../../../../../../../config/config'
+import { formatPrice } from '../../../../../../../../../utils/formatPrice'
 
 interface ProductOfferProps {
 	discountedPrice: number
@@ -11,7 +12,7 @@ const ProductOffer = ({ discountedPrice, cardPrice }: ProductOfferProps) => {
 		<div className='flex flex-row justify-between gap-2 leading-1.5 h-19 mb-4'>
 			<div className='flex flex-col justify-end'>
 				<p className='text-[#bfbfbf] text-xl md:text-lg xl:text-2xl mb-1.5'>
-					{discountedPrice.toFixed(2)} ₽
+					{formatPrice(discountedPrice)} ₽
 				</p>
 				<p className='text-[#bfbfbf] text-[8px] md:text-xs'>
 					Обычная цена
@@ -20,7 +21,7 @@ const ProductOffer = ({ discountedPrice, cardPrice }: ProductOfferProps) => {
 
 			<div className='flex flex-col justify-end'>
 				<p className='text-2xl xl:text-4xl font-bold mb-1.5 text-right'>
-					{cardPrice.toFixed(2)} ₽
+					{formatPrice(cardPrice)} ₽
 				</p>
 				<div className='flex flex-row gap-x-1 items-center relative'>
 					<p className='text-[#bfbfbf] text-[8px] md:text-xs'>

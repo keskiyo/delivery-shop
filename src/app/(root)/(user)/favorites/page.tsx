@@ -1,4 +1,3 @@
-import fetchProductsByCategory from '@/app/(root)/(catalog)/catalog/[category]/fetchCategory'
 import { Loader } from '@/components/features/common/loader'
 import DropFilter from '@/components/shared/filterComponents/DropFilter'
 import FilterButtons from '@/components/shared/filterComponents/FilterButtons'
@@ -6,27 +5,13 @@ import FilterControls from '@/components/shared/filterComponents/FilterControls'
 import PriceFilter from '@/components/shared/filterComponents/PriceFilter'
 import GenericListPage from '@/components/shared/GenericListPage'
 import { Suspense } from 'react'
-import { TRANSLATIONS } from '../../../../../../utils/translations'
+import { getServerUserId } from '../../../../../utils/getServerUserId'
+import { TRANSLATIONS } from '../../../../../utils/translations'
+import fetchFavorites from './fetchFavorites'
 
-export async function generateMetadata({
-	params,
-}: {
-	params: Promise<{ category: string }>
-}) {
-	const { category } = await params
-	return {
-		title: TRANSLATIONS[category] || category,
-		description: `Описание категории товаров "${
-			TRANSLATIONS[category] || category
-		}"магазина "Фудмаркет"`,
-	}
-}
-
-const CategoryPage = async ({
-	params,
+const FavoritesPage = async ({
 	searchParams,
 }: {
-	params: Promise<{ category: string }>
 	searchParams: Promise<{
 		page?: string
 		itemsPerPage?: string
@@ -35,22 +20,30 @@ const CategoryPage = async ({
 		priceTo?: string
 		inStock?: string
 	}>
+	params: Promise<{ category: string }>
 }) => {
-	const { category } = await params
-	const resolveSearchParams = await searchParams
-	const activeFilter = resolveSearchParams.filter
-	const priceFrom = resolveSearchParams.priceFrom
-	const priceTo = resolveSearchParams.priceTo
-	const inStock = resolveSearchParams.inStock === 'true'
+	const category = 'favorites'
+	const resolvedSearchParams = await searchParams
+	const activeFilter = resolvedSearchParams.filter
+	const priceFrom = resolvedSearchParams.priceFrom
+	const priceTo = resolvedSearchParams.priceTo
+	const inStock = resolvedSearchParams.inStock === 'true'
+
+	const userId = await getServerUserId()
 
 	return (
 		<div className='px-[max(12px,calc((100%-1208px)/2))] flex flex-col mx-auto'>
-			<h1 className='ml-3 xl:ml-0 text-4xl xl:text-5xl text-left font-bolt mb-8 mb:mb-10 xl:mb-15 max-w-84 md:max-w-max leading-[150%]'>
+			<h1 className='ml-3 xl:ml-0 text-4xl md:text-5xl xl:text-6xl text-left font-bold mb-8 md:mb-10 xl:mb-15 max-w-84 md:max-w-max leading-[150%]'>
 				{TRANSLATIONS[category] || category}
 			</h1>
-			<DropFilter basePath={`/catalog/${category}`} category={category} />
+			<DropFilter
+				basePath={`/${category}`}
+				category={category}
+				userId={userId}
+				apiEndpoint='/users/favorites/products'
+			/>
 			<div className='hidden xl:flex'>
-				<FilterButtons basePath={`/catalog/${category}`} />
+				<FilterButtons basePath={`/${category}`} />
 			</div>
 			<div className='mt-6 flex flex-col xl:flex-row gap-x-10'>
 				<div className='hidden xl:flex flex-col w-68 gap-y-10 '>
@@ -58,29 +51,33 @@ const CategoryPage = async ({
 						Фильтр
 					</div>
 					<PriceFilter
-						basePath={`/catalog/${category}`}
+						basePath={`/${category}`}
 						category={category}
+						userId={userId}
+						apiEndpoint='/users/favorites/products'
 					/>
 				</div>
-				<div className='flex flex-col w-full'>
+				<div className='flex flex-col'>
 					<div className='hidden xl:flex'>
-						<FilterControls basePath={`/catalog/${category}`} />
+						<FilterControls basePath={`/${category}`} />
 					</div>
+
 					<Suspense fallback={<Loader />}>
 						<GenericListPage
-							searchParams={Promise.resolve(resolveSearchParams)}
+							searchParams={Promise.resolve(resolvedSearchParams)}
 							props={{
 								fetchData: ({
 									pagination: { startIdx, perPage },
 								}) =>
-									fetchProductsByCategory(category, {
+									fetchFavorites({
 										pagination: { startIdx, perPage },
 										filter: activeFilter,
 										priceFrom,
 										priceTo,
 										inStock,
+										userId,
 									}),
-								basePath: `/catalog/${category}`,
+								basePath: `/${category}`,
 								contentType: 'category',
 							}}
 						/>
@@ -91,4 +88,4 @@ const CategoryPage = async ({
 	)
 }
 
-export default CategoryPage
+export default FavoritesPage

@@ -1,8 +1,8 @@
 import { HandCoins } from 'lucide-react'
-import { getBonusesWord } from '../../../../../../../../../utils/bonusWord'
+import { getWordEnding } from '../../../../../../../../../utils/getWordEnding'
 const Bonuses = ({ bonus }: { bonus: number }) => {
 	const roundedBonus = Math.round(bonus)
-	const bonusWord = getBonusesWord(roundedBonus)
+	const bonusWord = `${`бонус${getWordEnding(roundedBonus)}`}`
 
 	return (
 		<div className='w-53 flex flex-row gap-x-2 items-center justify-center mx-auto mb-2'>

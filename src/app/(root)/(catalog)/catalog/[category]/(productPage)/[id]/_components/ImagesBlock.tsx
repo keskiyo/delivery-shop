@@ -25,7 +25,7 @@ const ImagesBlock = ({ product }: { product: ProductCardProps }) => {
 				className='relative flex justify-center items-center shadow-image-block bg-[#fff5fd]
                      h-62 xl:h-124 
                      w-62 md:w-68 xl:w-126 
-                     p-2.5 shrink-0'
+                     p-2 shrink-0'
 			>
 				<Image
 					src={product.img}

@@ -3,9 +3,11 @@
 const InStockToggle = ({
 	checked,
 	handleInStockChange,
+	labelText,
 }: {
 	checked: boolean
 	handleInStockChange: (checked: boolean) => void
+	labelText?: string
 }) => {
 	return (
 		<div className='flex items-center gap-2'>
@@ -35,7 +37,7 @@ const InStockToggle = ({
               `}
 					></div>
 				</div>
-				<span className='ml-2 text-sm'>В наличии</span>
+				<span className='ml-2 text-sm'>{labelText}</span>
 			</label>
 		</div>
 	)

@@ -17,7 +17,7 @@ const ArticleCard = ({ img, title, createdAt, text }: ArticlesProps) => {
 					unoptimized
 				/>
 			</div>
-			<div className='p-2.5 flex-1 flex flex-col gap-y-2.5 leading-normal'>
+			<div className='p-2 flex-1 flex flex-col gap-y-2 leading-normal'>
 				<time className='text-[8px]'>
 					{format(new Date(createdAt), 'dd.MM.yyyy', {
 						locale: ru,
