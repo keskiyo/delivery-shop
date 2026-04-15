@@ -30,7 +30,12 @@ const CheckboxCard = ({
 							: 'bg-white border-[#bfbfbf]'
 					}`}
 				>
-					{checked && <Check size={16} className='text-white' />}
+					{checked && (
+						<Check
+							className='text-white w-4 h-4 shrink-0 '
+							strokeWidth={4}
+						/>
+					)}
 				</span>
 				<span className='ml-2 text-[#8f8f8f]'>
 					{'У меня нет карты лояльности'}

@@ -6,7 +6,8 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "eslint"
+		"lint": "eslint",
+		"update-delivery-dates": "curl -X GET http://localhost:3000/api/cron/update-delivery-dates?secret=6f0a80c1123c4f41985f2ad4ca960b398514c2bd3383a1ae0bc45860747723fa"
 	},
 	"dependencies": {
 		"@faker-js/faker": "^10.3.0",
