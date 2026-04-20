@@ -1,7 +1,6 @@
 const fetchProductsByTag = async (
 	tag: string,
 	options?: {
-		limitItems?: number
 		pagination?: { startIdx: number; perPage: number }
 	},
 ) => {
@@ -9,9 +8,7 @@ const fetchProductsByTag = async (
 		const url = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`)
 		url.searchParams.append('tag', tag)
 
-		if (options?.limitItems) {
-			url.searchParams.append('limitItems', options.limitItems.toString())
-		} else if (options?.pagination) {
+		if (options?.pagination) {
 			const { startIdx, perPage } = options.pagination
 			url.searchParams.append('startIdx', startIdx.toString())
 			url.searchParams.append('perPage', perPage.toString())

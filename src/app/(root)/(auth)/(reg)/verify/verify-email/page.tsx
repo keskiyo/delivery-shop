@@ -10,6 +10,38 @@ import { MailWarning } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+/**
+ * Страница верификации email после регистрации
+ * 
+ * Функционал:
+ * - Автоматическая отправка письма с подтверждением при загрузке
+ * - Показ состояния отправки
+ * - Повторная отправка письма при необходимости
+ * - Обработка ошибок (дубликат email и др.)
+ * 
+ * Логика работы:
+ * 1. Получает данные регистрации из RegFormContext
+ * 2. При монтировании автоматически отправляет письмо через authClient.signUp.email
+ * 3. Письмо содержит ссылку для подтверждения с callbackURL=/verify/verify-success
+ * 4. При успехе показывает SuccessSent (инструкции проверить почту)
+ * 5. При ошибке показывает ErrorContent с кнопками "Войти" и "Попробовать снова"
+ * 
+ * Обработка ошибок:
+ * - "already exists" -> "Пользователь с таким email уже существует"
+ * - Другие ошибки показываются как есть
+ * 
+ * Состояния:
+ * - isLoading: отправка письма
+ * - verificationSent: письмо отправлено успешно
+ * - error: ошибка при отправке
+ * 
+ * Особенности:
+ * - Использует useRef для предотвращения повторной отправки
+ * - Проверяет наличие email в regFormData
+ * - Кнопка "Попробовать снова" вызывает повторную отправку
+ * 
+ * @route /verify/verify-email
+ */
 export default function VerifyEmailPage() {
 	const { regFormData } = useRegFormContext()
 	const [isLoading, setIsLoading] = useState(true)

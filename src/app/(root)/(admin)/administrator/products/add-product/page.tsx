@@ -23,6 +23,32 @@ import {
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react'
+
+/**
+ * Страница добавления нового товара в админ-панели
+ * 
+ * Функционал:
+ * - Форма создания нового товара со всеми полями
+ * - Загрузка изображения товара
+ * - Валидация формы (обязательные поля, специальные правила)
+ * - Генерация уникального ID товара
+ * - Отправка данных на сервер
+ * 
+ * Логика работы:
+ * 1. Пользователь заполняет форму с данными товара
+ * 2. При наличии тега "Акции" обязательно указание скидки
+ * 3. При отправке генерируется уникальный ID
+ * 4. Сначала загружается изображение (если есть)
+ * 5. Затем создается товар с данными и путем к изображению
+ * 6. После успеха показывается сообщение с ссылкой на товар
+ * 
+ * Валидация:
+ * - Все основные поля обязательны (title, basePrice, quantity и т.д.)
+ * - Для товаров с тегом "actions" обязательна скидка > 0
+ * - Изображение опционально
+ * 
+ * @route /administrator/products/add-product
+ */
 export default function AddProductPage() {
 	const [formData, setFormData] =
 		useState<AddProductFormData>(initialProductData)
@@ -33,10 +59,21 @@ export default function AddProductPage() {
 		null,
 	)
 
+	/**
+	 * Генерация уникального ID для нового товара
+	 * Использует случайное число до 15 знаков
+	 */
 	const generateProductId = useCallback(() => {
 		return Math.floor(Math.random() * 1000000000000000)
 	}, [])
 
+	/**
+	 * Загрузка изображения товара на сервер
+	 * 
+	 * @param imageFile - Файл изображения
+	 * @param id - ID товара для привязки изображения
+	 * @returns Объект с путем к изображению и ID или null при ошибке
+	 */
 	const uploadImage = async (
 		imageFile: File | null,
 		id: number | null,
@@ -72,6 +109,16 @@ export default function AddProductPage() {
 
 	const hasActionsTag = formData.tags.includes('actions')
 
+	/**
+	 * Обработчик отправки формы создания товара
+	 * 
+	 * Последовательность действий:
+	 * 1. Валидация: проверка обязательной скидки для товаров с тегом "Акции"
+	 * 2. Генерация уникального ID товара
+	 * 3. Загрузка изображения (если выбрано)
+	 * 4. Отправка данных товара на API /api/add-product
+	 * 5. При успехе показ сообщения с ID созданного товара
+	 */
 	const handleSubmit = async (e: SyntheticEvent) => {
 		e.preventDefault()
 		if (

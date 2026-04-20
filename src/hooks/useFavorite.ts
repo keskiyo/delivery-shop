@@ -3,6 +3,21 @@
 import { useAuthStore } from '@/store/authStore'
 import { useEffect, useState } from 'react'
 
+/**
+ * Хук для управления избранными товарами пользователя
+ * Загружает список избранного из API и предоставляет методы для добавления/удаления товаров
+ * 
+ * @returns Объект с методами управления избранным и состоянием загрузки
+ * 
+ * @example
+ * const { toggleFavorite, isFavorite, isLoading } = useFavorites()
+ * 
+ * // Проверить, находится ли товар в избранном
+ * if (isFavorite('product-id-123')) { ... }
+ * 
+ * // Добавить/удалить товар из избранного
+ * await toggleFavorite('product-id-123')
+ */
 export const useFavorites = () => {
 	const { user } = useAuthStore()
 	const [favorites, setFavorites] = useState<string[]>([])

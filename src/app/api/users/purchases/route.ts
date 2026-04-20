@@ -1,4 +1,5 @@
 import { getDB } from '@/lib/api-routes'
+import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
 import { CONFIG } from '../../../../../config/config'
 export const dynamic = 'force-dynamic'
@@ -8,19 +9,27 @@ export async function GET(request: Request) {
 		const db = await getDB()
 
 		const url = new URL(request.url)
+
 		const usersPurchasesLimit = url.searchParams.get('usersPurchasesLimit')
 		const startIdx = parseInt(url.searchParams.get('startIdx') || '0')
 		const perPage = parseInt(
 			url.searchParams.get('perPage') || CONFIG.ITEMS_PER_PAGE.toString(),
 		)
 
-		const user = await db.collection('user').findOne({})
+		const userId = url.searchParams.get('userId')
+
+		if (!userId) {
+			return NextResponse.json({ products: [], totalCount: 0 })
+		}
+		const user = await db
+			.collection('user')
+			.findOne({ _id: ObjectId.createFromHexString(userId) })
 
 		if (!user?.purchases?.length) {
 			return NextResponse.json({ products: [], totalCount: 0 })
 		}
 
-		const productsIds = user.purchases.map((p: { id: number }) => p.id)
+		const productsIds = user.purchases
 
 		if (usersPurchasesLimit) {
 			const limit = parseInt(usersPurchasesLimit)

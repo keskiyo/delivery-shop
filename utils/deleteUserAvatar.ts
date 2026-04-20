@@ -1,6 +1,23 @@
 import { getDB } from '@/lib/api-routes'
 import { GridFSBucket, ObjectId } from 'mongodb'
 
+/**
+ * Удаляет аватар пользователя из GridFS хранилища
+ * 
+ * Используется при удалении аккаунта пользователя (вызывается из better-auth afterDelete hook)
+ * Аватары хранятся в MongoDB GridFS в bucket 'avatars'
+ * 
+ * @param userId - ID пользователя, чей аватар нужно удалить
+ * 
+ * @example
+ * // В better-auth конфигурации:
+ * deleteUser: {
+ *   enabled: true,
+ *   afterDelete: async user => {
+ *     await deleteUserAvatar(user.id)
+ *   }
+ * }
+ */
 export async function deleteUserAvatar(userId: string) {
 	try {
 		const db = await getDB()

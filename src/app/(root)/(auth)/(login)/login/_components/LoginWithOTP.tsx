@@ -13,6 +13,32 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { CONFIG } from '../../../../../../../config/config'
 
+/**
+ * Компонент входа по OTP коду из SMS
+ * 
+ * Функционал:
+ * - Ввод 4-значного кода из SMS
+ * - Верификация кода через better-auth
+ * - Отслеживание попыток ввода (максимум 3)
+ * - Таймер для повторной отправки кода (180 секунд)
+ * - Автоматическая авторизация после успешной верификации
+ * 
+ * Логика работы:
+ * 1. При монтировании запускает таймер обратного отсчета
+ * 2. Пользователь вводит 4-значный код
+ * 3. При отправке верифицирует код через authClient.phoneNumber.verify
+ * 4. Если код верный - проверяет телефон в БД и авторизует пользователя
+ * 5. Если код неверный - уменьшает счетчик попыток
+ * 6. После 3 неудачных попыток перенаправляет на регистрацию
+ * 7. Можно запросить повторную отправку кода (после истечения таймера)
+ * 
+ * Ограничения:
+ * - Максимум 3 попытки ввода кода
+ * - Таймер 180 секунд между отправками кода
+ * - Код должен быть ровно 4 цифры
+ * 
+ * @param phoneNumber - Номер телефона для верификации
+ */
 const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 	const [code, setCode] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
@@ -22,11 +48,26 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 	const router = useRouter()
 	const { login } = useAuthStore()
 
+	// Запускаем таймер при монтировании компонента
 	useEffect(() => {
 		startTimer()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
+	/**
+	 * Обработчик отправки формы с кодом
+	 * 
+	 * Процесс:
+	 * 1. Верифицирует код через better-auth
+	 * 2. Проверяет телефон в БД через /api/auth/check-phone
+	 * 3. Авторизует пользователя через authStore.login()
+	 * 4. Перенаправляет на главную страницу
+	 * 
+	 * При ошибке:
+	 * - Очищает поле ввода
+	 * - Уменьшает счетчик попыток
+	 * - После 3 попыток перенаправляет на регистрацию
+	 */
 	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault()
 		if (code.length !== 4) return
@@ -34,6 +75,7 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 		setIsLoading(true)
 
 		try {
+			// Верифицируем код через better-auth
 			const { error: verifyError } = await authClient.phoneNumber.verify({
 				phoneNumber,
 				code,
@@ -42,8 +84,10 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 
 			if (verifyError) throw verifyError
 
+			// Сбрасываем счетчик попыток после успешной верификации
 			setAttemptsLeft(CONFIG.MAX_ATTEMPTS)
 
+			// Проверяем телефон в БД
 			const response = await fetch('/api/auth/check-phone', {
 				method: 'POST',
 				body: JSON.stringify({
@@ -55,14 +99,17 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 				throw new Error('Данные не получены')
 			}
 
+			// Авторизуем пользователя
 			login()
 
+			// Перенаправляем на главную
 			router.replace('/')
 		} catch (error) {
 			console.error('Ошибка верификации телефона:', error)
 			setCode('')
 			setAttemptsLeft(prev => prev - 1)
 
+			// Проверяем количество оставшихся попыток
 			if (attemptsLeft <= 1) {
 				setError(
 					'Попытки исчерпаны. Пожалуйста, зарегистрируйтесь снова',
@@ -76,6 +123,14 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 		}
 	}
 
+	/**
+	 * Обработчик повторной отправки кода
+	 * 
+	 * Действия:
+	 * - Отправляет новый OTP код на телефон
+	 * - Перезапускает таймер
+	 * - Сбрасывает ошибки и счетчик попыток
+	 */
 	const handleResend = async () => {
 		if (!canResend) return
 		try {
@@ -100,6 +155,7 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 		}
 	}
 
+	// Показываем индикатор загрузки во время верификации
 	if (isLoading) {
 		return (
 			<AuthFormLayout>
@@ -119,6 +175,7 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 						className='w-65 mx-auto max-h-screen flex flex-col justify-center items-center'
 						autoComplete='off'
 					>
+						{/* Поле ввода 4-значного кода */}
 						<input
 							type='text'
 							inputMode='numeric'
@@ -133,11 +190,15 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 							autoComplete='one-time-code'
 							required
 						/>
+						
+						{/* Сообщение об ошибке */}
 						{error && (
 							<div className='text-red-500 text-center mt-2 text-sm'>
 								{error}
 							</div>
 						)}
+						
+						{/* Кнопка подтверждения (активна только при 4 цифрах) */}
 						<button
 							type='submit'
 							className={`${buttonStyles.base} ${code.length !== 4 ? buttonStyles.inactive : buttonStyles.active} [&&]:mt-8 mb-0`}
@@ -148,12 +209,14 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 					</form>
 				</div>
 
+				{/* Кнопка повторной отправки кода с таймером */}
 				<OTPResendCode
 					canResend={canResend}
 					timeLeft={timeLeft}
 					onResendAction={handleResend}
 				/>
 
+				{/* Ссылка возврата на страницу регистрации */}
 				<Link
 					href='/register'
 					className='h-8 text-xs text-gray-400 hover:text-gray-500 w-30 flex items-center justify-center gap-x-2 mx-auto duration-300 cursor-pointer'

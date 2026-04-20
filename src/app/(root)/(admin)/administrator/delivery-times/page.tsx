@@ -10,6 +10,30 @@ import { useDeliverySchedule } from '@/hooks/useDeliverySchedule'
 import { useEffect } from 'react'
 import { getDaysDates } from './utils/getDaysDates'
 
+/**
+ * Страница управления графиком доставки в админ-панели
+ *
+ * Функционал:
+ * - Просмотр графика доставки на 3 дня вперед
+ * - Добавление временных слотов доставки
+ * - Включение/выключение слотов для конкретных дат
+ * - Удаление временных слотов
+ * - Сохранение изменений в базу данных
+ *
+ * Логика работы:
+ * 1. При загрузке получает текущий график доставки с сервера
+ * 2. Отображает таблицу с временными слотами и датами
+ * 3. Администратор может добавлять новые слоты (начало-конец времени)
+ * 4. Для каждого слота можно включить/выключить доступность по датам
+ * 5. При нажатии "Сохранить" изменения отправляются на сервер
+ *
+ * Структура данных:
+ * - schedule: объект с датами и массивами доступных временных слотов
+ * - timeSlots: массив всех временных слотов
+ * - dates: массив дат на 3 дня вперед
+ *
+ * @route /administrator/delivery-times
+ */
 export default function DeliveryTimesAdmin() {
 	const {
 		schedule,
@@ -40,7 +64,7 @@ export default function DeliveryTimesAdmin() {
 	if (loading) return <Loader />
 
 	return (
-		<div className='p-3 md:p-4 xl:p-6 w-full mx-auto md:w-auto'>
+		<div className='container p-3 md:p-4 xl:p-6 w-full mx-auto md:w-auto'>
 			<h1 className='text-xl md:text-2xl font-bold mb-4 md:mb-6 text-center'>
 				Управление графиком доставки на 3 дня
 			</h1>
@@ -53,7 +77,7 @@ export default function DeliveryTimesAdmin() {
 				onAddTimeSlot={addTimeSlot}
 			/>
 
-			<div className='bg-white rounded border border-gray-200 mb-4 md:mb-6 overflow-x-auto'>
+			<div className='bg-card rounded border border-#202020 mb-4 md:mb-6 overflow-x-auto'>
 				<ScheduleTable
 					sortedTimeSlots={sortedTimeSlots}
 					dates={dates}

@@ -6,6 +6,26 @@ interface AddTimeSlotFormProps {
 	onAddTimeSlot: () => void
 }
 
+/**
+ * Компонент формы добавления временного слота доставки
+ *
+ * Функционал:
+ * - Ввод времени начала и окончания слота
+ * - Кнопка добавления слота для всех дней
+ *
+ * Используется в:
+ * - Страница управления графиком доставки (administrator/delivery-times)
+ *
+ * Логика:
+ * - Слот добавляется сразу для всех дней (сегодня + 2 дня)
+ * - Валидация и проверка пересечений выполняется в родительском компоненте (useDeliverySchedule)
+ *
+ * @param startTime - Время начала слота (формат HH:MM)
+ * @param endTime - Время окончания слота (формат HH:MM)
+ * @param onStartTimeChange - Callback изменения времени начала
+ * @param onEndTimeChange - Callback изменения времени окончания
+ * @param onAddTimeSlot - Callback добавления слота
+ */
 export default function AddTimeSlotForm({
 	startTime,
 	endTime,
@@ -14,7 +34,7 @@ export default function AddTimeSlotForm({
 	onAddTimeSlot,
 }: AddTimeSlotFormProps) {
 	return (
-		<div className='bg-[#f3f2f1] p-3 md:p-4 rounded border border-[#f3f2f1] mb-4 md:mb-6'>
+		<div className='bg-card rounded border border-#202020 p-3 md:p-4 mb-4 md:mb-6'>
 			<h2 className='text-base md:text-lg font-semibold mb-3 md:mb-4 text-center'>
 				Добавить временной слот для всех дней
 			</h2>
@@ -27,7 +47,7 @@ export default function AddTimeSlotForm({
 						type='time'
 						value={startTime}
 						onChange={e => onStartTimeChange(e.target.value)}
-						className='border rounded px-3 py-2 w-full text-sm md:text-base'
+						className='border rounded px-3 py-2 w-full text-sm md:text-base cursor-text'
 					/>
 				</div>
 
@@ -39,7 +59,7 @@ export default function AddTimeSlotForm({
 						type='time'
 						value={endTime}
 						onChange={e => onEndTimeChange(e.target.value)}
-						className='border rounded px-3 py-2 w-full text-sm md:text-base'
+						className='border rounded px-3 py-2 w-full text-sm md:text-base cursor-text'
 					/>
 				</div>
 

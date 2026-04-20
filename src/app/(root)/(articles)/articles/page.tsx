@@ -8,6 +8,15 @@ export const metadata = {
 	description: 'Читайте статьи на сайте магазина "Фудмаркет"',
 }
 
+/**
+ * Страница всех статей блога
+ * 
+ * Отображает список всех статей с пагинацией
+ * Использует GenericListPage для универсального отображения контента
+ * 
+ * @route /articles
+ * @param searchParams - Query параметры (page, itemsPerPage)
+ */
 const AllArticles = async ({
 	searchParams,
 }: {

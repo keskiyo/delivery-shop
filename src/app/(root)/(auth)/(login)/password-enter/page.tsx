@@ -11,6 +11,36 @@ import PasswordInput from '../../_components/PasswordInput'
 import Tooltip from '../../_components/Tooltip'
 import { buttonStyles } from '../../styles'
 
+/**
+ * Страница ввода пароля для входа
+ * 
+ * Функционал:
+ * - Ввод пароля для входа по email или телефону
+ * - Показ/скрытие пароля
+ * - Валидация и обработка ошибок
+ * - Ссылка на восстановление пароля
+ * - Кнопка возврата на страницу входа
+ * 
+ * Логика работы:
+ * 1. Получает login и loginType из query параметров
+ * 2. Пользователь вводит пароль
+ * 3. При отправке формы:
+ *    - Для телефона: POST /api/auth/login с phoneNumber и password
+ *    - Для email: authClient.signIn.email с email и password
+ * 4. При успехе вызывает login() и редирект на главную
+ * 5. При ошибке показывает сообщение (особая обработка "Неверный пароль")
+ * 
+ * Обработка ошибок:
+ * - "Invalid email or password" преобразуется в "Неверный пароль"
+ * - Другие ошибки показываются как есть
+ * - Ошибка отображается в тултипе над полем пароля
+ * 
+ * Навигация:
+ * - "Вернуться" -> /login
+ * - "Забыли пароль?" -> /phone-pass-reset или /forgot-password (зависит от loginType)
+ * 
+ * @route /password-enter?login=...&loginType=email|phone
+ */
 const EnterPasswordPage = () => {
 	return (
 		<Suspense

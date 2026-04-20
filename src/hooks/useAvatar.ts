@@ -9,6 +9,24 @@ interface UseAvatarProps {
 	gender?: string
 }
 
+/**
+ * Хук для управления аватаром пользователя
+ * Загружает аватар из API или использует дефолтный по полу
+ * Предоставляет функционал загрузки нового аватара
+ * 
+ * @param userId - ID пользователя для загрузки аватара
+ * @param gender - Пол пользователя для дефолтного аватара ('male' | 'female')
+ * @returns Объект с URL аватара, состоянием загрузки и методами управления
+ * 
+ * @example
+ * const { displayAvatar, uploadAvatar, isLoading } = useAvatar({ 
+ *   userId: user.id, 
+ *   gender: user.gender 
+ * })
+ * 
+ * // Загрузить новый аватар
+ * await uploadAvatar(file)
+ */
 const useAvatar = ({ userId, gender = 'male' }: UseAvatarProps) => {
 	const [currentAvatar, setCurrentAvatar] = useState<string>('')
 	const [isLoading, setIsLoading] = useState(false)

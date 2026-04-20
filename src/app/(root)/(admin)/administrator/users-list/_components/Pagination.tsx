@@ -1,4 +1,3 @@
-import { buttonStyles } from '@/app/(root)/(auth)/styles'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 const Pagination = ({
@@ -42,7 +41,7 @@ const Pagination = ({
 				<button
 					onClick={() => onPageChange(currentPage - 1)}
 					disabled={currentPage === 1}
-					className='px-3 py-1 border border-gray-300 rounded disabled:opacity-50 hover:bg-gray-50 duration-300 cursor-pointer disabled:cursor-not-allowed'
+					className='px-3 py-1 disabled:opacity-50 hover:text-[#ff6633] duration-300 cursor-pointer disabled:cursor-not-allowed'
 				>
 					<ArrowLeft size={24} />
 				</button>
@@ -51,10 +50,10 @@ const Pagination = ({
 					<button
 						key={page}
 						onClick={() => onPageChange(page)}
-						className={`p-2 w-10 hover:bg-[#ff6633] hover:text-white duration-300 cursor-pointer  ${
+						className={`w-5 h-5 md:w-10 md:h-10 flex items-center justify-center rounded duration-300 cursor-pointer ${
 							currentPage === page
-								? buttonStyles.active
-								: buttonStyles.inactive
+								? 'text-[#ff6633] border-2 border-[#ff6633]'
+								: 'hover:bg-[#ff6633] light:hover:text-white'
 						}`}
 					>
 						{page}
@@ -64,7 +63,7 @@ const Pagination = ({
 				<button
 					onClick={() => onPageChange(currentPage + 1)}
 					disabled={currentPage === totalPages}
-					className='px-3 py-1 border border-gray-300 rounded disabled:opacity-50 hover:bg-gray-50 cursor-pointer disabled:cursor-not-allowed'
+					className='px-3 py-1 disabled:opacity-50 hover:text-[#ff6633] cursor-pointer disabled:cursor-not-allowed'
 				>
 					<ArrowRight size={24} />
 				</button>

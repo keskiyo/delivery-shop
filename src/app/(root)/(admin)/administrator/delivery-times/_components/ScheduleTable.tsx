@@ -22,7 +22,7 @@ export default function ScheduleTable({
 }: ScheduleTableProps) {
 	if (sortedTimeSlots.length === 0) {
 		return (
-			<div className='p-6 md:p-8 text-center text-gray-500 text-sm md:text-base'>
+			<div className='p-6 md:p-8 text-center text-[#bfbfbf] text-sm md:text-base'>
 				Нет добавленных временных слотов. Добавьте первый слот выше.
 			</div>
 		)
@@ -32,7 +32,7 @@ export default function ScheduleTable({
 		<div className='w-full'>
 			<ScheduleTableHeader dates={dates} />
 
-			<div className='divide-y divide-[#151515]'>
+			<div className='divide-y divide-#202020'>
 				{sortedTimeSlots.map(timeSlot => (
 					<ScheduleTableRow
 						key={timeSlot}

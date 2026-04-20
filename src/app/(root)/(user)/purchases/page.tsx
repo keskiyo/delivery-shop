@@ -2,12 +2,14 @@ import fetchPurchases from '@/app/(root)/(user)/fetchPurchases'
 import { Loader } from '@/components/features/common/loader'
 import GenericListPage from '@/components/shared/GenericListPage'
 import { Suspense } from 'react'
+import { getServerUserId } from '../../../../../utils/getServerUserId'
 
 const AllPurchases = async ({
 	searchParams,
 }: {
 	searchParams: Promise<{ page?: string; itemsPerPage?: string }>
 }) => {
+	const userId = await getServerUserId()
 	return (
 		<Suspense fallback={<Loader />}>
 			<GenericListPage
@@ -16,6 +18,7 @@ const AllPurchases = async ({
 					fetchData: ({ pagination: { startIdx, perPage } }) =>
 						fetchPurchases({
 							pagination: { startIdx, perPage },
+							userId,
 						}),
 					pageTitle: ' Все покупки',
 					basePath: '/purchases',

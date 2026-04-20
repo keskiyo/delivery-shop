@@ -7,6 +7,16 @@ import { ProductCardProps } from '@/types/product'
 import { useSearchParams } from 'next/navigation'
 import { Suspense, useEffect, useState } from 'react'
 
+/**
+ * Страница поиска товаров
+ * 
+ * Функционал:
+ * - Полнотекстовый поиск товаров по query параметру
+ * - Отображение результатов поиска в виде сетки карточек
+ * - Обработка состояний: загрузка, ошибка, пустой результат
+ * 
+ * @route /search?query=...
+ */
 const SearchPage = () => {
 	return (
 		<Suspense fallback={<Loader />}>

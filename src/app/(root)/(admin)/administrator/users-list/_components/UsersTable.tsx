@@ -13,6 +13,31 @@ interface UsersTableProps {
 	onSort: (field: string, direction: 'asc' | 'desc') => void
 }
 
+/**
+ * Компонент таблицы пользователей в админ-панели
+ * 
+ * Функционал:
+ * - Отображение списка пользователей в табличном виде
+ * - Заголовок таблицы с возможностью сортировки
+ * - Строки с данными пользователей
+ * - Пагинация для навигации по страницам
+ * 
+ * Структура:
+ * - TableHeader: заголовки колонок с иконками сортировки
+ * - TableRow: строка с данными одного пользователя (ID, имя, email, телефон, роль и т.д.)
+ * - Pagination: навигация по страницам
+ * 
+ * Используется в:
+ * - Страница списка пользователей (administrator/users-list)
+ * 
+ * @param users - Массив пользователей для отображения
+ * @param currentPage - Текущая страница
+ * @param totalPages - Общее количество страниц
+ * @param onPageChange - Callback изменения страницы
+ * @param sortBy - Поле для сортировки
+ * @param sortDirection - Направление сортировки ('asc' | 'desc')
+ * @param onSort - Callback изменения сортировки
+ */
 const UsersTable = ({
 	users,
 	currentPage,

@@ -21,8 +21,8 @@ export default function ScheduleTableRow({
 	onUpdateTimeSlotStatus,
 }: ScheduleTableRowProps) {
 	return (
-		<div className='grid grid-cols-4 hover:bg-gray-50 transition-colors'>
-			<div className='p-2 md:p-3 border-r border-gray-200 flex flex-col justify-between'>
+		<div className='grid grid-cols-4 transition-colors'>
+			<div className='p-2 md:p-3 border-r border-#202020 flex flex-col justify-between'>
 				<div className='font-medium text-sm md:text-base mb-1 md:mb-2'>
 					{timeSlot}
 				</div>
@@ -37,7 +37,7 @@ export default function ScheduleTableRow({
 			{dates.map((date, index) => (
 				<div
 					key={date}
-					className={`p-2 md:p-3 flex items-center justify-center border-r border-gray-200 ${
+					className={`p-2 md:p-3 flex items-center justify-center border-r border-#202020 ${
 						index === dates.length - 1 ? 'border-r-0' : ''
 					}`}
 				>

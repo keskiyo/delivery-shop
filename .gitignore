@@ -40,5 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-QWEN.md
 AGENTS.md
+COMMENT_TEMPLATES.md

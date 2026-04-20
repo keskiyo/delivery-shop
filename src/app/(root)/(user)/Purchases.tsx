@@ -16,6 +16,8 @@ const Purchases = () => {
 	const [items, setItems] = useState<ProductCardProps[]>([])
 	const { user, isAuth } = useAuthStore()
 
+	const userId = user?.id
+
 	useEffect(() => {
 		const checkAccessAndFetchData = async () => {
 			try {
@@ -26,6 +28,7 @@ const Purchases = () => {
 					const { items: purchases } = await fetchPurchases({
 						usersPurchasesLimit:
 							CONFIG.ITEMS_PER_PAGE_MAIN_PRODUCTS,
+						userId,
 					})
 					setItems(purchases)
 				}
@@ -39,7 +42,7 @@ const Purchases = () => {
 		}
 
 		checkAccessAndFetchData()
-	}, [isAuth, user])
+	}, [isAuth, userId, user])
 
 	if (!shouldShow) return null
 

@@ -12,6 +12,38 @@ import { useEffect, useState } from 'react'
 import { CONFIG } from '../../../../../../config/config'
 import { buttonStyles } from '../../styles'
 
+/**
+ * Компонент ввода OTP кода для верификации телефона при регистрации
+ *
+ * Функционал:
+ * - Ввод 4-значного OTP кода
+ * - Таймер обратного отсчета (180 секунд)
+ * - Повторная отправка кода после истечения таймера
+ * - Ограничение попыток ввода (3 попытки)
+ * - Верификация телефона через better-auth
+ * - Установка пароля после верификации
+ * - Обновление данных пользователя
+ *
+ * Логика работы:
+ * 1. Пользователь вводит 4-значный код из SMS
+ * 2. При отправке вызывается authClient.phoneNumber.verify
+ * 3. После успешной верификации устанавливается пароль через /api/auth/set-password
+ * 4. Обновляются дополнительные данные пользователя (имя, дата рождения и т.д.)
+ * 5. Редирект на страницу входа
+ *
+ * Ограничения:
+ * - Максимум 3 попытки ввода кода
+ * - Таймер 180 секунд (3 минуты)
+ * - После 3 неудачных попыток блокировка до истечения таймера
+ *
+ * Особенности:
+ * - Автоматический запуск таймера при монтировании
+ * - Кнопка повторной отправки активна только после истечения таймера
+ * - Показ оставшихся попыток при ошибке
+ * - Индикатор загрузки во время верификации
+ *
+ * @param phoneNumber - Номер телефона для верификации (формат: +7XXXXXXXXXX)
+ */
 export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 	const [code, setCode] = useState('')
 	const [error, setError] = useState('')
@@ -143,7 +175,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 								setCode(e.target.value)
 								setError('')
 							}}
-							className='flex justify-center w-27.5 h-15 text-center text-2xl px-4 py-3 border border-[#bfbfbf] rounded focus:border-[#70c05b] focus:shadow-(--shadow-button-default) text-gray-500 focus:bg-white focus:outline-none'
+							className='flex justify-center w-27.5 h-15 text-center text-2xl px-4 py-3 border border-[#bfbfbf] rounded focus:border-[#70c05b] focus:shadow-(--shadow-button-default) focus:outline-none'
 							autoComplete='one-time-code'
 							required
 						/>

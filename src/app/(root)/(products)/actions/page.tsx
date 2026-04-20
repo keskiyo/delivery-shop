@@ -8,6 +8,15 @@ export const metadata = {
 	description: 'Акционные товары магазина "Фудмаркет"',
 }
 
+/**
+ * Страница всех акций
+ * 
+ * Отображает список всех товаров с тегом "actions" (акционные товары со скидками)
+ * Использует GenericListPage для пагинации и отображения товаров
+ * 
+ * @route /actions
+ * @param searchParams - Query параметры (page, itemsPerPage)
+ */
 const AllActions = async ({
 	searchParams,
 }: {

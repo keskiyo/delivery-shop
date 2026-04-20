@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react'
 
+/**
+ * Хук для управления таймером обратного отсчета
+ * Используется для ограничения повторной отправки OTP-кодов
+ *
+ * @param initialTime - Начальное время в секундах
+ * @returns Объект с текущим временем, флагом возможности повторной отправки и функцией запуска таймера
+ *
+ */
 const useTimer = (initialTime: number) => {
 	const [timeLeft, setTimeLeft] = useState(initialTime)
 	const [isTimerActive, setIsTimerActive] = useState(false)

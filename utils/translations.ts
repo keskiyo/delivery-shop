@@ -1,3 +1,16 @@
+/**
+ * Словарь переводов URL сегментов на русский язык
+ * 
+ * Используется в компоненте Breadcrumbs для отображения навигационной цепочки
+ * Преобразует английские URL сегменты в читаемые русские названия
+ * 
+ * @example
+ * // URL: /catalog/meat/product-123
+ * // Breadcrumbs: Главная > Каталог > Мясо, птица, колбаса > [Название товара]
+ * 
+ * TRANSLATIONS['catalog'] // "Каталог"
+ * TRANSLATIONS['meat']    // "Мясо, птица, колбаса"
+ */
 export const TRANSLATIONS: Record<string, string> = {
 	actions: 'Акции',
 	new: 'Новинки',

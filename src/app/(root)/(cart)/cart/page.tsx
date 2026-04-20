@@ -9,24 +9,73 @@ import {
 import CartControls from '@/app/(root)/(cart)/cart/_components/CartControls'
 import CartHeader from '@/app/(root)/(cart)/cart/_components/CartHeader'
 import CartItem from '@/app/(root)/(cart)/cart/_components/CartItem'
-import CardSideBar from '@/app/(root)/(cart)/cart/_components/CartSideBar'
+import CartSideBar from '@/app/(root)/(cart)/cart/_components/CartSideBar'
+import CheckoutForm from '@/app/(root)/(cart)/cart/_components/CheckoutForm'
 import { Loader } from '@/components/features/common/loader'
 import { usePricing } from '@/hooks/usePricing'
 import { useCartStore } from '@/store/cartStore'
+import { DeliveryAddress, DeliveryTime } from '@/types/order'
 import { ProductCardProps } from '@/types/product'
 import { useCallback, useEffect, useState } from 'react'
 
+/**
+ * Страница корзины и оформления заказа
+ * 
+ * Функционал:
+ * - Отображение товаров в корзине с возможностью изменения количества
+ * - Выбор товаров для удаления (множественное выделение)
+ * - Расчет цен с учетом скидок, карты лояльности и бонусов
+ * - Форма оформления заказа (адрес доставки, время доставки)
+ * - Боковая панель с итоговой информацией о заказе
+ * 
+ * Состояния:
+ * - Режим корзины: просмотр и редактирование товаров
+ * - Режим оформления (isCheckout): заполнение данных доставки
+ * - Режим успешного заказа (isOrdered): показ сообщения об успехе
+ * 
+ * @route /cart
+ */
 const CartPage = () => {
 	const [selectedItems, setSelectedItems] = useState<string[]>([])
 	const [productsData, setProductsData] = useState<{
 		[key: string]: ProductCardProps
 	}>({})
 	const [bonusesCount, setBonusesCount] = useState<number>(0)
-	const [hasLoyaltyCard, setHasLoyaltyCard] = useState<boolean>(false)
 	const [removedItems, setRemovedItems] = useState<string[]>([])
 	const [isCartLoading, setIsCartLoading] = useState(true)
-	const [useBonuses, setUseBonuses] = useState<boolean>(false)
-	const { cartItems, updateCart } = useCartStore()
+	const [title, setTitle] = useState<string>('Корзина')
+	const [deliveryData, setDeliveryData] = useState<{
+		address: DeliveryAddress
+		time: DeliveryTime
+		isValid: boolean
+	} | null>(null)
+
+	const handleFormDataChange = useCallback(
+		(data: {
+			address: DeliveryAddress
+			time: DeliveryTime
+			isValid: boolean
+		}) => {
+			setDeliveryData(data)
+		},
+		[],
+	)
+
+	const {
+		cartItems,
+		updateCart,
+		hasLoyaltyCard,
+		setHasLoyaltyCard,
+		useBonuses,
+		isCheckout,
+		isOrdered,
+	} = useCartStore()
+
+	const sidebarProps = {
+		deliveryData,
+		productsData,
+	}
+
 	const visibleCartItems = cartItems.filter(
 		item => !removedItems.includes(item.productId),
 	)
@@ -35,33 +84,13 @@ const CartPage = () => {
 		return product && product.quantity > 0
 	})
 
-	const {
-		totalPrice,
-		totalMaxPrice,
-		totalDiscount,
-		finalPrice,
-		totalBonuses,
-		isMinimumReached,
-	} = usePricing({
+	usePricing({
 		availableCartItems,
 		productsData,
 		hasLoyaltyCard,
 		bonusesCount,
 		useBonuses,
 	})
-
-	const commonSidebarProps = {
-		bonusesCount,
-		useBonuses,
-		onUseBonusesChange: setUseBonuses,
-		totalPrice,
-		visibleCartItems,
-		totalMaxPrice,
-		totalDiscount,
-		finalPrice,
-		totalBonuses,
-		isMinimumReached,
-	}
 
 	// Асинхронная функция загрузки данных корзины и товаров
 	const fetchCartAndProducts = async () => {
@@ -108,6 +137,14 @@ const CartPage = () => {
 			setIsCartLoading(false)
 		}
 	}
+
+	useEffect(() => {
+		if (isCheckout) {
+			setTitle('Доставка')
+		} else {
+			setTitle('Корзина')
+		}
+	}, [isCheckout])
 
 	useEffect(() => {
 		fetchCartAndProducts()
@@ -201,32 +238,44 @@ const CartPage = () => {
 
 	return (
 		<div className='px-[max(12px,calc((100%-1208px)/2))] md:px-[max(16px,calc((100%-1208px)/2))] mx-auto'>
-			<CartHeader itemCount={visibleCartItems.length} />
+			<CartHeader itemCount={visibleCartItems.length} title={title} />
 
-			<CartControls
-				isAllSelected={isAllSelected}
-				selectedItemsCount={selectedItems.length}
-				onSelectAll={selectAllItems}
-				onDeselectAll={deselectAllItems}
-				onRemoveSelected={handleRemoveSelected}
-			/>
-
-			<div className='flex flex-col md:flex-row gap-8 xl:gap-x-15 w-full'>
-				<div className='flex flex-col gap-y-6 w-full'>
-					{visibleCartItems.map(item => (
-						<CartItem
-							key={item.productId}
-							item={item}
-							productData={productsData[item.productId]}
-							isSelected={selectedItems.includes(item.productId)}
-							onSelectionChange={handleItemSelection}
-							onQuantityUpdate={handleQuantityUpdate}
-							hasLoyaltyCard={hasLoyaltyCard}
-						/>
-					))}
+			<div className='flex flex-col md:flex-row gap-8 xl:gap-x-15'>
+				<div
+					className={`flex-1 ${isOrdered ? 'pointer-events-none opacity-50' : ''}`}
+				>
+					{!isCheckout ? (
+						<>
+							<CartControls
+								isAllSelected={isAllSelected}
+								selectedItemsCount={selectedItems.length}
+								onSelectAll={selectAllItems}
+								onDeselectAll={deselectAllItems}
+								onRemoveSelected={handleRemoveSelected}
+							/>
+							<div className='flex flex-col gap-y-6'>
+								{visibleCartItems.map(item => (
+									<CartItem
+										key={item.productId}
+										item={item}
+										productData={
+											productsData[item.productId]
+										}
+										isSelected={selectedItems.includes(
+											item.productId,
+										)}
+										onSelectionChange={handleItemSelection}
+										onQuantityUpdate={handleQuantityUpdate}
+									/>
+								))}
+							</div>
+						</>
+					) : (
+						<CheckoutForm onFormDataChange={handleFormDataChange} />
+					)}
 				</div>
 
-				<CardSideBar {...commonSidebarProps} />
+				<CartSideBar {...sidebarProps} />
 			</div>
 		</div>
 	)

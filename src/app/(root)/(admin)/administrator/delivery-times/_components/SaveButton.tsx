@@ -16,7 +16,7 @@ export default function SaveButton({
 			<button
 				onClick={onClick}
 				disabled={saving}
-				className={`${buttonStyles.active} px-4 py-2 [&&]:w-full ${className}`}
+				className={`${buttonStyles.active} px-4 py-2 [&&]:w-full cursor-pointer ${className}`}
 			>
 				{saving ? 'Сохранение...' : 'Сохранить расписание'}
 			</button>

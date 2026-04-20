@@ -6,7 +6,10 @@ import { CONFIG } from '../../../../config/config'
 const NewProducts = async () => {
 	try {
 		const { items } = await fetchProductsByTag('new', {
-			limitItems: CONFIG.ITEMS_PER_PAGE_MAIN_PRODUCTS,
+			pagination: {
+				startIdx: 0,
+				perPage: CONFIG.ITEMS_PER_PAGE_MAIN_PRODUCTS,
+			},
 		})
 
 		return (

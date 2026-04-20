@@ -1,5 +1,35 @@
 import { validateBirthDate } from './validateBirthDate'
 
+/**
+ * Валидирует все поля формы регистрации пользователя
+ * 
+ * Проверяет:
+ * - Телефон: 11 цифр
+ * - Фамилия и имя: минимум 2 буквы (кириллица или латиница)
+ * - Пароль: минимум 6 символов, заглавные, строчные буквы и цифры
+ * - Подтверждение пароля: совпадение с паролем
+ * - Дата рождения: корректность и возраст 14+
+ * - Регион, город, пол: обязательные поля
+ * - Email: корректный формат (если указан)
+ * - Номер карты: 16 цифр (если указан и не отмечено "нет карты")
+ * 
+ * @param formData - Объект с данными формы регистрации
+ * @returns Объект с флагом валидности и текстом ошибки (если есть)
+ * 
+ * @example
+ * const result = validateRegisterForm({
+ *   phoneNumber: '79991234567',
+ *   surname: 'Иванов',
+ *   name: 'Иван',
+ *   password: 'Pass123',
+ *   confirmPassword: 'Pass123',
+ *   birthdayDate: '15.05.1990',
+ *   region: 'Москва',
+ *   location: 'Москва',
+ *   gender: 'male'
+ * })
+ * // result: { isValid: true }
+ */
 export function validateRegisterForm(formData: {
 	phoneNumber: string
 	surname: string

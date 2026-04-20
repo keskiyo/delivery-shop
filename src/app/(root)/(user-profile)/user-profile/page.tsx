@@ -15,6 +15,22 @@ import { useEffect, useState } from 'react'
 import ProfileHeader from '../_components/ProfileHeader'
 import SecuritySection from '../_components/SecuritySection'
 
+/**
+ * Страница профиля пользователя
+ * 
+ * Функционал:
+ * - Просмотр и редактирование личных данных (имя, фамилия, дата рождения)
+ * - Управление аватаром (загрузка, удаление)
+ * - Изменение email и телефона
+ * - Изменение пароля
+ * - Управление картой лояльности
+ * - Изменение адреса доставки
+ * - Удаление аккаунта
+ * 
+ * Требует авторизации - редиректит на главную если пользователь не авторизован
+ * 
+ * @route /user-profile
+ */
 const ProfilePage = () => {
 	const { user, isAuth, checkAuth } = useAuthStore()
 	const [isCheckingAuth, setIsCheckingAuth] = useState(true)

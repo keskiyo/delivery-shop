@@ -19,17 +19,40 @@ import {
 } from '../../../../../../../../../utils/calcPrices'
 import { getWordEnding } from '../../../../../../../../../utils/getWordEnding'
 
+/**
+ * Компонент содержимого страницы товара
+ * 
+ * Функционал:
+ * - Отображение полной информации о товаре
+ * - Расчет цен с учетом скидок и карты лояльности
+ * - Расчет бонусов за покупку
+ * - Блок с изображениями товара
+ * - Кнопки добавления в корзину и избранное
+ * - Похожие товары и товары того же бренда
+ * - Отзывы и рейтинг товара
+ * - Акционные товары внизу страницы
+ * 
+ * Расчеты:
+ * - priceWithDiscount: базовая цена минус скидка товара
+ * - cardPrice: цена с учетом скидки по карте лояльности
+ * - bonusesAmount: количество бонусов, начисляемых за покупку
+ * 
+ * @param product - Данные товара для отображения
+ */
 const ProductPageContent = ({ product }: { product: ProductCardProps }) => {
+	// Расчет финальной цены с учетом скидки товара
 	const priceWithDiscount = calculateFinalPrice(
 		product.basePrice,
 		product.discountPercent,
 	)
 
+	// Расчет цены с учетом скидки по карте лояльности
 	const cardPrice = calculatePriceByCard(
 		priceWithDiscount,
 		CONFIG.BONUSES_PERCENT,
 	)
 
+	// Расчет количества бонусов за покупку
 	const bonusesAmount = Math.round(
 		(priceWithDiscount * CONFIG.BONUSES_PERCENT) / 100,
 	)

@@ -6,6 +6,20 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import { TRANSLATIONS } from '../../../../utils/translations'
 
+/**
+ * Компонент хлебных крошек (навигационная цепочка)
+ * 
+ * Функционал:
+ * - Автоматически генерирует навигационную цепочку на основе URL
+ * - Переводит сегменты URL на русский язык через TRANSLATIONS
+ * - Для страниц товаров показывает название товара из query параметра 'desc'
+ * - Скрывается на главной странице и странице поиска
+ * - Использует Suspense для предотвращения ошибок гидратации
+ * 
+ * @example
+ * URL: /catalog/meat/product-123?desc=Говядина
+ * Результат: Главная > Каталог > Мясо > Говядина
+ */
 function BreadcrumbsContent() {
 	const pathname = usePathname()
 

@@ -9,6 +9,22 @@ import SpecialOffers from '@/components/features/SpacialOffers'
 import { Suspense } from 'react'
 export const dynamic = 'force-dynamic'
 
+/**
+ * Главная страница приложения
+ * 
+ * Отображает основные секции:
+ * - Слайдер с промо-баннерами
+ * - Акционные товары
+ * - Новинки
+ * - Прошлые покупки пользователя
+ * - Специальные предложения
+ * - Карта магазинов
+ * - Статьи блога
+ * 
+ * Каждая секция обернута в Suspense для показа загрузчика во время загрузки данных
+ * 
+ * @route /
+ */
 export default function Home() {
 	return (
 		<div className='w-full mx-auto'>

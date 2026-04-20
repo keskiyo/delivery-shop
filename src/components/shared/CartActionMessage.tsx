@@ -8,6 +8,19 @@ interface CartActionMessageProps {
 	onClose: () => void
 }
 
+/**
+ * Компонент всплывающего сообщения для действий с корзиной
+ * 
+ * Отображает уведомления об успехе или ошибке при добавлении товара в корзину
+ * Используется в AddToCardButton для показа сообщений пользователю
+ * 
+ * @param message - Объект с флагом успеха и текстом сообщения
+ * @param onClose - Callback для закрытия сообщения
+ * 
+ * Стили:
+ * - Успех: зеленый фон (#e5ffde) с зеленым текстом (#008c49)
+ * - Ошибка: желтый фон с желтым текстом
+ */
 const CartActionMessage = ({ message, onClose }: CartActionMessageProps) => {
 	return (
 		<div
