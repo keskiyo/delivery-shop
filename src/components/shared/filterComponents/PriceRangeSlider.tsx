@@ -1,3 +1,29 @@
+/**
+ * Слайдер для выбора диапазона цен
+ * 
+ * Использует библиотеку rc-slider (двухсторонний range slider)
+ * 
+ * Параметры:
+ * - min/max: границы диапазона (мин/макс цена категории)
+ * - values: текущие значения [от, до]
+ * - handleSliderChange: callback при изменении
+ * 
+ * Стили:
+ * - Зеленый трек (#70c05b) - активный диапазон
+ * - Серый рейл (#f0f0f0) - неактивная часть
+ * - Круглые зеленые ручки (20x20px)
+ * 
+ * @example
+ * <PriceRangeFilter 
+ *   min={100} 
+ *   max={5000} 
+ *   values={[500, 2000]} 
+ *   handleSliderChange={(v) => setValues(v)} 
+ * />
+ * 
+ * Используется в:
+ * - PriceFilter.tsx
+ */
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 

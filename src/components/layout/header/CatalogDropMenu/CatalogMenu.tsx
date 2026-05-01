@@ -1,3 +1,24 @@
+/**
+ * Выпадающее меню каталога товаров
+ * 
+ * Функционал:
+ * - Отображает строку поиска (SearchBlock)
+ * - Выпадающая панель с категориями товаров
+ * - При наведении на кнопку "Каталог" показывается меню
+ * - При клике на категорию переход на страницу категории
+ * 
+ * Структура:
+ * - Поиск (всегда виден)
+ * - Выпадающее меню категорий (появляется при isCatalogOpen=true)
+ * 
+ * Стили:
+ * - Фон: #242525 (темный)
+ * - Категории в виде сетки (2-4 колонки в зависимости от ширины)
+ * - При наведении: оранжевая подчеркивание
+ * 
+ * Используется в:
+ * - CatalogMenuWrapper.tsx
+ */
 import ErrorComponent from '@/components/features/common/ErrorComponent'
 import { Loader } from '@/components/features/common/loader'
 import SearchBlock from '@/components/layout/header/SearchBlock'

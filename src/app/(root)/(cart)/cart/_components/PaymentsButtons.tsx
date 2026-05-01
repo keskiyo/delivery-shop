@@ -10,7 +10,7 @@ const PaymentsButtons = ({
 	orderNumber,
 	paymentType,
 }: {
-	paymentType: 'cash' | 'online' | null
+	paymentType: 'cash_on_delivery' | 'online' | null
 	isOrdered: boolean
 	canProceedWithPayment: boolean
 	onOnlinePayment: () => void
@@ -18,7 +18,7 @@ const PaymentsButtons = ({
 	isProcessing: boolean
 	orderNumber: string | null
 }) => {
-	if (isOrdered && paymentType === 'cash') {
+	if (isOrdered && paymentType === 'cash_on_delivery') {
 		// Сообщение об успешном оформлении заказа
 		return <OrderSuccessMessage orderNumber={orderNumber} />
 	}

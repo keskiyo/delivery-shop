@@ -1,5 +1,22 @@
 'use client'
 
+/**
+ * Компонент отображения ошибки
+ * 
+ * Функционал:
+ * - Отображает красную плашку с сообщением для пользователя
+ * - Логирует ошибку в консоль для отладки
+ * - Кнопка "Попробовать снова" перезагружает страницу
+ * 
+ * @param error - Объект ошибки (Error)
+ * @param userMessage - Понятное сообщение для пользователя
+ * 
+ * @example
+ * <ErrorComponent 
+ *   error={new Error('Failed to fetch')} 
+ *   userMessage="Не удалось загрузить товары" 
+ * />
+ */
 import { ErrorProps } from '@/types/errorProps'
 
 export default function ErrorComponent({ error, userMessage }: ErrorProps) {

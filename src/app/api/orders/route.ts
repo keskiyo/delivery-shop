@@ -1,18 +1,19 @@
 import { getDB } from '@/lib/api-routes'
+import { Order } from '@/types/order'
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
 import { getServerUserId } from '../../../../utils/getServerUserId'
 
 /**
  * API Route для создания заказа (POST /api/orders)
- * 
+ *
  * Процесс создания заказа:
  * 1. Проверяет авторизацию пользователя
  * 2. Получает данные пользователя из БД
  * 3. Округляет все денежные значения (бонусы, цены)
  * 4. Создает объект заказа с уникальным номером
  * 5. Сохраняет заказ в коллекцию orders
- * 
+ *
  * Статусы заказа:
  * - status: 'pending' (ожидает обработки)
  * - paymentStatus: 'pending' (для наличных) или 'waiting' (для онлайн-оплаты)
@@ -47,7 +48,7 @@ export async function POST(request: Request) {
 		// Округляем бонусы до целых чисел (нельзя использовать дробные бонусы)
 		const roundedUsedBonuses = Math.floor(orderData.usedBonuses || 0)
 		const roundedEarnedBonuses = Math.floor(orderData.totalBonuses || 0)
-		
+
 		// Округляем денежные суммы до копеек (2 знака после запятой)
 		const roundedTotalAmount =
 			Math.round((orderData.finalPrice || 0) * 100) / 100
@@ -64,14 +65,14 @@ export async function POST(request: Request) {
 			// Статус оплаты зависит от способа оплаты
 			paymentStatus:
 				orderData.paymentMethod === 'cash_on_delivery'
-					? 'pending'  // Наличные - оплата при получении
+					? 'pending' // Наличные - оплата при получении
 					: 'waiting', // Онлайн - ожидает оплаты
-			totalAmount: roundedTotalAmount,           // Итоговая сумма к оплате
-			discountAmount: roundedDiscountAmount,     // Скидка от карты лояльности
-			usedBonuses: roundedUsedBonuses,           // Использовано бонусов
-			earnedBonuses: roundedEarnedBonuses,       // Будет начислено бонусов
+			totalAmount: roundedTotalAmount, // Итоговая сумма к оплате
+			discountAmount: roundedDiscountAmount, // Скидка от карты лояльности
+			usedBonuses: roundedUsedBonuses, // Использовано бонусов
+			earnedBonuses: roundedEarnedBonuses, // Будет начислено бонусов
 			deliveryAddress: orderData.deliveryAddress, // Адрес доставки
-			deliveryDate: orderData.deliveryTime.date,  // Дата доставки (YYYY-MM-DD)
+			deliveryDate: orderData.deliveryTime.date, // Дата доставки (YYYY-MM-DD)
 			deliveryTimeSlot: orderData.deliveryTime.timeSlot, // Временной слот (08:00-14:00)
 			// Персональные данные пользователя (копируются из профиля)
 			surname: user.surname,
@@ -91,7 +92,7 @@ export async function POST(request: Request) {
 					productId: item.productId,
 					quantity: item.quantity,
 					price: Math.round((item.price || 0) * 100) / 100,
-					discountPercent: item.discountPercent,      // Скидка товара
+					discountPercent: item.discountPercent, // Скидка товара
 					hasLoyaltyDiscount: item.hasLoyaltyDiscount, // Применена ли карта лояльности
 				}),
 			),
@@ -112,6 +113,44 @@ export async function POST(request: Request) {
 		})
 	} catch (error) {
 		console.error('Ошибка создания заказа:', error)
+		return NextResponse.json(
+			{ message: 'Внутренняя ошибка сервера' },
+			{ status: 500 },
+		)
+	}
+}
+
+export async function GET() {
+	try {
+		const db = await getDB()
+		const userId = await getServerUserId()
+
+		if (!userId) {
+			return NextResponse.json(
+				{ message: 'Пользователь не авторизован' },
+				{ status: 401 },
+			)
+		}
+
+		const orders = (await db
+			.collection('orders')
+			.find({ userId: ObjectId.createFromHexString(userId) })
+			.sort({ createdAt: -1 })
+			.toArray()) as unknown as Order[]
+
+		if (!orders || orders.length === 0) {
+			return NextResponse.json({
+				success: true,
+				orders: [],
+			})
+		}
+
+		return NextResponse.json({
+			success: true,
+			orders: orders,
+		})
+	} catch (error) {
+		console.error('Ошибка получения заказов:', error)
 		return NextResponse.json(
 			{ message: 'Внутренняя ошибка сервера' },
 			{ status: 500 },

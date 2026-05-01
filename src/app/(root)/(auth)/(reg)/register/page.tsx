@@ -5,6 +5,7 @@ import CheckboxCard from '@/app/(root)/(auth)/(reg)/_components/CheckboxCard'
 import DateInput from '@/app/(root)/(auth)/(reg)/_components/DateInput'
 import EmailInput from '@/app/(root)/(auth)/(reg)/_components/EmailInput'
 import GenderSelect from '@/app/(root)/(auth)/(reg)/_components/GenderSelect'
+import PasswordInputWithGenerate from '@/app/(root)/(auth)/(reg)/_components/PasswordInputWithGenerate'
 import PersonInput from '@/app/(root)/(auth)/(reg)/_components/PersonInput'
 import RegFormFooter from '@/app/(root)/(auth)/(reg)/_components/RegFormFooter'
 import SelectCity from '@/app/(root)/(auth)/(reg)/_components/SelectCity'
@@ -94,6 +95,14 @@ const RegisterPage = () => {
 		setRegisterForm(prev => ({ ...prev, [id]: value }))
 	}
 
+	const handlePasswordGenerate = (password: string) => {
+		setRegisterForm(prev => ({
+			...prev,
+			password,
+			confirmPassword: password,
+		}))
+	}
+
 	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault()
 		setIsLoading(true)
@@ -181,7 +190,7 @@ const RegisterPage = () => {
 							onChangeAction={handleChange}
 							placeholder='Иван'
 						/>
-						<PasswordInput
+						<PasswordInputWithGenerate
 							id='password'
 							label='Пароль'
 							value={registerForm.password}
@@ -192,6 +201,7 @@ const RegisterPage = () => {
 							}
 							showRequirements={true}
 							placeholder='********'
+							onPasswordGenerate={handlePasswordGenerate}
 						/>
 						<PasswordInput
 							id='confirmPassword'

@@ -1,10 +1,36 @@
 'use client'
+
+/**
+ * Обертка для пагинации с адаптивным количеством элементов на странице
+ * 
+ * Функционал:
+ * - Автоматически подстраивает количество элементов на странице под размер экрана
+ * - При Resize окна пересчитывает количество и сбрасывает на первую страницу
+ * - Использует Suspense для поддержки SSR
+ * - Обновляет URL параметры при изменении количества
+ * 
+ * Типы контента (contentType):
+ * - 'article': 1 элемент на мобильном, 3 на десктопе
+ * - 'category': 8 на мобильном, 6 на десктопе
+ * - По умолчанию: 2/3/4 в зависимости от ширины экрана
+ * 
+ * @param totalItems - Общее количество элементов
+ * @param currentPage - Текущая страница
+ * @param basePath - Базовый путь для ссылок
+ * @param contentType - Тип контента для адаптивного расчета
+ */
 import Pagination from '@/components/shared/Pagination'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense, useEffect, useState } from 'react'
 import { CONFIG } from '../../../config/config'
 import { debounce } from '../../../utils/debounce'
 
+/**
+ * Вычисляет оптимальное количество элементов на странице в зависимости от ширины экрана
+ * 
+ * @param contentType - Тип контента ('article' | 'category' | undefined)
+ * @returns Количество элементов на странице
+ */
 function getItemsPerPAgeByWidth(contentType?: string) {
 	const width = window.innerWidth
 

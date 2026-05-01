@@ -1,5 +1,25 @@
 'use client'
 
+/**
+ * Блок ввода поиска с выпадающими результатами
+ * 
+ * Функционал:
+ * - Поле ввода с кнопкой поиска
+ * - Debounce запрос (500ms) к API при вводе
+ * - Выпадающий список результатов, сгруппированных по категориям
+ * - Закрытие при клике вне компонента
+ * - Переход на страницу поиска при нажатии Enter
+ * 
+ * API:
+ * - GET /api/search?query={query} - возвращает товары и категории
+ * 
+ * Результаты:
+ * - Группировка по категориям: { category: string, products: SearchProduct[] }
+ * - Минимальная длина запроса: 2 символа
+ * 
+ * Используется в:
+ * - SearchBlock.tsx
+ */
 import SearchInput from '@/components/layout/header/inputSearch/SearchInput'
 import SearchResults from '@/components/layout/header/inputSearch/SearchResults'
 import { SearchProduct } from '@/types/searchProduct'

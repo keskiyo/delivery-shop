@@ -1,5 +1,19 @@
 'use client'
 
+/**
+ * Провайдер темы (Theme Provider)
+ * 
+ * Управляет светлой и темной темой:
+ * - При монтировании читает cookie 'theme' или использует системные настройки
+ * - Добавляет класс 'dark' на HTML элемент при темной теме
+ * - Сохраняет выбор пользователя в cookie на 1 год
+ * - Предотвращает ошибки гидратации (не рендерит до монтирования)
+ * 
+ * Используется:
+ * - useTheme() для доступа к theme и toggleTheme
+ * - ThemeToggle.tsx для переключения темы
+ * - layout.tsx для оборачивания приложения
+ */
 import { createContext, useContext, useEffect, useState } from 'react'
 
 type Theme = 'light' | 'dark'

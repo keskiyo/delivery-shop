@@ -1,3 +1,17 @@
+/**
+ * Блок поиска в header
+ * 
+ * Содержит:
+ * - Кнопка "Каталог" (только на десктопе, md и выше)
+ * - Поле ввода поиска (InputBlock)
+ * 
+ * Адаптивность:
+ * - Мобильная: только поле поиска
+ * - Десктоп: кнопка каталога + поле поиска
+ * 
+ * Используется в:
+ * - CatalogMenu.tsx (внутри выпадающего меню)
+ */
 import InputBlock from '@/components/layout/header/inputSearch/InputBlock'
 import { Menu } from 'lucide-react'
 import Link from 'next/link'

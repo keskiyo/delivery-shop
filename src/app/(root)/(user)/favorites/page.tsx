@@ -11,15 +11,15 @@ import fetchFavorites from './fetchFavorites'
 
 /**
  * Страница избранных товаров пользователя
- * 
+ *
  * Функционал:
  * - Отображение товаров, добавленных в избранное
  * - Фильтрация по категориям, цене, наличию
  * - Сортировка товаров
  * - Пагинация результатов
- * 
+ *
  * Требует авторизации пользователя (userId получается на сервере)
- * 
+ *
  * @route /favorites
  * @param searchParams - Query параметры (page, itemsPerPage, filter, priceFrom, priceTo, inStock)
  */

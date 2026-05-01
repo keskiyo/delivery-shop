@@ -1,9 +1,5 @@
 import { CartItem } from '@/types/cart'
-import {
-	CartItemWithPrice,
-	CreateOrderRequest,
-	UpdateUserData,
-} from '@/types/order'
+import { CartItemWithPrice, CreateOrderRequest } from '@/types/order'
 import { ProductCardProps } from '@/types/product'
 import { CONFIG } from '../../../../../../config/config'
 import {
@@ -65,9 +61,14 @@ export const createOrderRequest = async (orderData: CreateOrderRequest) => {
 	return await response.json()
 }
 
-export const updateUserAfterPayment = async (data: UpdateUserData) => {
+export const updateUserAfterPayment = async (data: {
+	orderId: string
+	usedBonuses?: number
+	earnedBonuses?: number
+	purchasedProductIds?: string[]
+}) => {
 	try {
-		const response = await fetch('/api/users/update-after-payment', {
+		const response = await fetch('/api/orders/update-after-payment', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -87,4 +88,59 @@ export const updateUserAfterPayment = async (data: UpdateUserData) => {
 		console.error('Ошибка обновления пользователя:', error)
 		throw error
 	}
+}
+
+export const clearUserCart = async (): Promise<void> => {
+	try {
+		const response = await fetch('/api/orders/clear-cart', {
+			method: 'POST',
+		})
+
+		if (!response.ok) {
+			throw new Error('Ошибка при очистке корзины')
+		}
+
+		const result = await response.json()
+
+		if (!result.success) {
+			throw new Error(result.message || 'Ошибка очистки корзины')
+		}
+	} catch (error) {
+		console.error('Ошибка очистки корзины:', error)
+		throw error
+	}
+}
+
+export const updateOrderStatus = async (
+	orderId: string,
+	updates: { status?: string; paymentStatus?: string },
+) => {
+	try {
+		const response = await fetch('/api/orders/update-status', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				orderId,
+				...updates,
+			}),
+		})
+
+		if (!response.ok) {
+			const errorData = await response.json()
+			throw new Error(
+				errorData.message || 'Ошибка при обновлении статуса заказа',
+			)
+		}
+
+		return await response.json()
+	} catch (error) {
+		console.error('Ошибка при обновлении статуса заказа:', error)
+		throw error
+	}
+}
+
+export const markPaymentAsFailed = async (orderId: string) => {
+	return await updateOrderStatus(orderId, { paymentStatus: 'failed' })
 }

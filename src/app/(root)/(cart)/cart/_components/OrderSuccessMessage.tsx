@@ -9,22 +9,19 @@ const OrderSuccessMessage = ({
 }: {
 	orderNumber: string | null
 }) => {
-	const { pricing, useBonuses, setIsOrdered } = useCartStore()
+	const { pricing, useBonuses, resetAfterOrder } = useCartStore()
 	const { totalBonuses, maxBonusUse, totalPrice } = pricing
 	const router = useRouter()
 
-	const handleNewOrder = () => {
-		setIsOrdered(false)
-		router.replace('/')
+	const handleToOrder = () => {
+		resetAfterOrder()
+		router.push('/user-orders')
 	}
 
 	const usedBonuses = Math.min(
 		maxBonusUse,
 		Math.floor((totalPrice * CONFIG.MAX_BONUSES_PERCENT) / 100),
 	)
-
-	const baseStyles =
-		'h-10 rounded w-full text-base items-center justify-center duration-300'
 
 	return (
 		<div className='text-center p-4 bg-[#e5ffde] text-[#008c49] rounded border border-green-600'>
@@ -52,10 +49,10 @@ const OrderSuccessMessage = ({
 				{getWordEnding(totalBonuses)}
 			</div>
 			<button
-				onClick={handleNewOrder}
-				className={`${baseStyles} bg-green-600 hover:shadow-button-default active:shadow-button-active text-white cursor-pointer duration-300`}
+				onClick={handleToOrder}
+				className='ml-4 px-4 py-2 bg-green-600 hover:bg-green-700 rounded text-white cursor-pointer duration-300'
 			>
-				Вернуться на главную
+				Перейти на страницу заказов
 			</button>
 		</div>
 	)

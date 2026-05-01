@@ -71,10 +71,14 @@ const FakePaymentModal = ({
 					})
 					break
 				case 'failure':
-					onError('Недостаточно средств на карте')
+					onError(
+						'Недостаточно средств на карте. Повторную попытку оплаты можно сделать на странице "Заказы"',
+					)
 					break
 				case 'error':
-					onError('Ошибка банка-эмитента. Попробуйте позже')
+					onError(
+						'Ошибка банка-эмитента. Повторную попытку оплаты можно сделать на странице "Заказы"',
+					)
 					break
 			}
 		} catch (error) {
@@ -143,8 +147,8 @@ const FakePaymentModal = ({
 		<div className='fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4'>
 			<div className='bg-card rounded-lg max-w-md w-full p-6'>
 				<h2 className='text-xl font-bold mb-4'>Тестовая оплата</h2>
-				<p className='mb-4'>Сумма: {amount} ₽</p>
-				<div className='mb-4 p-3 bg-gray-50 rounded'>
+				<p className='mb-4'>Сумма: {formatPrice(amount)} ₽</p>
+				<div className='mb-4 p-3 bg-gray-50 dark:text-gray-800 rounded'>
 					<h3 className='text-sm font-medium mb-2'>
 						Тестовые карты (авто-оплата):
 					</h3>

@@ -1,5 +1,25 @@
 'use client'
 
+/**
+ * Слайдер баннеров на главной странице
+ * 
+ * Функционал:
+ * - Автоматическое переключение слайдов каждые 5 секунд
+ * - Использует framer-motion для анимации (fade + scale)
+ * - Бесконечный цикл (repeat: Infinity)
+ * 
+ * Слайды:
+ * - SlideOne: баннер с акциями
+ * - SlideTwo: баннер с доставкой
+ * 
+ * Анимация:
+ * - Плавное появление/исчезновение (opacity 0->1->1->0)
+ * - Легкий поворот по X оси (rotateX 0->2)
+ * - Длительность: 5 секунд на слайд
+ * 
+ * Используется на:
+ * - Главной странице (src/app/(root)/page.tsx)
+ */
 import { motion } from 'framer-motion'
 import SlideOne from './SlideOne'
 import SlideTwo from './SlideTwo'

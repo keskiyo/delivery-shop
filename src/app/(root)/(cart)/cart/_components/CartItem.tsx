@@ -10,7 +10,7 @@ import SelectionCheckbox from '@/app/(root)/(cart)/cart/_components/SelectionChe
 import { useCartStore } from '@/store/cartStore'
 import { CartItemProps } from '@/types/cart'
 import Link from 'next/link'
-import { memo, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { CONFIG } from '../../../../../../config/config'
 import {
 	calculateFinalPrice,
@@ -20,7 +20,7 @@ import { formatPrice } from '../../../../../../utils/formatPrice'
 
 /**
  * Компонент элемента корзины
- * 
+ *
  * Отображает:
  * - Чекбокс для выбора товара (для массового удаления)
  * - Изображение товара
@@ -29,7 +29,7 @@ import { formatPrice } from '../../../../../../utils/formatPrice'
  * - Бейдж скидки (если есть)
  * - Селектор количества (-, количество, +)
  * - Итоговую стоимость товара
- * 
+ *
  * Логика работы:
  * 1. Рассчитывает цены с учетом скидки товара и карты лояльности
  * 2. При изменении количества проверяет наличие на складе
@@ -37,7 +37,7 @@ import { formatPrice } from '../../../../../../utils/formatPrice'
  * 4. Использует оптимистичный UI (сначала обновляет локально, потом на сервере)
  * 5. При ошибке откатывает изменения
  * 6. Для товаров "нет в наличии" скрывает селектор количества
- * 
+ *
  * Особенности:
  * - Обернут в memo для оптимизации рендеринга
  * - Адаптивная верстка (мобильная/десктоп)
@@ -55,14 +55,24 @@ const CartItem = memo(function CartItem({
 	const [showTooltip, setShowTooltip] = useState(false)
 	const { hasLoyaltyCard } = useCartStore()
 
+	useEffect(() => {
+		if (!productData) return
+
+		const maxQuantity = productData.quantity
+		if (quantity > maxQuantity) {
+			setQuantity(maxQuantity)
+			onQuantityUpdate(item.productId, maxQuantity)
+		}
+	}, [quantity, productData, onQuantityUpdate, item.productId])
+
 	/**
 	 * Обработчик изменения количества товара
-	 * 
+	 *
 	 * Валидация:
 	 * - Не позволяет отрицательные значения
 	 * - Проверяет наличие на складе
 	 * - Показывает тултип если превышен лимит
-	 * 
+	 *
 	 * Оптимистичный UI:
 	 * 1. Сохраняет предыдущее значение
 	 * 2. Обновляет локальное состояние
@@ -116,7 +126,7 @@ const CartItem = memo(function CartItem({
 	// Итоговые цены с учетом количества
 	const totalFinalPrice = finalPrice * quantity
 	const totalPriceWithoutCard = priceWithDiscount * quantity
-	
+
 	const isOutOfStock = productData?.quantity === 0
 	const hasDiscount = productData ? productData.discountPercent > 0 : false
 
@@ -134,7 +144,7 @@ const CartItem = memo(function CartItem({
 					onSelectionChange(item.productId, checked)
 				}
 			/>
-			
+
 			<div className='flex flex-row flex-wrap md:flex-row justify-between w-full md:flex-nowrap'>
 				<div className='flex flex-row flex-wrap md:flex-nowrap'>
 					{/* Изображение товара */}
@@ -180,7 +190,7 @@ const CartItem = memo(function CartItem({
 				{showTooltip && (
 					<Tooltip text='Количество ограничено' position='top' />
 				)}
-				
+
 				{/* Селектор количества и итоговая цена */}
 				<div className='flex flex-wrap justify-between items-center gap-2 w-full md:w-30 xl:w-59 p-2 md:flex-nowrap md:flex-col md:justify-normal md:items-end xl:flex-row xl:items-start xl:justify-end'>
 					{/* Селектор количества (скрыт для товаров без наличия) */}

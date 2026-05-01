@@ -1,11 +1,28 @@
 'use client'
 
+/**
+ * Верхнее меню навигации в header (иконки + названия)
+ * 
+ * Ссылки:
+ * - Каталог (мобильная версия) - /catalog
+ * - Избранное (только для обычных пользователей) - /favorites
+ * - Заказы (обычные: /user-orders, админ/менеджер: /administrator/admin-orders)
+ * - Корзина (только для обычных пользователей) - /cart
+ * 
+ * Функционал:
+ * - Подсветка активной страницы (оранжевый цвет)
+ * - Бейдж с количеством товаров на корзине (показывает 99+ если >99)
+ * - Скрытие избранного и корзины для admin/manager
+ * 
+ * Используется в:
+ * - components/layout/header/UserBlock.tsx
+ */
+import IconBox from '@/components/svg/IconBox'
 import IconCart from '@/components/svg/iconCart'
 import IconHeart from '@/components/svg/IconHeart'
 import IconMenuMob from '@/components/svg/IconMenuMob'
 import { useAuthStore } from '@/store/authStore'
 import { useCartStore } from '@/store/cartStore'
-import { Package } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
@@ -15,12 +32,17 @@ const TopMenu = () => {
 	const isCatalogPage = pathname === '/catalog'
 	const isFavoritesPage = pathname === '/favorites'
 	const isCartPage = pathname === '/cart'
-	const isOrdersPage = pathname === '/orders'
+	const isUserOrdersPage = pathname === '/user-orders'
+	const isAdminOrdersPage = pathname === '/administrator/admin-orders'
 
 	const { user } = useAuthStore()
 	const { totalItems, fetchCart } = useCartStore()
 
 	const isManagerOrAdmin = user?.role === 'manager' || user?.role === 'admin'
+	const ordersLink = isManagerOrAdmin
+		? '/administrator/admin-orders'
+		: '/user-orders'
+	const isOrderPage = isUserOrdersPage || isAdminOrdersPage
 
 	useEffect(() => {
 		if (user && !isManagerOrAdmin) {
@@ -71,13 +93,13 @@ const TopMenu = () => {
 
 			<li>
 				<Link
-					href='/orders'
-					className='flex flex-col items-center gap-2 w-11'
+					href={ordersLink}
+					className='flex flex-col items-center w-11'
 				>
-					<Package size={24} className='text-orange' />
+					<IconBox isActive={isOrderPage} />
 					<span
 						className={
-							isOrdersPage ? 'text-[#ff6633]' : 'text-[#808080]'
+							isOrderPage ? 'text-[#ff6633]' : 'text-[#808080]'
 						}
 					>
 						Заказы

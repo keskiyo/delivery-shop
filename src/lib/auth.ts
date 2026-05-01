@@ -1,3 +1,21 @@
+/**
+ * Конфигурация аутентификации через better-auth
+ * 
+ * Настройки:
+ * - Сессия: 30 дней (expiresIn), обновление каждые 24ч (updateAge)
+ * - Email/password: с подтверждением email, сброс пароля на 1 день
+ * - Phone: OTP на 4 цифры, 3 попытки, срок 5 минут
+ * - Доп. поля: phoneNumber, surname, birthdayDate, region, location, gender, card, role
+ * 
+ * Важные примечания:
+ * - При входе email+password: сессия создается от better-auth
+ * - При входе phone+password: сессия создается кастомно (см. api/auth/login)
+ * - SMS отправка закомментирована, OTP выводится в консоль
+ * - Email отправляется через Resend (нужен API ключ в .env)
+ * 
+ * База данных: MongoDB 'deliveryshop'
+ * Адаптер: mongodbAdapter из better-auth/adapters/mongodb
+ */
 import VerifyEmail from '@/app/(root)/(auth)/(reg)/_components/VerifyEmail'
 import PasswordResetEmail from '@/app/(root)/(auth)/(update-pass)/_components/PasswordResetEmail'
 import EmailChangeVerification from '@/app/(root)/(user-profile)/_components/EmailChangeVerification'

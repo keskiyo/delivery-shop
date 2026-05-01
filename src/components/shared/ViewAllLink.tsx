@@ -1,6 +1,18 @@
 import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 
+/**
+ * Компонент ссылки "Смотреть все" с иконкой стрелки
+ * 
+ * Используется для перехода на страницу с полным списком (категории, статьи, товары)
+ * Отображает текст и стрелку вправо
+ * 
+ * @param btnText - Текст ссылки (например, "Смотреть все")
+ * @param href - URL для перехода
+ * 
+ * @example
+ * <ViewAllLink btnText="Смотреть все" href="/catalog/meat" />
+ */
 const ViewAllLink = ({ btnText, href }: { btnText: string; href: string }) => {
 	return (
 		<Link

@@ -18,7 +18,7 @@ const PriceSummary = ({
 }) => {
 	return (
 		<>
-			<div className='flex flex-col gap-y-2 pb-6 border-b-2 border-[#f3f2f1]'>
+			<div className='flex flex-col gap-y-2 pb-6 border-b-2 border-[#f3f2f1] text-gray-800'>
 				<div className='flex flex-row justify-between'>
 					<p className='text-base'>
 						{visibleCartItems.length}{' '}
@@ -35,7 +35,7 @@ const PriceSummary = ({
 				</div>
 			</div>
 
-			<div className='flex flex-col items-end justify-between gap-y-6'>
+			<div className='flex flex-col items-end justify-between gap-y-6 text-gray-800'>
 				<div className='text-base flex flex-row justify-between items-center w-full'>
 					<span className='font-bold text-2xl '>Итог:</span>
 					<span className='font-bold text-2xl'>

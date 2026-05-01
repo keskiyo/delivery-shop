@@ -1,5 +1,6 @@
 'use client'
 
+import { Loader } from '@/components/features/common/loader'
 import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
@@ -8,14 +9,14 @@ import { TRANSLATIONS } from '../../../../utils/translations'
 
 /**
  * Компонент хлебных крошек (навигационная цепочка)
- * 
+ *
  * Функционал:
  * - Автоматически генерирует навигационную цепочку на основе URL
  * - Переводит сегменты URL на русский язык через TRANSLATIONS
  * - Для страниц товаров показывает название товара из query параметра 'desc'
  * - Скрывается на главной странице и странице поиска
  * - Использует Suspense для предотвращения ошибок гидратации
- * 
+ *
  * @example
  * URL: /catalog/meat/product-123?desc=Говядина
  * Результат: Главная > Каталог > Мясо > Говядина
@@ -91,9 +92,7 @@ const Breadcrumbs = () => {
 		<Suspense
 			fallback={
 				<nav className='px-[max(12px,calc((100%-1208px)/2))] my-6'>
-					<div className='flex items-center gap-4 text-[8px] md:text-xs'>
-						<div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div>
-					</div>
+					<Loader />
 				</nav>
 			}
 		>

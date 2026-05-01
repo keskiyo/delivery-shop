@@ -1,6 +1,7 @@
 import AddToCardButton from '@/components/shared/AddToCardButton'
 import FavoriteButton from '@/components/shared/FavoriteButton'
 import StarRating from '@/components/shared/StarRating'
+import IconCart from '@/components/svg/iconCart'
 import { ProductCardProps } from '@/types/product'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -26,15 +27,6 @@ const cardDiscountPercent = CONFIG.CARD_DISCOUNT_PERCENT
  * Логика цен:
  * - Для новых товаров (тег 'new') скидка не применяется
  * - Для остальных: базовая цена -> цена со скидкой -> цена с картой лояльности (6%)
- *
- * @param id - ID товара
- * @param img - URL изображения товара
- * @param description - Описание товара
- * @param basePrice - Базовая цена без скидок
- * @param discountPercent - Процент скидки (0-100)
- * @param rating - Объект с рейтингом товара
- * @param tags - Теги товара (например, 'new')
- * @param categories - Категории товара (первая используется для URL)
  */
 const ProductCard = ({
 	id,
@@ -43,40 +35,65 @@ const ProductCard = ({
 	basePrice,
 	discountPercent = 0,
 	rating,
-	tags,
 	categories,
+	quantity,
+	orderQuantity,
+	isLowStock,
+	insufficientStock,
+	isOrderPage = false,
+	index = 0,
 }: ProductCardProps) => {
-	const isNewProduct = tags?.includes('new')
-	const finalPrice = isNewProduct
-		? basePrice
-		: calculateFinalPrice(basePrice, discountPercent)
+	const finalPrice = calculateFinalPrice(basePrice, discountPercent)
 
-	const priceByCard = isNewProduct
-		? basePrice
-		: calculatePriceByCard(finalPrice, cardDiscountPercent)
+	const priceByCard = calculatePriceByCard(finalPrice, cardDiscountPercent)
 
-	const ratingValue = rating?.average ?? 5.0
+	const showTwoPrices =
+		!isOrderPage && discountPercent > 0 && cardDiscountPercent > 0
+
+	const displayPrice = showTwoPrices ? priceByCard : finalPrice
 
 	const productId = id
 	const mainCategory = categories?.[0]
 
 	const productUrl = `/catalog/${encodeURIComponent(mainCategory)}/${productId}?desc=${encodeURIComponent(description.substring(0, 50))}`
 
+	const isPriorityImage = index < 4
+
 	return (
 		<div className='relative flex flex-col justify-between w-40 rounded overflow-hidden bg-[#fff5fd] h-87.5 md:w-56 xl:w-68 align-top p-0 hover:shadow-(--shadow-article) duration-300'>
+			{orderQuantity && (
+				<div className='absolute top-2 left-2 flex items-center p-1 bg-[#ebebeb] bg-opacity-80 rounded justify-center gap-1 text-lg font-bold z-10 text-[#505050]'>
+					<IconCart />
+					{orderQuantity}
+				</div>
+			)}
+
+			{(isLowStock || insufficientStock) && (
+				<div
+					className={`absolute top-3 left-1/2 transform -translate-x-1/2 p-1 rounded text-[8px] md:px-2 md:text-xs z-10 ${
+						insufficientStock
+							? 'bg-[#d80000] text-white'
+							: 'bg-[#ff6633] text-white'
+					}`}
+				>
+					{insufficientStock
+						? 'Нет в наличии'
+						: `Осталось: ${quantity}`}
+				</div>
+			)}
 			<FavoriteButton productId={productId.toString()} />
 			<Link href={productUrl}>
 				<div className='w-40 h-40 md:w-56 xl:w-68 aspect-square relative'>
 					<Image
 						src={img}
-						alt='Акция'
+						alt='Товар'
 						fill
 						className='object-contain'
-						priority={false}
+						priority={isPriorityImage}
 						sizes='(max-width: 768px) 160px, (max-width: 1200px) 224px, 272px'
 						unoptimized
 					/>
-					{discountPercent > 0 && (
+					{!isOrderPage && discountPercent > 0 && (
 						<div className='absolute bg-[#ff6633] py-1 px-2 rounded text-white bottom-2 left-2'>
 							-{discountPercent}%
 						</div>
@@ -87,35 +104,37 @@ const ProductCard = ({
 					<div className='flex flex-row justify-between items-start h-11.25'>
 						<div className='flex flex-col gap-x-1'>
 							<div className='flex flex-row gap-x-1 text-sm md:text-lg font-bold'>
-								<span>{formatPrice(priceByCard)}</span>
+								<span>{formatPrice(displayPrice)}</span>
 								<span>₽</span>
 							</div>
-							{discountPercent > 0 && (
+							{showTwoPrices && (
 								<p className='text-[#bfbfbf] text-[8px] md:text-xs'>
 									С картой
 								</p>
 							)}
 						</div>
-						{finalPrice !== basePrice &&
-							cardDiscountPercent > 0 && (
-								<div className='flex flex-col gap-x-1'>
-									<div className='flex flex-row gap-x-1 text-xs md:text-base'>
-										<span>{formatPrice(finalPrice)}</span>
-										<span>₽</span>
-									</div>
-									<p className='text-[#bfbfbf] text-[8px] md:text-xs text-right'>
-										Обычная
-									</p>
+						{showTwoPrices && (
+							<div className='flex flex-col gap-x-1'>
+								<div className='flex flex-row gap-x-1 text-xs md:text-base'>
+									<span>{formatPrice(finalPrice)}</span>
+									<span>₽</span>
 								</div>
-							)}
+								<p className='text-[#bfbfbf] text-[8px] md:text-xs text-right'>
+									Обычная
+								</p>
+							</div>
+						)}
 					</div>
 					<div className='h-13.5 text-xs md:text-base line-clamp-3 md:line-clamp-2 leading-normal'>
 						{description}
 					</div>
-					{<StarRating rating={ratingValue} />}
+					{<StarRating rating={rating?.rate || 5.0} />}
 				</div>
 			</Link>
-			<AddToCardButton productId={productId.toString()} />
+			<AddToCardButton
+				productId={productId.toString()}
+				availableQuantity={quantity}
+			/>
 		</div>
 	)
 }

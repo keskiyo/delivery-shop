@@ -1,5 +1,22 @@
 'use client'
 
+/**
+ * Переключатель темы (светлая/темная)
+ * 
+ * Визуально:
+ * - Переключатель типа toggle (аналог iOS)
+ * - Иконка солнца (light) / луны (dark) внутри кнопки
+ * - Плавная анимация переключения (300ms)
+ * 
+ * Использует хук useTheme() из ThemeProvider
+ * 
+ * Встречается в:
+ * - Header (Profile.tsx)
+ * - Выпадающее меню профиля
+ * 
+ * @example
+ * <ThemeToggle /> // кнопка переключения темы
+ */
 import { useTheme } from './ThemeProvider'
 
 export function ThemeToggle() {

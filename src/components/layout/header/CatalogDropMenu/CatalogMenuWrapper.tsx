@@ -1,5 +1,24 @@
 'use client'
 
+/**
+ * Обертка для меню каталога с логикой открытия/закрытия
+ * 
+ * Функционал:
+ * - Загружает категории с API при первом открытии (/api/catalog)
+ * - Открывает меню при наведении на область поиска
+ * - Закрывает меню при уходе курсора с области
+ * - Закрывает меню при фокусе на поле поиска
+ * - Отслеживает движение мыши для определения области видимости
+ * 
+ * Состояния:
+ * - isCatalogOpen: открыто/закрыто меню
+ * - isLoading: идет загрузка категорий
+ * - categories: массив категорий
+ * - isSearchFocused: фокус в поле поиска
+ * 
+ * Используется в:
+ * - components/layout/header/Header.tsx
+ */
 import CatalogMenu from '@/components/layout/header/CatalogDropMenu/CatalogMenu'
 import { Category } from '@/types/categories'
 import { useCallback, useEffect, useRef, useState } from 'react'

@@ -1,3 +1,18 @@
+/**
+ * Шапка сайта (Header)
+ * 
+ * Структура:
+ * - Левая часть: логотип + выпадающее меню каталога (CatalogMenuWrapper)
+ * - Правая часть: блок пользователя (UserBlock) - авторизация, корзина, профиль
+ * 
+ * Стили:
+ * - Фиксированная позиция z-50
+ * - Темный фон (#353535)
+ * - Адаптивная верстка: на мобильных все элементы в столбец
+ * 
+ * Используется в:
+ * - src/app/layout.tsx (оборачивает все страницы)
+ */
 import CatalogMenuWrapper from '@/components/layout/header/CatalogDropMenu/CatalogMenuWrapper'
 import UserBlock from '@/components/layout/header/UserBlock'
 import Image from 'next/image'

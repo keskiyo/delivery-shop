@@ -13,7 +13,14 @@ export interface CartSummaryProps {
 		time: DeliveryTime
 		isValid: boolean
 	} | null
-	productsData?: { [key: string]: ProductCardProps }
+	productsData?: { [key: string]: Partial<ProductCardProps> }
+}
+
+export interface ExtendedCartSummaryProps extends CartSummaryProps {
+	customCartItems?: CustomCartItem[]
+	customPricing?: CustomPricing
+	isRepeatOrder?: boolean
+	onOrderSuccess?: () => void
 }
 
 export interface CartSidebarProps {
@@ -59,4 +66,29 @@ export interface BonusesSectionProps {
 	useBonuses: boolean
 	onUseBonusesChange: (use: boolean) => void
 	totalPrice: number
+}
+
+export interface CustomCartItem {
+	productId: string
+	quantity: number
+	price: number
+	discountPercent: number
+	hasLoyaltyDiscount: boolean
+	addedAt: Date
+}
+
+export interface CustomPricing {
+	totalPrice: number
+	totalMaxPrice: number
+	totalDiscount: number
+	finalPrice: number
+	totalBonuses: number
+	maxBonusUse: number
+	isMinimumReached: boolean
+}
+
+export interface DeliveryData {
+	address: DeliveryAddress
+	time: DeliveryTime
+	isValid: boolean
 }

@@ -213,7 +213,7 @@ const DeliveryTime = ({
 											!slot.passed
 												? 'bg-green-600 text-white hover:shadow-button-default active:shadow-button-active'
 												: slot.free && !slot.passed
-													? 'bg-[#f3f2f1] hover:shadow-button-secondary cursor-pointer'
+													? 'bg-[#f3f2f1] hover:shadow-button-secondary cursor-pointer dark:text-[#8f8f8f]'
 													: 'bg-white opacity-50 dark:text-[#8f8f8f] cursor-not-allowed'
 										}`}
 										disabled={!slot.free || slot.passed}
