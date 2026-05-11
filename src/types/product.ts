@@ -34,4 +34,5 @@ export interface ProductCardProps {
 	isNonGMO: boolean
 	isOrderPage?: boolean
 	index?: number
+	isAdminOrderPage?: boolean
 }

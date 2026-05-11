@@ -142,5 +142,8 @@ export const updateOrderStatus = async (
 }
 
 export const markPaymentAsFailed = async (orderId: string) => {
-	return await updateOrderStatus(orderId, { paymentStatus: 'failed' })
+	return await updateOrderStatus(orderId, {
+		status: 'pending',
+		paymentStatus: 'failed',
+	})
 }

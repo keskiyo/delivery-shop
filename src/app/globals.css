@@ -62,15 +62,6 @@
 	--color-foreground: var(--foreground); /* Основной цвет текста */
 	--color-background: var(--background); /* Основной фон страницы */
 
-	/* Радиусы скругления */
-	--radius-sm: calc(var(--radius) - 4px);
-	--radius-md: calc(var(--radius) - 2px);
-	--radius-lg: var(--radius);
-	--radius-xl: calc(var(--radius) + 4px);
-	--radius-2xl: calc(var(--radius) + 8px);
-	--radius-3xl: calc(var(--radius) + 12px);
-	--radius-4xl: calc(var(--radius) + 16px);
-
 	/* === ЦВЕТА ДЛЯ BREADCRUMBS И ОБЩИХ ЭЛЕМЕНТОВ === */
 	--color-breadcrumb-default: oklch(0.145 0 0); /* Темный цвет ссылок */
 	--color-breadcrumb-muted: oklch(0.556 0 0); /* Приглушенный цвет */
@@ -227,6 +218,21 @@ body {
 	}
 	body {
 		@apply bg-background text-foreground;
+	}
+	:root {
+		--radius: 1rem;
+	}
+}
+
+@layer utilities {
+	.rounded-lg {
+		@apply rounded-(--radius);
+	}
+	.rounded-md {
+		@apply rounded-[calc(var(--radius)*0.5)];
+	}
+	.rounded-sm {
+		@apply rounded-[calc(var(--radius)*0.25)];
 	}
 }
 

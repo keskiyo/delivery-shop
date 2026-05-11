@@ -1,5 +1,5 @@
 const IconBox = ({ isActive = false }: { isActive?: boolean }) => {
-	const fillColor = isActive ? 'rgb(255, 102, 51)' : '#505050'
+	const fillColor = isActive ? 'rgb(255, 102, 51)' : '#808080'
 
 	return (
 		<svg

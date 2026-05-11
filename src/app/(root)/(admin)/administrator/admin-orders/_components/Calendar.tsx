@@ -1,5 +1,6 @@
 import { ru } from 'date-fns/locale'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { DayPicker } from 'react-day-picker'
 import 'react-day-picker/style.css'
 import '../daypicker.css'
@@ -7,14 +8,20 @@ import '../daypicker.css'
 interface CalendarProps {
 	customDate: Date | undefined
 	onDateSelect: (date: Date | undefined) => void
-	onMonthChange: (date: Date | undefined) => void
+	month?: Date
+	isOrderDateChange?: boolean
 }
 
 const Calendar = ({
 	customDate,
 	onDateSelect,
-	onMonthChange,
+	month,
+	isOrderDateChange = false,
 }: CalendarProps) => {
+	const [currentMoth, setCurrentMonth] = useState<Date>(
+		month || customDate || new Date(),
+	)
+
 	const getMonthName = (date: Date) => {
 		const monthName = date.toLocaleDateString('ru-RU', {
 			month: 'long',
@@ -26,23 +33,31 @@ const Calendar = ({
 	}
 
 	const handlePreviousMonth = () => {
-		const newDate = new Date(customDate || new Date())
+		const newDate = new Date(currentMoth)
 		newDate.setMonth(newDate.getMonth() - 1)
-		onMonthChange(newDate)
+		setCurrentMonth(newDate)
 	}
 
 	const handleNextMonth = () => {
-		const newDate = new Date(customDate || new Date())
+		const newDate = new Date(currentMoth)
 		newDate.setMonth(newDate.getMonth() + 1)
-		onMonthChange(newDate)
+		setCurrentMonth(newDate)
 	}
 
+	useEffect(() => {
+		if (month) {
+			setCurrentMonth(month)
+		}
+	}, [month])
+
 	return (
-		<div className='absolute top-17 left-0 z-50 bg-white border border-gray-200 rounded-lg shadow-lg p-4 w-80'>
+		<div
+			className={`${isOrderDateChange ? '' : 'absolute top-17 left-0 z-50 bg-white border border-gray-200 rounded-lg shadow-lg p-4 w-92 text-gray-800'}`}
+		>
 			{/* Кастомная навигация */}
 			<div className='flex justify-between items-center mb-4'>
 				<span className='text-lg font-bold text-gray-800'>
-					{customDate ? getMonthName(customDate) : 'Выберите дату'}
+					{getMonthName(currentMoth)}
 				</span>
 				<div className='flex gap-x-4 justify-center'>
 					<button
@@ -60,42 +75,45 @@ const Calendar = ({
 					</button>
 				</div>
 			</div>
-
-			<DayPicker
-				mode='single'
-				selected={customDate}
-				onSelect={onDateSelect}
-				locale={ru}
-				showOutsideDays={true}
-				className='p-0'
-				classNames={{
-					root: 'w-full',
-					month: 'w-full',
-					caption: 'hidden',
-					nav: 'hidden',
-					table: 'w-full border-collapse',
-					head_row: 'border-b',
-					head_cell: 'font-normal py-2 text-sm',
-					row: 'border-b',
-					cell: 'h-10 text-center',
-					day: 'size-10 rounded-full text-[#606060] hover:text-white hover:bg-[#ff6633] duration-300 cursor-pointer mx-auto',
-					day_selected: 'bg-[#ff6633] !text-white',
-					day_today: 'bg-gray-100 !text-white',
-					day_outside: 'text-gray-500 opacity-50',
-				}}
-				modifiersStyles={{
-					selected: {
-						color: 'white',
-						backgroundColor: '#ff6633',
-						border: 'none',
-					},
-					today: {
-						color: 'white',
-						backgroundColor: '#ff6633',
-						border: 'none',
-					},
-				}}
-			/>
+			<div className='full-width-calendar'>
+				<DayPicker
+					mode='single'
+					selected={customDate}
+					onSelect={onDateSelect}
+					locale={ru}
+					month={currentMoth}
+					onMonthChange={setCurrentMonth}
+					showOutsideDays={true}
+					className='p-0'
+					classNames={{
+						root: 'w-full',
+						month: 'w-full',
+						caption: 'hidden',
+						nav: 'hidden',
+						table: 'w-full border-collapse',
+						head_row: 'border-b',
+						head_cell: 'font-normal py-2 text-sm',
+						row: 'border-b',
+						cell: 'h-10 text-center',
+						day: 'size-10 rounded-full text-[#606060] hover:text-white hover:bg-[#ff6633] duration-300 cursor-pointer mx-auto',
+						day_selected: 'bg-[#ff6633] !text-white',
+						day_today: 'bg-gray-100 !text-white',
+						day_outside: 'text-gray-500 opacity-50',
+					}}
+					modifiersStyles={{
+						selected: {
+							color: 'white',
+							backgroundColor: '#ff6633',
+							border: 'none',
+						},
+						today: {
+							color: 'white',
+							backgroundColor: '#ffaa8e',
+							border: 'none',
+						},
+					}}
+				/>
+			</div>
 		</div>
 	)
 }

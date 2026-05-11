@@ -1,4 +1,5 @@
 import { RegFormProvider } from '@/app/contexts/RegFormContext'
+import StoreProvider from '@/app/provider'
 import { Providers } from '@/components/features/common/providers'
 import StatesProvider from '@/store/StatesProvider'
 import type { Metadata } from 'next'
@@ -41,11 +42,13 @@ export default async function RootLayout({
 	return (
 		<html lang='ru' className={initialTheme} suppressHydrationWarning>
 			<body className={`${rubik.variable} font-sans`}>
-				<StatesProvider>
-					<RegFormProvider>
-						<Providers>{children}</Providers>
-					</RegFormProvider>
-				</StatesProvider>
+				<StoreProvider>
+					<StatesProvider>
+						<RegFormProvider>
+							<Providers>{children}</Providers>
+						</RegFormProvider>
+					</StatesProvider>
+				</StoreProvider>
 			</body>
 		</html>
 	)

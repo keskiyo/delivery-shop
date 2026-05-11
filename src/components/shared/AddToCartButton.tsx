@@ -28,7 +28,7 @@ import { useState } from 'react'
  * 5. Затем отправляет запрос на сервер для сохранения изменений
  * 6. После завершения операции перезагружает корзину для синхронизации
  */
-const AddToCardButton = ({
+const AddToCartButton = ({
 	productId,
 	availableQuantity,
 }: {
@@ -182,15 +182,8 @@ const AddToCardButton = ({
 					{getButtonText()}
 				</button>
 			)}
-			{/* Сообщение об ошибке (если есть) */}
-			{/* {message && (
-				<CartActionMessage
-					message={message}
-					onClose={() => setMessage(null)}
-				/>
-			)} */}
 		</div>
 	)
 }
 
-export default AddToCardButton
+export default AddToCartButton

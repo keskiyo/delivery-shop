@@ -1,6 +1,7 @@
 import Calendar from '@/app/(root)/(admin)/administrator/admin-orders/_components/Calendar'
 import { Order } from '@/types/order'
 import { CalendarDays } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import DateFilterButtons from './DateFilterButtons'
 
 interface DateSelectorProps {
@@ -24,8 +25,22 @@ const DateSelector = ({
 	toggleCalendar,
 	onCalendarDateSelect,
 }: DateSelectorProps) => {
+	const [calendarMonth, setCalendarMonth] = useState<Date | undefined>(
+		customDate || new Date(),
+	)
+
+	const handleDateSelect = (date: Date | undefined) => {
+		onCalendarDateSelect(date)
+		if (date) {
+			setCalendarMonth(date)
+		}
+	}
+
+	useEffect(() => {
+		if (customDate) setCalendarMonth(customDate)
+	}, [customDate])
 	return (
-		<div className='flex justify-start items-center gap-3 relative mb-15'>
+		<div className='flex justify-start items-center gap-3 relative mb-15 text-gray-800'>
 			<button
 				type='button'
 				onClick={toggleCalendar}
@@ -41,8 +56,8 @@ const DateSelector = ({
 			{isCalendarOpen && (
 				<Calendar
 					customDate={customDate}
-					onDateSelect={onCalendarDateSelect}
-					onMonthChange={onCalendarDateSelect}
+					onDateSelect={handleDateSelect}
+					month={calendarMonth}
 				/>
 			)}
 			<DateFilterButtons

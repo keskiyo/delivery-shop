@@ -1,19 +1,19 @@
 /**
  * Иконка корзины покупок
- * 
+ *
  * SVG иконка корзины ( inline SVG )
- * 
+ *
  * Параметры:
  * - isActive: активна ли страница корзины
  *   - true: оранжевый цвет (#ff6633)
- *   - false: серый цвет (#505050)
- * 
+ *   - false: серый цвет (#808080)
+ *
  * Используется в:
  * - ProductCard.tsx (количество товара в заказе)
  * - TopMenu.tsx (иконка в навигации)
  */
 const IconCart = ({ isActive }: { isActive?: boolean }) => {
-	const fillColor = isActive ? '#ff6633' : '#505050'
+	const fillColor = isActive ? '#ff6633' : '#808080'
 
 	return (
 		<svg

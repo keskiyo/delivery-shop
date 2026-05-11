@@ -6,60 +6,42 @@ import TimeSlotSection from '@/app/(root)/(admin)/administrator/admin-orders/_co
 import { getDaysDates } from '@/app/(root)/(admin)/administrator/delivery-times/utils/getDaysDates'
 import ErrorComponent from '@/components/features/common/ErrorComponent'
 import { Loader } from '@/components/features/common/loader'
-import { Order } from '@/types/order'
-import { useEffect, useState } from 'react'
-
-interface OrderStats {
-	nextThreeDaysOrders: number
-}
+import { useGetAdminOrdersQuery } from '@/store/redux/api/ordersApi'
+import { useEffect, useMemo, useState } from 'react'
 
 const AdminOrderPage = () => {
-	const [orders, setOrders] = useState<Order[]>([])
-	const [stats, setStats] = useState<OrderStats | null>(null)
 	const [selectedDate, setSelectedDate] = useState<string>('')
-	const [filteredOrders, setFilteredOrders] = useState<Order[]>([])
 	const [customDate, setCustomDate] = useState<Date | undefined>(new Date())
 	const [isCalendarOpen, setIsCalendarOpen] = useState(false)
-	const [loading, setLoading] = useState(true)
-	const [error, setError] = useState<{
-		error: Error
-		userMessage: string
-	} | null>(null)
 
-	const fetchOrders = async () => {
-		try {
-			const response = await fetch('/api/admin/users/orders')
-			if (!response.ok) {
-				throw new Error('Ошибка при загрузке заказов')
-			}
-			const data = await response.json()
-			setOrders(data.orders)
-			setStats(data.stats)
+	const {
+		data,
+		isLoading,
+		error: queryError,
+	} = useGetAdminOrdersQuery(undefined, {
+		pollingInterval: 10000,
+		refetchOnFocus: true,
+		refetchOnReconnect: true,
+	})
 
+	const orders = useMemo(() => data?.orders || [], [data?.orders])
+	const stats = useMemo(() => data?.stats || null, [data?.stats])
+
+	useEffect(() => {
+		if (orders.length > 0 && !selectedDate) {
 			const threeDaysDates = getDaysDates()
 			const today = threeDaysDates[0]
 			setSelectedDate(today)
-
-			const todayOrders = data.orders.filter(
-				(order: Order) => order.deliveryDate === today,
-			)
-			setFilteredOrders(todayOrders)
-		} catch (error) {
-			setError({
-				error:
-					error instanceof Error
-						? error
-						: new Error('Неизвестная ошибка'),
-				userMessage: 'Не удалось получить заказы пользователя',
-			})
-		} finally {
-			setLoading(false)
 		}
-	}
+	}, [orders, selectedDate])
 
-	useEffect(() => {
-		fetchOrders()
-	}, [])
+	const filteredOrdersIds = useMemo(() => {
+		if (orders.length === 0) return []
+		const targetDate = selectedDate || getDaysDates()[0]
+		return orders
+			.filter(order => order.deliveryDate === targetDate)
+			.map(order => order._id)
+	}, [orders, selectedDate])
 
 	const handleDateSelect = (date: Date | undefined) => {
 		setCustomDate(date)
@@ -70,12 +52,8 @@ const AdminOrderPage = () => {
 			const dateString = `${year}-${month}-${day}` // YYYY-MM-DD
 
 			setSelectedDate(dateString)
-			const filtered = orders.filter(
-				order => order.deliveryDate === dateString,
-			)
-			setFilteredOrders(filtered)
-			setIsCalendarOpen(false)
 		}
+		setIsCalendarOpen(false)
 	}
 
 	const toggleCalendar = () => {
@@ -86,19 +64,21 @@ const AdminOrderPage = () => {
 		setSelectedDate(date)
 		setCustomDate(undefined)
 		setIsCalendarOpen(false)
-		const filtered = orders.filter(order => order.deliveryDate === date)
-		setFilteredOrders(filtered)
 	}
 
 	const threeDaysDates = getDaysDates()
 
-	if (loading) return <Loader />
+	if (isLoading) return <Loader />
 
-	if (error) {
+	if (queryError) {
 		return (
 			<ErrorComponent
-				error={error.error}
-				userMessage={error.userMessage}
+				error={
+					queryError instanceof Error
+						? queryError
+						: new Error('Неизвестная ошибка')
+				}
+				userMessage='Не удалось загрузить данные о заказах пользователей'
 			/>
 		)
 	}
@@ -116,7 +96,7 @@ const AdminOrderPage = () => {
 				onCalendarDateSelect={handleDateSelect}
 				onDateSelect={filterOrdersByDate}
 			/>
-			<TimeSlotSection filteredOrders={filteredOrders} />
+			<TimeSlotSection orderIds={filteredOrdersIds} />
 		</div>
 	)
 }

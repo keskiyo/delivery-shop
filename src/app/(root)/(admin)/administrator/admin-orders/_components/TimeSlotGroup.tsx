@@ -1,24 +1,31 @@
 import AdminOrderCard from '@/app/(root)/(admin)/administrator/admin-orders/_components/AdminOrderCard'
 import CityFilterButtons from '@/app/(root)/(admin)/administrator/admin-orders/_components/CityFilterButtons'
 import { getUniqueCities } from '@/app/(root)/(admin)/administrator/admin-orders/utils/getUniqueCities'
+import { useGetAdminOrdersQuery } from '@/store/redux/api/ordersApi'
 import { Order } from '@/types/order'
 import { Check, Clock } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 interface TimeSlotGroupProps {
 	timeSlot: string
-	slotOrders: Order[]
+	orderIds: string[]
 }
 
-const TimeSlotGroup = ({ timeSlot, slotOrders }: TimeSlotGroupProps) => {
+const TimeSlotGroup = ({ timeSlot, orderIds }: TimeSlotGroupProps) => {
+	const { data } = useGetAdminOrdersQuery()
 	const [selectedCity, setSelectedCity] = useState<string>('Все города')
-	const [localOrders, setLocalOrders] = useState<Order[]>(slotOrders)
+	const [localOrders, setLocalOrders] = useState<Order[]>([])
 
 	useEffect(() => {
-		setLocalOrders(slotOrders)
-	}, [slotOrders])
+		if (data?.orders) {
+			const filteredOrders = data.orders.filter(order =>
+				orderIds.includes(order._id),
+			)
+			setLocalOrders(filteredOrders)
+		}
+	}, [data?.orders, orderIds])
 
-	const cities = getUniqueCities(slotOrders)
+	const cities = getUniqueCities(localOrders)
 
 	const filteredSlotOrders =
 		selectedCity === 'Все города'
@@ -37,31 +44,16 @@ const TimeSlotGroup = ({ timeSlot, slotOrders }: TimeSlotGroupProps) => {
 		setSelectedCity(city)
 	}
 
-	const handleOrderStatusUpdate = (orderId: string, newStatus: string) => {
-		setLocalOrders(prev =>
-			prev.map(order => {
-				if (order._id === orderId) {
-					const updatedOrder: Order = {
-						...order,
-						status: newStatus as Order['status'],
-					}
-					return updatedOrder
-				}
-				return order
-			}),
-		)
-	}
-
 	return (
 		<div key={timeSlot}>
-			<div className='flex justify-between text-xl md:text-2xl xl:text-4xl'>
-				<div className='flex gap-x-4 mb-4'>
-					<Clock className='w-6 h-6' />{' '}
+			<div className='flex justify-between text-xl md:text-2xl xl:text-4xl mb-4'>
+				<div className='flex gap-x-4 items-center'>
+					<Clock className='w-8 h-8' />
 					<span className='font-bold'>{startTime}</span>
 				</div>
 				<div className='flex gap-x-2.5 items-center'>
-					<Check className='w-6 h-6' />
-					<div>
+					<Check className='w-8 h-8' />
+					<div className='flex gap-x-1.5 items-center'>
 						<span className='text-2xl'>{completedOrdersCount}</span>
 						<span className='text-xl'>{' / '}</span>
 						<span className='text-2xl'>
@@ -73,7 +65,7 @@ const TimeSlotGroup = ({ timeSlot, slotOrders }: TimeSlotGroupProps) => {
 			{cities.length > 1 && (
 				<CityFilterButtons
 					cities={cities}
-					slotOrders={slotOrders}
+					slotOrders={localOrders}
 					selectedCity={selectedCity}
 					onCitySelect={handleCitySelect}
 				/>
@@ -81,11 +73,7 @@ const TimeSlotGroup = ({ timeSlot, slotOrders }: TimeSlotGroupProps) => {
 			<div className='flex flex-col gap-y-15'>
 				{filteredSlotOrders.map(order => {
 					return (
-						<AdminOrderCard
-							key={order._id}
-							order={order}
-							onStatusUpdate={handleOrderStatusUpdate}
-						/>
+						<AdminOrderCard key={order._id} orderId={order._id} />
 					)
 				})}
 			</div>

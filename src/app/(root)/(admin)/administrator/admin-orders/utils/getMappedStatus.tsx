@@ -2,11 +2,14 @@ import { Order } from '@/types/order'
 import { CUSTOMER_STATUSES } from './customerStatuses'
 
 export const getMappedStatus = (order: Order): string => {
-	// 1. Сначала проверяем особые случаи с оплатой
+	// При оплате онлайн
 	if (order.paymentMethod === 'online') {
 		if (order.paymentStatus === 'paid' && order.status === 'confirmed') {
 			return 'Подтвержден'
-		} else if (order.paymentStatus === 'failed') {
+		} else if (
+			order.paymentStatus === 'failed' &&
+			order.status === 'cancelled'
+		) {
 			return 'Не подтвердили'
 		} else if (
 			order.paymentStatus === 'waiting' &&
@@ -16,15 +19,16 @@ export const getMappedStatus = (order: Order): string => {
 		}
 	}
 
+	// При оплате наличными
 	if (order.paymentMethod === 'cash_on_delivery') {
 		if (order.status === 'pending' && order.paymentStatus === 'pending') {
-			return 'Доставляется'
+			return 'Новый'
 		} else if (order.status === 'confirmed') {
 			return 'Подтвержден'
 		}
 	}
 
-	// 2. Затем проверяем CUSTOMER_STATUSES
+	// Базовый маппинг
 	const statusFromValue = CUSTOMER_STATUSES.find(
 		status => status.value === order.status,
 	)
@@ -32,6 +36,5 @@ export const getMappedStatus = (order: Order): string => {
 		return statusFromValue.label
 	}
 
-	// 3. Fallback
 	return 'Новый'
 }

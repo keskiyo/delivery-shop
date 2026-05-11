@@ -2,19 +2,19 @@
 
 /**
  * Кнопки фильтров товаров (нашего производства, полезные, без ГМО)
- * 
+ *
  * Функционал:
  * - Переключение фильтров по клику (добавление/удаление из URL)
  * - Поддержка нескольких фильтров одновременно
  * - Визуальное отличие активного фильтра (зеленый фон)
  * - Сохранение других URL параметров при переключении
  * - Сброс пагинации (page=1) при изменении фильтра
- * 
+ *
  * Фильтры:
  * - our-production: Товары нашего производства
  * - healthy-food: Полезные продукты
  * - non-gmo: Без ГМО
- * 
+ *
  * Используется на:
  * - Страницах каталога (catalog/[category])
  * - Странице поиска (search)
@@ -59,7 +59,7 @@ function FilterButtonsContent({ basePath }: { basePath: string }) {
 				<Link
 					key={filter.key}
 					href={buildFilterLink(filter.key)}
-					className={`h-8 p-2 text-xs flex justify-center items-center duration-300 cursor-pointer ${
+					className={`h-8 p-2 text-xs flex justify-center items-center duration-300 cursor-pointer rounded-2xl ${
 						isFilterActive(filter.key)
 							? 'bg-green-600 text-white hover:shadow-(--shadow-button-default) active:shadow-(--shadow-button-active)'
 							: 'bg-[#f3f2f1] text-[#606060] hover:shadow-(--shadow-button-secondary) active:shadow-(--shadow-button-active)'
