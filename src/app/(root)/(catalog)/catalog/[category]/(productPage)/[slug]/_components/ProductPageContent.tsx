@@ -1,13 +1,14 @@
-import AdditionalInfo from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[id]/_components/AdditionalInfo'
-import Bonuses from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[id]/_components/Bonuses'
-import CartButton from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[id]/_components/CartButton'
-import ImagesBlock from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[id]/_components/ImagesBlock'
-import ProductOffer from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[id]/_components/ProductOffer'
-import RatingDistribution from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[id]/_components/RatingDistribution'
-import ReviewsWrapper from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[id]/_components/ReviewsWrapper'
-import SameBrandProducts from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[id]/_components/SameBrandProducts'
-import ShareButton from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[id]/_components/ShareButton'
-import SimilarProducts from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[id]/_components/SimilarProducts'
+import AdditionalInfo from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[slug]/_components/AdditionalInfo'
+import Bonuses from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[slug]/_components/Bonuses'
+import CartButton from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[slug]/_components/CartButton'
+import ImagesBlock from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[slug]/_components/ImagesBlock'
+import ProductOffer from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[slug]/_components/ProductOffer'
+import ProductTitle from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[slug]/_components/ProductTitle'
+import RatingDistribution from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[slug]/_components/RatingDistribution'
+import ReviewsWrapper from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[slug]/_components/ReviewsWrapper'
+import SameBrandProducts from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[slug]/_components/SameBrandProducts'
+import ShareButton from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[slug]/_components/ShareButton'
+import SimilarProducts from '@/app/(root)/(catalog)/catalog/[category]/(productPage)/[slug]/_components/SimilarProducts'
 import Actions from '@/app/(root)/(products)/Actions'
 import FavoriteButton from '@/components/shared/FavoriteButton'
 import StarRating from '@/components/shared/StarRating'
@@ -21,7 +22,7 @@ import { getWordEnding } from '../../../../../../../../../utils/getWordEnding'
 
 /**
  * Компонент содержимого страницы товара
- * 
+ *
  * Функционал:
  * - Отображение полной информации о товаре
  * - Расчет цен с учетом скидок и карты лояльности
@@ -31,14 +32,15 @@ import { getWordEnding } from '../../../../../../../../../utils/getWordEnding'
  * - Похожие товары и товары того же бренда
  * - Отзывы и рейтинг товара
  * - Акционные товары внизу страницы
- * 
+ *
  * Расчеты:
  * - priceWithDiscount: базовая цена минус скидка товара
  * - cardPrice: цена с учетом скидки по карте лояльности
  * - bonusesAmount: количество бонусов, начисляемых за покупку
- * 
+ *
  * @param product - Данные товара для отображения
  */
+
 const ProductPageContent = ({ product }: { product: ProductCardProps }) => {
 	// Расчет финальной цены с учетом скидки товара
 	const priceWithDiscount = calculateFinalPrice(
@@ -59,9 +61,10 @@ const ProductPageContent = ({ product }: { product: ProductCardProps }) => {
 
 	return (
 		<div className='px-[max(12px,calc((100%-1208px)/2))] md:px-[max(16px,calc((100%-1208px)/2))]'>
-			<h1 className='text-xl md:text-2xl font-bold mb-4'>
-				{product.description}
-			</h1>
+			<ProductTitle
+				title={product.title}
+				description={product.description}
+			/>
 			<div className='flex flex-row flex-wrap items-center gap-6 mb-4 md:mb-6'>
 				<div className='text-xs'>арт. {product.article}</div>
 				<div className='flex flex-row flex-wrap gap-2 items-center'>

@@ -1,9 +1,10 @@
 'use client'
 
+import { useProduct } from '@/app/contexts/ProductContext'
 import { Loader } from '@/components/features/common/loader'
 import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { Suspense } from 'react'
 import { TRANSLATIONS } from '../../../../utils/translations'
 
@@ -23,13 +24,13 @@ import { TRANSLATIONS } from '../../../../utils/translations'
  */
 function BreadcrumbsContent() {
 	const pathname = usePathname()
+	const { title } = useProduct()
 
 	if (pathname === '/' || pathname === '/search') return null
 
 	const pathSegments = pathname.split('/').filter(segment => segment !== '')
 
-	const searchParams = useSearchParams()
-	const productsDesc = searchParams.get('desc')
+	const productDesc = title
 
 	const breadcrumbs = pathSegments.map((segment, index) => {
 		const href = '/' + pathSegments.slice(0, index + 1).join('/')
@@ -38,18 +39,18 @@ function BreadcrumbsContent() {
 
 		if (
 			index === pathSegments.length - 1 &&
-			productsDesc &&
+			productDesc &&
 			pathSegments.includes('catalog') &&
 			pathSegments.length >= 3
 		) {
-			label = productsDesc
+			label = productDesc
 		}
 
 		return {
 			label,
 			href:
 				index === pathSegments.length - 1
-					? `${href}?desc=${productsDesc}`
+					? `${href}?desc=${productDesc}`
 					: href,
 			isLast: index === pathSegments.length - 1,
 		}

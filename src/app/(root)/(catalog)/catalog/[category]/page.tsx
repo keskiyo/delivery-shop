@@ -6,6 +6,7 @@ import FilterControls from '@/components/shared/filterComponents/FilterControls'
 import PriceFilter from '@/components/shared/filterComponents/PriceFilter'
 import GenericListPage from '@/components/shared/GenericListPage'
 import { Suspense } from 'react'
+import { baseUrl } from '../../../../../../utils/baseUrl'
 import { TRANSLATIONS } from '../../../../../../utils/translations'
 
 /**
@@ -23,12 +24,16 @@ export async function generateMetadata({
 		description: `Описание категории товаров "${
 			TRANSLATIONS[category] || category
 		}"магазина "Фудмаркет"`,
+		metadataBase: new URL(baseUrl),
+		alternates: {
+			canonical: `${baseUrl}/catalog/${category}`,
+		},
 	}
 }
 
 /**
  * Страница категории товаров с фильтрацией и пагинацией
- * 
+ *
  * Функционал:
  * - Отображение товаров выбранной категории
  * - Фильтрация по тегам (новинки, акции, здоровая еда и т.д.)
@@ -36,19 +41,19 @@ export async function generateMetadata({
  * - Фильтр "В наличии"
  * - Сортировка товаров
  * - Пагинация результатов
- * 
+ *
  * Логика работы:
  * 1. Получает категорию из URL параметра
  * 2. Применяет фильтры из query параметров
  * 3. Загружает товары через fetchProductsByCategory
  * 4. Отображает результаты с возможностью изменения фильтров
- * 
+ *
  * Компоненты фильтрации:
  * - DropFilter: выпадающий фильтр для мобильных устройств
  * - FilterButtons: кнопки быстрых фильтров (десктоп)
  * - PriceFilter: фильтр по диапазону цен (десктоп)
  * - FilterControls: элементы управления сортировкой
- * 
+ *
  * @route /catalog/[category]
  * @param category - Название категории (например: "meat", "dairy", "vegetables")
  * @param searchParams - Query параметры фильтрации и пагинации
