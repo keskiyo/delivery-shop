@@ -280,7 +280,7 @@ const EnterLoginPage = () => {
 
 					<button
 						onClick={handleForgotPassword}
-						className='h-8 text-gray-400 hover:text-gray-500 w-30 flex items-center justify-center duration-300'
+						className='h-8 text-[#969696] hover:text-gray-500 w-30 flex items-center justify-center duration-300 cursor-pointer'
 					>
 						Забыли пароль?
 					</button>

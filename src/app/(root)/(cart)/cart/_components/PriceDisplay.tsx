@@ -28,15 +28,15 @@ const PriceDisplay = memo(function PriceDisplay({
 							>
 								{formatPrice(finalPrice)} ₽
 							</span>
-							<span className='text-[#bfbfbf]'>С картой</span>
+							<span className='text-[#8a8a8a]'>С картой</span>
 						</div>
 						<div className='flex flex-col'>
 							<span
-								className={`text-[12px] ${isOutOfStock ? 'line-through text-[#bfbfbf]' : ''}`}
+								className={`text-[12px] ${isOutOfStock ? 'line-through text-[#8a8a8a]' : ''}`}
 							>
 								{formatPrice(priceWithDiscount)} ₽
 							</span>
-							<span className='text-[#bfbfbf]'>Обычная</span>
+							<span className='text-[#8a8a8a]'>Обычная</span>
 						</div>
 					</>
 				) : (
@@ -48,7 +48,7 @@ const PriceDisplay = memo(function PriceDisplay({
 						</span>
 					</div>
 				)}
-				<span className='text-[#bfbfbf]'>за шт.</span>
+				<span className='text-[#8a8a8a]'>за шт.</span>
 			</div>
 		</>
 	)

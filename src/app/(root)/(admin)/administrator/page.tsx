@@ -48,6 +48,12 @@ const AdminPanel = () => {
 				>
 					Заказы пользователей
 				</Link>
+				<Link
+					href='/administrator/cms'
+					className={`${buttonStyles.active} [&&]:justify-start px-4 py-2 w-full md:w-1/2`}
+				>
+					Система управления сайтом (CMS)
+				</Link>
 			</div>
 		</div>
 	)
@@ -56,4 +62,4 @@ const AdminPanel = () => {
 export default AdminPanel
 
 // ! Проверить страницу добавления товара в админке и страницу продукта
-// ! text-gray-300 если нужно серый текст text-[#bfbfbf]
+// ! text-[#8a8a8a] если нужно серый текст text-[#bfbfbf] или text-[#8a8a8a]

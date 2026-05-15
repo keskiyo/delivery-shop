@@ -11,7 +11,7 @@ const SearchStates = ({ hasSearched, loading }: SearchStatesProps) => {
 	if (!hasSearched && !loading) {
 		return (
 			<div className='text-center py-12'>
-				<Search size={48} className='mx-auto mb-4 text-[#bfbfbf]' />
+				<Search size={48} className='mx-auto mb-4 text-[#8a8a8a]' />
 				<p className='text-lg'>Введите запрос для поиска товаров</p>
 				<p className='text-sm'>
 					Найдите товары по названию или артикулу

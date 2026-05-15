@@ -22,7 +22,7 @@ export function DeleteConfirmationModal({
 					<h3 className='text-lg font-semibold mb-2'>
 						Подтверждение удаления
 					</h3>
-					<p className='text-[#bfbfbf] mb-4'>
+					<p className='text-[#8a8a8a] mb-4'>
 						Вы уверены, что хотите удалить товар{' '}
 						<strong>&quot;{productTitle}&quot;</strong>?
 					</p>

@@ -22,7 +22,7 @@ export default function ScheduleTable({
 }: ScheduleTableProps) {
 	if (sortedTimeSlots.length === 0) {
 		return (
-			<div className='p-6 md:p-8 text-center text-[#bfbfbf] text-sm md:text-base'>
+			<div className='p-6 md:p-8 text-center text-[#8a8a8a] text-sm md:text-base'>
 				Нет добавленных временных слотов. Добавьте первый слот выше.
 			</div>
 		)

@@ -1,21 +1,21 @@
 /**
  * Выпадающее меню каталога товаров
- * 
+ *
  * Функционал:
  * - Отображает строку поиска (SearchBlock)
  * - Выпадающая панель с категориями товаров
  * - При наведении на кнопку "Каталог" показывается меню
  * - При клике на категорию переход на страницу категории
- * 
+ *
  * Структура:
  * - Поиск (всегда виден)
  * - Выпадающее меню категорий (появляется при isCatalogOpen=true)
- * 
+ *
  * Стили:
  * - Фон: #242525 (темный)
  * - Категории в виде сетки (2-4 колонки в зависимости от ширины)
  * - При наведении: оранжевая подчеркивание
- * 
+ *
  * Используется в:
  * - CatalogMenuWrapper.tsx
  */
@@ -78,7 +78,7 @@ const CatalogMenu = ({
 									<Link
 										key={category.slug}
 										href={`/catalog/${category.slug}`}
-										className='block px-4 py-2 text-gray-300 hover:text-orange-400 font-bold duration-300 hover:border-b hover:border-orange-400 border-b border-[#242525]'
+										className='block px-4 py-2 text-[#8a8a8a] hover:text-orange-400 font-bold duration-300 hover:border-b hover:border-orange-400 border-b border-[#242525]'
 										onClick={() => setIsCatalogOpen(false)}
 									>
 										{category.title}

@@ -138,7 +138,7 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 								)
 							})}
 							{availableTimeSlots.length === 0 && (
-								<p className='col-span-2 text-center text-[#bfbfbf] py-2'>
+								<p className='col-span-2 text-center text-[#8a8a8a] py-2'>
 									Нет доступных временных интервалов
 								</p>
 							)}
@@ -159,7 +159,7 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 				{isCreatingOrder && (
 					<div className='mt-4 text-center'>
 						<Loader />
-						<p className='text-sm text-[#bfbfbf]'>
+						<p className='text-sm text-[#8a8a8a]'>
 							Создаем заказ...
 						</p>
 					</div>

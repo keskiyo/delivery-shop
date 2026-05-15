@@ -2,18 +2,18 @@
 
 /**
  * Переключатель темы (светлая/темная)
- * 
+ *
  * Визуально:
  * - Переключатель типа toggle (аналог iOS)
  * - Иконка солнца (light) / луны (dark) внутри кнопки
  * - Плавная анимация переключения (300ms)
- * 
+ *
  * Использует хук useTheme() из ThemeProvider
- * 
+ *
  * Встречается в:
  * - Header (Profile.tsx)
  * - Выпадающее меню профиля
- * 
+ *
  * @example
  * <ThemeToggle /> // кнопка переключения темы
  */
@@ -35,7 +35,7 @@ export function ThemeToggle() {
 	return (
 		<button
 			onClick={toggleTheme}
-			className='p-2 text-gray-300 cursor-pointer transition-colors'
+			className='p-2 text-[#8a8a8a] cursor-pointer transition-colors'
 			aria-label={title}
 			title={title}
 		>

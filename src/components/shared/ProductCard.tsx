@@ -119,7 +119,7 @@ const ProductCard = ({
 									<span>₽</span>
 								</div>
 								{showTwoPrices && (
-									<p className='text-[#bfbfbf] text-[8px] md:text-xs'>
+									<p className='text-[#8a8a8a] text-[8px] md:text-xs'>
 										С картой
 									</p>
 								)}
@@ -130,7 +130,7 @@ const ProductCard = ({
 										<span>{formatPrice(finalPrice)}</span>
 										<span>₽</span>
 									</div>
-									<p className='text-[#bfbfbf] text-[8px] md:text-xs text-right'>
+									<p className='text-[#8a8a8a] text-[8px] md:text-xs text-right'>
 										Обычная
 									</p>
 								</div>

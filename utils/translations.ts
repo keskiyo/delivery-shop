@@ -44,7 +44,7 @@ export const TRANSLATIONS: Record<string, string> = {
 	'delivery-times': 'График доставки',
 	'user-orders': 'Заказы',
 	'admin-orders': 'Заказы',
-	cms: 'Блог',
+	cms: 'Система управления сайтом',
 	'semantic-core': 'Семантическое ядро',
 	categories: 'Категории',
 	blog: 'Блог',

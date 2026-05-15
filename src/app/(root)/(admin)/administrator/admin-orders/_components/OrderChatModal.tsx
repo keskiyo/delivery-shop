@@ -106,12 +106,12 @@ const OrderChatModal = ({
 									}`}
 								>
 									<span
-										className={`font-medium ${isCurrentUser ? 'text-white/90' : 'text-[#bfbfbf]'}`}
+										className={`font-medium ${isCurrentUser ? 'text-white/90' : 'text-[#8a8a8a]'}`}
 									>
 										{msg.userName}
 									</span>
 									<span
-										className={`font-medium ${isCurrentUser ? 'text-white/90' : 'text-[#bfbfbf]'}`}
+										className={`font-medium ${isCurrentUser ? 'text-white/90' : 'text-[#8a8a8a]'}`}
 									>
 										{roleDisplayName}
 									</span>
@@ -119,7 +119,7 @@ const OrderChatModal = ({
 										className={
 											isCurrentUser
 												? 'text-white/90'
-												: 'text-[#bfbfbf]'
+												: 'text-[#8a8a8a]'
 										}
 									>
 										{new Date(

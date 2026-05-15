@@ -48,7 +48,7 @@ const SearchInput = ({
 
 			<p className='text-sm mt-2'>
 				{searchTerm.trim().length === 0 ? (
-					<span className='text-[#bfbfbf]'>
+					<span className='text-[#8a8a8a]'>
 						Введите минимум 3 символа для поиска
 					</span>
 				) : searchTerm.trim().length < 3 ? (

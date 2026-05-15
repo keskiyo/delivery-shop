@@ -5,6 +5,7 @@ import StatesProvider from '@/store/StatesProvider'
 import type { Metadata } from 'next'
 import { Rubik } from 'next/font/google'
 import { cookies } from 'next/headers'
+import { generateSiteMetadata } from '../../utils/generateSiteMetadata'
 import './globals.css'
 
 const rubik = Rubik({
@@ -12,15 +13,8 @@ const rubik = Rubik({
 	subsets: ['latin', 'cyrillic'],
 })
 
-export const metadata: Metadata = {
-	metadataBase: new URL(
-		process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
-	),
-	title: 'Фудмаркет',
-	description: 'Разработка магазина доставки',
-	icons: {
-		icon: '/icon.png',
-	},
+export async function generateMetadata(): Promise<Metadata> {
+	return await generateSiteMetadata()
 }
 
 async function getInitialTheme() {

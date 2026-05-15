@@ -33,7 +33,7 @@ const SearchProductResult = ({
 
 			<div className='grid gap-4'>
 				{products.length === 0 ? (
-					<div className='text-center py-8 text-[#bfbfbf]'>
+					<div className='text-center py-8 text-[#8a8a8a]'>
 						<p className='text-lg'>Товары не найдены</p>
 						<p className='text-sm'>
 							Попробуйте изменить поисковый запрос

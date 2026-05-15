@@ -173,7 +173,7 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
 
 			{reviews.length > 0 && (
 				<div className='flex flex-col items-center gap-2 my-6'>
-					<p className='text-sm text-[#bfbfbf]'>
+					<p className='text-sm text-[#8a8a8a]'>
 						Показано {displayCount} из {total} отзывов
 					</p>
 

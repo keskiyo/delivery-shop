@@ -154,7 +154,7 @@ const Profile = () => {
 
 	return (
 		<>
-			<div className='relative ml-6' ref={menuRef}>
+			<div className='relative ml-6 text-white' ref={menuRef}>
 				<div
 					className='flex items-center gap-2 cursor-pointer'
 					onClick={toggleMenu}
@@ -184,14 +184,14 @@ const Profile = () => {
 				>
 					<Link
 						href='/user-profile'
-						className='block px-4 py-3 text-gray-300 hover:text-[#ff6633] duration-300'
+						className='block px-4 py-3 hover:text-[#ff6633] duration-300'
 						onClick={() => setIsMenuOpen(false)}
 					>
 						Профиль
 					</Link>
 					<Link
 						href='/'
-						className='block px-4 py-3 text-gray-300 hover:text-[#ff6633] duration-300'
+						className='block px-4 py-3 hover:text-[#ff6633] duration-300'
 						onClick={() => setIsMenuOpen(false)}
 					>
 						Главная
@@ -199,7 +199,7 @@ const Profile = () => {
 					{isManagerOrAdmin() && (
 						<Link
 							href='/administrator'
-							className='block px-4 py-3 text-gray-300 hover:text-[#ff6633] duration-300'
+							className='block px-4 py-3 hover:text-[#ff6633] duration-300'
 							onClick={() => setIsMenuOpen(false)}
 						>
 							Панель управления
@@ -209,7 +209,7 @@ const Profile = () => {
 					<button
 						onClick={handleLogout}
 						disabled={isLoggingOut}
-						className='w-full text-center px-4 py-3 text-gray-300 hover:text-[#ff6633] duration-300 border-t border-gray-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
+						className='w-full text-center px-4 py-3 hover:text-[#ff6633] duration-300 border-t border-gray-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
 					>
 						{isLoggingOut ? 'Выход...' : 'Выйти'}
 					</button>

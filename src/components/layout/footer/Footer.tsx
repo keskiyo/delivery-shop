@@ -2,17 +2,17 @@
 
 /**
  * Подвал сайта (Footer)
- * 
+ *
  * Содержит:
  * - Социальные сети: VK, OK, WhatsApp, Telegram (ссылки на внешние сайты)
  * - Телефон горячей линии: 8 800 777 33 33
  * - Навигация: О компании, Контакты, Вакансии, Статьи, Политика обработки ПД
- * 
+ *
  * Особенности:
  * - Использует isClient для избежания гидратации (SSR-safe)
  * - Адаптивная верстка: на мобильном - все в столбец, на десктопе - в ряд
  * - Темный фон (#353535), светлый текст
- * 
+ *
  * Используется в:
  * - src/app/layout.tsx (оборачивает все страницы)
  */
@@ -30,14 +30,14 @@ const Footer = () => {
 
 	if (!isClient) {
 		return (
-			<footer className='bg-[#353535] text-gray-300 mt-10 md:mt-15 xl:mt-20 w-full relative'>
+			<footer className='bg-[#353535] text-[#8a8a8a] mt-10 md:mt-15 xl:mt-20 w-full relative'>
 				<div className='px-7 py-10'></div>
 			</footer>
 		)
 	}
 
 	return (
-		<footer className='bg-[#353535] text-gray-300 mt-10 md:mt-15 xl:mt-20 w-full relative'>
+		<footer className='bg-[#353535] text-[#8a8a8a] mt-10 md:mt-15 xl:mt-20 w-full relative'>
 			<div className='max-w-302 mx-auto px-7 py-10 pb-24'>
 				{/* Общая обертка для всех элементов футера */}
 				<div className='flex flex-col md:flex-row justify-between items-center gap-6 md:gap-10'>

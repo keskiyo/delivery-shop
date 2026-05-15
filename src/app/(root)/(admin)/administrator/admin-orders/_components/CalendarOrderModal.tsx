@@ -211,13 +211,13 @@ const CalendarOrderModal = ({
 								</div>
 							</>
 						) : (
-							<div className='py-4 text-center text-[#bfbfbf]'>
+							<div className='py-4 text-center text-[#8a8a8a]'>
 								На выбранную дату нет доступных временных слотов
 							</div>
 						)}
 					</>
 				) : (
-					<div className='py-4 text-center text-[#bfbfbf]'>
+					<div className='py-4 text-center text-[#8a8a8a]'>
 						Нет данных о графике доставки
 					</div>
 				)}

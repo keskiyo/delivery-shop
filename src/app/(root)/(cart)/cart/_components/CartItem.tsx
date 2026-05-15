@@ -222,7 +222,7 @@ const CartItem = memo(function CartItem({
 								{/* Старая цена и экономия (только на мобильных) */}
 								{hasDiscount && (
 									<div className='flex flex-row gap-x-2 md:hidden'>
-										<p className='line-through font-normal text-xs md:text-base text-[#bfbfbf]'>
+										<p className='line-through font-normal text-xs md:text-base text-[#8a8a8a]'>
 											{formatPrice(totalPriceWithoutCard)}{' '}
 											₽
 										</p>

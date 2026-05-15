@@ -50,7 +50,7 @@ export default function VerifySuccessPage() {
 						Перейти к авторизации
 					</button>
 
-					<p className='text-sm text-gray-300'>
+					<p className='text-sm text-[#8a8a8a]'>
 						Автоматический переход через {secondsLeft}{' '}
 						{secondsLeft % 10 === 1 && secondsLeft % 100 !== 11
 							? 'секунду'
