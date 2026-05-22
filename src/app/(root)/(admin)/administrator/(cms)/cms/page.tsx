@@ -1,11 +1,11 @@
 'use client'
 
-import DashboardCardsGrid from '@/app/(root)/(admin)/administrator/(cms)/cms/_components/DashboardCardsGrid'
-import Header from '@/app/(root)/(admin)/administrator/(cms)/cms/_components/Header'
-import StatsSection from '@/app/(root)/(admin)/administrator/(cms)/cms/_components/StatsSection'
+import { DashboardCardsGrid } from '@/app/(root)/(admin)/administrator/(cms)/cms/_components/DashboardCardsGrid'
+import { Header } from '@/app/(root)/(admin)/administrator/(cms)/cms/_components/Header'
+import { StatsSection } from '@/app/(root)/(admin)/administrator/(cms)/cms/_components/StatsSection'
 import { useEffect, useState } from 'react'
 
-export default function AdminDashboardPage() {
+const AdminDashboardPage = () => {
 	const [mounted, setMounted] = useState(false)
 
 	useEffect(() => {
@@ -27,3 +27,7 @@ export default function AdminDashboardPage() {
 		</div>
 	)
 }
+
+export default AdminDashboardPage
+
+// ! text-[#8a8a8a]

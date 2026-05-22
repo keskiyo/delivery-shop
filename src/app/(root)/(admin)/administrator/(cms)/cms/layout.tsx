@@ -1,6 +1,6 @@
 'use client'
 
-import SidebarMenu from '@/app/(root)/(admin)/administrator/(cms)/cms/sidebarMenu/SideBarMenu'
+import { SidebarMenu } from '@/app/(root)/(admin)/administrator/(cms)/cms/sidebarMenu/SideBarMenu'
 import { Menu } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { ReactNode, useState } from 'react'

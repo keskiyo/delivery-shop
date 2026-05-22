@@ -1,0 +1,36 @@
+import { Loader2, Save } from 'lucide-react'
+
+const SubmitSection = ({ isSubmitting, isUploading, onCancel }) => {
+	return (
+		<>
+			{isSubmitting && (
+				<div className='mt-4 p-3 bg-blue-50 text-blue-600 rounded text-sm border border-blue-100'>
+					<div className='flex items-center gap-2'>
+						<Loader2 className='w-4 h-4 animate-spin' />
+						{'Создаем категорию...'}
+					</div>
+				</div>
+			)}
+			<div className='flex gap-3 mt-6'>
+				<button
+					type='submit'
+					disabled={isUploading || isSubmitting}
+					className='flex items-center gap-1 px-4 py-2.5 bg-green-600 text-white rounded hover:bg-green-600/90 cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium focus:outline-none focus:ring-3 focus:ring-green-600/30'
+				>
+					<Save className='w-4 h-4' />
+					Сохранить изменения
+				</button>
+				<button
+					type='button'
+					onClick={onCancel}
+					disabled={isUploading || isSubmitting}
+					className='px-4 py-2.5 border border-gray-300 rounded cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium focus:outline-none focus:ring-3 focus:ring-gray-200'
+				>
+					Отмена
+				</button>
+			</div>
+		</>
+	)
+}
+
+export default SubmitSection

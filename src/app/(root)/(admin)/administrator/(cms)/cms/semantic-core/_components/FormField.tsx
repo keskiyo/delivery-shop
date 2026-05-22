@@ -1,16 +1,6 @@
-interface FormFieldProps {
-	label: string
-	value: string
-	onChange: (value: string) => void
-	type: 'text' | 'textarea'
-	placeholder: string
-	hint: string
-	rows?: number
-	showCommaHint?: boolean
-	disabled?: boolean
-}
+import { FormFieldProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types/siteSettings'
 
-export default function FormField({
+export const FormField = ({
 	label,
 	value,
 	onChange,
@@ -20,7 +10,7 @@ export default function FormField({
 	rows = 3,
 	showCommaHint = false,
 	disabled = false,
-}: FormFieldProps) {
+}: FormFieldProps) => {
 	const inputClasses = `w-full px-3 py-2 border border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-green-600/50 shadow-sm ${
 		disabled ? 'bg-gray-100 cursor-not-allowed opacity-60 text-black' : ''
 	}`

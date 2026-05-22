@@ -1,9 +1,6 @@
-interface HeaderProps {
-	title: string
-	description?: string
-}
+import { HeaderProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types/dashboard'
 
-const Header = ({ title, description }: HeaderProps) => {
+export const Header = ({ title, description }: HeaderProps) => {
 	return (
 		<header className='mb-8'>
 			<h1 className='text-2xl md:text-3xl font-bold'>{title}</h1>
@@ -11,5 +8,3 @@ const Header = ({ title, description }: HeaderProps) => {
 		</header>
 	)
 }
-
-export default Header

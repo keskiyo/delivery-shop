@@ -1,12 +1,8 @@
-import { StatItem as StatItemType } from '../types/dashboard'
+import { StatItemProps } from '../types/dashboard'
 import { getBgColor } from '../utils/getBgColor'
 import { getTextColor } from '../utils/getTextColor'
 
-interface StatItemProps {
-	stat: StatItemType
-}
-
-const StatItem = ({ stat }: StatItemProps) => {
+export const StatItem = ({ stat, statValue }: StatItemProps) => {
 	return (
 		<div className='p-4 rounded-lg border border-gray-100 hover:border-gray-200 duration-200'>
 			<div className='flex items-center justify-between mb-2'>
@@ -16,12 +12,10 @@ const StatItem = ({ stat }: StatItemProps) => {
 				<span
 					className={`text-2xl font-bold ${getTextColor(stat.color)}`}
 				>
-					{stat.value}
+					{statValue}
 				</span>
 			</div>
 			<h4 className='font-medium'>{stat.title}</h4>
 		</div>
 	)
 }
-
-export default StatItem

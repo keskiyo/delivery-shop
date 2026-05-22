@@ -1,24 +1,17 @@
 'use client'
 
-import GlobalStyles from '@/app/(root)/(admin)/administrator/(cms)/cms/sidebarMenu/GlobalStyles'
-import MenuFooter from '@/app/(root)/(admin)/administrator/(cms)/cms/sidebarMenu/MenuFooter'
-import MenuHeader from '@/app/(root)/(admin)/administrator/(cms)/cms/sidebarMenu/MenuHeader'
-import MenuItemsList from '@/app/(root)/(admin)/administrator/(cms)/cms/sidebarMenu/MenuItemsList'
-import MenuOverlay from '@/app/(root)/(admin)/administrator/(cms)/cms/sidebarMenu/MenuOverlay'
+import { GlobalStyles } from '@/app/(root)/(admin)/administrator/(cms)/cms/sidebarMenu/GlobalStyles'
+import { MenuFooter } from '@/app/(root)/(admin)/administrator/(cms)/cms/sidebarMenu/MenuFooter'
+import { MenuHeader } from '@/app/(root)/(admin)/administrator/(cms)/cms/sidebarMenu/MenuHeader'
+import { MenuItemsList } from '@/app/(root)/(admin)/administrator/(cms)/cms/sidebarMenu/MenuItemsList'
+import { MenuOverlay } from '@/app/(root)/(admin)/administrator/(cms)/cms/sidebarMenu/MenuOverlay'
+import { SidebarMenuProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types/sidebar'
 import { Truck } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { menuItems } from '../utils/menuItems'
 
-interface SidebarMenuProps {
-	isOpen: boolean
-	onCloseAction: () => void
-}
-
-export default function SidebarMenu({
-	isOpen,
-	onCloseAction,
-}: SidebarMenuProps) {
+export const SidebarMenu = ({ isOpen, onCloseAction }: SidebarMenuProps) => {
 	const router = useRouter()
 	const [mounted, setMounted] = useState(false)
 
@@ -82,18 +75,22 @@ export default function SidebarMenu({
 					<div className='absolute inset-0 bg-linear-to-b from-white via-white to-gray-50/95 backdrop-blur-xl' />
 					<div className='absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-purple-500/5' />
 					<div className='absolute inset-0 shadow-[inset_0_0_60px_-20px_rgba(59,130,246,0.1)]' />
-					<div className='relative h-full flex flex-col p-8'>
-						<MenuHeader
-							isOpen={isOpen}
-							onCloseAction={onCloseAction}
-							icon={
-								<Truck className='relative w-7 h-7 text-blue-600' />
-							}
-						/>
-						<MenuItemsList
-							items={menuItems}
-							onItemClick={handleItemClick}
-						/>
+					<div className='relative h-full flex flex-col'>
+						<div className='shrink-0 pt-5 px-5'>
+							<MenuHeader
+								isOpen={isOpen}
+								onCloseAction={onCloseAction}
+								icon={
+									<Truck className='relative w-7 h-7 text-blue-600' />
+								}
+							/>
+						</div>
+						<div className='flex-1 overflow-y-auto overflow-x-hidden p-5'>
+							<MenuItemsList
+								items={menuItems}
+								onItemClick={handleItemClick}
+							/>
+						</div>
 						<MenuFooter />
 					</div>
 				</div>

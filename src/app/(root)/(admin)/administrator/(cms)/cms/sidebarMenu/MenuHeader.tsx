@@ -1,13 +1,7 @@
+import { MenuHeaderProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types/sidebar'
 import { X } from 'lucide-react'
-import { ReactNode } from 'react'
 
-interface MenuHeaderProps {
-	isOpen: boolean
-	onCloseAction: () => void
-	icon: ReactNode
-}
-
-export default function MenuHeader({ onCloseAction, icon }: MenuHeaderProps) {
+export const MenuHeader = ({ onCloseAction, icon }: MenuHeaderProps) => {
 	return (
 		<div className='flex justify-between items-center mb-10'>
 			<div className='flex items-center gap-5'>

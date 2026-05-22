@@ -1,14 +1,9 @@
-import { DashboardCard as DashboardCardType } from '../types/dashboard'
+import { DashboardCardProps } from '../types/dashboard'
 import { getBgColor } from '../utils/getBgColor'
 import { getButtonColor } from '../utils/getButtonColor'
 import { getTextColor } from '../utils/getTextColor'
 
-interface DashboardCardProps {
-	card: DashboardCardType
-	navigateTo: (path: string) => void
-}
-
-const DashboardCard = ({ card, navigateTo }: DashboardCardProps) => {
+export const DashboardCard = ({ card, navigateTo }: DashboardCardProps) => {
 	return (
 		<div
 			onClick={() => navigateTo(card.path)}
@@ -31,5 +26,3 @@ const DashboardCard = ({ card, navigateTo }: DashboardCardProps) => {
 		</div>
 	)
 }
-
-export default DashboardCard

@@ -1,4 +1,4 @@
-export function getBgColor(color: string): string {
+export const getBgColor = (color: string): string => {
 	const colors: Record<string, string> = {
 		blue: 'bg-blue-100',
 		green: 'bg-green-100',

@@ -1,26 +1,17 @@
 import { Loader } from 'lucide-react'
-import { FormData, SiteSettings } from '../../types/siteSettings'
-import CurrentSettings from './CurrentSettings'
-import FormButtons from './FormButtons'
-import FormField from './FormField'
+import { SEOFormProps } from '../../types/siteSettings'
+import { CurrentSettings } from './CurrentSettings'
+import { FormButtons } from './FormButtons'
+import { FormField } from './FormField'
 
-interface SEOFormProps {
-	formData: FormData
-	setFormData: (data: FormData) => void
-	settings: SiteSettings | null
-	saving: boolean
-	handleSave: (e: React.FormEvent) => void
-	reloading?: boolean
-}
-
-export default function SEOForm({
+export const SEOForm = ({
 	formData,
 	setFormData,
 	settings,
 	saving,
 	handleSave,
 	reloading = false,
-}: SEOFormProps) {
+}: SEOFormProps) => {
 	return (
 		<form
 			onSubmit={handleSave}

@@ -1,8 +1,8 @@
-import DashboardCard from '@/app/(root)/(admin)/administrator/(cms)/cms/_components/DashboardCard'
+import { DashboardCard } from '@/app/(root)/(admin)/administrator/(cms)/cms/_components/DashboardCard'
 import { useRouter } from 'next/navigation'
 import { dashboardCards } from '../utils/dashboardCards'
 
-const DashboardCardsGrid = () => {
+export const DashboardCardsGrid = () => {
 	const router = useRouter()
 	const navigateTo = (path: string) => {
 		router.push(path)
@@ -19,5 +19,3 @@ const DashboardCardsGrid = () => {
 		</div>
 	)
 }
-
-export default DashboardCardsGrid

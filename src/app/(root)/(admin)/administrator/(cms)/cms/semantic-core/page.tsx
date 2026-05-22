@@ -1,9 +1,10 @@
 'use client'
 
-import SEOForm from '@/app/(root)/(admin)/administrator/(cms)/cms/semantic-core/_components/SEOForm'
-import SEORecommendations from '@/app/(root)/(admin)/administrator/(cms)/cms/semantic-core/_components/SEORecommendations'
+import { SEORecommendations } from '@/app/(root)/(admin)/administrator/(cms)/cms/_components/SEORecommendations'
+import { SEOForm } from '@/app/(root)/(admin)/administrator/(cms)/cms/semantic-core/_components/SEOForm'
+import { commonSeoRecommendations } from '@/app/(root)/(admin)/administrator/(cms)/cms/utils/recommendations'
 import { Loader, Loader2 } from 'lucide-react'
-import Header from '../_components/Header'
+import { Header } from '../_components/Header'
 import { useSiteSettings } from '../hooks/useSiteSettings'
 
 const SemanticCorePage = () => {
@@ -38,7 +39,7 @@ const SemanticCorePage = () => {
 				saving={saving}
 				handleSave={handleSave}
 			/>
-			<SEORecommendations />
+			<SEORecommendations recommendations={commonSeoRecommendations} />
 		</>
 	)
 }
