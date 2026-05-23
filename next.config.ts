@@ -12,6 +12,17 @@ const nextConfig: NextConfig = {
 			{
 				pathname: '/images/**',
 			},
+			// Category images uploaded from the CMS
+			{
+				pathname: '/blogCategories/**',
+			},
+			// Static SVG icons rendered through next/image
+			{
+				pathname: '/icons-footer/**',
+			},
+			{
+				pathname: '/icons-orders/**',
+			},
 		],
 	},
 }

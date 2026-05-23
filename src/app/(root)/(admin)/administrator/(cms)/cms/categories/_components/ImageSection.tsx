@@ -1,17 +1,18 @@
+import { ImageSectionProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
 import { SEO_LIMITS } from '@/app/(root)/(admin)/administrator/(cms)/cms/utils/SEO_LIMITS'
+import { useCategoryStore } from '@/store/categoryStore'
 import { AlertCircle, Upload, XCircle } from 'lucide-react'
 import Image from 'next/image'
 import { useRef } from 'react'
 
-const ImageSection = ({
-	formData,
+export const ImageSection = ({
 	charCount,
-	isUploading,
-	isSubmitting,
 	onInputChange,
 	onFileChange,
 	onRemoveImage,
-}) => {
+}: ImageSectionProps) => {
+	const { editingId, isUploading, isSubmitting, formData } =
+		useCategoryStore()
 	const fileInputRef = useRef<HTMLInputElement>(null)
 
 	const handleRemoveImage = () => {
@@ -26,15 +27,15 @@ const ImageSection = ({
 			<h3 className='text-lg font-medium mb-4'>Изображение категории</h3>
 			<div className='space-y-4'>
 				{formData.image && (
-					<div className='bg-gray-50 p-4 rounded border border-gray-200'>
+					<div className='p-4 rounded border border-gray-200'>
 						<div className='flex items-start gap-4'>
 							<div className='shrink-0'>
 								<Image
 									src={formData.image}
 									alt='Предпросмотр'
-									width={800}
-									height={450}
-									className='w-full aspect-video object-cover rounded shadow-sm'
+									width={160}
+									height={160}
+									className='w-40 h-40 object-cover rounded shadow-sm'
 									unoptimized={formData.image.startsWith(
 										'blob:',
 									)}
@@ -84,7 +85,7 @@ const ImageSection = ({
 									disabled={isUploading || isSubmitting}
 									className='hidden'
 								/>
-								<div className='w-full px-3 py-2 text-sm border border-gray-300 rounded focus-within:border-primary focus-within:ring-3 focus-within:ring-primary/20 duration-300 disabled:opacity-50 disabled:bg-gray-100 hover:bg-gray-50'>
+								<div className='w-full px-3 py-2 text-sm border border-gray-300 rounded focus-within:border-green-600 focus-within:ring-3 focus-within:ring-green-600/20 duration-300 disabled:opacity-50 disabled:bg-gray-100 hover:bg-gray-50'>
 									<div className='flex items-center gap-2 text-[#8a8a8a]'>
 										<Upload className='w-4 h-4' />
 										<span>Выберите файл</span>
@@ -103,6 +104,15 @@ const ImageSection = ({
 						Поддерживаемые форматы: JPG, PNG, GIF, WebP. Изображение
 						будет загружено на сервер только при сохранении
 						категории.
+						{editingId &&
+							formData.image &&
+							formData.image.startsWith('blob:') && (
+								<span className='flex items-center gap-2 text-base text-red-600 mt-1'>
+									<AlertCircle className='w-5 h-5' />
+									При сохранении старое изображение будет
+									удалено
+								</span>
+							)}
 					</p>
 				</div>
 				{formData.image && (
@@ -141,5 +151,3 @@ const ImageSection = ({
 		</div>
 	)
 }
-
-export default ImageSection

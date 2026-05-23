@@ -1,19 +1,22 @@
 import { FormFields } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/FormFields'
-import ImageSection from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/ImageSection'
-import SubmitSection from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/SubmitSection'
-import { useState } from 'react'
+import { ImageSection } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/ImageSection'
+import { SubmitSection } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/SubmitSection'
+import {
+	CategoryFormProps,
+	CharCount,
+	FormField,
+} from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { useCategoryStore } from '@/store/categoryStore'
 
-const CategoryForm = ({
-	formData,
-	isSubmitting,
+export const CategoryForm = ({
 	onFieldChange,
 	onGenerateSlug,
 	onSaveImageFile,
 	onRemoveImage,
 	onSubmit,
 	onCancel,
-}) => {
-	const [isUploading, setIsUploading] = useState(false)
+}: CategoryFormProps) => {
+	const { setIsUploading, formData } = useCategoryStore()
 
 	const charCount: CharCount = {
 		name: formData.name.length,
@@ -65,29 +68,18 @@ const CategoryForm = ({
 			</h2>
 			<form onSubmit={onSubmit}>
 				<ImageSection
-					formData={formData}
 					charCount={charCount}
-					isUploading={isUploading}
-					isSubmitting={isSubmitting}
 					onInputChange={handleInputChange}
 					onFileChange={handleFileChange}
 					onRemoveImage={onRemoveImage}
 				/>
 				<FormFields
-					formData={formData}
-					isSubmitting={isSubmitting}
 					charCount={charCount}
 					onInputChange={handleInputChange}
 					onGenerateSlug={handleGenerateSlug}
 				/>
-				<SubmitSection
-					onCancel={onCancel}
-					isSubmitting={isSubmitting}
-					isUploading={isUploading}
-				/>
+				<SubmitSection onCancel={onCancel} />
 			</form>
 		</div>
 	)
 }
-
-export default CategoryForm

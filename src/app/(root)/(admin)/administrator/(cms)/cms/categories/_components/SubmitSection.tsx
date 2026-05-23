@@ -1,6 +1,9 @@
+import { SubmitSectionProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { useCategoryStore } from '@/store/categoryStore'
 import { Loader2, Save } from 'lucide-react'
 
-const SubmitSection = ({ isSubmitting, isUploading, onCancel }) => {
+export const SubmitSection = ({ onCancel }: SubmitSectionProps) => {
+	const { editingId, isUploading, isSubmitting } = useCategoryStore()
 	return (
 		<>
 			{isSubmitting && (
@@ -18,7 +21,11 @@ const SubmitSection = ({ isSubmitting, isUploading, onCancel }) => {
 					className='flex items-center gap-1 px-4 py-2.5 bg-green-600 text-white rounded hover:bg-green-600/90 cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium focus:outline-none focus:ring-3 focus:ring-green-600/30'
 				>
 					<Save className='w-4 h-4' />
-					Сохранить изменения
+					{isSubmitting
+						? 'Сохранение...'
+						: editingId
+							? 'Сохранить изменения'
+							: 'Создать категорию'}
 				</button>
 				<button
 					type='button'
@@ -32,5 +39,3 @@ const SubmitSection = ({ isSubmitting, isUploading, onCancel }) => {
 		</>
 	)
 }
-
-export default SubmitSection

@@ -1,6 +1,63 @@
+import { CONFIG_BLOG } from '@/app/(root)/(admin)/administrator/(cms)/cms/CONFIG_BLOG'
+import { Category } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
+
+export async function GET(request: Request) {
+	try {
+		const db = await getDB()
+
+		const { searchParams } = new URL(request.url)
+		const page = parseInt(searchParams.get('pageToLoad') || '1')
+		const limit = parseInt(
+			searchParams.get('limit') || CONFIG_BLOG.ITEMS_PER_PAGE.toString(),
+		)
+
+		const validPage = Math.max(1, page)
+		const validLimit = Math.max(1, Math.min(limit, 100))
+		const skip = (validPage - 1) * validLimit
+
+		const categories = await db
+			.collection<Category>('article-category')
+			.find()
+			.skip(skip)
+			.limit(validLimit)
+			.toArray()
+
+		const totalInDB = await db
+			.collection<Category>('article-category')
+			.countDocuments({})
+
+		const totalPages = Math.ceil(totalInDB / validLimit)
+
+		const response = {
+			success: true,
+			data: {
+				categories: categories.map(category => ({
+					...category,
+					_id: category._id.toString(),
+				})),
+				totalInDB,
+				pagination: {
+					page: validPage,
+					limit: validLimit,
+					total: totalInDB,
+					totalAll: totalInDB,
+					totalPages,
+				},
+			},
+		}
+
+		return NextResponse.json(response)
+	} catch (error) {
+		console.error('Ошибка загрузки категорий:', error)
+		return NextResponse.json(
+			{ success: false, message: 'Ошибка загрузки категорий' },
+			{ status: 500 },
+		)
+	}
+}
 
 export async function POST(request: Request) {
 	try {

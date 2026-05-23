@@ -13,7 +13,7 @@ const Articles = async () => {
 			<ArticlesSection
 				title='Статьи'
 				articles={items}
-				viewAllLink={{ text: 'Все статьи', href: 'articles' }}
+				viewAllLink={{ text: 'Все статьи', href: '/articles' }}
 			/>
 		)
 	} catch (error) {

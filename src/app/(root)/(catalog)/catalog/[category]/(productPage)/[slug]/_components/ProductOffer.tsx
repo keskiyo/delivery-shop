@@ -11,7 +11,7 @@ const ProductOffer = ({ discountedPrice, cardPrice }: ProductOfferProps) => {
 	return (
 		<div className='flex flex-row justify-between gap-2 leading-1.5 h-19 mb-4'>
 			<div className='flex flex-col justify-end'>
-				<p className='text-[#8a8a8a] text-xl md:text-lg xl:text-2xl mb-1.5'>
+				<p className='text-xl md:text-lg xl:text-2xl mb-1.5'>
 					{formatPrice(discountedPrice)} ₽
 				</p>
 				<p className='text-[#8a8a8a] text-[8px] md:text-xs'>

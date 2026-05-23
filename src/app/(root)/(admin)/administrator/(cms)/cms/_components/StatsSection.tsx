@@ -3,13 +3,16 @@ import { StatsSkeleton } from '@/app/(root)/(admin)/administrator/(cms)/cms/_com
 import { useSiteSettings } from '@/app/(root)/(admin)/administrator/(cms)/cms/hooks/useSiteSettings'
 import { useStatsValues } from '@/app/(root)/(admin)/administrator/(cms)/cms/hooks/useStatsValues'
 import { getStatValue } from '@/app/(root)/(admin)/administrator/(cms)/cms/utils/getStatValue'
+import { useCategoryStore } from '@/store/categoryStore'
 import { stats } from '../utils/stats'
 
 export const StatsSection = () => {
-	const { keywordsCount } = useStatsValues()
+	const { categoriesCount, keywordsCount } = useStatsValues()
 	const { loading: settingsLoading } = useSiteSettings()
+	const { loading: categoriesLoading } = useCategoryStore()
 
-	const loading = settingsLoading
+	const loading = settingsLoading || categoriesLoading
+	console.log('Кол-во categoriesCount: ', categoriesCount)
 
 	if (loading) return <StatsSkeleton />
 	return (
@@ -22,6 +25,7 @@ export const StatsSection = () => {
 						stat={stat}
 						statValue={getStatValue(
 							stat.title,
+							categoriesCount.toString(),
 							keywordsCount.toString(),
 						)}
 					/>

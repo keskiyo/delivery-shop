@@ -91,7 +91,7 @@ const Footer = () => {
 									/>
 								</a>
 								<a
-									href='https://t.me/Keskiyo'
+									href='https://t.me/'
 									target='_blank'
 									rel='noopener noreferrer'
 									className='flex items-center'

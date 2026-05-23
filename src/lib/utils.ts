@@ -9,8 +9,8 @@ import { twMerge } from 'tailwind-merge'
  * - twMerge разрешает конфликты (приоритет у последнего класса)
  *
  * @example
- * cn('px-2 py-1', isActive && 'bg-blue-500', variant === 'primary' && 'text-white')
- * -> 'px-2 py-1 bg-blue-500 text-white' (если isActive=true, variant='primary')
+ * cn('px-2 py-1', isActive && 'bg-blue-500', variant === 'bg-green-600' && 'text-white')
+ * -> 'px-2 py-1 bg-blue-500 text-white' (если isActive=true, variant='bg-green-600')
  */
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))

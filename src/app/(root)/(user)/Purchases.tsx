@@ -63,7 +63,7 @@ const Purchases = () => {
 		<ProductsSections
 			title='Покупали ранее'
 			products={items}
-			viewAllLink={{ text: 'Все покупки', href: 'purchases' }}
+			viewAllLink={{ text: 'Все покупки', href: '/purchases' }}
 		/>
 	)
 }

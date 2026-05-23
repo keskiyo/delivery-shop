@@ -1,13 +1,14 @@
+import { FormFieldsProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { useCategoryStore } from '@/store/categoryStore'
 import { RotateCcw } from 'lucide-react'
 import { SEO_LIMITS } from '../../utils/SEO_LIMITS'
 
 export const FormFields = ({
-	formData,
 	charCount,
-	isSubmitting,
 	onInputChange,
 	onGenerateSlug,
 }: FormFieldsProps) => {
+	const { isSubmitting, formData } = useCategoryStore()
 	return (
 		<div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
 			{/* Название */}
@@ -20,7 +21,7 @@ export const FormFields = ({
 						className={`text-xs ${
 							charCount.name > SEO_LIMITS.name.max
 								? 'text-red-600'
-								: ''
+								: 'text-[#8a8a8a]'
 						}`}
 					>
 						{charCount.name}/{SEO_LIMITS.name.max}
@@ -53,7 +54,7 @@ export const FormFields = ({
 						className={`text-xs ${
 							charCount.slug > SEO_LIMITS.slug.max
 								? 'text-red-600'
-								: ''
+								: 'text-[#8a8a8a]'
 						}`}
 					>
 						{charCount.slug}/{SEO_LIMITS.slug.max}
@@ -86,7 +87,9 @@ export const FormFields = ({
 						Генерировать
 					</button>
 				</div>
-				<p className='text-xs mt-1'>Только латиница, цифры и дефисы</p>
+				<p className='text-xs mt-1 text-[#8a8a8a]'>
+					Только латиница, цифры и дефисы
+				</p>
 			</div>
 
 			{/* Описание */}
@@ -103,7 +106,7 @@ export const FormFields = ({
 											SEO_LIMITS.description.min &&
 									  charCount.description > 0
 									? 'text-yellow-600'
-									: ''
+									: 'text-[#8a8a8a]'
 						}`}
 					>
 						{charCount.description}/{SEO_LIMITS.description.max}
@@ -123,7 +126,7 @@ export const FormFields = ({
 					className='w-full px-3 py-2.5 border rounded focus:outline-none focus:ring-3 duration-300 resize-none border-gray-300 focus:border-green-600 focus:ring-green-600/20 disabled:opacity-50 disabled:bg-gray-100 placeholder:text-[#8a8a8a]'
 					placeholder='Краткое описание категории для поисковых систем (10-160 символов)'
 				/>
-				<p className='text-xs mt-1'>
+				<p className='text-xs mt-1 text-[#8a8a8a]'>
 					Оптимальная длина для SEO: {SEO_LIMITS.description.min}-
 					{SEO_LIMITS.description.max} символов
 				</p>
@@ -133,16 +136,13 @@ export const FormFields = ({
 			<div className='md:col-span-2'>
 				<div className='flex justify-between items-center mb-1'>
 					<label className='block text-sm font-medium'>
-						Ключевые слова
-						<span className='text-[#8a8a8a] text-xs ml-2'>
-							(через запятую)
-						</span>
+						Ключевые слова (через запятую)
 					</label>
 					<span
 						className={`text-xs ${
 							charCount.keywords > SEO_LIMITS.keywords.maxLength
 								? 'text-red-600'
-								: ''
+								: 'text-[#8a8a8a]'
 						}`}
 					>
 						{charCount.keywords}/{SEO_LIMITS.keywords.maxLength}
