@@ -1,13 +1,17 @@
 export interface SubmitSectionProps {
-  onCancel: () => void;
+	onCancel: () => void
 }
 
 export interface HeaderActionsProps {
-  onCreate: () => void;
+	onCreate: () => void
 }
 
 export interface NotificationProps {
-  type: "success" | "error";
-  message: string;
-  onClose: () => void;
+	type: 'success' | 'error'
+	message: string
+	onClose: () => void
+}
+
+export interface FilterControlsProps {
+	onToggleFilters?: (show: boolean) => void
 }

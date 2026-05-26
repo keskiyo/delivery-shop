@@ -7,9 +7,11 @@ import { CategoryForm } from '@/app/(root)/(admin)/administrator/(cms)/cms/categ
 import { CategoryTable } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/CategoryTable'
 import { HeaderActions } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/HeaderActions'
 import { ItemsPerPageSelector } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/ItemPerPageSelector'
+import { ReorderStatus } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/ReorderStatus'
 import { WarningAlert } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/WarningAlert'
 import { useCategories } from '@/app/(root)/(admin)/administrator/(cms)/cms/hooks/useCategories'
 import { useCategoryFormState } from '@/app/(root)/(admin)/administrator/(cms)/cms/hooks/useCategoryFormState'
+import { Category } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
 import { categorySeoRecommendations } from '@/app/(root)/(admin)/administrator/(cms)/cms/utils/recommendations'
 import { useAuthStore } from '@/store/authStore'
 import { useCategoryStore } from '@/store/categoryStore'
@@ -37,13 +39,19 @@ const CategoriesPage = () => {
 		itemsPerPage,
 		setItemsPerPage,
 		setCurrentPage,
+		setIsReordering,
 	} = useCategoryStore()
 	if (!user) {
 		return null
 	}
 
-	const { createCategory, updateCategory, deleteCategory, loadCategories } =
-		useCategories()
+	const {
+		createCategory,
+		updateCategory,
+		deleteCategory,
+		loadCategories,
+		reorderCategories,
+	} = useCategories()
 
 	const {
 		resetForm,
@@ -184,7 +192,7 @@ const CategoriesPage = () => {
 				keywords: getKeywordsArray(),
 			}
 
-			const result = await updateCategory(updateData)
+			const result = await updateCategory(editingId, updateData)
 
 			if (result.success) {
 				setNotification({
@@ -246,6 +254,40 @@ const CategoriesPage = () => {
 		loadCategories({ page: 1 })
 	}
 
+	const handleReorder = async (reorderedCategories: Category[]) => {
+		console.log(reorderedCategories)
+		setIsReordering(true)
+
+		try {
+			const dataForApi = reorderedCategories.map(category => ({
+				_id: category._id.toString(),
+				numericId: category.numericId || 0,
+			}))
+
+			const result = await reorderCategories(dataForApi)
+
+			if (result.success) {
+				setNotification({
+					type: 'success',
+					message: 'Порядок категорий успешно обновлен',
+				})
+			} else {
+				setNotification({
+					type: 'error',
+					message: result.message || 'Ошибка обновления порядка',
+				})
+			}
+		} catch (error) {
+			console.error('Ошибка:', error)
+			setNotification({
+				type: 'error',
+				message: 'Произошла ошибка при обновлении порядка',
+			})
+		} finally {
+			setIsReordering(false)
+		}
+	}
+
 	return (
 		<div className='relative'>
 			<Header
@@ -265,7 +307,12 @@ const CategoriesPage = () => {
 					value={itemsPerPage}
 					onChange={handleItemsPerPageChange}
 				/>
+				<div className='text-sm mt-1 text-[#8a8a8a]'>
+					Текущие параметры: страница {currentPage}, элементов:{' '}
+					{itemsPerPage}
+				</div>
 			</div>
+			<ReorderStatus />
 			<WarningAlert />
 			{showForm && (
 				<CategoryForm
@@ -278,7 +325,11 @@ const CategoriesPage = () => {
 				/>
 			)}
 
-			<CategoryTable onDelete={handleDelete} onEdit={startEdit} />
+			<CategoryTable
+				onDelete={handleDelete}
+				onEdit={startEdit}
+				onReorder={handleReorder}
+			/>
 			{totalPages > 1 && <Pagination />}
 			<SEORecommendations recommendations={categorySeoRecommendations} />
 		</div>

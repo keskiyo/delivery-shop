@@ -76,7 +76,7 @@ export const Pagination = () => {
 
 	return (
 		<div className='border-t border-gray-200 px-6 py-4 dark:border-neutral-800'>
-			<div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
+			<div className='flex flex-wrap gap-3 items-center justify-between'>
 				<div className='text-sm text-gray-600 dark:text-neutral-400'>
 					Показано{' '}
 					<span className='font-medium text-gray-900 dark:text-neutral-100'>

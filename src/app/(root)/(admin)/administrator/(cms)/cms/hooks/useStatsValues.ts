@@ -1,9 +1,14 @@
 import { useCategoryStore } from '@/store/categoryStore'
+import { useEffect } from 'react'
 import { useSiteSettings } from './useSiteSettings'
 
 export const useStatsValues = () => {
 	const { settings } = useSiteSettings()
-	const { totalAllItems } = useCategoryStore()
+	const { totalAllItems, loadCategories } = useCategoryStore()
+
+	useEffect(() => {
+		loadCategories()
+	}, [])
 
 	const keywordsCount = settings?.semanticCore?.length || 0
 

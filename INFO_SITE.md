@@ -1,598 +1,480 @@
-# Delivery Shop Project Structure Documentation
-
-## Project Overview
-
-This is a Next.js 16 food delivery e-commerce application built with MongoDB, better-auth for authentication, Zustand/Redux for state management, and Tailwind CSS v4 for styling. The app features product catalog, shopping cart, order management, user profiles, and admin panel.
-
-## Directory Structure
-
-### Root Level Files
-
-| File                 | Description                                                 |
-| -------------------- | ----------------------------------------------------------- |
-| `package.json`       | Project dependencies and scripts (npm run dev, build, lint) |
-| `tsconfig.json`      | TypeScript configuration                                    |
-| `tailwind.config.js` | Tailwind CSS configuration                                  |
-| `.env`               | Environment variables (DB URL, API keys, secrets)           |
-| `AGENTS.md`          | Agent instructions for OpenCode sessions                    |
-
----
-
-### config/ - Configuration Files
-
-| File          | Description                                                                                                                        |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| **config.ts** | Application configuration constants: pagination sizes, discount percentages, bonus rates, min order price, site URLs, OTP settings |
-
----
-
-### migrations/ - Database Migrations
-
-| File                           | Description                                 |
-| ------------------------------ | ------------------------------------------- |
-| **20260218115601-articles.js** | MongoDB migration for articles collection   |
-| **20260218130417-users.js**    | MongoDB migration for users collection      |
-| **20260220173627-products.js** | MongoDB migration for products collection   |
-| **articlesData.json**          | Initial articles data for seeding           |
-| **usersData.json**             | Initial users data for seeding              |
-| **productsData.json**          | Initial products data for seeding           |
-| **catalogData.json**           | Initial catalog/categories data for seeding |
-
----
-
-### public/ - Static Assets
-
-| Path                             | Description                                                                                                                                                                                                                                                                |
-| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **robots.txt**                   | SEO robots rules                                                                                                                                                                                                                                                           |
-| **web-app-manifest-192x192.png** | PWA manifest icon (192x192)                                                                                                                                                                                                                                                |
-| **images/products/**             | Product images (130+ JPG files: img-1.jpeg through img-127.jpeg)                                                                                                                                                                                                           |
-| **images/categories/**           | Category icons (13 PNG files: img-1.png through img-13.png)                                                                                                                                                                                                                |
-| **images/graphics/**             | Graphic assets: banners (slide-1.jpeg, slide-2.jpeg), patterns, default avatars                                                                                                                                                                                            |
-| **images/banners/**              | Banner images                                                                                                                                                                                                                                                              |
-| **images/articles/**             | Article images                                                                                                                                                                                                                                                             |
-| **icons-footer/**                | Footer icons (SVG): instargam.svg, OK.svg, phone.svg, telegram.svg, VK.svg, wa.svg                                                                                                                                                                                         |
-| **icons-orders/**                | Order status icons (SVG): icon-alert-circle.svg, icon-alert-triangle.svg, icon-arrow.svg, icon-bag.svg, icon-check-circle.svg, icon-check.svg, icon-clock.svg, icon-delivery.svg, icon-home.svg, icon-message-empty.svg, icon-message.svg, icon-phone.svg, icon-upload.svg |
-| **images/icon-arrow.svg**        | Arrow icon                                                                                                                                                                                                                                                                 |
-
----
-
-### src/ - Source Code
-
----
-
-#### src/actions/ - Server Actions (Next.js)
-
-| File                    | Description                                                 |
-| ----------------------- | ----------------------------------------------------------- |
-| **addToCartActions.ts** | Server action for adding items to cart (getOrderCartAction) |
-| **orderActions.ts**     | Server action for order operations                          |
-
----
-
-#### src/app/ - Application Routes and Layouts
-
-##### Root Layout (src/app/)
-
-| File              | Description                                                       |
-| ----------------- | ----------------------------------------------------------------- |
-| **layout.tsx**    | Root layout with providers                                        |
-| **provider.tsx**  | Redux Provider wrapper (creates store instance)                   |
-| **globals.css**   | Global styles with Tailwind CSS v4, theme definitions, animations |
-| **manifest.json** | PWA manifest configuration                                        |
-| **sitemap.ts**    | Dynamic sitemap generation for SEO                                |
-
-##### Context Providers (src/app/contexts/)
-
-| File                   | Description                                                    |
-| ---------------------- | -------------------------------------------------------------- |
-| **ProductContext.tsx** | Product page title state (title, setTitle) - used for SEO      |
-| **RegFormContext.tsx** | Registration form state management with initial data and reset |
-
----
-
-### Route Groups (src/app/(root)/)
-
-#### (admin)/administrator/ - Admin Panel
-
-| Path                         | Description               |
-| ---------------------------- | ------------------------- |
-| **administrator/page.tsx**   | Admin dashboard main page |
-| **administrator/layout.tsx** | Admin layout wrapper      |
-| **administrator/styles.ts**  | Admin page styles         |
-
-**Subdirectories:**
-
-| Path                                 | Description                                                                                                                                                                                                                                               |
-| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **users-list/**                      | User management                                                                                                                                                                                                                                           |
-| users-list/page.tsx                  | User listing with filtering, pagination                                                                                                                                                                                                                   |
-| users-list/\_components/             | Table components (UsersTable, TableRow, TableHeader, Pagination, Filters, Role, Register, Phone, Email, Age, Person, NavAndInfo, UserId)                                                                                                                  |
-| **admin-orders/**                    | Order management with Excel export                                                                                                                                                                                                                        |
-| admin-orders/page.tsx                | Order listing with filters                                                                                                                                                                                                                                |
-| admin-orders/\_components/           | Order components (AdminOrderCard, OrderChatModal, Calendar, CalendarOrderModal, OrderDetails, AdminOrdersHeader, TimeSlotGroup, TimeSlotSection, CityFilterButtons, StatusDropdown, UserAvatar, DateSelector, OrderProductsLoader)                        |
-| admin-orders/utils/                  | Order utilities (excelGenerator, exportOrderToExcel, getMappedStatus, getPaymentStatusText, formatDeliveryDateTime, getEnglishStatuses, getRoleDisplayName, getUniqueCities, getStatusColorClass, formatPhoneNumber, customerStatuses, formatDisplayDate) |
-| admin-orders/daypicker.css           | Date picker styles                                                                                                                                                                                                                                        |
-| **delivery-times/**                  | Delivery time slot configuration                                                                                                                                                                                                                          |
-| delivery-times/page.tsx              | Delivery schedule management (3-day schedule)                                                                                                                                                                                                             |
-| delivery-times/\_components/         | Schedule components (ScheduleTable, ScheduleTableRow, ScheduleTableHeader, AddTimeSlotForm, SaveButton, MessageAlert)                                                                                                                                     |
-| delivery-times/utils/                | Schedule utilities (getDaysDates, sortTimeSlots, dateFormatters, convertTimeToMinuts)                                                                                                                                                                     |
-| **products/**                        | Product CRUD operations                                                                                                                                                                                                                                   |
-| products/page.tsx                    | Products main page                                                                                                                                                                                                                                        |
-| products/add-product/page.tsx        | Add new product page                                                                                                                                                                                                                                      |
-| products/edit-product/[id]/page.tsx  | Edit product page                                                                                                                                                                                                                                         |
-| products/products-list/page.tsx      | Product listing with search                                                                                                                                                                                                                               |
-| products/products-list/\_components/ | Search components (SearchProductsResult, SearchInput, SearchHeader, SearchStates, DeleteConfirmModal)                                                                                                                                                     |
-| products/\_components/               | Product form components (ImageUploadSection, ImageUploader, CheckboxGroup, CustomCheckbox, Tags, Categories, SuccessCreatedMessage, Manufacturer, Brand, Weight, Quantity, Discount, BasePrice, Description, Article, Title)                              |
-
----
-
-#### (articles)/articles/ - Blog Articles
-
-| Path                | Description                   |
-| ------------------- | ----------------------------- |
-| articles/page.tsx   | Blog listing page             |
-| Articles.tsx        | Articles display component    |
-| ArticleCard.tsx     | Article card component        |
-| ArticlesSection.tsx | Articles section for homepage |
-| fetchArticles.ts    | Articles data fetching        |
-
----
-
-#### (auth)/auth/ - Authentication Pages
-
-| Path               | Description                                                                                        |
-| ------------------ | -------------------------------------------------------------------------------------------------- |
-| **login/**         | Email/password and phone login                                                                     |
-| **register/**      | Phone/email registration with OTP                                                                  |
-| **(forgot-pass)/** | Password reset initiation                                                                          |
-| **(update-pass)/** | Password update with phone verification                                                            |
-| \_components/      | Auth components (PasswordInput, PhoneInput, OTPResendButton, Tooltip, CloseButton, AuthFormLayout) |
-| styles.ts          | Auth page styles                                                                                   |
-
----
-
-#### (cart)/cart/ - Shopping Cart
-
-| Path               | Description                                                                                                                                                                                                                                                                                                                                            |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| cart/page.tsx      | Cart page with items list                                                                                                                                                                                                                                                                                                                              |
-| cart/\_components/ | Cart components (CartHeader, CartItem, CartControls, CartSummary, CartSideBar, PriceSummary, QuantitySelector, CheckoutButton, CheckoutForm, DeliveryTime, DeliveryAddress, PaymentsButtons, OrderSuccessMessage, BonusSection, MinimumOrderWarning, ProductImage, SelectionCheckbox, PriceDisplay, DiscountBadge, CartSkeleton, DeliveryTimeSkeleton) |
-| cart/utils/        | Cart utilities (orderHelpers, formatTimeSlot, isTimeSlotPassed)                                                                                                                                                                                                                                                                                        |
-| cart/styles.ts     | Cart page styles                                                                                                                                                                                                                                                                                                                                       |
-
----
-
-#### (catalog)/catalog/ - Product Catalog
-
-| Path                     | Description                                |
-| ------------------------ | ------------------------------------------ |
-| catalog/page.tsx         | Main catalog page with filters and sorting |
-| CatalogGrid.tsx          | Catalog grid component                     |
-| CatalogPage.tsx          | Catalog page wrapper                       |
-| CatalogAdminControls.tsx | Admin controls for catalog                 |
-| GridCategoryBlock.tsx    | Category block grid                        |
-
-**Category Page:**
-
-| Path                            | Description            |
-| ------------------------------- | ---------------------- |
-| **[category]/**                 | Dynamic category route |
-| **[category]/page.tsx**         | Category page          |
-| **[category]/fetchCategory.ts** | Category data fetching |
-
-**Product Detail Page:**
-
-| Path                                 | Description                                                                                                                                             |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **[category]/(productPage)/[slug]/** | Product detail route                                                                                                                                    |
-| **\_components/**                    | Product page components (ProductTitle, ReviewsWrapper, SimilarProducts, UserAvatar, ProductReviews, RatingDistribution, SameBrandProducts, ShareButton) |
-
----
-
-#### (payment)/payment/ - Payment Processing
-
-| Path                    | Description                        |
-| ----------------------- | ---------------------------------- |
-| PaymentSuccessModal.tsx | Payment success notification modal |
-| FakePaymentModal.tsx    | Payment mockup modal (for testing) |
-
----
-
-#### (products)/products/ - Product Listings
-
-| Path                 | Description                    |
-| -------------------- | ------------------------------ |
-| actions/page.tsx     | Special offers page            |
-| new/page.tsx         | New products page              |
-| Actions.tsx          | Actions section component      |
-| NewProducts.tsx      | New products section component |
-| ProductsSections.tsx | Product sections for homepage  |
-
----
-
-#### (search)/search/ - Search
-
-| Path            | Description                      |
-| --------------- | -------------------------------- |
-| search/page.tsx | Search results page with filters |
-
----
-
-#### (user)/user/ - User Account Features
-
-| Path                        | Description                 |
-| --------------------------- | --------------------------- |
-| **favorites/**              | Favorite products           |
-| favorites/page.tsx          | Favorites page              |
-| favorites/fetchFavorites.ts | Favorites data fetching     |
-| **purchases/**              | Purchase history            |
-| purchases/page.tsx          | Purchases page              |
-| Purchases.tsx               | Purchases display component |
-| fetchPurchases.ts           | Purchase data fetching      |
-
----
-
-#### (user-orders)/user-orders/ - Order History
-
-| Path                      | Description                                                                                                                                                                                                                         |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| user-orders/page.tsx      | Orders list page                                                                                                                                                                                                                    |
-| user-orders/\_components/ | Order components (OrderCard, OrderHeader, OrderDetails, OrderActions, DeliveryInfo, DeliveryDatePicker, UserOrdersList, RepeatOrderSection, PriceComparisonAlert, PricePreservedAlert, RepeatOrderSuccessAlert, StockWarningsAlert) |
-| user-orders/utils/        | Order utilities (getAvailableTimeSlots, formatOrderDate, formatDisplayDate, getStatusColor, getStatusText, getAvailableDates)                                                                                                       |
-
----
-
-#### (user-profile)/user-profile/ - User Profile
-
-| Path                                   | Description                                                                                                                                                                                                                        |
-| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| user-profile/page.tsx                  | Main profile page                                                                                                                                                                                                                  |
-| goodbye/page.tsx                       | Account deletion confirmation page                                                                                                                                                                                                 |
-| \_components/                          | Profile components (ProfileCard, ProfileHeader, ProfileAvatar, ProfileEmail, ProfilePassword, LocationSection, SecuritySection, DeleteAccountModal, ConfirmAvatarModal, AlertMessage, SuccessChangeEmail, EmailChangeVerification) |
-| profile-phone/                         | Phone verification subdirectory                                                                                                                                                                                                    |
-| profile-phone/ProfilePhoneSettings.tsx | Phone settings main component                                                                                                                                                                                                      |
-| profile-phone/ProfilePhoneInput.tsx    | Phone input component                                                                                                                                                                                                              |
-| profile-phone/PhoneEditView.tsx        | Phone edit view                                                                                                                                                                                                                    |
-| profile-phone/PhoneVerifyView.tsx      | Phone verification view                                                                                                                                                                                                            |
-| profile-phone/EditButton.tsx           | Edit button component                                                                                                                                                                                                              |
-
----
-
-### API Routes (src/app/api/)
-
-| Path                                 | Description                        |
-| ------------------------------------ | ---------------------------------- |
-| **cart/route.ts**                    | GET cart items, POST update cart   |
-| **orders/route.ts**                  | POST create order, GET user orders |
-| orders/update-status/route.ts        | Update order status (admin)        |
-| orders/update-after-payment/route.ts | Update after payment               |
-| orders/clear-cart/route.ts           | Clear cart after order             |
-| users/purchases/route.ts             | Get user purchases                 |
-| users/favorites/route.ts             | Add/remove favorites               |
-| users/favorites/products/route.ts    | Get favorite products              |
-| users/update-card/route.ts           | Update loyalty card                |
-| search-full/route.ts                 | Full-text search                   |
-| search/route.ts                      | Simple search fallback             |
-| search-products/route.ts             | Product search                     |
-| catalog/route.ts                     | Catalog listing with filters       |
-| category/route.ts                    | Category data                      |
-| sitemap-data/route.ts                | Sitemap generation data            |
-| products/route.ts                    | Products listing                   |
-| products/[id]/route.ts               | Get product by ID                  |
-| products/[id]/reviews/route.ts       | Product reviews                    |
-| products/brand/route.ts              | Brand filtering                    |
-| products/similar-products/route.ts   | Similar products                   |
-| update-product/route.ts              | Update product (admin)             |
-| delete-product/route.ts              | Delete product (admin)             |
-| upload-image/route.ts                | Image upload (Cloudinary)          |
-| delivery-times/route.ts              | Delivery times data                |
-| admin/users/route.ts                 | Admin user listing                 |
-| admin/users/orders/route.ts          | Admin order listing                |
-| admin/users/[id]/role/route.ts       | Update user role                   |
-| articles/route.ts                    | Articles CRUD                      |
-| auth/[...all]/route.ts               | Better-auth proxy                  |
-| auth/login/route.ts                  | Custom login (phone+password)      |
-| auth/set-password/route.ts           | Set password                       |
-| auth/update-phone/route.ts           | Update phone                       |
-| auth/update-email/route.ts           | Update email                       |
-| auth/location/route.ts               | Update location                    |
-| auth/upload-avatar/route.ts          | Upload avatar                      |
-| auth/check-phone/route.ts            | Check phone exists                 |
-| auth/check-login/route.ts            | Check login exists                 |
-| auth/check-session/route.ts          | Check session valid                |
-| auth/logout/route.ts                 | Logout                             |
-| auth/reset-phone-pass/route.ts       | Reset phone password               |
-| auth/delete-account/route.ts         | Delete account                     |
-| auth/user/route.ts                   | Get user data                      |
-| auth/avatar/[userId]/route.ts        | Get/verify avatar                  |
-| auth/avatar/[userId]/check/route.ts  | Check avatar exists                |
-| cron/update-delivery-dates/route.ts  | Update delivery schedule (cron)    |
-
----
-
-### src/components/ - Reusable UI Components
-
-#### features/ - Feature-specific components
-
-| Path                      | Description                                        |
-| ------------------------- | -------------------------------------------------- |
-| **common/**               |                                                    |
-| common/Breadcrumbs.tsx    | Navigation trail component                         |
-| common/ErrorComponent.tsx | Error display component                            |
-| common/loader.tsx         | Loading spinner component                          |
-| common/providers.tsx      | Context providers wrapper                          |
-| **slider/**               |                                                    |
-| slider/Slider.tsx         | Auto-playing banner slider with animations         |
-| slider/SlideOne.tsx       | First slide (special offers)                       |
-| slider/SlideTwo.tsx       | Second slide (delivery info)                       |
-| **SpacialOffers.tsx**     | Special offers section on homepage                 |
-| **Maps.tsx**              | Interactive map with store locations (Yandex Maps) |
-
-#### layout/ - Layout structure components
-
-| Path                                   | Description                                  |
-| -------------------------------------- | -------------------------------------------- |
-| **header/**                            |                                              |
-| header/Header.tsx                      | Main header with logo and menus              |
-| header/TopMenu.tsx                     | Top menu links                               |
-| header/UserBlock.tsx                   | User authorization/status block              |
-| header/SearchBlock.tsx                 | Search functionality wrapper                 |
-| header/Profile.tsx                     | Profile dropdown menu                        |
-| header/HighlightText.tsx               | Text highlighting component                  |
-| header/CatalogDropMenu/                | Product catalog dropdown                     |
-| CatalogDropMenu/CatalogMenuWrapper.tsx | Catalog menu wrapper                         |
-| CatalogDropMenu/CatalogMenu.tsx        | Catalog menu component                       |
-| header/inputSearch/                    | Search input with autocomplete               |
-| inputSearch/SearchInput.tsx            | Search input component                       |
-| inputSearch/SearchResults.tsx          | Search results dropdown                      |
-| inputSearch/InputBlock.tsx             | Input block component                        |
-| **footer/**                            |                                              |
-| footer/Footer.tsx                      | Site footer with social links and navigation |
-
-#### shared/ - Generic reusable components
-
-| Path                                   | Description                |
-| -------------------------------------- | -------------------------- |
-| ProductCard.tsx                        | Product display card       |
-| AddToCartButton.tsx                    | Add to cart control        |
-| FavoriteButton.tsx                     | Add to favorites toggle    |
-| StarRating.tsx                         | Review rating display      |
-| InStockToggle.tsx                      | Stock status indicator     |
-| Pagination.tsx                         | Pagination controls        |
-| PaginationWrapper.tsx                  | Wrapper for pagination     |
-| GenericListPage.tsx                    | Generic list page template |
-| ViewAllLink.tsx                        | "View all" link            |
-| **filterComponents/**                  | Filtering system           |
-| filterComponents/PriceFilter.tsx       | Price filter container     |
-| filterComponents/FilterButtons.tsx     | Filter toggle buttons      |
-| filterComponents/PriceFilterHeader.tsx | Price filter header        |
-| filterComponents/PriceRangeSlider.tsx  | Price range slider         |
-| filterComponents/PriceInputs.tsx       | Price range inputs         |
-| filterComponents/FilterControls.tsx    | Filter action controls     |
-| filterComponents/DropFilter.tsx        | Dropdown filter            |
-
-#### ui/ - UI primitives (shadcn + Radix)
-
-| Path                    | Description                      |
-| ----------------------- | -------------------------------- |
-| ui/container.tsx        | Content container with max-width |
-| **theme/**              | Theme management                 |
-| theme/ThemeProvider.tsx | Theme context provider           |
-| theme/ThemeToggle.tsx   | Dark/light mode toggle           |
-
-#### svg/ - SVG Icons
-
-| File                 | Description        |
-| -------------------- | ------------------ |
-| IconNotice.tsx       | Notice icon        |
-| IconVision.tsx       | Vision icon        |
-| IconStar.tsx         | Star icon          |
-| iconCart.tsx         | Cart icon          |
-| IconBox.tsx          | Box icon           |
-| IconHeart.tsx        | Heart icon         |
-| IconAvatarChange.tsx | Avatar change icon |
-| IconMenuMob.tsx      | Mobile menu icon   |
-
----
-
-### src/store/ - State Management
-
-#### Redux (src/store/redux/)
-
-| File                 | Description                                       |
-| -------------------- | ------------------------------------------------- |
-| **index.ts**         | Redux store configuration with middleware (thunk) |
-| **api/ordersApi.ts** | Orders API slice with CRUD operations             |
-| **api/chatApi.ts**   | Chat API slice for messaging                      |
-
-#### Zustand (src/store/)
-
-| File                   | Description                                                               |
-| ---------------------- | ------------------------------------------------------------------------- |
-| **cartStore.ts**       | Shopping cart state: cartItems, totalItems, pricing, fetchCart, clearCart |
-| **authStore.ts**       | Authentication state: isAuth, user, isLoading, checkAuth, login, logout   |
-| **StatesProvider.tsx** | Client-side state initialization                                          |
-
----
-
-### src/types/ - TypeScript Type Definitions
-
-| File                    | Description                                         |
-| ----------------------- | --------------------------------------------------- |
-| product.ts              | Product interface (ProductCardProps, ProductRating) |
-| cart.ts                 | Cart item structure                                 |
-| order.ts                | Order interface                                     |
-| userOrder.ts            | User order display type                             |
-| userData.ts             | User data structure                                 |
-| catalog.ts              | Catalog structure                                   |
-| categories.ts           | Category types                                      |
-| articles.ts             | Article types                                       |
-| articlesSections.ts     | Article section types                               |
-| filterState.ts          | Filter state structure                              |
-| pricingProps.ts         | Pricing calculation properties                      |
-| deliverySchedule.ts     | Delivery schedule types                             |
-| availableDate.ts        | Available date types                                |
-| searchProduct.ts        | Search results product type                         |
-| paginationProps.ts      | Pagination types                                    |
-| genericListPageProps.ts | Generic list page types                             |
-| categoryBlockProps.ts   | Category block props                                |
-| errorProps.ts           | Error props                                         |
-| sitemap.ts              | Sitemap type definitions                            |
-| addProductTypes.ts      | Admin product types                                 |
-| productsSections.ts     | Product sections types                              |
-| regFormData.ts          | Registration form data                              |
-| excel.ts                | Excel export types                                  |
-| chat.ts                 | Chat types                                          |
-| shops.ts                | Shop types                                          |
-| payment.ts              | Payment types                                       |
-| storeStates.ts          | Store state types                                   |
-| reduxApi.ts             | Redux API types                                     |
-
----
-
-### src/hooks/ - Custom React Hooks
-
-| File                    | Description                                     |
-| ----------------------- | ----------------------------------------------- |
-| useFavorite.ts          | Favorite products management                    |
-| useAvatar.ts            | Avatar upload/download                          |
-| useTimer.ts             | Countdown timer                                 |
-| usePriceComparison.ts   | Price change comparison                         |
-| useOrderProductsData.ts | Order data fetching                             |
-| userOrderProducts.ts    | User order products hook                        |
-| userOrderPricing.ts     | Order pricing calculations                      |
-| useDeliveryData.ts      | Delivery data fetching                          |
-| useRepeatOrder.ts       | Repeat order functionality                      |
-| useDeliverySchedule.ts  | Delivery schedule management                    |
-| usePricing.ts           | Pricing calculations (cart, discounts, bonuses) |
-| redux.ts                | Redux hooks (useAppDispatch, useAppSelector)    |
-
----
-
-### src/lib/ - Library Files
-
-| File               | Description                                                                                                      |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| **auth.ts**        | Server-side better-auth configuration: MongoDB adapter, email/password, phone OTP, admin plugin, email templates |
-| **auth-client.ts** | Client-side auth client                                                                                          |
-| **api-routes.ts**  | API helper utilities (getDB - singleton MongoDB connection)                                                      |
-| **utils.ts**       | Utility function (cn: class name merging with twMerge)                                                           |
-
----
-
-### src/data/ - Static Data
-
-| File                | Description                             |
-| ------------------- | --------------------------------------- |
-| columnsUsersList.ts | Admin users table columns configuration |
-| city.ts             | City list                               |
-| regions.ts          | Region list                             |
-| locations.ts        | Location/address data                   |
-
----
-
-### src/constants/ - Configuration Constants
-
-| File                  | Description                    |
-| --------------------- | ------------------------------ |
-| RegFormData.ts        | Initial registration form data |
-| addProductFormData.ts | Product form configuration     |
-
----
-
-### utils/ - Root Utility Functions
-
-#### Authentication & Auth
-
-| File                | Description                                                                               |
-| ------------------- | ----------------------------------------------------------------------------------------- |
-| getServerUserId.ts  | Get user ID from server-side session (supports better-auth and custom sessions)           |
-| auth-helpers.ts     | Auth session helpers (getBetterAuthSession, getCustomSessionToken, validateCustomSession) |
-| deleteUserAvatar.ts | Remove avatar file                                                                        |
-
-#### Formatting & Display
-
-| File                         | Description                     |
-| ---------------------------- | ------------------------------- |
-| formatPrice.ts               | Format price (1234,50)          |
-| formatDateToLocalYYYYMMDD.ts | Format date (YYYY-MM-DD)        |
-| formatWeight.ts              | Format weight (g/kg)            |
-| getWordEnding.ts             | Get word endings (plural forms) |
-| baseUrl.ts                   | Get base URL for API calls      |
-
-#### Calculations
-
-| File          | Description                                                   |
-| ------------- | ------------------------------------------------------------- |
-| calcPrices.ts | Price calculations: calculateFinalPrice, calculatePriceByCard |
-
-#### Validation
-
-| File                            | Description             |
-| ------------------------------- | ----------------------- |
-| validation/form.ts              | Form validation         |
-| validation/passwordValid.ts     | Password strength check |
-| validation/validProfileCard.ts  | Profile card validation |
-| validation/validateBirthDate.ts | Birth date validation   |
-
-#### Admin Utilities
-
-| File                       | Description                      |
-| -------------------------- | -------------------------------- |
-| admin/birthdaySoon.ts      | Upcoming birthdays (next 7 days) |
-| admin/calculateAge.ts      | Calculate age from birth date    |
-| admin/formatBirthday.ts    | Format birthday display          |
-| admin/getShortDecimalId.ts | Short ID format (last 5 digits)  |
-| admin/maskPhone.ts         | Mask phone number                |
-| admin/rolesUtils.ts        | Role display functions           |
-
-#### Image & Avatar
-
-| File             | Description                     |
-| ---------------- | ------------------------------- |
-| getAvatar.ts     | Get user avatar from Cloudinary |
-| avatarUtils.ts   | Avatar utilities                |
-| optimizeImage.ts | Image optimization utility      |
-
-#### Strings & Slugs
-
-| File              | Description                            |
-| ----------------- | -------------------------------------- |
-| createSlug.ts     | Create URL-friendly slug               |
-| transliterate.ts  | Cyrillic to Latin transliteration      |
-| translations.ts   | URL segment to Russian translation map |
-| getSitemapData.ts | Sitemap data processing                |
-
-#### Arrays & Data
-
-| File            | Description            |
-| --------------- | ---------------------- |
-| shuffleArray.ts | Random array shuffling |
-| debounce.ts     | Debounce function      |
-
-#### Specialized
-
-| File                | Description                                     |
-| ------------------- | ----------------------------------------------- |
-| proxy-redirects.ts  | Route redirect handlers (old products, catalog) |
-| generatePassword.ts | Random password generation                      |
-
----
-
-### src/proxy.ts - Next.js Middleware
-
-| File     | Description                                                |
-| -------- | ---------------------------------------------------------- |
-| proxy.ts | Next.js middleware for route redirects and auth protection |
-
----
-
-### Additional Notes
-
-1. **Authentication**: Dual system - Better-auth (email+password, phone+OTP) + custom session (phone+password)
-2. **Database**: MongoDB with single client connection in api-routes.ts
-3. **State Management**: Redux Toolkit for users/orders, Zustand for cart, React Context for product title
-4. **Styling**: Tailwind CSS v4 with shadcn, Radix UI components
-5. **Payment**: Mock payment system (FakePaymentModal) - not connected to real payment provider
-6. **SMS**: Currently commented out - OTP codes printed to console only
+# Delivery Shop - справка по проекту
+
+Обновлено: 26 мая 2026.
+
+Этот файл описывает структуру и ключевые особенности проекта `delivery-shop`.
+
+## Краткое описание
+
+`delivery-shop` - интернет-магазин доставки продуктов на Next.js. В приложении есть витрина товаров, каталог с категориями, карточки товаров, корзина, оформление заказов, личный кабинет, избранное, история покупок, админ-панель и отдельный CMS-раздел для управления контентом и SEO-настройками.
+
+## Быстрый старт
+
+| Команда                         | Комментарий                                                                                                                      |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run dev`                   | Запускает Next.js dev server. По умолчанию сайт доступен на `http://localhost:3000`.                                             |
+| `npm run build`                 | Собирает production-версию приложения.                                                                                           |
+| `npm run start`                 | Запускает собранное production-приложение.                                                                                       |
+| `npm run lint`                  | Запускает ESLint. Перед сборкой лучше сначала выполнять эту команду.                                                             |
+| `npm run update-delivery-dates` | Дергает cron endpoint обновления дат доставки. В скрипте уже указан `secret`, но для окружений лучше использовать `CRON_SECRET`. |
+
+Рекомендуемый порядок проверки перед сдачей изменений: `npm run lint`, затем `npm run build`.
+
+## Технологический стек
+
+| Область           | Используется                                 | Комментарий                                                                            |
+| ----------------- | -------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Фреймворк         | Next.js 16, React 19, TypeScript             | Приложение построено на App Router с route groups.                                     |
+| Стили             | Tailwind CSS 4, shadcn, Radix UI             | Глобальные стили лежат в `src/app/globals.css`; UI-примитивы - в `src/components/ui`.  |
+| Анимации и иконки | Framer Motion, motion, Lucide React          | Иконки лучше брать из `lucide-react`, если подходящая иконка уже есть.                 |
+| Данные            | MongoDB, MongoDB driver, Mongoose            | Основные API routes используют общий helper `getDB()` из `src/lib/api-routes.ts`.      |
+| Авторизация       | Better Auth, кастомная phone+password сессия | В проекте одновременно существуют две схемы сессий. Это важно при проверках доступа.   |
+| State management  | Zustand, Redux Toolkit, React Context        | Корзина и auth - Zustand; заказы и чат - Redux Toolkit; product title - React Context. |
+| Почта             | Resend, react-email                          | Почтовые интеграции завязаны на `RESEND_API_KEY`.                                      |
+| Экспорт           | ExcelJS                                      | Используется в админке заказов для выгрузки в Excel.                                   |
+
+## Переменные окружения
+
+| Переменная              | Комментарий                                                                           |
+| ----------------------- | ------------------------------------------------------------------------------------- |
+| `FOOD_DELIVERY_DB_URL`  | URL MongoDB. Для локальной разработки часто используется `mongodb://localhost:27017`. |
+| `FOOD_DELIVERY_DB_NAME` | Имя базы данных. В проекте ожидается `deliveryshop`.                                  |
+| `RESEND_API_KEY`        | Ключ Resend для отправки email.                                                       |
+| `BETTER_AUTH_SECRET`    | Секрет Better Auth.                                                                   |
+| `BETTER_AUTH_URL`       | Базовый URL Better Auth. Для dev обычно соответствует локальному адресу.              |
+| `SMS_API_ID`            | Ключ SMS.ru. Сейчас SMS-отправка отключена, OTP выводится в консоль.                  |
+| `CRON_SECRET`           | Секрет для `/api/cron/update-delivery-dates`.                                         |
+
+## Важные настройки
+
+Основные бизнес-настройки лежат в `config/config.ts`.
+
+| Настройка                      |            Значение | Комментарий                                                 |
+| ------------------------------ | ------------------: | ----------------------------------------------------------- |
+| `ITEMS_PER_PAGE`               |                 `3` | Размер страницы для поиска и фильтрации товаров.            |
+| `ITEMS_PER_PAGE_MAIN_PRODUCTS` |                 `4` | Количество товаров в главных блоках на витрине.             |
+| `ITEMS_PER_PAGE_MAIN_ARTICLES` |                 `3` | Количество статей на главной странице.                      |
+| `ITEMS_PER_PAGE_CATEGORY`      |                 `6` | Размер страницы категории каталога.                         |
+| `ITEMS_PER_ORDERS_PAGE`        |                 `4` | Пагинация заказов пользователя.                             |
+| `ARTICLES_PER_BLOG_PAGE`       |                 `3` | Пагинация блога.                                            |
+| `COMMENTS_PER_ARTICLE_PAGE`    |                 `5` | Пагинация комментариев к статье.                            |
+| `CARD_DISCOUNT_PERCENT`        |                 `6` | Скидка по карте лояльности.                                 |
+| `BONUSES_PERCENT`              |                 `5` | Начисление бонусов от суммы заказа.                         |
+| `MAX_BONUSES_PERCENT`          |                `10` | Максимальная часть заказа, которую можно оплатить бонусами. |
+| `MIN_ORDER_PRICE`              |              `1000` | Минимальная сумма заказа в рублях.                          |
+| `TEMPORARY_EMAIL_DOMAIN`       | `@delivery-shop.ru` | Временный email для регистрации по телефону.                |
+| `MAX_ATTEMPTS`                 |                 `3` | Максимум попыток ввода OTP.                                 |
+| `TIMEOUT_PERIOD`               |               `180` | Время жизни OTP в секундах.                                 |
+| `DEFAULT_PAGE_SIZE`            |                 `5` | Общий размер страницы для универсальных списков.            |
+
+## Корневая структура
+
+| Путь                      | Комментарий                                    |
+| ------------------------- | ---------------------------------------------- |
+| `package.json`            | Скрипты проекта и зависимости.                 |
+| `tsconfig.json`           | Конфигурация TypeScript.                       |
+| `next.config.ts`          | Конфигурация Next.js.                          |
+| `eslint.config.mjs`       | Конфигурация ESLint.                           |
+| `tailwind.config.js`      | Дополнительная конфигурация Tailwind.          |
+| `postcss.config.mjs`      | PostCSS-конфигурация для Tailwind CSS 4.       |
+| `components.json`         | Конфигурация shadcn.                           |
+| `AGENTS.md`               | Инструкции для агентной работы с репозиторием. |
+| `INFO_SITE.md`            | Этот файл с обзором проекта.                   |
+| `migrate-mongo-config.js` | Конфигурация миграций MongoDB.                 |
+| `seed-db*.ts`             | Скрипты наполнения базы начальными данными.    |
+
+## `config/`
+
+| Путь               | Комментарий                                                                                                    |
+| ------------------ | -------------------------------------------------------------------------------------------------------------- |
+| `config/config.ts` | Централизованные настройки пагинации, скидок, бонусов, OTP, минимальной суммы заказа и домена временных email. |
+
+Комментарий: если меняется бизнес-логика скидок, бонусов или пагинации, сначала проверьте, не достаточно ли изменить `CONFIG`, а не размазывать новые числа по компонентам.
+
+## `migrations/`
+
+| Путь                         | Комментарий                            |
+| ---------------------------- | -------------------------------------- |
+| `20260218115601-articles.js` | Миграция для коллекции статей.         |
+| `20260218130417-users.js`    | Миграция для коллекции пользователей.  |
+| `20260220173627-products.js` | Миграция для коллекции товаров.        |
+| `articlesData.json`          | Начальные данные статей.               |
+| `usersData.json`             | Начальные данные пользователей.        |
+| `productsData.json`          | Начальные данные товаров.              |
+| `catalogData.json`           | Начальные данные каталога и категорий. |
+
+## `public/`
+
+| Путь                                  | Комментарий                                  |
+| ------------------------------------- | -------------------------------------------- |
+| `public/robots.txt`                   | Правила индексации для поисковых роботов.    |
+| `public/og-image.jpeg`                | Изображение для Open Graph.                  |
+| `public/web-app-manifest-192x192.png` | Иконка PWA manifest.                         |
+| `public/images/products/`             | Изображения товаров.                         |
+| `public/images/categories/`           | Изображения категорий.                       |
+| `public/images/graphics/`             | Слайдеры, фоны, дефолтные аватары и графика. |
+| `public/images/banners/`              | Баннеры для промо-блоков.                    |
+| `public/images/articles/`             | Изображения статей.                          |
+| `public/blogCategories/`              | Загруженные изображения категорий блога/CMS. |
+| `public/icons-footer/`                | SVG-иконки футера.                           |
+| `public/icons-orders/`                | SVG-иконки статусов и действий по заказам.   |
+
+Комментарий: новые пользовательские загрузки и публичные статичные ассеты должны иметь понятные имена. Случайные имена допустимы для загруженных файлов, но для системных ассетов лучше использовать семантические названия.
+
+## `src/app/` - маршруты и layouts
+
+| Путь                    | Комментарий                                                                     |
+| ----------------------- | ------------------------------------------------------------------------------- |
+| `src/app/layout.tsx`    | Корневой layout приложения. Подключает базовые провайдеры и глобальную обвязку. |
+| `src/app/provider.tsx`  | Redux Provider.                                                                 |
+| `src/app/globals.css`   | Глобальные стили, Tailwind CSS 4, темы и базовые анимации.                      |
+| `src/app/manifest.json` | PWA manifest.                                                                   |
+| `src/app/sitemap.ts`    | Генерация sitemap.                                                              |
+| `src/app/favicon.ico`   | Иконка сайта.                                                                   |
+
+### `src/app/contexts/`
+
+| Путь                 | Комментарий                                                          |
+| -------------------- | -------------------------------------------------------------------- |
+| `ProductContext.tsx` | Контекст заголовка товара. Используется в product page и SEO-логике. |
+| `RegFormContext.tsx` | Состояние регистрационной формы и сброс начальных данных.            |
+
+## Route groups в `src/app/(root)/`
+
+| Группа           | Комментарий                                                                           |
+| ---------------- | ------------------------------------------------------------------------------------- |
+| `(root)`         | Общая публичная обвязка сайта: header, breadcrumbs, footer и главная страница.        |
+| `(admin)`        | Админ-панель, управление пользователями, заказами, временем доставки, товарами и CMS. |
+| `(auth)`         | Login, registration, OTP, reset password и общие auth-компоненты.                     |
+| `(cart)`         | Корзина, оформление заказа, выбор адреса, времени доставки и оплаты.                  |
+| `(catalog)`      | Каталог, категории, карточка товара, отзывы, похожие товары.                          |
+| `(articles)`     | Блог и статьи.                                                                        |
+| `(products)`     | Подборки товаров: акции, новинки и общие product sections.                            |
+| `(search)`       | Страница результатов поиска.                                                          |
+| `(user)`         | Избранное и покупки пользователя.                                                     |
+| `(user-orders)`  | История заказов и повтор заказа.                                                      |
+| `(user-profile)` | Профиль, безопасность, email, телефон, адрес, удаление аккаунта.                      |
+| `(payment)`      | Модальные окна успешной и тестовой оплаты.                                            |
+
+## Главная публичная часть
+
+| Путь                                        | Комментарий                                                                                                                   |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `src/app/(root)/layout.tsx`                 | Layout публичной части с header, breadcrumbs и footer.                                                                        |
+| `src/app/(root)/page.tsx`                   | Главная страница.                                                                                                             |
+| `src/components/layout/header/`             | Header, top menu, profile menu, поиск и выпадающий каталог.                                                                   |
+| `src/components/layout/footer/Footer.tsx`   | Footer сайта.                                                                                                                 |
+| `src/components/features/slider/`           | Слайдер на главной.                                                                                                           |
+| `src/components/features/SpacialOffers.tsx` | Блок специальных предложений. Название файла содержит опечатку `Spacial`, но сейчас это существующий импортируемый компонент. |
+| `src/components/features/Maps.tsx`          | Карты магазинов через Yandex Maps.                                                                                            |
+
+## Админ-панель
+
+| Путь                                              | Комментарий                                                    |
+| ------------------------------------------------- | -------------------------------------------------------------- |
+| `src/app/(root)/(admin)/administrator/page.tsx`   | Главная страница админки.                                      |
+| `src/app/(root)/(admin)/administrator/layout.tsx` | Layout админки. Проверяет роль `admin` или `manager`.          |
+| `src/app/(root)/(admin)/administrator/styles.ts`  | Общие стили админ-страниц.                                     |
+| `administrator/users-list/`                       | Управление пользователями: фильтры, таблица, роли, пагинация.  |
+| `administrator/admin-orders/`                     | Управление заказами, календарь, статусы, чат, экспорт в Excel. |
+| `administrator/delivery-times/`                   | Управление слотами доставки.                                   |
+| `administrator/products/`                         | Добавление, редактирование, поиск и удаление товаров.          |
+
+Комментарий: менеджер и администратор имеют доступ к админке, но отдельные экраны и действия могут проверять роль точечно. При добавлении новой админской функции проверяйте both UI access и API access.
+
+## CMS в админке
+
+CMS находится в `src/app/(root)/(admin)/administrator/(cms)/cms/`.
+
+| Путь                                  | Комментарий                                                                                                |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `cms/page.tsx`                        | Главная страница CMS.                                                                                      |
+| `cms/layout.tsx`                      | Layout CMS-раздела.                                                                                        |
+| `cms/CONFIG_BLOG.ts`                  | Конфигурация CMS/блога.                                                                                    |
+| `cms/_components/`                    | Dashboard cards, header, pagination, SEO recommendations, stats и skeleton states.                         |
+| `cms/categories/page.tsx`             | Управление категориями.                                                                                    |
+| `cms/categories/_components/`         | Форма категории, таблица, drag-and-drop, поиск, фильтры, статистика, desktop/mobile карточки, уведомления. |
+| `cms/semantic-core/page.tsx`          | Управление SEO/семантическим ядром и настройками сайта.                                                    |
+| `cms/semantic-core/_components/`      | SEOForm, CurrentSettings, FormField и кнопки формы.                                                        |
+| `cms/sidebarMenu/`                    | Компоненты бокового меню CMS.                                                                              |
+| `cms/hooks/`                          | Хуки категорий, формы категории, настроек сайта и статистики.                                              |
+| `cms/types/`                          | Типы моделей, таблиц, форм, UI, DnD, dashboard и sidebar.                                                  |
+| `cms/utils/`                          | SEO limits, рекомендации, dashboard cards, menu items, статистика, цвета, сортировка и фильтры.            |
+| `cms/api/categories/route.ts`         | API списка и создания категорий CMS.                                                                       |
+| `cms/api/categories/[id]/route.ts`    | API конкретной категории.                                                                                  |
+| `cms/api/categories/reorder/route.ts` | API сохранения порядка категорий.                                                                          |
+| `cms/api/categories/upload/route.ts`  | API загрузки изображений категорий.                                                                        |
+| `cms/api/site-settings/route.ts`      | API настроек сайта и SEO.                                                                                  |
+
+Комментарий: в CMS сейчас много логики разделено на маленькие компоненты и типы. При изменениях категории лучше начинать с `useCategories.ts`, `categoryStore.ts`, `CategoryTable.tsx` и API `cms/api/categories`.
+
+## Авторизация
+
+| Путь                                      | Комментарий                                                                                           |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `src/lib/auth.ts`                         | Настройка Better Auth, phone plugin, admin plugin, email/password и дополнительные поля пользователя. |
+| `src/lib/auth-client.ts`                  | Клиент Better Auth с `phoneNumberClient`.                                                             |
+| `utils/getServerUserId.ts`                | Унифицированное получение user id на сервере. Проверяет Better Auth и кастомную сессию.               |
+| `utils/auth-helpers.ts`                   | Helper-функции для Better Auth session и кастомного `session` cookie.                                 |
+| `src/store/authStore.ts`                  | Zustand-состояние авторизации на клиенте.                                                             |
+| `src/proxy.ts`                            | Middleware/Proxy для защиты маршрутов и редиректов.                                                   |
+| `src/app/api/auth/[...all]/route.ts`      | Better Auth proxy route.                                                                              |
+| `src/app/api/auth/login/route.ts`         | Кастомный вход по телефону и паролю.                                                                  |
+| `src/app/api/auth/check-session/route.ts` | Проверка текущей сессии.                                                                              |
+| `src/app/api/auth/logout/route.ts`        | Выход из Better Auth и кастомной сессии.                                                              |
+
+Комментарии по auth:
+
+1. В проекте есть две схемы сессий: `better-auth.session_token` и кастомная cookie `session`.
+2. Регистрация по телефону использует временный email вида `phoneNumber@delivery-shop.ru`.
+3. OTP сейчас не отправляется через SMS, а выводится в консоль в `src/lib/auth.ts`.
+4. При добавлении server-side проверки пользователя используйте `getServerUserId()`, если нужно поддержать обе схемы авторизации.
+
+## Корзина и заказы
+
+| Путь                                               | Комментарий                                                                            |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `src/store/cartStore.ts`                           | Zustand store корзины: товары, суммы, загрузка, очистка.                               |
+| `src/actions/addToCartActions.ts`                  | Server action для добавления товаров в корзину.                                        |
+| `src/actions/orderActions.ts`                      | Server actions для заказов.                                                            |
+| `src/app/(root)/(cart)/cart/page.tsx`              | Страница корзины.                                                                      |
+| `src/app/(root)/(cart)/cart/_components/`          | Компоненты корзины: товары, summary, checkout, адрес, время, оплата, бонусы, skeleton. |
+| `src/app/api/cart/route.ts`                        | API корзины.                                                                           |
+| `src/app/api/orders/route.ts`                      | Создание и получение заказов.                                                          |
+| `src/app/api/orders/update-status/route.ts`        | Изменение статуса заказа.                                                              |
+| `src/app/api/orders/update-after-payment/route.ts` | Обновление заказа после оплаты.                                                        |
+| `src/app/api/orders/clear-cart/route.ts`           | Очистка корзины после заказа.                                                          |
+
+Комментарий: для администраторов и менеджеров корзина очищается в `src/store/StatesProvider.tsx`, потому что эти роли не оформляют заказы как покупатели.
+
+## Каталог и товары
+
+| Путь                                                                            | Комментарий                                                                             |
+| ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `src/app/(root)/(catalog)/catalog/page.tsx`                                     | Главная страница каталога.                                                              |
+| `src/app/(root)/(catalog)/CatalogPage.tsx`                                      | Обертка каталога с фильтрами и состояниями.                                             |
+| `src/app/(root)/(catalog)/CatalogGrid.tsx`                                      | Сетка категорий/товаров каталога.                                                       |
+| `src/app/(root)/(catalog)/GridCategoryBlock.tsx`                                | Блок категории в сетке.                                                                 |
+| `src/app/(root)/(catalog)/catalog/[category]/page.tsx`                          | Страница категории.                                                                     |
+| `src/app/(root)/(catalog)/catalog/[category]/fetchCategory.ts`                  | Загрузка данных категории.                                                              |
+| `src/app/(root)/(catalog)/catalog/[category]/(productPage)/[slug]/page.tsx`     | Страница товара.                                                                        |
+| `src/app/(root)/(catalog)/catalog/[category]/(productPage)/getProduct.ts`       | Загрузка товара.                                                                        |
+| `src/app/(root)/(catalog)/catalog/[category]/(productPage)/[slug]/_components/` | Карточка товара, изображения, отзывы, рейтинг, похожие товары, кнопка корзины, sharing. |
+| `src/app/api/catalog/route.ts`                                                  | API каталога.                                                                           |
+| `src/app/api/category/route.ts`                                                 | API категории.                                                                          |
+| `src/app/api/products/route.ts`                                                 | API списка товаров.                                                                     |
+| `src/app/api/products/[id]/route.ts`                                            | API товара по ID.                                                                       |
+| `src/app/api/products/[id]/reviews/route.ts`                                    | API отзывов товара.                                                                     |
+| `src/app/api/products/brand/route.ts`                                           | Фильтрация по бренду.                                                                   |
+| `src/app/api/products/similar-products/route.ts`                                | Похожие товары.                                                                         |
+| `src/app/api/add-product/route.ts`                                              | Добавление товара из админки.                                                           |
+| `src/app/api/update-product/route.ts`                                           | Обновление товара.                                                                      |
+| `src/app/api/delete-product/route.ts`                                           | Удаление товара.                                                                        |
+| `src/app/api/upload-image/route.ts`                                             | Загрузка изображений товара.                                                            |
+
+## Поиск
+
+| Путь                                           | Комментарий                                                |
+| ---------------------------------------------- | ---------------------------------------------------------- |
+| `src/app/(root)/(search)/search/page.tsx`      | Страница результатов поиска.                               |
+| `src/components/layout/header/SearchBlock.tsx` | Обертка поиска в header.                                   |
+| `src/components/layout/header/inputSearch/`    | Search input, dropdown результатов и подсветка совпадений. |
+| `src/app/api/search/route.ts`                  | Простой search fallback.                                   |
+| `src/app/api/search-full/route.ts`             | Полнотекстовый поиск.                                      |
+| `src/app/api/search-products/route.ts`         | Поиск товаров.                                             |
+
+## Пользовательские разделы
+
+| Путь                                                    | Комментарий                                                             |
+| ------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `src/app/(root)/(user-profile)/user-profile/page.tsx`   | Профиль пользователя.                                                   |
+| `src/app/(root)/(user-profile)/_components/`            | Аватар, email, телефон, пароль, адрес, безопасность, удаление аккаунта. |
+| `src/app/(root)/(user-profile)/goodbye/page.tsx`        | Страница после удаления аккаунта.                                       |
+| `src/app/(root)/(user-orders)/user-orders/page.tsx`     | История заказов.                                                        |
+| `src/app/(root)/(user-orders)/user-orders/_components/` | Карточки заказов, повтор заказа, предупреждения, выбор даты доставки.   |
+| `src/app/(root)/(user)/favorites/page.tsx`              | Избранные товары.                                                       |
+| `src/app/(root)/(user)/purchases/page.tsx`              | Покупки пользователя.                                                   |
+| `src/app/api/users/favorites/route.ts`                  | Добавление и удаление избранного.                                       |
+| `src/app/api/users/favorites/products/route.ts`         | Получение товаров из избранного.                                        |
+| `src/app/api/users/purchases/route.ts`                  | История покупок.                                                        |
+| `src/app/api/users/update-card/route.ts`                | Обновление карты лояльности.                                            |
+
+## Статьи
+
+| Путь                                            | Комментарий                          |
+| ----------------------------------------------- | ------------------------------------ |
+| `src/app/(root)/(articles)/articles/page.tsx`   | Страница списка статей.              |
+| `src/app/(root)/(articles)/Articles.tsx`        | Компонент отображения списка статей. |
+| `src/app/(root)/(articles)/ArticleCard.tsx`     | Карточка статьи.                     |
+| `src/app/(root)/(articles)/ArticlesSection.tsx` | Блок статей на главной.              |
+| `src/app/(root)/(articles)/fetchArticles.ts`    | Загрузка статей.                     |
+| `src/app/api/articles/route.ts`                 | API статей.                          |
+
+## Оплата
+
+| Путь                                               | Комментарий                                                      |
+| -------------------------------------------------- | ---------------------------------------------------------------- |
+| `src/app/(root)/(payment)/FakePaymentModal.tsx`    | Тестовое окно оплаты. Реальный платежный провайдер не подключен. |
+| `src/app/(root)/(payment)/PaymentSuccessModal.tsx` | Модальное окно успешной оплаты.                                  |
+
+Комментарий: платежная логика сейчас mock-based. Перед подключением реального провайдера нужно отдельно проверить статусы заказа, повторные callbacks и защиту от повторного списания.
+
+## API routes
+
+| Группа      | Основные маршруты                                                                   | Комментарий                                                                               |
+| ----------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Auth        | `/api/auth/*`                                                                       | Better Auth, кастомный login/logout, avatar, reset password, update email/phone/location. |
+| Cart        | `/api/cart`                                                                         | Получение и обновление корзины.                                                           |
+| Orders      | `/api/orders/*`                                                                     | Создание заказа, смена статуса, обновление после оплаты, очистка корзины.                 |
+| Admin users | `/api/admin/users/*`                                                                | Пользователи, роли, заказы пользователей.                                                 |
+| Admin chat  | `/api/admin/chat/*`                                                                 | Чат по заказам, read/unread state.                                                        |
+| Catalog     | `/api/catalog`, `/api/category`                                                     | Каталог и категории.                                                                      |
+| Products    | `/api/products/*`, `/api/add-product`, `/api/update-product`, `/api/delete-product` | Товары, отзывы, бренды, похожие товары и CRUD админки.                                    |
+| Search      | `/api/search`, `/api/search-full`, `/api/search-products`                           | Поиск по сайту и товарам.                                                                 |
+| Articles    | `/api/articles`                                                                     | CRUD/получение статей.                                                                    |
+| Users       | `/api/users/*`                                                                      | Избранное, покупки, карта лояльности.                                                     |
+| Delivery    | `/api/delivery-times`                                                               | Слоты доставки.                                                                           |
+| Cron        | `/api/cron/update-delivery-dates`                                                   | Обновление дат доставки, требуется `secret`.                                              |
+| Sitemap     | `/api/sitemap-data`                                                                 | Данные для sitemap.                                                                       |
+| Upload      | `/api/upload-image`                                                                 | Загрузка изображений.                                                                     |
+
+## `src/components/`
+
+| Путь                                        | Комментарий                                                                                |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `src/components/features/common/`           | Breadcrumbs, ErrorComponent, loader, providers.                                            |
+| `src/components/features/slider/`           | Компоненты слайдера главной страницы.                                                      |
+| `src/components/features/Maps.tsx`          | Карта магазинов.                                                                           |
+| `src/components/features/SpacialOffers.tsx` | Блок спецпредложений.                                                                      |
+| `src/components/layout/header/`             | Header, меню, профиль, поиск и выпадающий каталог.                                         |
+| `src/components/layout/footer/`             | Footer сайта.                                                                              |
+| `src/components/shared/`                    | ProductCard, AddToCartButton, FavoriteButton, Pagination, GenericListPage и общие фильтры. |
+| `src/components/shared/filterComponents/`   | PriceFilter, PriceRangeSlider, DropFilter, кнопки фильтров и controls.                     |
+| `src/components/ui/`                        | UI-примитивы и тема.                                                                       |
+| `src/components/svg/`                       | Локальные SVG React-компоненты.                                                            |
+
+Комментарий: для новых общих компонентов сначала проверьте `shared` и `ui`. Если компонент привязан к конкретному экрану, лучше держать его рядом с route group в `_components`.
+
+## `src/store/`
+
+| Путь                               | Комментарий                                    |
+| ---------------------------------- | ---------------------------------------------- |
+| `src/store/cartStore.ts`           | Zustand store корзины.                         |
+| `src/store/authStore.ts`           | Zustand store авторизации.                     |
+| `src/store/categoryStore.ts`       | Store категорий CMS.                           |
+| `src/store/StatesProvider.tsx`     | Клиентская инициализация глобальных состояний. |
+| `src/store/redux/index.ts`         | Конфигурация Redux store.                      |
+| `src/store/redux/api/ordersApi.ts` | RTK Query/API slice заказов.                   |
+| `src/store/redux/api/chatApi.ts`   | RTK Query/API slice чата.                      |
+
+## `src/hooks/`
+
+| Путь                      | Комментарий                                           |
+| ------------------------- | ----------------------------------------------------- |
+| `useFavorite.ts`          | Управление избранными товарами.                       |
+| `useAvatar.ts`            | Загрузка и получение аватара.                         |
+| `useTimer.ts`             | Таймер обратного отсчета.                             |
+| `usePriceComparison.ts`   | Сравнение цен при повторе заказа.                     |
+| `useOrderProductsData.ts` | Получение данных товаров заказа.                      |
+| `userOrderProducts.ts`    | Данные товаров пользовательского заказа.              |
+| `userOrderPricing.ts`     | Расчеты стоимости пользовательского заказа.           |
+| `useDeliveryData.ts`      | Получение данных доставки.                            |
+| `useDeliverySchedule.ts`  | Работа с расписанием доставки.                        |
+| `useRepeatOrder.ts`       | Повтор заказа.                                        |
+| `usePricing.ts`           | Расчеты корзины, скидок, бонусов и минимальной суммы. |
+| `redux.ts`                | Типизированные Redux hooks.                           |
+
+## `src/lib/`
+
+| Путь             | Комментарий                                                                              |
+| ---------------- | ---------------------------------------------------------------------------------------- |
+| `auth.ts`        | Server-side Better Auth config, Mongo adapter, phone OTP, admin plugin, email templates. |
+| `auth-client.ts` | Client-side Better Auth client.                                                          |
+| `api-routes.ts`  | Helper `getDB()` с singleton MongoClient.                                                |
+| `utils.ts`       | `cn()` для merge классов через `clsx` и `tailwind-merge`.                                |
+
+Комментарий: API routes должны использовать `getDB()` вместо создания нового `MongoClient` в каждом обработчике.
+
+## `src/types/`
+
+| Группа                                                            | Комментарий                                        |
+| ----------------------------------------------------------------- | -------------------------------------------------- |
+| `product.ts`, `cart.ts`, `order.ts`, `userOrder.ts`               | Основные доменные типы товаров, корзины и заказов. |
+| `userData.ts`, `regFormData.ts`                                   | Типы пользователя и регистрации.                   |
+| `catalog.ts`, `categories.ts`, `categoryBlockProps.ts`            | Типы каталога и категорий.                         |
+| `articles.ts`, `articlesSections.ts`                              | Типы статей и секций статей.                       |
+| `deliverySchedule.ts`, `availableDate.ts`                         | Типы расписания доставки.                          |
+| `filterState.ts`, `paginationProps.ts`, `genericListPageProps.ts` | Типы фильтров, пагинации и универсальных списков.  |
+| `pricingProps.ts`, `payment.ts`                                   | Типы расчетов стоимости и оплаты.                  |
+| `excel.ts`, `chat.ts`, `reduxApi.ts`, `storeStates.ts`            | Типы админских выгрузок, чата, Redux API и stores. |
+| `sitemap.ts`, `searchProduct.ts`, `shops.ts`, `errorProps.ts`     | SEO, поиск, магазины и ошибки.                     |
+
+## `utils/`
+
+| Путь                                                                                    | Комментарий                                                                |
+| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `getServerUserId.ts`                                                                    | Получение user id из Better Auth или кастомной сессии.                     |
+| `auth-helpers.ts`                                                                       | Проверка и получение сессий.                                               |
+| `deleteUserAvatar.ts`, `getAvatar.ts`, `avatarUtils.ts`, `optimizeImage.ts`             | Работа с аватарами и изображениями.                                        |
+| `formatPrice.ts`, `formatWeight.ts`, `formatDateToLocalYYYYMMDD.ts`, `getWordEnding.ts` | Форматирование отображаемых значений.                                      |
+| `calcPrices.ts`                                                                         | Расчеты цены, скидки и цены по карте.                                      |
+| `baseUrl.ts`                                                                            | Получение базового URL для API.                                            |
+| `createSlug.ts`, `transliterate.ts`, `translations.ts`                                  | Slug, транслитерация и переводы URL-сегментов.                             |
+| `getSitemapData.ts`, `generateSiteMetadata.ts`, `getSiteMetadata.ts`                    | SEO metadata и sitemap.                                                    |
+| `shuffleArray.ts`, `debounce.ts`, `generatePassword.ts`                                 | Общие утилиты.                                                             |
+| `proxy-redirects.ts`                                                                    | Редиректы старых маршрутов.                                                |
+| `validation/`                                                                           | Валидация форм, пароля, карты профиля и даты рождения.                     |
+| `admin/`                                                                                | Утилиты админки: дни рождения, возраст, короткий ID, маска телефона, роли. |
+
+## Данные
+
+| Путь                                  | Комментарий                                 |
+| ------------------------------------- | ------------------------------------------- |
+| `src/data/city.ts`                    | Список городов.                             |
+| `src/data/regions.ts`                 | Список регионов.                            |
+| `src/data/locations.ts`               | Адресные данные.                            |
+| `src/data/columnsUsersList.ts`        | Конфигурация колонок таблицы пользователей. |
+| `src/constants/RegFormData.ts`        | Начальные данные формы регистрации.         |
+| `src/constants/addProductFormData.ts` | Конфигурация формы добавления товара.       |
+
+## Практические комментарии для разработки
+
+1. Если нужно получить текущего пользователя на сервере, используйте `getServerUserId()` или существующие auth helpers. Это снижает риск забыть одну из двух сессионных схем.
+2. Если меняете роли или доступы, проверяйте `src/proxy.ts`, layout админки и API route, потому что UI-защиты недостаточно.
+3. Если меняете корзину, проверяйте `cartStore.ts`, `/api/cart`, `usePricing.ts` и server actions. Там распределена логика количества, цены, скидок и бонусов.
+4. Если меняете повтор заказа, смотрите `useRepeatOrder.ts`, `usePriceComparison.ts`, компоненты `user-orders` и API заказов.
+5. Если меняете каталог или карточку товара, проверьте API товара, типы `src/types/product.ts`, общую карточку `ProductCard.tsx` и product page components.
+6. Если меняете CMS категории, проверьте `categoryStore.ts`, `cms/hooks/useCategories.ts`, `cms/categories/_components/*` и CMS API routes.
+7. Если добавляете новые изображения, проверьте, должны ли они лежать в `public/` как статичные ассеты или загружаться через существующий upload API.
+8. Если меняете SEO, проверьте `src/app/sitemap.ts`, `/api/sitemap-data`, `utils/getSitemapData.ts`, CMS `semantic-core` и site metadata helpers.
+9. Если включаете реальную SMS-отправку, раскомментируйте/обновите `sendOTP` в `src/lib/auth.ts` и проверьте `SMS_API_ID`.
+10. Если подключаете реальную оплату, не полагайтесь на текущий `FakePaymentModal`; нужна отдельная серверная валидация платежа и идемпотентность callbacks.
+
+## Известные особенности
+
+| Особенность             | Комментарий                                                             |
+| ----------------------- | ----------------------------------------------------------------------- |
+| Две auth-системы        | Better Auth и кастомная phone+password сессия живут параллельно.        |
+| Временные email         | Для phone registration используется домен `@delivery-shop.ru`.          |
+| OTP в консоли           | SMS отправка отключена, код пишется в server console.                   |
+| Mock payment            | Оплата имитируется, реального платежного провайдера нет.                |
+| Admin/manager           | Обе роли видят админку, но бизнес-доступы могут различаться.            |
+| Mongo singleton         | Для API routes используется общий `MongoClient` через `getDB()`.        |
+| CMS активно развивается | В CMS есть новые компоненты фильтрации, сортировки и reorder категорий. |
+
+## Проверка после изменений
+
+Минимальная проверка:
+
+```bash
+npm run lint
+npm run build
+```
+
+Для ручной проверки:
+
+```bash
+npm run dev
+```
+
+Затем открыть `http://localhost:3000` и пройти затронутый сценарий: каталог, корзина, заказ, профиль, админка или CMS.

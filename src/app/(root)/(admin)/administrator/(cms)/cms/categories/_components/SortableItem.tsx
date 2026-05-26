@@ -1,14 +1,17 @@
 import { MobileCategoryCard } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/MobileCategoryCard'
 import { SortableItemProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { useCategoryStore } from '@/store/categoryStore'
 import { useEffect, useState } from 'react'
 import { DesktopCategoryRow } from './DesktopCategoryRow'
 
 export const SortableItem = ({
+	id,
 	category,
 	displayNumericId,
 	onDelete,
 	onEdit,
 }: SortableItemProps) => {
+	const { draggedId } = useCategoryStore()
 	const [isMobileView, setIsMobileView] = useState(false)
 
 	useEffect(() => {
@@ -22,6 +25,8 @@ export const SortableItem = ({
 		return () => window.removeEventListener('resize', checkMobile)
 	}, [])
 
+	const isBeingDragged = draggedId === id
+
 	if (isMobileView) {
 		return (
 			<div>
@@ -30,6 +35,7 @@ export const SortableItem = ({
 					displayNumericId={displayNumericId}
 					onDelete={onDelete}
 					onEdit={onEdit}
+					isDragging={isBeingDragged}
 				/>
 			</div>
 		)
@@ -41,6 +47,7 @@ export const SortableItem = ({
 			displayNumericId={displayNumericId}
 			onDelete={onDelete}
 			onEdit={onEdit}
+			isDragging={isBeingDragged}
 		/>
 	)
 }
