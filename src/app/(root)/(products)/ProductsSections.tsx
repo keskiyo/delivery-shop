@@ -23,7 +23,7 @@ const ProductsSections = ({
 			: 'grid-cols-2 md:grid-cols-3 xl:grid-cols-4'
 
 	return (
-		<section>
+		<section className='w-full min-w-0'>
 			<div className='flex flex-col px-[max(12px,calc((100%-1208px)/2))]'>
 				<div className='mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between'>
 					<h2 className='text-2xl xl:text-4xl text-left font-bold'>
@@ -60,7 +60,7 @@ const ProductsSections = ({
 						))}
 					</ul>
 				) : (
-					<div className='flex justify-center items-center min-h-100 min-w-200'>
+					<div className='flex justify-center items-center min-w-100 min-h-100'>
 						<span> Нет товаров</span>
 					</div>
 				)}

@@ -124,7 +124,7 @@ export const PhonePasswordResetVerify = ({
 		<AuthFormLayout>
 			<div className='flex flex-col gap-y-6'>
 				<div className='flex flex-col items-center'>
-					<MessageCircle className='w-12 h-12 text-green-600 mb-4' />
+					<MessageCircle className='w-12 h-12 text-brand mb-4' />
 					<h1 className='text-2xl font-bold text-center'>
 						Введите код из SMS
 					</h1>
@@ -132,11 +132,11 @@ export const PhonePasswordResetVerify = ({
 
 				<p className='text-center'>
 					Мы отправили 4-значный код на номер: <br />
-					<span className='text-[#ff6633] font-medium'>{phone}</span>
+					<span className='text-promo font-medium'>{phone}</span>
 				</p>
 
 				{error && (
-					<div className='p-3 bg-red-100 text-red-700 rounded text-sm text-center'>
+					<div className='p-3 bg-danger-soft text-danger rounded text-sm text-center'>
 						{error}
 					</div>
 				)}
@@ -147,7 +147,7 @@ export const PhonePasswordResetVerify = ({
 						)) && (
 						<button
 							onClick={handleToLogin}
-							className='text-green-600 hover:underline text-sm mx-auto cursor-pointer'
+							className='text-brand hover:underline text-sm mx-auto cursor-pointer'
 						>
 							Перейти на страницу входа
 						</button>
@@ -155,7 +155,7 @@ export const PhonePasswordResetVerify = ({
 				<button
 					type='button'
 					onClick={onBackAction}
-					className='text-green-600 hover:underline text-sm mx-auto cursor-pointer'
+					className='text-brand hover:underline text-sm mx-auto cursor-pointer'
 				>
 					Изменить номер телефона
 				</button>
@@ -165,7 +165,7 @@ export const PhonePasswordResetVerify = ({
 						className='flex flex-col gap-y-4 justify-center'
 					>
 						<div>
-							<p className='text-center text-gray-400'>
+							<p className='text-center text-muted-foreground'>
 								Код из SMS
 							</p>
 							<input
@@ -177,7 +177,7 @@ export const PhonePasswordResetVerify = ({
 								autoComplete='one-time-code'
 								value={otp}
 								onChange={handleOtpChange}
-								className='flex justify-center w-27.5 h-15 mx-auto text-center px-4 py-3 border border-[#bfbfbf] rounded focus:border-[#70c05b] focus:shadow-(--shadow-button-default) focus:bg-white focus:outline-none'
+								className='flex justify-center w-27.5 h-15 mx-auto text-center px-4 py-3 border border-border bg-input text-foreground rounded focus:border-brand focus:shadow-(--shadow-button-default) focus:bg-input focus:outline-none'
 								required
 							/>
 						</div>
@@ -197,7 +197,7 @@ export const PhonePasswordResetVerify = ({
 									inputClass={`h-15 ${
 										newPassword.length > 0 &&
 										!isPasswordValid(newPassword)
-											? 'border-red-500'
+											? 'border-danger'
 											: ''
 									}`}
 								/>

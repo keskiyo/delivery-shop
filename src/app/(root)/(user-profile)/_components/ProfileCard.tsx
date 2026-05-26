@@ -192,21 +192,21 @@ const ProfileCard = ({ isEditing }: { isEditing: boolean }) => {
 					<input
 						type='text'
 						value={displayValue || 'Не указана'}
-						className={`${formStyles.input} [&&]:w-full disabled:cursor-not-allowed [&&]:disabled:bg-[#f3f2f1]`}
+						className={`${formStyles.input} [&&]:w-full disabled:cursor-not-allowed [&&]:disabled:bg-surface`}
 						disabled
 						readOnly
 					/>
 				)}
 				{/* Иконка карты */}
-				<CreditCard className='absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400' />
+				<CreditCard className='absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground' />
 			</div>
 
 			{/* Сообщение об ошибке */}
-			{error && <p className='text-red-500 text-sm mt-2'>{error}</p>}
+			{error && <p className='text-danger text-sm mt-2'>{error}</p>}
 
 			{/* Подсказка если карта не добавлена */}
 			{!user?.card && !isEditing && (
-				<p className='text-[#8f8f8f] text-sm mt-2'>
+				<p className='text-muted-foreground text-sm mt-2'>
 					Добавьте номер карты лояльности для получения бонусов
 				</p>
 			)}

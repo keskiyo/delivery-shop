@@ -146,7 +146,7 @@ const AddReviewForm = ({ productId, onReviewAdded }: AddReviewFormProps) => {
 								setShowValidationError(false)
 							}}
 							rows={4}
-							className='w-full max-w-136 bg-white px-4 py-2 border border-[#bfbfbf] rounded focus:outline-none focus:ring-1 focus:ring-green-600 text-gray-700'
+							className='w-full max-w-136 bg-input px-4 py-2 border border-border rounded focus:outline-none focus:ring-1 focus:ring-brand text-foreground placeholder:text-muted-foreground'
 							placeholder='Оставьте свой отзыв'
 							style={{ resize: 'vertical' }}
 						/>
@@ -154,14 +154,14 @@ const AddReviewForm = ({ productId, onReviewAdded }: AddReviewFormProps) => {
 
 					{/* Сообщение о необходимости заполнить все поля */}
 					{showValidationError && (
-						<div className='text-[#d80000] text-sm p-2 bg-[#ffc7c7] rounded mb-2'>
+						<div className='text-danger text-sm p-2 bg-danger-soft rounded mb-2'>
 							Пожалуйста, поставьте оценку и напишите отзыв
 						</div>
 					)}
 
 					{/* Сообщение об ошибке авторизации или сервера */}
 					{error && (
-						<div className='text-[#d80000] text-sm p-2 bg-[#ffc7c7] rounded mb-2'>
+						<div className='text-danger text-sm p-2 bg-danger-soft rounded mb-2'>
 							{error}
 						</div>
 					)}
@@ -172,8 +172,8 @@ const AddReviewForm = ({ productId, onReviewAdded }: AddReviewFormProps) => {
 					disabled={submitting}
 					className={`${
 						submitting
-							? 'cursor-not-allowed bg-[#fcd5ba] text-[#ff6633]'
-							: 'text-base bg-[#ff6633] text-white hover:shadow-(--shadow-article)'
+							? 'cursor-not-allowed bg-promo-soft text-promo'
+							: 'text-base bg-promo text-promo-foreground hover:shadow-(--shadow-article)'
 					} w-47 p-2 flex items-center justify-center rounded duration-300 cursor-pointer`}
 				>
 					{submitting ? 'Отправка...' : 'Отправить отзыв'}

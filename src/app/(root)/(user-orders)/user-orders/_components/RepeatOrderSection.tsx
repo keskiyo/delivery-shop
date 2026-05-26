@@ -23,7 +23,7 @@ const RepeatOrderSection = ({
 		return null
 
 	return (
-		<div className='mt-6 p-6 rounded bg-[#f3f2f1]'>
+		<div className='mt-6 p-6 rounded bg-surface'>
 			<h3 className='text-lg font-semibold mb-4'>
 				Оформление повторного заказа
 			</h3>

@@ -30,14 +30,14 @@ const Footer = () => {
 
 	if (!isClient) {
 		return (
-			<footer className='bg-[#353535] text-[#8a8a8a] mt-10 md:mt-15 xl:mt-20 w-full relative'>
+			<footer className='bg-site-chrome text-site-chrome-muted mt-10 md:mt-15 xl:mt-20 w-full relative'>
 				<div className='px-7 py-10'></div>
 			</footer>
 		)
 	}
 
 	return (
-		<footer className='bg-[#353535] text-[#8a8a8a] mt-10 md:mt-15 xl:mt-20 w-full relative'>
+		<footer className='bg-site-chrome text-site-chrome-muted mt-10 md:mt-15 xl:mt-20 w-full relative'>
 			<div className='max-w-302 mx-auto px-7 py-10 pb-24'>
 				{/* Общая обертка для всех элементов футера */}
 				<div className='flex flex-col md:flex-row justify-between items-center gap-6 md:gap-10'>
@@ -114,7 +114,7 @@ const Footer = () => {
 								className='flex items-center gap-x-2 hover:opacity-80 transition-opacity duration-300'
 							>
 								<Phone size={20} />
-								<p className='text-base hover:text-gray-100 duration-300'>
+								<p className='text-base hover:text-site-chrome-hover duration-300'>
 									8 800 777 33 33
 								</p>
 							</a>
@@ -124,19 +124,19 @@ const Footer = () => {
 					{/* Навигация */}
 					<nav className='nav'>
 						<ul className='flex flex-wrap justify-center gap-x-8 text-xs gap-4 xl:gap-y-2 md:gap-x-10'>
-							<li className='hover:text-gray-100 cursor-pointer'>
+							<li className='hover:text-site-chrome-hover cursor-pointer'>
 								<Link href='#'>О компании</Link>
 							</li>
-							<li className='hover:text-gray-100 cursor-pointer'>
+							<li className='hover:text-site-chrome-hover cursor-pointer'>
 								<Link href='#'>Контакты</Link>
 							</li>
-							<li className='hover:text-gray-100 cursor-pointer'>
+							<li className='hover:text-site-chrome-hover cursor-pointer'>
 								<Link href='#'>Вакансии</Link>
 							</li>
-							<li className='hover:text-gray-100 cursor-pointer'>
+							<li className='hover:text-site-chrome-hover cursor-pointer'>
 								<Link href='#'>Статьи</Link>
 							</li>
-							<li className='hover:text-gray-100 cursor-pointer'>
+							<li className='hover:text-site-chrome-hover cursor-pointer'>
 								Политика обработки персональных данных
 							</li>
 						</ul>

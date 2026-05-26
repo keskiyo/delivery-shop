@@ -14,7 +14,7 @@ export default function GoodbyePage() {
 				</p>
 				<Link
 					href='/'
-					className='bg-green-600 hover:shadow-(--shadow-button-default) active:shadow-(--shadow-button-active) w-full text-center text-white text-2xl px-3 py-2 cursor-pointer rounded duration-300'
+					className='bg-brand hover:shadow-(--shadow-button-default) active:shadow-(--shadow-button-active) w-full text-center text-brand-foreground text-2xl px-3 py-2 cursor-pointer rounded duration-300'
 				>
 					На главную
 				</Link>

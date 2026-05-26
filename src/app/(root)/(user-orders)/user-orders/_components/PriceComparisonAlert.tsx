@@ -13,14 +13,14 @@ export const PriceComparisonAlert: React.FC<PriceComparisonAlertProps> = ({
 }) => {
 	console.log(priceComparison)
 	return (
-		<div className='mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg'>
+		<div className='mb-4 p-4 bg-warning-soft border border-warning/30 rounded-lg'>
 			<div className='flex justify-between items-start'>
 				<div className='flex-1'>
-					<h3 className='text-yellow-800 font-semibold mb-2 flex items-center gap-2'>
+					<h3 className='text-warning font-semibold mb-2 flex items-center gap-2'>
 						<AlertTriangle className='w-5 h-5' />
 						Внимание: цены или скидки изменились
 					</h3>
-					<p className='text-yellow-700 text-sm mb-2'>
+					<p className='text-warning text-sm mb-2'>
 						С момента предыдущего заказа произошли изменения. Заказ
 						будет создан по актуальным ценам и скидкам, а также с
 						учетом статуса карты лояльности и скидок по ней.
@@ -28,10 +28,10 @@ export const PriceComparisonAlert: React.FC<PriceComparisonAlertProps> = ({
 
 					{priceComparison.changedItems.length > 0 && (
 						<div className='mt-2'>
-							<p className='text-yellow-800 font-medium text-sm'>
+							<p className='text-warning font-medium text-sm'>
 								Изменения:
 							</p>
-							<ul className='text-yellow-700 text-sm mt-1 space-y-2'>
+							<ul className='text-warning text-sm mt-1 space-y-2'>
 								{priceComparison.changedItems.map(
 									(item, index) => (
 										<li
@@ -69,8 +69,8 @@ export const PriceComparisonAlert: React.FC<PriceComparisonAlertProps> = ({
 						</div>
 					)}
 
-					<div className='mt-3 p-2 bg-yellow-100 rounded'>
-						<p className='text-yellow-800 font-medium text-sm'>
+					<div className='mt-3 p-2 bg-warning-soft/70 rounded'>
+						<p className='text-warning font-medium text-sm'>
 							<span className='block'>
 								Сумма в предыдущем заказе:{' '}
 								{formatPrice(priceComparison.originalTotal)} ₽
@@ -83,8 +83,8 @@ export const PriceComparisonAlert: React.FC<PriceComparisonAlertProps> = ({
 								<span
 									className={`block ${
 										priceComparison.difference > 0
-											? 'text-red-600'
-											: 'text-green-600'
+											? 'text-danger'
+											: 'text-success'
 									}`}
 								>
 									Изменение:{' '}
@@ -97,7 +97,7 @@ export const PriceComparisonAlert: React.FC<PriceComparisonAlertProps> = ({
 				</div>
 				<button
 					onClick={onClose}
-					className='text-yellow-600 hover:text-yellow-800 text-lg font-bold ml-4 shrink-0'
+					className='text-warning hover:text-foreground text-lg font-bold ml-4 shrink-0'
 				>
 					×
 				</button>

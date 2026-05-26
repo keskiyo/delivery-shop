@@ -35,6 +35,32 @@
 	--color-chart-1: var(--chart-1);
 
 	/* Основные цвета UI */
+	--color-site-chrome-hover: var(--site-chrome-hover);
+	--color-site-chrome-muted: var(--site-chrome-muted);
+	--color-site-chrome-foreground: var(--site-chrome-foreground);
+	--color-site-chrome: var(--site-chrome);
+	--color-danger-foreground: var(--danger-foreground);
+	--color-danger-soft: var(--danger-soft);
+	--color-danger: var(--danger);
+	--color-warning-foreground: var(--warning-foreground);
+	--color-warning-soft: var(--warning-soft);
+	--color-warning: var(--warning);
+	--color-success-foreground: var(--success-foreground);
+	--color-success-soft: var(--success-soft);
+	--color-success: var(--success);
+	--color-promo-foreground: var(--promo-foreground);
+	--color-promo-soft: var(--promo-soft);
+	--color-promo-hover: var(--promo-hover);
+	--color-promo: var(--promo);
+	--color-brand-foreground: var(--brand-foreground);
+	--color-brand-soft: var(--brand-soft);
+	--color-brand-hover: var(--brand-hover);
+	--color-brand: var(--brand);
+	--color-text-soft: var(--text-soft);
+	--color-surface-pressed: var(--surface-pressed);
+	--color-surface-hover: var(--surface-hover);
+	--color-surface-subtle: var(--surface-subtle);
+	--color-surface: var(--surface);
 	--color-ring: var(--ring); /* Цвет обводки при фокусе */
 	--color-input: var(--input); /* Фон полей ввода */
 	--color-border: var(--border); /* Цвет границ */
@@ -63,58 +89,92 @@
 	--color-background: var(--background); /* Основной фон страницы */
 
 	/* === ЦВЕТА ДЛЯ BREADCRUMBS И ОБЩИХ ЭЛЕМЕНТОВ === */
-	--color-breadcrumb-default: oklch(0.145 0 0); /* Темный цвет ссылок */
-	--color-breadcrumb-muted: oklch(0.556 0 0); /* Приглушенный цвет */
+	--color-breadcrumb-default: var(--breadcrumb-default); /* Основной цвет ссылок */
+	--color-breadcrumb-muted: var(--breadcrumb-muted); /* Приглушенный цвет */
 }
 
 /* Светлая тема */
 .light {
 	/* Фон карточек (например, Card, Dialog и т.п.) */
-	--card: oklch(1 0 0); /* Белый фон карточек */
-	--card-foreground: oklch(0.145 0 0); /* Текст в карточках (темный) */
+	--card: oklch(0.992 0.004 92); /* Мягкий белый фон карточек */
+	--card-foreground: oklch(0.235 0.014 84); /* Текст в карточках */
 
 	/* Фон всплывающих окон (Dropdown, Tooltip и т.п.) */
-	--popover: oklch(1 0 0); /* Белый фон всплывающих окон */
-	--popover-foreground: oklch(0.145 0 0); /* Текст во всплывающих окнах */
+	--popover: oklch(0.996 0.004 92); /* Фон всплывающих окон */
+	--popover-foreground: oklch(0.235 0.014 84); /* Текст во всплывающих окнах */
 
 	/* Основной акцентный цвет (например, кнопки Primary) */
-	--primary: oklch(0.205 0 0); /* Темный акцент (почти черный) */
-	--primary-foreground: oklch(0.985 0 0); /* Белый текст на акцентном фоне */
+	--primary: oklch(0.635 0.142 139); /* Зеленый брендовый акцент */
+	--primary-foreground: oklch(0.988 0.006 98); /* Светлый текст на акцентном фоне */
 
 	/* Второстепенные элементы (например, Secondary Button) */
-	--secondary: oklch(0.97 0 0); /* Светло-серый фон */
+	--secondary: oklch(0.938 0.012 88); /* Спокойный второстепенный фон */
 	--secondary-foreground: oklch(
-		0.205 0 0
+		0.285 0.016 84
 	); /* Темный текст на второстепенном фоне */
 
 	/* Приглушенные элементы (например, Muted Badge) */
-	--muted: oklch(0.97 0 0); /* Светло-серый фон */
-	--muted-foreground: oklch(0.556 0 0); /* Средне-серый текст */
+	--muted: oklch(0.942 0.011 88); /* Приглушенный фон */
+	--muted-foreground: oklch(0.505 0.018 86); /* Средний приглушенный текст */
 
 	/* Акцентные элементы (например, Accent Button) */
-	--accent: oklch(0.97 0 0); /* Светло-серый фон */
-	--accent-foreground: oklch(0.205 0 0); /* Темный текст на акценте */
+	--accent: oklch(0.955 0.028 122); /* Светлый зеленый акцентный фон */
+	--accent-foreground: oklch(0.315 0.078 138); /* Текст на акценте */
 
 	/* Границы и поля ввода */
-	--border: oklch(0.922 0 0); /* Светло-серая граница */
-	--input: oklch(0.922 0 0); /* Фон полей ввода */
+	--border: oklch(0.872 0.014 88); /* Светлая теплая граница */
+	--input: oklch(0.982 0.006 92); /* Фон полей ввода */
 
 	/* Цвет фокуса */
-	--ring: oklch(0.708 0 0); /* Серый цвет обводки при фокусе */
+	--ring: oklch(0.665 0.13 139); /* Зеленая обводка при фокусе */
 
 	/* Радиус скругления */
 	--radius: 0.625rem;
 
 	/* === ОСНОВНОЙ ФОН СТРАНИЦЫ === */
 	--background: oklch(
-		94.912% 0.00011 271.152
-	); /* БЕЛЫЙ ФОН СТРАНИЦЫ (ИЗМЕНЯТЬ ЗДЕСЬ) */
+		0.964 0.01 88
+	); /* Мягкий теплый фон страницы */
 
 	/* === ОСНОВНОЙ ТЕКСТ === */
-	--foreground: oklch(0.145 0 0); /* ТЕМНЫЙ ТЕКСТ ПО БЕЛОМУ ФОНУ */
+	--foreground: oklch(0.235 0.014 84); /* Темный основной текст */
 
 	/* Цвет ошибок (например, destructive button) */
-	--destructive: oklch(0.577 0.245 27.325); /* Красный цвет */
+	--destructive: oklch(0.56 0.22 28); /* Красный цвет */
+
+	/* Поверхности и текстовые роли */
+	--surface: oklch(0.982 0.006 92);
+	--surface-subtle: oklch(0.952 0.01 88);
+	--surface-hover: oklch(0.935 0.014 88);
+	--surface-pressed: oklch(0.902 0.018 88);
+	--text-soft: oklch(0.375 0.018 84);
+
+	/* Брендовые и смысловые роли */
+	--brand: oklch(0.635 0.142 139);
+	--brand-hover: oklch(0.58 0.142 139);
+	--brand-soft: oklch(0.93 0.048 136);
+	--brand-foreground: oklch(0.988 0.006 98);
+	--promo: oklch(0.675 0.19 43);
+	--promo-hover: oklch(0.62 0.19 43);
+	--promo-soft: oklch(0.93 0.06 54);
+	--promo-foreground: oklch(0.988 0.006 98);
+	--success: oklch(0.635 0.142 139);
+	--success-soft: oklch(0.93 0.048 136);
+	--success-foreground: oklch(0.988 0.006 98);
+	--warning: oklch(0.74 0.145 82);
+	--warning-soft: oklch(0.945 0.06 86);
+	--warning-foreground: oklch(0.29 0.06 72);
+	--danger: oklch(0.56 0.22 28);
+	--danger-soft: oklch(0.93 0.055 28);
+	--danger-foreground: oklch(0.988 0.006 98);
+
+	/* Фирменная темная рамка сайта: header, footer, mobile nav */
+	--site-chrome: oklch(0.305 0.006 88);
+	--site-chrome-foreground: oklch(0.95 0.006 92);
+	--site-chrome-muted: oklch(0.68 0.006 92);
+	--site-chrome-hover: oklch(0.88 0.006 92);
+	--breadcrumb-default: oklch(0.235 0.014 84);
+	--breadcrumb-muted: oklch(0.505 0.018 86);
 
 	/* Цвета диаграмм */
 	--chart-1: oklch(0.646 0.222 41.116);
@@ -124,65 +184,99 @@
 	--chart-5: oklch(0.769 0.188 70.08);
 
 	/* Цвета сайдбара */
-	--sidebar: oklch(0.985 0 0); /* Фон сайдбара */
-	--sidebar-foreground: oklch(0.145 0 0); /* Текст в сайдбаре */
-	--sidebar-primary: oklch(0.205 0 0); /* Акцент в сайдбаре */
+	--sidebar: oklch(0.985 0.005 92); /* Фон сайдбара */
+	--sidebar-foreground: oklch(0.235 0.014 84); /* Текст в сайдбаре */
+	--sidebar-primary: var(--brand); /* Акцент в сайдбаре */
 	--sidebar-primary-foreground: oklch(
-		0.985 0 0
+		0.988 0.006 98
 	); /* Текст на акценте в сайдбаре */
-	--sidebar-accent: oklch(0.97 0 0); /* Второстепенный в сайдбаре */
+	--sidebar-accent: var(--surface-subtle); /* Второстепенный в сайдбаре */
 	--sidebar-accent-foreground: oklch(
-		0.205 0 0
+		0.285 0.016 84
 	); /* Текст на второстепенном в сайдбаре */
-	--sidebar-border: oklch(0.922 0 0); /* Границы в сайдбаре */
-	--sidebar-ring: oklch(0.708 0 0); /* Обводка фокуса в сайдбаре */
+	--sidebar-border: var(--border); /* Границы в сайдбаре */
+	--sidebar-ring: var(--ring); /* Обводка фокуса в сайдбаре */
 }
 
 /* Темная тема */
 .dark {
 	/* ОСНОВНОЙ ФОН СТРАНИЦЫ В ТЕМНОЙ ТЕМЕ */
 	--background: oklch(
-		26.033% 0.00003 271.152
-	); /* ТЕМНЫЙ ФОН (около черного) */
+		0.215 0.012 92
+	); /* Мягкий темный фон страницы */
 
 	/* ОСНОВНОЙ ТЕКСТ В ТЕМНОЙ ТЕМЕ */
-	--foreground: oklch(95.815% 0.00011 271.152); /* СВЕТЛЫЙ ТЕКСТ */
+	--foreground: oklch(0.93 0.008 92); /* Светлый основной текст */
 
 	/* Фон карточек в темной теме */
-	--card: oklch(38.666% 0.00004 271.152); /* Темный фон карточек */
-	--card-foreground: oklch(0.985 0 0); /* Светлый текст в карточках */
+	--card: oklch(0.285 0.013 92); /* Темный фон карточек */
+	--card-foreground: oklch(0.93 0.008 92); /* Светлый текст в карточках */
 
 	/* Фон всплывающих окон */
-	--popover: oklch(0.205 0 0); /* Темный фон всплывающих окон */
+	--popover: oklch(0.315 0.014 92); /* Темный фон всплывающих окон */
 	--popover-foreground: oklch(
-		0.985 0 0
+		0.93 0.008 92
 	); /* Светлый текст во всплывающих окнах */
 
 	/* Основной акцентный цвет в темной теме */
-	--primary: oklch(0.922 0 0); /* Светлый акцент */
-	--primary-foreground: oklch(0.205 0 0); /* Темный текст на акценте */
+	--primary: oklch(0.69 0.13 139); /* Зеленый брендовый акцент */
+	--primary-foreground: oklch(0.18 0.018 132); /* Темный текст на акценте */
 
 	/* Второстепенные элементы */
-	--secondary: oklch(0.269 0 0); /* Темный фон */
-	--secondary-foreground: oklch(0.985 0 0); /* Светлый текст */
+	--secondary: oklch(0.335 0.014 92); /* Темный второстепенный фон */
+	--secondary-foreground: oklch(0.91 0.008 92); /* Светлый текст */
 
 	/* Приглушенные элементы */
-	--muted: oklch(0.269 0 0);
-	--muted-foreground: oklch(0.708 0 0);
+	--muted: oklch(0.335 0.014 92);
+	--muted-foreground: oklch(0.72 0.012 92);
 
 	/* Акцентные элементы */
-	--accent: oklch(0.269 0 0);
-	--accent-foreground: oklch(0.985 0 0);
+	--accent: oklch(0.355 0.036 135);
+	--accent-foreground: oklch(0.92 0.018 132);
 
 	/* Границы и поля ввода (прозрачные в темной теме) */
-	--border: oklch(1 0 0 / 10%); /* Прозрачные границы */
-	--input: oklch(1 0 0 / 15%); /* Прозрачный фон полей ввода */
+	--border: oklch(0.82 0.012 92 / 18%); /* Прозрачные границы */
+	--input: oklch(0.335 0.014 92); /* Фон полей ввода */
 
 	/* Цвет фокуса */
-	--ring: oklch(0.556 0 0);
+	--ring: oklch(0.69 0.13 139);
 
 	/* Цвет ошибок */
-	--destructive: oklch(0.704 0.191 22.216);
+	--destructive: oklch(0.68 0.18 24);
+
+	/* Поверхности и текстовые роли */
+	--surface: oklch(0.285 0.013 92);
+	--surface-subtle: oklch(0.255 0.012 92);
+	--surface-hover: oklch(0.355 0.014 92);
+	--surface-pressed: oklch(0.39 0.016 92);
+	--text-soft: oklch(0.82 0.01 92);
+
+	/* Брендовые и смысловые роли */
+	--brand: oklch(0.69 0.13 139);
+	--brand-hover: oklch(0.75 0.12 139);
+	--brand-soft: oklch(0.36 0.052 138);
+	--brand-foreground: oklch(0.18 0.018 132);
+	--promo: oklch(0.72 0.16 45);
+	--promo-hover: oklch(0.78 0.145 45);
+	--promo-soft: oklch(0.38 0.055 44);
+	--promo-foreground: oklch(0.18 0.018 45);
+	--success: oklch(0.69 0.13 139);
+	--success-soft: oklch(0.36 0.052 138);
+	--success-foreground: oklch(0.18 0.018 132);
+	--warning: oklch(0.78 0.13 82);
+	--warning-soft: oklch(0.39 0.055 82);
+	--warning-foreground: oklch(0.18 0.035 76);
+	--danger: oklch(0.68 0.18 24);
+	--danger-soft: oklch(0.38 0.06 24);
+	--danger-foreground: oklch(0.98 0.006 92);
+
+	/* Фирменная темная рамка сайта: header, footer, mobile nav */
+	--site-chrome: oklch(0.275 0.007 88);
+	--site-chrome-foreground: oklch(0.94 0.007 92);
+	--site-chrome-muted: oklch(0.69 0.008 92);
+	--site-chrome-hover: oklch(0.9 0.008 92);
+	--breadcrumb-default: oklch(0.88 0.008 92);
+	--breadcrumb-muted: oklch(0.68 0.01 92);
 
 	/* Цвета диаграмм в темной теме */
 	--chart-1: oklch(0.488 0.243 264.376);
@@ -192,14 +286,14 @@
 	--chart-5: oklch(0.645 0.246 16.439);
 
 	/* Цвета сайдбара в темной теме */
-	--sidebar: oklch(0.205 0 0);
-	--sidebar-foreground: oklch(0.985 0 0);
-	--sidebar-primary: oklch(0.488 0.243 264.376);
-	--sidebar-primary-foreground: oklch(0.985 0 0);
-	--sidebar-accent: oklch(0.269 0 0);
-	--sidebar-accent-foreground: oklch(0.985 0 0);
-	--sidebar-border: oklch(1 0 0 / 10%);
-	--sidebar-ring: oklch(0.556 0 0);
+	--sidebar: oklch(0.255 0.012 92);
+	--sidebar-foreground: oklch(0.93 0.008 92);
+	--sidebar-primary: var(--brand);
+	--sidebar-primary-foreground: var(--brand-foreground);
+	--sidebar-accent: var(--surface-hover);
+	--sidebar-accent-foreground: oklch(0.92 0.018 132);
+	--sidebar-border: var(--border);
+	--sidebar-ring: var(--ring);
 }
 
 /* Установка шрифта по умолчанию */

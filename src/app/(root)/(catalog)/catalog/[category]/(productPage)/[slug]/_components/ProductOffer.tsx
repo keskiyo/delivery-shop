@@ -14,7 +14,7 @@ const ProductOffer = ({ discountedPrice, cardPrice }: ProductOfferProps) => {
 				<p className='text-xl md:text-lg xl:text-2xl mb-1.5'>
 					{formatPrice(discountedPrice)} ₽
 				</p>
-				<p className='text-[#8a8a8a] text-[8px] md:text-xs'>
+				<p className='text-muted-foreground text-[8px] md:text-xs'>
 					Обычная цена
 				</p>
 			</div>
@@ -24,12 +24,12 @@ const ProductOffer = ({ discountedPrice, cardPrice }: ProductOfferProps) => {
 					{formatPrice(cardPrice)} ₽
 				</p>
 				<div className='flex flex-row gap-x-1 items-center relative'>
-					<p className='text-[#8a8a8a] text-[8px] md:text-xs'>
+					<p className='text-muted-foreground text-[8px] md:text-xs'>
 						С картой Фудмаркет
 					</p>
 					<div className='group relative cursor-help'>
 						<Info size={16} className='select-none opacity-70' />
-						<div className='absolute right-0 bottom-full mb-2 w-48 p-3 bg-card border border-gray-200 shadow-lg rounded-md text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50'>
+						<div className='absolute right-0 bottom-full mb-2 w-48 p-3 bg-popover text-popover-foreground border border-border shadow-lg rounded-md text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50'>
 							Скидка {CONFIG.CARD_DISCOUNT_PERCENT}% по карте
 							лояльности «Фудмаркета». Оформите карту на кассе или
 							закажите с курьером!

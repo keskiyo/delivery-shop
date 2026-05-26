@@ -199,11 +199,11 @@ const ProfileEmail = ({ isEditing }: { isEditing: boolean }) => {
 					type='email'
 					value={email}
 					onChange={handleEmailChange}
-					className={`${formStyles.input} [&&]:w-full disabled:cursor-not-allowed [&&]:disabled:bg-[#f3f2f1]`}
+					className={`${formStyles.input} [&&]:w-full disabled:cursor-not-allowed [&&]:disabled:bg-surface`}
 					placeholder='Введите ваш email'
 					disabled={!isEditing}
 				/>
-				<Mail className='absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400' />
+				<Mail className='absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground' />
 			</div>
 
 			{hasNoEmail && !isEditing && (

@@ -41,7 +41,7 @@ const UserAvatar = ({
 
 	return (
 		<div
-			className='rounded-full border border-[#f3f2f1] overflow-hidden shrink-0'
+			className='rounded-full border border-border overflow-hidden shrink-0'
 			style={{ width: size, height: size }}
 		>
 			<Image

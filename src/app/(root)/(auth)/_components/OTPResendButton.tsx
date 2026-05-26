@@ -20,8 +20,8 @@ const OTPResendCode = ({
 			disabled={!canResend}
 			className={`text-xs underline cursor-pointer text-center ${
 				canResend
-					? 'text-[#ff6633]'
-					: 'text-gray-400 cursor-not-allowed'
+					? 'text-promo'
+					: 'text-muted-foreground cursor-not-allowed'
 			}`}
 		>
 			Отправить еще раз

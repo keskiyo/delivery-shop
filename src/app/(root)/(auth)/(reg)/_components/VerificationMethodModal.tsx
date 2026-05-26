@@ -11,8 +11,8 @@ const VerificationMethodModal = () => {
 	const { phoneNumber, email } = regFormData
 
 	const iconContainerStyles = `
-    p-3 mb-4 rounded-full bg-[#FFF2ED] 
-    group-hover:bg-[#ff6633] duration-300
+    p-3 mb-4 rounded-full bg-promo-soft
+    group-hover:bg-promo duration-300
   `
 
 	return (
@@ -35,26 +35,26 @@ const VerificationMethodModal = () => {
 							className={verificationButtonStyles}
 						>
 							<div className={iconContainerStyles}>
-								<Smartphone className='h-6 w-6 text-[#ff6633] group-hover:text-white' />
+								<Smartphone className='h-6 w-6 text-promo group-hover:text-promo-foreground' />
 							</div>
 							<span className='font-medium'>
 								По SMS на телефон
 							</span>
-							<span className='text-sm mt-1 text-gray-400'>
+							<span className='text-sm mt-1 text-muted-foreground'>
 								+{phoneNumber}
 							</span>
 							<div className='absolute top-0 right-0 -mt-2 -mr-2'>
 								<span className='flex h-4 w-4'>
-									<span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ff6633] opacity-75'></span>
-									<span className='relative inline-flex rounded-full h-4 w-4 bg-[#ff6633]'></span>
+									<span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-promo opacity-75'></span>
+									<span className='relative inline-flex rounded-full h-4 w-4 bg-promo'></span>
 								</span>
 							</div>
 						</Link>
 
 						<div className='flex items-center my-2'>
-							<div className='grow border-t border-gray-200'></div>
+							<div className='grow border-t border-border'></div>
 							<span className='mx-4 text-sm'>или</span>
-							<div className='grow border-t border-gray-200'></div>
+							<div className='grow border-t border-border'></div>
 						</div>
 
 						<Link
@@ -62,12 +62,12 @@ const VerificationMethodModal = () => {
 							className={verificationButtonStyles}
 						>
 							<div className={iconContainerStyles}>
-								<Mail className='h-6 w-6 text-[#ff6633] group-hover:text-white' />
+								<Mail className='h-6 w-6 text-promo group-hover:text-promo-foreground' />
 							</div>
 							<span className='font-medium'>
 								По ссылке на email
 							</span>
-							<span className='text-sm  mt-1 text-gray-400'>
+							<span className='text-sm  mt-1 text-muted-foreground'>
 								{email}
 							</span>
 						</Link>

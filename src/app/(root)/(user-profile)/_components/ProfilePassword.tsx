@@ -80,11 +80,11 @@ const ProfilePassword = () => {
 				<input
 					type='text'
 					value='********'
-					className={`${formStyles.input} [&&]:w-full disabled:cursor-not-allowed [&&]:disabled:bg-[#f3f2f1]`}
+					className={`${formStyles.input} [&&]:w-full disabled:cursor-not-allowed [&&]:disabled:bg-surface`}
 					disabled
 					readOnly
 				/>
-				<Key className='absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400' />
+				<Key className='absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground' />
 			</div>
 
 			{/* Модальное окно */}
@@ -97,9 +97,9 @@ const ProfilePassword = () => {
 							</h3>
 							<button
 								onClick={handleCancel}
-								className='rounded duration-300 cursor-pointer mb-8 bg-gray-100 absolute top-0 right-0 m-3'
+								className='rounded duration-300 cursor-pointer mb-8 bg-surface hover:bg-surface-hover absolute top-0 right-0 m-3'
 							>
-								<X size={24} className='text-gray-600' />
+								<X size={24} className='text-muted-foreground' />
 							</button>
 						</div>
 

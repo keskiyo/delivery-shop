@@ -72,7 +72,7 @@ const ProfilePage = () => {
 		return (
 			<ErrorContent
 				error='Данные пользователя не найдены'
-				icon={<MailWarning className='h-8 w-8 text-red-600' />}
+				icon={<MailWarning className='h-8 w-8 text-danger' />}
 				primaryAction={{ label: 'Войти', onClick: handleToLogin }}
 				secondaryAction={{
 					label: 'Зарегистрироваться',
@@ -89,7 +89,7 @@ const ProfilePage = () => {
 
 				<div className='p-6 md:p-8'>
 					<div className='flex items-center justify-center mb-6'>
-						<div className='bg-green-600 text-white px-3 py-1 rounded-full text-sm flex items-center'>
+						<div className='bg-success-soft text-success px-3 py-1 rounded-full text-sm flex items-center'>
 							{isPhoneRegistration ? (
 								<>
 									<Phone className='h-4 w-4 mr-1' />

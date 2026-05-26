@@ -57,7 +57,7 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 		: []
 
 	return (
-		<div className='fixed inset-0 backdrop-blur-sm bg-opacity-50 flex items-center justify-center z-50'>
+		<div className='fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50'>
 			<div className='bg-card p-6 rounded max-w-md w-full mx-4'>
 				<h3 className='text-lg font-bold mb-4'>
 					Выберите дату и время доставки
@@ -78,15 +78,15 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 									onClick={() => handleDateSelect(item.date)}
 									className={`py-2 px-3 rounded text-sm duration-300 cursor-pointer ${
 										isSelected
-											? 'bg-green-600 text-white'
-											: 'bg-gray-100 hover:bg-gray-200'
+											? 'bg-brand text-brand-foreground'
+											: 'bg-surface text-foreground hover:bg-surface-hover'
 									}`}
 								>
 									<div
 										className={`text-xs mt-1 ${
 											isSelected
-												? 'text-white'
-												: 'text-[#292929]'
+												? 'text-brand-foreground'
+												: 'text-foreground'
 										}`}
 									>
 										{formatDateNumeric(
@@ -96,8 +96,8 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 									<div
 										className={`text-xs hidden xs:block ${
 											isSelected
-												? 'text-white'
-												: 'text-[#292929]'
+												? 'text-brand-foreground'
+												: 'text-foreground'
 										}`}
 									>
 										{formatDateFull(
@@ -126,7 +126,7 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 											handleTimeSlotSelect(slot)
 										}
 										disabled={isCreatingOrder}
-										className='bg-gray-100 hover:bg-green-600 hover:text-white py-2 px-3 text-gray-800 rounded text-sm duration-300 cursor-pointer disabled:opacity-50'
+										className='bg-surface hover:bg-brand hover:text-brand-foreground py-2 px-3 text-foreground rounded text-sm duration-300 cursor-pointer disabled:opacity-50'
 									>
 										<span className='xl:hidden'>
 											{formatted.mobileLabel}
@@ -138,7 +138,7 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 								)
 							})}
 							{availableTimeSlots.length === 0 && (
-								<p className='col-span-2 text-center text-[#8a8a8a] py-2'>
+								<p className='col-span-2 text-center text-muted-foreground py-2'>
 									Нет доступных временных интервалов
 								</p>
 							)}
@@ -149,7 +149,7 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 				<div className='flex gap-2 mt-4'>
 					<button
 						onClick={onCancel}
-						className='flex-1 bg-gray-300 text-gray-700 py-2 rounded hover:bg-[#ff6633] hover:text-white duration-300 cursor-pointer'
+						className='flex-1 bg-surface text-text-soft py-2 rounded hover:bg-promo hover:text-promo-foreground duration-300 cursor-pointer'
 						disabled={isCreatingOrder}
 					>
 						Отмена
@@ -159,7 +159,7 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 				{isCreatingOrder && (
 					<div className='mt-4 text-center'>
 						<Loader />
-						<p className='text-sm text-[#8a8a8a]'>
+						<p className='text-sm text-muted-foreground'>
 							Создаем заказ...
 						</p>
 					</div>

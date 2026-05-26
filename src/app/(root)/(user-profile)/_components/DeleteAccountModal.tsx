@@ -45,7 +45,7 @@ const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({
 				</h3>
 
 				{error && (
-					<div className='mb-4 p-3 bg-red-100 border border-red-300 text-red-700 rounded text-sm'>
+					<div className='mb-4 p-3 bg-danger-soft border border-danger/30 text-danger rounded text-sm'>
 						{error}
 					</div>
 				)}
@@ -58,13 +58,13 @@ const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({
 				<div className='flex justify-end gap-3'>
 					<button
 						onClick={onClose}
-						className='flex-1 bg-[#dddddd] border-none text-[#414141] rounded flex hover:shadow-button-secondary p-2 justify-center items-center active:shadow-(--shadow-button-active) duration-300 cursor-pointer'
+						className='flex-1 bg-surface border-none text-text-soft rounded flex hover:shadow-button-secondary p-2 justify-center items-center active:shadow-(--shadow-button-active) duration-300 cursor-pointer'
 					>
 						Отмена
 					</button>
 					<button
 						onClick={onConfirm}
-						className='flex-1 px-4 py-2 bg-[#d80000] text-white rounded hover:bg-red-700 duration-300 cursor-pointer'
+						className='flex-1 px-4 py-2 bg-danger text-danger-foreground rounded hover:shadow-button-cancel duration-300 cursor-pointer'
 					>
 						Удалить
 					</button>

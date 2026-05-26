@@ -137,16 +137,16 @@ const ProfileAvatar = ({ gender }: { gender: string }) => {
 					width={128}
 					height={128}
 					alt='Аватар профиля'
-					className='w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover'
+					className='w-32 h-32 rounded-full border-4 border-card shadow-lg object-cover'
 					onError={handleImageError}
 					priority
 				/>
 				{isUploading && (
-					<div className='absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-full'>
-						<div className='animate-spin rounded-full h-8 w-8 border-b-2 border-white'></div>
+					<div className='absolute inset-0 bg-black/50 flex items-center justify-center rounded-full'>
+						<div className='animate-spin rounded-full h-8 w-8 border-b-2 border-brand-foreground'></div>
 					</div>
 				)}
-				<label className='absolute bottom-0 right-0 bg-green-600 text-white p-2 rounded-full cursor-pointer shadow-md hover:bg-green-500 duration-300'>
+				<label className='absolute bottom-0 right-0 bg-brand text-brand-foreground p-2 rounded-full cursor-pointer shadow-md hover:shadow-(--shadow-button-default) duration-300'>
 					<input
 						ref={fileInputRef}
 						type='file'
@@ -169,7 +169,7 @@ const ProfileAvatar = ({ gender }: { gender: string }) => {
 				<p className='text-sm mb-1'>
 					Нажмите на иконку для смены аватара
 				</p>
-				<p className='text-xs text-[#8f8f8f]'>
+				<p className='text-xs text-muted-foreground'>
 					{isUploading
 						? 'Загрузка...'
 						: 'Загрузите файл JPEG, PNG, WEBP, GIF'}

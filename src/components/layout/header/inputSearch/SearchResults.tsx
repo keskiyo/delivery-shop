@@ -47,7 +47,7 @@ const SearchResults = ({
 					<div key={group.category} className='flex flex-col gap-2'>
 						<Link
 							href={`/catalog/${encodeURIComponent(group.category)}`}
-							className='flex items-start gap-x-4 hoverLbg-gray-100 p-1 rounded cursor-pointer'
+							className='flex items-start gap-x-4 hover:bg-surface-hover p-1 rounded cursor-pointer'
 							onClick={resetSearch}
 						>
 							<div>
@@ -59,13 +59,13 @@ const SearchResults = ({
 									highlight={query}
 								/>
 							</div>
-							<Menu size={24} className='text-gray-500' />
+							<Menu size={24} className='text-muted-foreground' />
 						</Link>
 						<ul className='flex flex-col gap-2'>
 							{group.products.map(product => (
 								<li
 									key={product.id}
-									className='p-1 hover:bg-gray-100'
+									className='p-1 hover:bg-surface-hover'
 								>
 									<Link
 										href={`/catalog/${encodeURIComponent(group.category)}/${product.id}?desc=${encodeURIComponent(product.title.substring(0, 50))}`}

@@ -25,7 +25,7 @@ const ArticleCard = ({ img, title, createdAt, text }: ArticlesProps) => {
 				</time>
 				<h3 className=' text-base font-bold xl:text-lg'>{title}</h3>
 				<p className='line-clamp-3 text-xs xl:text-base'>{text}</p>
-				<button className='rounded mt-auto w-37.5 h-10 bg-[#E5FFDE] text-base text-[#70C05B] hover:bg-green-500 hover:shadow-(--shadow-button-default) hover:text-white active:shadow-(--shadow-button-active) duration-300 cursor-pointer'>
+				<button className='rounded mt-auto w-37.5 h-10 bg-success-soft text-base text-success hover:bg-success hover:shadow-(--shadow-button-default) hover:text-success-foreground active:shadow-(--shadow-button-active) duration-300 cursor-pointer'>
 					Подробнее
 				</button>
 			</div>

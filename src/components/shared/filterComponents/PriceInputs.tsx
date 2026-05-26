@@ -44,7 +44,7 @@ const PriceInputs = ({
 				min={min}
 				max={max}
 				placeholder={`${min} ₽`}
-				className='w-31 h-10 border rounded py-2 px-4 bg-white text-gray-500'
+				className='w-31 h-10 border border-border rounded py-2 px-4 bg-input text-foreground placeholder:text-muted-foreground focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20'
 			/>
 			<p className='text-base'>-</p>
 			<input
@@ -55,7 +55,7 @@ const PriceInputs = ({
 				min={min}
 				max={max}
 				placeholder={`${max} ₽`}
-				className='w-31 h-10 border rounded py-2 px-4 bg-white text-gray-500'
+				className='w-31 h-10 border border-border rounded py-2 px-4 bg-input text-foreground placeholder:text-muted-foreground focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20'
 			/>
 		</div>
 	)

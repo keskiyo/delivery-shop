@@ -21,7 +21,7 @@ type ErrorContentProps = {
 
 export const ErrorContent = ({
 	error,
-	icon = <XCircle className='h-8 w-8 text-red-600' />,
+	icon = <XCircle className='h-8 w-8 text-danger' />,
 	title = 'Ошибка отправки',
 	primaryAction,
 	secondaryAction,
@@ -29,7 +29,7 @@ export const ErrorContent = ({
 	return (
 		<div className='space-y-6'>
 			<div className='flex flex-col items-center text-center space-y-4'>
-				<div className='p-3 bg-red-100 rounded-full'>{icon}</div>
+				<div className='p-3 bg-danger-soft rounded-full'>{icon}</div>
 				<div className='space-y-2'>
 					<h3 className='text-2xl font-bold'>{title}</h3>
 					{error && <p className='max-w-md'>{error}</p>}
@@ -40,7 +40,7 @@ export const ErrorContent = ({
 				{primaryAction && (
 					<button
 						onClick={primaryAction.onClick}
-						className={`w-full py-3 px-4 bg-[#d80000] text-white rounded shadow-md hover:shadow-lg duration-300 flex items-center justify-center space-x-2 cursor-pointer ${primaryAction.className}`}
+						className={`w-full py-3 px-4 bg-danger text-danger-foreground rounded shadow-md hover:shadow-lg duration-300 flex items-center justify-center space-x-2 cursor-pointer ${primaryAction.className}`}
 					>
 						<span>{primaryAction.label}</span>
 					</button>
@@ -49,7 +49,7 @@ export const ErrorContent = ({
 				{secondaryAction && (
 					<button
 						onClick={secondaryAction.onClick}
-						className={`w-full py-3 px-4 border bg-gray-300 border-gray-300 text-gray-900 rounded hover:bg-gray-200 duration-300 flex items-center justify-center space-x-2 cursor-pointer ${secondaryAction.className}`}
+						className={`w-full py-3 px-4 border bg-surface border-border text-foreground rounded hover:bg-surface-hover duration-300 flex items-center justify-center space-x-2 cursor-pointer ${secondaryAction.className}`}
 					>
 						<RotateCw size={24} />
 						<span>{secondaryAction.label}</span>

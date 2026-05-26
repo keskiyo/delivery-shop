@@ -20,17 +20,17 @@ export const UnverifiedEmail = ({
 	return (
 		<AuthFormLayout>
 			<div className='flex flex-col gap-y-4 justify-center items-center'>
-				<MailWarning className='h-8 w-8 text-[#ff6633]' />
+				<MailWarning className='h-8 w-8 text-promo' />
 
 				<h2 className='text-2xl font-medium tracking-tight'>
 					Требуется{' '}
-					<span className='text-[#ff6633] font-semibold'>
+					<span className='text-promo font-semibold'>
 						подтверждение
 					</span>
 				</h2>
 
 				<div className='w-full'>
-					<div className='w-full rounded p-4 border border-gray-200 shadow-xs flex flex-col items-center'>
+					<div className='w-full rounded p-4 border border-border shadow-xs flex flex-col items-center'>
 						<p className='text-sm font-light'>
 							Письмо отправлено на:
 						</p>
@@ -61,10 +61,10 @@ export const UnverifiedEmail = ({
 							setLoginAction('')
 							setShowUnverifiedEmailAction(false)
 						}}
-						className={`${formStyles.loginLink} [&&]:h-auto [&&]:my-auto text-green-600 hover:text-white w-full cursor-pointer`}
+						className={`${formStyles.loginLink} [&&]:h-auto [&&]:my-auto w-full cursor-pointer`}
 					>
 						<span className='relative flex items-center justify-center gap-2 font-medium py-3.5 px-6 text-sm hover:*:text-white'>
-							<Search className='h-5 w-5 text-green-600 transition-colors duration-300' />
+							<Search className='h-5 w-5 text-brand transition-colors duration-300' />
 							<span className='translate-y-px'>
 								Использовать другой email
 							</span>
@@ -77,7 +77,7 @@ export const UnverifiedEmail = ({
 							setShowUnverifiedEmailAction(false)
 							router.replace('/contacts')
 						}}
-						className='w-full rounded border border-gray-200 hover:text-gray-200 duration-300 cursor-pointer'
+						className='w-full rounded border border-border hover:text-muted-foreground duration-300 cursor-pointer'
 					>
 						<span className='flex items-center justify-center gap-2 font-medium py-3.5 px-6 text-sm'>
 							<HelpCircle className='h-5 w-5' />

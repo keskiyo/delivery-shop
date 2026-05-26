@@ -11,7 +11,7 @@ const ProductImage = memo(function ProductImage({
 	title,
 }: ProductImageProps) {
 	return (
-		<div className='shrink-0 w-20 h-17 min-w-20 min-h-17 bg-gray-100 rounded flex items-center justify-center shadow-cart-item relative mt-3'>
+		<div className='shrink-0 w-20 h-17 min-w-20 min-h-17 bg-surface rounded flex items-center justify-center shadow-cart-item relative mt-3'>
 			<Image
 				src={`/images/products/img-${productId}.jpeg`}
 				alt={title}

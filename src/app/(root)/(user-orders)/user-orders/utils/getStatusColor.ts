@@ -3,42 +3,42 @@ import { Order } from '@/types/order'
 export const getStatusColor = (order: Order) => {
 	if (order.paymentMethod === 'online') {
 		if (order.paymentStatus === 'paid' && order.status === 'confirmed') {
-			return 'bg-[#f3f2f1] text-gray-800'
+			return 'bg-surface text-foreground'
 		} else if (order.paymentStatus === 'failed') {
-			return 'bg-[#d80000] text-white'
+			return 'bg-danger text-danger-foreground'
 		} else if (
 			order.paymentStatus === 'waiting' &&
 			order.status === 'pending'
 		) {
-			return 'bg-[#f3f2f1] text-gray-800'
+			return 'bg-surface text-foreground'
 		}
 	}
 
 	if (order.paymentMethod === 'cash_on_delivery') {
 		if (order.status === 'pending' && order.paymentStatus === 'pending') {
-			return 'bg-[#e6f7ee] text-[#067647]'
+			return 'bg-success-soft text-success'
 		} else if (order.status === 'confirmed') {
-			return 'bg-[#f3f2f1] text-gray-800'
+			return 'bg-surface text-foreground'
 		}
 	}
 
 	switch (order.status) {
 		case 'pending':
 		case 'confirmed':
-			return 'bg-[#f3f2f1] text-gray-800'
+			return 'bg-surface text-foreground'
 		case 'delivered':
-			return 'bg-[#067647] text-white'
+			return 'bg-success text-success-foreground'
 		case 'cancelled':
 		case 'failed':
-			return 'bg-[#d80000] text-white'
+			return 'bg-danger text-danger-foreground'
 		case 'refund':
 		case 'returned':
-			return 'bg-[#fff9e6] text-[#b35c00]'
+			return 'bg-warning-soft text-warning'
 		case 'collected':
-			return 'bg-[#e6f7ee] text-[#067647]'
+			return 'bg-success-soft text-success'
 		case 'delivering':
-			return 'bg-[#e6f7ee] text-[#067647]'
+			return 'bg-success-soft text-success'
 		default:
-			return 'bg-[#f3f2f1] text-gray-800'
+			return 'bg-surface text-foreground'
 	}
 }

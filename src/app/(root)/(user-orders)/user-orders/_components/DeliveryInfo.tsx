@@ -10,14 +10,14 @@ export const DeliveryInfo: React.FC<DeliveryInfoProps> = ({
 	onEdit,
 }) => {
 	return (
-		<div className='mb-4 text-gray-800'>
+		<div className='mb-4 text-foreground'>
 			<p className='text-sm'>
 				<strong>Время доставки:</strong>{' '}
 				{new Date(delivery.time.date).toLocaleDateString()}{' '}
 				{delivery.time.timeSlot}
 			</p>
 			<button
-				className='mt-2 underline text-sm cursor-pointer text-orange-700'
+				className='mt-2 underline text-sm cursor-pointer text-promo hover:text-promo-hover duration-300'
 				onClick={onEdit}
 			>
 				Изменить время доставки

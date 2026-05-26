@@ -57,7 +57,7 @@ const SimilarProducts = async ({ currentProduct }: SimilarProductsProps) => {
 						<Link
 							key={product.id}
 							href={`/catalog/product/${product.id}`}
-							className='text-sm md:text-lg flex flex-col w-19.5 h-15.5 md:w-43 md:h-39.5 xl:w-42 xl:h-26 rounded bg-white shadow-image-block duration-300 hover:shadow-lg'
+							className='text-sm md:text-lg flex flex-col w-19.5 h-15.5 md:w-43 md:h-39.5 xl:w-42 xl:h-26 rounded bg-card shadow-image-block duration-300 hover:shadow-lg'
 							title={product.title}
 						>
 							<div className='relative w-full h-6.25 md:h-27.75 xl:h-14.25 shrink-0'>
@@ -69,7 +69,7 @@ const SimilarProducts = async ({ currentProduct }: SimilarProductsProps) => {
 									sizes='(max-width: 768px) 78px, (max-width: 1280px) 172px, 168px'
 								/>
 							</div>
-							<div className='flex items-center font-bold p-2 md:p-2 text-gray-700'>
+							<div className='flex items-center font-bold p-2 md:p-2 text-foreground'>
 								{calculatePrice(product)} ₽
 							</div>
 						</Link>

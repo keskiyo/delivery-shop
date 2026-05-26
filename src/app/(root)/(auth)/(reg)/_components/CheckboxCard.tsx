@@ -26,18 +26,18 @@ const CheckboxCard = ({
 				<span
 					className={`relative w-5 h-5 border rounded flex items-center justify-center duration-300 ${
 						checked
-							? 'bg-green-600 border-green-600'
-							: 'bg-white border-[#bfbfbf]'
+							? 'bg-brand border-brand'
+							: 'bg-input border-border'
 					}`}
 				>
 					{checked && (
 						<Check
-							className='text-white w-4 h-4 shrink-0 '
+							className='text-brand-foreground w-4 h-4 shrink-0 '
 							strokeWidth={4}
 						/>
 					)}
 				</span>
-				<span className='ml-2 text-[#8f8f8f]'>
+				<span className='ml-2 text-muted-foreground'>
 					{'У меня нет карты лояльности'}
 				</span>
 			</label>

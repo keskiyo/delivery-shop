@@ -124,7 +124,7 @@ const PaginationWrapper = ({
 	return (
 		<Suspense
 			fallback={
-				<div className='h-8 bg-gray-200 animate-pulse rounded'></div>
+				<div className='h-8 bg-muted animate-pulse rounded'></div>
 			}
 		>
 			<PaginationWrapperContent

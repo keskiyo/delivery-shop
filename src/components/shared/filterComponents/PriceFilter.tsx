@@ -285,7 +285,7 @@ function PriceFilterContent(props: {
 			{/* Кнопка применения фильтра */}
 			<button
 				type='submit'
-				className='bg-[#ff6633] text-white hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) h-10 rounded justify-center items-center duration-300 cursor-pointer'
+				className='bg-promo text-promo-foreground hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) h-10 rounded justify-center items-center duration-300 cursor-pointer'
 			>
 				Применить
 			</button>

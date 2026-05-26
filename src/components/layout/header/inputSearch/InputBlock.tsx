@@ -100,7 +100,7 @@ const InputBlock = ({
 	}
 	return (
 		<div
-			className='relative min-w-65.25 grow text-gray-900'
+			className='relative min-w-65.25 grow text-foreground'
 			ref={searchRef}
 		>
 			<SearchInput
@@ -111,13 +111,13 @@ const InputBlock = ({
 				handleInputBlur={handleInputBlur}
 			/>
 			{isOpen && (
-				<div className='absolute -mt-0.5 left-0 right-0 z-100 max-h-75 overflow-y-auto bg-white rounded-b border border-gray-300 border-t-0 wrap-break-word'>
+				<div className='absolute -mt-0.5 left-0 right-0 z-100 max-h-75 overflow-y-auto bg-card rounded-b border border-border border-t-0 wrap-break-word'>
 					{error ? (
-						<div className='p-2 text-red-500 text-sm'>
+						<div className='p-2 text-danger text-sm'>
 							{error}{' '}
 							<button
 								onClick={() => setError(null)}
-								className='text-blue-600 hover:text-blue-500 cursor-pointer flex items-center'
+								className='text-brand hover:text-brand-hover cursor-pointer flex items-center'
 							>
 								Попробовать снова
 							</button>

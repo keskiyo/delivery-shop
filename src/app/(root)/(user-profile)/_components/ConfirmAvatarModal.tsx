@@ -45,14 +45,14 @@ const ConfirmAvatarModal = ({
 					<button
 						disabled={isUploading}
 						onClick={onConfirm}
-						className='flex-1 bg-green-600 text-white py-2 rounded hover:bg-green-600 duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer'
+						className='flex-1 bg-brand text-brand-foreground py-2 rounded hover:shadow-(--shadow-button-default) duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer'
 					>
 						{isUploading ? 'Загрузка' : 'Да, сменить'}
 					</button>
 					<button
 						onClick={onCancel}
 						disabled={isUploading}
-						className='flex-1 bg-[#dddddd] rounded hover:shadow-button-secondary py-2 active:shadow-(--shadow-button-active) disabled:opacity-50 text-[#575757] duration-300 cursor-pointer'
+						className='flex-1 bg-surface rounded hover:shadow-button-secondary py-2 active:shadow-(--shadow-button-active) disabled:opacity-50 text-text-soft duration-300 cursor-pointer'
 					>
 						Отмена
 					</button>

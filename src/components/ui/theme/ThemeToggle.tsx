@@ -29,13 +29,17 @@ export function ThemeToggle() {
 
 	const title = theme === 'light' ? 'Светлая тема' : 'Тёмная тема'
 
-	const thumbBgClass = theme === 'dark' ? 'bg-gray-900' : 'bg-white'
-	const trackBgClass = theme === 'dark' ? 'bg-gray-700' : 'bg-gray-300'
+	const thumbBgClass =
+		theme === 'dark'
+			? 'bg-site-chrome text-site-chrome-foreground'
+			: 'bg-card text-promo'
+	const trackBgClass =
+		theme === 'dark' ? 'bg-surface-pressed' : 'bg-surface-hover'
 
 	return (
 		<button
 			onClick={toggleTheme}
-			className='p-2 text-[#8a8a8a] cursor-pointer transition-colors'
+			className='p-2 text-site-chrome-muted hover:text-site-chrome-hover cursor-pointer transition-colors'
 			aria-label={title}
 			title={title}
 		>
@@ -58,7 +62,7 @@ export function ThemeToggle() {
 							strokeWidth='2.5' // Увеличили толщину линий
 							strokeLinecap='round'
 							strokeLinejoin='round'
-							className='text-white w-5 h-5 m-1 '
+							className='w-5 h-5 m-1'
 							style={{
 								opacity: moonOpacity,
 								transition: 'opacity 0.3s ease',
@@ -77,7 +81,7 @@ export function ThemeToggle() {
 							strokeWidth='2.5' // Увеличили толщину линий
 							strokeLinecap='round'
 							strokeLinejoin='round'
-							className='text-orange-500 w-5 h-5 m-1'
+							className='w-5 h-5 m-1'
 							style={{
 								opacity: sunOpacity,
 								transition: 'opacity 0.3s ease',

@@ -9,7 +9,7 @@ const SuccessSentEmail = ({ email }: { email: string }) => {
 		<AuthFormLayout>
 			<div className='flex flex-col gap-y-6'>
 				<div className='flex flex-col items-center'>
-					<MailCheck className='w-12 h-12 text-green-600 mb-4' />
+					<MailCheck className='w-12 h-12 text-success mb-4' />
 					<h1 className='text-2xl font-bold text-center'>
 						Проверьте Вашу почту
 					</h1>
@@ -21,7 +21,7 @@ const SuccessSentEmail = ({ email }: { email: string }) => {
 					мы отправили письмо с инструкциями по сбросу пароля.
 				</p>
 
-				<div className='text-green-600 bg-white p-4 rounded border border-green-600'>
+				<div className='text-success bg-success-soft p-4 rounded border border-success/30'>
 					<h3 className='font-semibold mb-2'>Не получили письмо?</h3>
 					<ul className='text-sm list-disc list-inside space-y-1'>
 						<li>
@@ -41,16 +41,16 @@ const SuccessSentEmail = ({ email }: { email: string }) => {
 					</ul>
 				</div>
 
-				<div className='mt-4 p-4 bg-white rounded border border-[#ff6633]'>
-					<h3 className='font-semibold text-[#ff6633] mb-2'>
+				<div className='mt-4 p-4 bg-promo-soft rounded border border-promo/30'>
+					<h3 className='font-semibold text-promo mb-2'>
 						Регистрировались по телефону?
 					</h3>
-					<p className='text-[#ff6633] text-sm'>
+					<p className='text-promo text-sm'>
 						Если Вы не помните, как регистрировались, попробуйте
 						<button
 							type='button'
 							onClick={() => router.replace('/login')}
-							className='text-[#ff6633] font-medium underline hover:no-underline ml-1 cursor-pointer duration-300'
+							className='text-promo font-medium underline hover:no-underline ml-1 cursor-pointer duration-300'
 						>
 							войти с помощью номера телефона
 						</button>

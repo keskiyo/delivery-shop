@@ -46,6 +46,6 @@ export const Loader = ({ text = '', className = '' }: LoaderProps) => (
 				className='track'
 			></circle>
 		</svg>
-		{text && <p className='text-green-600'>Загрузка {text}...</p>}
+		{text && <p className='text-brand'>Загрузка {text}...</p>}
 	</div>
 )

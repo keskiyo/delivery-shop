@@ -22,9 +22,9 @@ const PhoneVerifyView = ({
 	onResendCode,
 }: PhoneVerifyViewProps) => {
 	return (
-		<div className='mt-4 p-4 bg-green-50 rounded'>
+		<div className='mt-4 p-4 bg-success-soft rounded'>
 			<div className='flex justify-between items-center mb-3'>
-				<p className='text-sm text-green-600 font-medium'>
+				<p className='text-sm text-success font-medium'>
 					Код подтверждения отправлен на +{currentPhone}
 				</p>
 			</div>
@@ -38,14 +38,14 @@ const PhoneVerifyView = ({
 						maxLength={4}
 						value={code}
 						onChange={e => onCodeChange(e.target.value)}
-						className={`${formStyles.input} [&&]:w-27.5 [&&]:bg-white block text-center`}
+						className={`${formStyles.input} [&&]:w-27.5 [&&]:bg-input block text-center`}
 						autoComplete='one-time-code'
 					/>
 
 					<button
 						onClick={onVerify}
 						disabled={code.length !== 4 || isSaving}
-						className={`${profileStyles.saveButton} [&&]:h-10 bg-green-600 text-white py-2 px-4 rounded disabled:bg-gray-500 disabled:cursor-not-allowed`}
+						className={`${profileStyles.saveButton} [&&]:h-10 py-2 px-4 rounded disabled:bg-muted disabled:cursor-not-allowed`}
 					>
 						{isSaving ? 'Проверка...' : 'Подтвердить'}
 					</button>

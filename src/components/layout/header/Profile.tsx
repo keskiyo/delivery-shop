@@ -131,7 +131,7 @@ const Profile = () => {
 
 	if (isLoading) {
 		return (
-			<div className='ml-6 w-10 h-10 rounded-full bg-gray-200 animate-pulse'></div>
+			<div className='w-10 h-10 rounded-full bg-surface-hover animate-pulse'></div>
 		)
 	}
 
@@ -140,7 +140,7 @@ const Profile = () => {
 			<>
 				<Link
 					href='/login'
-					className='ml-6 w-10 xl:w-30 flex justify-between items-center gap-x-2 p-2 rounded text-white text-base bg-[#ff6633] hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) duration-300 cursor-pointer'
+					className='w-10 xl:w-30 flex justify-between items-center gap-x-2 p-2 rounded text-promo-foreground text-base bg-promo hover:bg-promo-hover hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) duration-300 cursor-pointer'
 				>
 					<div className='w-27 justify-center hidden xl:flex'>
 						<p>Войти</p>
@@ -154,7 +154,7 @@ const Profile = () => {
 
 	return (
 		<>
-			<div className='relative ml-6 text-white' ref={menuRef}>
+			<div className='relative text-site-chrome-foreground' ref={menuRef}>
 				<div
 					className='flex items-center gap-2 cursor-pointer'
 					onClick={toggleMenu}
@@ -174,7 +174,7 @@ const Profile = () => {
 
 				{/* Выпадающее меню */}
 				<div
-					className={`absolute right-0 bg-[#353535] rounded shadow-button-secondary overflow-hidden flex flex-col items-center z-50 ${
+					className={`absolute right-0 bg-site-chrome text-site-chrome-foreground rounded shadow-button-secondary overflow-hidden flex flex-col items-center z-50 ${
 						isMenuOpen
 							? 'opacity-100 translate-y-0'
 							: 'opacity-0 -translate-y-2 pointer-events-none'
@@ -184,14 +184,14 @@ const Profile = () => {
 				>
 					<Link
 						href='/user-profile'
-						className='block px-4 py-3 hover:text-[#ff6633] duration-300'
+						className='block px-4 py-3 hover:text-promo duration-300'
 						onClick={() => setIsMenuOpen(false)}
 					>
 						Профиль
 					</Link>
 					<Link
 						href='/'
-						className='block px-4 py-3 hover:text-[#ff6633] duration-300'
+						className='block px-4 py-3 hover:text-promo duration-300'
 						onClick={() => setIsMenuOpen(false)}
 					>
 						Главная
@@ -199,7 +199,7 @@ const Profile = () => {
 					{isManagerOrAdmin() && (
 						<Link
 							href='/administrator'
-							className='block px-4 py-3 hover:text-[#ff6633] duration-300'
+							className='block px-4 py-3 hover:text-promo duration-300'
 							onClick={() => setIsMenuOpen(false)}
 						>
 							Панель управления
@@ -209,7 +209,7 @@ const Profile = () => {
 					<button
 						onClick={handleLogout}
 						disabled={isLoggingOut}
-						className='w-full text-center px-4 py-3 hover:text-[#ff6633] duration-300 border-t border-gray-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
+						className='w-full text-center px-4 py-3 hover:text-promo duration-300 border-t border-site-chrome-muted/30 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
 					>
 						{isLoggingOut ? 'Выход...' : 'Выйти'}
 					</button>

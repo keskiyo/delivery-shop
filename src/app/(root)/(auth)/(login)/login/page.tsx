@@ -151,9 +151,9 @@ const EnterLoginPage = () => {
 					error={error}
 					icon={
 						loginType === 'email' ? (
-							<MailWarning className='h-8 w-8 text-red-600' />
+							<MailWarning className='h-8 w-8 text-danger' />
 						) : (
-							<PhoneOff className='h-8 w-8 text-red-600' />
+							<PhoneOff className='h-8 w-8 text-danger' />
 						)
 					}
 					secondaryAction={{
@@ -193,14 +193,14 @@ const EnterLoginPage = () => {
 				className='w-65 mx-auto max-h-screen flex flex-col justify-center overflow-y-auto gap-y-8'
 				autoComplete='off'
 			>
-				<div className='flex bg-gray-100 rounded-xl p-1'>
+				<div className='flex bg-surface rounded-xl p-1'>
 					<button
 						type='button'
 						onClick={switchToEmail}
 						className={`flex-1 py-2 rounded-lg text-sm transition cursor-pointer ${
 							loginType === 'email'
-								? 'bg-[#ff6633] text-white shadow'
-								: 'text-gray-500'
+								? 'bg-promo text-promo-foreground shadow'
+								: 'text-muted-foreground'
 						}`}
 					>
 						По email
@@ -211,8 +211,8 @@ const EnterLoginPage = () => {
 						onClick={switchToPhone}
 						className={`flex-1 py-2 rounded-lg text-sm transition cursor-pointer ${
 							loginType === 'phone'
-								? 'bg-[#ff6633] text-white shadow'
-								: 'text-gray-500'
+								? 'bg-promo text-promo-foreground shadow'
+								: 'text-muted-foreground'
 						}`}
 					>
 						По телефону
@@ -259,8 +259,8 @@ const EnterLoginPage = () => {
 				(loginType === 'phone' &&
 					login.replace(/\D/g, '').length < 11) ||
 				isLoading
-					? 'cursor-not-allowed bg-[#fcd5ba] text-[#ff6633]'
-					: 'bg-[#ff6633] text-white hover:shadow-(--shadow-article)'
+					? 'cursor-not-allowed bg-promo-soft text-promo'
+					: 'bg-promo text-promo-foreground hover:shadow-(--shadow-article)'
 			}
             active:shadow-(--shadow-button-active)
            duration-300
@@ -280,7 +280,7 @@ const EnterLoginPage = () => {
 
 					<button
 						onClick={handleForgotPassword}
-						className='h-8 text-[#969696] hover:text-gray-500 w-30 flex items-center justify-center duration-300 cursor-pointer'
+						className='h-8 text-muted-foreground hover:text-foreground w-30 flex items-center justify-center duration-300 cursor-pointer'
 					>
 						Забыли пароль?
 					</button>

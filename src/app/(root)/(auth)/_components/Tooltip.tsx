@@ -18,7 +18,7 @@ const Tooltip = ({
 			}`}
 		>
 			<div
-				className={`relative bg-[#d80000] text-white text-sm p-2 rounded max-w-65 mx-auto flex items-center z-50 opacity-0 animate-fadeIn ${
+				className={`relative bg-danger text-danger-foreground text-sm p-2 rounded max-w-65 mx-auto flex items-center z-50 opacity-0 animate-fadeIn ${
 					position === 'bottom' ? 'mb-2' : 'mt-1'
 				}`}
 			>
@@ -28,14 +28,14 @@ const Tooltip = ({
 					<div
 						className='absolute left-1/2 -bottom-0.75 transform -translate-x-1/2 w-0 h-0 
                      border-l-[6px] border-r-[6px] border-t-4 
-                     border-l-transparent border-r-transparent border-t-[#d80000]'
+                     border-l-transparent border-r-transparent border-t-danger'
 					></div>
 				) : (
 					// Треугольник вверху (по умолчанию)
 					<div
 						className='absolute left-1/2 -top-0.75 transform -translate-x-1/2 w-0 h-0 
                      border-l-[6px] border-r-[6px] border-b-4 
-                     border-l-transparent border-r-transparent border-b-[#d80000]'
+                     border-l-transparent border-r-transparent border-b-danger'
 					></div>
 				)}
 				{text}

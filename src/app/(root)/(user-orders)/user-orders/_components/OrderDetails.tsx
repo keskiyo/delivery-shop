@@ -13,10 +13,10 @@ const OrderDetails: React.FC<{ order: Order }> = ({ order }) => {
 				</p>
 			</div>
 
-			<div className='mt-4 pt-4 border-t border-gray-200 space-y-3 text-sm'>
+			<div className='mt-4 pt-4 border-t border-border space-y-3 text-sm'>
 				<div className='flex justify-between items-center'>
 					<span className='lg:text-base'>Скидка:</span>
-					<span className='font-medium lg:text-base text-[#d80000]'>
+					<span className='font-medium lg:text-base text-danger'>
 						-{order.discountAmount.toLocaleString('ru-RU')} ₽
 					</span>
 				</div>
@@ -28,7 +28,7 @@ const OrderDetails: React.FC<{ order: Order }> = ({ order }) => {
 				</div>
 				<div className='flex justify-between items-center'>
 					<span className='lg:text-base'>Начислено бонусов:</span>
-					<span className='font-medium lg:text-base text-green-600'>
+					<span className='font-medium lg:text-base text-success'>
 						+{order.earnedBonuses.toLocaleString('ru-RU')}
 					</span>
 				</div>

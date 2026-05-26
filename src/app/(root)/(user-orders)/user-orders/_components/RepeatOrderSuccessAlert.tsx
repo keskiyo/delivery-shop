@@ -6,14 +6,14 @@ export const RepeatOrderSuccessAlert: React.FC = () => {
 	}
 
 	return (
-		<div className='mt-6 p-4 bg-green-50 border border-green-200 rounded-lg'>
+		<div className='mt-6 p-4 bg-success-soft border border-success/30 rounded-lg'>
 			<div className='flex items-center justify-between'>
-				<p className='text-[#008c48] font-medium'>
+				<p className='text-success font-medium'>
 					Повторный заказ успешно создан!
 				</p>
 				<button
 					onClick={handleRefresh}
-					className='ml-4 bg-[#008c48] text-white px-4 py-2 rounded hover:bg-[#006c38] duration-300 font-medium cursor-pointer'
+					className='ml-4 bg-success text-success-foreground px-4 py-2 rounded hover:shadow-(--shadow-button-default) duration-300 font-medium cursor-pointer'
 				>
 					Обновить страницу
 				</button>

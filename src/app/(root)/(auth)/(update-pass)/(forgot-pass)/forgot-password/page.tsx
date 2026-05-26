@@ -44,7 +44,7 @@ const ForgotPassword = () => {
 		<AuthFormLayout>
 			<div className='flex flex-col gap-y-8'>
 				<div className='flex flex-col items-center'>
-					<KeyRound className='w-12 h-12 text-green-600 mb-4' />
+					<KeyRound className='w-12 h-12 text-brand mb-4' />
 					<h1 className='text-2xl font-bold text-center'>
 						Восстановление / сброс пароля
 					</h1>
@@ -54,7 +54,7 @@ const ForgotPassword = () => {
 					вышлем Вам инструкции по сбросу пароля.
 				</p>
 				{error && (
-					<div className='p-5 bg-red-100 text-red-600 rounded'>
+					<div className='p-5 bg-danger-soft text-danger rounded'>
 						{error}
 					</div>
 				)}
@@ -83,8 +83,7 @@ const ForgotPassword = () => {
 					<button
 						type='submit'
 						disabled={loading}
-						className={`${buttonStyles.active} rounded [&&]:w-full [&&]:h-10 [&&]:mt-8 cursor-pointer flex items-center justify-center gap-2`}
-						style={loading ? { backgroundColor: '#fcd5ba' } : {}}
+						className={`${buttonStyles.active} rounded [&&]:w-full [&&]:h-10 [&&]:mt-8 cursor-pointer flex items-center justify-center gap-2 ${loading ? 'bg-promo-soft text-promo' : ''}`}
 					>
 						{loading ? (
 							<>

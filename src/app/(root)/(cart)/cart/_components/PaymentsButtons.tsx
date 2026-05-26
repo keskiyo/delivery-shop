@@ -46,8 +46,8 @@ const PaymentsButtons = ({
 				onClick={onCashPayment}
 				className={`h-10 rounded w-full text-base items-center justify-center duration-300 ${
 					canProceedWithPayment
-						? 'bg-green-600 hover:shadow-button-default active:shadow-button-active text-white cursor-pointer'
-						: 'bg-gray-300 text-gray-500 cursor-not-allowed'
+						? 'bg-brand hover:shadow-button-default active:shadow-button-active text-brand-foreground cursor-pointer'
+						: 'bg-muted text-muted-foreground cursor-not-allowed'
 				}`}
 			>
 				{isProcessing ? 'Оформление...' : 'Оплатить при получении'}

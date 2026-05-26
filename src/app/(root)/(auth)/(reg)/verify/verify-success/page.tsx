@@ -29,15 +29,15 @@ export default function VerifySuccessPage() {
 	return (
 		<AuthFormLayout>
 			<div className='p-8 text-center'>
-				<div className='mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-600 mb-6'>
-					<CheckCircle className='h-10 w-10 text-white' />
+				<div className='mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-success mb-6'>
+					<CheckCircle className='h-10 w-10 text-success-foreground' />
 				</div>
 
 				<h1 className='text-2xl font-bold mb-2'>
 					Email успешно подтвержден!
 				</h1>
 
-				<p className='text-gray-400 mb-6'>
+				<p className='text-muted-foreground mb-6'>
 					Ваш адрес электронной почты был успешно подтвержден. Теперь
 					Вы можете войти в свой аккаунт.
 				</p>
@@ -50,7 +50,7 @@ export default function VerifySuccessPage() {
 						Перейти к авторизации
 					</button>
 
-					<p className='text-sm text-[#8a8a8a]'>
+					<p className='text-sm text-muted-foreground'>
 						Автоматический переход через {secondsLeft}{' '}
 						{secondsLeft % 10 === 1 && secondsLeft % 100 !== 11
 							? 'секунду'
@@ -65,12 +65,12 @@ export default function VerifySuccessPage() {
 				</div>
 			</div>
 
-			<div className='bg-gray-50 px-8 py-4 border-t border-gray-200'>
-				<p className='text-xs text-gray-400 text-center'>
+			<div className='bg-surface px-8 py-4 border-t border-border'>
+				<p className='text-xs text-muted-foreground text-center'>
 					Нужна помощь?{' '}
 					<Link
 						href='/contacts'
-						className='text-[#ff6633] hover:underline'
+						className='text-promo hover:underline'
 					>
 						Свяжитесь с поддержкой
 					</Link>

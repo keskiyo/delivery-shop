@@ -55,7 +55,7 @@ const ResetPassword = () => {
 				<ErrorContent
 					title='Что-то пошло не так!'
 					error={error}
-					icon={<MailWarning className='h-8 w-8 text-red-600' />}
+					icon={<MailWarning className='h-8 w-8 text-danger' />}
 					secondaryAction={{
 						label: (
 							<>
@@ -146,7 +146,7 @@ const ResetPassword = () => {
 							inputClass={
 								password.length > 0 &&
 								!isPasswordValid(password)
-									? 'border-red-500'
+									? 'border-danger'
 									: ''
 							}
 							placeholder='********'
@@ -164,7 +164,7 @@ const ResetPassword = () => {
 							inputClass={
 								confirmPassword.length > 0 &&
 								password !== confirmPassword
-									? 'border-red-500'
+									? 'border-danger'
 									: ''
 							}
 							placeholder='********'
@@ -174,7 +174,7 @@ const ResetPassword = () => {
 				<button
 					type='submit'
 					disabled={loading}
-					className={`text-white bg-green-600 hover:shadow-(--shadow-button-default) active:shadow-(--shadow-button-active) w-full max-w-65 mx-auto p-2 gap-4 cursor-pointer duration-300 rounded ${loading ? 'bg-[#5c5c5c]' : 'bg-green-600'}`}
+					className={`text-brand-foreground bg-brand hover:shadow-(--shadow-button-default) active:shadow-(--shadow-button-active) w-full max-w-65 mx-auto p-2 gap-4 cursor-pointer duration-300 rounded ${loading ? 'bg-muted text-muted-foreground' : 'bg-brand'}`}
 				>
 					{loading ? 'Сохранение...' : 'Сохранить новый пароль'}
 				</button>

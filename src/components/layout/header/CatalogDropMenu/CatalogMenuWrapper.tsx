@@ -2,20 +2,20 @@
 
 /**
  * Обертка для меню каталога с логикой открытия/закрытия
- * 
+ *
  * Функционал:
  * - Загружает категории с API при первом открытии (/api/catalog)
  * - Открывает меню при наведении на область поиска
  * - Закрывает меню при уходе курсора с области
  * - Закрывает меню при фокусе на поле поиска
  * - Отслеживает движение мыши для определения области видимости
- * 
+ *
  * Состояния:
  * - isCatalogOpen: открыто/закрыто меню
  * - isLoading: идет загрузка категорий
  * - categories: массив категорий
  * - isSearchFocused: фокус в поле поиска
- * 
+ *
  * Используется в:
  * - components/layout/header/Header.tsx
  */
@@ -89,6 +89,49 @@ const CatalogMenuWrapper = () => {
 			document.removeEventListener('mousemove', handleMouseMove)
 		}
 	}, [handleMouseMove])
+
+	useEffect(() => {
+		document.addEventListener('mousemove', handleMouseMove)
+
+		return () => {
+			document.removeEventListener('mousemove', handleMouseMove)
+		}
+	}, [handleMouseMove])
+
+	useEffect(() => {
+		const handleClickOutside = (event: PointerEvent) => {
+			if (!isCatalogOpen) return
+
+			const target = event.target as Node
+
+			const isInsideSearchBlock = searchBlockRef.current?.contains(target)
+			const isInsideMenu = menuRef.current?.contains(target)
+
+			if (!isInsideSearchBlock && !isInsideMenu) {
+				setIsCatalogOpen(false)
+			}
+		}
+
+		document.addEventListener('pointerdown', handleClickOutside)
+
+		return () => {
+			document.removeEventListener('pointerdown', handleClickOutside)
+		}
+	}, [isCatalogOpen])
+
+	useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === 'Escape') {
+				setIsCatalogOpen(false)
+			}
+		}
+
+		document.addEventListener('keydown', handleKeyDown)
+
+		return () => {
+			document.removeEventListener('keydown', handleKeyDown)
+		}
+	}, [])
 
 	const handleSearchFocusAction = (focused: boolean) => {
 		setIsSearchFocused(focused)

@@ -48,8 +48,8 @@ const Maps = () => {
 								onClick={() => setCurrentLocation(key)}
 								className={`p-2 text-xs justify-center items-center active:shadow-(--shadow-button-active) border-none rounded cursor-pointer transition-colors duration-300 ${
 									isActive
-										? 'bg-green-500 text-white hover: shadow-(--shadow-button-default)'
-										: 'bg-[#f3f2f1] text-gray-500 hover:shadow-(--shadow-button-secondary)'
+										? 'bg-brand text-brand-foreground hover:shadow-(--shadow-button-default)'
+										: 'bg-surface text-muted-foreground hover:shadow-(--shadow-button-secondary)'
 								}`}
 							>
 								{locations[key].name}

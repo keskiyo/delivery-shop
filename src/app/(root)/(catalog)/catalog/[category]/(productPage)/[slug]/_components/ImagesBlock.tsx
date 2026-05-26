@@ -8,7 +8,7 @@ const ImagesBlock = ({ product }: { product: ProductCardProps }) => {
 				{[...Array(5)].map((_, index) => (
 					<div
 						key={index}
-						className='relative bg-[#fff5fd] w-16 h-9.25 xl:h-21.5 flex items-center justify-center overflow-hidden shrink-0'
+						className='relative bg-surface w-16 h-9.25 xl:h-21.5 flex items-center justify-center overflow-hidden shrink-0'
 					>
 						<Image
 							src={product.img}
@@ -22,7 +22,7 @@ const ImagesBlock = ({ product }: { product: ProductCardProps }) => {
 			</div>
 
 			<div
-				className='relative flex justify-center items-center shadow-image-block bg-[#fff5fd]
+				className='relative flex justify-center items-center shadow-image-block bg-surface
                      h-62 xl:h-124 
                      w-62 md:w-68 xl:w-126 
                      p-2 shrink-0'
@@ -36,7 +36,7 @@ const ImagesBlock = ({ product }: { product: ProductCardProps }) => {
 					priority
 				/>
 				{product.discountPercent && product.discountPercent > 0 ? (
-					<div className='absolute top-5 right-5 bg-[#ff6633] text-white px-2 py-1 rounded text-sm'>
+					<div className='absolute top-5 right-5 bg-promo text-promo-foreground px-2 py-1 rounded text-sm'>
 						-{product.discountPercent}%
 					</div>
 				) : null}

@@ -15,7 +15,7 @@ const CardInput = ({
 }) => {
 	return (
 		<div className='flex flex-col mb-4'>
-			<label htmlFor='card' className='text-[#8f8f8f]'>
+			<label htmlFor='card' className='text-muted-foreground'>
 				{'Номер карты лояльности'}
 			</label>
 			<InputMask
@@ -27,7 +27,7 @@ const CardInput = ({
 				disabled={disabled}
 				placeholder={disabled ? '' : '0000 0000 0000 0000'}
 				className={`${formStyles.input} ${
-					disabled ? 'bg-[#f3f2f1] cursor-not-allowed' : ''
+					disabled ? 'bg-surface cursor-not-allowed' : ''
 				}`}
 			/>
 		</div>

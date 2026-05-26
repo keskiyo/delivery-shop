@@ -230,7 +230,7 @@ const CartPage = () => {
 			<div className='container mx-auto px-4 py-8'>
 				<h1 className='text-2xl font-bold mb-8'>Корзина</h1>
 				<div className='text-center py-12'>
-					<p className='text-[#aaaaaa] text-lg'>Корзина пуста</p>
+					<p className='text-muted-foreground text-lg'>Корзина пуста</p>
 				</div>
 			</div>
 		)

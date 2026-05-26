@@ -6,8 +6,8 @@ const Bonuses = ({ bonus }: { bonus: number }) => {
 
 	return (
 		<div className='w-53 flex flex-row gap-x-2 items-center justify-center mx-auto mb-2'>
-			<HandCoins size={24} className='text-green-600' />
-			<p className='text-xs text-green-600'>
+			<HandCoins size={24} className='text-success' />
+			<p className='text-xs text-success'>
 				Вы получаете{' '}
 				<span className='font-bold'>
 					{roundedBonus} {bonusWord}

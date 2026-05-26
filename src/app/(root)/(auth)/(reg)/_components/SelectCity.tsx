@@ -34,7 +34,7 @@ const SelectCity = ({
 					onChange={onChangeAction}
 					onFocus={() => setIsFocused(true)}
 					onBlur={() => setIsFocused(false)}
-					className={`${formStyles.input} ${className} appearance-none pr-8 cursor-pointer disabled:cursor-not-allowed disabled:bg-[#f3f2f1]`}
+					className={`${formStyles.input} ${className} appearance-none pr-8 cursor-pointer disabled:cursor-not-allowed disabled:bg-surface`}
 				>
 					{cities.map(city => (
 						<option key={city.value} value={city.label}>

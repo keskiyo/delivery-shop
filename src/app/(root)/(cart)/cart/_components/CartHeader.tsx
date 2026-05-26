@@ -10,8 +10,8 @@ const CartHeader = ({ itemCount, title }: CartHeaderProps) => {
 				{title}
 			</h1>
 			{itemCount > 0 && (
-				<div className='absolute ml-5 -top-4 right-33 md:right-20 xl:right-0 bg-[#ff6633] rounded px-2 py-1'>
-					<span className='text-base text-white'>{itemCount}</span>
+				<div className='absolute ml-5 -top-4 right-33 md:right-20 xl:right-0 bg-promo rounded px-2 py-1'>
+					<span className='text-base text-promo-foreground'>{itemCount}</span>
 				</div>
 			)}
 		</div>

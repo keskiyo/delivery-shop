@@ -77,7 +77,7 @@ const PasswordInputWithGenerate = ({
 			<button
 				type='button'
 				onClick={handleGenerate}
-				className='absolute right-12 top-[2.15rem] transform -translate-y-1/2 text-muted-foreground hover:text-green-600 transition-colors'
+				className='absolute right-12 top-[2.15rem] transform -translate-y-1/2 text-muted-foreground hover:text-brand transition-colors'
 				title='Сгенерировать пароль'
 			>
 				<RefreshCw className='w-5 h-5 animate-spin' />

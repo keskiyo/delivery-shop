@@ -148,7 +148,7 @@ const FakePaymentModal = ({
 			<div className='bg-card rounded-lg max-w-md w-full p-6'>
 				<h2 className='text-xl font-bold mb-4'>Тестовая оплата</h2>
 				<p className='mb-4'>Сумма: {formatPrice(amount)} ₽</p>
-				<div className='mb-4 p-3 bg-gray-50 dark:text-gray-800 rounded'>
+				<div className='mb-4 p-3 bg-surface text-foreground rounded'>
 					<h3 className='text-sm font-medium mb-2'>
 						Тестовые карты (авто-оплата):
 					</h3>
@@ -160,7 +160,7 @@ const FakePaymentModal = ({
 								fillTestCard(card.number, card.result)
 							}
 							disabled={isProcessing}
-							className='block w-full text-left p-2 hover:bg-#e7e7bf-100 rounded text-sm mb-1 disabled:opacity-50 disabled:cursor-not-allowed'
+							className='block w-full text-left p-2 hover:bg-surface-hover rounded text-sm mb-1 disabled:opacity-50 disabled:cursor-not-allowed'
 						>
 							<span className='font-mono'>{card.number}</span>
 							<span className='ml-2'>- {card.description}</span>
@@ -180,7 +180,7 @@ const FakePaymentModal = ({
 								handleCardNumberChange(e.target.value)
 							}
 							placeholder='0000 0000 0000 0000'
-							className='w-full p-2 border rounded font-mono'
+							className='w-full p-2 border border-border bg-input text-foreground placeholder:text-muted-foreground rounded font-mono focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20'
 							required
 							maxLength={19}
 							disabled={isProcessing}
@@ -199,7 +199,7 @@ const FakePaymentModal = ({
 									handleExpiryDateChange(e.target.value)
 								}
 								placeholder='ММ/ГГ'
-								className='w-full p-2 border rounded'
+								className='w-full p-2 border border-border bg-input text-foreground placeholder:text-muted-foreground rounded focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20'
 								required
 								maxLength={5}
 								disabled={isProcessing}
@@ -214,7 +214,7 @@ const FakePaymentModal = ({
 								value={cvc}
 								onChange={e => handleCvcChange(e.target.value)}
 								placeholder='123'
-								className='w-full p-2 border rounded'
+								className='w-full p-2 border border-border bg-input text-foreground placeholder:text-muted-foreground rounded focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20'
 								required
 								maxLength={3}
 								disabled={isProcessing}
@@ -233,7 +233,7 @@ const FakePaymentModal = ({
 								setCardholder(e.target.value.toUpperCase())
 							}
 							placeholder='IVAN IVANOV'
-							className='w-full p-2 border rounded uppercase'
+							className='w-full p-2 border border-border bg-input text-foreground placeholder:text-muted-foreground rounded uppercase focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20'
 							required
 							disabled={isProcessing}
 						/>
@@ -244,7 +244,7 @@ const FakePaymentModal = ({
 							type='button'
 							onClick={onClose}
 							disabled={isProcessing}
-							className='flex-1 py-2 px-4 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 bg-gray-100 disabled:opacity-50 duration-300 cursor-pointer'
+							className='flex-1 py-2 px-4 border border-border rounded text-text-soft hover:bg-surface-hover bg-surface disabled:opacity-50 duration-300 cursor-pointer'
 						>
 							Отмена
 						</button>
@@ -257,7 +257,7 @@ const FakePaymentModal = ({
 								!cvc ||
 								!cardholder
 							}
-							className='flex-1 py-2 px-4 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed duration-300 cursor-pointer'
+							className='flex-1 py-2 px-4 bg-brand text-brand-foreground rounded hover:bg-brand-hover disabled:opacity-50 disabled:cursor-not-allowed duration-300 cursor-pointer'
 						>
 							{isProcessing
 								? 'Обработка...'

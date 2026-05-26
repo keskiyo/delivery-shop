@@ -76,7 +76,7 @@ const SearchResult = () => {
 			</h1>
 			<p className='text-sm md:text-base xl:text-2xl mb-6'>
 				по запросу:
-				<span className='text-orange-500 font-bold border-b-3 border-orange-500'>
+				<span className='text-promo font-bold border-b-3 border-promo'>
 					{query}
 				</span>
 			</p>

@@ -27,9 +27,9 @@ const CatalogGrid = ({
 					key={category._id}
 					className={`${category.mobileColSpan} ${category.tabletColSpan} ${
 						category.colSpan
-					} bg-gray-100 rounded overflow-hidden min-h-50 h-full
-			${isEditing ? 'border-4 border-dashed border-gray-400' : ''}
-			${hoveredCategoryId === category._id ? 'border-3 border-red-800' : ''}
+					} bg-surface rounded overflow-hidden min-h-50 h-full
+			${isEditing ? 'border-4 border-dashed border-border' : ''}
+			${hoveredCategoryId === category._id ? 'border-3 border-danger' : ''}
 				`}
 					onDragOver={e => handleDragOver(e, category._id)}
 					onDragLeave={handleDragLeave}

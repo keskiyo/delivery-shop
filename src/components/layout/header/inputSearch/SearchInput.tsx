@@ -30,7 +30,7 @@ const SearchInput = ({
 	handleInputBlur: () => void
 }) => {
 	return (
-		<div className='relative rounded border border-gray-300 leading-[150%]'>
+		<div className='relative rounded border border-border leading-[150%]'>
 			<form
 				onSubmit={e => {
 					e.preventDefault()
@@ -41,7 +41,7 @@ const SearchInput = ({
 					type='text'
 					value={query}
 					placeholder='Найти продукт'
-					className='w-full h-10  p-2 outline-none bg-white text-base'
+					className='w-full h-10 p-2 outline-none bg-card text-foreground placeholder:text-muted-foreground text-base'
 					onFocus={handleInputFocus}
 					onChange={e => setQuery(e.target.value)}
 					onBlur={handleInputBlur}

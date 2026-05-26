@@ -64,7 +64,7 @@ export const PhonePasswordResetRequest = ({
 		<AuthFormLayout>
 			<div className='flex flex-col gap-y-6'>
 				<div className='flex flex-col items-center'>
-					<KeyRound className='w-12 h-12 text-green-600 mb-4' />
+					<KeyRound className='w-12 h-12 text-brand mb-4' />
 					<h1 className='text-2xl font-bold text-center'>
 						Сброс пароля для телефона
 					</h1>
@@ -76,7 +76,7 @@ export const PhonePasswordResetRequest = ({
 				</p>
 
 				{error && (
-					<div className='p-3 bg-red-100 text-red-700 rounded text-sm'>
+					<div className='p-3 bg-danger-soft text-danger rounded text-sm'>
 						{error}
 					</div>
 				)}

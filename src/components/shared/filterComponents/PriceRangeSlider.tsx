@@ -51,14 +51,14 @@ const PriceRangeFilter = ({
 				}
 				styles={{
 					track: {
-						backgroundColor: '#70c05b',
+						backgroundColor: 'var(--brand)',
 						height: 4,
 					},
 					handle: {
 						width: 20,
 						height: 20,
-						backgroundColor: '#70c05b',
-						border: '1px solid #ffffff',
+						backgroundColor: 'var(--brand)',
+						border: '1px solid var(--card)',
 						borderRadius: '50%',
 						boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
 						marginTop: -8,
@@ -66,7 +66,7 @@ const PriceRangeFilter = ({
 						opacity: 1,
 					},
 					rail: {
-						backgroundColor: '#f0f0f0',
+						backgroundColor: 'var(--surface-hover)',
 						height: 4,
 					},
 				}}

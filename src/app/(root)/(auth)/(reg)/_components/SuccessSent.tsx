@@ -12,14 +12,14 @@ export const SuccessSent = () => {
 	return (
 		<div className='space-y-6 flex flex-col items-center'>
 			<div className='flex flex-col items-center text-center space-y-4'>
-				<div className='p-3 bg-green-600 rounded-full'>
-					<MailCheck className='h-8 w-8 text-white' />
+				<div className='p-3 bg-success rounded-full'>
+					<MailCheck className='h-8 w-8 text-success-foreground' />
 				</div>
 				<div className='space-y-2'>
 					<h2 className='text-2xl font-bold'>Письмо отправлено!</h2>
 					<p className='max-w-md'>
 						Мы отправили email с подтверждением на {''}
-						<span className='font-semibold text-[#ff6633]'>
+						<span className='font-semibold text-promo'>
 							{regFormData.email}
 						</span>
 						. Пожалуйста, проверьте и следуйте инструкциям.

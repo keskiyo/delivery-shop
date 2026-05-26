@@ -181,7 +181,7 @@ const DeliveryTime = ({
 						Время
 					</label>
 					{timeSlots.length === 0 ? (
-						<div className='text-center bg-[#ffc7c7] py-2 text-[#d80000] rounded'>
+						<div className='text-center bg-danger-soft py-2 text-danger rounded'>
 							На выбранную дату нет доставки
 						</div>
 					) : (
@@ -211,10 +211,10 @@ const DeliveryTime = ({
 											selectedTimeSlot === slot.value &&
 											slot.free &&
 											!slot.passed
-												? 'bg-green-600 text-white hover:shadow-button-default active:shadow-button-active'
+												? 'bg-brand text-brand-foreground hover:shadow-button-default active:shadow-button-active'
 												: slot.free && !slot.passed
-													? 'bg-[#f3f2f1] hover:shadow-button-secondary cursor-pointer dark:text-[#8f8f8f]'
-													: 'bg-white opacity-50 dark:text-[#8f8f8f] cursor-not-allowed'
+													? 'bg-surface text-text-soft hover:shadow-button-secondary cursor-pointer'
+													: 'bg-card text-muted-foreground opacity-50 cursor-not-allowed'
 										}`}
 										disabled={!slot.free || slot.passed}
 									>
@@ -233,13 +233,13 @@ const DeliveryTime = ({
 									{(!slot.free || slot.passed) &&
 										tooltipSlot === slot.value && (
 											<div className='absolute z-50 bottom-full left-1/2 transform -translate-x-1/2 mb-2'>
-												<div className='bg-[#f4f6fb] text-[#151515] text-sm rounded-[5px] p-2 flex items-center gap-2 whitespace-nowrap shadow-lg'>
+												<div className='bg-popover text-popover-foreground text-sm rounded-[5px] p-2 flex items-center gap-2 whitespace-nowrap shadow-lg'>
 													<Clock size={16} />
 													{slot.passed
 														? 'Это время уже прошло'
 														: 'На это время доставить не можем'}
 												</div>
-												<div className='absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-[#f4f6fb]'></div>
+												<div className='absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-popover'></div>
 											</div>
 										)}
 								</div>

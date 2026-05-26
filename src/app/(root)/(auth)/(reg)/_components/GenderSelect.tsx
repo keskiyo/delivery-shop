@@ -16,12 +16,12 @@ const GenderSelect = ({
 	return (
 		<div className='text-xs w-full'>
 			<p className={formStyles.label}>Пол</p>
-			<div className='flex gap-1 bg-[#f3f2f1] h-10 rounded p-1 text-gray-600'>
+			<div className='flex gap-1 bg-surface h-10 rounded p-1 text-muted-foreground'>
 				{genders.map(gender => (
 					<label
 						key={gender.id}
 						className={`flex flex-1 items-center justify-center rounded duration-300 cursor-pointer ${
-							value === gender.id ? 'bg-green-600 text-white' : ''
+							value === gender.id ? 'bg-brand text-brand-foreground' : ''
 						}`}
 					>
 						<input

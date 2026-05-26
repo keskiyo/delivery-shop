@@ -44,7 +44,7 @@ const DropFilter = ({
 		<div className='xl:hidden'>
 			<button
 				onClick={() => setIsFilterOpen(true)}
-				className='ml-3 xl:hidden w-32 h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-green-600 text-white cursor-pointer'
+				className='ml-3 xl:hidden w-32 h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-brand text-brand-foreground cursor-pointer'
 			>
 				Фильтр
 			</button>

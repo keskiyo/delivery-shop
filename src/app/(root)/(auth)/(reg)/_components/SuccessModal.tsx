@@ -15,15 +15,15 @@ const SuccessModal = () => {
 
 	return (
 		<AuthFormLayout>
-			<h2 className='text-2xl font-bold text-green-600 mb-4'>
+			<h2 className='text-2xl font-bold text-success mb-4'>
 				Регистрация прошла успешно!
 			</h2>
 			<p className='text-lg mb-6'>
 				Сейчас вы будете перенаправлены на страницу входа
 			</p>
-			<div className='w-full bg-gray-200 rounded-full h-2'>
+			<div className='w-full bg-surface rounded-full h-2'>
 				<div
-					className='bg-green-600 h-2 rounded-full animate-[progress_3s_linear]'
+					className='bg-success h-2 rounded-full animate-[progress_3s_linear]'
 					style={{ animationFillMode: 'forwards' }}
 				></div>
 			</div>

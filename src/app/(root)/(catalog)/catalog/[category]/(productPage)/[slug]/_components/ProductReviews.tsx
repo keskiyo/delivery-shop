@@ -109,14 +109,14 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
 				<h2 className='text-xl font-semibold mb-4'>Отзывы</h2>
 				<div className='animate-pulse space-y-4'>
 					{[...Array(3)].map((_, i) => (
-						<div key={i} className='p-4 bg-gray-100 rounded-lg'>
+						<div key={i} className='p-4 bg-surface rounded-lg'>
 							<div className='flex items-center gap-2 mb-2'>
-								<div className='rounded-full bg-gray-300 w-9 h-9'></div>
-								<div className='h-4 bg-gray-300 rounded w-1/4'></div>
+								<div className='rounded-full bg-muted w-9 h-9'></div>
+								<div className='h-4 bg-muted rounded w-1/4'></div>
 							</div>
-							<div className='h-4 bg-gray-300 rounded w-1/3 mb-4'></div>
-							<div className='h-3 bg-gray-300 rounded w-full mb-1'></div>
-							<div className='h-3 bg-gray-300 rounded w-2/3'></div>
+							<div className='h-4 bg-muted rounded w-1/3 mb-4'></div>
+							<div className='h-3 bg-muted rounded w-full mb-1'></div>
+							<div className='h-3 bg-muted rounded w-2/3'></div>
 						</div>
 					))}
 				</div>
@@ -173,7 +173,7 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
 
 			{reviews.length > 0 && (
 				<div className='flex flex-col items-center gap-2 my-6'>
-					<p className='text-sm text-[#8a8a8a]'>
+					<p className='text-sm text-muted-foreground'>
 						Показано {displayCount} из {total} отзывов
 					</p>
 
@@ -181,14 +181,14 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
 						<button
 							onClick={handleLoadMore}
 							disabled={loadingMore}
-							className='px-6 py-2 bg-[#ff6633] text-white rounded hover:shadow-(--shadow-article) transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed'
+							className='px-6 py-2 bg-promo text-promo-foreground rounded hover:shadow-(--shadow-article) transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed'
 						>
 							{loadingMore ? 'Загрузка...' : 'Показать еще'}
 						</button>
 					) : displayCount > 5 ? (
 						<button
 							onClick={handleShowLess}
-							className='px-6 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-all duration-300'
+							className='px-6 py-2 bg-surface text-text-soft rounded hover:bg-surface-hover transition-all duration-300'
 						>
 							Показать меньше
 						</button>

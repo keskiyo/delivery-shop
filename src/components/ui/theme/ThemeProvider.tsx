@@ -58,6 +58,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 	useEffect(() => {
 		if (!mounted) return
 		document.documentElement.classList.toggle('dark', theme === 'dark')
+		document.documentElement.classList.toggle('light', theme === 'light')
 		setCookie('theme', theme)
 	}, [theme, mounted])
 

@@ -25,7 +25,7 @@ const BonusesSection = () => {
 	if (maxBonusUse <= 0) return null
 
 	return (
-		<div className='flex flex-col gap-y-5 text-base pb-6 border-b-2 border-[#f3f2f1]'>
+		<div className='flex flex-col gap-y-5 text-base pb-6 border-b-2 border-border'>
 			<div className='flex flex-row items-center gap-x-2'>
 				<InStockToggle
 					checked={useBonuses}
@@ -42,7 +42,7 @@ const BonusesSection = () => {
 					₽
 				</p>
 			</div>
-			<div className='text-[#8a8a8a]'>
+			<div className='text-muted-foreground'>
 				{`На карте накоплено ${maxBonusUse} ₽ `}
 			</div>
 		</div>

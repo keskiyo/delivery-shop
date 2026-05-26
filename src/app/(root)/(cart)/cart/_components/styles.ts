@@ -1,7 +1,7 @@
-export const labelStyles = `text-base text-[#8f8f8f] block`
+export const labelStyles = `text-base text-muted-foreground block`
 
 export const additionalStyles = `
-    [&&]:bg-white 
+    [&&]:bg-input
     [&&]:h-10 
     [&&]:px-4 
     [&&]:py-2

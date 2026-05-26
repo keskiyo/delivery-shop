@@ -9,9 +9,9 @@ const AlertMessage = ({
 	message: ReactNode
 }) => {
 	const styles = {
-		success: 'text-green-600 bg-green-50',
-		warning: 'text-yellow-600 bg-yellow-50',
-		error: 'text-red-600 bg-red-50',
+		success: 'text-success bg-success-soft',
+		warning: 'text-warning bg-warning-soft',
+		error: 'text-danger bg-danger-soft',
 	}
 
 	return (

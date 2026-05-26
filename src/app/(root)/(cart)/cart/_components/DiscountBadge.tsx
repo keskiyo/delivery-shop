@@ -8,7 +8,7 @@ const DiscountBadge = memo(function DiscountBadge({
 	discountPercent,
 }: DiscountBadgeProps) {
 	return (
-		<div className='bg-[#ff6633] rounded py-1 px-2 text-white flex justify-center items-center text-xs'>
+		<div className='bg-promo rounded py-1 px-2 text-promo-foreground flex justify-center items-center text-xs'>
 			-{discountPercent}%
 		</div>
 	)

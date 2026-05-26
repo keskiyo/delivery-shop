@@ -21,12 +21,12 @@ const SelectionCheckbox = memo(function SelectionCheckbox({
 			<span
 				className={`
           w-5 h-5 border rounded flex items-center justify-center duration-300
-          ${isSelected ? 'bg-green-600 border-green-600' : 'bg-card border-gray-400'}
+          ${isSelected ? 'bg-brand border-brand' : 'bg-card border-border'}
         `}
 			>
 				{isSelected && (
 					<Check
-						className='text-white w-4 h-4 shrink-0 '
+						className='text-brand-foreground w-4 h-4 shrink-0 '
 						strokeWidth={4}
 					/>
 				)}

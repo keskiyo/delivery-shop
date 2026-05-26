@@ -60,7 +60,7 @@ const CatalogMenu = ({
 
 			{isCatalogOpen && (
 				<div
-					className='hidden md:block absolute top-full left-0 w-full bg-[#242525] z-50 shadow-(--shadow-category-block)'
+					className='hidden md:block absolute top-full left-0 w-full bg-site-chrome z-50 shadow-(--shadow-category-block)'
 					ref={menuRef}
 				>
 					<div className='px-4 py-3 mx-auto'>
@@ -78,7 +78,7 @@ const CatalogMenu = ({
 									<Link
 										key={category.slug}
 										href={`/catalog/${category.slug}`}
-										className='block px-4 py-2 text-[#8a8a8a] hover:text-orange-400 font-bold duration-300 hover:border-b hover:border-orange-400 border-b border-[#242525]'
+										className='block px-4 py-2 text-site-chrome-muted hover:text-promo font-bold duration-300 hover:border-b hover:border-promo border-b border-site-chrome'
 										onClick={() => setIsCatalogOpen(false)}
 									>
 										{category.title}

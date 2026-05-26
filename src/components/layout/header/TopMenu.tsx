@@ -2,18 +2,18 @@
 
 /**
  * Верхнее меню навигации в header (иконки + названия)
- * 
+ *
  * Ссылки:
  * - Каталог (мобильная версия) - /catalog
  * - Избранное (только для обычных пользователей) - /favorites
  * - Заказы (обычные: /user-orders, админ/менеджер: /administrator/admin-orders)
  * - Корзина (только для обычных пользователей) - /cart
- * 
+ *
  * Функционал:
  * - Подсветка активной страницы (оранжевый цвет)
  * - Бейдж с количеством товаров на корзине (показывает 99+ если >99)
  * - Скрытие избранного и корзины для admin/manager
- * 
+ *
  * Используется в:
  * - components/layout/header/UserBlock.tsx
  */
@@ -55,12 +55,14 @@ const TopMenu = () => {
 			<li>
 				<Link
 					href='/catalog'
-					className='flex flex-col items-center gap-2 md:hidden w-11'
+					className='flex flex-col items-center gap-2 lg:hidden w-11'
 				>
 					<IconMenuMob isCatalogPage={isCatalogPage} />
 					<span
 						className={
-							isCatalogPage ? 'text-[#ff6633]' : 'text-[#808080]'
+							isCatalogPage
+								? 'text-promo'
+								: 'text-site-chrome-muted'
 						}
 					>
 						Каталог
@@ -81,8 +83,8 @@ const TopMenu = () => {
 						<span
 							className={
 								isFavoritesPage
-									? 'text-[#ff6633]'
-									: 'text-[#808080]'
+									? 'text-promo'
+									: 'text-site-chrome-muted'
 							}
 						>
 							Избранное
@@ -99,7 +101,9 @@ const TopMenu = () => {
 					<IconBox isActive={isOrderPage} />
 					<span
 						className={
-							isOrderPage ? 'text-[#ff6633]' : 'text-[#808080]'
+							isOrderPage
+								? 'text-promo'
+								: 'text-site-chrome-muted'
 						}
 					>
 						Заказы
@@ -116,14 +120,16 @@ const TopMenu = () => {
 						<IconCart isActive={isCartPage} />
 
 						{totalItems > 0 && (
-							<span className='absolute -top-2 right-0 bg-[#ff6633] text-white text-[9px] rounded w-4 h-4 flex items-center justify-center py-0.5 px-1'>
+							<span className='absolute -top-2 right-0 bg-promo text-promo-foreground text-[9px] rounded w-4 h-4 flex items-center justify-center py-0.5 px-1'>
 								{totalItems > 99 ? '99+' : totalItems}
 							</span>
 						)}
 
 						<span
 							className={
-								isCartPage ? 'text-[#ff6633]' : 'text-[#808080]'
+								isCartPage
+									? 'text-promo'
+									: 'text-site-chrome-muted'
 							}
 						>
 							Корзина

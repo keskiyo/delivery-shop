@@ -157,7 +157,7 @@ const CartItem = memo(function CartItem({
 					<div className='flex-1 flex min-w-56 md:flex-initial flex-col gap-y-2 p-2'>
 						{/* Ссылка на страницу товара */}
 						<Link
-							className='text-base hover:text-[#ff6633] cursor-pointer'
+							className='text-base hover:text-promo cursor-pointer'
 							href={`/catalog/${productData.categories[0]}/${item.productId}`}
 						>
 							{productData.description}
@@ -222,11 +222,11 @@ const CartItem = memo(function CartItem({
 								{/* Старая цена и экономия (только на мобильных) */}
 								{hasDiscount && (
 									<div className='flex flex-row gap-x-2 md:hidden'>
-										<p className='line-through font-normal text-xs md:text-base text-[#8a8a8a]'>
+										<p className='line-through font-normal text-xs md:text-base text-muted-foreground'>
 											{formatPrice(totalPriceWithoutCard)}{' '}
 											₽
 										</p>
-										<p className='font-normal text-xs text-[#ff6633]'>
+										<p className='font-normal text-xs text-promo'>
 											{formatPrice(
 												totalFinalPrice -
 													totalPriceWithoutCard,

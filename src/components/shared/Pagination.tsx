@@ -105,12 +105,12 @@ const Pagination = ({
 
 	const buttonSize =
 		'w-5 h-5 md:w-10 md:h-10 flex items-center justify-center rounded duration-300'
-	const buttonActive = 'dark:text-white hover:text-[#ff7345]'
+	const buttonActive = 'text-text-soft hover:text-promo'
 	const buttonDisabled = 'hidden cursor-not-allowed'
 	const pageButtonClass = `${buttonSize}`
 
 	return (
-		<div className='flex justify-center mt-10 dark:text-white text-sm md:text-base'>
+		<div className='flex justify-center mt-10 text-foreground text-sm md:text-base'>
 			<nav className='flex gap-1 md:gap-2 items-center'>
 				{/* <Link
 					href={createPageUrl(basePath, params, 1)}
@@ -138,7 +138,7 @@ const Pagination = ({
 						return (
 							<span
 								key={`ellipsis-${index}`}
-								className={`${buttonSize} text-[#ff6633]`}
+								className={`${buttonSize} text-promo`}
 							>
 								...
 							</span>
@@ -154,8 +154,8 @@ const Pagination = ({
 							)}
 							className={`${pageButtonClass} ${
 								currentPage === page
-									? 'text-[#ff6633] border-2 border-[#ff6633]'
-									: 'hover:bg-[#ff6633] light:hover:text-white'
+									? 'text-promo border-2 border-promo'
+									: 'hover:bg-promo hover:text-promo-foreground'
 							}`}
 						>
 							{page}

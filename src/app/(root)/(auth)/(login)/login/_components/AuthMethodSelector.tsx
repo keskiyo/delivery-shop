@@ -17,7 +17,7 @@ export const AuthMethodSelector: React.FC<AuthMethodSelectorProps> = ({
 }) => {
 	const buttonStyles = `
     flex flex-col items-center justify-center
-    p-4 rounded-lg border border-gray-200
+    p-4 rounded-lg border border-border
     hover:shadow-md duration-300 cursor-pointer
     relative group w-full cursor-pointer duration-300
   `
@@ -42,7 +42,7 @@ export const AuthMethodSelector: React.FC<AuthMethodSelectorProps> = ({
 							className={buttonStyles}
 						>
 							<div className={iconContainerStyles}>
-								<Key className='h-6 w-6 text-[#ff6633] group-hover:text-white' />
+								<Key className='h-6 w-6 text-promo group-hover:text-promo-foreground' />
 							</div>
 							<span className='font-medium'>Войти с паролем</span>
 						</button>
@@ -52,7 +52,7 @@ export const AuthMethodSelector: React.FC<AuthMethodSelectorProps> = ({
 							className={buttonStyles}
 						>
 							<div className={iconContainerStyles}>
-								<Smartphone className='h-6 w-6 text-[#ff6633] group-hover:text-white' />
+								<Smartphone className='h-6 w-6 text-promo group-hover:text-promo-foreground' />
 							</div>
 							<span className='font-medium'>
 								Войти по SMS-коду
@@ -62,7 +62,7 @@ export const AuthMethodSelector: React.FC<AuthMethodSelectorProps> = ({
 
 					<button
 						onClick={onBackAction}
-						className='h-8 text-xs text-gray-400 hover:text-gray-500 w-30 flex items-center justify-center gap-x-2 mx-auto duration-300 cursor-pointer'
+						className='h-8 text-xs text-muted-foreground hover:text-foreground w-30 flex items-center justify-center gap-x-2 mx-auto duration-300 cursor-pointer'
 					>
 						<ArrowLeft size={24} />
 						Вернуться

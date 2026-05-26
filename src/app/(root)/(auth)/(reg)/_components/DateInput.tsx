@@ -118,7 +118,7 @@ const DateInput = ({
 					className='absolute right-2 top-1/2 transform -translate-y-1/2'
 					aria-label='Установить дату рождения'
 				>
-					<CalendarDays size={24} className='text-gray-600' />
+					<CalendarDays size={24} className='text-muted-foreground' />
 				</button>
 			</div>
 			{showTooltip && error && <Tooltip text={error} />}

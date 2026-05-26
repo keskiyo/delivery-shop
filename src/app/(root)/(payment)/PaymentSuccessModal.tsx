@@ -18,9 +18,9 @@ const PaymentSuccessModal = ({
 	return (
 		<div className='fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4'>
 			<div className='bg-card rounded-lg max-w-md w-full p-6 text-center'>
-				<div className='w-16 h-16 bg-green-200 rounded-full flex items-center justify-center mx-auto mb-4'>
+				<div className='w-16 h-16 bg-success-soft rounded-full flex items-center justify-center mx-auto mb-4'>
 					<Check
-						className='w-8 h-8 text-green-600 shrink-0 '
+						className='w-8 h-8 text-success shrink-0 '
 						strokeWidth={4}
 					/>
 				</div>
@@ -29,34 +29,34 @@ const PaymentSuccessModal = ({
 					Оплата прошла успешно!
 				</h2>
 
-				<div className='space-y-3 mb-6 text-left bg-#e7e7bf-100 p-4 rounded-lg'>
+				<div className='space-y-3 mb-6 text-left bg-surface p-4 rounded-lg'>
 					<div className='flex justify-between'>
-						<span className='text-[#a8a8a8]'>Номер заказа:</span>
+						<span className='text-muted-foreground'>Номер заказа:</span>
 						<span className='font-semibold'>
 							{successData.orderNumber}
 						</span>
 					</div>
 					<div className='flex justify-between'>
-						<span className='text-[#a8a8a8]'>ID платежа:</span>
+						<span className='text-muted-foreground'>ID платежа:</span>
 						<span className='font-mono text-sm'>
 							{successData.paymentId}
 						</span>
 					</div>
 					<div className='flex justify-between'>
-						<span className='text-[#a8a8a8]'>Сумма:</span>
+						<span className='text-muted-foreground'>Сумма:</span>
 						<span className='font-semibold'>
 							{formatPrice(successData.amount)} ₽
 						</span>
 					</div>
 					<div className='flex justify-between'>
-						<span className='text-[#a8a8a8]'>Карта:</span>
+						<span className='text-muted-foreground'>Карта:</span>
 						<span className='font-mono'>
 							**** {successData.cardLast4}
 						</span>
 					</div>
 				</div>
 
-				<p className='text-[#a8a8a8] mb-6'>
+				<p className='text-muted-foreground mb-6'>
 					Ваш заказ успешно оплачен и передан в обработку. В ближайшее
 					время с Вами свяжется наш менеджер для подтверждения
 					доставки.
@@ -64,7 +64,7 @@ const PaymentSuccessModal = ({
 
 				<button
 					onClick={onClose}
-					className='w-full py-3 px-4 bg-green-600 text-white rounded-lg hover:bg-green-500 transition-colors font-medium cursor-pointer'
+					className='w-full py-3 px-4 bg-brand text-brand-foreground rounded-lg hover:bg-brand-hover transition-colors font-medium cursor-pointer'
 				>
 					Понятно
 				</button>

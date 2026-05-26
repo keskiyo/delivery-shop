@@ -186,14 +186,14 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 								setCode(e.target.value)
 								setError('')
 							}}
-							className='flex justify-center w-27.5 h-15 text-center text-2xl px-4 py-3 border border-[#bfbfbf] rounded focus:border-[#70c05b] focus:shadow-(--shadow-button-default) text-gray-500 focus:bg-white focus:outline-none'
+							className='flex justify-center w-27.5 h-15 text-center text-2xl px-4 py-3 border border-border rounded focus:border-brand focus:shadow-(--shadow-button-default) text-foreground bg-input focus:bg-input focus:outline-none'
 							autoComplete='one-time-code'
 							required
 						/>
 						
 						{/* Сообщение об ошибке */}
 						{error && (
-							<div className='text-red-500 text-center mt-2 text-sm'>
+							<div className='text-danger text-center mt-2 text-sm'>
 								{error}
 							</div>
 						)}
@@ -219,7 +219,7 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 				{/* Ссылка возврата на страницу регистрации */}
 				<Link
 					href='/register'
-					className='h-8 text-xs text-gray-400 hover:text-gray-500 w-30 flex items-center justify-center gap-x-2 mx-auto duration-300 cursor-pointer'
+					className='h-8 text-xs text-muted-foreground hover:text-foreground w-30 flex items-center justify-center gap-x-2 mx-auto duration-300 cursor-pointer'
 				>
 					<ArrowLeft size={24} />
 					Вернуться

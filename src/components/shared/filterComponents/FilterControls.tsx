@@ -77,30 +77,30 @@ function FilterControlsContent({
 	return (
 		<div className='flex flex-warp flex-row gap-4'>
 			<div
-				className={`h-8 p-2 rounded text-xs flex justify-center items-center duration-300 cursor-not-allowed gap-x-2 ${(activeFilter && activeFilter.length > 0) || hasPriceFilter ? 'bg-green-600 text-white' : 'bg-[#f3f2f1] text-[#606060]'}`}
+				className={`h-8 p-2 rounded text-xs flex justify-center items-center duration-300 cursor-not-allowed gap-x-2 ${(activeFilter && activeFilter.length > 0) || hasPriceFilter ? 'bg-brand text-brand-foreground' : 'bg-surface text-text-soft'}`}
 			>
 				{filterButtonText}
 			</div>
 			{hasPriceFilter && (
-				<div className='h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-green-600 text-white'>
+				<div className='h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-brand text-brand-foreground'>
 					<Link
 						href={buildClearPriceFilterLink()}
 						className='flex items-center gap-x-2'
 					>
 						Цена {minPrice !== undefined ? `от ${minPrice}` : ''}
 						{maxPrice !== undefined ? `до ${maxPrice}` : ''}
-						<X size={24} style={{ filter: 'text-white' }} />
+						<X size={24} />
 					</Link>
 				</div>
 			)}
 			{activeFilterCount > 0 && (
-				<div className='h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-green-600 text-white'>
+				<div className='h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-brand text-brand-foreground'>
 					<Link
 						href={buildClearFiltersLink()}
 						className='flex items-center gap-x-2'
 					>
 						Очистить фильтры
-						<X size={24} style={{ filter: 'text-white' }} />
+						<X size={24} />
 					</Link>
 				</div>
 			)}
@@ -118,7 +118,7 @@ const FilterControls = ({
 		<Suspense
 			fallback={
 				<div className='flex flex-wrap flex-row gap-4'>
-					<div className='h-8 p-2 rounded text-xs bg-[#f3f2f1] text-[#606060] animate-pulse'>
+					<div className='h-8 p-2 rounded text-xs bg-surface text-text-soft animate-pulse'>
 						Фильтры
 					</div>
 				</div>

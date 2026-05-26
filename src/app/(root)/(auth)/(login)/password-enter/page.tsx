@@ -198,7 +198,7 @@ const EnterPasswordContent = () => {
 				<div className='flex flex-row flex-wrap mx-auto text-xs'>
 					<button
 						onClick={() => router.replace('/login')}
-						className='h-8 text-gray-400 hover:text-gray-500 w-30 flex items-center justify-center gap-x-2 duration-300 cursor-pointer'
+						className='h-8 text-muted-foreground hover:text-foreground w-30 flex items-center justify-center gap-x-2 duration-300 cursor-pointer'
 					>
 						<ArrowLeft size={24} />
 						Вернуться
@@ -206,7 +206,7 @@ const EnterPasswordContent = () => {
 
 					<button
 						onClick={handleForgotPassword}
-						className='h-8 text-gray-400 hover:text-gray-500 w-30 flex items-center justify-center duration-300'
+						className='h-8 text-muted-foreground hover:text-foreground w-30 flex items-center justify-center duration-300'
 					>
 						Забыли пароль?
 					</button>

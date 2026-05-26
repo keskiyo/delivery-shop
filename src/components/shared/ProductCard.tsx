@@ -63,10 +63,10 @@ const ProductCard = ({
 
 	return (
 		<div
-			className={`relative flex flex-col justify-between w-40 rounded overflow-hidden bg-white md:w-56 xl:w-68 ${isAdminOrderPage ? 'h-auto' : 'h-87.25'} align-top p-0 hover:shadow-article duration-300`}
+			className={`relative flex flex-col justify-between w-40 rounded overflow-hidden bg-card md:w-56 xl:w-68 ${isAdminOrderPage ? 'h-auto' : 'h-87.25'} align-top p-0 hover:shadow-article duration-300`}
 		>
 			{orderQuantity && (
-				<div className='absolute top-2 left-2 flex items-center p-1 bg-[#ebebeb] bg-opacity-80 rounded justify-center gap-1 text-lg font-bold z-10 text-[#505050]'>
+				<div className='absolute top-2 left-2 flex items-center p-1 bg-surface/90 rounded justify-center gap-1 text-lg font-bold z-10 text-text-soft'>
 					<IconCart />
 					{orderQuantity}
 				</div>
@@ -76,8 +76,8 @@ const ProductCard = ({
 				<div
 					className={`absolute top-3 left-1/2 transform -translate-x-1/2 p-1 rounded text-[8px] md:px-2 md:text-xs z-10 ${
 						insufficientStock
-							? 'bg-[#d80000] text-white'
-							: 'bg-[#ff6633] text-white'
+							? 'bg-danger text-danger-foreground'
+							: 'bg-promo text-promo-foreground'
 					}`}
 				>
 					{insufficientStock
@@ -102,7 +102,7 @@ const ProductCard = ({
 					{!isAdminOrderPage &&
 						!isOrderPage &&
 						discountPercent > 0 && (
-							<div className='absolute bg-[#ff6633] py-1 px-2 rounded text-white bottom-2 left-2'>
+							<div className='absolute bg-promo py-1 px-2 rounded text-promo-foreground bottom-2 left-2'>
 								-{discountPercent}%
 							</div>
 						)}
@@ -119,7 +119,7 @@ const ProductCard = ({
 									<span>₽</span>
 								</div>
 								{showTwoPrices && (
-									<p className='text-[#8a8a8a] text-[8px] md:text-xs'>
+									<p className='text-muted-foreground text-[8px] md:text-xs'>
 										С картой
 									</p>
 								)}
@@ -130,7 +130,7 @@ const ProductCard = ({
 										<span>{formatPrice(finalPrice)}</span>
 										<span>₽</span>
 									</div>
-									<p className='text-[#8a8a8a] text-[8px] md:text-xs text-right'>
+									<p className='text-muted-foreground text-[8px] md:text-xs text-right'>
 										Обычная
 									</p>
 								</div>
