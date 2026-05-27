@@ -30,7 +30,7 @@ const NavAndInfo = ({
 					<h1 className='text-lg lg:text-2xl font-bold mb-2'>
 						Список пользователей
 					</h1>
-					<p className='text-sm lg:text-base text-gray-400'>
+					<p className='text-sm lg:text-base text-muted-foreground'>
 						Всего пользователей: {totalUsers}
 					</p>
 				</div>
@@ -38,7 +38,7 @@ const NavAndInfo = ({
 				<div className='flex items-center gap-2'>
 					<label
 						htmlFor='pageSize'
-						className='text-sm whitespace-nowrap text-gray-400'
+						className='text-sm whitespace-nowrap text-muted-foreground'
 					>
 						Пользователей на странице:
 					</label>
@@ -46,7 +46,7 @@ const NavAndInfo = ({
 						id='pageSize'
 						value={pageSize}
 						onChange={e => onPageSizeChange(Number(e.target.value))}
-						className='border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500'
+						className='border border-input bg-card rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-brand'
 					>
 						{pageSizeOptions.map(option => (
 							<option key={option} value={option}>

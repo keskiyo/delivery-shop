@@ -11,8 +11,8 @@
  * @param labelText - Текст метки рядом с переключателем (опционально)
  * 
  * Стили:
- * - Выключен: серый фон
- * - Включен: зеленый фон (#70c05b)
+ * - Выключен: `bg-surface-hover`
+ * - Включен: `bg-brand`
  * - Анимация переключения: 300ms
  */
 const InStockToggle = ({
@@ -39,7 +39,7 @@ const InStockToggle = ({
 						className={`
                 absolute top-0.5 left-0
                 w-5 h-5
-                border-[0.5px] border-[rgba(0,0,0,0.04)]
+                border-[0.5px] border-border/40
                 rounded-full
                 shadow-[0px_1px_1px_rgba(0,0,0,0.08),0px_2px_6px_rgba(0,0,0,0.15)]
                 bg-card

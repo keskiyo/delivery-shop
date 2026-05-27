@@ -46,7 +46,7 @@ const PaymentsButtons = ({
 				onClick={onCashPayment}
 				className={`h-10 rounded w-full text-base items-center justify-center duration-300 ${
 					canProceedWithPayment
-						? 'bg-brand hover:shadow-button-default active:shadow-button-active text-brand-foreground cursor-pointer'
+						? 'bg-brand hover:shadow-button-default active:shadow-button-active text-white cursor-pointer'
 						: 'bg-muted text-muted-foreground cursor-not-allowed'
 				}`}
 			>

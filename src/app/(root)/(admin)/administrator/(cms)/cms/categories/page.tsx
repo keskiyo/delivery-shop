@@ -307,7 +307,7 @@ const CategoriesPage = () => {
 					value={itemsPerPage}
 					onChange={handleItemsPerPageChange}
 				/>
-				<div className='text-sm mt-1 text-[#8a8a8a]'>
+				<div className='text-sm mt-1 text-muted-foreground'>
 					Текущие параметры: страница {currentPage}, элементов:{' '}
 					{itemsPerPage}
 				</div>

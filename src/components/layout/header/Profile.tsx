@@ -140,7 +140,7 @@ const Profile = () => {
 			<>
 				<Link
 					href='/login'
-					className='w-10 xl:w-30 flex justify-between items-center gap-x-2 p-2 rounded text-promo-foreground text-base bg-promo hover:bg-promo-hover hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) duration-300 cursor-pointer'
+					className='w-10 xl:w-30 flex justify-between items-center gap-x-2 p-2 rounded text-white text-base bg-promo hover:bg-promo-hover hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) duration-300 cursor-pointer'
 				>
 					<div className='w-27 justify-center hidden xl:flex'>
 						<p>Войти</p>

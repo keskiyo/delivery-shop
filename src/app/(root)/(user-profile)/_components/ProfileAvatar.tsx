@@ -142,11 +142,11 @@ const ProfileAvatar = ({ gender }: { gender: string }) => {
 					priority
 				/>
 				{isUploading && (
-					<div className='absolute inset-0 bg-black/50 flex items-center justify-center rounded-full'>
-						<div className='animate-spin rounded-full h-8 w-8 border-b-2 border-brand-foreground'></div>
+					<div className='absolute inset-0 bg-muted/80 flex items-center justify-center rounded-full'>
+						<div className='animate-spin rounded-full h-8 w-8 border-b-2 border-white'></div>
 					</div>
 				)}
-				<label className='absolute bottom-0 right-0 bg-brand text-brand-foreground p-2 rounded-full cursor-pointer shadow-md hover:shadow-(--shadow-button-default) duration-300'>
+				<label className='absolute bottom-0 right-0 bg-brand text-white p-2 rounded-full cursor-pointer shadow-md hover:shadow-(--shadow-button-default) duration-300'>
 					<input
 						ref={fileInputRef}
 						type='file'

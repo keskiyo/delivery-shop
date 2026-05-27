@@ -5,7 +5,7 @@ export const getStatusColor = (order: Order) => {
 		if (order.paymentStatus === 'paid' && order.status === 'confirmed') {
 			return 'bg-surface text-foreground'
 		} else if (order.paymentStatus === 'failed') {
-			return 'bg-danger text-danger-foreground'
+			return 'bg-danger text-white'
 		} else if (
 			order.paymentStatus === 'waiting' &&
 			order.status === 'pending'
@@ -27,10 +27,10 @@ export const getStatusColor = (order: Order) => {
 		case 'confirmed':
 			return 'bg-surface text-foreground'
 		case 'delivered':
-			return 'bg-success text-success-foreground'
+			return 'bg-success text-white'
 		case 'cancelled':
 		case 'failed':
-			return 'bg-danger text-danger-foreground'
+			return 'bg-danger text-white'
 		case 'refund':
 		case 'returned':
 			return 'bg-warning-soft text-warning'

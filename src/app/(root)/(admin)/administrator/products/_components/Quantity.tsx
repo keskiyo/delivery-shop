@@ -9,7 +9,7 @@ const Quantity = ({ onChangeAction, quantity }: QuantityProps) => {
 	return (
 		<div>
 			<label className='block text-sm font-medium mb-2'>
-				Количество <span className='text-[#d80000]'>*</span>
+				Количество <span className='text-danger'>*</span>
 			</label>
 			<input
 				type='number'
@@ -17,7 +17,7 @@ const Quantity = ({ onChangeAction, quantity }: QuantityProps) => {
 				required
 				value={quantity}
 				onChange={onChangeAction}
-				className={`${formStyles.input} bg-white [&&]:w-full`}
+				className={`${formStyles.input} bg-card [&&]:w-full`}
 			/>
 		</div>
 	)

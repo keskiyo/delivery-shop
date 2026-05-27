@@ -40,7 +40,7 @@ export const ErrorContent = ({
 				{primaryAction && (
 					<button
 						onClick={primaryAction.onClick}
-						className={`w-full py-3 px-4 bg-danger text-danger-foreground rounded shadow-md hover:shadow-lg duration-300 flex items-center justify-center space-x-2 cursor-pointer ${primaryAction.className}`}
+						className={`w-full py-3 px-4 bg-danger text-white rounded shadow-md hover:shadow-lg duration-300 flex items-center justify-center space-x-2 cursor-pointer ${primaryAction.className}`}
 					>
 						<span>{primaryAction.label}</span>
 					</button>

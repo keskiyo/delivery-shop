@@ -77,7 +77,7 @@ export default function DeliveryTimesAdmin() {
 				onAddTimeSlot={addTimeSlot}
 			/>
 
-			<div className='bg-card rounded border border-#202020 mb-4 md:mb-6 overflow-x-auto'>
+			<div className='bg-card rounded border border-border mb-4 md:mb-6 overflow-x-auto'>
 				<ScheduleTable
 					sortedTimeSlots={sortedTimeSlots}
 					dates={dates}
@@ -90,7 +90,7 @@ export default function DeliveryTimesAdmin() {
 			<SaveButton saving={saving} onClick={saveDeliveryTimes} />
 			{message && <MessageAlert message={message} />}
 			{error && (
-				<div className='p-3 md:p-4 mb-4 rounded border bg-[#ffc7c7] text-[#d80000]'>
+				<div className='p-3 md:p-4 mb-4 rounded border border-danger/30 bg-danger-soft text-danger'>
 					{error}
 				</div>
 			)}

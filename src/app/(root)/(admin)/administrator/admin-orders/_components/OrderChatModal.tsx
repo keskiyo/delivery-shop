@@ -68,15 +68,15 @@ const OrderChatModal = ({
 	if (!isOpen) return null
 
 	return (
-		<div className='fixed inset-0 z-100 flex items-center justify-center bg-black/50 min-h-screen py-10 px-3'>
-			<div className='max-w-150 w-full relative bg-[#686868] rounded shadow-auth-form max-h-[calc(100vh-80px)] flex flex-col px-25 pb-15'>
+		<div className='fixed inset-0 z-100 flex items-center justify-center bg-muted/80 min-h-screen py-10 px-3 backdrop-blur-sm'>
+			<div className='max-w-150 w-full relative bg-card text-foreground rounded shadow-auth-form max-h-[calc(100vh-80px)] flex flex-col px-25 pb-15 border border-border'>
 				<button
 					onClick={onClose}
-					className='bg-[#f3f2f1] rounded w-8 h-8 mb-8 absolute top-0 right-0 flex justify-center items-center duration-300 cursor-pointer m-2'
+					className='bg-surface-hover rounded w-8 h-8 mb-8 absolute top-0 right-0 flex justify-center items-center duration-300 cursor-pointer m-2'
 				>
-					<X size={24} className='text-gray-600' />
+					<X size={24} className='text-text-soft' />
 				</button>
-				<h3 className='text-center text-2xl font-bold px-4 mt-18 mb-8 text-white'>
+				<h3 className='text-center text-2xl font-bold px-4 mt-18 mb-8 text-foreground'>
 					Комментарии к заказу № {orderNumber.slice(-3)}
 				</h3>
 
@@ -91,8 +91,8 @@ const OrderChatModal = ({
 							'relative max-w-[85%] md:max-w-[75%] px-4 py-2.5 rounded-2xl shadow-sm transition-all hover:shadow-md'
 
 						const bubbleClass = isCurrentUser
-							? 'bg-[#766ac8] text-white rounded-br-md' // свои: фиолетово-голубые, справа
-							: 'bg-[#363636] text-white rounded-bl-md' // чужие: темно-серые, слева
+							? 'bg-brand text-white rounded-br-md'
+							: 'bg-surface-pressed text-foreground rounded-bl-md'
 
 						return (
 							<div
@@ -106,20 +106,20 @@ const OrderChatModal = ({
 									}`}
 								>
 									<span
-										className={`font-medium ${isCurrentUser ? 'text-white/90' : 'text-[#8a8a8a]'}`}
+										className={`font-medium ${isCurrentUser ? 'text-brand' : 'text-muted-foreground'}`}
 									>
 										{msg.userName}
 									</span>
 									<span
-										className={`font-medium ${isCurrentUser ? 'text-white/90' : 'text-[#8a8a8a]'}`}
+										className={`font-medium ${isCurrentUser ? 'text-brand' : 'text-muted-foreground'}`}
 									>
 										{roleDisplayName}
 									</span>
 									<span
 										className={
 											isCurrentUser
-												? 'text-white/90'
-												: 'text-[#8a8a8a]'
+												? 'text-brand'
+												: 'text-muted-foreground'
 										}
 									>
 										{new Date(
@@ -157,14 +157,14 @@ const OrderChatModal = ({
 							value={message}
 							onChange={e => setMessage(e.target.value)}
 							placeholder='Введите сообщение...'
-							className='flex-1 border border-[#bfbfbf] rounded px-2 py-1 h-25.5 focus:outline-none focus:border-green-600 focus:shadow-button-default caret-green-600 resize-none text-white'
+							className='flex-1 border border-input bg-surface rounded px-2 py-1 h-25.5 focus:outline-none focus:border-brand focus:shadow-button-default caret-brand resize-none text-foreground'
 							disabled={isSending}
 							rows={4}
 						/>
 						<button
 							type='submit'
 							disabled={!message.trim() || isSending}
-							className='bg-[#fcd5ba] text-[#ff6633] text-2xl px-4 py-2 h-17 rounded hover:bg-[#ff6633] hover:text-white disabled:cursor-not-allowed cursor-pointer duration-300'
+							className='bg-promo-soft text-promo text-2xl px-4 py-2 h-17 rounded hover:bg-promo hover:text-white disabled:cursor-not-allowed cursor-pointer duration-300'
 						>
 							{isSending ? '...' : 'Отправить'}
 						</button>

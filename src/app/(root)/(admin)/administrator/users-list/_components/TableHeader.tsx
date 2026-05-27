@@ -22,7 +22,7 @@ const TableHeader = ({ sortBy, sortDirection, onSort }: TableHeaderProps) => {
 
 	return (
 		<div
-			className={`hidden md:grid grid-cols-1 md:grid-cols-12 md:gap-2 rounded ${tableStyles.spacing.cell} bg-[#f3f2f1] ${tableStyles.border.bottom}`}
+			className={`hidden md:grid grid-cols-1 md:grid-cols-12 md:gap-2 rounded ${tableStyles.spacing.cell} bg-surface-hover ${tableStyles.border.bottom}`}
 		>
 			{columns.map(({ key, label, span, sortable }) => {
 				const isActiveSort = sortBy === key
@@ -30,7 +30,7 @@ const TableHeader = ({ sortBy, sortDirection, onSort }: TableHeaderProps) => {
 				return (
 					<div
 						key={key}
-						className={`${span} text-xs break-all font-semibold text-gray-700 ${key !== 'createdAt' ? tableStyles.border.right : ''} ${
+						className={`${span} text-xs break-all font-semibold text-foreground ${key !== 'createdAt' ? tableStyles.border.right : ''} ${
 							sortable
 								? 'cursor-default'
 								: 'cursor-not-allowed opacity-50'
@@ -44,8 +44,8 @@ const TableHeader = ({ sortBy, sortDirection, onSort }: TableHeaderProps) => {
 										className={`h-3 w-3 cursor-pointer ${
 											isActiveSort &&
 											sortDirection === 'asc'
-												? 'text-[#008c48]'
-												: 'text-gray-400 hover:text-gray-600'
+												? 'text-success'
+												: 'text-muted-foreground hover:text-text-soft'
 										}`}
 										onClick={e =>
 											handleIconClick(e, key, 'asc')
@@ -55,8 +55,8 @@ const TableHeader = ({ sortBy, sortDirection, onSort }: TableHeaderProps) => {
 										className={`h-3 w-3 -mt-1 cursor-pointer ${
 											isActiveSort &&
 											sortDirection === 'desc'
-												? 'text-[#008c48]'
-												: 'text-gray-400 hover:text-gray-600'
+												? 'text-success'
+												: 'text-muted-foreground hover:text-text-soft'
 										}`}
 										onClick={e =>
 											handleIconClick(e, key, 'desc')

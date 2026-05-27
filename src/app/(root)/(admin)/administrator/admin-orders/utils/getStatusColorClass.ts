@@ -5,18 +5,18 @@ export const getStatusColorClass = (
 	switch (statusLabel) {
 		case 'Новый':
 		case 'Доставляется':
-			return isSelected ? 'bg-[#f3f2f1]' : 'text-[#414141]'
+			return isSelected ? 'bg-surface-hover text-foreground' : 'text-foreground'
 		case 'Собран':
-			return isSelected ? 'bg-green-600' : 'text-green-600'
+			return isSelected ? 'bg-success text-white' : 'text-success'
 		case 'Подтвержден':
-			return isSelected ? 'bg-[#008c49]' : 'text-[#008c49]'
+			return isSelected ? 'bg-success text-white' : 'text-success'
 		case 'Не подтвердили':
-			return isSelected ? 'bg-[#fca21c]' : 'text-[#fca21c]'
+			return isSelected ? 'bg-warning text-white' : 'text-warning'
 		case 'Возврат':
-			return isSelected ? 'bg-[#d80000]' : 'text-[#d80000]'
+			return isSelected ? 'bg-danger text-white' : 'text-danger'
 		case 'Вернули':
-			return isSelected ? 'bg-[#1cb9fc]' : 'text-[#1cb9fc]'
+			return isSelected ? 'bg-brand text-white' : 'text-brand'
 		default:
-			return isSelected ? 'bg-[#f3f2f1]' : 'text-[#414141]'
+			return isSelected ? 'bg-surface-hover text-foreground' : 'text-foreground'
 	}
 }

@@ -34,7 +34,7 @@ export default function AddTimeSlotForm({
 	onAddTimeSlot,
 }: AddTimeSlotFormProps) {
 	return (
-		<div className='bg-card rounded border border-#202020 p-3 md:p-4 mb-4 md:mb-6'>
+		<div className='bg-card rounded border border-border p-3 md:p-4 mb-4 md:mb-6'>
 			<h2 className='text-base md:text-lg font-semibold mb-3 md:mb-4 text-center'>
 				Добавить временной слот для всех дней
 			</h2>
@@ -47,7 +47,7 @@ export default function AddTimeSlotForm({
 						type='time'
 						value={startTime}
 						onChange={e => onStartTimeChange(e.target.value)}
-						className='border rounded px-3 py-2 w-full text-sm md:text-base cursor-text'
+						className='border border-input bg-card rounded px-3 py-2 w-full text-sm md:text-base cursor-text focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20'
 					/>
 				</div>
 
@@ -59,13 +59,13 @@ export default function AddTimeSlotForm({
 						type='time'
 						value={endTime}
 						onChange={e => onEndTimeChange(e.target.value)}
-						className='border rounded px-3 py-2 w-full text-sm md:text-base cursor-text'
+						className='border border-input bg-card rounded px-3 py-2 w-full text-sm md:text-base cursor-text focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20'
 					/>
 				</div>
 
 				<button
 					onClick={onAddTimeSlot}
-					className='bg-green-600 text-white hover:shadow-button-default active:shadow-button-active py-2 px-3 md:px-4 rounded whitespace-nowrap text-sm md:text-base w-full md:w-auto duration-300 cursor-pointer'
+					className='bg-brand text-white hover:bg-brand-hover hover:shadow-button-default active:shadow-button-active py-2 px-3 md:px-4 rounded whitespace-nowrap text-sm md:text-base w-full md:w-auto duration-300 cursor-pointer'
 				>
 					Добавить слот
 				</button>

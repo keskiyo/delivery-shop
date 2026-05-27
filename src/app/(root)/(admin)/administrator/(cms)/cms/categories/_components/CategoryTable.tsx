@@ -10,6 +10,7 @@ import {
 	CategoryTableProps,
 } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
 import { useCategoryStore } from '@/store/categoryStore'
+import { Loader2 } from 'lucide-react'
 import { useState } from 'react'
 
 export const CategoryTable = ({
@@ -101,12 +102,9 @@ export const CategoryTable = ({
 		return category.numericId
 	}
 
-	if (loading) {
-		return <div className='text-center p-8'>Загрузка категорий ...</div>
-	}
 	return (
 		<div className='rounded shadow-sm'>
-			<div className='p-4 border-b border-gray-200'>
+			<div className='p-4 border-b border-border'>
 				<div className='flex flex-col md:flex-row md:items-center gap-4'>
 					<SearchBar />
 					<FilterControls onToggleFilters={setShowFilters} />
@@ -115,8 +113,17 @@ export const CategoryTable = ({
 				{showFilters && <AdvancedFilters />}
 			</div>
 			<TableHeader />
-			<div className='divide-y divide-gray-200'>
-				{categories.length === 0 ? (
+			<div className='relative min-h-32 divide-y divide-border'>
+				{loading && (
+					<div className='absolute inset-0 z-10 flex items-center justify-center bg-card/80 backdrop-blur-[1px]'>
+						<div className='inline-flex items-center gap-2 rounded bg-site-chrome px-4 py-2 text-sm text-white shadow-sm'>
+							<Loader2 className='h-4 w-4 animate-spin' />
+							<span>Загрузка категорий...</span>
+						</div>
+					</div>
+				)}
+
+				{categories.length === 0 && !loading ? (
 					<EmptyState />
 				) : (
 					categories.map(category => {
@@ -130,7 +137,7 @@ export const CategoryTable = ({
 								onDragStart={() => handleDragStart(categoryId)}
 								onDragOver={e => handleDragOver(e, categoryId)}
 								onDrop={e => handleDrop(e, categoryId)}
-								className={`${isDragOver ? 'bg-blue-50' : ''}`}
+								className={`${isDragOver ? 'bg-brand-soft' : ''}`}
 							>
 								<SortableItem
 									id={categoryId}

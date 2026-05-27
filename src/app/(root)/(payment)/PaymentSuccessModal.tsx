@@ -16,7 +16,7 @@ const PaymentSuccessModal = ({
 	if (!isOpen || !successData) return null
 
 	return (
-		<div className='fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4'>
+		<div className='fixed inset-0 bg-muted/80 backdrop-blur-sm flex items-center justify-center z-50 p-4'>
 			<div className='bg-card rounded-lg max-w-md w-full p-6 text-center'>
 				<div className='w-16 h-16 bg-success-soft rounded-full flex items-center justify-center mx-auto mb-4'>
 					<Check
@@ -64,7 +64,7 @@ const PaymentSuccessModal = ({
 
 				<button
 					onClick={onClose}
-					className='w-full py-3 px-4 bg-brand text-brand-foreground rounded-lg hover:bg-brand-hover transition-colors font-medium cursor-pointer'
+					className='w-full py-3 px-4 bg-brand text-white rounded-lg hover:bg-brand-hover transition-colors font-medium cursor-pointer'
 				>
 					Понятно
 				</button>

@@ -50,7 +50,7 @@ const OrderSuccessMessage = ({
 			</div>
 			<button
 				onClick={handleToOrder}
-				className='ml-4 px-4 py-2 bg-brand hover:bg-brand-hover rounded text-brand-foreground cursor-pointer duration-300'
+				className='ml-4 px-4 py-2 bg-brand hover:bg-brand-hover rounded text-white cursor-pointer duration-300'
 			>
 				Перейти на страницу заказов
 			</button>

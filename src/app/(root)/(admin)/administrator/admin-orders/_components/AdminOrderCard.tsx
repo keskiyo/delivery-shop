@@ -181,7 +181,7 @@ const AdminOrderCard = ({ orderId }: AdminOrderCardProps) => {
 					/>
 					{!showOrderDetails && (
 						<button
-							className='bg-[#f3f2f1] hover:shadow-button-secondary w-50 h-10 px-2 flex justify-center items-center gap-2 rounded duration-300 cursor-pointer text-gray-800'
+							className='bg-surface-hover hover:shadow-button-secondary w-50 h-10 px-2 flex justify-center items-center gap-2 rounded duration-300 cursor-pointer text-foreground'
 							onClick={handleToggleDetails}
 						>
 							<IconVision showPassword={!showOrderDetails} />
@@ -204,7 +204,7 @@ const AdminOrderCard = ({ orderId }: AdminOrderCardProps) => {
 						<div>
 							// При confirmed/pending
 							<button
-								className='relative bg-[#f3f2f1] hover:shadow-button-secondary w-10 h-10 px-2 flex justify-center items-center gap-2 rounded duration-300 cursor-pointer text-gray-800'
+								className='relative bg-surface-hover hover:shadow-button-secondary w-10 h-10 px-2 flex justify-center items-center gap-2 rounded duration-300 cursor-pointer text-foreground'
 								onClick={handleOpenCalendar}
 							>
 								<CalendarDays className='w-6 h-6' />
@@ -218,7 +218,7 @@ const AdminOrderCard = ({ orderId }: AdminOrderCardProps) => {
 					) : (
 						// Показываем иконку чата для остальных статусов
 						<button
-							className='relative bg-[#f3f2f1] hover:shadow-button-secondary w-10 h-10 px-2 flex justify-center items-center gap-2 rounded duration-300 cursor-pointer text-gray-800'
+							className='relative bg-surface-hover hover:shadow-button-secondary w-10 h-10 px-2 flex justify-center items-center gap-2 rounded duration-300 cursor-pointer text-foreground'
 							onClick={handleOpenChat}
 						>
 							{messages.length === 0 ? (
@@ -255,7 +255,7 @@ const AdminOrderCard = ({ orderId }: AdminOrderCardProps) => {
 			{showOrderDetails && !showFullOrder && (
 				<div className='flex justify-center mt-10'>
 					<button
-						className='bg-[#f3f2f1] hover:shadow-button-secondary w-60 h-10 px-2 flex justify-center items-center gap-2 rounded duration-300 cursor-pointer text-gray-800'
+						className='bg-surface-hover hover:shadow-button-secondary w-60 h-10 px-2 flex justify-center items-center gap-2 rounded duration-300 cursor-pointer text-foreground'
 						onClick={handleToggleFullOrder}
 					>
 						<IconVision showPassword={true} />
@@ -266,7 +266,7 @@ const AdminOrderCard = ({ orderId }: AdminOrderCardProps) => {
 			{showFullOrder && (
 				<div className='flex justify-center mt-10'>
 					<button
-						className='bg-[#f3f2f1] hover:shadow-button-secondary w-60 h-10 px-2 flex justify-center items-center gap-2 rounded duration-300 cursor-pointer text-gray-800'
+						className='bg-surface-hover hover:shadow-button-secondary w-60 h-10 px-2 flex justify-center items-center gap-2 rounded duration-300 cursor-pointer text-foreground'
 						onClick={handleToggleFullOrder}
 					>
 						<IconVision showPassword={false} />

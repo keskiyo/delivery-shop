@@ -18,14 +18,14 @@ const ArticleCard = ({ img, title, createdAt, text }: ArticlesProps) => {
 				/>
 			</div>
 			<div className='p-2 flex-1 flex flex-col gap-y-2 leading-normal'>
-				<time className='text-[8px]'>
+				<time className='text-[8px] text-muted-foreground'>
 					{format(new Date(createdAt), 'dd.MM.yyyy', {
 						locale: ru,
 					})}
 				</time>
 				<h3 className=' text-base font-bold xl:text-lg'>{title}</h3>
-				<p className='line-clamp-3 text-xs xl:text-base'>{text}</p>
-				<button className='rounded mt-auto w-37.5 h-10 bg-success-soft text-base text-success hover:bg-success hover:shadow-(--shadow-button-default) hover:text-success-foreground active:shadow-(--shadow-button-active) duration-300 cursor-pointer'>
+				<p className='line-clamp-3 text-xs xl:text-base text-muted-foreground'>{text}</p>
+				<button className='rounded mt-auto w-37.5 h-10 bg-success text-base text-white hover:shadow-(--shadow-button-default) active:shadow-(--shadow-button-active) duration-300 cursor-pointer'>
 					Подробнее
 				</button>
 			</div>

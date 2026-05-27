@@ -9,7 +9,7 @@ const BasePrice = ({ onChangeAction, basePrice }: BasePriceProps) => {
 	return (
 		<div>
 			<label className='block text-sm font-medium mb-2'>
-				Базовая цена (руб.) <span className='text-[#d80000]'>*</span>
+				Базовая цена (руб.) <span className='text-danger'>*</span>
 			</label>
 			<input
 				type='number'
@@ -18,7 +18,7 @@ const BasePrice = ({ onChangeAction, basePrice }: BasePriceProps) => {
 				required
 				value={basePrice}
 				onChange={onChangeAction}
-				className={`${formStyles.input} bg-white [&&]:w-full`}
+				className={`${formStyles.input} bg-card [&&]:w-full`}
 			/>
 		</div>
 	)

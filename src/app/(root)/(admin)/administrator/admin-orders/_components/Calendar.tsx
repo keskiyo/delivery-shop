@@ -52,24 +52,24 @@ const Calendar = ({
 
 	return (
 		<div
-			className={`${isOrderDateChange ? '' : 'absolute top-17 left-0 z-50 bg-white border border-gray-200 rounded-lg shadow-lg p-4 w-92 text-gray-800'}`}
+			className={`${isOrderDateChange ? '' : 'absolute top-17 left-0 z-50 bg-card border border-border rounded-lg shadow-lg p-4 w-92 text-foreground'}`}
 		>
 			{/* Кастомная навигация */}
 			<div className='flex justify-between items-center mb-4'>
-				<span className='text-lg font-bold text-gray-800'>
+				<span className='text-lg font-bold text-foreground'>
 					{getMonthName(currentMoth)}
 				</span>
 				<div className='flex gap-x-4 justify-center'>
 					<button
 						onClick={handlePreviousMonth}
-						className='p-2 bg-[#f3f2f1] hover:bg-green-600 rounded duration-300 cursor-pointer'
+						className='p-2 bg-surface-hover hover:bg-brand hover:text-white rounded duration-300 cursor-pointer'
 					>
 						<ChevronLeft className='w-6 h-6' />
 					</button>
 
 					<button
 						onClick={handleNextMonth}
-						className='p-2 bg-[#f3f2f1] hover:bg-green-600 rounded duration-300 cursor-pointer'
+						className='p-2 bg-surface-hover hover:bg-brand hover:text-white rounded duration-300 cursor-pointer'
 					>
 						<ChevronRight className='w-6 h-6' />
 					</button>
@@ -95,20 +95,20 @@ const Calendar = ({
 						head_cell: 'font-normal py-2 text-sm',
 						row: 'border-b',
 						cell: 'h-10 text-center',
-						day: 'size-10 rounded-full text-[#606060] hover:text-white hover:bg-[#ff6633] duration-300 cursor-pointer mx-auto',
-						day_selected: 'bg-[#ff6633] !text-white',
-						day_today: 'bg-gray-100 !text-white',
-						day_outside: 'text-gray-500 opacity-50',
+						day: 'size-10 rounded-full text-text-soft hover:text-white hover:bg-promo duration-300 cursor-pointer mx-auto',
+						day_selected: 'bg-promo !text-white',
+						day_today: 'bg-promo-soft !text-promo',
+						day_outside: 'text-muted-foreground opacity-50',
 					}}
 					modifiersStyles={{
 						selected: {
-							color: 'white',
-							backgroundColor: '#ff6633',
+							color: 'var(--promo-foreground)',
+							backgroundColor: 'var(--promo)',
 							border: 'none',
 						},
 						today: {
-							color: 'white',
-							backgroundColor: '#ffaa8e',
+							color: 'var(--promo)',
+							backgroundColor: 'var(--promo-soft)',
 							border: 'none',
 						},
 					}}

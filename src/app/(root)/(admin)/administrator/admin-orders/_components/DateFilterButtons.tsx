@@ -27,12 +27,12 @@ const DateFilterButtons = ({
 						onClick={() => onDateSelect(date)}
 						className={`p-4 w-46 h-15 rounded duration-300 cursor-pointer text-base md:text-lg xl:text-xl flex justify-between items-center gap-2 ${
 							selectedDate === date
-								? 'items-center bg-green-600 text-white relative gap-2 justify-between'
-								: 'active:shadow-button-active bg-[#e0e0e0] hover:shadow-button-secondary text-gray-800'
+								? 'items-center bg-brand text-white relative gap-2 justify-between'
+								: 'active:shadow-button-active bg-surface-hover hover:shadow-button-secondary text-foreground'
 						}`}
 					>
 						{formatDisplayDate(date)}
-						<div className='text-white w-8 h-8 text-xs md:text-sm xl:text-base bg-[#ff6633] rounded flex justify-center items-center'>
+						<div className='text-white w-8 h-8 text-xs md:text-sm xl:text-base bg-promo rounded flex justify-center items-center'>
 							{ordersCount}
 						</div>
 					</button>

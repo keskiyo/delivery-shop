@@ -69,8 +69,8 @@ const StatusDropdown = ({
 						className={`flex-1 text-left ${
 							currentStatusLabel === 'Доставляется' ||
 							currentStatusLabel === 'Новый'
-								? 'text-[#606060]'
-								: 'text-[#f3f2f1]'
+								? 'text-text-soft'
+								: 'text-current'
 						}`}
 					>
 						{currentStatusLabel}
@@ -91,7 +91,7 @@ const StatusDropdown = ({
 			</button>
 
 			{isDropdownOpen && (
-				<div className='absolute top-full right-0 mt-1 bg-white border border-gray-200 rounded shadow-lg z-200 w-50'>
+				<div className='absolute top-full right-0 mt-1 bg-card border border-border rounded shadow-lg z-200 w-50'>
 					{CUSTOMER_STATUSES.map(status => (
 						<button
 							key={status.value}
@@ -100,7 +100,7 @@ const StatusDropdown = ({
 								onStatusChange(status.label)
 								setIsDropdownOpen(false)
 							}}
-							className={`flex items-center gap-3 w-full px-4 py-2 text-left hover:bg-[#fcd5ba] duration-300 cursor-pointer ${getStatusColorClass(
+							className={`flex items-center gap-3 w-full px-4 py-2 text-left hover:bg-promo-soft duration-300 cursor-pointer ${getStatusColorClass(
 								status.label,
 								false,
 							)}`}

@@ -26,11 +26,11 @@ const CartControls = ({
 				/>
 				<div className='w-6 h-6 bg-brand border border-brand rounded flex items-center justify-center duration-300'>
 					{isAllSelected ? (
-						<div className='w-3.75 h-px bg-brand-foreground'></div>
+						<div className='w-3.75 h-px bg-white'></div>
 					) : (
 						<div className='relative w-3.75 h-3.75'>
-							<div className='absolute top-1/2 left-0 w-full h-px bg-brand-foreground transform -translate-y-1/2'></div>
-							<div className='absolute left-1/2 top-0 w-px h-full bg-brand-foreground transform -translate-x-1/2'></div>
+							<div className='absolute top-1/2 left-0 w-full h-px bg-white transform -translate-y-1/2'></div>
+							<div className='absolute left-1/2 top-0 w-px h-full bg-white transform -translate-x-1/2'></div>
 						</div>
 					)}
 				</div>

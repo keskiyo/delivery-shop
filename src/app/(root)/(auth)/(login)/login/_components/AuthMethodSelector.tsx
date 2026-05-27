@@ -42,7 +42,7 @@ export const AuthMethodSelector: React.FC<AuthMethodSelectorProps> = ({
 							className={buttonStyles}
 						>
 							<div className={iconContainerStyles}>
-								<Key className='h-6 w-6 text-promo group-hover:text-promo-foreground' />
+								<Key className='h-6 w-6 text-promo group-hover:text-white' />
 							</div>
 							<span className='font-medium'>Войти с паролем</span>
 						</button>
@@ -52,7 +52,7 @@ export const AuthMethodSelector: React.FC<AuthMethodSelectorProps> = ({
 							className={buttonStyles}
 						>
 							<div className={iconContainerStyles}>
-								<Smartphone className='h-6 w-6 text-promo group-hover:text-promo-foreground' />
+								<Smartphone className='h-6 w-6 text-promo group-hover:text-white' />
 							</div>
 							<span className='font-medium'>
 								Войти по SMS-коду

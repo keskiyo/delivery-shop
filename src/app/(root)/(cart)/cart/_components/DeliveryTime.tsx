@@ -211,7 +211,7 @@ const DeliveryTime = ({
 											selectedTimeSlot === slot.value &&
 											slot.free &&
 											!slot.passed
-												? 'bg-brand text-brand-foreground hover:shadow-button-default active:shadow-button-active'
+												? 'bg-brand text-white hover:shadow-button-default active:shadow-button-active'
 												: slot.free && !slot.passed
 													? 'bg-surface text-text-soft hover:shadow-button-secondary cursor-pointer'
 													: 'bg-card text-muted-foreground opacity-50 cursor-not-allowed'

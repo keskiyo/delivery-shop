@@ -19,8 +19,8 @@ export const SEOForm = ({
 		>
 			{/* Индикатор перезагрузки в блоке текущих настроек */}
 			{reloading && settings && (
-				<div className='absolute inset-0 bg-white/50 flex items-center justify-center z-10'>
-					<Loader className='animate-spin text-green-600' />
+				<div className='absolute inset-0 bg-background/50 flex items-center justify-center z-10'>
+					<Loader className='animate-spin text-brand' />
 				</div>
 			)}
 
@@ -82,8 +82,8 @@ export const SEOForm = ({
 					<div className='relative'>
 						<CurrentSettings settings={settings} />
 						{reloading && (
-							<div className='absolute inset-0 bg-gray-50/50 flex items-center justify-center'>
-								<Loader className='animate-spin h-5 w-5' />
+							<div className='absolute inset-0 bg-background/50 flex items-center justify-center'>
+								<Loader className='animate-spin h-5 w-5 text-brand' />
 							</div>
 						)}
 					</div>

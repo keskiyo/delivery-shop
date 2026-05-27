@@ -29,5 +29,3 @@ const AdminDashboardPage = () => {
 }
 
 export default AdminDashboardPage
-
-// ! text-[#8a8a8a]

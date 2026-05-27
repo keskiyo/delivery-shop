@@ -32,7 +32,7 @@ export const AdvancedFilters = () => {
 						onChange={e =>
 							setFilterType(e.target.value as FilterType)
 						}
-						className='text-sm w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none'
+						className='text-sm w-full border border-input bg-card rounded px-3 py-2 focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none'
 					>
 						<option value='all'>Во всех полях</option>
 						<option value='name'>Название</option>
@@ -53,7 +53,7 @@ export const AdvancedFilters = () => {
 						onChange={e =>
 							handleSortFieldChange(e.target.value as SortField)
 						}
-						className='text-sm w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none'
+						className='text-sm w-full border border-input bg-card rounded px-3 py-2 focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none'
 					>
 						<option value='numericId'>ID</option>
 						<option value='name'>Название</option>
@@ -73,8 +73,8 @@ export const AdvancedFilters = () => {
 							onClick={() => handleSortDirectionChange('asc')}
 							className={`flex-1 px-4 py-2 border rounded cursor-pointer duration-300 ${
 								sortDirection === 'asc'
-									? 'bg-green-50 border-green-500 text-green-700'
-									: 'border-gray-300 hover:bg-[#8a8a8a]'
+									? 'bg-brand-soft border-brand text-brand'
+									: 'border-border hover:bg-surface-hover'
 							}`}
 						>
 							По возрастанию
@@ -83,8 +83,8 @@ export const AdvancedFilters = () => {
 							onClick={() => handleSortDirectionChange('desc')}
 							className={`flex-1 px-4 py-2 border rounded cursor-pointer duration-300 ${
 								sortDirection === 'desc'
-									? 'bg-green-50 border-green-500 text-green-700'
-									: 'border-gray-300 hover:bg-[#8a8a8a]'
+									? 'bg-brand-soft border-brand text-brand'
+									: 'border-border hover:bg-surface-hover'
 							}`}
 						>
 							По убыванию

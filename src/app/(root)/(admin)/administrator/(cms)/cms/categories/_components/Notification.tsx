@@ -6,8 +6,8 @@ export const Notification = ({ type, message, onClose }: NotificationProps) => {
 		'mb-4 p-4 rounded absolute top-10 flex justify-between items-center'
 	const typeClasses =
 		type === 'success'
-			? 'bg-green-50 text-green-600 border border-green-200'
-			: 'bg-red-50 text-red-600 border border-red-200'
+			? 'bg-success-soft text-success border border-success/30'
+			: 'bg-danger-soft text-danger border border-danger/30'
 
 	return (
 		<div className={`${baseClasses} ${typeClasses}`}>

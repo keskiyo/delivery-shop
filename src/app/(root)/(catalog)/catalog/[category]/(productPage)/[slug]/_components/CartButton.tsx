@@ -72,7 +72,7 @@ const CartButton = ({ productId }: { productId: string }) => {
 				<button
 					type='submit'
 					disabled={isLoading}
-					className='mb-2 h-10 md:h-15 w-full bg-promo text-promo-foreground text-base md:text-2xl p-4 flex justify-center items-center rounded hover:shadow-article active:shadow-button-active duration-300 cursor-pointer relative disabled:opacity-60 disabled:cursor-not-allowed'
+					className='mb-2 h-10 md:h-15 w-full bg-promo text-white text-base md:text-2xl p-4 flex justify-center items-center rounded hover:shadow-article active:shadow-button-active duration-300 cursor-pointer relative disabled:opacity-60 disabled:cursor-not-allowed'
 				>
 					<ShoppingCart className='absolute right-4 h-8 w-8' />
 

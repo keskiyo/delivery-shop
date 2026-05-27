@@ -9,8 +9,8 @@ export const tableStyles = {
 		registration: 'md:col-span-2 flex items-center md:justify-center pr-2',
 	},
 	border: {
-		right: 'border-r border-gray-300 py-2 rounded md:rounded-none',
-		bottom: 'border-b border-gray-300 py-2 rounded md:rounded-none',
+		right: 'border-r border-border py-2 rounded md:rounded-none',
+		bottom: 'border-b border-border py-2 rounded md:rounded-none',
 	},
 	spacing: {
 		cell: 'p-3',

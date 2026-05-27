@@ -33,7 +33,7 @@ const SearchProductResult = ({
 
 			<div className='grid gap-4'>
 				{products.length === 0 ? (
-					<div className='text-center py-8 text-[#8a8a8a]'>
+					<div className='text-center py-8 text-muted-foreground'>
 						<p className='text-lg'>Товары не найдены</p>
 						<p className='text-sm'>
 							Попробуйте изменить поисковый запрос
@@ -43,13 +43,13 @@ const SearchProductResult = ({
 					products.map(product => (
 						<div
 							key={product.id}
-							className='border rounded p-4 flex justify-between items-center bg-card'
+							className='border border-border rounded p-4 flex justify-between items-center bg-card'
 						>
 							<div className='flex-1'>
 								<h3 className='font-semibold text-lg mb-1'>
 									{product.title}
 								</h3>
-								<div className='grid grid-cols-2 md:grid-cols-4 gap-2 text-sm'>
+								<div className='grid grid-cols-2 md:grid-cols-4 gap-2 text-sm text-muted-foreground'>
 									<p>Артикул: {product.article}</p>
 									<p>Цена: {product.basePrice} руб.</p>
 									<p>Остаток: {product.quantity} шт.</p>
@@ -67,7 +67,7 @@ const SearchProductResult = ({
 							<div className='flex gap-2 ml-4'>
 								<Link
 									href={`/administrator/products/edit-product/${product.id}`}
-									className='bg-green-600 hover:shadow-button-default active:shadow-button-active rounded text-white cursor-pointer duration-300 px-4 py-2 flex flex-row gap-2 items-center justify-center'
+									className='bg-brand hover:bg-brand-hover hover:shadow-button-default active:shadow-button-active rounded text-white cursor-pointer duration-300 px-4 py-2 flex flex-row gap-2 items-center justify-center'
 								>
 									<Edit size={16} />
 									Редактировать
@@ -81,7 +81,7 @@ const SearchProductResult = ({
 										)
 									}
 									disabled={deletingId === product.id}
-									className='bg-[#d80000] text-white px-4 py-2 rounded flex items-center gap-2 disabled:opacity-50 cursor-pointer'
+									className='bg-danger hover:bg-danger/90 text-white px-4 py-2 rounded flex items-center gap-2 disabled:opacity-50 cursor-pointer duration-300'
 								>
 									<Trash2 size={16} />
 									Удалить

@@ -24,8 +24,8 @@ const CustomCheckbox = ({
 				<div
 					className={`relative w-5 h-5 border rounded flex items-center justify-center duration-300 ${
 						checked
-							? 'bg-green-600 border-green-600'
-							: 'bg-white border-[#bfbfbf]'
+							? 'bg-brand border-brand'
+							: 'bg-card border-border'
 					}`}
 				>
 					{checked && (

@@ -9,7 +9,7 @@ const Title = ({ onChangeAction, title }: TitleProps) => {
 	return (
 		<div>
 			<label className='block text-sm font-medium mb-2'>
-				Название товара <span className='text-[#d80000]'>*</span>
+				Название товара <span className='text-danger'>*</span>
 			</label>
 			<input
 				type='text'
@@ -17,7 +17,7 @@ const Title = ({ onChangeAction, title }: TitleProps) => {
 				required
 				value={title}
 				onChange={onChangeAction}
-				className={`${formStyles.input} bg-white [&&]:w-full`}
+				className={`${formStyles.input} bg-card [&&]:w-full`}
 			/>
 		</div>
 	)

@@ -23,8 +23,11 @@ const Filters = ({
 		})
 	}
 
+	const inputClasses =
+		'w-full p-2 border border-input bg-card rounded focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20'
+
 	return (
-		<div className='bg-card p-4 rounded-lg shadow-md border border-gray-200'>
+		<div className='bg-card p-4 rounded-lg shadow-md border border-border'>
 			<div className='flex items-center justify-between mb-4'>
 				<h3 className='text-lg font-semibold'>Фильтры</h3>
 				<div className='flex gap-2'>
@@ -36,7 +39,7 @@ const Filters = ({
 					</button>
 					<button
 						onClick={onClearFilters}
-						className='px-3 py-2 text-xs justify-center text-gray-600 items-center active:shadow-(--shadow-button-active) border-none rounded cursor-pointer transition-colors duration-300 bg-[#f3f2f1] hover:shadow-(--shadow-button-secondary)'
+						className='px-3 py-2 text-xs justify-center text-text-soft items-center active:shadow-(--shadow-button-active) border-none rounded cursor-pointer transition-colors duration-300 bg-surface-hover hover:shadow-(--shadow-button-secondary)'
 					>
 						Очистить
 					</button>
@@ -51,7 +54,7 @@ const Filters = ({
 						value={filters.id}
 						onChange={e => handleInputChange('id', e.target.value)}
 						placeholder='Поиск по ID'
-						className='w-full p-2 border border-gray-300 rounded'
+						className={inputClasses}
 					/>
 				</div>
 
@@ -66,7 +69,7 @@ const Filters = ({
 							handleInputChange('name', e.target.value)
 						}
 						placeholder='Поиск по имени'
-						className='w-full p-2 border border-gray-300 rounded'
+						className={inputClasses}
 					/>
 				</div>
 
@@ -81,7 +84,7 @@ const Filters = ({
 							handleInputChange('surname', e.target.value)
 						}
 						placeholder='Поиск по фамилии'
-						className='w-full p-2 border border-gray-300 rounded'
+						className={inputClasses}
 					/>
 				</div>
 
@@ -96,7 +99,7 @@ const Filters = ({
 							handleInputChange('email', e.target.value)
 						}
 						placeholder='Поиск по email'
-						className='w-full p-2 border border-gray-300 rounded'
+						className={inputClasses}
 					/>
 				</div>
 
@@ -111,7 +114,7 @@ const Filters = ({
 							handleInputChange('phoneNumber', e.target.value)
 						}
 						placeholder='Поиск по телефону'
-						className='w-full p-2 border border-gray-300 rounded'
+						className={inputClasses}
 					/>
 				</div>
 
@@ -124,7 +127,7 @@ const Filters = ({
 						onChange={e =>
 							handleInputChange('role', e.target.value)
 						}
-						className='w-full p-2 border border-gray-300 rounded'
+						className={inputClasses}
 					>
 						<option value=''>Все роли</option>
 						<option value='user'>Пользователь</option>
@@ -144,7 +147,7 @@ const Filters = ({
 						}
 						min='0'
 						placeholder='От'
-						className='w-full p-2 border border-gray-300 rounded'
+						className={inputClasses}
 					/>
 				</div>
 
@@ -160,7 +163,7 @@ const Filters = ({
 						}
 						min='0'
 						placeholder='До'
-						className='w-full p-2 border border-gray-300 rounded'
+						className={inputClasses}
 					/>
 				</div>
 
@@ -174,7 +177,7 @@ const Filters = ({
 						onChange={e =>
 							handleInputChange('startDate', e.target.value)
 						}
-						className='w-full p-2 border border-gray-300 rounded'
+						className={inputClasses}
 					/>
 				</div>
 
@@ -188,7 +191,7 @@ const Filters = ({
 						onChange={e =>
 							handleInputChange('endDate', e.target.value)
 						}
-						className='w-full p-2 border border-gray-300 rounded'
+						className={inputClasses}
 					/>
 				</div>
 			</div>

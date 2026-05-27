@@ -23,7 +23,7 @@ const PriceFilterHeader = ({
 			<button
 				type='button'
 				onClick={resetPriceFitlter}
-				className='text-xs rounded h-8 p-2 cursor-pointer hover:bg-brand duration-300 hover:text-brand-foreground'
+				className='text-xs rounded h-8 p-2 cursor-pointer hover:bg-brand duration-300 hover:text-white border:bg-promo border flex items-center'
 			>
 				Очистка
 			</button>

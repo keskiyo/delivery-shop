@@ -5,21 +5,20 @@ export const MenuHeader = ({ onCloseAction, icon }: MenuHeaderProps) => {
 	return (
 		<div className='flex justify-between items-center mb-10'>
 			<div className='flex items-center gap-5'>
-				<div className='relative'>
-					<div className='absolute -inset-1 bg-linear-to-r from-blue-500 to-purple-500 rounded-full blur opacity-70 animate-pulse' />
+				<div className='relative rounded-xl bg-brand-soft p-3'>
 					{icon}
 				</div>
-				<h2 className='text-2xl font-bold bg-linear-to-r from-gray-900 via-blue-600 to-purple-600 bg-clip-text text-transparent'>
+				<h2 className='text-xl font-semibold text-foreground'>
 					Быстрые действия
 				</h2>
 			</div>
 
 			<button
 				onClick={onCloseAction}
-				className='group p-3 rounded-2xl bg-linear-to-br from-gray-100 to-white shadow-lg hover:shadow-xl hover:from-gray-200 duration-500 cursor-pointer transition-all hover:scale-110'
+				className='group p-3 rounded-xl bg-surface-hover text-muted-foreground shadow-lg hover:shadow-xl hover:bg-surface-pressed hover:text-foreground duration-300 cursor-pointer transition-all hover:scale-105 focus:outline-none focus:ring-3 focus:ring-brand/20'
 				aria-label='Закрыть меню'
 			>
-				<X className='w-6 h-6 text-gray-100 group-hover:text-[#8a8a8a] group-hover:rotate-90 transition-all duration-500' />
+				<X className='w-6 h-6 group-hover:rotate-90 transition-transform duration-300' />
 			</button>
 		</div>
 	)

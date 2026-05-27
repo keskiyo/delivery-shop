@@ -22,9 +22,9 @@ export const DesktopCategoryRow = ({
 	}
 	return (
 		<div
-			className={`p-4 hover:bg-[#bbad93] text-sm duration-200 ${
+			className={`p-4 hover:bg-surface-hover text-sm duration-200 ${
 				isDragging
-					? 'opacity-60 bg-linear-to-r from-blue-50 to-green-50 shadow-lg border-2 border-green-400 transform scale-[0.995]'
+					? 'opacity-60 bg-brand-soft shadow-lg border-2 border-brand transform scale-[0.995]'
 					: 'hover:shadow-sm'
 			}`}
 		>
@@ -49,7 +49,7 @@ export const DesktopCategoryRow = ({
 							alt={category.imageAlt || category.name}
 							width={50}
 							height={50}
-							className='object-cover rounded border border-gray-200'
+							className='object-cover rounded border border-border'
 							title={category.imageAlt}
 						/>
 					) : (
@@ -92,7 +92,7 @@ export const DesktopCategoryRow = ({
 							category.keywords.map((keyword, index) => (
 								<span
 									key={index}
-									className='inline-flex items-center bg-green-100 text-green-600 text-xs px-2 py-1 rounded wrap-break-word max-w-full'
+									className='inline-flex items-center bg-success-soft text-success text-xs px-2 py-1 rounded wrap-break-word max-w-full'
 									title={keyword}
 								>
 									{keyword}
@@ -133,14 +133,14 @@ export const DesktopCategoryRow = ({
 					<div className='flex gap-2 justify-center'>
 						<button
 							onClick={handleEdit}
-							className='p-2 bg-green-600 text-white rounded hover:bg-green-700 flex items-center justify-center cursor-pointer duration-300 shrink-0'
+							className='p-2 bg-brand text-white rounded hover:bg-brand-hover flex items-center justify-center cursor-pointer duration-300 shrink-0'
 							title='Редактировать категорию'
 						>
 							<Edit className='w-4 h-4' />
 						</button>
 						<button
 							onClick={handleDelete}
-							className='p-2 bg-red-600 text-white rounded hover:bg-red-700 flex items-center justify-center cursor-pointer duration-300 shrink-0'
+							className='p-2 bg-danger text-white rounded hover:bg-danger/90 flex items-center justify-center cursor-pointer duration-300 shrink-0'
 							title='Удалить категорию'
 						>
 							<Trash2 className='w-4 h-4' />

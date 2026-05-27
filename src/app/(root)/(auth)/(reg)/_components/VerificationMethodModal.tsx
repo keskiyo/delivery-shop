@@ -35,7 +35,7 @@ const VerificationMethodModal = () => {
 							className={verificationButtonStyles}
 						>
 							<div className={iconContainerStyles}>
-								<Smartphone className='h-6 w-6 text-promo group-hover:text-promo-foreground' />
+								<Smartphone className='h-6 w-6 text-promo group-hover:text-white' />
 							</div>
 							<span className='font-medium'>
 								По SMS на телефон
@@ -62,7 +62,7 @@ const VerificationMethodModal = () => {
 							className={verificationButtonStyles}
 						>
 							<div className={iconContainerStyles}>
-								<Mail className='h-6 w-6 text-promo group-hover:text-promo-foreground' />
+								<Mail className='h-6 w-6 text-promo group-hover:text-white' />
 							</div>
 							<span className='font-medium'>
 								По ссылке на email

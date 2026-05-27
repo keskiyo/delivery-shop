@@ -5,15 +5,15 @@
  *
  * Параметры:
  * - isActive: активна ли страница корзины
- *   - true: оранжевый цвет (#ff6633)
- *   - false: серый цвет (#808080)
+ *   - true: акцентный цвет
+ *   - false: приглушенный цвет
  *
  * Используется в:
  * - ProductCard.tsx (количество товара в заказе)
  * - TopMenu.tsx (иконка в навигации)
  */
 const IconCart = ({ isActive }: { isActive?: boolean }) => {
-	const fillColor = isActive ? '#ff6633' : '#808080'
+	const fillColor = isActive ? 'var(--promo)' : 'var(--for-svg)'
 
 	return (
 		<svg

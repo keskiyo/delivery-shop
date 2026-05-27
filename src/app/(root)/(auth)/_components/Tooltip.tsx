@@ -18,7 +18,7 @@ const Tooltip = ({
 			}`}
 		>
 			<div
-				className={`relative bg-danger text-danger-foreground text-sm p-2 rounded max-w-65 mx-auto flex items-center z-50 opacity-0 animate-fadeIn ${
+				className={`relative bg-danger text-white text-sm p-2 rounded max-w-65 mx-auto flex items-center z-50 opacity-0 animate-fadeIn ${
 					position === 'bottom' ? 'mb-2' : 'mt-1'
 				}`}
 			>

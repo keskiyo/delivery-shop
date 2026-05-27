@@ -120,7 +120,7 @@ const TopMenu = () => {
 						<IconCart isActive={isCartPage} />
 
 						{totalItems > 0 && (
-							<span className='absolute -top-2 right-0 bg-promo text-promo-foreground text-[9px] rounded w-4 h-4 flex items-center justify-center py-0.5 px-1'>
+							<span className='absolute -top-2 right-0 bg-promo text-white text-[9px] rounded w-4 h-4 flex items-center justify-center py-0.5 px-1'>
 								{totalItems > 99 ? '99+' : totalItems}
 							</span>
 						)}

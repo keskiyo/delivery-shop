@@ -20,7 +20,7 @@ const ConfirmAvatarModal = ({
 	if (!isOpen) return null
 
 	return (
-		<div className='fixed inset-0 bg-opacity-75 flex items-center justify-center z-50 p-4 bg-black/50 backdrop-blur-sm'>
+		<div className='fixed inset-0 flex items-center justify-center z-50 p-4 bg-muted/80 backdrop-blur-sm'>
 			<div className='bg-card rounded p-6 max-w-sm w-full'>
 				<h3 className='text-lg font-semibold mb-4 text-center'>
 					Подтверждение смены аватара
@@ -45,14 +45,14 @@ const ConfirmAvatarModal = ({
 					<button
 						disabled={isUploading}
 						onClick={onConfirm}
-						className='flex-1 bg-brand text-brand-foreground py-2 rounded hover:shadow-(--shadow-button-default) duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer'
+						className='flex-1 bg-brand text-white py-2 rounded hover:shadow-(--shadow-button-default) duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer'
 					>
 						{isUploading ? 'Загрузка' : 'Да, сменить'}
 					</button>
 					<button
 						onClick={onCancel}
 						disabled={isUploading}
-						className='flex-1 bg-surface rounded hover:shadow-button-secondary py-2 active:shadow-(--shadow-button-active) disabled:opacity-50 text-text-soft duration-300 cursor-pointer'
+						className='flex-1 bg-site-chrome rounded hover:shadow-button-secondary py-2 active:shadow-(--shadow-button-active) disabled:opacity-50 text-white duration-300 cursor-pointer'
 					>
 						Отмена
 					</button>

@@ -66,10 +66,10 @@ const ProductPageContent = ({ product }: { product: ProductCardProps }) => {
 				description={product.description}
 			/>
 			<div className='flex flex-row flex-wrap items-center gap-6 mb-4 md:mb-6'>
-				<div className='text-xs'>арт. {product.article}</div>
+				<div className='text-xs text-muted-foreground'>арт. {product.article}</div>
 				<div className='flex flex-row flex-wrap gap-2 items-center'>
 					<StarRating rating={product.rating.rate || 5} />
-					<p className='text-sm underline'>
+					<p className='text-sm text-muted-foreground underline underline-offset-2 hover:text-foreground transition-colors'>
 						{product.rating.count || 0}{' '}
 						{`отзыв${getWordEnding(product.rating.count || 0)}`}
 					</p>

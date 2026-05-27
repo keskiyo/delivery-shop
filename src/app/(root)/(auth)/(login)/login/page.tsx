@@ -199,7 +199,7 @@ const EnterLoginPage = () => {
 						onClick={switchToEmail}
 						className={`flex-1 py-2 rounded-lg text-sm transition cursor-pointer ${
 							loginType === 'email'
-								? 'bg-promo text-promo-foreground shadow'
+								? 'bg-promo text-white shadow'
 								: 'text-muted-foreground'
 						}`}
 					>
@@ -211,7 +211,7 @@ const EnterLoginPage = () => {
 						onClick={switchToPhone}
 						className={`flex-1 py-2 rounded-lg text-sm transition cursor-pointer ${
 							loginType === 'phone'
-								? 'bg-promo text-promo-foreground shadow'
+								? 'bg-promo text-white shadow'
 								: 'text-muted-foreground'
 						}`}
 					>
@@ -260,7 +260,7 @@ const EnterLoginPage = () => {
 					login.replace(/\D/g, '').length < 11) ||
 				isLoading
 					? 'cursor-not-allowed bg-promo-soft text-promo'
-					: 'bg-promo text-promo-foreground hover:shadow-(--shadow-article)'
+					: 'bg-promo text-white hover:shadow-(--shadow-article)'
 			}
             active:shadow-(--shadow-button-active)
            duration-300

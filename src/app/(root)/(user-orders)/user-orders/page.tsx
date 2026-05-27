@@ -10,33 +10,29 @@ import { useEffect, useState } from 'react'
 
 const UserOrdersPage = () => {
 	const [orders, setOrders] = useState<Order[]>([])
-	const [loading, setLoading] = useState(true)
+	const [ordersLoading, setOrdersLoading] = useState(false)
 	const [error, setError] = useState<{
 		error: Error
 		userMessage: string
 	} | null>(null)
-	const { isAuth, isLoading: authLoading, checkAuth } = useAuthStore()
-
-	useEffect(() => {
-		checkAuth()
-	}, [checkAuth])
+	const { isAuth, isLoading: authLoading } = useAuthStore()
 
 	useEffect(() => {
 		if (authLoading) return
 
 		if (!isAuth) {
 			setOrders([])
-			setLoading(false)
+			setOrdersLoading(false)
 			setError(null)
 			return
 		}
 
 		const fetchOrders = async () => {
 			try {
-				setLoading(true)
+				setOrdersLoading(true)
+				setError(null)
 
 				const response = await fetch('/api/orders')
-
 				const data = await response.json()
 
 				if (!response.ok) {
@@ -61,79 +57,81 @@ const UserOrdersPage = () => {
 					userMessage: 'Ошибка получения заказов. Попробуйте снова',
 				})
 			} finally {
-				setLoading(false)
+				setOrdersLoading(false)
 			}
 		}
 
 		fetchOrders()
 	}, [isAuth, authLoading])
 
-	if (authLoading || loading) return <Loader />
+	const renderContent = () => {
+		if (authLoading || ordersLoading) {
+			return (
+				<div className='flex min-h-90 items-center justify-center'>
+					<Loader />
+				</div>
+			)
+		}
 
-	if (!isAuth) {
-		return (
-			<div className='px-[max(12px,calc((100%-1208px)/2))] mx-auto py-8'>
-				<h1 className='mb-6 md:mb-8 xl:mb-10 flex flex-row text-4xl md:text-5xl xl:text-[64px] font-bold'>
-					Заказы
-				</h1>
+		if (!isAuth) {
+			return (
+				<div className='flex min-h-90 flex-col items-center justify-center py-12 text-center'>
+					<div className='mb-4 text-6xl'>🔐</div>
 
-				<div className='flex flex-col items-center justify-center py-12 text-center'>
-					<div className='text-6xl mb-4'>🔐</div>
-
-					<h2 className='text-2xl font-semibold mb-2'>
+					<h2 className='mb-2 text-2xl font-semibold'>
 						Войдите в аккаунт
 					</h2>
 
-					<p className='max-w-md mb-6'>
+					<p className='mb-6 max-w-md'>
 						Чтобы посмотреть свои заказы, нужно авторизоваться.
 					</p>
 
 					<Link
 						href='/login'
-						className='px-6 py-3 rounded bg-promo text-promo-foreground hover:bg-promo-hover duration-300'
+						className='rounded bg-promo px-6 py-3 text-white duration-300 hover:bg-promo-hover'
 					>
 						Войти
 					</Link>
 				</div>
-			</div>
-		)
-	}
+			)
+		}
 
-	if (error)
-		return (
-			<ErrorComponent
-				error={error.error}
-				userMessage={error.userMessage}
-			/>
-		)
+		if (error) {
+			return (
+				<ErrorComponent
+					error={error.error}
+					userMessage={error.userMessage}
+				/>
+			)
+		}
 
-	if (orders.length === 0) {
-		return (
-			<div className='px-[max(12px,calc((100%-1208px)/2))] mx-auto py-8'>
-				<h1 className='mb-6 md:mb-8 xl:mb-10 flex flex-row text-4xl md:text-5xl xl:text-[64px] font-bold'>
-					Заказы
-				</h1>
+		if (orders.length === 0) {
+			return (
+				<div className='flex min-h-90 flex-col items-center justify-center py-12 text-center'>
+					<div className='mb-4 text-6xl'>📦</div>
 
-				<div className='flex flex-col items-center justify-center py-12 text-center'>
-					<div className='text-6xl mb-4'>📦</div>
-					<h2 className='text-2xl font-semibold mb-2'>
+					<h2 className='mb-2 text-2xl font-semibold'>
 						Заказов пока нет
 					</h2>
+
 					<p className='max-w-md'>
 						Здесь будут отображаться ваши заказы, когда Вы сделаете
-						покупки в нашем магазине
+						покупки в нашем магазине.
 					</p>
 				</div>
-			</div>
-		)
+			)
+		}
+
+		return <UserOrdersList orders={orders} />
 	}
 
 	return (
-		<div className='px-[max(12px,calc((100%-1208px)/2))] mx-auto py-8'>
-			<h1 className='mb-6 md:mb-8 xl:mb-10 flex flex-row text-4xl md:text-5xl xl:text-[64px] font-bold'>
+		<div className='mx-auto px-[max(12px,calc((100%-1208px)/2))] py-8'>
+			<h1 className='mb-6 flex flex-row text-4xl font-bold md:mb-8 md:text-5xl xl:mb-10 xl:text-[64px]'>
 				Заказы
 			</h1>
-			<UserOrdersList orders={orders} />
+
+			{renderContent()}
 		</div>
 	)
 }

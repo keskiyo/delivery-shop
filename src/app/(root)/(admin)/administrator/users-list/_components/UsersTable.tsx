@@ -48,13 +48,13 @@ const UsersTable = ({
 	onSort,
 }: UsersTableProps) => {
 	return (
-		<div className='bg-card rounded shadow-lg border border-gray-200 overflow-hidden mt-4'>
+		<div className='bg-card rounded shadow-lg border border-border overflow-hidden mt-4'>
 			<TableHeader
 				sortBy={sortBy}
 				sortDirection={sortDirection}
 				onSort={onSort}
 			/>
-			<div className='divide-y divide-gray-200 flex flex-col gap-y-5 border-b border-gray-200 pb-3'>
+			<div className='divide-y divide-border flex flex-col gap-y-5 border-b border-border pb-3'>
 				{users.map(user => (
 					<TableRow key={user.id} user={user} />
 				))}

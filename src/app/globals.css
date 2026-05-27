@@ -16,6 +16,8 @@
 	--shadow-article: 4px 8px 16px 0px rgba(255, 102, 51, 0.2);
 	--shadow-category-block: 1px 2px 4px 0px rgba(112, 192, 91, 0.2);
 	--shadow-catalog-menu: 0px 8px 16px 0px rgba(0, 0, 0, 0.15);
+	--for-svg: #999894;
+	--slider-one: #292724;
 
 	/* Цвета для сайдбара */
 	--color-sidebar-ring: var(--sidebar-ring);
@@ -89,7 +91,9 @@
 	--color-background: var(--background); /* Основной фон страницы */
 
 	/* === ЦВЕТА ДЛЯ BREADCRUMBS И ОБЩИХ ЭЛЕМЕНТОВ === */
-	--color-breadcrumb-default: var(--breadcrumb-default); /* Основной цвет ссылок */
+	--color-breadcrumb-default: var(
+		--breadcrumb-default
+	); /* Основной цвет ссылок */
 	--color-breadcrumb-muted: var(--breadcrumb-muted); /* Приглушенный цвет */
 }
 
@@ -101,11 +105,15 @@
 
 	/* Фон всплывающих окон (Dropdown, Tooltip и т.п.) */
 	--popover: oklch(0.996 0.004 92); /* Фон всплывающих окон */
-	--popover-foreground: oklch(0.235 0.014 84); /* Текст во всплывающих окнах */
+	--popover-foreground: oklch(
+		0.235 0.014 84
+	); /* Текст во всплывающих окнах */
 
 	/* Основной акцентный цвет (например, кнопки Primary) */
 	--primary: oklch(0.635 0.142 139); /* Зеленый брендовый акцент */
-	--primary-foreground: oklch(0.988 0.006 98); /* Светлый текст на акцентном фоне */
+	--primary-foreground: oklch(
+		0.988 0.006 98
+	); /* Светлый текст на акцентном фоне */
 
 	/* Второстепенные элементы (например, Secondary Button) */
 	--secondary: oklch(0.938 0.012 88); /* Спокойный второстепенный фон */
@@ -132,9 +140,7 @@
 	--radius: 0.625rem;
 
 	/* === ОСНОВНОЙ ФОН СТРАНИЦЫ === */
-	--background: oklch(
-		0.964 0.01 88
-	); /* Мягкий теплый фон страницы */
+	--background: oklch(0.964 0.01 88); /* Мягкий теплый фон страницы */
 
 	/* === ОСНОВНОЙ ТЕКСТ === */
 	--foreground: oklch(0.235 0.014 84); /* Темный основной текст */
@@ -201,9 +207,7 @@
 /* Темная тема */
 .dark {
 	/* ОСНОВНОЙ ФОН СТРАНИЦЫ В ТЕМНОЙ ТЕМЕ */
-	--background: oklch(
-		0.215 0.012 92
-	); /* Мягкий темный фон страницы */
+	--background: oklch(0.215 0.012 92); /* Мягкий темный фон страницы */
 
 	/* ОСНОВНОЙ ТЕКСТ В ТЕМНОЙ ТЕМЕ */
 	--foreground: oklch(0.93 0.008 92); /* Светлый основной текст */

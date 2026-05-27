@@ -1,8 +1,8 @@
 export const buttonStyles = {
 	base: 'w-65 h-13 my-5 mx-auto text-2xl rounded cursor-pointer transition-all duration-200',
 	active:
-		'bg-promo text-promo-foreground hover:shadow-(--shadow-article) rounded active:shadow-(--shadow-button-active)',
-	inactive: 'bg-promo-soft text-promo',
+		'bg-promo text-white hover:shadow-(--shadow-article) rounded active:shadow-(--shadow-button-active)',
+	inactive: 'bg-promo text-white opacity-60 cursor-not-allowed',
 }
 
 export const formStyles = {
@@ -10,9 +10,9 @@ export const formStyles = {
 	input:
 		'w-65 h-10 py-2 px-4 text-foreground bg-input text-base border border-border rounded focus:border-brand focus:shadow-(--shadow-button-default) focus:bg-input focus:outline-none caret-brand placeholder:text-muted-foreground',
 	loginLink:
-		'mb-10 mx-auto h-8 text-brand hover:text-brand-foreground active:text-brand-foreground border-1 border-brand bg-card hover:bg-brand active:shadow-(--shadow-button-default) w-30 rounded flex items-center justify-center duration-300',
+		'mb-10 mx-auto h-8 text-brand hover:text-white active:text-white border-1 border-brand bg-card hover:bg-brand active:shadow-(--shadow-button-default) w-30 rounded flex items-center justify-center duration-300',
 	radioLabel: 'px-4 py-2 border rounded-lg cursor-pointer transition-colors',
-	radioLabelActive: 'bg-brand text-brand-foreground border-brand',
+	radioLabelActive: 'bg-brand text-white border-brand',
 }
 
 export const verificationButtonStyles = `
@@ -30,9 +30,9 @@ export const iconContainerStyles = `
 export const profileStyles = {
 	editButton: `${buttonStyles.active} [&&]:w-full [&&]:md:w-auto px-4 py-2 rounded items-center justify-center font-medium duration-300 cursor-pointer flex flex-row gap-x-3`,
 	cancelButton:
-		'px-4 py-2 md:flex-none flex-1 bg-surface rounded hover:shadow-button-secondary active:shadow-(--shadow-button-active) text-text-soft duration-300 cursor-pointer',
+		'px-4 py-2 md:flex-none flex-1 bg-site-chrome rounded hover:shadow-button-secondary active:shadow-(--shadow-button-active) text-white duration-300 cursor-pointer',
 	saveButton:
-		'px-4 py-2 md:flex-none flex-1 bg-brand hover:shadow-(--shadow-button-default) active:shadow-(--shadow-button-active) rounded text-brand-foreground duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer',
+		'px-4 py-2 md:flex-none flex-1 bg-brand hover:shadow-(--shadow-button-default) active:shadow-(--shadow-button-active) rounded text-white duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer',
 	sectionTitle: 'text-lg font-semibold w-20',
 	inputContainer: 'relative',
 }

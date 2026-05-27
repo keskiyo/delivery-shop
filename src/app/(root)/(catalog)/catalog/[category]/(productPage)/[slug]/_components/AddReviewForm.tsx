@@ -173,7 +173,7 @@ const AddReviewForm = ({ productId, onReviewAdded }: AddReviewFormProps) => {
 					className={`${
 						submitting
 							? 'cursor-not-allowed bg-promo-soft text-promo'
-							: 'text-base bg-promo text-promo-foreground hover:shadow-(--shadow-article)'
+							: 'text-base bg-promo text-white hover:shadow-(--shadow-article)'
 					} w-47 p-2 flex items-center justify-center rounded duration-300 cursor-pointer`}
 				>
 					{submitting ? 'Отправка...' : 'Отправить отзыв'}

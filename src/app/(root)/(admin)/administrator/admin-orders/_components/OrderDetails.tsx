@@ -86,7 +86,7 @@ const OrderDetails = ({ order, totalWeight = 0 }: OrderDetailsProps) => {
 						</div>
 						<div className='flex justify-between'>
 							<span className='font-medium'>Скидка:</span>
-							<span className='font-medium text-green-600'>
+							<span className='font-medium text-success'>
 								-{order.discountAmount} ₽
 							</span>
 						</div>
@@ -102,7 +102,7 @@ const OrderDetails = ({ order, totalWeight = 0 }: OrderDetailsProps) => {
 							<span className='font-medium'>
 								Начислено бонусов:
 							</span>
-							<span className='font-medium text-green-600'>
+							<span className='font-medium text-success'>
 								+{order.earnedBonuses}
 							</span>
 						</div>
@@ -181,13 +181,13 @@ const OrderDetails = ({ order, totalWeight = 0 }: OrderDetailsProps) => {
 							<span className='text-sm'>Дата рождения:</span>
 							<div className='flex items-center'>
 								<p
-									className={`${birthdaySoon ? 'text-red-500' : ''} font-medium`}
+									className={`${birthdaySoon ? 'text-danger' : ''} font-medium`}
 								>
 									{formattedBirthday}
 								</p>
 								{birthdaySoon && (
 									<Cake
-										className='ml-2 text-yellow-500'
+										className='ml-2 text-warning'
 										size={20}
 									/>
 								)}
@@ -197,7 +197,7 @@ const OrderDetails = ({ order, totalWeight = 0 }: OrderDetailsProps) => {
 				</div>
 			</div>
 
-			<div className='mt-6 pt-6 border-t border-gray-200'>
+			<div className='mt-6 pt-6 border-t border-border'>
 				<h4 className='font-medium mb-4'>
 					<span className='ml-4'>
 						Общая масса: {totalWeight.toFixed(2)} кг

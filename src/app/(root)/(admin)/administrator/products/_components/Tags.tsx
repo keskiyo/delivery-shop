@@ -46,8 +46,8 @@ const Tags = ({ selectedTags, onTagsChange, hasActionsTag }: TagsProps) => {
 								<div
 									className={`relative w-5 h-5 border rounded flex items-center justify-center duration-300 ${
 										checked
-											? 'bg-green-600 border-green-600'
-											: 'bg-white border-[#bfbfbf]'
+											? 'bg-brand border-brand'
+											: 'bg-card border-border'
 									}`}
 								>
 									{checked && (
@@ -73,10 +73,10 @@ const Tags = ({ selectedTags, onTagsChange, hasActionsTag }: TagsProps) => {
 				})}
 			</div>
 			{hasActionsTag && (
-				<div className='mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded'>
+				<div className='mt-3 p-3 bg-warning-soft border border-warning/30 rounded'>
 					<div className='flex items-center space-x-2'>
-						<AlertTriangle className='w-4 h-4 text-yellow-600' />
-						<span className='text-sm text-yellow-800'>
+						<AlertTriangle className='w-4 h-4 text-warning' />
+						<span className='text-sm text-warning'>
 							Для товара с тегом &quot;Акции&quot; обязательно
 							укажите скидку
 						</span>

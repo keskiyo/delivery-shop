@@ -16,7 +16,7 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
 			{!isCMSRoot && (
 				<button
 					onClick={() => setIsSidebarOpen(true)}
-					className='fixed top-17 right-6 z-100 p-3 bg-green-600 text-white rounded-full shadow-lg hover:bg-green-600/90 duration-300 cursor-pointer'
+					className='fixed top-17 right-6 z-100 p-3 bg-brand text-white rounded-full shadow-lg hover:bg-brand-hover duration-300 cursor-pointer'
 					aria-label='Открыть меню'
 				>
 					<Menu className='w-5 h-5' />

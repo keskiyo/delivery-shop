@@ -16,7 +16,7 @@ export const MobileExpandableContent = ({
 	}
 
 	return (
-		<div className='mt-4 space-y-3 pt-4 border-t border-gray-200'>
+		<div className='mt-4 space-y-3 pt-4 border-t border-border'>
 			{category.description && (
 				<div>
 					<div className='text-xs font-medium mb-1'>Описание</div>
@@ -50,7 +50,7 @@ export const MobileExpandableContent = ({
 						{(category.keywords || []).map((keyword, index) => (
 							<span
 								key={index}
-								className='inline-flex items-center bg-green-100 text-green-600 text-xs px-2 py-1 rounded wrap-break-words max-w-full'
+								className='inline-flex items-center bg-success-soft text-success text-xs px-2 py-1 rounded wrap-break-words max-w-full'
 								title={keyword}
 							>
 								{keyword}
@@ -63,14 +63,14 @@ export const MobileExpandableContent = ({
 			<div className='flex gap-2 pt-2'>
 				<button
 					onClick={handleEdit}
-					className='flex-1 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-xs cursor-pointer duration-300'
+					className='flex-1 px-4 py-2 bg-brand text-white rounded hover:bg-brand-hover text-xs cursor-pointer duration-300'
 					title='Редактировать категорию'
 				>
 					Редактировать
 				</button>
 				<button
 					onClick={handleDelete}
-					className='flex-1 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-xs cursor-pointer duration-300'
+					className='flex-1 px-4 py-2 bg-danger text-white rounded hover:bg-danger/90 text-xs cursor-pointer duration-300'
 					title='Удалить категорию'
 				>
 					Удалить

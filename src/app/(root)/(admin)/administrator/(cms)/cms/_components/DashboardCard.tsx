@@ -7,7 +7,7 @@ export const DashboardCard = ({ card, navigateTo }: DashboardCardProps) => {
 	return (
 		<div
 			onClick={() => navigateTo(card.path)}
-			className='bg-card rounded-xl shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-200 p-6 group'
+			className='bg-card rounded-xl shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer border border-border p-6 group'
 		>
 			<div className='flex flex-col h-full'>
 				<div

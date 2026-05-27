@@ -50,9 +50,9 @@ const Categories = ({
 		return (
 			<div>
 				<label className='block text-sm font-medium mb-2'>
-					Категории <span className='text-[#d80000]'>*</span>
+					Категории <span className='text-danger'>*</span>
 				</label>
-				<div className='text-sm text-red-500'>Ошибка: {error}</div>
+				<div className='text-sm text-danger'>Ошибка: {error}</div>
 			</div>
 		)
 	}
@@ -60,7 +60,7 @@ const Categories = ({
 	return (
 		<div>
 			<label className='block text-sm font-medium mb-2'>
-				Категории <span className='text-[#d80000]'>*</span>
+				Категории <span className='text-danger'>*</span>
 			</label>
 			<select
 				multiple

@@ -18,8 +18,8 @@ interface QuantitySelectorProps {
  * - Кнопку увеличения количества (+)
  *
  * Особенности:
- * - Зеленый фон (bg-green-600)
- * - Белые иконки и текст
+ * - Брендовый фон через токен `bg-brand`
+ * - Контрастные иконки и текст через `text-white`
  * - Индикатор загрузки ("..." вместо количества)
  * - Блокировка кнопок при обновлении или отсутствии товара
  * - Адаптивная ширина (w-25 в корзине, w-full на карточке товара)
@@ -45,7 +45,7 @@ const QuantitySelector = memo(function QuantitySelector({
 }: QuantitySelectorProps) {
 	return (
 		<div
-			className={`flex items-center bg-brand p-2 rounded text-brand-foreground relative h-10 gap-2 ${
+			className={`flex items-center bg-brand p-2 rounded text-white relative h-10 gap-2 ${
 				onProductCard ? ' w-full justify-between' : 'w-25'
 			}`}
 		>
@@ -56,7 +56,7 @@ const QuantitySelector = memo(function QuantitySelector({
 				className='w-6 h-6 rounded flex items-center justify-center duration-300 cursor-pointer disabled:opacity-50'
 			>
 				{/* Горизонтальная линия (минус) */}
-				<div className='w-3.75 h-px bg-brand-foreground'></div>
+				<div className='w-3.75 h-px bg-white'></div>
 			</button>
 
 			{/* Отображение количества или индикатора загрузки */}
@@ -73,9 +73,9 @@ const QuantitySelector = memo(function QuantitySelector({
 				{/* Иконка плюса (две пересекающиеся линии) */}
 				<div className='relative w-3.75 h-3.75'>
 					{/* Горизонтальная линия */}
-					<div className='absolute top-1/2 left-0 w-full h-px bg-brand-foreground transform -translate-y-1/2'></div>
+					<div className='absolute top-1/2 left-0 w-full h-px bg-white transform -translate-y-1/2'></div>
 					{/* Вертикальная линия */}
-					<div className='absolute left-1/2 top-0 w-px h-full bg-brand-foreground transform -translate-x-1/2'></div>
+					<div className='absolute left-1/2 top-0 w-px h-full bg-white transform -translate-x-1/2'></div>
 				</div>
 			</button>
 		</div>

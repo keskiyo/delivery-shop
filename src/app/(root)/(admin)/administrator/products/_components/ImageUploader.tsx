@@ -105,8 +105,8 @@ export default function ImageUploader({
 			<div
 				className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer duration-300 ${
 					isDragging
-						? 'border-green-600 bg-[#e5ffde]'
-						: 'border-gray-300 hover:border-gray-400'
+						? 'border-brand bg-brand-soft'
+						: 'border-border hover:border-text-soft'
 				} ${converting ? 'opacity-50 cursor-not-allowed' : ''}`}
 				onDrop={handleDrop}
 				onDragOver={e => {
@@ -131,10 +131,10 @@ export default function ImageUploader({
 
 				<div className='space-y-2'>
 					{converting ? (
-						<div className='animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto'></div>
+						<div className='animate-spin rounded-full h-12 w-12 border-b-2 border-brand mx-auto'></div>
 					) : (
 						<svg
-							className='w-12 h-12 mx-auto text-gray-400'
+							className='w-12 h-12 mx-auto text-muted-foreground'
 							fill='none'
 							stroke='currentColor'
 							viewBox='0 0 24 24'
@@ -148,20 +148,20 @@ export default function ImageUploader({
 						</svg>
 					)}
 
-					<p className='text-sm text-gray-600'>
+					<p className='text-sm text-text-soft'>
 						{converting ? (
 							'Конвертация в JPG...'
 						) : (
 							<>
 								Перетащите изображение или{' '}
-								<span className='font-medium text-green-600 hover:text-[#008c49] duration-300'>
+								<span className='font-medium text-brand hover:text-brand-hover duration-300'>
 									выберите файл
 								</span>
 							</>
 						)}
 					</p>
 
-					<p className='text-xs text-gray-500'>
+					<p className='text-xs text-muted-foreground'>
 						{converting
 							? 'Пожалуйста, подождите'
 							: `JPG, PNG, WebP, GIF до ${maxSize / 1024 / 1024}MB`}
@@ -169,7 +169,7 @@ export default function ImageUploader({
 				</div>
 			</div>
 
-			{error && <p className='mt-2 text-sm text-red-600'>{error}</p>}
+			{error && <p className='mt-2 text-sm text-danger'>{error}</p>}
 		</div>
 	)
 }

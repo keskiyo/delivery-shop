@@ -16,7 +16,7 @@ export const StatsSection = () => {
 
 	if (loading) return <StatsSkeleton />
 	return (
-		<div className='bg-card rounded-xl shadow-md border border-gray-200 p-6'>
+		<div className='bg-card rounded-xl shadow-md border border-border p-6'>
 			<h2 className='text-xl font-semibold mb-6'>Общая статистика</h2>
 			<div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
 				{stats.map((stat, index) => (

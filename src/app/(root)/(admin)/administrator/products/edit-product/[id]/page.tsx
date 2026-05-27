@@ -246,10 +246,10 @@ export default function EditProductPage() {
 	if (error) {
 		return (
 			<div className='container flex flex-col items-center px-4 py-8 mx-auto'>
-				<div className='text-red-500 text-lg mb-4'>{error}</div>
+				<div className='text-danger text-lg mb-4'>{error}</div>
 				<Link
 					href='/administrator/products-list'
-					className='bg-green-600 text-white py-2 px-4 rounded'
+					className='bg-brand hover:bg-brand-hover text-white py-2 px-4 rounded duration-300'
 				>
 					Вернуться к списку продуктов
 				</Link>
@@ -350,7 +350,7 @@ export default function EditProductPage() {
 				<button
 					type='submit'
 					disabled={loading || uploading}
-					className='w-full bg-green-600 hover:shadow-button-default active:shadow-button-active text-white py-3 px-4 mb-5 rounded disabled:opacity-50 cursor-pointer'
+					className='w-full bg-brand hover:bg-brand-hover hover:shadow-button-default active:shadow-button-active text-white py-3 px-4 mb-5 rounded disabled:opacity-50 cursor-pointer duration-300'
 				>
 					{loading ? 'Обновление...' : 'Обновить товар'}
 				</button>

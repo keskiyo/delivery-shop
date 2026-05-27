@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Delivery Shop
 
-## Getting Started
+Full-stack приложение для доставки еды: витрина с каталогом, корзиной и заказами, личный кабинет пользователя, админ-панель и CMS для управления категориями, товарами, заказами и SEO.
 
-First, run the development server:
+## Stack
+
+- Next.js 16, React 19, TypeScript
+- Tailwind CSS 4, shadcn/Radix UI, Lucide Icons, Framer Motion
+- MongoDB, Better Auth
+- Zustand, Redux Toolkit, React Context
+- React Email, Resend
+
+## Features
+
+- Каталог с категориями, поиском, фильтрами, карточками товаров и страницами продукта.
+- Корзина, оформление заказа, бонусы, минимальная сумма заказа и выбор времени доставки.
+- Авторизация по email/паролю и телефону, профиль, история заказов, избранное и покупки.
+- Админка для товаров, пользователей, заказов, календаря заказов и слотов доставки.
+- CMS для категорий: сортировка, изображения, SEO-поля, рекомендации и пагинация.
+- Email-шаблоны для подтверждений, восстановления пароля и смены email.
+- Cron endpoint для обновления доступных дат доставки.
+
+## Quick Start
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Dev server: `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev                    # development server
+npm run build                  # production build
+npm run start                  # start production server
+npm run lint                   # ESLint
+npm run update-delivery-dates  # call delivery dates cron endpoint
+```
 
-## Learn More
+## Environment
 
-To learn more about Next.js, take a look at the following resources:
+Проект ожидает следующие переменные окружения:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+FOOD_DELIVERY_DB_URL=
+FOOD_DELIVERY_DB_NAME=
+RESEND_API_KEY=
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=
+SMS_API_ID=
+CRON_SECRET=
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Для локальной MongoDB обычно используется база `deliveryshop`.
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```text
+src/app/                 routes, layouts, API routes
+src/actions/             server actions
+src/components/          shared UI and layout components
+src/contexts/            React contexts
+src/hooks/               reusable hooks
+src/lib/                 auth, db and utility code
+src/store/               Zustand and Redux state
+src/types/               shared TypeScript types
+src/data/                static app data
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Build
+
+```bash
+npm run lint
+npm run build
+```

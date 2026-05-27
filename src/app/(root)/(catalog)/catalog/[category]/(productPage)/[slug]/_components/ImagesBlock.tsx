@@ -1,34 +1,59 @@
+'use client'
+
 import { ProductCardProps } from '@/types/product'
 import Image from 'next/image'
+import { useState } from 'react'
 
-const ImagesBlock = ({ product }: { product: ProductCardProps }) => {
+type ProductWithImages = ProductCardProps & {
+	images?: string[]
+}
+
+const ImagesBlock = ({ product }: { product: ProductWithImages }) => {
+	const images =
+		product.images && product.images.length > 0
+			? product.images
+			: [product.img, product.img, product.img, product.img]
+
+	const [activeIndex, setActiveIndex] = useState(0)
+
+	const activeImage = images[activeIndex] || product.img
+
 	return (
 		<div className='flex flex-row gap-x-4 h-62 xl:h-124 justify-center'>
-			<div className='flex flex-col justify-between h-full shrink-0'>
-				{[...Array(5)].map((_, index) => (
-					<div
-						key={index}
-						className='relative bg-surface w-16 h-9.25 xl:h-21.5 flex items-center justify-center overflow-hidden shrink-0'
+			{/* Миниатюры слева */}
+			<div className='flex flex-col gap-y-2 shrink-0'>
+				{images.map((src, index) => (
+					<button
+						key={`${src}-${index}`}
+						type='button'
+						onClick={() => setActiveIndex(index)}
+						aria-label={`Показать изображение ${index + 1}`}
+						className={`relative h-16 w-16 overflow-hidden bg-card transition md:h-20 md:w-20 cursor-pointer ${
+							activeIndex === index
+								? 'border-2 border-promo'
+								: 'border border-transparent hover:border-border'
+						}`}
 					>
 						<Image
-							src={product.img}
+							src={src}
 							alt={`${product.title} - миниатюра ${index + 1}`}
 							fill
-							className='object-cover'
-							sizes='64px'
+							className='object-contain p-1'
+							sizes='80px'
 						/>
-					</div>
+					</button>
 				))}
 			</div>
 
+			{/* Основное изображение */}
 			<div
 				className='relative flex justify-center items-center shadow-image-block bg-surface
-                     h-62 xl:h-124 
-                     w-62 md:w-68 xl:w-126 
+                     h-62 xl:h-120
+                     w-62 md:w-68 xl:w-120
                      p-2 shrink-0'
 			>
 				<Image
-					src={product.img}
+					src={activeImage}
 					alt={product.title}
 					fill
 					className='object-contain'
@@ -36,7 +61,7 @@ const ImagesBlock = ({ product }: { product: ProductCardProps }) => {
 					priority
 				/>
 				{product.discountPercent && product.discountPercent > 0 ? (
-					<div className='absolute top-5 right-5 bg-promo text-promo-foreground px-2 py-1 rounded text-sm'>
+					<div className='absolute top-5 right-5 bg-promo text-white px-2 py-1 rounded text-sm'>
 						-{product.discountPercent}%
 					</div>
 				) : null}

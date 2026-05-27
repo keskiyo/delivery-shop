@@ -5,8 +5,8 @@ export const ReorderStatus = () => {
 	if (!isReordering) return null
 
 	return (
-		<div className='flex items-center gap-2 text-sm text-[#8a8a8a]'>
-			<div className='w-2 h-2 bg-blue-500 rounded-full animate-pulse'></div>
+		<div className='flex items-center gap-2 text-sm text-muted-foreground'>
+			<div className='w-2 h-2 bg-brand rounded-full animate-pulse'></div>
 			Обновление порядка категорий...
 		</div>
 	)

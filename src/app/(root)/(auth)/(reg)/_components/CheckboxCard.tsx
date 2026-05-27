@@ -32,7 +32,7 @@ const CheckboxCard = ({
 				>
 					{checked && (
 						<Check
-							className='text-brand-foreground w-4 h-4 shrink-0 '
+							className='text-white w-4 h-4 shrink-0 '
 							strokeWidth={4}
 						/>
 					)}

@@ -39,11 +39,11 @@ export const TableHeader = () => {
 	}
 
 	return (
-		<div className='hidden lg:block border border-gray-200'>
-			<div className='grid grid-cols-[0.3fr_0.5fr_1fr_2fr_2fr_2fr_2fr_1fr_1fr_2fr] gap-2 px-2 py-4 bg-card border-b border-gray-200 text-xs font-medium uppercase tracking-wider'>
+		<div className='hidden lg:block border border-border'>
+			<div className='grid grid-cols-[0.3fr_0.5fr_1fr_2fr_2fr_2fr_2fr_1fr_1fr_2fr] gap-2 px-2 py-4 bg-card border-b border-border text-xs font-medium uppercase tracking-wider'>
 				<div></div>
 				<div
-					className='text-center cursor-pointer hover:text-[#8a8a8a] flex items-center justify-center'
+					className='text-center cursor-pointer hover:text-text-soft flex items-center justify-center'
 					title='Сортировать по ID'
 					onClick={() => handleSort('numericId')}
 				>
@@ -57,14 +57,14 @@ export const TableHeader = () => {
 				</div>
 
 				<div
-					className='cursor-pointer hover:text-[#8a8a8a] flex items-center'
+					className='cursor-pointer hover:text-text-soft flex items-center'
 					title='Сортировать по названию'
 					onClick={() => handleSort('name')}
 				>
 					Название {renderSortItem('name')}
 				</div>
 				<div
-					className='cursor-pointer hover:text-[#8a8a8a] flex items-center'
+					className='cursor-pointer hover:text-text-soft flex items-center'
 					title='Сортировать по алиасу'
 					onClick={() => handleSort('slug')}
 				>
@@ -73,14 +73,14 @@ export const TableHeader = () => {
 				<div>Описание</div>
 				<div className='text-center'>Ключевые слова</div>
 				<div
-					className='text-center cursor-pointer hover:text-[#8a8a8a] flex items-center justify-center'
+					className='text-center cursor-pointer hover:text-text-soft flex items-center justify-center'
 					title='Сортировать по автору'
 					onClick={() => handleSort('author')}
 				>
 					Автор {renderSortItem('author')}
 				</div>
 				<div
-					className='cursor-pointer hover:text-[#8a8a8a] flex items-center'
+					className='cursor-pointer hover:text-text-soft flex items-center'
 					title='Сортировать по дате создания'
 					onClick={() => handleSort('createdAt')}
 				>

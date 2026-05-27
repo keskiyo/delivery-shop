@@ -2,7 +2,7 @@ import { CurrentSettingsProps } from '../../types/siteSettings'
 
 export const CurrentSettings = ({ settings }: CurrentSettingsProps) => {
 	return (
-		<div className='p-4 bg-card rounded-lg border border-gray-200 shadow-sm'>
+		<div className='p-4 bg-card rounded-lg border border-border shadow-sm'>
 			<h3 className='font-semibold mb-2'>Текущие настройки:</h3>
 			<div className='text-sm space-y-1'>
 				<div>

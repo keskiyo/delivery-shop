@@ -58,7 +58,7 @@ export const SidebarMenu = ({ isOpen, onCloseAction }: SidebarMenuProps) => {
 			<MenuOverlay isOpen={isOpen} onClose={onCloseAction} />
 
 			<div
-				className={`fixed right-0 top-0 h-full w-96 z-200 shadow-2xl shadow-black/20 ${
+				className={`fixed right-0 top-0 h-full w-96 max-w-[calc(100vw-1rem)] z-200 shadow-2xl shadow-black/20 ${
 					isOpen
 						? 'translate-x-0 opacity-100'
 						: 'translate-x-full opacity-0'
@@ -68,12 +68,8 @@ export const SidebarMenu = ({ isOpen, onCloseAction }: SidebarMenuProps) => {
 						'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-out',
 				}}
 			>
-				<div className='absolute -left-2 top-0 h-full w-2 bg-linear-to-r from-transparent via-blue-500/10 to-transparent blur-sm' />
-				<div className='absolute -left-4 top-4 h-[calc(100%-2rem)] w-1 bg-linear-to-r from-transparent via-purple-500/5 to-transparent blur' />
-
 				<div className='relative h-full w-full'>
-					<div className='absolute inset-0 bg-linear-to-b from-white via-white to-gray-50/95 backdrop-blur-xl' />
-					<div className='absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-purple-500/5' />
+					<div className='absolute inset-0 border-l border-border bg-card' />
 					<div className='absolute inset-0 shadow-[inset_0_0_60px_-20px_rgba(59,130,246,0.1)]' />
 					<div className='relative h-full flex flex-col'>
 						<div className='shrink-0 pt-5 px-5'>
@@ -81,7 +77,7 @@ export const SidebarMenu = ({ isOpen, onCloseAction }: SidebarMenuProps) => {
 								isOpen={isOpen}
 								onCloseAction={onCloseAction}
 								icon={
-									<Truck className='relative w-7 h-7 text-blue-600' />
+									<Truck className='relative w-7 h-7 text-brand' />
 								}
 							/>
 						</div>

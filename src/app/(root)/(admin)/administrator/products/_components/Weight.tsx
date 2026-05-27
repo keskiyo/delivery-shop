@@ -9,7 +9,7 @@ const Weight = ({ onChangeAction, weight }: WeightProps) => {
 	return (
 		<div>
 			<label className='block text-sm font-medium mb-2'>
-				Вес (кг) <span className='text-[#d80000]'>*</span>
+				Вес (кг) <span className='text-danger'>*</span>
 			</label>
 			<input
 				type='number'
@@ -17,7 +17,7 @@ const Weight = ({ onChangeAction, weight }: WeightProps) => {
 				step='0.01'
 				value={weight}
 				onChange={onChangeAction}
-				className={`${formStyles.input} bg-white [&&]:w-full`}
+				className={`${formStyles.input} bg-card [&&]:w-full`}
 			/>
 		</div>
 	)

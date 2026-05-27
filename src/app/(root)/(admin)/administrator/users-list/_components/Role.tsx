@@ -64,7 +64,7 @@ const Role = ({ initialRole, userId }: RoleProps) => {
 
 	return (
 		<div
-			className={`border-b border-gray-300 md:border-b-0 order-6 flex flex-row gap-x-3 ${tableStyles.colSpans.role} ${tableStyles.border.right}`}
+			className={`border-b border-border md:border-b-0 order-6 flex flex-row gap-x-3 ${tableStyles.colSpans.role} ${tableStyles.border.right}`}
 		>
 			<div className='text-xs font-semibold md:hidden'>Роль:</div>
 

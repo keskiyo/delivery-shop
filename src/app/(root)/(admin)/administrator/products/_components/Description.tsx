@@ -9,7 +9,7 @@ const Description = ({ onChangeAction, description }: DescriptionProps) => {
 	return (
 		<div>
 			<label className='block text-sm font-medium mb-2'>
-				Описание <span className='text-[#d80000]'>*</span>
+				Описание <span className='text-danger'>*</span>
 			</label>
 			<input
 				type='text'
@@ -17,7 +17,7 @@ const Description = ({ onChangeAction, description }: DescriptionProps) => {
 				required
 				value={description}
 				onChange={onChangeAction}
-				className={`${formStyles.input} bg-white [&&]:w-full`}
+				className={`${formStyles.input} bg-card [&&]:w-full`}
 			/>
 		</div>
 	)

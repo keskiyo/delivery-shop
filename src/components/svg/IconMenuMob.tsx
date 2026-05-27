@@ -1,5 +1,5 @@
 const IconMenuMob = ({ isCatalogPage = false }) => {
-	const fillColor = isCatalogPage ? '#ff6633' : '#808080'
+	const fillColor = isCatalogPage ? 'var(--promo)' : 'var(--for-svg)'
 	return (
 		<>
 			<svg
@@ -15,7 +15,7 @@ const IconMenuMob = ({ isCatalogPage = false }) => {
 					width='23.000000'
 					height='23.000000'
 					transform='translate(0.500000 0.500000)'
-					fill='#FFFFFF'
+					fill='transparent'
 					fillOpacity='0'
 				/>
 				<path

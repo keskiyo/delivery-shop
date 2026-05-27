@@ -15,7 +15,7 @@ const Discount = ({
 		<div>
 			<label className='block text-sm font-medium mb-2'>
 				Скидка (%){' '}
-				{required && <span className='text-[#d80000]'>*</span>}
+				{required && <span className='text-danger'>*</span>}
 			</label>
 			<input
 				type='number'
@@ -23,7 +23,7 @@ const Discount = ({
 				required={required}
 				value={discount}
 				onChange={onChangeAction}
-				className={`${formStyles.input} bg-white [&&]:w-full`}
+				className={`${formStyles.input} bg-card [&&]:w-full`}
 				min='0'
 				max='100'
 			/>

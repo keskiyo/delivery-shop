@@ -38,7 +38,7 @@ const OrderHeader = ({
                 ${
 					disabled
 						? 'bg-muted text-muted-foreground cursor-not-allowed opacity-60'
-						: 'bg-promo text-promo-foreground hover:shadow-button-default cursor-pointer'
+						: 'bg-promo text-white hover:shadow-button-default cursor-pointer'
 				}
             `}
 						onClick={onOrderClick}
@@ -49,7 +49,7 @@ const OrderHeader = ({
 				) : (
 					<button
 						onClick={onDeliveryClick}
-						className='flex justify-center items-center p-2 gap-2 rounded bg-brand text-brand-foreground hover:shadow-button-default cursor-pointer duration-300'
+						className='flex justify-center items-center p-2 gap-2 rounded bg-brand text-white hover:shadow-button-default cursor-pointer duration-300'
 					>
 						<CalendarDays className='w-6 h-6' />
 						<p className='flex-1'>

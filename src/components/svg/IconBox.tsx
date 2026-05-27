@@ -1,5 +1,5 @@
 const IconBox = ({ isActive = false }: { isActive?: boolean }) => {
-	const fillColor = isActive ? 'rgb(255, 102, 51)' : '#808080'
+	const fillColor = isActive ? 'var(--promo)' : 'var(--for-svg)'
 
 	return (
 		<svg
@@ -46,7 +46,7 @@ const IconBox = ({ isActive = false }: { isActive?: boolean }) => {
 					height='24.000000'
 					x='0.000000'
 					y='0.000000'
-					fill='rgb(255,255,255)'
+					fill='transparent'
 					fillOpacity='0'
 				/>
 			</g>

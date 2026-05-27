@@ -57,7 +57,7 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 		: []
 
 	return (
-		<div className='fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50'>
+		<div className='fixed inset-0 bg-muted/80 backdrop-blur-sm flex items-center justify-center z-50'>
 			<div className='bg-card p-6 rounded max-w-md w-full mx-4'>
 				<h3 className='text-lg font-bold mb-4'>
 					Выберите дату и время доставки
@@ -78,28 +78,16 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 									onClick={() => handleDateSelect(item.date)}
 									className={`py-2 px-3 rounded text-sm duration-300 cursor-pointer ${
 										isSelected
-											? 'bg-brand text-brand-foreground'
-											: 'bg-surface text-foreground hover:bg-surface-hover'
+											? 'bg-brand text-white'
+											: 'bg-site-chrome text-white hover:bg-promo'
 									}`}
 								>
-									<div
-										className={`text-xs mt-1 ${
-											isSelected
-												? 'text-brand-foreground'
-												: 'text-foreground'
-										}`}
-									>
+									<div className='text-xs mt-1 text-white'>
 										{formatDateNumeric(
 											formatDateToString(item.date),
 										)}
 									</div>
-									<div
-										className={`text-xs hidden xs:block ${
-											isSelected
-												? 'text-brand-foreground'
-												: 'text-foreground'
-										}`}
-									>
+									<div className='text-xs hidden xs:block text-white'>
 										{formatDateFull(
 											formatDateToString(item.date),
 										)}
@@ -126,7 +114,7 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 											handleTimeSlotSelect(slot)
 										}
 										disabled={isCreatingOrder}
-										className='bg-surface hover:bg-brand hover:text-brand-foreground py-2 px-3 text-foreground rounded text-sm duration-300 cursor-pointer disabled:opacity-50'
+										className='bg-site-chrome hover:bg-brand py-2 px-3 text-white rounded text-sm duration-300 cursor-pointer disabled:opacity-50'
 									>
 										<span className='xl:hidden'>
 											{formatted.mobileLabel}
@@ -149,7 +137,7 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 				<div className='flex gap-2 mt-4'>
 					<button
 						onClick={onCancel}
-						className='flex-1 bg-surface text-text-soft py-2 rounded hover:bg-promo hover:text-promo-foreground duration-300 cursor-pointer'
+						className='flex-1 bg-site-chrome text-white py-2 rounded hover:bg-promo duration-300 cursor-pointer'
 						disabled={isCreatingOrder}
 					>
 						Отмена

@@ -28,12 +28,12 @@ const CityFilterButtons = ({
 						onClick={() => onCitySelect(city)}
 						className={`p-2 w-auto h-10 rounded duration-300 cursor-pointer text-xs md:text-sm xl:text-base flex justify-between items-center gap-2 ${
 							selectedCity === city
-								? 'items-center bg-green-600 text-white relative gap-2 justify-between'
-								: 'active:shadow-button-active bg-[#f3f2f1] hover:shadow-button-secondary text-gray-800'
+								? 'items-center bg-brand text-white relative gap-2 justify-between'
+								: 'active:shadow-button-active bg-surface-hover hover:shadow-button-secondary text-foreground'
 						}`}
 					>
 						{city}
-						<div className='text-white w-6 h-6 text-xs bg-[#ff6633] rounded flex justify-center items-center'>
+						<div className='text-white w-6 h-6 text-xs bg-promo rounded flex justify-center items-center'>
 							{ordersCount}
 						</div>
 					</button>

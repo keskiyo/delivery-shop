@@ -7,10 +7,10 @@
  *
  * Параметры:
  * - isActive: активно ли (заполненное/контурное сердце)
- * - variant: 'default' (красный #ff3b30) или 'orange' (оранжевый #ff6633)
+ * - variant: 'default' или 'orange'
  *
  * Логика:
- * - Неактивный: серый цвет (#808080), без заливки
+ * - Неактивный: приглушенный цвет, без заливки
  * - Активный (default): красный с заливкой
  * - Активный (orange): оранжевый с заливкой
  *
@@ -28,15 +28,20 @@ interface HeartIconProps {
 const IconHeart = ({ isActive, variant }: HeartIconProps) => {
 	const iconColor = isActive
 		? variant === 'orange'
-			? '#ff6633'
-			: '#ff3b30'
-		: '#808080'
+			? 'var(--promo)'
+			: 'var(--danger)'
+		: 'var(--text-soft)'
 	return (
 		<Heart
 			size={24}
-			color={iconColor}
 			fill={isActive ? iconColor : 'none'}
-			className='transition-all duration-300'
+			className={`transition-all duration-300 ${
+				isActive
+					? variant === 'orange'
+						? 'text-promo'
+						: 'text-danger'
+					: 'text-site-chrome-muted'
+			}`}
 		/>
 	)
 }

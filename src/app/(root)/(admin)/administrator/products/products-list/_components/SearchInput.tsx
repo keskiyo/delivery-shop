@@ -20,7 +20,7 @@ const SearchInput = ({
 			<div className='flex gap-3'>
 				<div className='relative flex-1'>
 					<Search
-						className='absolute left-3 top-1/2 transform -translate-y-1/2 text-[#]'
+						className='absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground'
 						size={20}
 					/>
 					<input
@@ -29,13 +29,13 @@ const SearchInput = ({
 						value={searchTerm}
 						onChange={e => onSearchTermChange(e.target.value)}
 						onKeyDown={onKeyPress}
-						className='w-full pl-10 pr-4 py-2 rounded outline-none border border-green-600 bg-white focus:shadow-button-default duration-300 text-gray-700'
+						className='w-full pl-10 pr-4 py-2 rounded outline-none border border-input bg-card focus:border-brand focus:shadow-button-default duration-300 text-foreground placeholder:text-muted-foreground'
 					/>
 				</div>
 				<button
 					onClick={onSearch}
 					disabled={loading || searchTerm.trim().length < 3}
-					className='bg-green-600 hover:shadow-button-default active:shadow-button-active rounded text-white duration-300 px-4 py-2 flex flex-row gap-2 items-center justify-center disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed'
+					className='bg-brand hover:bg-brand-hover hover:shadow-button-default active:shadow-button-active rounded text-white duration-300 px-4 py-2 flex flex-row gap-2 items-center justify-center disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed'
 				>
 					{loading ? (
 						<Loader size={18} className='animate-spin' />
@@ -48,16 +48,16 @@ const SearchInput = ({
 
 			<p className='text-sm mt-2'>
 				{searchTerm.trim().length === 0 ? (
-					<span className='text-[#8a8a8a]'>
+					<span className='text-muted-foreground'>
 						Введите минимум 3 символа для поиска
 					</span>
 				) : searchTerm.trim().length < 3 ? (
-					<span className='text-[#ff6633]'>
+					<span className='text-warning'>
 						Введите еще {3 - searchTerm.trim().length} символ(а, ов)
 						для поиска
 					</span>
 				) : (
-					<span className='text-[#008c49]'>
+					<span className='text-success'>
 						✓ Можно выполнить поиск
 					</span>
 				)}

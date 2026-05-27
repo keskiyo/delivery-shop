@@ -25,7 +25,7 @@ const SearchBlock = ({
 		<div className='flex flex-row gap-4 items-center grow text-site-chrome-foreground'>
 			<Link
 				href='/catalog'
-				className='hidden lg:flex w-auto min-w-18 px-3 py-2 gap-2 items-center shrink-0 rounded transition-colors cursor-pointer bg-promo text-promo-foreground hover:bg-promo-hover'
+				className='hidden lg:flex w-auto min-w-18 px-3 py-2 gap-2 items-center shrink-0 rounded transition-colors cursor-pointer bg-promo text-white hover:bg-promo-hover'
 			>
 				<Menu size={24} />
 				<span className='text-base hidden lg:block'>Каталог</span>

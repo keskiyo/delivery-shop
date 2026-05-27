@@ -144,7 +144,7 @@ const FakePaymentModal = ({
 	}
 
 	return (
-		<div className='fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4'>
+		<div className='fixed inset-0 bg-muted/80 backdrop-blur-sm flex items-center justify-center z-50 p-4'>
 			<div className='bg-card rounded-lg max-w-md w-full p-6'>
 				<h2 className='text-xl font-bold mb-4'>Тестовая оплата</h2>
 				<p className='mb-4'>Сумма: {formatPrice(amount)} ₽</p>
@@ -244,7 +244,7 @@ const FakePaymentModal = ({
 							type='button'
 							onClick={onClose}
 							disabled={isProcessing}
-							className='flex-1 py-2 px-4 border border-border rounded text-text-soft hover:bg-surface-hover bg-surface disabled:opacity-50 duration-300 cursor-pointer'
+							className='flex-1 py-2 px-4 border border-border rounded text-white hover:bg-promo bg-site-chrome disabled:opacity-50 duration-300 cursor-pointer'
 						>
 							Отмена
 						</button>
@@ -257,7 +257,7 @@ const FakePaymentModal = ({
 								!cvc ||
 								!cardholder
 							}
-							className='flex-1 py-2 px-4 bg-brand text-brand-foreground rounded hover:bg-brand-hover disabled:opacity-50 disabled:cursor-not-allowed duration-300 cursor-pointer'
+							className='flex-1 py-2 px-4 bg-brand text-white rounded hover:bg-brand-hover disabled:opacity-50 disabled:cursor-not-allowed duration-300 cursor-pointer'
 						>
 							{isProcessing
 								? 'Обработка...'

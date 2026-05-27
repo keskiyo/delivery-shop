@@ -26,7 +26,7 @@ export default function ErrorComponent({ error, userMessage }: ErrorProps) {
 			<p>{userMessage || 'Произошла ошибка попробуйте снова'} </p>
 			<button
 				onClick={() => window.location.reload()}
-				className='mt-2 px-3 py-1 bg-danger rounded cursor-pointer text-danger-foreground'
+				className='mt-2 px-3 py-1 bg-danger rounded cursor-pointer text-white'
 			>
 				Попробовать снова
 			</button>

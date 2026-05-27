@@ -22,7 +22,7 @@ export default function ScheduleTableRow({
 }: ScheduleTableRowProps) {
 	return (
 		<div className='grid grid-cols-4 transition-colors'>
-			<div className='p-2 md:p-3 border-r border-#202020 flex flex-col justify-between'>
+			<div className='p-2 md:p-3 border-r border-border flex flex-col justify-between'>
 				<div className='font-medium text-sm md:text-base mb-1 md:mb-2'>
 					{timeSlot}
 				</div>
@@ -37,7 +37,7 @@ export default function ScheduleTableRow({
 			{dates.map((date, index) => (
 				<div
 					key={date}
-					className={`p-2 md:p-3 flex items-center justify-center border-r border-#202020 ${
+					className={`p-2 md:p-3 flex items-center justify-center border-r border-border ${
 						index === dates.length - 1 ? 'border-r-0' : ''
 					}`}
 				>
@@ -60,8 +60,8 @@ export default function ScheduleTableRow({
                   w-6 h-6 border-2 rounded flex items-center justify-center duration-300
                   ${
 						schedule[date]?.[timeSlot] !== false
-							? 'bg-green-600 border-green-600'
-							: 'bg-white border-gray-300'
+							? 'bg-success border-success'
+							: 'bg-card border-border'
 					}
                 `}
 							>
@@ -76,8 +76,8 @@ export default function ScheduleTableRow({
 						<span
 							className={`text-xs md:text-sm ${
 								schedule[date]?.[timeSlot] !== false
-									? 'text-green-600'
-									: 'text-[#d80000]'
+									? 'text-success'
+									: 'text-danger'
 							}`}
 						>
 							{schedule[date]?.[timeSlot] !== false

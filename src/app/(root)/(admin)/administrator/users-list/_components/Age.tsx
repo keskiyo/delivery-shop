@@ -10,7 +10,7 @@ const Age = ({ birthdayDate }: AgeProps) => {
 
 	return (
 		<div
-			className={`text-xs border-b border-gray-300 md:border-b-0 order-3 ${tableStyles.colSpans.age} ${tableStyles.border.right}`}
+			className={`text-xs border-b border-border md:border-b-0 order-3 ${tableStyles.colSpans.age} ${tableStyles.border.right}`}
 		>
 			{age === 0 ? (
 				0

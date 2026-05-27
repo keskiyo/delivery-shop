@@ -40,11 +40,11 @@ const DateSelector = ({
 		if (customDate) setCalendarMonth(customDate)
 	}, [customDate])
 	return (
-		<div className='flex justify-start items-center gap-3 relative mb-15 text-gray-800'>
+		<div className='flex justify-start items-center gap-3 relative mb-15 text-foreground'>
 			<button
 				type='button'
 				onClick={toggleCalendar}
-				className='relative hover:opacity-70 transition-opacity rounded w-15 h-15 bg-[#f3f2f1] flex justify-center items-center cursor-pointer text-gray-800'
+				className='relative hover:opacity-70 transition-opacity rounded w-15 h-15 bg-surface-hover flex justify-center items-center cursor-pointer text-foreground'
 			>
 				<CalendarDays className='w-6 h-6' />
 			</button>

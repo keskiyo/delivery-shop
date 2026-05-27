@@ -7,7 +7,7 @@ const SearchHeader = () => {
 			<div className='flex flex-col md:flex-row justify-between gap-4 items-center mb-6'>
 				<Link
 					href='/administrator'
-					className='flex items-center gap-2 hover:underline'
+					className='flex items-center gap-2 text-muted-foreground hover:text-foreground hover:underline'
 				>
 					<ArrowLeft size={20} />
 					Назад в панель управления
@@ -15,7 +15,7 @@ const SearchHeader = () => {
 
 				<Link
 					href='/administrator/products/add-product'
-					className='bg-green-600 hover:shadow-button-default active:shadow-button-active rounded text-white cursor-pointer duration-300 px-4 py-2 flex flex-row gap-2 items-center justify-center'
+					className='bg-brand hover:bg-brand-hover hover:shadow-button-default active:shadow-button-active rounded text-white cursor-pointer duration-300 px-4 py-2 flex flex-row gap-2 items-center justify-center'
 				>
 					<Plus size={16} />
 					Добавить товар

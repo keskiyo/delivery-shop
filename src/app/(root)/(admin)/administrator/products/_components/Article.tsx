@@ -9,7 +9,7 @@ const Article = ({ onChangeAction, article }: ArticleProps) => {
 	return (
 		<div>
 			<label className='block text-sm font-medium mb-2'>
-				Артикул <span className='text-[#d80000]'>*</span>
+				Артикул <span className='text-danger'>*</span>
 			</label>
 			<input
 				type='number'
@@ -19,7 +19,7 @@ const Article = ({ onChangeAction, article }: ArticleProps) => {
 				required
 				value={article}
 				onChange={onChangeAction}
-				className={`${formStyles.input} bg-white [&&]:w-full`}
+				className={`${formStyles.input} bg-card [&&]:w-full`}
 			/>
 		</div>
 	)

@@ -30,7 +30,7 @@ export default function VerifySuccessPage() {
 		<AuthFormLayout>
 			<div className='p-8 text-center'>
 				<div className='mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-success mb-6'>
-					<CheckCircle className='h-10 w-10 text-success-foreground' />
+					<CheckCircle className='h-10 w-10 text-white' />
 				</div>
 
 				<h1 className='text-2xl font-bold mb-2'>

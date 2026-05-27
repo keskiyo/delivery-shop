@@ -44,7 +44,7 @@ const RatingDistribution = ({
 		return (
 			<div className='text-center py-4'>
 				<div className='text-lg font-bold mb-2'>0 из 5</div>
-				<div className='text-base'>Пока нет оценок</div>
+				<div className='text-base text-muted-foreground'>Пока нет оценок</div>
 			</div>
 		)
 	}
@@ -59,11 +59,11 @@ const RatingDistribution = ({
 			<div className='space-y-2'>
 				{[5, 4, 3, 2, 1].map(rating => (
 					<div key={rating} className='flex items-center gap-x-2'>
-						<span className='w-5 text-base'>{rating}</span>
+						<span className='w-5 text-base text-muted-foreground'>{rating}</span>
 						<div className='flex items-center'>
 							{renderStars(rating)}
 						</div>
-						<span className='text-base'>
+						<span className='text-base text-muted-foreground'>
 							{
 								distribution[
 									rating as unknown as keyof typeof distribution

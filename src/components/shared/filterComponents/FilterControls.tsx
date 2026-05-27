@@ -2,19 +2,19 @@
 
 /**
  * Управление фильтрами (десктопная версия)
- * 
+ *
  * Функционал:
  * - Отображает активные фильтры (кнопка с количеством)
  * - Показывает диапазон цен если установлен
  * - Кнопка "Очистить фильтры" для сброса всех фильтров
  * - Отдельная кнопка для очистки только ценового диапазона
- * 
+ *
  * Логика:
  * - Читает параметры из URL: priceFrom, priceTo, filter
  * - Подсчитывает количество активных фильтров
  * - Динамически меняет текст кнопки (Фильтры / Фильтр 1 / Фильтры N)
  * - Активные фильтры: зеленый фон, неактивные: серый
- * 
+ *
  * @param basePath - Базовый путь страницы для формирования ссылок
  */
 import { X } from 'lucide-react'
@@ -77,12 +77,12 @@ function FilterControlsContent({
 	return (
 		<div className='flex flex-warp flex-row gap-4'>
 			<div
-				className={`h-8 p-2 rounded text-xs flex justify-center items-center duration-300 cursor-not-allowed gap-x-2 ${(activeFilter && activeFilter.length > 0) || hasPriceFilter ? 'bg-brand text-brand-foreground' : 'bg-surface text-text-soft'}`}
+				className={`h-8 p-2 rounded text-xs flex justify-center items-center duration-300 cursor-not-allowed gap-x-2 border:bg-promo border ${(activeFilter && activeFilter.length > 0) || hasPriceFilter ? 'bg-brand text-white' : 'bg-surface text-text-soft'}`}
 			>
 				{filterButtonText}
 			</div>
 			{hasPriceFilter && (
-				<div className='h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-brand text-brand-foreground'>
+				<div className='h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-brand text-white'>
 					<Link
 						href={buildClearPriceFilterLink()}
 						className='flex items-center gap-x-2'
@@ -94,7 +94,7 @@ function FilterControlsContent({
 				</div>
 			)}
 			{activeFilterCount > 0 && (
-				<div className='h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-brand text-brand-foreground'>
+				<div className='h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-brand text-white'>
 					<Link
 						href={buildClearFiltersLink()}
 						className='flex items-center gap-x-2'

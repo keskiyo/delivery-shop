@@ -303,7 +303,7 @@ export default function AddProductPage() {
 				<button
 					type='submit'
 					disabled={loading || uploading}
-					className='w-full bg-green-600 hover:shadow-button-default active:shadow-button-active text-white py-3 px-4 mb-5 rounded disabled:opacity-50 cursor-pointer'
+					className='w-full bg-brand hover:bg-brand-hover hover:shadow-button-default active:shadow-button-active text-white py-3 px-4 mb-5 rounded disabled:opacity-50 cursor-pointer duration-300'
 				>
 					{loading ? 'Добавление...' : 'Добавить товар'}
 				</button>

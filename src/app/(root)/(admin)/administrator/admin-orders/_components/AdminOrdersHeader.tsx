@@ -11,7 +11,7 @@ const AdminOrdersHeader = ({ stats }: AdminOrdersHeaderProps) => {
 				Заказы
 			</h1>
 			{stats && (
-				<div className='absolute -top-5 left-[calc(100%+8px)] md:left-[calc(100%+12px)] xl:left-[calc(100%+20px)] bg-[#ff6633] rounded px-2 py-1 w-9 h-8 flex justify-center items-center text-xs md:text-sm xl:text-base text-white'>
+				<div className='absolute -top-5 left-[calc(100%+8px)] md:left-[calc(100%+12px)] xl:left-[calc(100%+20px)] bg-promo rounded px-2 py-1 w-9 h-8 flex justify-center items-center text-xs md:text-sm xl:text-base text-white'>
 					{stats.nextThreeDaysOrders}
 				</div>
 			)}

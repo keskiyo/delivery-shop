@@ -9,7 +9,7 @@ const Brand = ({ onChangeAction, brand }: BrandProps) => {
 	return (
 		<div>
 			<label className='block text-sm font-medium mb-2'>
-				Бренд <span className='text-[#d80000]'>*</span>
+				Бренд <span className='text-danger'>*</span>
 			</label>
 			<input
 				type='text'
@@ -17,7 +17,7 @@ const Brand = ({ onChangeAction, brand }: BrandProps) => {
 				required
 				value={brand}
 				onChange={onChangeAction}
-				className={`${formStyles.input} bg-white [&&]:w-full`}
+				className={`${formStyles.input} bg-card [&&]:w-full`}
 			/>
 		</div>
 	)

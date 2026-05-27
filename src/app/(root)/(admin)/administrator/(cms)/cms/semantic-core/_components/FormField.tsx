@@ -11,8 +11,8 @@ export const FormField = ({
 	showCommaHint = false,
 	disabled = false,
 }: FormFieldProps) => {
-	const inputClasses = `w-full px-3 py-2 border border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-green-600/50 shadow-sm ${
-		disabled ? 'bg-gray-100 cursor-not-allowed opacity-60 text-black' : ''
+	const inputClasses = `w-full px-3 py-2 border border-input bg-card rounded focus:outline-none focus:ring-2 focus:ring-brand/40 focus:border-brand shadow-sm ${
+		disabled ? 'bg-surface-hover cursor-not-allowed opacity-60 text-text-soft' : ''
 	}`
 
 	return (
@@ -20,7 +20,7 @@ export const FormField = ({
 			<label className='block text-sm font-medium mb-2'>
 				{label}
 				{showCommaHint && (
-					<span className='text-[#8a8a8a] text-sm font-normal ml-2'>
+					<span className='text-muted-foreground text-sm font-normal ml-2'>
 						(через запятую)
 					</span>
 				)}
@@ -44,7 +44,7 @@ export const FormField = ({
 					disabled={disabled}
 				/>
 			)}
-			<p className='text-xs mt-1 text-[#8a8a8a]'>{hint}</p>
+			<p className='text-xs mt-1 text-muted-foreground'>{hint}</p>
 		</div>
 	)
 }

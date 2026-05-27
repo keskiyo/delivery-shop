@@ -36,12 +36,12 @@ const Pagination = ({
 	}
 
 	return (
-		<div className='flex justify-center items-center mt-12 p-4 border-t border-gray-300'>
+		<div className='flex justify-center items-center mt-12 p-4 border-t border-border'>
 			<div className='flex gap-2'>
 				<button
 					onClick={() => onPageChange(currentPage - 1)}
 					disabled={currentPage === 1}
-					className='px-3 py-1 disabled:opacity-50 hover:text-[#ff6633] duration-300 cursor-pointer disabled:cursor-not-allowed'
+					className='px-3 py-1 disabled:opacity-50 hover:text-promo duration-300 cursor-pointer disabled:cursor-not-allowed'
 				>
 					<ArrowLeft size={24} />
 				</button>
@@ -52,8 +52,8 @@ const Pagination = ({
 						onClick={() => onPageChange(page)}
 						className={`w-5 h-5 md:w-10 md:h-10 flex items-center justify-center rounded duration-300 cursor-pointer ${
 							currentPage === page
-								? 'text-[#ff6633] border-2 border-[#ff6633]'
-								: 'hover:bg-[#ff6633] light:hover:text-white'
+								? 'text-promo border-2 border-promo'
+								: 'hover:bg-promo hover:text-white'
 						}`}
 					>
 						{page}
@@ -63,7 +63,7 @@ const Pagination = ({
 				<button
 					onClick={() => onPageChange(currentPage + 1)}
 					disabled={currentPage === totalPages}
-					className='px-3 py-1 disabled:opacity-50 hover:text-[#ff6633] cursor-pointer disabled:cursor-not-allowed'
+					className='px-3 py-1 disabled:opacity-50 hover:text-promo cursor-pointer disabled:cursor-not-allowed'
 				>
 					<ArrowRight size={24} />
 				</button>

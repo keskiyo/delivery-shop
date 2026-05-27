@@ -7,18 +7,18 @@ import { UserRole } from '@/types/userData'
  * @returns Строка с Tailwind CSS классами для фона и цвета текста
  * 
  * @example
- * getRoleStyles('admin')   // "bg-[#ffc7c7] text-[#d80000]" (красный)
- * getRoleStyles('manager') // "bg-[#e5ffde] text-[#008c48]" (зеленый)
- * getRoleStyles('user')    // "bg-[#f3f2f1] text-[#414141]" (серый)
+ * getRoleStyles('admin')   // danger-токены
+ * getRoleStyles('manager') // success-токены
+ * getRoleStyles('user')    // neutral-токены
  */
 export const getRoleStyles = (role: UserRole) => {
 	switch (role) {
 		case 'admin':
-			return 'bg-[#ffc7c7] text-[#d80000]'
+			return 'bg-danger-soft text-danger'
 		case 'manager':
-			return 'bg-[#e5ffde] text-[#008c48]'
+			return 'bg-success-soft text-success'
 		default:
-			return 'bg-[#f3f2f1] text-[#414141]'
+			return 'bg-surface-hover text-foreground'
 	}
 }
 

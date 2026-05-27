@@ -76,8 +76,8 @@ const ProductCard = ({
 				<div
 					className={`absolute top-3 left-1/2 transform -translate-x-1/2 p-1 rounded text-[8px] md:px-2 md:text-xs z-10 ${
 						insufficientStock
-							? 'bg-danger text-danger-foreground'
-							: 'bg-promo text-promo-foreground'
+							? 'bg-danger text-white'
+							: 'bg-promo text-white'
 					}`}
 				>
 					{insufficientStock
@@ -102,7 +102,7 @@ const ProductCard = ({
 					{!isAdminOrderPage &&
 						!isOrderPage &&
 						discountPercent > 0 && (
-							<div className='absolute bg-promo py-1 px-2 rounded text-promo-foreground bottom-2 left-2'>
+							<div className='absolute bg-promo py-1 px-2 rounded text-white bottom-2 left-2'>
 								-{discountPercent}%
 							</div>
 						)}

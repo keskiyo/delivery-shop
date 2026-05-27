@@ -155,7 +155,7 @@ const Pagination = ({
 							className={`${pageButtonClass} ${
 								currentPage === page
 									? 'text-promo border-2 border-promo'
-									: 'hover:bg-promo hover:text-promo-foreground'
+									: 'hover:bg-promo hover:text-white'
 							}`}
 						>
 							{page}

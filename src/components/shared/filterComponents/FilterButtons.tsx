@@ -61,8 +61,8 @@ function FilterButtonsContent({ basePath }: { basePath: string }) {
 					href={buildFilterLink(filter.key)}
 					className={`h-8 p-2 text-xs flex justify-center items-center duration-300 cursor-pointer rounded-2xl ${
 						isFilterActive(filter.key)
-							? 'bg-brand text-brand-foreground hover:shadow-(--shadow-button-default) active:shadow-(--shadow-button-active)'
-							: 'bg-surface text-text-soft hover:shadow-(--shadow-button-secondary) active:shadow-(--shadow-button-active)'
+							? 'bg-brand text-white  hover:shadow-(--shadow-button-default) active:shadow-(--shadow-button-active)'
+							: 'bg-surface hover:shadow-(--shadow-button-secondary) active:shadow-(--shadow-button-active) border:bg-promo border'
 					} `}
 				>
 					{filter.label}
@@ -80,7 +80,7 @@ const FilterButtons = ({ basePath }: { basePath: string }) => {
 					{FILTERS.map(filter => (
 						<div
 							key={filter.key}
-							className='h-8 p-2 rounded text-xs bg-surface text-text-soft animate-pulse'
+							className='h-8 p-2 rounded text-xs bg-surface animate-pulse'
 						>
 							{filter.label}
 						</div>

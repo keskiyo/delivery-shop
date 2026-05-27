@@ -110,14 +110,14 @@ const CalendarOrderModal = ({
 	if (!isOpen) return null
 	return (
 		<div className='absolute right-0 z-50 mt-14'>
-			<div className='px-5 py-5 w-92 bg-white rounded shadow-button-secondary text-gray-800'>
+			<div className='px-5 py-5 w-92 bg-card rounded shadow-button-secondary text-foreground border border-border'>
 				<div className='flex justify-between items-center pb-6'>
 					<h4 className='text-lg'>Изменить время</h4>
 					<button
 						onClick={onClose}
 						className='cursor-pointer hover:opacity-70 m-2'
 					>
-						<X size={24} className='text-gray-600' />
+						<X size={24} className='text-text-soft' />
 					</button>
 				</div>
 
@@ -177,8 +177,8 @@ const CalendarOrderModal = ({
 													}
 													className={`py-2 px-3 rounded text-sm duration-300 cursor-pointer ${
 														shouldHighlight
-															? 'bg-green-600 text-white'
-															: 'bg-gray-100 hover:bg-green-600 hover:text-white'
+															? 'bg-brand text-white'
+															: 'bg-surface-hover hover:bg-brand hover:text-white'
 													}`}
 												>
 													<span>
@@ -211,13 +211,13 @@ const CalendarOrderModal = ({
 								</div>
 							</>
 						) : (
-							<div className='py-4 text-center text-[#8a8a8a]'>
+							<div className='py-4 text-center text-muted-foreground'>
 								На выбранную дату нет доступных временных слотов
 							</div>
 						)}
 					</>
 				) : (
-					<div className='py-4 text-center text-[#8a8a8a]'>
+					<div className='py-4 text-center text-muted-foreground'>
 						Нет данных о графике доставки
 					</div>
 				)}

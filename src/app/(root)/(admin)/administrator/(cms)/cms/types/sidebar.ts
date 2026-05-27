@@ -5,8 +5,6 @@ export interface MenuItem {
 	title: string
 	description: string
 	icon: ReactNode
-	color: string
-	hoverColor: string
 	shadow: string
 	path: string
 }

@@ -116,21 +116,21 @@ const SecuritySection = ({
 				<div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
 					<button
 						onClick={logoutFromProfile}
-						className='flex flex-1 items-center justify-center h-12 bg-promo text-promo-foreground px-4 py-2 rounded font-medium hover:shadow-button-cancel active:shadow-button-cancel-active duration-300 cursor-pointer'
+						className='flex flex-1 items-center justify-center h-12 bg-promo text-white px-4 py-2 rounded font-medium hover:shadow-button-cancel active:shadow-button-cancel-active duration-300 cursor-pointer'
 					>
 						Выйти из личного кабинета
 					</button>
 
 					<button
 						onClick={handleChangeProfile}
-						className='flex flex-1 items-center justify-center h-12 bg-brand text-brand-foreground px-4 py-2 rounded font-medium hover:shadow-button-default active:shadow-button-cancel-active duration-300 cursor-pointer'
+						className='flex flex-1 items-center justify-center h-12 bg-brand text-white px-4 py-2 rounded font-medium hover:shadow-button-default active:shadow-button-cancel-active duration-300 cursor-pointer'
 					>
 						{isEditing ? 'Готово' : 'Редактировать профиль'}
 					</button>
 
 					<button
 						onClick={handleOpenDeleteModal}
-						className='bg-danger-soft hover:bg-danger text-danger hover:text-danger-foreground px-4 py-2 h-12 rounded font-medium duration-300 text-center cursor-pointer w-full active:shadow-button-cancel-active'
+						className='bg-danger-soft hover:bg-danger text-danger hover:text-white px-4 py-2 h-12 rounded font-medium duration-300 text-center cursor-pointer w-full active:shadow-button-cancel-active'
 					>
 						Удалить аккаунт
 					</button>
