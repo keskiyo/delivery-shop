@@ -15,10 +15,7 @@ const ArticlesSection = ({
 						{title}
 					</h2>
 					{viewAllLink && (
-						<ViewAllLink
-							href={viewAllLink.href}
-							btnText={viewAllLink.text}
-						/>
+						<ViewAllLink href='/blog' btnText={viewAllLink.text} />
 					)}
 				</div>
 

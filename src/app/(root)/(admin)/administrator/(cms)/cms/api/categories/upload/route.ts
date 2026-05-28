@@ -38,9 +38,8 @@ export async function POST(request: NextRequest) {
 		if (originalExtension === 'png') {
 			optimizedBuffer = await sharp(buffer)
 				.resize(800, 450, {
-					fit: 'contain',
-					position: 'center',
-					withoutEnlargement: true,
+					fit: 'fill',
+					withoutEnlargement: false,
 				})
 				.png({ quality: 80 })
 				.toBuffer()

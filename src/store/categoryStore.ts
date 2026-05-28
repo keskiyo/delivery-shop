@@ -55,6 +55,7 @@ interface CategoryStore {
 		page?: number
 		search?: string
 		filterType?: FilterType
+		unlimited?: boolean
 	}) => Promise<void>
 	setSearchQuery: (searchQuery: string) => void
 	setFilterType: (filterType: FilterType) => void
@@ -148,6 +149,7 @@ export const useCategoryStore = create<CategoryStore>((set, get) => ({
 		page?: number
 		search?: string
 		filterBy?: FilterType
+		unlimited?: boolean
 	}) => {
 		const state = get()
 		set({ loading: true })
@@ -156,12 +158,18 @@ export const useCategoryStore = create<CategoryStore>((set, get) => ({
 			const pageToLoad = params?.page ?? state.currentPage
 			const search = params?.search ?? state.searchQuery
 			const filterBy = params?.filterBy ?? state.filterType
+			const unlimited = params?.unlimited ?? false
 			queryParams.append('pageToLoad', pageToLoad.toString())
-			queryParams.append('limit', state.itemsPerPage.toString())
 			queryParams.append('sortBy', state.sortField.toString())
 			queryParams.append('sortOrder', state.sortDirection.toString())
 			queryParams.append('search', search.toString())
 			queryParams.append('filterBy', filterBy.toString())
+
+			if (unlimited) {
+				queryParams.append('limit', '')
+			} else {
+				queryParams.append('limit', state.itemsPerPage.toString())
+			}
 
 			const response = await fetch(
 				`/administrator/cms/api/categories?${queryParams}`,

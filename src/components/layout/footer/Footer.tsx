@@ -134,7 +134,7 @@ const Footer = () => {
 								<Link href='#'>Вакансии</Link>
 							</li>
 							<li className='hover:text-site-chrome-hover cursor-pointer'>
-								<Link href='#'>Статьи</Link>
+								<Link href='/blog'>Статьи</Link>
 							</li>
 							<li className='hover:text-site-chrome-hover cursor-pointer'>
 								Политика обработки персональных данных
