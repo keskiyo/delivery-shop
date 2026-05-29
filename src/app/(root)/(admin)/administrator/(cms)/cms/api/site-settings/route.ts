@@ -1,7 +1,7 @@
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
-import { SiteSettings } from '../../types/siteSettings'
+import { SiteSettings } from '../../types/site-settings'
 
 // GET - Получение настроек (с атомарным созданием если нет)
 export async function GET() {

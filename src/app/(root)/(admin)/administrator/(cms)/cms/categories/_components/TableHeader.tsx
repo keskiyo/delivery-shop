@@ -1,4 +1,4 @@
-import { SortField } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { SortField } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { useCategoryStore } from '@/store/categoryStore'
 import { ChevronUp, ImageIcon } from 'lucide-react'
 

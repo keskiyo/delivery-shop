@@ -20,16 +20,16 @@ export const AdvancedFilters = () => {
   };
 
   return (
-    <div className="mt-4 p-4 bg-gray-50 rounded">
+    <div className="mt-4 p-4 rounded bg-surface-subtle">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div>
-          <label className="block text-xs font-medium text-gray-700 mb-2">
+          <label className="block text-xs font-medium mb-2">
             Искать в:
           </label>
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value as FilterType)}
-            className="text-sm w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
+            className="text-sm w-full border border-input bg-card rounded px-3 py-2 focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none"
           >
             <option value="all">Во всех полях</option>
             <option value="name">Название</option>
@@ -43,13 +43,13 @@ export const AdvancedFilters = () => {
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-700 mb-2">
+          <label className="block text-xs font-medium mb-2">
             Сортировать по:
           </label>
           <select
             value={sortField}
             onChange={(e) => handleSortFieldChange(e.target.value as SortField)}
-            className="text-sm w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
+            className="text-sm w-full border border-input bg-card rounded px-3 py-2 focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none"
           >
             <option value="numericId">ID</option>
             <option value="name">Названию</option>
@@ -64,7 +64,7 @@ export const AdvancedFilters = () => {
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-700 mb-2">
+          <label className="block text-xs font-medium mb-2">
             Порядок сортировки:
           </label>
           <div className="flex gap-2 text-sm">
@@ -72,8 +72,8 @@ export const AdvancedFilters = () => {
               onClick={() => handleSortDirectionChange("asc")}
               className={`flex-1 px-4 py-2 border rounded cursor-pointer transition-custom ${
                 sortDirection === "asc"
-                  ? "bg-green-50 border-green-500 text-green-700"
-                  : "border-gray-300 hover:bg-gray-50"
+                  ? "bg-brand border-brand text-white"
+                  : "border-border hover:bg-surface-hover"
               }`}
             >
               По возрастанию
@@ -82,8 +82,8 @@ export const AdvancedFilters = () => {
               onClick={() => handleSortDirectionChange("desc")}
               className={`flex-1 px-4 py-2 border rounded cursor-pointer transition-custom ${
                 sortDirection === "desc"
-                  ? "bg-green-50 border-green-500 text-green-700"
-                  : "border-gray-300 hover:bg-gray-50"
+                  ? "bg-brand border-brand text-white"
+                  : "border-border hover:bg-surface-hover"
               }`}
             >
               По убыванию

@@ -1,4 +1,4 @@
-import { FormButtonsProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types/siteSettings'
+import { FormButtonsProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types/site-settings'
 import Link from 'next/link'
 
 export const FormButtons = ({ saving, disabled = false }: FormButtonsProps) => {

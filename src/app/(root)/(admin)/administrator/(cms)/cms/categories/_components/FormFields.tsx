@@ -1,4 +1,4 @@
-import { FormFieldsProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { FormFieldsProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { useCategoryStore } from '@/store/categoryStore'
 import { RotateCcw } from 'lucide-react'
 import { SEO_LIMITS } from '../../utils/SEO_LIMITS'
@@ -24,7 +24,8 @@ export const FormFields = ({
 			<div>
 				<div className='flex justify-between items-center mb-1'>
 					<label className='block text-sm font-medium'>
-						Название категории *
+						Название категории{' '}
+						<span className='text-danger'>*</span>
 					</label>
 					<span
 						className={`text-xs ${countClass(charCount.name > SEO_LIMITS.name.max)}`}
@@ -53,7 +54,7 @@ export const FormFields = ({
 			<div>
 				<div className='flex justify-between items-center mb-1'>
 					<label className='block text-sm font-medium'>
-						Алиас (slug) *
+						Алиас (slug) <span className='text-danger'>*</span>
 					</label>
 					<span
 						className={`text-xs ${countClass(charCount.slug > SEO_LIMITS.slug.max)}`}
@@ -102,7 +103,8 @@ export const FormFields = ({
 					<span
 						className={`text-xs ${countClass(
 							charCount.description > SEO_LIMITS.description.max,
-							charCount.description < SEO_LIMITS.description.min &&
+							charCount.description <
+								SEO_LIMITS.description.min &&
 								charCount.description > 0,
 						)}`}
 					>

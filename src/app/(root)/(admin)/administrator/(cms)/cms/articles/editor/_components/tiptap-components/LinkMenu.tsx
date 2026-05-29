@@ -179,8 +179,8 @@ export const LinkMenu = ({ editor }: EditorProps) => {
             p-2 rounded duration-300 cursor-pointer
             ${
 				isLinkActive
-					? 'bg-blue-100 text-[#9674F9] hover:bg-blue-200'
-					: 'text-gray-700 hover:bg-gray-100'
+					? 'bg-brand text-white hover:bg-brand-hover'
+					: 'text-foreground hover:bg-surface-hover'
 			}
           `}
 					title='Добавить ссылку (Ctrl+K)'
@@ -198,7 +198,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
             ${
 				canRemoveLink
 					? 'text-red-600 hover:bg-red-50 hover:text-red-700 cursor-pointer'
-					: 'opacity-40 cursor-not-allowed text-gray-400'
+					: 'opacity-40 cursor-not-allowed text-muted-foreground'
 			}
           `}
 					title='Удалить ссылку'
@@ -212,10 +212,10 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 				<div className='fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50 p-4'>
 					<div
 						ref={modalRef}
-						className='bg-white rounded-lg shadow-xl w-full max-w-md border border-gray-300'
+						className='bg-card rounded-lg shadow-xl w-full max-w-md border border-border'
 					>
 						<div className='p-6'>
-							<h3 className='text-lg font-medium text-gray-900 mb-4'>
+							<h3 className='text-lg font-medium text-foreground mb-4'>
 								{isLinkActive
 									? 'Редактировать ссылку'
 									: 'Добавить ссылку'}
@@ -225,7 +225,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 								<div>
 									<label
 										htmlFor='link-text'
-										className='block text-sm font-medium text-gray-700 mb-1'
+										className='block text-sm font-medium text-foreground mb-1'
 									>
 										Текст ссылки
 									</label>
@@ -234,7 +234,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 										type='text'
 										value={text}
 										onChange={e => setText(e.target.value)}
-										className='w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+										className='w-full px-3 py-2 border border-border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand'
 										placeholder='Текст ссылки (опционально)'
 										onKeyDown={handleKeyDown}
 									/>
@@ -243,7 +243,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 								<div>
 									<label
 										htmlFor='link-url'
-										className='block text-sm font-medium text-gray-700 mb-1'
+										className='block text-sm font-medium text-foreground mb-1'
 									>
 										URL адрес *
 									</label>
@@ -253,7 +253,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 										type='url'
 										value={url}
 										onChange={e => setUrl(e.target.value)}
-										className='w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+										className='w-full px-3 py-2 border border-border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand'
 										placeholder='https://example.com'
 										required
 										onKeyDown={handleKeyDown}
@@ -263,10 +263,10 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 								{/* Переключатель для target="_blank" */}
 								<div className='flex items-center justify-between pt-2'>
 									<div className='flex items-center'>
-										<ExternalLink className='w-4 h-4 text-gray-500 mr-2' />
+										<ExternalLink className='w-4 h-4 text-muted-foreground mr-2' />
 										<label
 											htmlFor='open-in-new-tab'
-											className='text-sm font-medium text-gray-700 cursor-pointer'
+											className='text-sm font-medium text-foreground cursor-pointer'
 										>
 											Открывать в новой вкладке
 										</label>
@@ -279,14 +279,14 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 										className={`
                       relative inline-flex h-6 w-11 items-center rounded-full 
                       transition-colors focus:outline-none focus:ring-2 
-                      focus:ring-[#9674F9] focus:ring-offset-2 cursor-pointer duration-300
-                      ${openInNewTab ? 'bg-[#9674F9]' : 'bg-gray-300'}
+                      focus:ring-brand focus:ring-offset-2 cursor-pointer duration-300
+                      ${openInNewTab ? 'bg-brand' : 'bg-surface-pressed'}
                     `}
 										aria-pressed={openInNewTab}
 									>
 										<span
 											className={`
-                        inline-block h-4 w-4 transform rounded-full bg-white 
+                        inline-block h-4 w-4 transform rounded-full bg-card
                         transition-transform duration-200
                         ${openInNewTab ? 'translate-x-6' : 'translate-x-1'}
                       `}
@@ -304,7 +304,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 								</div>
 
 								{/* Подсказка */}
-								<div className='text-xs text-gray-500 mt-2 p-2 bg-gray-50 rounded'>
+								<div className='text-xs text-muted-foreground mt-2 p-2 bg-surface-subtle rounded'>
 									{openInNewTab
 										? 'Ссылка будет открываться в новой вкладке (рекомендуется для внешних ссылок)'
 										: 'Ссылка будет открываться в текущей вкладке (рекомендуется для навигации по Вашему сайту)'}
@@ -315,7 +315,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 								<button
 									type='button'
 									onClick={handleCloseModal}
-									className='px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md duration-300 cursor-pointer'
+									className='px-4 py-2 text-sm font-medium text-foreground bg-surface-hover hover:bg-surface-pressed rounded-md duration-300 cursor-pointer'
 								>
 									Отмена
 								</button>
@@ -327,8 +327,8 @@ export const LinkMenu = ({ editor }: EditorProps) => {
                     px-4 py-2 text-sm font-medium text-white rounded-md duration-300
                     ${
 						url.trim()
-							? 'bg-[#9674F9] hover:bg-[#8563e8] cursor-pointer'
-							: 'bg-[#9674F9]/60 cursor-not-allowed'
+							? 'bg-brand hover:bg-brand-hover cursor-pointer'
+							: 'bg-brand/60 cursor-not-allowed'
 					}
                   `}
 								>

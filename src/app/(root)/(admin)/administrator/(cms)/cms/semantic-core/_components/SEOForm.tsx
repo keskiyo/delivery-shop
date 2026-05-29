@@ -1,5 +1,5 @@
 import { Loader } from 'lucide-react'
-import { SEOFormProps } from '../../types/siteSettings'
+import { SEOFormProps } from '../../types/site-settings'
 import { CurrentSettings } from './CurrentSettings'
 import { FormButtons } from './FormButtons'
 import { FormField } from './FormField'

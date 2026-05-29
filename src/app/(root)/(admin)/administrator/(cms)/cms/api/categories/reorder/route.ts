@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
 
-import { ReorderRequestItem } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { ReorderRequestItem } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { getDB } from '@/lib/api-routes'
 
 export async function PUT(request: Request) {

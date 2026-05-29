@@ -3,7 +3,7 @@ import {
 	Category,
 	FilterType,
 	SortField,
-} from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+} from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { buildFilterQuery } from '@/app/(root)/(admin)/administrator/(cms)/cms/utils/buildFilterQuery'
 import { buildSortObject } from '@/app/(root)/(admin)/administrator/(cms)/cms/utils/buildSortObject'
 import { getDB } from '@/lib/api-routes'

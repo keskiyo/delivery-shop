@@ -5,7 +5,7 @@ import {
 	CategoryFormProps,
 	CharCount,
 	FormField,
-} from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+} from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { useCategoryStore } from '@/store/categoryStore'
 
 export const CategoryForm = ({
@@ -27,12 +27,12 @@ export const CategoryForm = ({
 	}
 
 	const handleInputChange = (
-		field: FormField,
+		field: string,
 		value: string,
 		maxLength: number,
 	) => {
 		if (value.length <= maxLength) {
-			onFieldChange(field, value)
+			onFieldChange(field as FormField, value)
 		}
 	}
 
@@ -68,6 +68,7 @@ export const CategoryForm = ({
 			</h2>
 			<form onSubmit={onSubmit}>
 				<ImageSection
+					type='category'
 					charCount={charCount}
 					onInputChange={handleInputChange}
 					onFileChange={handleFileChange}

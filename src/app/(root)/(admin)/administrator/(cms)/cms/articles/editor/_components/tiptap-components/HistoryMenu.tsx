@@ -20,7 +20,7 @@ export const HistoryMenu = ({ editor }: EditorProps) => {
 				type='button'
 				onClick={() => editor.chain().focus().undo().run()}
 				disabled={!canUndo}
-				className='p-2 rounded hover:bg-gray-200 duration-300 cursor-pointer text-gray-600 disabled:text-gray-400 disabled:cursor-not-allowed disabled:hover:bg-transparent'
+				className='p-2 rounded hover:bg-surface-pressed duration-300 cursor-pointer text-muted-foreground disabled:text-muted-foreground disabled:cursor-not-allowed disabled:hover:bg-transparent'
 				title='Отменить (Ctrl+Z)'
 			>
 				<Undo className='w-4 h-4' />
@@ -29,7 +29,7 @@ export const HistoryMenu = ({ editor }: EditorProps) => {
 				type='button'
 				onClick={() => editor.chain().focus().redo().run()}
 				disabled={!canRedo}
-				className='p-2 rounded hover:bg-gray-200 duration-300 cursor-pointer text-gray-600 disabled:text-gray-400 disabled:cursor-not-allowed disabled:hover:bg-transparent'
+				className='p-2 rounded hover:bg-surface-pressed duration-300 cursor-pointer text-muted-foreground disabled:text-muted-foreground disabled:cursor-not-allowed disabled:hover:bg-transparent'
 				title='Повторить (Ctrl+Y)'
 			>
 				<Redo className='w-4 h-4' />

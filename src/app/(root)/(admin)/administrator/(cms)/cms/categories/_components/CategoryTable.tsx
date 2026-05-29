@@ -8,7 +8,7 @@ import { TableHeader } from '@/app/(root)/(admin)/administrator/(cms)/cms/catego
 import {
 	Category,
 	CategoryTableProps,
-} from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+} from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { useCategoryStore } from '@/store/categoryStore'
 import { Loader2 } from 'lucide-react'
 import { useState } from 'react'

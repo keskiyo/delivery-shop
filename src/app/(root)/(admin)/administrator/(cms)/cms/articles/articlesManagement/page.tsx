@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { Header } from "../../_components/Header";
 import { Notification } from "../../_components/Notification";
-import { ItemsPerPageSelector } from "../../../../_components/ItemsPerPageSelector";
-import { Pagination } from "../../../../_components/Pagination";
+import { ItemsPerPageSelector } from "../../categories/_components/ItemPerPageSelector";
+import { Pagination } from "../../_components/Pagination";
 import { useArticlesManagementStore } from "@/store/articlesManagementStore";
 import { Article } from "./types";
 import { ArticleTable } from "./_components/ArticleTable";
@@ -100,7 +100,7 @@ const ArticlesManagementPage = () => {
           value={itemsPerPage}
           onChange={handleItemsPerPageChange}
         />
-        <div className="text-sm text-gray-500 mt-1">
+        <div className="text-sm text-muted-foreground mt-1">
           Текущие параметры: страница {currentPage}, элементов: {itemsPerPage}
         </div>
       </div>

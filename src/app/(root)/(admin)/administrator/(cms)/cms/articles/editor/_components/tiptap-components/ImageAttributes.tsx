@@ -318,8 +318,8 @@ export const ImageAttributes = ({ editor }: EditorProps) => {
 				onClick={openModal}
 				className={`p-2 rounded duration-300 cursor-pointer flex items-center gap-1 ${
 					isImageSelected
-						? 'hover:bg-gray-200 text-gray-600'
-						: 'text-gray-300 cursor-not-allowed opacity-50'
+						? 'hover:bg-surface-pressed text-muted-foreground'
+						: 'text-muted-foreground cursor-not-allowed opacity-50'
 				}`}
 				title={
 					isImageSelected

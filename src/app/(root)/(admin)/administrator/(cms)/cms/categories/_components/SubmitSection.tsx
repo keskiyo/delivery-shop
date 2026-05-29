@@ -1,4 +1,4 @@
-import { SubmitSectionProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { SubmitSectionProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { useCategoryStore } from '@/store/categoryStore'
 import { Loader2, Save } from 'lucide-react'
 

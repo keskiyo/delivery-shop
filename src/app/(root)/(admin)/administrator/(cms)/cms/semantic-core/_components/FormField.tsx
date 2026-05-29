@@ -1,4 +1,4 @@
-import { FormFieldProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types/siteSettings'
+import { FormFieldProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types/site-settings'
 
 export const FormField = ({
 	label,

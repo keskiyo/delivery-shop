@@ -1,6 +1,6 @@
 import { Check, ChevronDown, Edit, Eye, Star } from "lucide-react";
 import { ArticleStatus, SortableItemProps } from "../types";
-import { DragHandle } from "../../../_components/DragHandle";
+import { DragHandle } from "../../../categories/_components/DragHandle";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useArticlesManagementStore } from "@/store/articlesManagementStore";
@@ -59,9 +59,9 @@ export const DesktopArticleRow = ({
 
   return (
     <div
-      className={`p-4 hover:bg-gray-50 text-sm transition-custom ${
+      className={`p-4 hover:bg-surface-hover text-sm transition-custom ${
         isDragging
-          ? "opacity-60 bg-linear-to-r from-blue-50 to-green-50 shadow-lg border-2 border-green-400 transform scale-[0.995]"
+          ? "opacity-60 bg-brand-soft shadow-lg border-2 border-brand transform scale-[0.995]"
           : "hover:shadow-sm"
       }`}
     >
@@ -72,7 +72,7 @@ export const DesktopArticleRow = ({
 
         <div className="flex justify-center">
           <span
-            className="inline-flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full text-xs font-medium shrink-0"
+            className="inline-flex items-center justify-center w-8 h-8 rounded-full text-xs font-medium shrink-0"
             title="Порядковый номер"
           >
             {displayNumericId || "-"}
@@ -90,7 +90,7 @@ export const DesktopArticleRow = ({
 
         <div className="min-w-0">
           <div
-            className="text-xs bg-gray-100 px-2 py-1 rounded break-all font-mono"
+            className="text-xs bg-surface-subtle px-2 py-1 rounded break-all font-mono"
             title={`Ссылка: ${article.slug}`}
           >
             {article.slug}
@@ -99,7 +99,7 @@ export const DesktopArticleRow = ({
 
         <div className="min-w-0">
           <div
-            className="text-xs bg-gray-100 px-2 py-1 rounded break-all font-mono"
+            className="text-xs bg-surface-subtle px-2 py-1 rounded break-all font-mono"
             title={`Категория: ${article.categoryName}`}
           >
             {article.categoryName}
@@ -110,8 +110,8 @@ export const DesktopArticleRow = ({
             onClick={handleFeaturedToggle}
             className={`text-xs px-2 py-1 rounded break-all font-mono flex items-center justify-center w-8 cursor-pointer  ${
               article.isFeatured
-                ? "bg-yellow-50 hover:bg-yellow-100"
-                : "bg-gray-100 hover:bg-gray-200"
+                ? "bg-warning text-white hover:bg-warning/90"
+                : "bg-surface-hover hover:bg-surface-pressed"
             }`}
             title={
               article.isFeatured
@@ -123,7 +123,7 @@ export const DesktopArticleRow = ({
               className={`w-4 h-4 ${
                 article.isFeatured
                   ? "fill-yellow-400 text-yellow-400"
-                  : "text-gray-400"
+                  : "text-muted-foreground"
               }`}
             />
           </button>
@@ -144,7 +144,7 @@ export const DesktopArticleRow = ({
           </div>
 
           {isDropdownOpen && (
-            <div className="absolute left-0 right-0 mt-1 border border-gray-200 rounded shadow-lg z-10 flex items-stretch justify-between">
+            <div className="absolute left-0 right-0 mt-1 border border-border rounded shadow-lg z-10 flex items-stretch justify-between overflow-hidden">
               <div className="w-full">
                 {(
                   [
@@ -158,7 +158,7 @@ export const DesktopArticleRow = ({
                   return (
                     <button
                       key={status}
-                      className={`flex flex-1 items-center justify-between w-full px-3 py-2 text-xs text-left hover:bg-gray-50 cursor-pointer ${statusStyle.className}`}
+                      className={`flex flex-1 items-center justify-between w-full px-3 py-2 text-xs text-left hover:brightness-95 cursor-pointer ${statusStyle.className}`}
                       onClick={(e) => {
                         e.stopPropagation();
                         handleStatusChange(status);
@@ -178,16 +178,16 @@ export const DesktopArticleRow = ({
 
         <div className="min-w-0 flex justify-center">
           <div
-            className="text-gray-600 text-xs wrap-break-word text-center"
+            className="text-muted-foreground text-xs wrap-break-word text-center"
             title={article.author || "Автор неизвестен"}
           >
-            {article.author || <span className="text-gray-400">—</span>}
+            {article.author || <span className="text-muted-foreground">—</span>}
           </div>
         </div>
 
         <div className="min-w-0">
           <div
-            className="text-gray-600 text-xs wrap-break-word"
+            className="text-muted-foreground text-xs wrap-break-word"
             title={`Дата создания: ${new Date(article.createdAt).toLocaleDateString("ru-RU")}`}
           >
             {new Date(article.createdAt).toLocaleDateString("ru-RU")}
@@ -207,7 +207,7 @@ export const DesktopArticleRow = ({
             {article.status !== "deleted" && (
               <button
                 onClick={handleEdit}
-                className="p-1 bg-green-600 text-white rounded hover:bg-green-700 flex items-center justify-center cursor-pointer transition-custom shrink-0"
+                className="p-1 bg-brand text-white rounded hover:bg-brand-hover flex items-center justify-center cursor-pointer transition-custom shrink-0"
                 title="Редактировать статью"
               >
                 <Edit className="w-3 h-3" />
@@ -219,7 +219,7 @@ export const DesktopArticleRow = ({
               <Link
                 href={`/blog/${article.categorySlug}/${article.slug}`}
                 target="_blank"
-                className="p-1 bg-blue-600 text-white rounded hover:bg-blue-700 flex items-center justify-center cursor-pointer transition-custom shrink-0"
+                className="p-1 bg-site-chrome text-white rounded hover:bg-site-chrome/90 flex items-center justify-center cursor-pointer transition-custom shrink-0"
                 title="Просмотреть статью"
               >
                 <Eye className="w-3 h-3" />

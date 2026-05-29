@@ -22,7 +22,7 @@ export interface ArticleFormProps {
 	onGenerateSlug: () => void
 	onSaveImageFile: (file: File) => void
 	onRemoveImage: () => void
-	onSubmit: (e: React.FormEvent) => void
+	onSubmit: (e: React.SyntheticEvent) => void
 	onCancel: () => void
 }
 

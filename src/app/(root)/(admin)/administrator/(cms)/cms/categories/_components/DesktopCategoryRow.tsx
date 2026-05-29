@@ -1,4 +1,4 @@
-import { SortableItemProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { SortableItemProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { Edit, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'

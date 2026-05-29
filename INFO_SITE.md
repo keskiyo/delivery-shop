@@ -84,19 +84,18 @@
 
 ## Корневая структура
 
-| Путь                      | Комментарий                                    |
-| ------------------------- | ---------------------------------------------- |
-| `package.json`            | Скрипты проекта и зависимости.                 |
-| `tsconfig.json`           | Конфигурация TypeScript.                       |
-| `next.config.ts`          | Конфигурация Next.js.                          |
-| `eslint.config.mjs`       | Конфигурация ESLint.                           |
-| `tailwind.config.js`      | Дополнительная конфигурация Tailwind.          |
-| `postcss.config.mjs`      | PostCSS-конфигурация для Tailwind CSS 4.       |
-| `components.json`         | Конфигурация shadcn.                           |
-| `AGENTS.md`               | Инструкции для агентной работы с репозиторием. |
-| `INFO_SITE.md`            | Этот файл с обзором проекта.                   |
-| `migrate-mongo-config.js` | Конфигурация миграций MongoDB.                 |
-| `seed-db*.ts`             | Скрипты наполнения базы начальными данными.    |
+| Путь                      | Комментарий                                 |
+| ------------------------- | ------------------------------------------- |
+| `package.json`            | Скрипты проекта и зависимости.              |
+| `tsconfig.json`           | Конфигурация TypeScript.                    |
+| `next.config.ts`          | Конфигурация Next.js.                       |
+| `eslint.config.mjs`       | Конфигурация ESLint.                        |
+| `tailwind.config.js`      | Дополнительная конфигурация Tailwind.       |
+| `postcss.config.mjs`      | PostCSS-конфигурация для Tailwind CSS 4.    |
+| `components.json`         | Конфигурация shadcn.                        |
+| `INFO_SITE.md`            | Этот файл с обзором проекта.                |
+| `migrate-mongo-config.js` | Конфигурация миграций MongoDB.              |
+| `seed-db*.ts`             | Скрипты наполнения базы начальными данными. |
 
 ## `config/`
 

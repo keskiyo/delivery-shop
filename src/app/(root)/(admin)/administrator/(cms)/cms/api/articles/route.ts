@@ -1,7 +1,7 @@
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
-import { sanitizeArticleHTML } from '../../../../../../../../utils/sanitizeArticleHTML'
+import { sanitizeArticleHTML } from '../../../../../../../../../utils/sanitizeArticleHTML'
 import { processArticleImages } from '../../articles/utils/processArticleImages'
 
 export async function POST(request: Request) {

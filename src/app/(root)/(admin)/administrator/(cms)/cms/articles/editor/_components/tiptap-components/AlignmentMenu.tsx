@@ -110,8 +110,8 @@ export const AlignmentMenu = ({ editor }: EditorProps) => {
               p-2 rounded duration-300 cursor-pointer
               ${
 					isActive
-						? 'bg-blue-100 text-[#9674F9] hover:bg-blue-200'
-						: 'text-gray-700 hover:bg-gray-100'
+						? 'bg-brand text-white hover:bg-brand-hover'
+						: 'text-foreground hover:bg-surface-hover'
 				}
             `}
 						title={`${button.title} (${button.shortcut})`}

@@ -14,7 +14,7 @@ export default function CategoryMeta({
     <div className="flex items-center justify-between mb-3">
       <time
         dateTime={createdAt}
-        className="text-xs text-gray-500 font-medium"
+        className="text-xs text-muted-foreground font-medium"
         title={formattedDate}
       >
         {formattedDate}
@@ -22,8 +22,8 @@ export default function CategoryMeta({
 
       {author && (
         <div className="flex items-center">
-          <div className="w-2 h-2 rounded-full bg-green-500 mr-1.5"></div>
-          <span className="text-xs text-gray-600 font-medium">{author}</span>
+          <div className="w-2 h-2 rounded-full bg-brand mr-1.5"></div>
+          <span className="text-xs text-muted-foreground font-medium">{author}</span>
         </div>
       )}
     </div>

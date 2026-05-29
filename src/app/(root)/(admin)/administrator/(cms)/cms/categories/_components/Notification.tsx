@@ -1,4 +1,4 @@
-import { NotificationProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { NotificationProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { X } from 'lucide-react'
 
 export const Notification = ({ type, message, onClose }: NotificationProps) => {

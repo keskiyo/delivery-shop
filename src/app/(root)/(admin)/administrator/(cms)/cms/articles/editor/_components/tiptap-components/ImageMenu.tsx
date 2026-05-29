@@ -35,7 +35,7 @@ export const ImageMenu = ({ editor, onDragOverChange }: ImageMenuProps) => {
 
 	return (
 		<div className='flex items-center gap-2'>
-			<span className='text-xs text-gray-500 mr-1'>Изображения:</span>
+			<span className='text-xs text-muted-foreground mr-1'>Изображения:</span>
 
 			<div
 				className='relative group'
@@ -55,8 +55,8 @@ export const ImageMenu = ({ editor, onDragOverChange }: ImageMenuProps) => {
 					onClick={() => fileInputRef.current?.click()}
 					className={`px-1 py-2 rounded duration-300 cursor-pointer flex items-center gap-1 relative ${
 						isUploading
-							? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-							: 'hover:bg-gray-200 text-gray-600'
+							? 'bg-surface-hover text-muted-foreground cursor-not-allowed'
+							: 'hover:bg-surface-pressed text-muted-foreground'
 					}`}
 					title={
 						isUploading ? 'Загрузка...' : 'Загрузить изображение'
@@ -73,7 +73,7 @@ export const ImageMenu = ({ editor, onDragOverChange }: ImageMenuProps) => {
 			<button
 				type='button'
 				onClick={insertByUrl}
-				className='p-2 rounded hover:bg-gray-200 duration-300 cursor-pointer text-gray-600'
+				className='p-2 rounded hover:bg-surface-pressed duration-300 cursor-pointer text-muted-foreground'
 				title='Вставить по URL'
 				disabled={isUploading}
 			>

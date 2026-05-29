@@ -1,7 +1,7 @@
-import { SubmitSectionProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
 import { useArticleStore } from '@/store/articleStore'
 import { Eye, EyeOff, FileText, Globe, Save, Star } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import type { SubmitSectionProps } from '../../articlesManagement/types'
 import './css/modal-preview.css'
 import { ArticlePreviewModal } from './tiptap-components/ArticlePreviewModal'
 
@@ -71,14 +71,14 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 				isOpen={showPreview}
 				onClose={() => setShowPreview(false)}
 			/>
-			<div className='mb-6 bg-linear-to-r from-purple-50 to-indigo-50 p-4 rounded-xl border border-purple-200'>
+			<div className='mb-6 bg-surface-subtle p-4 rounded-xl border border-border'>
 				<div className='flex flex-col sm:flex-row items-center justify-between gap-4'>
 					<div className='flex-1'>
-						<h3 className='text-lg font-semibold text-gray-900 mb-1 flex items-center gap-2'>
-							<Eye className='w-5 h-5 text-purple-600' />
+						<h3 className='text-lg font-semibold mb-1 flex items-center gap-2'>
+							<Eye className='w-5 h-5 text-brand' />
 							Предпросмотр статьи
 						</h3>
-						<p className='text-gray-600 text-sm'>
+						<p className='text-muted-foreground text-sm'>
 							Посмотрите, как статья будет выглядеть на сайте
 							перед сохранением
 						</p>
@@ -89,8 +89,8 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 						disabled={!canPreview || isUploading || isSubmitting}
 						className={`flex items-center justify-center gap-2 px-2 md:px-6 py-3 rounded-lg cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium whitespace-nowrap shadow-lg ${
 							canPreview
-								? 'bg-linear-to-r from-purple-600 to-indigo-600 text-white hover:from-purple-700 hover:to-indigo-700 transform hover:-translate-y-0.5 transition-all'
-								: 'bg-gray-200 text-gray-500'
+								? 'bg-brand text-white hover:bg-brand-hover transform hover:-translate-y-0.5 transition-all'
+								: 'bg-surface-pressed text-white'
 						}`}
 						title={
 							!canPreview
@@ -104,15 +104,15 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 				</div>
 
 				{!canPreview && (
-					<div className='mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg'>
-						<p className='text-yellow-700 text-sm'>
+					<div className='mt-3 p-3 bg-warning-soft border border-warning/30 rounded-lg'>
+						<p className='text-warning text-sm'>
 							Для предпросмотра необходимо заполнить название и
 							текст статьи
 						</p>
 					</div>
 				)}
 			</div>
-			<div className='my-6 bg-gray-50 p-4 rounded border border-gray-200'>
+			<div className='my-6 bg-surface-subtle p-4 rounded border border-border'>
 				<h3 className='text-lg font-medium mb-4 flex items-center gap-2'>
 					<Star className='w-5 h-5' />
 					Статус избранности
@@ -125,8 +125,8 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 							disabled={isUploading || isSubmitting}
 							className={`flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
 								!isFeatured
-									? 'bg-white text-gray-700 border-gray-300 shadow-sm'
-									: 'bg-gray-50 border-gray-200 hover:bg-gray-100'
+									? 'bg-card border-brand shadow-sm'
+									: 'bg-card border-border hover:bg-surface-hover'
 							}`}
 						>
 							<FileText className='w-5 h-5' />
@@ -134,7 +134,7 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 								<div className='font-medium'>
 									Обычная статья
 								</div>
-								<div className='text-sm text-gray-500'>
+								<div className='text-sm'>
 									Стандартное отображение
 								</div>
 							</div>
@@ -146,8 +146,8 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 							disabled={isUploading || isSubmitting}
 							className={`flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
 								isFeatured
-									? 'bg-yellow-50 text-yellow-700 border-yellow-300 shadow-sm'
-									: 'bg-white border-gray-300 hover:bg-gray-50'
+									? 'bg-warning text-white border-warning shadow-sm'
+									: 'bg-card border-border hover:bg-surface-hover'
 							}`}
 						>
 							<Star className='w-5 h-5' />
@@ -155,14 +155,14 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 								<div className='font-medium'>
 									Избранная статья
 								</div>
-								<div className='text-sm text-gray-500'>
+								<div className='text-sm'>
 									Выделить особым образом
 								</div>
 							</div>
 						</button>
 					</div>
 
-					<div className='text-sm text-gray-600 p-3 bg-white rounded border border-gray-200'>
+					<div className='text-sm text-muted-foreground p-3 bg-card rounded border border-border'>
 						{isFeatured ? (
 							<div>
 								<p className='font-medium mb-2'>
@@ -193,7 +193,7 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 				</div>
 			</div>
 
-			<div className='my-6 bg-gray-50 p-4 rounded border border-gray-200'>
+			<div className='my-6 bg-surface-subtle p-4 rounded border border-border'>
 				<h3 className='text-lg font-medium mb-4 flex items-center gap-2'>
 					<Globe className='w-5 h-5' />
 					Статус публикации
@@ -206,14 +206,14 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 							disabled={isUploading || isSubmitting}
 							className={`flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
 								articleStatus === 'draft'
-									? 'bg-yellow-50 text-yellow-700 border-yellow-300 shadow-sm'
-									: 'bg-white border-gray-300 hover:bg-gray-50'
+									? 'bg-warning text-white border-warning shadow-sm'
+									: 'bg-card border-border hover:bg-surface-hover'
 							}`}
 						>
 							<EyeOff className='w-5 h-5' />
 							<div className='text-left'>
 								<div className='font-medium'>Черновик</div>
-								<div className='text-sm text-gray-500'>
+								<div className='text-sm'>
 									Сохранить, но не публиковать
 								</div>
 							</div>
@@ -225,21 +225,21 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 							disabled={isUploading || isSubmitting}
 							className={`flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
 								articleStatus === 'published'
-									? 'bg-green-50 text-green-700 border-green-300 shadow-sm'
-									: 'bg-white border-gray-300 hover:bg-gray-50'
+									? 'bg-brand text-white border-brand shadow-sm'
+									: 'bg-card border-border hover:bg-surface-hover'
 							}`}
 						>
 							<Eye className='w-5 h-5' />
 							<div className='text-left'>
 								<div className='font-medium'>Опубликовать</div>
-								<div className='text-sm text-gray-500'>
+								<div className='text-sm'>
 									Сразу опубликовать на сайте
 								</div>
 							</div>
 						</button>
 					</div>
 
-					<div className='text-sm text-gray-600 p-3 bg-white rounded border border-gray-200'>
+					<div className='text-sm text-muted-foreground p-3 bg-card rounded border border-border'>
 						{articleStatus === 'draft' ? (
 							<div>
 								<p className='font-medium mb-2'>
@@ -282,9 +282,9 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 					className={`flex items-center justify-center gap-2 px-5 py-3 rounded-lg cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium flex-1 ${
 						articleStatus === 'published'
 							? isFeatured
-								? 'bg-yellow-600 text-white hover:bg-yellow-700'
-								: 'bg-green-600 text-white hover:bg-green-700'
-							: 'bg-yellow-600 text-white hover:bg-yellow-700'
+								? 'bg-warning text-white hover:bg-warning/90'
+								: 'bg-brand text-white hover:bg-brand-hover'
+							: 'bg-warning text-white hover:bg-warning/90'
 					}`}
 				>
 					<Save className='w-5 h-5' />
@@ -305,7 +305,7 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 					type='button'
 					onClick={handleCancelWithConfirm}
 					disabled={isUploading || isSubmitting}
-					className='px-5 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium'
+					className='px-5 py-3 border border-border rounded-lg hover:bg-surface-hover cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium'
 				>
 					Отмена
 				</button>

@@ -27,8 +27,8 @@ const MainToolbar = ({ editor, onImageDragOverChange }: MainToolbarProps) => {
 		const dragImage = document.createElement('div')
 		dragImage.style.width = '100px'
 		dragImage.style.height = '32px'
-		dragImage.style.background = '#f3f4f6'
-		dragImage.style.border = '1px solid #d1d5db'
+		dragImage.style.background = 'var(--surface-subtle)'
+		dragImage.style.border = '1px solid var(--border)'
 		dragImage.style.borderRadius = '6px'
 		dragImage.style.position = 'absolute'
 		dragImage.style.top = '-1000px'
@@ -96,7 +96,7 @@ const MainToolbar = ({ editor, onImageDragOverChange }: MainToolbarProps) => {
 		return (
 			<div
 				key={itemId}
-				className='p-0.5 rounded hover:bg-gray-100 duration-300 cursor-pointer'
+				className='p-0.5 rounded hover:bg-surface-hover duration-300 cursor-pointer'
 			>
 				<Component {...props} />
 			</div>
@@ -104,7 +104,7 @@ const MainToolbar = ({ editor, onImageDragOverChange }: MainToolbarProps) => {
 	}
 
 	return (
-		<div className='bg-gray-50 border-b border-gray-200 py-1.5 px-2'>
+		<div className='bg-surface-subtle border-b border-border py-1.5 px-2'>
 			<div className='flex flex-wrap items-center gap-1.5'>
 				{groups.map(group => (
 					<div
@@ -121,17 +121,17 @@ const MainToolbar = ({ editor, onImageDragOverChange }: MainToolbarProps) => {
               min-h-14 box-content
               ${
 					draggingGroupId === group.id
-						? 'border-blue-400 bg-blue-50 opacity-60 cursor-grabbing scale-95'
-						: 'border-gray-300 hover:border-gray-400 cursor-grab'
+						? 'border-brand bg-brand-soft opacity-60 cursor-grabbing scale-95'
+						: 'border-border hover:border-brand cursor-grab'
 				}
               ${
 					dragOverGroupId === group.id && draggingGroupId !== group.id
-						? 'border-green-500 bg-green-50 ring-1 ring-green-300'
+						? 'border-brand bg-brand-soft ring-1 ring-brand/30'
 						: ''
 				}
             `}
 					>
-						<div className='text-gray-400 opacity-60 hover:opacity-100 transition-opacity -ml-1 mr-0.5'>
+						<div className='text-muted-foreground opacity-60 hover:opacity-100 transition-opacity -ml-1 mr-0.5'>
 							<GripVertical className='w-3.5 h-3.5' />
 						</div>
 						<div className='flex items-center gap-0.5'>

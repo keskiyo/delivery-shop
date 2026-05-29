@@ -1,4 +1,4 @@
-import { HeaderActionsProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { HeaderActionsProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { Plus } from 'lucide-react'
 
 export function HeaderActions({ onCreate }: HeaderActionsProps) {

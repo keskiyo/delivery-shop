@@ -1,4 +1,4 @@
-import { MobileCategoryHeaderProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { MobileCategoryHeaderProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 
 export const MobileCategoryHeader = ({
 	category,

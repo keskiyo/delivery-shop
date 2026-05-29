@@ -1,16 +1,19 @@
 'use client'
 
 import { useCategoryStore } from '@/store/categoryStore'
+import { useArticlesManagementStore } from '@/store/articlesManagementStore'
 import { CONFIG_BLOG } from '../CONFIG_BLOG'
 
-export const Pagination = () => {
+export const Pagination = ({ type = 'categories' }: { type?: 'categories' | 'articles' }) => {
+	const categoryPagination = useCategoryStore()
+	const articlePagination = useArticlesManagementStore()
 	const {
 		totalPages,
 		totalItems,
 		currentPage,
 		itemsPerPage,
 		setCurrentPage,
-	} = useCategoryStore()
+	} = type === 'articles' ? articlePagination : categoryPagination
 
 	const startItem = (currentPage - 1) * itemsPerPage + 1
 	const endItem = Math.min(currentPage * itemsPerPage, totalItems)

@@ -1,5 +1,5 @@
 import { MobileCategoryCard } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/MobileCategoryCard'
-import { SortableItemProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { SortableItemProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { useCategoryStore } from '@/store/categoryStore'
 import { useEffect, useState } from 'react'
 import { DesktopCategoryRow } from './DesktopCategoryRow'

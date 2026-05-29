@@ -1,4 +1,4 @@
-import { ImageSectionProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { ImageSectionProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { SEO_LIMITS } from '@/app/(root)/(admin)/administrator/(cms)/cms/utils/SEO_LIMITS'
 import { useCategoryStore } from '@/store/categoryStore'
 import { AlertCircle, Upload, XCircle } from 'lucide-react'

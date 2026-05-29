@@ -1,4 +1,4 @@
-import { SortableItemProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { SortableItemProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { ChevronDown } from 'lucide-react'
 import { useState } from 'react'
 import { DragHandle } from './DragHandle'

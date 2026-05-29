@@ -33,20 +33,20 @@ export const ImageAttributesModal = ({
 
 	return (
 		<div className='fixed inset-0 z-50 flex items-center justify-center bg-black/50'>
-			<div className='bg-white rounded-lg shadow-xl w-full max-w-lg mx-4 max-h-[90vh] overflow-hidden'>
+			<div className='bg-card rounded-lg shadow-xl w-full max-w-lg mx-4 max-h-[90vh] overflow-hidden'>
 				<div className='flex items-center justify-between p-4 border-b'>
 					<div className='flex items-center gap-2'>
-						<ImageIcon className='w-5 h-5 text-gray-600' />
-						<h3 className='text-lg font-semibold text-gray-900'>
+						<ImageIcon className='w-5 h-5 text-muted-foreground' />
+						<h3 className='text-lg font-semibold text-foreground'>
 							Атрибуты изображения
 						</h3>
 					</div>
 					<button
 						onClick={onClose}
-						className='p-1 hover:bg-gray-100 rounded duration-300 cursor-pointer'
+						className='p-1 hover:bg-surface-hover rounded duration-300 cursor-pointer'
 						aria-label='Закрыть'
 					>
-						<X className='w-5 h-5 text-gray-500' />
+						<X className='w-5 h-5 text-muted-foreground' />
 					</button>
 				</div>
 
@@ -56,7 +56,7 @@ export const ImageAttributesModal = ({
 						<button
 							type='button'
 							onClick={() => handleTabChange('basic')}
-							className={`px-4 py-2 text-sm font-medium duration-300 cursor-pointer ${internalActiveTab === 'basic' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+							className={`px-4 py-2 text-sm font-medium duration-300 cursor-pointer ${internalActiveTab === 'basic' ? 'border-b-2 border-brand text-brand' : 'text-muted-foreground hover:text-foreground'}`}
 						>
 							<span className='flex items-center gap-2'>
 								<Captions className='w-4 h-4' />
@@ -66,7 +66,7 @@ export const ImageAttributesModal = ({
 						<button
 							type='button'
 							onClick={() => handleTabChange('advanced')}
-							className={`px-4 py-2 text-sm font-medium duration-300 cursor-pointer ${internalActiveTab === 'advanced' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+							className={`px-4 py-2 text-sm font-medium duration-300 cursor-pointer ${internalActiveTab === 'advanced' ? 'border-b-2 border-brand text-brand' : 'text-muted-foreground hover:text-foreground'}`}
 						>
 							<span className='flex items-center gap-2'>
 								<Maximize2 className='w-4 h-4' />
@@ -77,11 +77,11 @@ export const ImageAttributesModal = ({
 
 					{currentImage?.src && (
 						<div className='mb-4'>
-							<div className='text-sm text-gray-600 mb-2'>
+							<div className='text-sm text-muted-foreground mb-2'>
 								Предпросмотр:
 							</div>
 							<div
-								className='relative border rounded overflow-hidden bg-gray-50'
+								className='relative border rounded overflow-hidden bg-surface-subtle'
 								style={{ height: '200px' }}
 							>
 								<Image
@@ -92,7 +92,7 @@ export const ImageAttributesModal = ({
 									className='object-contain p-2'
 								/>
 							</div>
-							<div className='text-xs text-gray-500 mt-2 wrap-break-word truncate'>
+							<div className='text-xs text-muted-foreground mt-2 wrap-break-word truncate'>
 								{currentImage.src}
 							</div>
 						</div>
@@ -103,7 +103,7 @@ export const ImageAttributesModal = ({
 							<div>
 								<label
 									htmlFor='alt-input'
-									className='block text-sm font-medium text-gray-700 mb-1'
+									className='block text-sm font-medium text-foreground mb-1'
 								>
 									Alt текст{' '}
 									<span className='text-red-500'>*</span>
@@ -119,10 +119,10 @@ export const ImageAttributesModal = ({
 										}))
 									}
 									placeholder='Описание изображения для доступности'
-									className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+									className='w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent'
 									autoFocus
 								/>
-								<div className='text-xs text-gray-500 mt-1'>
+								<div className='text-xs text-muted-foreground mt-1'>
 									Важно для доступности и SEO
 								</div>
 							</div>
@@ -130,7 +130,7 @@ export const ImageAttributesModal = ({
 							<div>
 								<label
 									htmlFor='title-input'
-									className='block text-sm font-medium text-gray-700 mb-1'
+									className='block text-sm font-medium text-foreground mb-1'
 								>
 									Title (необязательно)
 								</label>
@@ -145,9 +145,9 @@ export const ImageAttributesModal = ({
 										}))
 									}
 									placeholder='Всплывающая подсказка при наведении'
-									className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+									className='w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent'
 								/>
-								<div className='text-xs text-gray-500 mt-1'>
+								<div className='text-xs text-muted-foreground mt-1'>
 									Отображается при наведении курсора
 								</div>
 							</div>
@@ -158,7 +158,7 @@ export const ImageAttributesModal = ({
 						<div className='space-y-4'>
 							<div>
 								<div className='flex items-center justify-between mb-2'>
-									<label className='block text-sm font-medium text-gray-700'>
+									<label className='block text-sm font-medium text-foreground'>
 										Размеры
 									</label>
 									<div className='flex gap-1'>
@@ -167,7 +167,7 @@ export const ImageAttributesModal = ({
 											onClick={() =>
 												setPresetSize('small')
 											}
-											className='px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded duration-300 cursor-pointer'
+											className='px-2 py-1 text-xs bg-surface-hover hover:bg-surface-pressed rounded duration-300 cursor-pointer'
 										>
 											М
 										</button>
@@ -176,7 +176,7 @@ export const ImageAttributesModal = ({
 											onClick={() =>
 												setPresetSize('medium')
 											}
-											className='px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded duration-300 cursor-pointer'
+											className='px-2 py-1 text-xs bg-surface-hover hover:bg-surface-pressed rounded duration-300 cursor-pointer'
 										>
 											Ср
 										</button>
@@ -185,7 +185,7 @@ export const ImageAttributesModal = ({
 											onClick={() =>
 												setPresetSize('large')
 											}
-											className='px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded duration-300 cursor-pointer'
+											className='px-2 py-1 text-xs bg-surface-hover hover:bg-surface-pressed rounded duration-300 cursor-pointer'
 										>
 											Б
 										</button>
@@ -194,7 +194,7 @@ export const ImageAttributesModal = ({
 											onClick={() =>
 												setPresetSize('original')
 											}
-											className='px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded duration-300 cursor-pointer'
+											className='px-2 py-1 text-xs bg-surface-hover hover:bg-surface-pressed rounded duration-300 cursor-pointer'
 										>
 											Ориг
 										</button>
@@ -205,7 +205,7 @@ export const ImageAttributesModal = ({
 									<div>
 										<label
 											htmlFor='width-input'
-											className='block text-xs text-gray-600 mb-1'
+											className='block text-xs text-muted-foreground mb-1'
 										>
 											Ширина
 										</label>
@@ -220,13 +220,13 @@ export const ImageAttributesModal = ({
 												}))
 											}
 											placeholder='300px, 50%, auto'
-											className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+											className='w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent'
 										/>
 									</div>
 									<div>
 										<label
 											htmlFor='height-input'
-											className='block text-xs text-gray-600 mb-1'
+											className='block text-xs text-muted-foreground mb-1'
 										>
 											Высота
 										</label>
@@ -241,18 +241,18 @@ export const ImageAttributesModal = ({
 												}))
 											}
 											placeholder='200px, auto'
-											className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+											className='w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent'
 										/>
 									</div>
 								</div>
-								<div className='text-xs text-gray-500 mt-1'>
+								<div className='text-xs text-muted-foreground mt-1'>
 									Используйте px, %, em, rem, vw, vh или
 									оставьте пустым для auto
 								</div>
 							</div>
 
 							<div>
-								<label className='block text-sm font-medium text-gray-700 mb-2'>
+								<label className='block text-sm font-medium text-foreground mb-2'>
 									Выравнивание
 								</label>
 								<div className='flex gap-2'>
@@ -266,8 +266,8 @@ export const ImageAttributesModal = ({
 										}
 										className={`flex-1 py-2 px-3 rounded flex flex-col items-center justify-center gap-1 duration-300 cursor-pointer ${
 											attributes.align === 'left'
-												? 'bg-blue-50 border border-blue-200 text-blue-700'
-												: 'bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-700'
+												? 'bg-brand text-white border border-brand'
+												: 'bg-surface-subtle border border-border hover:bg-surface-hover text-foreground'
 										}`}
 									>
 										<AlignLeft className='w-5 h-5' />
@@ -283,8 +283,8 @@ export const ImageAttributesModal = ({
 										}
 										className={`flex-1 py-2 px-3 rounded flex flex-col items-center justify-center gap-1 duration-300 cursor-pointer ${
 											attributes.align === 'center'
-												? 'bg-blue-50 border border-blue-200 text-blue-700'
-												: 'bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-700'
+												? 'bg-brand text-white border border-brand'
+												: 'bg-surface-subtle border border-border hover:bg-surface-hover text-foreground'
 										}`}
 									>
 										<AlignCenter className='w-5 h-5' />
@@ -302,8 +302,8 @@ export const ImageAttributesModal = ({
 										}
 										className={`flex-1 py-2 px-3 rounded flex flex-col items-center justify-center gap-1 duration-300 cursor-pointer ${
 											attributes.align === 'right'
-												? 'bg-blue-50 border border-blue-200 text-blue-700'
-												: 'bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-700'
+												? 'bg-brand text-white border border-brand'
+												: 'bg-surface-subtle border border-border hover:bg-surface-hover text-foreground'
 										}`}
 									>
 										<AlignRight className='w-5 h-5' />
@@ -319,12 +319,12 @@ export const ImageAttributesModal = ({
 										}
 										className={`flex-1 py-2 px-3 rounded flex flex-col items-center justify-center gap-1 duration-300 cursor-pointer ${
 											attributes.align === 'none'
-												? 'bg-blue-50 border border-blue-200 text-blue-700'
-												: 'bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-700'
+												? 'bg-brand text-white border border-brand'
+												: 'bg-surface-subtle border border-border hover:bg-surface-hover text-foreground'
 										}`}
 									>
 										<div className='w-5 h-5 flex items-center justify-center'>
-											<div className='w-3 h-3 border border-gray-400'></div>
+											<div className='w-3 h-3 border border-border'></div>
 										</div>
 										<span className='text-xs'>Нет</span>
 									</button>
@@ -338,7 +338,7 @@ export const ImageAttributesModal = ({
 					<button
 						type='button'
 						onClick={onReset}
-						className='px-3 py-1.5 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded duration-300 cursor-pointer'
+						className='px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-surface-hover rounded duration-300 cursor-pointer'
 						disabled={
 							attributes.alt === (currentImage?.alt || '') &&
 							attributes.title === (currentImage?.title || '') &&
@@ -355,14 +355,14 @@ export const ImageAttributesModal = ({
 						<button
 							type='button'
 							onClick={onClose}
-							className='px-4 py-1.5 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded duration-300 cursor-pointer'
+							className='px-4 py-1.5 text-sm text-foreground hover:text-foreground hover:bg-surface-hover rounded duration-300 cursor-pointer'
 						>
 							Отмена
 						</button>
 						<button
 							type='button'
 							onClick={onApply}
-							className='px-4 py-1.5 text-sm bg-blue-600 text-white hover:bg-blue-700 rounded duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
+							className='px-4 py-1.5 text-sm bg-brand text-white hover:bg-brand-hover rounded duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
 							disabled={!attributes.alt.trim()}
 						>
 							Применить

@@ -7,10 +7,10 @@ export default function EmptyState({
 }) {
   return (
     <div className="text-center py-12">
-      <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-        <Search className="w-8 h-8 text-gray-400" />
+      <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-surface-subtle flex items-center justify-center">
+        <Search className="w-8 h-8 text-muted-foreground" />
       </div>
-      <p className="text-gray-500 dark:text-gray-400">
+      <p className="text-muted-foreground">
         {hasSearchQuery ? "Категории не найдены" : "Нет доступных категорий"}
       </p>
     </div>

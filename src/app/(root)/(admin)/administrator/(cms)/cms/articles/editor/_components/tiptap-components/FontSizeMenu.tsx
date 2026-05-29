@@ -210,8 +210,8 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
           flex items-center gap-1 px-3 py-1.5 text-sm border rounded-md duration-300 cursor-pointer
           ${
 				isOpen
-					? 'bg-blue-100 text-[#9674F9] border-blue-300'
-					: 'text-gray-700 hover:bg-gray-100 border-gray-300'
+					? 'bg-brand text-white border-brand'
+					: 'text-foreground hover:bg-surface-hover border-border'
 			}
         `}
 				title='Размер шрифта'
@@ -226,13 +226,13 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
 			{isOpen && (
 				<div
 					ref={dropdownRef}
-					className='absolute z-50 mt-1 left-0 bg-white border border-gray-300 rounded-lg shadow-lg min-w-40'
+					className='absolute z-50 mt-1 left-0 bg-card border border-border rounded-lg shadow-lg min-w-40'
 					onClick={e => e.stopPropagation()}
 				>
 					<div className='py-1'>
 						{/* Заголовок меню */}
-						<div className='px-3 py-2 border-b border-gray-100'>
-							<span className='text-xs font-medium text-gray-500'>
+						<div className='px-3 py-2 border-b border-border'>
+							<span className='text-xs font-medium text-muted-foreground'>
 								РАЗМЕР ШРИФТА
 							</span>
 						</div>
@@ -249,18 +249,18 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
 										handleSizeChange(size.value)
 									}}
 									className={`
-                    w-full text-left px-3 py-2.5 text-sm hover:bg-gray-50 flex justify-between items-center duration-300 cursor-pointer
+                    w-full text-left px-3 py-2.5 text-sm hover:bg-surface-subtle flex justify-between items-center duration-300 cursor-pointer
                     ${
 						isActive
-							? 'bg-blue-50 text-[#9674F9] border-r-2 border-[#9674F9]'
-							: 'text-gray-700'
+							? 'bg-brand text-white border-r-2 border-brand'
+							: 'text-foreground'
 					}
                   `}
 								>
 									<div className='flex items-center gap-2'>
 										{size.value !== 'unset' && (
 											<div
-												className='w-3 h-3 rounded-full border border-gray-300'
+												className='w-3 h-3 rounded-full border border-border'
 												style={{
 													backgroundColor: isActive
 														? '#9674F9'

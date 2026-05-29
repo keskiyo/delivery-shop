@@ -15,7 +15,7 @@ export const menuItems = [
 		description: 'Создать статью в редакторе',
 		icon: <Plus className='w-6 h-6' />,
 		shadow: 'shadow-lg shadow-blue-500/20',
-		path: '/administrator/cms/editor',
+		path: '/administrator/cms/articles/editor',
 	},
 	{
 		id: 'all-articles',

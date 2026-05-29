@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
-import { getDB } from "../../../../../../../../../../utils/api-routes";
+import { getDB } from "@/lib/api-routes";
 
 export async function GET(
   _request: Request,

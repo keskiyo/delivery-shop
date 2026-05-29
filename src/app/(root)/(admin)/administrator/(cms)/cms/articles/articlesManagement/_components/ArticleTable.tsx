@@ -8,6 +8,7 @@ import { AdvancedFilters } from "./AdvancedFilters";
 import { TableHeader } from "./TableHeader";
 import { EmptyState } from "./EmptyState";
 import { SortableItem } from "./SortableItem";
+import { Loader2 } from "lucide-react";
 
 export const ArticleTable = ({ onReorder }: ArticleTableProps) => {
   const {
@@ -111,15 +112,9 @@ export const ArticleTable = ({ onReorder }: ArticleTableProps) => {
     return article.numericId;
   };
 
-  if (loading) {
-    return (
-      <div className="p-8 text-center text-gray-500">Загрузка статей...</div>
-    );
-  }
-
   return (
-    <div className="bg-white rounded shadow-sm">
-      <div className="p-4 border-b border-gray-200">
+    <div className="rounded shadow-sm">
+      <div className="p-4 border-b border-border">
         <div className="flex flex-col md:flex-row md:items-center gap-4">
           <SearchBar />
           <FilterControls onToggleFilters={setShowFilters} />
@@ -131,8 +126,17 @@ export const ArticleTable = ({ onReorder }: ArticleTableProps) => {
       </div>
 
       <TableHeader />
-      <div className="divide-y divide-gray-200">
-        {articles.length === 0 ? (
+      <div className="relative min-h-32 divide-y divide-border">
+        {loading && (
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-card/80 backdrop-blur-[1px]">
+            <div className="inline-flex items-center gap-2 rounded bg-site-chrome px-4 py-2 text-sm text-white shadow-sm">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              <span>Загрузка статей...</span>
+            </div>
+          </div>
+        )}
+
+        {articles.length === 0 && !loading ? (
           <EmptyState />
         ) : (
           optimisticArticles.map((article) => {
@@ -146,7 +150,7 @@ export const ArticleTable = ({ onReorder }: ArticleTableProps) => {
                 onDragStart={() => handleDragStart(articleId)}
                 onDragOver={(e) => handleDragOver(e, articleId)}
                 onDrop={(e) => handleDrop(e, articleId)}
-                className={`${isDragOver ? "bg-blue-50" : ""} ${isPending ? "opacity-50" : ""}`}
+                className={`${isDragOver ? "bg-brand-soft" : ""} ${isPending ? "opacity-50" : ""}`}
               >
                 <SortableItem
                   id={articleId}

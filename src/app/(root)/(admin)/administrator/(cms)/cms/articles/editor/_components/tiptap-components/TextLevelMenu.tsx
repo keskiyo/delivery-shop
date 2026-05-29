@@ -1,4 +1,4 @@
-import { HeadingButton } from '@/components/tiptap-ui/heading-button'
+import { HeadingButton } from '@/components/tiptap/tiptap-ui/heading-button'
 import { Editor } from '@tiptap/react'
 import { Check, ChevronDown, Type } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
@@ -93,8 +93,8 @@ export const TextLevelMenu = ({ editor }: { editor: Editor | null }) => {
           flex items-center gap-1 px-3 py-1.5 text-sm border rounded-md duration-300 cursor-pointer
           ${
 				isOpen
-					? 'bg-blue-100 text-[#9674F9] border-blue-300'
-					: 'text-gray-700 hover:bg-gray-100 border-gray-300'
+					? 'bg-brand text-white border-brand'
+					: 'text-foreground hover:bg-surface-hover border-border'
 			}
         `}
 				title='Тип текста'
@@ -110,12 +110,12 @@ export const TextLevelMenu = ({ editor }: { editor: Editor | null }) => {
 			{isOpen && (
 				<div
 					ref={dropdownRef}
-					className='absolute z-50 mt-1 left-0 bg-white border border-gray-300 rounded-lg shadow-lg min-w-40'
+					className='absolute z-50 mt-1 left-0 bg-card border border-border rounded-lg shadow-lg min-w-40'
 					onClick={e => e.stopPropagation()}
 				>
 					<div className='py-1'>
-						<div className='px-3 py-2 border-b border-gray-100'>
-							<span className='text-xs font-medium text-gray-500'>
+						<div className='px-3 py-2 border-b border-border'>
+							<span className='text-xs font-medium text-muted-foreground'>
 								ТИП ТЕКСТА
 							</span>
 						</div>
@@ -128,11 +128,11 @@ export const TextLevelMenu = ({ editor }: { editor: Editor | null }) => {
 								setIsOpen(false)
 							}}
 							className={`
-                w-full text-left px-3 py-2.5 text-sm hover:bg-gray-50 flex justify-between items-center duration-300 cursor-pointer
+                w-full text-left px-3 py-2.5 text-sm hover:bg-surface-subtle flex justify-between items-center duration-300 cursor-pointer
                 ${
 					isActiveParagraph
-						? 'bg-blue-50 text-[#9674F9] border-r-2 border-[#9674F9]'
-						: 'text-gray-700'
+						? 'bg-brand text-white border-r-2 border-brand'
+						: 'text-foreground'
 				}
               `}
 						>
@@ -143,7 +143,7 @@ export const TextLevelMenu = ({ editor }: { editor: Editor | null }) => {
 							{isActiveParagraph && <Check className='w-3 h-3' />}
 						</button>
 
-						<div className='border-t border-gray-100 my-1'></div>
+						<div className='border-t border-border my-1'></div>
 
 						{[1, 2, 3, 4, 5, 6].map(level => {
 							const isActive = isActiveHeading(level)
@@ -154,20 +154,20 @@ export const TextLevelMenu = ({ editor }: { editor: Editor | null }) => {
 										level={level as 1 | 2 | 3 | 4 | 5 | 6}
 										editor={editor}
 										className={`
-                      w-full text-left px-3 py-2.5 text-sm hover:bg-gray-50 flex justify-between items-center duration-300 cursor-pointer
-                      ${
-							isActive
-								? 'bg-blue-50 text-[#9674F9] border-r-2 border-[#9674F9]'
-								: 'text-gray-700'
-						}
-                    `}
+								  w-full text-left px-3 py-2.5 text-sm hover:bg-surface-subtle flex justify-between items-center duration-300 cursor-pointer
+								  ${
+										isActive
+											? 'bg-brand text-white border-r-2 border-brand'
+											: 'text-foreground'
+									}
+								`}
 										onClick={() => setIsOpen(false)}
 									>
 										<div className='flex items-center gap-2'>
 											<span className='font-medium'>
 												H{level}
 											</span>
-											<span className='text-gray-500 text-xs'>
+											<span className='text-muted-foreground text-xs'>
 												Заголовок {level}
 											</span>
 										</div>

@@ -1,4 +1,4 @@
-import { FilterControlsProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { FilterControlsProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { useCategoryStore } from '@/store/categoryStore'
 import { Filter, X } from 'lucide-react'
 import { useState } from 'react'

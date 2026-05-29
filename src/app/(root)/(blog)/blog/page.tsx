@@ -62,5 +62,3 @@ export default async function BlogPage() {
 		</div>
 	)
 }
-
-// В blog поправить стили

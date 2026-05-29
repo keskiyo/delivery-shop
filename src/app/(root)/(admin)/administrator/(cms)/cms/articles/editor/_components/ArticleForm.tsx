@@ -1,4 +1,4 @@
-import { CharCount } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import type { CharCount } from '@/app/(root)/(admin)/administrator/(cms)/cms/types/form/form.types'
 import { useArticleStore } from '@/store/articleStore'
 import { useCategoryStore } from '@/store/categoryStore'
 import { ImageSection } from '../../../_components/ImageSection'
@@ -76,7 +76,7 @@ export const ArticleForm = ({
 	}
 
 	return (
-		<div className='mb-8 bg-white rounded shadow-sm p-6'>
+		<div className='mb-8 bg-card rounded shadow-sm p-6'>
 			<h2 className='text-xl font-semibold mb-4'>
 				Создание новой статьи
 			</h2>
@@ -89,9 +89,9 @@ export const ArticleForm = ({
 			/>
 			<form onSubmit={onSubmit}>
 				{categories.length > 0 && (
-					<div className='m-6 bg-gray-50 p-4 rounded border border-gray-200'>
+					<div className='mb-6 bg-surface-subtle p-4 rounded border border-border'>
 						<h3 className='text-lg font-medium mb-4'>
-							Категория статьи *
+							Категория статьи
 						</h3>
 						<CategorySelect
 							value={formData.categoryId || ''}
@@ -104,7 +104,7 @@ export const ArticleForm = ({
 					onInputChange={handleInputChange}
 					onGenerateSlug={handleGenerateSlug}
 				/>
-				<div className='my-6 bg-gray-50 p-4 rounded border border-gray-200'>
+				<div className='my-6 bg-surface-subtle p-4 rounded border border-border'>
 					<h3 className='text-lg font-medium mb-4'>Текст статьи</h3>
 					<TiptapEditor
 						key={`editor-${formData.slug}`}

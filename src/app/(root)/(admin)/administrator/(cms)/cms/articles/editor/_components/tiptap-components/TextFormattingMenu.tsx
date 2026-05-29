@@ -109,10 +109,10 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
           p-2 rounded duration-300 
           ${
 				!canBold
-					? 'opacity-40 cursor-not-allowed text-gray-400'
+					? 'opacity-40 cursor-not-allowed text-muted-foreground'
 					: isBold
-						? 'bg-blue-100 text-[#9674F9] hover:bg-blue-200 cursor-pointer'
-						: 'text-gray-700 hover:bg-gray-100 cursor-pointer'
+						? 'bg-brand text-white hover:bg-brand-hover cursor-pointer'
+						: 'text-foreground hover:bg-surface-hover cursor-pointer'
 			}
         `}
 				title={`Жирный (Ctrl+B)${!canBold ? ' - недоступно' : ''}`}
@@ -129,10 +129,10 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
           p-2 rounded duration-300 
           ${
 				!canItalic
-					? 'opacity-40 cursor-not-allowed text-gray-400'
+					? 'opacity-40 cursor-not-allowed text-muted-foreground'
 					: isItalic
-						? 'bg-blue-100 text-[#9674F9] hover:bg-blue-200 cursor-pointer'
-						: 'text-gray-700 hover:bg-gray-100 cursor-pointer'
+						? 'bg-brand text-white hover:bg-brand-hover cursor-pointer'
+						: 'text-foreground hover:bg-surface-hover cursor-pointer'
 			}
         `}
 				title={`Курсив (Ctrl+I)${!canItalic ? ' - недоступно' : ''}`}
@@ -149,10 +149,10 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
           p-2 rounded duration-300 
           ${
 				!canUnderline
-					? 'opacity-40 cursor-not-allowed text-gray-400'
+					? 'opacity-40 cursor-not-allowed text-muted-foreground'
 					: isUnderline
-						? 'bg-blue-100 text-[#9674F9] hover:bg-blue-200 cursor-pointer'
-						: 'text-gray-700 hover:bg-gray-100 cursor-pointer'
+						? 'bg-brand text-white hover:bg-brand-hover cursor-pointer'
+						: 'text-foreground hover:bg-surface-hover cursor-pointer'
 			}
         `}
 				title={`Подчеркнутый (Ctrl+U)${!canUnderline ? ' - недоступно' : ''}`}
@@ -169,10 +169,10 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
           p-2 rounded duration-300 
           ${
 				!canStrike
-					? 'opacity-40 cursor-not-allowed text-gray-400'
+					? 'opacity-40 cursor-not-allowed text-muted-foreground'
 					: isStrike
-						? 'bg-blue-100 text-[#9674F9] hover:bg-blue-200 cursor-pointer'
-						: 'text-gray-700 hover:bg-gray-100 cursor-pointer'
+						? 'bg-brand text-white hover:bg-brand-hover cursor-pointer'
+						: 'text-foreground hover:bg-surface-hover cursor-pointer'
 			}
         `}
 				title={`Зачеркнутый (Ctrl+Shift+S)${!canStrike ? ' - недоступно' : ''}`}

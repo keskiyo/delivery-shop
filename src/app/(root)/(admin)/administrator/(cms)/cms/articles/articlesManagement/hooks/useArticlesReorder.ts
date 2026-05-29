@@ -1,5 +1,5 @@
 import { useArticlesManagementStore } from "@/store/articlesManagementStore";
-import { ApiResponse } from "../../types";
+import type { ApiResponse } from "../types";
 
 export const useArticlesReorder = () => {
   const { loadArticles } = useArticlesManagementStore();

@@ -167,10 +167,10 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
           p-2 rounded duration-300 border cursor-pointer
           ${
 				isOpen
-					? 'bg-blue-100 text-[#9674F9] border-blue-300'
+					? 'bg-brand text-white border-brand'
 					: isActive
-						? 'bg-blue-100 text-[#9674F9] hover:bg-blue-200 border-blue-300'
-						: 'text-gray-700 hover:bg-gray-100 border-gray-300'
+						? 'bg-brand text-white hover:bg-brand-hover border-brand'
+						: 'text-foreground hover:bg-surface-hover border-border'
 			}
         `}
 				title='Цвет текста'
@@ -178,7 +178,7 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 				<div className='flex items-center gap-1'>
 					<Palette className='w-4 h-4' />
 					<div
-						className='w-3 h-3 rounded border border-gray-300'
+						className='w-3 h-3 rounded border border-border'
 						style={{ backgroundColor: currentColor }}
 					/>
 				</div>
@@ -188,7 +188,7 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 			{isOpen && (
 				<div
 					ref={dropdownRef}
-					className='absolute z-50 mt-1 left-0 bg-white border border-gray-300 rounded-lg shadow-lg p-2 max-w-[calc(100vw-20px)]'
+					className='absolute z-50 mt-1 left-0 bg-card border border-border rounded-lg shadow-lg p-2 max-w-[calc(100vw-20px)]'
 					style={{
 						left: '50%',
 						transform: 'translateX(-50%)',
@@ -199,7 +199,7 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 				>
 					{/* Заголовок */}
 					<div className='mb-2'>
-						<div className='text-xs font-medium text-gray-700 mb-1'>
+						<div className='text-xs font-medium text-foreground mb-1'>
 							Цвет текста
 						</div>
 
@@ -214,7 +214,7 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 									}}
 									className={`
                     w-5 h-5 rounded border hover:scale-110 transition-transform relative duration-300 cursor-pointer
-                    ${color === '#000000' ? 'border-2' : 'border border-gray-300'}
+                    ${color === '#000000' ? 'border-2' : 'border border-border'}
                   `}
 									style={{ backgroundColor: color }}
 									title={color}
@@ -227,7 +227,7 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 												color === '#800000' ||
 												color === '#008000'
 													? 'text-white'
-													: 'text-gray-700'
+													: 'text-foreground'
 											}`}
 										/>
 									)}
@@ -236,7 +236,7 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 						</div>
 
 						<div className='mb-2'>
-							<div className='text-xs text-gray-600 mb-1'>
+							<div className='text-xs text-muted-foreground mb-1'>
 								Свой цвет:
 							</div>
 							<div className='flex flex-col gap-1'>
@@ -245,7 +245,7 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 										type='color'
 										value={customColor}
 										onChange={handleCustomColorChange}
-										className='w-6 h-6 cursor-pointer rounded border border-gray-300'
+										className='w-6 h-6 cursor-pointer rounded border border-border'
 										title='Выберите цвет'
 									/>
 									<input
@@ -254,28 +254,28 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 										onChange={e =>
 											setCustomColor(e.target.value)
 										}
-										className='flex-1 px-1.5 py-0.5 text-xs border border-gray-300 rounded'
+										className='flex-1 px-1.5 py-0.5 text-xs border border-border rounded'
 										placeholder='#000000'
 									/>
 								</div>
 								<button
 									type='button'
 									onClick={applyCustomColor}
-									className='w-full px-2 py-1 text-xs bg-[#9674F9] text-white rounded hover:bg-[#8563e8] duration-300 cursor-pointer'
+									className='w-full px-2 py-1 text-xs bg-brand text-white rounded hover:bg-brand-hover duration-300 cursor-pointer'
 								>
 									Применить цвет
 								</button>
 							</div>
 						</div>
 
-						<div className='flex items-center justify-between p-1 bg-gray-50 rounded text-xs mb-2'>
-							<div className='text-gray-600'>Текущий:</div>
+						<div className='flex items-center justify-between p-1 bg-surface-subtle rounded text-xs mb-2'>
+							<div className='text-muted-foreground'>Текущий:</div>
 							<div className='flex items-center gap-1'>
 								<div
-									className='w-4 h-4 rounded border border-gray-300'
+									className='w-4 h-4 rounded border border-border'
 									style={{ backgroundColor: currentColor }}
 								/>
-								<span className='font-mono truncate max-w-[100px]'>
+								<span className='font-mono truncate max-w-25'>
 									{currentColor === '#000000'
 										? 'По умолчанию'
 										: currentColor}

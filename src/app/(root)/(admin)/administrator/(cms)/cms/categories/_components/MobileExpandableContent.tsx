@@ -1,4 +1,4 @@
-import { MobileExpandableContentProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+import { MobileExpandableContentProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import React from 'react'
 
 export const MobileExpandableContent = ({

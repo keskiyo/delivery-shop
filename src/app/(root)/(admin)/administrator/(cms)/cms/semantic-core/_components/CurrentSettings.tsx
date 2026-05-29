@@ -1,4 +1,4 @@
-import { CurrentSettingsProps } from '../../types/siteSettings'
+import { CurrentSettingsProps } from '../../types/site-settings'
 
 export const CurrentSettings = ({ settings }: CurrentSettingsProps) => {
 	return (

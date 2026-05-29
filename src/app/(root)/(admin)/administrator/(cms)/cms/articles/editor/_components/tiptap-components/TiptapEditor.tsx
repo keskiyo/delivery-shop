@@ -50,22 +50,22 @@ export const TiptapEditor = ({
 			AllowHtmlAttributes,
 			TableKit,
 			Image.configure({
-				// resize: {
-				//   enabled: true,
-				//   directions: [
-				//     "top",
-				//     "bottom",
-				//     "left",
-				//     "right",
-				//     "top-left",
-				//     "top-right",
-				//     "bottom-left",
-				//     "bottom-right",
-				//   ],
-				//   minWidth: 50,
-				//   minHeight: 50,
-				//   alwaysPreserveAspectRatio: false,
-				// },
+				resize: {
+					enabled: true,
+					directions: [
+						'top',
+						'bottom',
+						'left',
+						'right',
+						'top-left',
+						'top-right',
+						'bottom-left',
+						'bottom-right',
+					],
+					minWidth: 50,
+					minHeight: 50,
+					alwaysPreserveAspectRatio: false,
+				},
 				allowBase64: true,
 				HTMLAttributes: {
 					class: 'tiptap-image',
@@ -124,10 +124,10 @@ export const TiptapEditor = ({
 
 	if (!editor) {
 		return (
-			<div className='border border-gray-300 rounded-lg p-3'>
-				<div className='min-h-50 bg-gray-50 rounded p-3 flex flex-col items-center justify-center'>
-					<Loader2 className='h-8 w-8 text-gray-400 animate-spin mb-3' />
-					<div className='text-gray-500 text-sm'>
+			<div className='border border-border rounded-lg p-3'>
+				<div className='min-h-50 bg-surface-subtle rounded p-3 flex flex-col items-center justify-center'>
+					<Loader2 className='h-8 w-8 text-muted-foreground animate-spin mb-3' />
+					<div className='text-muted-foreground text-sm'>
 						Инициализация редактора...
 					</div>
 				</div>
@@ -136,12 +136,12 @@ export const TiptapEditor = ({
 	}
 
 	return (
-		<div className='border border-gray-300 rounded-lg'>
+		<div className='border border-border rounded-lg overflow-hidden'>
 			<MainToolbar
 				editor={editor}
 				onImageDragOverChange={setShowDragIcon}
 			/>
-			<div className='bg-white relative'>
+			<div className='bg-card relative'>
 				<EditorContent
 					editor={editor}
 					className='min-h-100 md:p-4 focus:outline-none'
@@ -149,21 +149,21 @@ export const TiptapEditor = ({
 				{showDragIcon && (
 					<div
 						key='drag-overlay'
-						className='absolute inset-0 bg-blue-50/95 border-2 border-dashed border-blue-500 rounded-lg flex items-center justify-center z-50 pointer-events-none animate-in fade-in-0 zoom-in-95 duration-150'
+						className='absolute inset-0 bg-brand-soft/95 border-2 border-dashed border-brand rounded-lg flex items-center justify-center z-50 pointer-events-none animate-in fade-in-0 zoom-in-95 duration-150'
 					>
-						<div className='text-center p-8 bg-white/80 rounded-xl shadow-lg animate-in fade-in-0 slide-in-from-bottom-2 duration-200'>
-							<Upload className='w-16 h-16 text-blue-600 mx-auto mb-4 animate-bounce' />
-							<p className='text-blue-700 font-semibold text-lg mb-1'>
+						<div className='text-center p-8 bg-card/80 rounded-xl shadow-lg animate-in fade-in-0 slide-in-from-bottom-2 duration-200'>
+							<Upload className='w-16 h-16 text-brand mx-auto mb-4 animate-bounce' />
+							<p className='text-brand font-semibold text-lg mb-1'>
 								Отпустите изображение
 							</p>
-							<p className='text-blue-500 text-sm'>
+							<p className='text-muted-foreground text-sm'>
 								Файл будет загружен в редактор
 							</p>
 						</div>
 					</div>
 				)}
 			</div>
-			<div className='border-t border-gray-200 bg-gray-50 px-4 py-2'>
+			<div className='border-t border-border bg-surface-subtle px-4 py-2'>
 				<Counter wordCount={stats.words} charCount={stats.characters} />
 			</div>
 		</div>

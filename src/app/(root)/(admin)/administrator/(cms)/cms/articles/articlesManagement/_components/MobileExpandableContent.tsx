@@ -71,14 +71,14 @@ export const MobileExpandableContent = ({
   );
 
   return (
-    <div className="mt-4 pt-4 border-t border-gray-200">
+    <div className="mt-4 pt-4 border-t border-border">
       <div className="flex items-center justify-between mb-4">
         <button
           onClick={handleFeaturedToggle}
           className={`flex items-center justify-center w-10 h-10 rounded-lg cursor-pointer  transition-custom ${
             article.isFeatured
-              ? "bg-yellow-50 hover:bg-yellow-100"
-              : "bg-gray-50 hover:bg-gray-100"
+              ? "bg-warning text-white hover:bg-warning/90"
+              : "bg-surface-hover hover:bg-surface-pressed"
           }`}
           title={
             article.isFeatured ? "Убрать из избранного" : "Добавить в избранное"
@@ -88,19 +88,19 @@ export const MobileExpandableContent = ({
             className={`w-5 h-5 ${
               article.isFeatured
                 ? "fill-yellow-400 text-yellow-400"
-                : "text-gray-400"
+                : "text-muted-foreground"
             }`}
           />
         </button>
 
         <div className="flex flex-col items-center">
           <div className="flex items-center gap-1 mb-1">
-            <Eye className="w-4 h-4 text-gray-500" />
-            <span className="text-sm font-semibold text-gray-700">
+            <Eye className="w-4 h-4 text-muted-foreground" />
+            <span className="text-sm font-semibold text-foreground">
               {article.views}
             </span>
           </div>
-          <span className="text-xs text-gray-500">просмотров</span>
+          <span className="text-xs text-muted-foreground">просмотров</span>
         </div>
 
         <div className="relative" ref={dropdownRef}>
@@ -121,7 +121,7 @@ export const MobileExpandableContent = ({
           </button>
 
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-1 min-w-[140px] border border-gray-200 rounded-lg shadow-lg bg-white z-10">
+            <div className="absolute right-0 mt-1 min-w-[140px] border border-border rounded-lg shadow-lg bg-card z-10 overflow-hidden">
               {(
                 ["published", "draft", "archived", "deleted"] as ArticleStatus[]
               ).map((status) => {
@@ -129,8 +129,8 @@ export const MobileExpandableContent = ({
                 return (
                   <button
                     key={status}
-                    className={`flex items-center justify-between w-full px-3 py-2 text-sm hover:bg-gray-50 cursor-pointer  ${
-                      article.status === status ? "bg-gray-50" : ""
+                    className={`flex items-center justify-between w-full px-3 py-2 text-sm hover:brightness-95 cursor-pointer  ${
+                      article.status === status ? "brightness-95" : ""
                     } ${statusStyle.className}`}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -148,22 +148,22 @@ export const MobileExpandableContent = ({
       </div>
 
       <div className="grid grid-cols-2 gap-4 mb-4">
-        <div className="bg-gray-50 rounded-lg p-3">
+        <div className="bg-surface-subtle rounded-lg p-3">
           <div className="flex items-center gap-2 mb-1">
-            <User className="w-4 h-4 text-gray-500" />
-            <span className="text-xs font-medium text-gray-700">Автор</span>
+            <User className="w-4 h-4 text-muted-foreground" />
+            <span className="text-xs font-medium text-muted-foreground">Автор</span>
           </div>
-          <div className="text-sm font-semibold text-gray-900 truncate">
-            {article.author || <span className="text-gray-500">Не указан</span>}
+          <div className="text-sm font-semibold text-foreground truncate">
+            {article.author || <span className="text-muted-foreground">Не указан</span>}
           </div>
         </div>
 
-        <div className="bg-gray-50 rounded-lg p-3">
+        <div className="bg-surface-subtle rounded-lg p-3">
           <div className="flex items-center gap-2 mb-1">
-            <Calendar className="w-4 h-4 text-gray-500" />
-            <span className="text-xs font-medium text-gray-700">Создана</span>
+            <Calendar className="w-4 h-4 text-muted-foreground" />
+            <span className="text-xs font-medium text-muted-foreground">Создана</span>
           </div>
-          <div className="text-sm font-semibold text-gray-900">
+          <div className="text-sm font-semibold text-foreground">
             {formattedDate}
           </div>
         </div>
@@ -173,7 +173,7 @@ export const MobileExpandableContent = ({
         {article.status !== "deleted" && (
           <button
             onClick={handleEdit}
-            className="flex items-center justify-center w-8 h-8 bg-green-600 text-white rounded-lg hover:bg-green-700 cursor-pointer  transition-custom shadow-sm hover:shadow"
+            className="flex items-center justify-center w-8 h-8 bg-brand text-white rounded-lg hover:bg-brand-hover cursor-pointer  transition-custom shadow-sm hover:shadow"
             title="Редактировать статью"
           >
             <Edit className="w-4 h-4" />
@@ -183,7 +183,7 @@ export const MobileExpandableContent = ({
           <Link
             href={`/blog/${article.categorySlug}/${article.slug}`}
             target="_blank"
-            className="flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer  transition-custom shadow-sm hover:shadow"
+            className="flex items-center justify-center w-8 h-8 bg-site-chrome text-white rounded-lg hover:bg-site-chrome/90 cursor-pointer  transition-custom shadow-sm hover:shadow"
             title="Просмотреть статью на сайте"
           >
             <Eye className="w-4 h-4" />

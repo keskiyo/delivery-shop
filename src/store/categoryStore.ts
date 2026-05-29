@@ -4,7 +4,7 @@ import {
 	CategoryFormData,
 	FilterType,
 	SortField,
-} from '@/app/(root)/(admin)/administrator/(cms)/cms/types'
+} from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { SortDirection } from 'mongodb'
 import { create } from 'zustand'
 
