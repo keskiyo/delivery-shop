@@ -1,6 +1,7 @@
 import { formatDeliveryDateTime } from '@/app/(root)/(admin)/administrator/admin-orders/utils/formatDeliveryDateTime'
 import { buttonStyles } from '@/app/(root)/(auth)/styles'
 import { getAvailableTimeSlots } from '@/app/(root)/(user-orders)/user-orders/utils/getAvailableTimeSlots'
+import { showPromiseToast, showToast } from '@/lib/showToast'
 import { useGetAdminOrdersQuery } from '@/store/redux/api/ordersApi'
 import { Schedule } from '@/types/deliverySchedule'
 import { X } from 'lucide-react'
@@ -73,44 +74,57 @@ const CalendarOrderModal = ({
 
 	const updateOrderDeliveryTime = async () => {
 		if (!orderId || !selectedTimeSlot) {
-			alert('Пожалуйста, выберите временной слот')
+			showToast({
+				type: 'error',
+				message: 'Пожалуйста, выберите временной слот',
+			})
 			return
 		}
 
 		try {
-			const formattedDate = formatDateToLocalYYYYMMDD(selectedDate)
+			await showPromiseToast(
+				(async () => {
+					const formattedDate = formatDateToLocalYYYYMMDD(selectedDate)
 
-			const response = await fetch(
-				`/api/admin/orders/${orderId}/delivery-time`,
+					const response = await fetch(
+						`/api/admin/orders/${orderId}/delivery-time`,
+						{
+							method: 'POST',
+							headers: { 'Content-Type': 'application/json' },
+							body: JSON.stringify({
+								deliveryDate: formattedDate,
+								deliveryTimeSlot: selectedTimeSlot,
+							}),
+						},
+					)
+
+					const result = await response.json()
+
+					if (!response.ok) {
+						throw new Error(
+							result.message ||
+								'Не удалось обновить время доставки',
+						)
+					}
+
+					return result
+				})(),
 				{
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({
-						deliveryDate: formattedDate,
-						deliveryTimeSlot: selectedTimeSlot,
-					}),
+					pending: 'Обновляем время доставки...',
+					success: 'Время доставки обновлено',
+					error: 'Не удалось обновить время доставки',
 				},
 			)
-
-			const result = await response.json()
-
-			if (response.ok) {
-				onClose()
-			} else {
-				alert(
-					`Ошибка: ${result.message || 'Не удалось обновить время доставки'}`,
-				)
-			}
+			onClose()
 		} catch (error) {
 			console.error('Ошибка при обновлении времени доставки:', error)
-			alert('Произошла ошибка при обновлении времени доставки')
 		}
 	}
 
 	if (!isOpen) return null
 	return (
-		<div className='absolute right-0 z-50 mt-14'>
-			<div className='px-5 py-5 w-92 bg-card rounded shadow-button-secondary text-foreground border border-border'>
+		<div className='absolute left-1/2 top-full z-50 mt-3 -translate-x-1/2'>
+			<div className='animate-in fade-in-0 slide-in-from-top-2 duration-200 px-5 py-5 w-92 max-w-[calc(100vw-2rem)] bg-card rounded shadow-button-secondary text-foreground border border-border'>
 				<div className='flex justify-between items-center pb-6'>
 					<h4 className='text-lg'>Изменить время</h4>
 					<button

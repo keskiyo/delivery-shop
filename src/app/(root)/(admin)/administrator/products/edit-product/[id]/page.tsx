@@ -3,6 +3,7 @@
 import BasePrice from '@/app/(root)/(admin)/administrator/products/_components/BasePrice'
 import { Loader } from '@/components/features/common/loader'
 import { initialProductData } from '@/constants/addProductFormData'
+import { showPromiseToast, showToast } from '@/lib/showToast'
 import {
 	AddProductFormData,
 	ImageUploadResponse,
@@ -161,9 +162,11 @@ export default function EditProductPage() {
 			hasActionsTag &&
 			(!formData.discountPercent || formData.discountPercent === '0')
 		) {
-			alert(
-				"Для товара с тегом 'Акции' обязательно укажите размер скидки",
-			)
+			showToast({
+				type: 'error',
+				message:
+					"Для товара с тегом 'Акции' обязательно укажите размер скидки",
+			})
 			return
 		}
 
@@ -171,48 +174,58 @@ export default function EditProductPage() {
 
 		try {
 			if (image) {
-				const uploadResult = await uploadImage(image)
+				const uploadResult = await showPromiseToast(uploadImage(image), {
+					pending: 'Загружаем изображение товара...',
+					success: 'Изображение товара загружено',
+					error: 'Ошибка загрузки изображения',
+				})
 				if (!uploadResult) {
-					alert('Ошибка загрузки изображения')
+					showToast({
+						type: 'error',
+						message: 'Ошибка загрузки изображения',
+					})
 					setLoading(false)
 					return
 				}
 			}
 
-			const response = await fetch('/api/update-product', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
+			await showPromiseToast(
+				(async () => {
+					const response = await fetch('/api/update-product', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({
+							...formData,
+							id: parseInt(productId),
+							basePrice: Number(formData.basePrice),
+							discountPercent: Number(formData.discountPercent),
+							weight: Number(formData.weight),
+							quantity: Number(formData.quantity),
+							isHealthyFood: formData.isHealthyFood,
+							isNonGMO: formData.isNonGMO,
+						}),
+					})
+
+					const result = await response.json()
+
+					if (!response.ok || !result.success) {
+						throw new Error(
+							result.error || 'Ошибка обновления товара',
+						)
+					}
+
+					return result
+				})(),
+				{
+					pending: 'Обновляем товар...',
+					success: 'Товар обновлен',
+					error: 'Ошибка обновления товара',
 				},
-				body: JSON.stringify({
-					...formData,
-					id: parseInt(productId),
-					basePrice: Number(formData.basePrice),
-					discountPercent: Number(formData.discountPercent),
-					weight: Number(formData.weight),
-					quantity: Number(formData.quantity),
-					isHealthyFood: formData.isHealthyFood,
-					isNonGMO: formData.isNonGMO,
-				}),
-			})
-
-			const result = await response.json()
-
-			if (response.ok && result.success) {
-				alert('товар успешно обновлен')
-			} else {
-				alert(
-					'Ошибка обновления товара: ' +
-						(result.error || 'Неизвестная ошибка'),
-				)
-			}
-		} catch (error) {
-			alert(
-				'Ошибка: ' +
-					(error instanceof Error
-						? error.message
-						: 'Неизвестная ошибка'),
 			)
+		} catch (error) {
+			console.error('Ошибка обновления товара:', error)
 		} finally {
 			setLoading(false)
 		}

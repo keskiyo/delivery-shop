@@ -141,8 +141,6 @@ export async function POST(
 		const product = await db.collection('products').findOne({
 			id: parseInt(productId),
 		})
-		const category = product?.categories[0]
-
 		if (!product) {
 			return NextResponse.json(
 				{ message: 'Продукт не найден' },

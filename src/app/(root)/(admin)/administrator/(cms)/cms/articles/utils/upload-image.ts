@@ -1,3 +1,4 @@
+import { showPromiseToast, showToast } from '@/lib/showToast';
 import { Editor } from '@tiptap/react';
 import { UploadResult } from '../types';
 
@@ -90,12 +91,19 @@ export const handleImageUpload = async (
 ): Promise<void> => {
   const validationError = validateImageFile(file);
   if (validationError) {
-    alert(validationError);
+    showToast({
+      type: 'error',
+      message: validationError,
+    });
     return;
   }
 
   try {
-    const serverResult = await uploadToServer(file);
+    const serverResult = await showPromiseToast(uploadToServer(file), {
+      pending: 'Загружаем изображение...',
+      success: 'Изображение загружено',
+      error: 'Ошибка при загрузке изображения',
+    });
 
     insertImageToEditor(
       editor,
@@ -105,7 +113,6 @@ export const handleImageUpload = async (
     );
   } catch (error) {
     console.error('Upload error:', error);
-    alert('Ошибка при загрузке изображения');
 
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -125,7 +132,10 @@ export const handleImageUrl = (editor: Editor): void => {
 
   if (url && editor) {
     if (!url.match(/\.(jpeg|jpg|png|webp)(\?.*)?$/i)) {
-      alert('Недопустимый формат файла. Разрешены только JPG, PNG и WebP.');
+      showToast({
+        type: 'error',
+        message: 'Недопустимый формат файла. Разрешены только JPG, PNG и WebP.',
+      });
       return;
     }
 

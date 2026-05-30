@@ -60,41 +60,16 @@ const GenericListPage = async ({
 	const perPage = Number(itemsPerPage)
 	const startIdx = (currentPage - 1) * perPage
 
+	let items: ProductCardProps[] | ArticlesProps[]
+	let totalCount: number
+
 	try {
-		const { items, totalCount } = await props.fetchData({
+		const data = await props.fetchData({
 			pagination: { startIdx, perPage },
 		})
 
-		const totalPages = Math.ceil(totalCount / perPage)
-
-		return (
-			<>
-				{!props.contentType || props.contentType === 'category' ? (
-					<ProductsSections
-						title={props.pageTitle}
-						products={items as ProductCardProps[]}
-						applyIndexStyles={
-							props.contentType === 'category' ? false : true
-						}
-						contentType={props.contentType}
-					/>
-				) : (
-					<ArticleSection
-						title={props.pageTitle || ''}
-						articles={items as ArticlesProps[]}
-					/>
-				)}
-
-				{totalPages > 1 && (
-					<PaginationWrapper
-						totalItems={totalCount}
-						currentPage={currentPage}
-						basePath={props.basePath}
-						contentType={props.contentType}
-					/>
-				)}
-			</>
-		)
+		items = data.items as ProductCardProps[] | ArticlesProps[]
+		totalCount = data.totalCount
 	} catch (error) {
 		return (
 			<ErrorComponent
@@ -105,6 +80,37 @@ const GenericListPage = async ({
 			/>
 		)
 	}
+
+	const totalPages = Math.ceil(totalCount / perPage)
+
+	return (
+		<>
+			{!props.contentType || props.contentType === 'category' ? (
+				<ProductsSections
+					title={props.pageTitle}
+					products={items as ProductCardProps[]}
+					applyIndexStyles={
+						props.contentType === 'category' ? false : true
+					}
+					contentType={props.contentType}
+				/>
+			) : (
+				<ArticleSection
+					title={props.pageTitle || ''}
+					articles={items as ArticlesProps[]}
+				/>
+			)}
+
+			{totalPages > 1 && (
+				<PaginationWrapper
+					totalItems={totalCount}
+					currentPage={currentPage}
+					basePath={props.basePath}
+					contentType={props.contentType}
+				/>
+			)}
+		</>
+	)
 }
 
 export default GenericListPage

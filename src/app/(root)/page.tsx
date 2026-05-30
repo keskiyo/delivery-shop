@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic'
 
 /**
  * Главная страница приложения
- * 
+ *
  * Отображает основные секции:
  * - Слайдер с промо-баннерами
  * - Акционные товары
@@ -20,9 +20,9 @@ export const dynamic = 'force-dynamic'
  * - Специальные предложения
  * - Карта магазинов
  * - Статьи блога
- * 
+ *
  * Каждая секция обернута в Suspense для показа загрузчика во время загрузки данных
- * 
+ *
  * @route /
  */
 export default function Home() {
@@ -33,8 +33,8 @@ export default function Home() {
 			</Suspense>
 			<div className='px-[max(12px,calc((100%-1208px)/2))] flex flex-col gap-y-20 md:mb-25 xl:mb-30 md:mt-25 xl:mt-30'>
 				{[
-					{ component: <Actions />, text: 'акций' },
-					{ component: <NewProducts />, text: 'новинок' },
+					{ component: <Actions randomize />, text: 'акций' },
+					{ component: <NewProducts randomize />, text: 'новинок' },
 					{
 						component: <Purchases />,
 						text: 'ваших прошлых покупок',

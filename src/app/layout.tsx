@@ -7,6 +7,7 @@ import { Rubik } from 'next/font/google'
 import { cookies } from 'next/headers'
 import { generateSiteMetadata } from '../../utils/generateSiteMetadata'
 import './globals.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 const rubik = Rubik({
 	variable: '--font-rubik',

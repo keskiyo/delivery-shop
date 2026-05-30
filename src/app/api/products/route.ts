@@ -10,6 +10,7 @@ export async function GET(request: Request) {
 		const url = new URL(request.url)
 
 		const tag = url.searchParams.get('tag')
+		const random = url.searchParams.get('random') === 'true'
 		const startIdx = parseInt(url.searchParams.get('startIdx') || '0')
 		const perPage = parseInt(
 			url.searchParams.get('perPage') || CONFIG.ITEMS_PER_PAGE.toString(),
@@ -29,13 +30,21 @@ export async function GET(request: Request) {
 
 		const totalCount = await db.collection('products').countDocuments(query)
 
-		const products = await db
-			.collection('products')
-			.find(query)
-			.sort({ _id: 1 })
-			.skip(startIdx)
-			.limit(perPage)
-			.toArray()
+		const products = random
+			? await db
+					.collection('products')
+					.aggregate([
+						{ $match: query },
+						{ $sample: { size: perPage } },
+					])
+					.toArray()
+			: await db
+					.collection('products')
+					.find(query)
+					.sort({ _id: 1 })
+					.skip(startIdx)
+					.limit(perPage)
+					.toArray()
 
 		return NextResponse.json({ products, totalCount })
 	} catch (error) {

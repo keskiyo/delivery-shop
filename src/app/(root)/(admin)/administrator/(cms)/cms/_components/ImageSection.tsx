@@ -70,13 +70,13 @@ export const ImageSection = ({
 								/>
 							</div>
 							<div className='flex-1 mt-8'>
-								<p className='text-sm text-gray-600 mb-2'>
+								<p className='text-sm text-muted-foreground mb-2'>
 									{formData.image.startsWith('blob:')
 										? `Новое изображение (будет загружено при сохранении) ${entityName}`
 										: `Текущее изображение ${entityName}`}
 								</p>
 								{formData.image.startsWith('blob:') && (
-									<p className='flex items-center gap-1 text-xs text-green-600 mb-2'>
+									<p className='flex items-center gap-1 text-xs text-success mb-2'>
 										<AlertCircle className='w-3 h-3' />
 										Старое изображение будет удалено после
 										сохранения
@@ -86,7 +86,7 @@ export const ImageSection = ({
 									type='button'
 									onClick={handleRemoveImage}
 									disabled={isUploading || isSubmitting}
-									className='flex items-center gap-1 px-3 py-1.5 text-sm bg-red-50 text-red-600 rounded hover:bg-red-100 cursor-pointer transition-custom disabled:opacity-50 disabled:cursor-not-allowed border border-red-200 hover:border-red-300'
+									className='flex items-center gap-1 px-3 py-1.5 text-sm bg-danger text-white rounded hover:bg-danger/90 cursor-pointer transition-custom disabled:opacity-50 disabled:cursor-not-allowed border border-danger'
 								>
 									<XCircle className='w-4 h-4' />
 									Удалить изображение
@@ -124,8 +124,8 @@ export const ImageSection = ({
 							</label>
 						</div>
 						{isUploading && (
-							<div className='flex items-center gap-2 text-sm text-green-600'>
-								<div className='animate-spin rounded-full h-4 w-4 border-2 border-green-600 border-t-transparent'></div>
+							<div className='flex items-center gap-2 text-sm text-success'>
+								<div className='animate-spin rounded-full h-4 w-4 border-2 border-success border-t-transparent'></div>
 								Обработка...
 							</div>
 						)}
@@ -137,7 +137,7 @@ export const ImageSection = ({
 						{editingId &&
 							formData.image &&
 							formData.image.startsWith('blob:') && (
-								<span className='flex items-center gap-2 text-base text-red-600 mt-1'>
+								<span className='flex items-center gap-2 text-base text-danger mt-1'>
 									<AlertCircle className='w-5 h-5' />
 									При сохранении старое изображение будет
 									удалено
@@ -154,8 +154,8 @@ export const ImageSection = ({
 							<span
 								className={`text-xs ${
 									charCount.slug > SEO_LIMITS.slug.max
-										? 'text-red-600'
-										: 'text-gray-500'
+										? 'text-danger'
+										: 'text-muted-foreground'
 								}`}
 							>
 								{charCount.imageAlt}/{SEO_LIMITS.imageAlt.max}
@@ -172,11 +172,11 @@ export const ImageSection = ({
 								)
 							}
 							disabled={isSubmitting}
-							className={`w-full px-3 py-2.5 bg-white border rounded focus:outline-none focus:ring-3 transition-custom ${
+							className={`w-full px-3 py-2.5 bg-card border rounded focus:outline-none focus:ring-3 transition-custom ${
 								errors.imageAlt
-									? 'border-red-400 focus:border-red-500 focus:ring-red-100'
-									: 'border-gray-300 focus:border-primary focus:ring-primary/20'
-							} disabled:opacity-50 disabled:bg-gray-100 placeholder:text-gray-400`}
+									? 'border-danger focus:border-danger focus:ring-danger/20'
+									: 'border-input focus:border-brand focus:ring-brand/20'
+							} disabled:opacity-50 disabled:bg-surface-subtle placeholder:text-muted-foreground`}
 							placeholder='Например: Соки и напитки в ассортименте'
 						/>
 					</div>

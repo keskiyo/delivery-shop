@@ -3,22 +3,23 @@ import ProductsSections from '@/app/(root)/(products)/ProductsSections'
 import ErrorComponent from '@/components/features/common/ErrorComponent'
 import { CONFIG } from '../../../../config/config'
 
-const NewProducts = async () => {
+interface NewProductsProps {
+	randomize?: boolean
+}
+
+const NewProducts = async ({ randomize = false }: NewProductsProps) => {
+	let items
+
 	try {
-		const { items } = await fetchProductsByTag('new', {
+		const data = await fetchProductsByTag('new', {
 			pagination: {
 				startIdx: 0,
 				perPage: CONFIG.ITEMS_PER_PAGE_MAIN_PRODUCTS,
 			},
+			randomize,
 		})
 
-		return (
-			<ProductsSections
-				title='Новинки'
-				viewAllLink={{ text: 'Все новинки', href: '/new' }}
-				products={items}
-			/>
-		)
+		items = data.items
 	} catch (error) {
 		return (
 			<ErrorComponent
@@ -29,6 +30,14 @@ const NewProducts = async () => {
 			/>
 		)
 	}
+
+	return (
+		<ProductsSections
+			title='Новинки'
+			viewAllLink={{ text: 'Все новинки', href: '/new' }}
+			products={items}
+		/>
+	)
 }
 
 export default NewProducts

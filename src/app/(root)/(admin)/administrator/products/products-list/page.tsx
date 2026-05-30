@@ -5,6 +5,7 @@ import SearchHeader from '@/app/(root)/(admin)/administrator/products/products-l
 import SearchInput from '@/app/(root)/(admin)/administrator/products/products-list/_components/SearchInput'
 import SearchProductsResult from '@/app/(root)/(admin)/administrator/products/products-list/_components/SearchProductsResult'
 import SearchStates from '@/app/(root)/(admin)/administrator/products/products-list/_components/SearchStates'
+import { showPromiseToast } from '@/lib/showToast'
 import { ProductCardProps } from '@/types/product'
 import { useCallback, useState } from 'react'
 
@@ -96,31 +97,40 @@ export default function ProductsListPage() {
 		setDeletingId(deleteModal.productId)
 
 		try {
-			const response = await fetch('/api/delete-product', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
+			const result = await showPromiseToast(
+				(async () => {
+					const response = await fetch('/api/delete-product', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({ id: deleteModal.productId }),
+					})
+
+					const result = await response.json()
+
+					if (!response.ok || !result.success) {
+						throw new Error(
+							result.error || 'Ошибка удаления товара',
+						)
+					}
+
+					return result
+				})(),
+				{
+					pending: 'Удаляем товар...',
+					success: 'Товар успешно удален',
+					error: 'Ошибка удаления товара',
 				},
-				body: JSON.stringify({ id: deleteModal.productId }),
-			})
-
-			const result = await response.json()
-
-			if (response.ok && result.success) {
+			)
+			if (result.success) {
 				setProducts(prev =>
 					prev.filter(
 						product => product.id !== deleteModal.productId,
 					),
 				)
-				alert('Товар успешно удален')
-			} else {
-				alert(
-					'Ошибка удаления товара: ' +
-						(result.error || 'Неизвестная ошибка'),
-				)
 			}
 		} catch (error) {
-			alert('Ошибка при удалении товара')
 			console.error('Delete error:', error)
 		} finally {
 			setDeletingId(null)

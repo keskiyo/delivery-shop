@@ -1,4 +1,5 @@
 import type { CharCount } from '@/app/(root)/(admin)/administrator/(cms)/cms/types/form/form.types'
+import { showToast } from '@/lib/showToast'
 import { useArticleStore } from '@/store/articleStore'
 import { useCategoryStore } from '@/store/categoryStore'
 import { ImageSection } from '../../../_components/ImageSection'
@@ -49,7 +50,10 @@ export const ArticleForm = ({
 		if (!file) return
 
 		if (file.size > 5 * 1024 * 1024) {
-			alert('Размер файла не должен превышать 5MB')
+			showToast({
+				type: 'error',
+				message: 'Размер файла не должен превышать 5MB',
+			})
 			return
 		}
 
@@ -59,7 +63,10 @@ export const ArticleForm = ({
 			onSaveImageFile(file)
 		} catch (error) {
 			console.error('Ошибка при выборе изображения:', error)
-			alert('Ошибка при выборе изображения')
+			showToast({
+				type: 'error',
+				message: 'Ошибка при выборе изображения',
+			})
 		} finally {
 			setIsUploading(false)
 		}

@@ -13,16 +13,12 @@ import { useCategories } from '@/app/(root)/(admin)/administrator/(cms)/cms/cate
 import { useCategoryFormState } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/hooks/useCategoryFormState'
 import type { Category } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { categorySeoRecommendations } from '@/app/(root)/(admin)/administrator/(cms)/cms/utils/recommendations'
+import { showPromiseToast } from '@/lib/showToast'
 import { useAuthStore } from '@/store/authStore'
 import { useCategoryStore } from '@/store/categoryStore'
-import { useEffect, useState } from 'react'
-import { Notification } from './_components/Notification'
+import { useEffect } from 'react'
 
 const CategoriesPage = () => {
-	const [notification, setNotification] = useState<{
-		type: 'success' | 'error'
-		message: string
-	} | null>(null)
 	const { user } = useAuthStore()
 	const author = `${user?.surname} ${user?.name}`.trim() || 'Неизвестен'
 	const {
@@ -41,9 +37,6 @@ const CategoriesPage = () => {
 		setCurrentPage,
 		setIsReordering,
 	} = useCategoryStore()
-	if (!user) {
-		return null
-	}
 
 	const {
 		createCategory,
@@ -66,17 +59,10 @@ const CategoriesPage = () => {
 	} = useCategoryFormState()
 
 	useEffect(() => {
-		if (notification) {
-			const timer = setTimeout(() => {
-				setNotification(null)
-			}, 5000)
-			return () => clearTimeout(timer)
-		}
-	}, [notification])
+		if (!user) return
 
-	useEffect(() => {
 		loadCategories({ page: currentPage })
-	}, [currentPage, loadCategories])
+	}, [currentPage, loadCategories, user])
 
 	const handleCreate = async (e: React.SyntheticEvent) => {
 		e.preventDefault()
@@ -86,18 +72,25 @@ const CategoriesPage = () => {
 			let finalImageUrl = ''
 			if (formData.image && formData.image.startsWith('blob:')) {
 				try {
-					const uploadResult = await uploadImageToServer()
-					if (uploadResult) {
-						finalImageUrl = uploadResult.url
-					} else {
-						throw new Error('Не удалось загрузить изображение')
-					}
+					const uploadResult = await showPromiseToast(
+						(async () => {
+							const result = await uploadImageToServer()
+							if (!result) {
+								throw new Error(
+									'Не удалось загрузить изображение',
+								)
+							}
+							return result
+						})(),
+						{
+							pending: 'Загружаем изображение категории...',
+							success: 'Изображение категории загружено',
+							error: 'Не удалось загрузить изображение',
+						},
+					)
+					finalImageUrl = uploadResult.url
 				} catch (uploadError) {
 					console.error('Ошибка загрузки изображения:', uploadError)
-					setNotification({
-						type: 'error',
-						message: 'Не удалось загрузить изображение',
-					})
 					setIsSubmitting(false)
 					return
 				}
@@ -114,27 +107,28 @@ const CategoriesPage = () => {
 				author,
 			}
 
-			const createResult = await createCategory(categoryData)
+			const createResult = await showPromiseToast(
+				(async () => {
+					const result = await createCategory(categoryData)
+					if (!result.success) {
+						throw new Error(
+							result.message || 'Ошибка создания категории',
+						)
+					}
+					return result
+				})(),
+				{
+					pending: 'Создаем категорию...',
+					success: 'Категория успешно создана',
+					error: 'Ошибка создания категории',
+				},
+			)
 
 			if (createResult.success) {
-				setNotification({
-					type: 'success',
-					message: 'Категория успешно создана',
-				})
 				resetForm()
-			} else {
-				setNotification({
-					type: 'error',
-					message:
-						createResult.message || 'Ошибка создания категории',
-				})
 			}
 		} catch (error) {
 			console.error('Неожиданная ошибка:', error)
-			setNotification({
-				type: 'error',
-				message: 'Произошла непредвиденная ошибка',
-			})
 		} finally {
 			setIsSubmitting(false)
 		}
@@ -152,21 +146,26 @@ const CategoriesPage = () => {
 
 			if (formData.image && formData.image.startsWith('blob:')) {
 				try {
-					const uploadResult = await uploadImageToServer()
-
-					if (uploadResult) {
-						finalImageUrl = uploadResult.url
-						shouldDeleteOldImage = true
-					} else {
-						throw new Error('Не удалось загрузить изображение')
-					}
+					const uploadResult = await showPromiseToast(
+						(async () => {
+							const result = await uploadImageToServer()
+							if (!result) {
+								throw new Error(
+									'Не удалось загрузить изображение',
+								)
+							}
+							return result
+						})(),
+						{
+							pending: 'Загружаем изображение категории...',
+							success: 'Изображение категории загружено',
+							error: 'Не удалось загрузить изображение',
+						},
+					)
+					finalImageUrl = uploadResult.url
+					shouldDeleteOldImage = true
 				} catch (uploadError) {
 					console.error('Ошибка загрузки изображения:', uploadError)
-					setNotification({
-						type: 'error',
-						message:
-							'Не удалось загрузить изображение. Попробуйте еще раз.',
-					})
 					setIsSubmitting(false)
 					return
 				}
@@ -192,27 +191,28 @@ const CategoriesPage = () => {
 				keywords: getKeywordsArray(),
 			}
 
-			const result = await updateCategory(editingId, updateData)
+			const result = await showPromiseToast(
+				(async () => {
+					const result = await updateCategory(editingId, updateData)
+					if (!result.success) {
+						throw new Error(
+							result.message || 'Ошибка обновления категории',
+						)
+					}
+					return result
+				})(),
+				{
+					pending: 'Обновляем категорию...',
+					success: 'Категория успешно обновлена',
+					error: 'Ошибка обновления категории',
+				},
+			)
 
 			if (result.success) {
-				setNotification({
-					type: 'success',
-					message: 'Категория успешно обновлена',
-				})
 				resetForm()
-			} else {
-				console.error('Ошибка обновления категории:', result.message)
-				setNotification({
-					type: 'error',
-					message: result.message || 'Ошибка обновления категории',
-				})
 			}
 		} catch (error) {
 			console.error('Неожиданная ошибка:', error)
-			setNotification({
-				type: 'error',
-				message: 'Произошла ошибка при обновлении категории',
-			})
 		} finally {
 			setIsSubmitting(false)
 		}
@@ -223,28 +223,37 @@ const CategoriesPage = () => {
 
 		const categoryToDelete = categories.find(c => c._id.toString() === id)
 
-		const result = await deleteCategory(id)
-		if (result.success) {
-			if (categoryToDelete?.image) {
-				try {
-					await deleteOldImage(categoryToDelete.image)
-				} catch (error) {
-					console.error(
-						'Не удалось удалить изображение категории:',
-						error,
-					)
+		try {
+			const result = await showPromiseToast(
+				(async () => {
+					const result = await deleteCategory(id)
+					if (!result.success) {
+						throw new Error(
+							result.message || 'Ошибка удаления категории',
+						)
+					}
+					return result
+				})(),
+				{
+					pending: 'Удаляем категорию...',
+					success: 'Категория успешно удалена',
+					error: 'Ошибка удаления категории',
+				},
+			)
+			if (result.success) {
+				if (categoryToDelete?.image) {
+					try {
+						await deleteOldImage(categoryToDelete.image)
+					} catch (error) {
+						console.error(
+							'Не удалось удалить изображение категории:',
+							error,
+						)
+					}
 				}
 			}
-
-			setNotification({
-				type: 'success',
-				message: 'Категория успешно удалена',
-			})
-		} else {
-			setNotification({
-				type: 'error',
-				message: result.message || 'Ошибка удаления категории',
-			})
+		} catch (error) {
+			console.error('Ошибка удаления категории:', error)
 		}
 	}
 
@@ -264,28 +273,32 @@ const CategoriesPage = () => {
 				numericId: category.numericId || 0,
 			}))
 
-			const result = await reorderCategories(dataForApi)
+			await showPromiseToast(
+				(async () => {
+					const result = await reorderCategories(dataForApi)
+					if (!result.success) {
+						throw new Error(
+							result.message || 'Ошибка обновления порядка',
+						)
+					}
+					return result
+				})(),
+				{
+					pending: 'Обновляем порядок категорий...',
+					success: 'Порядок категорий успешно обновлен',
+					error: 'Ошибка обновления порядка',
+				},
+			)
 
-			if (result.success) {
-				setNotification({
-					type: 'success',
-					message: 'Порядок категорий успешно обновлен',
-				})
-			} else {
-				setNotification({
-					type: 'error',
-					message: result.message || 'Ошибка обновления порядка',
-				})
-			}
 		} catch (error) {
 			console.error('Ошибка:', error)
-			setNotification({
-				type: 'error',
-				message: 'Произошла ошибка при обновлении порядка',
-			})
 		} finally {
 			setIsReordering(false)
 		}
+	}
+
+	if (!user) {
+		return null
 	}
 
 	return (
@@ -294,13 +307,6 @@ const CategoriesPage = () => {
 				title='Управление категориями'
 				description={`Всего категорий: ${totalAllItems}`}
 			/>
-			{notification && (
-				<Notification
-					type={notification.type}
-					message={notification.message}
-					onClose={() => setNotification(null)}
-				/>
-			)}
 			<HeaderActions onCreate={startCreate} />
 			<div className='mb-4'>
 				<ItemsPerPageSelector

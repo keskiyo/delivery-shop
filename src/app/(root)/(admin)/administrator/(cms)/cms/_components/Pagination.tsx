@@ -31,7 +31,7 @@ export const Pagination = ({ type = 'categories' }: { type?: 'categories' | 'art
 		'border-border bg-card text-foreground hover:border-promo hover:bg-promo-soft hover:text-promo'
 
 	const activeButtonClass =
-		'border-promo bg-promo text-white shadow-sm shadow-orange-500/25 hover:border-promo-hover hover:bg-promo-hover'
+		'border-promo bg-promo text-white shadow-sm shadow-promo/25 hover:border-promo-hover hover:bg-promo-hover'
 
 	const renderPageButtons = () => {
 		const buttons = []

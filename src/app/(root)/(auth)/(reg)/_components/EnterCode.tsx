@@ -55,7 +55,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 
 	useEffect(() => {
 		startTimer()
-	}, [])
+	}, [startTimer])
 
 	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault()
@@ -98,7 +98,15 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 			let userDataToUpdate = { ...regFormData }
 
 			if (verifyData.user.phoneNumberVerified) {
-				const { email, phoneNumber, ...rest } = userDataToUpdate
+				const {
+					email: omittedEmail,
+					phoneNumber: omittedPhoneNumber,
+					...rest
+				} = userDataToUpdate
+
+				void omittedEmail
+				void omittedPhoneNumber
+
 				userDataToUpdate = rest as typeof regFormData
 			}
 

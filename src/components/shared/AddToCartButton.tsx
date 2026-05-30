@@ -7,6 +7,7 @@ import {
 } from '@/actions/orderActions'
 import Tooltip from '@/app/(root)/(auth)/_components/Tooltip'
 import QuantitySelector from '@/app/(root)/(cart)/cart/_components/QuantitySelector'
+import { showPromiseToast, showToast } from '@/lib/showToast'
 import { useCartStore } from '@/store/cartStore'
 import { useState } from 'react'
 
@@ -67,18 +68,30 @@ const AddToCartButton = ({
 		setShowTooltip(false)
 
 		try {
-			const result = await addToCartAction(productId)
+			const result = await showPromiseToast(
+				(async () => {
+					const result = await addToCartAction(productId)
 
-			if (!result.success && result.message) {
-				showMessage(result.message)
-			}
+					if (!result.success) {
+						throw new Error(
+							result.message || 'Ошибка добавления в корзину',
+						)
+					}
+
+					return result
+				})(),
+				{
+					pending: 'Добавляем товар в корзину...',
+					success: 'Товар добавлен в корзину',
+					error: 'Ошибка добавления в корзину',
+				},
+			)
 
 			if (result.success) {
 				await fetchCart()
 			}
 		} catch (error) {
 			console.error('Ошибка добавления товара в корзину:', error)
-			showMessage('Ошибка при добавлении в корзину')
 		} finally {
 			setIsLoading(false)
 		}
@@ -116,6 +129,10 @@ const AddToCartButton = ({
 			await fetchCart()
 		} catch (error) {
 			console.error('Ошибка обновления количества:', error)
+			showToast({
+				type: 'error',
+				message: 'Ошибка обновления количества товара',
+			})
 			await fetchCart()
 		} finally {
 			setIsLoading(false)

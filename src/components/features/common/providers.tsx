@@ -3,7 +3,7 @@
 import { ThemeProvider } from '@/components/ui/theme/ThemeProvider'
 import NextTopLoader from 'nextjs-toploader'
 import React from 'react'
-import { Toaster } from 'react-hot-toast'
+import { ToastContainer } from 'react-toastify'
 
 // Разные провайдеры
 
@@ -11,7 +11,18 @@ export const Providers: React.FC<React.PropsWithChildren> = ({ children }) => {
 	return (
 		<>
 			<ThemeProvider>{children}</ThemeProvider>
-			<Toaster />
+			<ToastContainer
+				position='top-center'
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop
+				closeOnClick
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme='colored'
+				limit={4}
+			/>
 			<NextTopLoader />
 		</>
 	)

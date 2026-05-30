@@ -1,5 +1,6 @@
 'use client'
 
+import { showToast } from '@/lib/showToast'
 import { useArticleStore } from '@/store/articleStore'
 import { useCallback, useState } from 'react'
 import { transliterate } from '../../../../../../../../../utils/transliterate'
@@ -11,7 +12,10 @@ export const useArticleFormState = () => {
 
 	const generateSlug = useCallback(() => {
 		if (!formData.name.trim()) {
-			alert('Сначала введите название статьи')
+			showToast({
+				type: 'error',
+				message: 'Сначала введите название статьи',
+			})
 			return
 		}
 

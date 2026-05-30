@@ -11,6 +11,7 @@ import {
 } from '@/app/(root)/(cart)/cart/utils/orderHelpers'
 import FakePaymentModal from '@/app/(root)/(payment)/FakePaymentModal'
 import PaymentSuccessModal from '@/app/(root)/(payment)/PaymentSuccessModal'
+import { showPromiseToast, showToast } from '@/lib/showToast'
 import { useAuthStore } from '@/store/authStore'
 import { useCartStore } from '@/store/cartStore'
 import { ExtendedCartSummaryProps } from '@/types/cart'
@@ -96,7 +97,7 @@ const CartSummary = ({
 		totalBonuses,
 		maxBonusUse,
 		isMinimumReached,
-	} = pricing
+	} = currentPricing
 
 	// Рассчитываем использованные бонусы (не больше 10% от суммы заказа)
 	const usedBonuses = Math.min(
@@ -196,7 +197,7 @@ const CartSummary = ({
 			setIsOrdered(true)
 		} catch (error) {
 			console.error(`Ошибка:`, error)
-			alert('Ошибка при оформлении заказа')
+			throw error
 		} finally {
 			setIsProcessing(false)
 		}
@@ -213,7 +214,15 @@ const CartSummary = ({
 	 * 5. При ошибке показывает alert с описанием проблемы
 	 */
 	const handleCashPayment = async () => {
-		await handlePaymentResult('cash_on_delivery')
+		try {
+			await showPromiseToast(handlePaymentResult('cash_on_delivery'), {
+				pending: 'Оформляем заказ...',
+				success: 'Заказ оформлен',
+				error: 'Ошибка при оформлении заказа',
+			})
+		} catch (error) {
+			console.error('Ошибка при оформлении заказа:', error)
+		}
 	}
 
 	/**
@@ -228,13 +237,16 @@ const CartSummary = ({
 		setIsProcessing(true)
 
 		try {
-			const result = await createOrder('online')
+			const result = await showPromiseToast(createOrder('online'), {
+				pending: 'Создаем заказ...',
+				success: 'Заказ создан',
+				error: 'Ошибка при оформлении заказа',
+			})
 			setOrderNumber(result.orderNumber)
 			setCurrentOrderId(result.order._id)
 			setShowPaymentModal(true)
 		} catch (error) {
 			console.error('Ошибка при создании заказа:', error)
-			alert('Ошибка при оформлении заказа')
 		} finally {
 			setIsProcessing(false)
 		}
@@ -247,7 +259,11 @@ const CartSummary = ({
 	const handlePaymentSuccess = async (paymentData: FakePaymentData) => {
 		setShowPaymentModal(false)
 		try {
-			await handlePaymentResult('online', paymentData)
+			await showPromiseToast(handlePaymentResult('online', paymentData), {
+				pending: 'Подтверждаем оплату...',
+				success: 'Оплата подтверждена',
+				error: 'Ошибка при оформлении заказа',
+			})
 		} catch (error) {
 			console.error('Ошибка обработки заказа: ', error)
 		}
@@ -260,7 +276,10 @@ const CartSummary = ({
 		} else {
 			console.error('Order Id не найден для отмены оплаты')
 		}
-		alert(`Ошибка оплаты: ${error}`)
+		showToast({
+			type: 'error',
+			message: `Ошибка оплаты: ${error}`,
+		})
 		resetAfterOrder()
 		await clearUserCart()
 		router.push('/user-orders')

@@ -1,6 +1,7 @@
 'use client'
 
 import { articleSeoRecommendations } from '@/app/(root)/(admin)/administrator/(cms)/cms/utils/recommendations'
+import { showPromiseToast, showToast } from '@/lib/showToast'
 import { Loader } from '@/components/features/common/loader'
 import { useArticleStore } from '@/store/articleStore'
 import { useAuthStore } from '@/store/authStore'
@@ -8,7 +9,6 @@ import { useCategoryStore } from '@/store/categoryStore'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Header } from '../../_components/Header'
-import { Notification } from '../../_components/Notification'
 import { SEORecommendations } from '../../_components/SEORecommendations'
 import { useArticleFormState } from '../hooks/useArticleFormState'
 import { useArticles } from '../hooks/useArticles'
@@ -19,19 +19,8 @@ const EditorPage = () => {
 		null,
 	)
 	const [isLoading, setIsLoading] = useState(false)
-	const [notification, setNotification] = useState<{
-		type: 'success' | 'error'
-		message: string
-	} | null>(null)
 	const { user } = useAuthStore()
 	const searchParams = useSearchParams()
-
-	useEffect(() => {
-		const articleId = searchParams?.get('id')
-		if (articleId) {
-			setCurrentArticleId(articleId)
-		}
-	}, [searchParams])
 
 	const author = `${user?.surname} ${user?.name}`.trim() || 'Неизвестен'
 
@@ -59,7 +48,7 @@ const EditorPage = () => {
 					if (result.success && result.data) {
 						setArticleData(result.data)
 					} else {
-						setNotification({
+						showToast({
 							type: 'error',
 							message:
 								result.message || 'Не удалось загрузить статью',
@@ -67,7 +56,7 @@ const EditorPage = () => {
 					}
 				} catch (error) {
 					console.error('Ошибка загрузки статьи:', error)
-					setNotification({
+					showToast({
 						type: 'error',
 						message: 'Ошибка загрузки статьи',
 					})
@@ -105,15 +94,6 @@ const EditorPage = () => {
 		fetchCategories()
 	}, [loadCategories])
 
-	useEffect(() => {
-		if (notification) {
-			const timer = setTimeout(() => {
-				setNotification(null)
-			}, 5000)
-			return () => clearTimeout(timer)
-		}
-	}, [notification])
-
 	const handleCreate = async (e: React.SyntheticEvent) => {
 		e.preventDefault()
 		setIsSubmitting(true)
@@ -122,20 +102,25 @@ const EditorPage = () => {
 			let finalImageUrl = formData.image
 			if (formData.image && formData.image.startsWith('blob:')) {
 				try {
-					const uploadResult = await uploadImageToServer()
-					if (uploadResult) {
-						finalImageUrl = uploadResult.url
-					} else {
-						console.warn(
-							'Не удалось загрузить новое изображение, соатвляем старое',
-						)
-					}
+					const uploadResult = await showPromiseToast(
+						(async () => {
+							const result = await uploadImageToServer()
+							if (!result) {
+								throw new Error(
+									'Не удалось загрузить изображение',
+								)
+							}
+							return result
+						})(),
+						{
+							pending: 'Загружаем изображение статьи...',
+							success: 'Изображение статьи загружено',
+							error: 'Не удалось загрузить изображение',
+						},
+					)
+					finalImageUrl = uploadResult.url
 				} catch (uploadError) {
 					console.error('Ошибка загрузки изображения:', uploadError)
-					setNotification({
-						type: 'error',
-						message: 'Не удалось загрузить изображение',
-					})
 				}
 			}
 
@@ -160,30 +145,36 @@ const EditorPage = () => {
 				_id: articleId,
 			}
 
-			const createResult = await createArticle(articleData)
+			const createResult = await showPromiseToast(
+				(async () => {
+					const result = await createArticle(articleData)
+					if (!result.success) {
+						throw new Error(
+							result.message || 'Ошибка создания статьи',
+						)
+					}
+					return result
+				})(),
+				{
+					pending: currentArticleId
+						? 'Сохраняем изменения...'
+						: 'Создаем статью...',
+					success: currentArticleId
+						? 'Изменения сохранены'
+						: 'Статья успешно создана',
+					error: currentArticleId
+						? 'Ошибка сохранения статьи'
+						: 'Ошибка создания статьи',
+				},
+			)
 
 			if (createResult.success) {
 				if (createResult.data?._id && !currentArticleId) {
 					setCurrentArticleId(createResult.data?._id)
 				}
-				setNotification({
-					type: 'success',
-					message: currentArticleId
-						? 'Изменения сохранены'
-						: 'Статья успешно создана',
-				})
-			} else {
-				setNotification({
-					type: 'error',
-					message: createResult.message || 'Ошибка создания статьи',
-				})
 			}
 		} catch (error) {
 			console.error('Неожиданная ошибка:', error)
-			setNotification({
-				type: 'error',
-				message: 'Произошла непредвиденная ошибка',
-			})
 		} finally {
 			setIsSubmitting(false)
 			window.scroll({ top: 0, behavior: 'smooth' })
@@ -195,14 +186,6 @@ const EditorPage = () => {
 	return (
 		<div className='relative'>
 			<Header title='Текстовый редактор' description='Создание статей' />
-			{notification && (
-				<Notification
-					type={notification.type}
-					message={notification.message}
-					onClose={() => setNotification(null)}
-				/>
-			)}
-
 			<ArticleForm
 				onFieldChange={updateFormField}
 				onGenerateSlug={generateSlug}

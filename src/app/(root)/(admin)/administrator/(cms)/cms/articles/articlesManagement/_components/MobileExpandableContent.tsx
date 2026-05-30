@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { showPromiseToast } from "@/lib/showToast";
 
 export const MobileExpandableContent = ({
   article,
@@ -31,7 +32,14 @@ export const MobileExpandableContent = ({
   const handleStatusChange = async (newStatus: ArticleStatus) => {
     setIsDropdownOpen(false);
     try {
-      await updateArticleStatus(article._id.toString(), newStatus);
+      await showPromiseToast(
+        updateArticleStatus(article._id.toString(), newStatus),
+        {
+          pending: "Обновляем статус статьи...",
+          success: "Статус статьи обновлен",
+          error: "Не удалось обновить статус статьи",
+        },
+      );
     } catch (error) {
       console.error("Ошибка изменения статуса:", error);
     }
@@ -40,7 +48,17 @@ export const MobileExpandableContent = ({
   const handleFeaturedToggle = async (e: React.MouseEvent) => {
     e.stopPropagation();
     try {
-      await updateArticleFeatured(article._id.toString(), !article.isFeatured);
+      const nextFeaturedState = !article.isFeatured;
+      await showPromiseToast(
+        updateArticleFeatured(article._id.toString(), nextFeaturedState),
+        {
+          pending: "Обновляем избранность статьи...",
+          success: nextFeaturedState
+            ? "Статья добавлена в избранное"
+            : "Статья убрана из избранного",
+          error: "Не удалось обновить избранность статьи",
+        },
+      );
     } catch (error) {
       console.error("Ошибка изменения избранности:", error);
     }

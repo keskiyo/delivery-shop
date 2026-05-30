@@ -3,6 +3,7 @@ import { formStyles, profileStyles } from '@/app/(root)/(auth)/styles'
 import AlertMessage from '@/app/(root)/(user-profile)/_components/AlertMessage'
 import { SuccessChangeEmail } from '@/app/(root)/(user-profile)/_components/SuccessChangeEmail'
 import { authClient } from '@/lib/auth-client'
+import { showPromiseToast } from '@/lib/showToast'
 import { useAuthStore } from '@/store/authStore'
 import { Mail } from 'lucide-react'
 import { ChangeEvent, useEffect, useState } from 'react'
@@ -78,11 +79,10 @@ const ProfileEmail = ({ isEditing }: { isEditing: boolean }) => {
 
 		if (!response.ok) {
 			setError(data.error)
-			return
+			throw new Error(data.error || 'Ошибка при обновлении email')
 		}
 
 		await fetchUserData()
-		alert('Email успешно обновлен!')
 	}
 
 	const handleSave = async () => {
@@ -105,12 +105,23 @@ const ProfileEmail = ({ isEditing }: { isEditing: boolean }) => {
 
 		try {
 			if (isPhoneRegistered) {
-				await updateEmailDirectly()
-			} else {
-				const response = await authClient.changeEmail({
-					newEmail: email,
-					callbackURL: '/login',
+				await showPromiseToast(updateEmailDirectly(), {
+					pending: 'Обновляем email...',
+					success: 'Email успешно обновлен',
+					error: 'Ошибка при обновлении email',
 				})
+			} else {
+				const response = await showPromiseToast(
+					authClient.changeEmail({
+						newEmail: email,
+						callbackURL: '/login',
+					}),
+					{
+						pending: 'Отправляем подтверждение...',
+						success: 'Письмо для подтверждения отправлено',
+						error: 'Ошибка при смене email',
+					},
+				)
 
 				if (response.error) {
 					if (response.error.code === 'COULDNT_UPDATE_YOUR_EMAIL') {

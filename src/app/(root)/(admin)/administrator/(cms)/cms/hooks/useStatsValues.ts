@@ -8,7 +8,7 @@ export const useStatsValues = () => {
 
 	useEffect(() => {
 		loadCategories()
-	}, [])
+	}, [loadCategories])
 
 	const keywordsCount = settings?.semanticCore?.length || 0
 

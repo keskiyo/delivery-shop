@@ -1,6 +1,6 @@
 # Delivery Shop - справка по проекту
 
-Обновлено: 27 мая 2026.
+Обновлено: 30 мая 2026.
 
 Этот файл описывает структуру и ключевые особенности проекта `delivery-shop`.
 
@@ -16,9 +16,10 @@
 | `npm run build`                 | Собирает production-версию приложения.                                                                                           |
 | `npm run start`                 | Запускает собранное production-приложение.                                                                                       |
 | `npm run lint`                  | Запускает ESLint. Перед сборкой лучше сначала выполнять эту команду.                                                             |
+| `npm audit`                     | Проверяет зависимости на известные уязвимости. Сейчас audit должен возвращать `found 0 vulnerabilities`.                         |
 | `npm run update-delivery-dates` | Дергает cron endpoint обновления дат доставки. В скрипте уже указан `secret`, но для окружений лучше использовать `CRON_SECRET`. |
 
-Рекомендуемый порядок проверки перед сдачей изменений: `npm run lint`, затем `npm run build`.
+Рекомендуемый порядок проверки перед сдачей изменений: `npm run lint`, затем `npm audit`, затем `npm run build`.
 
 ## Технологический стек
 
@@ -32,6 +33,7 @@
 | State management  | Zustand, Redux Toolkit, React Context        | Корзина и auth - Zustand; заказы и чат - Redux Toolkit; product title - React Context. |
 | Почта             | Resend, react-email                          | Почтовые интеграции завязаны на `RESEND_API_KEY`.                                      |
 | Экспорт           | ExcelJS                                      | Используется в админке заказов для выгрузки в Excel.                                   |
+| Уведомления       | React-Toastify                               | Общие toast helpers лежат в `src/lib/showToast.ts`.                                    |
 
 ## Комментарии по светлой и темной теме
 
@@ -76,7 +78,7 @@
 | `CARD_DISCOUNT_PERCENT`        |                 `6` | Скидка по карте лояльности.                                 |
 | `BONUSES_PERCENT`              |                 `5` | Начисление бонусов от суммы заказа.                         |
 | `MAX_BONUSES_PERCENT`          |                `10` | Максимальная часть заказа, которую можно оплатить бонусами. |
-| `MIN_ORDER_PRICE`              |              `1000` | Минимальная сумма заказа в рублях.                          |
+| `MIN_ORDER_PRICE`              |               `700` | Минимальная сумма заказа в рублях.                          |
 | `TEMPORARY_EMAIL_DOMAIN`       | `@delivery-shop.ru` | Временный email для регистрации по телефону.                |
 | `MAX_ATTEMPTS`                 |                 `3` | Максимум попыток ввода OTP.                                 |
 | `TIMEOUT_PERIOD`               |               `180` | Время жизни OTP в секундах.                                 |
@@ -89,7 +91,7 @@
 | `package.json`            | Скрипты проекта и зависимости.              |
 | `tsconfig.json`           | Конфигурация TypeScript.                    |
 | `next.config.ts`          | Конфигурация Next.js.                       |
-| `eslint.config.mjs`       | Конфигурация ESLint.                        |
+| `eslint.config.mjs`       | Конфигурация ESLint. CommonJS configs/migrations исключены из `no-require-imports`; `react-hooks/set-state-in-effect` отключен как шумное правило для текущей архитектуры. |
 | `tailwind.config.js`      | Дополнительная конфигурация Tailwind.       |
 | `postcss.config.mjs`      | PostCSS-конфигурация для Tailwind CSS 4.    |
 | `components.json`         | Конфигурация shadcn.                        |
@@ -207,7 +209,7 @@ CMS находится в `src/app/(root)/(admin)/administrator/(cms)/cms/`.
 | `cms/CONFIG_BLOG.ts`                  | Конфигурация CMS/блога.                                                                                    |
 | `cms/_components/`                    | Dashboard cards, header, pagination, SEO recommendations, stats и skeleton states.                         |
 | `cms/categories/page.tsx`             | Управление категориями.                                                                                    |
-| `cms/categories/_components/`         | Форма категории, таблица, drag-and-drop, поиск, фильтры, статистика, desktop/mobile карточки, уведомления. |
+| `cms/categories/_components/`         | Форма категории, таблица, drag-and-drop, поиск, фильтры, статистика, desktop/mobile карточки.              |
 | `cms/semantic-core/page.tsx`          | Управление SEO/семантическим ядром и настройками сайта.                                                    |
 | `cms/semantic-core/_components/`      | SEOForm, CurrentSettings, FormField и кнопки формы.                                                        |
 | `cms/sidebarMenu/`                    | Компоненты бокового меню CMS.                                                                              |
@@ -356,7 +358,7 @@ CMS находится в `src/app/(root)/(admin)/administrator/(cms)/cms/`.
 
 | Путь                                        | Комментарий                                                                                |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `src/components/features/common/`           | Breadcrumbs, ErrorComponent, loader, providers.                                            |
+| `src/components/features/common/`           | Breadcrumbs, ErrorComponent, loader, providers. В `providers.tsx` подключен `ToastContainer`. |
 | `src/components/features/slider/`           | Компоненты слайдера главной страницы.                                                      |
 | `src/components/features/Maps.tsx`          | Карта магазинов.                                                                           |
 | `src/components/features/SpacialOffers.tsx` | Блок спецпредложений.                                                                      |
@@ -405,9 +407,10 @@ CMS находится в `src/app/(root)/(admin)/administrator/(cms)/cms/`.
 | `auth.ts`        | Server-side Better Auth config, Mongo adapter, phone OTP, admin plugin, email templates. |
 | `auth-client.ts` | Client-side Better Auth client.                                                          |
 | `api-routes.ts`  | Helper `getDB()` с singleton MongoClient.                                                |
+| `showToast.ts`   | Общие helpers уведомлений: `showToast` и `showPromiseToast` на базе React-Toastify.      |
 | `utils.ts`       | `cn()` для merge классов через `clsx` и `tailwind-merge`.                                |
 
-Комментарий: API routes должны использовать `getDB()` вместо создания нового `MongoClient` в каждом обработчике.
+Комментарий: API routes должны использовать `getDB()` вместо создания нового `MongoClient` в каждом обработчике. Для новых уведомлений используйте `showToast()` или `showPromiseToast()`, а не прямые вызовы `toast.*` в компонентах.
 
 ## `src/types/`
 
@@ -463,6 +466,8 @@ CMS находится в `src/app/(root)/(admin)/administrator/(cms)/cms/`.
 8. Если меняете SEO, проверьте `src/app/sitemap.ts`, `/api/sitemap-data`, `utils/getSitemapData.ts`, CMS `semantic-core` и site metadata helpers.
 9. Если включаете реальную SMS-отправку, раскомментируйте/обновите `sendOTP` в `src/lib/auth.ts` и проверьте `SMS_API_ID`.
 10. Если подключаете реальную оплату, не полагайтесь на текущий `FakePaymentModal`; нужна отдельная серверная валидация платежа и идемпотентность callbacks.
+11. Если добавляете уведомление, используйте `src/lib/showToast.ts`. Для фоновых async-действий предпочтителен `showPromiseToast()` с состояниями `pending`, `success`, `error`.
+12. Если меняете Excel-выгрузку, используйте `exceljs`. Пакет `xlsx` удален из зависимостей из-за advisory и отсутствия использования.
 
 ## Известные особенности
 
@@ -475,6 +480,8 @@ CMS находится в `src/app/(root)/(admin)/administrator/(cms)/cms/`.
 | Admin/manager           | Обе роли видят админку, но бизнес-доступы могут различаться.            |
 | Mongo singleton         | Для API routes используется общий `MongoClient` через `getDB()`.        |
 | CMS активно развивается | В CMS есть новые компоненты фильтрации, сортировки и reorder категорий. |
+| Toast notifications     | Уведомления централизованы через React-Toastify и helpers в `src/lib/showToast.ts`. |
+| Excel export            | Выгрузка заказов работает через ExcelJS; зависимость `xlsx` не используется. |
 
 ## Проверка после изменений
 
@@ -482,6 +489,7 @@ CMS находится в `src/app/(root)/(admin)/administrator/(cms)/cms/`.
 
 ```bash
 npm run lint
+npm audit
 npm run build
 ```
 

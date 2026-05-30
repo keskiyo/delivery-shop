@@ -1,7 +1,10 @@
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import { CUSTOMER_STATUSES } from '../utils/customerStatuses'
-import { getStatusColorClass } from '../utils/getStatusColorClass'
+import {
+	getStatusColorClass,
+	getStatusIconColorClass,
+} from '../utils/getStatusColorClass'
 
 interface StatusDropdownProps {
 	currentStatusLabel: string
@@ -52,27 +55,21 @@ const StatusDropdown = ({
 			>
 				<div className='flex items-center gap-2 flex-1'>
 					{currentStatusData && (
-						<Image
-							src={currentStatusData.icon}
-							alt={currentStatusData.label}
-							width={24}
-							height={24}
-							className={`shrink-0 ${
-								currentStatusLabel === 'Доставляется' ||
-								currentStatusLabel === 'Новый'
-									? ''
-									: 'filter brightness-0 invert'
-							}`}
-						/>
+						<span
+							className={`flex h-7 w-7 shrink-0 items-center justify-center rounded ${getStatusIconColorClass(
+								currentStatusLabel,
+							)}`}
+						>
+							<Image
+								src={currentStatusData.icon}
+								alt={currentStatusData.label}
+								width={18}
+								height={18}
+								className='shrink-0 filter brightness-0 invert'
+							/>
+						</span>
 					)}
-					<span
-						className={`flex-1 text-left ${
-							currentStatusLabel === 'Доставляется' ||
-							currentStatusLabel === 'Новый'
-								? 'text-text-soft'
-								: 'text-current'
-						}`}
-					>
+					<span className='flex-1 text-left text-current'>
 						{currentStatusLabel}
 					</span>
 				</div>
@@ -81,17 +78,12 @@ const StatusDropdown = ({
 					alt='Раскрыть'
 					width={24}
 					height={24}
-					className={`transition-transform ${
-						currentStatusLabel === 'Доставляется' ||
-						currentStatusLabel === 'Новый'
-							? ''
-							: 'filter brightness-0 invert'
-					} ${isDropdownOpen ? 'rotate-180' : ''}`}
+					className={`transition-transform filter brightness-0 invert ${isDropdownOpen ? 'rotate-180' : ''}`}
 				/>
 			</button>
 
 			{isDropdownOpen && (
-				<div className='absolute top-full right-0 mt-1 bg-card border border-border rounded shadow-lg z-200 w-50'>
+				<div className='absolute top-full right-0 mt-1 bg-card border border-border rounded shadow-lg z-200 w-50 overflow-hidden p-1'>
 					{CUSTOMER_STATUSES.map(status => (
 						<button
 							key={status.value}
@@ -100,19 +92,25 @@ const StatusDropdown = ({
 								onStatusChange(status.label)
 								setIsDropdownOpen(false)
 							}}
-							className={`flex items-center gap-3 w-full px-4 py-2 text-left hover:bg-promo-soft duration-300 cursor-pointer ${getStatusColorClass(
+							className={`flex items-center gap-3 w-full rounded px-2 py-2 text-left duration-300 cursor-pointer ${getStatusColorClass(
 								status.label,
 								false,
 							)}`}
 						>
-							<Image
-								src={status.icon}
-								alt={status.label}
-								width={24}
-								height={24}
-								className='shrink-0 filter brightness-0'
-							/>
-							<span>{status.label}</span>
+							<span
+								className={`flex h-7 w-7 shrink-0 items-center justify-center rounded ${getStatusIconColorClass(
+									status.label,
+								)}`}
+							>
+								<Image
+									src={status.icon}
+									alt={status.label}
+									width={18}
+									height={18}
+									className='shrink-0 filter brightness-0 invert'
+								/>
+							</span>
+							<span className='font-medium'>{status.label}</span>
 						</button>
 					))}
 				</div>

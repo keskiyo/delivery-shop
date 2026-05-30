@@ -2,6 +2,7 @@
 
 import IconHeart from '@/components/svg/IconHeart'
 import { useFavorites } from '@/hooks/useFavorite'
+import { showPromiseToast, showToast } from '@/lib/showToast'
 import { useAuthStore } from '@/store/authStore'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -34,6 +35,10 @@ const FavoriteButton = ({
 
 	const handleClick = async () => {
 		if (!isAuth) {
+			showToast({
+				type: 'error',
+				message: 'Войдите в аккаунт, чтобы добавлять товары в избранное',
+			})
 			router.push('/login')
 			return
 		}
@@ -41,7 +46,14 @@ const FavoriteButton = ({
 		setIsProcessing(true)
 
 		try {
-			await toggleFavorite(productId)
+			const wasFavorite = isFavorite(productId)
+			await showPromiseToast(toggleFavorite(productId), {
+				pending: 'Обновляем избранное...',
+				success: wasFavorite
+					? 'Товар удален из избранного'
+					: 'Товар добавлен в избранное',
+				error: 'Не удалось обновить избранное',
+			})
 		} catch (error) {
 			console.error('Не удалось переключить избранное:', error)
 		} finally {

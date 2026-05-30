@@ -2,6 +2,7 @@ const fetchProductsByTag = async (
 	tag: string,
 	options?: {
 		pagination?: { startIdx: number; perPage: number }
+		randomize?: boolean
 	},
 ) => {
 	try {
@@ -14,7 +15,16 @@ const fetchProductsByTag = async (
 			url.searchParams.append('perPage', perPage.toString())
 		}
 
-		const res = await fetch(url.toString(), { next: { revalidate: 3600 } })
+		if (options?.randomize) {
+			url.searchParams.append('random', 'true')
+		}
+
+		const res = await fetch(
+			url.toString(),
+			options?.randomize
+				? { cache: 'no-store' }
+				: { next: { revalidate: 3600 } },
+		)
 
 		if (!res.ok) {
 			throw new Error(`Ошибка получения продуктов ${tag}`)

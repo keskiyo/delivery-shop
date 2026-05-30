@@ -21,7 +21,11 @@ const Purchases = () => {
 	useEffect(() => {
 		const checkAccessAndFetchData = async () => {
 			try {
-				const hasAccess = isAuth && user?.role === 'user'
+				const hasAccess =
+					isAuth &&
+					(user?.role === 'user' ||
+						user?.role === 'admin' ||
+						user?.role === 'manager')
 				setShouldShow(hasAccess)
 
 				if (hasAccess) {

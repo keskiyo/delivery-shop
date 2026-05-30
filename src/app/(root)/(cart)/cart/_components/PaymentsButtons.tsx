@@ -33,8 +33,8 @@ const PaymentsButtons = ({
 				onClick={onOnlinePayment}
 				className={`rounded w-full text-xl h-15 items-center justify-center ${
 					canProceedWithPayment
-						? buttonStyles.active
-						: buttonStyles.inactive
+						? `${buttonStyles.active} cursor-pointer`
+						: `${buttonStyles.inactive} cursor-not-allowed`
 				}`}
 			>
 				{isProcessing ? 'Обработка...' : 'Оплатить на сайте'}

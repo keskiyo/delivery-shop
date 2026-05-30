@@ -34,7 +34,7 @@ const Profile = () => {
 	const [isLoggingOut, setIsLoggingOut] = useState(false)
 	const [isMobile, setIsMobile] = useState(false)
 	const [avatarSrc, setAvatarSrc] = useState<string>('')
-	const [lastUpdate, setLastUpdate] = useState(Date.now())
+	const [lastUpdate, setLastUpdate] = useState(() => Date.now())
 	const menuRef = useRef<HTMLDivElement>(null)
 	const router = useRouter()
 

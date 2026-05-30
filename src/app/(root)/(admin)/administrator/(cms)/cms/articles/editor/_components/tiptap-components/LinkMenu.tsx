@@ -1,6 +1,6 @@
 import { EditorProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/articles/types/tiptap'
 import { ExternalLink, Link as LinkIcon, Unlink } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 export const LinkMenu = ({ editor }: EditorProps) => {
 	const [isModalOpen, setIsModalOpen] = useState(false)
@@ -10,6 +10,13 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 	const [isLinkActive, setIsLinkActive] = useState(false)
 	const modalRef = useRef<HTMLDivElement>(null)
 	const urlInputRef = useRef<HTMLInputElement>(null)
+
+	const handleCloseModal = useCallback(() => {
+		setIsModalOpen(false)
+		setUrl('')
+		setText('')
+		setOpenInNewTab(true)
+	}, [])
 
 	// Подписываемся на изменения редактора для определения активности ссылки
 	useEffect(() => {
@@ -103,7 +110,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 		return () => {
 			document.removeEventListener('mousedown', handleClickOutside)
 		}
-	}, [isModalOpen])
+	}, [handleCloseModal, isModalOpen])
 
 	const handleAddLink = () => {
 		if (!editor || !url.trim()) return
@@ -147,13 +154,6 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 
 	const handleOpenModal = () => {
 		setIsModalOpen(true)
-	}
-
-	const handleCloseModal = () => {
-		setIsModalOpen(false)
-		setUrl('')
-		setText('')
-		setOpenInNewTab(true)
 	}
 
 	const handleKeyDown = (e: React.KeyboardEvent) => {

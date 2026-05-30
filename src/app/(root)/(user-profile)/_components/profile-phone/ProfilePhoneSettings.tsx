@@ -4,6 +4,7 @@ import PhoneVerifyView from '@/app/(root)/(user-profile)/_components/profile-pho
 import ProfilePhoneInput from '@/app/(root)/(user-profile)/_components/profile-phone/ProfilePhoneInput'
 import useTimer from '@/hooks/useTimer'
 import { authClient } from '@/lib/auth-client'
+import { showPromiseToast } from '@/lib/showToast'
 import { useAuthStore } from '@/store/authStore'
 import { useEffect, useState } from 'react'
 import { CONFIG } from '../../../../../../config/config'
@@ -57,11 +58,10 @@ const ProfilePhoneSetting = ({ isEditing }: { isEditing: boolean }) => {
 
 		if (!response.ok) {
 			setError(data.error)
-			return
+			throw new Error(data.error || 'Ошибка при обновлении телефона')
 		}
 
 		await fetchUserData()
-		alert('Номер телефона успешно обновлен!')
 	}
 
 	const handleSave = async () => {
@@ -77,9 +77,17 @@ const ProfilePhoneSetting = ({ isEditing }: { isEditing: boolean }) => {
 
 		try {
 			if (!isPhoneRegistered) {
-				await updatePhoneDirectly()
+				await showPromiseToast(updatePhoneDirectly(), {
+					pending: 'Обновляем телефон...',
+					success: 'Номер телефона успешно обновлен',
+					error: 'Ошибка при обновлении телефона',
+				})
 			} else {
-				await sendVerificationCode()
+				await showPromiseToast(sendVerificationCode(), {
+					pending: 'Отправляем SMS-код...',
+					success: 'SMS-код отправлен',
+					error: 'Ошибка при отправке SMS',
+				})
 			}
 		} catch (error) {
 			console.error('Ошибка при сохранении:', error)
@@ -101,6 +109,8 @@ const ProfilePhoneSetting = ({ isEditing }: { isEditing: boolean }) => {
 		setError('')
 
 		try {
+			let otpError: Error | null = null
+
 			await authClient.phoneNumber.sendOtp(
 				{ phoneNumber: currentPhone },
 				{
@@ -111,19 +121,25 @@ const ProfilePhoneSetting = ({ isEditing }: { isEditing: boolean }) => {
 					},
 					onError: ctx => {
 						setIsSendingOTP(false)
-						setError(
-							ctx.error?.message || 'Ошибка при отправке SMS',
-						)
+						const message =
+							ctx.error?.message || 'Ошибка при отправке SMS'
+						setError(message)
+						otpError = new Error(message)
 					},
 				},
 			)
+
+			if (otpError) {
+				throw otpError
+			}
+
 			return true
 		} catch (error) {
 			setIsSendingOTP(false)
-			setError(
-				error instanceof Error ? error.message : 'Неизвестная ошибка',
-			)
-			return false
+			const message =
+				error instanceof Error ? error.message : 'Неизвестная ошибка'
+			setError(message)
+			throw new Error(message)
 		}
 	}
 
@@ -140,7 +156,11 @@ const ProfilePhoneSetting = ({ isEditing }: { isEditing: boolean }) => {
 
 			if (verifyError) throw verifyError
 
-			updatePhoneDirectly()
+			await showPromiseToast(updatePhoneDirectly(), {
+				pending: 'Подтверждаем телефон...',
+				success: 'Номер телефона успешно обновлен',
+				error: 'Ошибка при обновлении телефона',
+			})
 			setVerificationStep('edit')
 			setCode('')
 			setAttemptsLeft(CONFIG.MAX_ATTEMPTS)
@@ -165,7 +185,15 @@ const ProfilePhoneSetting = ({ isEditing }: { isEditing: boolean }) => {
 
 	const handleResendCode = async () => {
 		if (!canResend) return
-		await sendVerificationCode()
+		try {
+			await showPromiseToast(sendVerificationCode(), {
+				pending: 'Отправляем SMS-код...',
+				success: 'SMS-код отправлен',
+				error: 'Ошибка при отправке SMS',
+			})
+		} catch (error) {
+			console.error('Ошибка при повторной отправке SMS:', error)
+		}
 	}
 
 	return (

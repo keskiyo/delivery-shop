@@ -1,6 +1,7 @@
 import SelectCity from '@/app/(root)/(auth)/(reg)/_components/SelectCity'
 import SelectRegion from '@/app/(root)/(auth)/(reg)/_components/SelectRegion'
 import { profileStyles } from '@/app/(root)/(auth)/styles'
+import { showPromiseToast } from '@/lib/showToast'
 import { useAuthStore } from '@/store/authStore'
 import { ChangeEvent, useEffect, useState } from 'react'
 
@@ -74,26 +75,35 @@ const LocationSection = ({ isEditing }: { isEditing: boolean }) => {
 		setIsSaving(true)
 
 		try {
-			const response = await fetch('/api/auth/location', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
+			await showPromiseToast(
+				(async () => {
+					const response = await fetch('/api/auth/location', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({
+							userId: user.id,
+							region: formData.region,
+							location: formData.location,
+						}),
+					})
+
+					if (!response.ok) {
+						throw new Error('Ошибка сохранения')
+					}
+
+					return response
+				})(),
+				{
+					pending: 'Сохраняем местоположение...',
+					success: 'Местоположение успешно обновлено',
+					error: 'Не удалось сохранить изменения',
 				},
-				body: JSON.stringify({
-					userId: user.id,
-					region: formData.region,
-					location: formData.location,
-				}),
-			})
-
-			if (!response.ok) {
-				throw new Error('Ошибка сохранения')
-			}
-
+			)
 			await fetchUserData()
 		} catch (error) {
 			console.error('Ошибка при сохранении:', error)
-			alert('Не удалось сохранить изменения')
 		} finally {
 			setIsSaving(false)
 		}

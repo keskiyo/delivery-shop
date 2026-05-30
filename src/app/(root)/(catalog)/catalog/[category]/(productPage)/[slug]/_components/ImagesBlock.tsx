@@ -28,7 +28,7 @@ const ImagesBlock = ({ product }: { product: ProductWithImages }) => {
 						type='button'
 						onClick={() => setActiveIndex(index)}
 						aria-label={`Показать изображение ${index + 1}`}
-						className={`relative h-16 w-16 overflow-hidden bg-card transition md:h-20 md:w-20 cursor-pointer ${
+						className={`relative h-16 w-16 overflow-hidden bg-white transition md:h-20 md:w-20 cursor-pointer ${
 							activeIndex === index
 								? 'border-2 border-promo'
 								: 'border border-transparent hover:border-border'
@@ -47,7 +47,7 @@ const ImagesBlock = ({ product }: { product: ProductWithImages }) => {
 
 			{/* Основное изображение */}
 			<div
-				className='relative flex justify-center items-center shadow-image-block bg-surface
+				className='relative flex justify-center items-center shadow-image-block bg-white
                      h-62 xl:h-120
                      w-62 md:w-68 xl:w-120
                      p-2 shrink-0'
@@ -56,7 +56,7 @@ const ImagesBlock = ({ product }: { product: ProductWithImages }) => {
 					src={activeImage}
 					alt={product.title}
 					fill
-					className='object-contain'
+					className='object-contain p-2'
 					sizes='(max-width: 768px) 248px, (max-width: 1032px) 272px, 504px'
 					priority
 				/>

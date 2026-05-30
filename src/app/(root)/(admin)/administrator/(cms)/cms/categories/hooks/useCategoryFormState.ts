@@ -1,5 +1,6 @@
 'use client'
 
+import { showToast } from '@/lib/showToast'
 import { useCategoryStore } from '@/store/categoryStore'
 import { useCallback, useState } from 'react'
 import { transliterate } from '../../../../../../../../../utils/transliterate'
@@ -20,7 +21,10 @@ export const useCategoryFormState = () => {
 
 	const generateSlug = useCallback(() => {
 		if (!formData.name.trim()) {
-			alert('Сначала введите название категории')
+			showToast({
+				type: 'error',
+				message: 'Сначала введите название категории',
+			})
 			return
 		}
 

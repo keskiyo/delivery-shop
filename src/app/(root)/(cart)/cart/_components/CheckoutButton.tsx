@@ -1,7 +1,6 @@
 import { buttonStyles } from '@/app/(root)/(auth)/styles'
 
 const CheckoutButton = ({
-	isCheckout,
 	isMinimumReached,
 	visibleCartItemsCount,
 	onCheckout,
@@ -15,10 +14,10 @@ const CheckoutButton = ({
 		<button
 			onClick={onCheckout}
 			disabled={!isMinimumReached || visibleCartItemsCount === 0}
-			className={`p-3 rounded mx-auto w-full text-2xl cursor-pointer ${
+			className={`p-3 rounded mx-auto w-full text-2xl  ${
 				isMinimumReached && visibleCartItemsCount > 0
-					? buttonStyles.active
-					: buttonStyles.inactive
+					? `${buttonStyles.active} cursor-pointer`
+					: `${buttonStyles.inactive} cursor-not-allowed`
 			}`}
 		>
 			Оформить заказ

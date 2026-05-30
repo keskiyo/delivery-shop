@@ -9,6 +9,8 @@ Full-stack приложение для доставки еды: витрина �
 - MongoDB, Better Auth
 - Zustand, Redux Toolkit, React Context
 - React Email, Resend
+- React-Toastify для пользовательских уведомлений
+- ExcelJS для выгрузки заказов в `.xlsx`
 
 ## Features
 
@@ -17,6 +19,8 @@ Full-stack приложение для доставки еды: витрина �
 - Авторизация по email/паролю и телефону, профиль, история заказов, избранное и покупки.
 - Админка для товаров, пользователей, заказов, календаря заказов и слотов доставки.
 - CMS для категорий: сортировка, изображения, SEO-поля, рекомендации и пагинация.
+- Красивые toast-уведомления для действий пользователя и фоновых async-операций.
+- Выгрузка заказов в Excel через ExcelJS.
 - Email-шаблоны для подтверждений, восстановления пароля и смены email.
 - Cron endpoint для обновления доступных дат доставки.
 
@@ -36,6 +40,7 @@ npm run dev                    # development server
 npm run build                  # production build
 npm run start                  # start production server
 npm run lint                   # ESLint
+npm audit                      # dependency security audit
 npm run update-delivery-dates  # call delivery dates cron endpoint
 ```
 
@@ -73,5 +78,11 @@ src/data/                static app data
 
 ```bash
 npm run lint
+npm audit
 npm run build
 ```
+
+## Notes
+
+- Уведомления централизованы в `src/lib/showToast.ts`: `showToast` для обычных сообщений и `showPromiseToast` для async-действий через `toast.promise`.
+- `xlsx` удален из зависимостей из-за audit advisory; выгрузка Excel работает через `exceljs`.

@@ -89,12 +89,12 @@ const ProductCard = ({
 				<FavoriteButton productId={productId.toString()} />
 			)}
 			<Link href={productUrl}>
-				<div className='w-40 h-40 md:w-56 xl:w-68 aspect-square relative'>
+				<div className='w-40 h-40 md:w-56 xl:w-68 aspect-square relative bg-white'>
 					<Image
 						src={img}
 						alt='Товар'
 						fill
-						className='object-contain'
+						className='object-contain p-2'
 						priority={isPriorityImage}
 						sizes='(max-width: 768px) 160px, (max-width: 1200px) 224px, 272px'
 						unoptimized

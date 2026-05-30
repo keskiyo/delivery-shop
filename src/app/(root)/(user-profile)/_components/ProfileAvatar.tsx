@@ -3,6 +3,7 @@
 import ConfirmAvatarModal from '@/app/(root)/(user-profile)/_components/ConfirmAvatarModal'
 import IconAvatarChange from '@/components/svg/IconAvatarChange'
 import useAvatar from '@/hooks/useAvatar'
+import { showPromiseToast, showToast } from '@/lib/showToast'
 import { useAuthStore } from '@/store/authStore'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
@@ -90,7 +91,10 @@ const ProfileAvatar = ({ gender }: { gender: string }) => {
 			reader.readAsDataURL(file)
 		} catch (error) {
 			console.error('Ошибка оптимизации изображения:', error)
-			alert('Не удалось обработать изображение')
+			showToast({
+				type: 'error',
+				message: 'Не удалось обработать изображение',
+			})
 		}
 	}
 
@@ -99,15 +103,17 @@ const ProfileAvatar = ({ gender }: { gender: string }) => {
 			setShowConfirmModal(false)
 
 			try {
-				await uploadAvatar(pendingFile)
+				await showPromiseToast(uploadAvatar(pendingFile), {
+					pending: 'Загружаем аватар...',
+					success: 'Аватар обновлен',
+					error: 'Ошибка загрузки аватара',
+				})
 				if (previewUrl && previewUrl.startsWith('blob:')) {
 					URL.revokeObjectURL(previewUrl)
 				}
 				setPreviewUrl('')
 			} catch (error) {
-				alert(
-					error instanceof Error ? error.message : 'Ошибка загрузки',
-				)
+				console.error('Ошибка загрузки аватара:', error)
 				setPreviewUrl('')
 			} finally {
 				setPendingFile(null)

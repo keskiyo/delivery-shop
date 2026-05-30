@@ -15,6 +15,7 @@ import Tags from '@/app/(root)/(admin)/administrator/products/_components/Tags'
 import Title from '@/app/(root)/(admin)/administrator/products/_components/Title'
 import Weight from '@/app/(root)/(admin)/administrator/products/_components/Weight'
 import { initialProductData } from '@/constants/addProductFormData'
+import { showPromiseToast, showToast } from '@/lib/showToast'
 import {
 	AddProductApiResponse,
 	AddProductFormData,
@@ -125,9 +126,11 @@ export default function AddProductPage() {
 			hasActionsTag &&
 			(!formData.discountPercent || formData.discountPercent === '0')
 		) {
-			alert(
-				"Для товара с тегом 'Акции' обязательно укажите размер скидки",
-			)
+			showToast({
+				type: 'error',
+				message:
+					"Для товара с тегом 'Акции' обязательно укажите размер скидки",
+			})
 			return
 		}
 
@@ -139,46 +142,66 @@ export default function AddProductPage() {
 			let imagePath: string | null = null
 
 			if (image) {
-				const uploadResult = await uploadImage(image, productId)
+				const uploadResult = await showPromiseToast(
+					uploadImage(image, productId),
+					{
+						pending: 'Загружаем изображение товара...',
+						success: 'Изображение товара загружено',
+						error: 'Ошибка загрузки изображения',
+					},
+				)
 				if (uploadResult) {
 					imagePath = uploadResult.img
 				} else {
-					alert('Ошибка загрузки изображения')
+					showToast({
+						type: 'error',
+						message: 'Ошибка загрузки изображения',
+					})
 					setLoading(false)
 					return
 				}
 			}
 
-			const response = await fetch('/api/add-product', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
+			const result = await showPromiseToast(
+				(async (): Promise<AddProductApiResponse> => {
+					const response = await fetch('/api/add-product', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({
+							...formData,
+							img: imagePath,
+							id: productId,
+							basePrice: Number(formData.basePrice),
+							discountPercent: Number(formData.discountPercent),
+							weight: Number(formData.weight),
+							quantity: Number(formData.quantity),
+							isHealthyFood: formData.isHealthyFood,
+							isNonGMO: formData.isNonGMO,
+						}),
+					})
+
+					const result: AddProductApiResponse = await response.json()
+
+					if (!response.ok || !result.success) {
+						throw new Error('Ошибка создания товара')
+					}
+
+					return result
+				})(),
+				{
+					pending: 'Создаем товар...',
+					success: 'Товар создан',
+					error: 'Ошибка создания товара',
 				},
-				body: JSON.stringify({
-					...formData,
-					img: imagePath,
-					id: productId,
-					basePrice: Number(formData.basePrice),
-					discountPercent: Number(formData.discountPercent),
-					weight: Number(formData.weight),
-					quantity: Number(formData.quantity),
-					isHealthyFood: formData.isHealthyFood,
-					isNonGMO: formData.isNonGMO,
-				}),
-			})
+			)
 
-			const result: AddProductApiResponse = await response.json()
-
-			if (response.ok && result.success) {
+			if (result.success) {
 				setCreatedProductId(productId)
 			}
 		} catch (error) {
-			alert(
-				'Ошибка: ' +
-					(error instanceof Error
-						? error.message
-						: 'Неизвестная ошибка'),
-			)
+			console.error('Ошибка создания товара:', error)
 		} finally {
 			setLoading(false)
 		}

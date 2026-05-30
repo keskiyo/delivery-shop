@@ -1,3 +1,4 @@
+import { showPromiseToast } from '@/lib/showToast'
 import { useEffect, useState } from 'react'
 import { FormData, SiteSettings } from '../types/site-settings'
 
@@ -44,36 +45,45 @@ export const useSiteSettings = () => {
 		setSaving(true)
 
 		try {
-			const response = await fetch(
-				'/administrator/cms/api/site-settings',
+			await showPromiseToast(
+				(async () => {
+					const response = await fetch(
+						'/administrator/cms/api/site-settings',
+						{
+							method: 'PUT',
+							headers: { 'Content-Type': 'application/json' },
+							body: JSON.stringify({
+								siteTitle: formData.siteTitle,
+								metaDescription: formData.metaDescription,
+								siteKeywords: formData.siteKeywords
+									.split(',')
+									.map(k => k.trim())
+									.filter(k => k.length > 0),
+								semanticCore: formData.semanticCore
+									.split(',')
+									.map(k => k.trim())
+									.filter(k => k.length > 0),
+							}),
+						},
+					)
+
+					const data = await response.json()
+
+					if (!data.success) {
+						throw new Error('Ошибка сохранения')
+					}
+
+					return data
+				})(),
 				{
-					method: 'PUT',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({
-						siteTitle: formData.siteTitle,
-						metaDescription: formData.metaDescription,
-						siteKeywords: formData.siteKeywords
-							.split(',')
-							.map(k => k.trim())
-							.filter(k => k.length > 0),
-						semanticCore: formData.semanticCore
-							.split(',')
-							.map(k => k.trim())
-							.filter(k => k.length > 0),
-					}),
+					pending: 'Сохраняем настройки...',
+					success: 'Настройки сохранены',
+					error: 'Ошибка сохранения настроек',
 				},
 			)
-
-			const data = await response.json()
-			if (data.success) {
-				alert('Настройки сохранены')
-				await loadSettings()
-			} else {
-				alert('Ошибка сохранения')
-			}
+			await loadSettings()
 		} catch (error) {
 			console.error('Ошибка сохранения:', error)
-			alert('Ошибка сохранения настроек')
 		} finally {
 			setSaving(false)
 		}

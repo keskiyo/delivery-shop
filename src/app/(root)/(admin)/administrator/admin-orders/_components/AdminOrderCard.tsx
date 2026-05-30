@@ -7,6 +7,7 @@ import { buttonStyles } from '@/app/(root)/(auth)/styles'
 import { updateOrderStatus } from '@/app/(root)/(cart)/cart/utils/orderHelpers'
 import IconNotice from '@/components/svg/IconNotice'
 import IconVision from '@/components/svg/IconVision'
+import { showPromiseToast } from '@/lib/showToast'
 import {
 	useGetOrderMessagesQuery,
 	useUnreadMessagesQuery,
@@ -64,7 +65,7 @@ const AdminOrderCard = ({ orderId }: AdminOrderCardProps) => {
 
 	const handleOpenCalendar = () => {
 		if (showCalendarIcon) {
-			setShowCalendar(true)
+			setShowCalendar(prev => !prev)
 		}
 	}
 
@@ -86,7 +87,11 @@ const AdminOrderCard = ({ orderId }: AdminOrderCardProps) => {
 				updateData.paymentStatus = paymentStatus
 			}
 
-			await updateOrderStatus(order._id, updateData)
+			await showPromiseToast(updateOrderStatus(order._id, updateData), {
+				pending: 'Обновляем статус заказа...',
+				success: 'Статус заказа обновлен',
+				error: 'Ошибка обновления статуса',
+			})
 			setCurrentStatusLabel(newStatusLabel)
 		} catch (error) {
 			console.error('Ошибка при обновлении статуса:', error)
@@ -140,7 +145,11 @@ const AdminOrderCard = ({ orderId }: AdminOrderCardProps) => {
 
 		setIsExporting(true)
 		try {
-			await exportOrderToExcel(order)
+			await showPromiseToast(exportOrderToExcel(order), {
+				pending: 'Готовим Excel-файл...',
+				success: 'Excel-файл выгружен',
+				error: 'Ошибка выгрузки в Excel',
+			})
 		} catch (error) {
 			console.error('Ошибка при выгрузке в Excel:', error)
 		} finally {
@@ -201,8 +210,7 @@ const AdminOrderCard = ({ orderId }: AdminOrderCardProps) => {
 
 					{/* Кнопка чата или календаря */}
 					{showCalendarIcon ? (
-						<div>
-							// При confirmed/pending
+						<div className='relative'>
 							<button
 								className='relative bg-surface-hover hover:shadow-button-secondary w-10 h-10 px-2 flex justify-center items-center gap-2 rounded duration-300 cursor-pointer text-foreground'
 								onClick={handleOpenCalendar}

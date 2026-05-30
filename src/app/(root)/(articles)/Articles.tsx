@@ -4,18 +4,14 @@ import ErrorComponent from '@/components/features/common/ErrorComponent'
 import { CONFIG } from '../../../../config/config'
 
 const Articles = async () => {
+	let items
+
 	try {
-		const { items } = await fetchArticles({
+		const data = await fetchArticles({
 			articlesLimit: CONFIG.ITEMS_PER_PAGE_MAIN_ARTICLES,
 		})
 
-		return (
-			<ArticlesSection
-				title='Статьи'
-				articles={items}
-				viewAllLink={{ text: 'Все статьи', href: '/articles' }}
-			/>
-		)
+		items = data.items
 	} catch (error) {
 		return (
 			<ErrorComponent
@@ -26,6 +22,14 @@ const Articles = async () => {
 			/>
 		)
 	}
+
+	return (
+		<ArticlesSection
+			title='Статьи'
+			articles={items}
+			viewAllLink={{ text: 'Все статьи', href: '/articles' }}
+		/>
+	)
 }
 
 export default Articles

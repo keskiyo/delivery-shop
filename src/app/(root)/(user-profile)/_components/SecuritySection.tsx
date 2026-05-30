@@ -1,6 +1,7 @@
 'use client'
 
 import { LoadingContent } from '@/app/(root)/(auth)/(reg)/_components/LoadingContent'
+import { showPromiseToast } from '@/lib/showToast'
 import { useAuthStore } from '@/store/authStore'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -44,7 +45,11 @@ const SecuritySection = ({
 
 	const logoutFromProfile = async () => {
 		try {
-			await logout()
+			await showPromiseToast(logout(), {
+				pending: 'Выходим из аккаунта...',
+				success: 'Вы вышли из аккаунта',
+				error: 'Не удалось выйти из приложения',
+			})
 			router.replace('/')
 		} catch (error) {
 			console.error('Ошибка при выходе:', error)
@@ -63,27 +68,40 @@ const SecuritySection = ({
 			setIsLoading(true)
 			setError(null)
 
-			const response = await fetch('/api/auth/delete-account', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ userId: user.id }),
-			})
+			await showPromiseToast(
+				(async () => {
+					const response = await fetch('/api/auth/delete-account', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({ userId: user.id }),
+					})
 
-			const data = await response.json()
+					const data = await response.json()
 
-			if (!response.ok) {
-				throw new Error(data.message || 'Не удалось удалить аккаунт')
-			}
+					if (!response.ok) {
+						throw new Error(
+							data.message || 'Не удалось удалить аккаунт',
+						)
+					}
+
+					return data
+				})(),
+				{
+					pending: 'Удаляем аккаунт...',
+					success: 'Аккаунт удален',
+					error: 'Не удалось удалить аккаунт',
+				},
+			)
 
 			logout() // Выходим из приложения, чтобы очистить Zustand store
 			router.replace('/goodbye')
 		} catch (error) {
 			console.error('Ошибка при удалении аккаунта:', error)
-			setError(
+			const errorMessage =
 				error instanceof Error
 					? error.message
-					: 'Не удалось удалить аккаунт. Попробуйте позже.',
-			)
+					: 'Не удалось удалить аккаунт. Попробуйте позже.'
+			setError(errorMessage)
 		} finally {
 			setIsLoading(false)
 			setShowDeleteConfirm(false)

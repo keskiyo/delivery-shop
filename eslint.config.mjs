@@ -14,9 +14,18 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
   ]),
   {
-    files: ["src/components/**/ThemeProvider.tsx"],
     rules: {
       "react-hooks/set-state-in-effect": "off",
+    },
+  },
+  {
+    files: [
+      "migrate-mongo-config.js",
+      "tailwind.config.js",
+      "migrations/**/*.js",
+    ],
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
     },
   },
 ]);

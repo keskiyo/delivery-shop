@@ -6,6 +6,7 @@ import { CONFIG } from '../../../../config/config'
 interface ActionProps {
 	limitItems?: number
 	mobileItemsLimit?: number
+	randomize?: boolean
 }
 
 /**
@@ -20,6 +21,7 @@ interface ActionProps {
  * Параметры:
  * - limitItems: количество товаров для загрузки (по умолчанию из CONFIG)
  * - mobileItemsLimit: количество товаров на мобильных (по умолчанию 4)
+ * - randomize: случайная выборка товаров, используется только на главной странице
  *
  * Логика работы:
  * 1. Вызывает fetchProductsByTag('actions') для получения акционных товаров
@@ -33,23 +35,23 @@ interface ActionProps {
  * @param limitItems - Максимальное количество товаров для загрузки
  * @param mobileItemsLimit - Количество товаров на мобильных устройствах
  */
-const Actions = async ({ mobileItemsLimit = 4 }: ActionProps) => {
+const Actions = async ({
+	limitItems = CONFIG.ITEMS_PER_PAGE_MAIN_PRODUCTS,
+	mobileItemsLimit = 4,
+	randomize = false,
+}: ActionProps) => {
+	let items
+
 	try {
-		const { items } = await fetchProductsByTag('actions', {
+		const data = await fetchProductsByTag('actions', {
 			pagination: {
 				startIdx: 0,
-				perPage: CONFIG.ITEMS_PER_PAGE_MAIN_PRODUCTS,
+				perPage: limitItems,
 			},
+			randomize,
 		})
 
-		return (
-			<ProductsSections
-				title='Акции'
-				viewAllLink={{ text: 'Все акции', href: '/actions' }}
-				products={items}
-				mobileItemsLimit={mobileItemsLimit}
-			/>
-		)
+		items = data.items
 	} catch (error) {
 		return (
 			<ErrorComponent
@@ -60,6 +62,15 @@ const Actions = async ({ mobileItemsLimit = 4 }: ActionProps) => {
 			/>
 		)
 	}
+
+	return (
+		<ProductsSections
+			title='Акции'
+			viewAllLink={{ text: 'Все акции', href: '/actions' }}
+			products={items}
+			mobileItemsLimit={mobileItemsLimit}
+		/>
+	)
 }
 
 export default Actions

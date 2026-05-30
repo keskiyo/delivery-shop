@@ -56,7 +56,7 @@ const FakePaymentModal = ({
 
 		try {
 			const basePaymentData: Omit<FakePaymentData, 'status'> = {
-				id: `fake_pay_${Date.now()}`,
+				id: `fake_pay_${new Date().getTime()}`,
 				amount,
 				cardLast4: cardNumber.slice(-4) || '4444',
 				timestamp: new Date().toISOString(),

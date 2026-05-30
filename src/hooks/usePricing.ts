@@ -114,7 +114,7 @@ export const usePricing = ({
 		? Math.max(0, totalPrice - maxBonusUse)
 		: totalPrice
 
-	// Проверяем, достигнута ли минимальная сумма заказа (1000 руб)
+	// Проверяем, достигнута ли минимальная сумма заказа из CONFIG.MIN_ORDER_PRICE
 	const isMinimumReached = finalPrice >= CONFIG.MIN_ORDER_PRICE
 
 	// Обновляем глобальное состояние корзины при изменении цен

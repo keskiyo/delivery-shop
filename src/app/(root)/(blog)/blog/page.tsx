@@ -7,6 +7,8 @@ import StatsInfo from './categories/_components/StatsInfo'
 import CategoriesSidebar from './categories/sidebar/CategoriesSidebar'
 import { getCategories } from './categories/utils/getCategories'
 
+export const dynamic = 'force-dynamic'
+
 const truncate = (str: string, maxLength: number): string => {
 	if (str.length <= maxLength) return str
 	return str.substring(0, maxLength - 3) + '...'

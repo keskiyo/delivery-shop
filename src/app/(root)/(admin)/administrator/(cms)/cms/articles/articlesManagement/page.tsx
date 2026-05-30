@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { showPromiseToast } from "@/lib/showToast";
+import { useEffect } from "react";
 import { Header } from "../../_components/Header";
-import { Notification } from "../../_components/Notification";
 import { ItemsPerPageSelector } from "../../categories/_components/ItemPerPageSelector";
 import { Pagination } from "../../_components/Pagination";
 import { useArticlesManagementStore } from "@/store/articlesManagementStore";
@@ -11,11 +11,6 @@ import { ArticleTable } from "./_components/ArticleTable";
 import { useArticlesReorder } from "./hooks/useArticlesReorder";
 
 const ArticlesManagementPage = () => {
-  const [notification, setNotification] = useState<{
-    type: "success" | "error";
-    message: string;
-  } | null>(null);
-
   const {
     totalAllItems,
     totalPages,
@@ -27,15 +22,6 @@ const ArticlesManagementPage = () => {
   } = useArticlesManagementStore();
 
   const { loadArticles, reorderArticles } = useArticlesReorder();
-
-  useEffect(() => {
-    if (notification) {
-      const timer = setTimeout(() => {
-        setNotification(null);
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [notification]);
 
   useEffect(() => {
     loadArticles({ page: currentPage });
@@ -50,26 +36,23 @@ const ArticlesManagementPage = () => {
         numericId: category.numericId || 0,
       }));
 
-      const result = await reorderArticles(dataForApi);
+      await showPromiseToast(
+        (async () => {
+          const result = await reorderArticles(dataForApi);
+          if (!result.success) {
+            throw new Error(result.message || "Ошибка обновления порядка");
+          }
+          return result;
+        })(),
+        {
+          pending: "Обновляем порядок статей...",
+          success: "Порядок статей успешно обновлен",
+          error: "Ошибка обновления порядка",
+        },
+      );
 
-      if (result.success) {
-        setNotification({
-          type: "success",
-          message: "Порядок статей успешно обновлен",
-        });
-      } else {
-        setNotification({
-          type: "error",
-          message: result.message || "Ошибка обновления порядка",
-        });
-        throw new Error(result.message);
-      }
     } catch (error) {
       console.error("Ошибка:", error);
-      setNotification({
-        type: "error",
-        message: "Произошла ошибка при обновлении порядка",
-      });
       throw error;
     } finally {
       setIsReordering(false);
@@ -88,13 +71,6 @@ const ArticlesManagementPage = () => {
         title="Управление статьями"
         description={`Всего статей: ${totalAllItems}`}
       />
-      {notification && (
-        <Notification
-          type={notification.type}
-          message={notification.message}
-          onClose={() => setNotification(null)}
-        />
-      )}
       <div className="mb-4">
         <ItemsPerPageSelector
           value={itemsPerPage}

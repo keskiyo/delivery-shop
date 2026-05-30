@@ -1,4 +1,5 @@
 import { formStyles, profileStyles } from '@/app/(root)/(auth)/styles'
+import { showPromiseToast } from '@/lib/showToast'
 import { useAuthStore } from '@/store/authStore'
 import { InputMask } from '@react-input/mask'
 import { CreditCard } from 'lucide-react'
@@ -89,28 +90,44 @@ const ProfileCard = ({ isEditing }: { isEditing: boolean }) => {
 		setError('')
 
 		try {
-			const response = await fetch('/api/users/update-card', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
+			await showPromiseToast(
+				(async () => {
+					const response = await fetch('/api/users/update-card', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({
+							userId: user?.id,
+							cardNumber: cleanedCardNumber,
+						}),
+					})
+
+					const data = await response.json()
+
+					if (!response.ok) {
+						throw new Error(
+							data.error || 'Ошибка при обновлении карты',
+						)
+					}
+
+					return data
+				})(),
+				{
+					pending: 'Обновляем карту...',
+					success: 'Карта успешно обновлена',
+					error: 'Ошибка при обновлении карты',
 				},
-				body: JSON.stringify({
-					userId: user?.id,
-					cardNumber: cleanedCardNumber,
-				}),
-			})
-
-			const data = await response.json()
-
-			if (response.ok) {
-				// Обновляем данные пользователя после успешного сохранения
-				fetchUserData()
-			} else {
-				setError(data.error || 'Ошибка при обновлении карты')
-			}
+			)
+			// Обновляем данные пользователя после успешного сохранения
+			fetchUserData()
 		} catch (error) {
 			console.error(error)
-			setError('Ошибка сети. Попробуйте еще раз.')
+			setError(
+				error instanceof Error
+					? error.message
+					: 'Ошибка сети. Попробуйте еще раз.',
+			)
 		} finally {
 			setIsLoading(false)
 		}
