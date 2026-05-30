@@ -10,7 +10,7 @@ export const ItemsPerPageSelector = ({
 		<select
 			value={value}
 			onChange={e => onChange(Number(e.target.value))}
-			className='text-sm border border-input bg-card rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand'
+			className='text-sm border border-border bg-card rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand'
 		>
 			<option value='5'>5</option>
 			<option value='10'>10</option>

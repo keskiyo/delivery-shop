@@ -29,7 +29,7 @@ const SearchInput = ({
 						value={searchTerm}
 						onChange={e => onSearchTermChange(e.target.value)}
 						onKeyDown={onKeyPress}
-						className='w-full pl-10 pr-4 py-2 rounded outline-none border border-input bg-card focus:border-brand focus:shadow-button-default duration-300 text-foreground placeholder:text-muted-foreground'
+						className='w-full pl-10 pr-4 py-2 rounded outline-none border border-border bg-card focus:border-brand focus:shadow-button-default duration-300 text-foreground placeholder:text-muted-foreground'
 					/>
 				</div>
 				<button

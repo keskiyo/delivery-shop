@@ -43,7 +43,7 @@ export const SearchBar = () => {
 				value={searchQuery}
 				onChange={handleChange}
 				onKeyDown={handleKeyDown}
-				className='w-full pl-10 pr-24 py-2 border border-input bg-card rounded focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none'
+				className='w-full pl-10 pr-24 py-2 border border-border bg-card rounded focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none'
 				autoComplete='off'
 			/>
 			<div className='absolute right-1 top-1/2 transform -translate-y-1/2 flex items-center gap-1'>

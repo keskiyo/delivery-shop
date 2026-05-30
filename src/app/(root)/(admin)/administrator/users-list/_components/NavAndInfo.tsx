@@ -46,7 +46,7 @@ const NavAndInfo = ({
 						id='pageSize'
 						value={pageSize}
 						onChange={e => onPageSizeChange(Number(e.target.value))}
-						className='border border-input bg-card rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-brand'
+						className='border border-border bg-card rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-brand'
 					>
 						{pageSizeOptions.map(option => (
 							<option key={option} value={option}>

@@ -47,7 +47,7 @@ export default function AddTimeSlotForm({
 						type='time'
 						value={startTime}
 						onChange={e => onStartTimeChange(e.target.value)}
-						className='border border-input bg-card rounded px-3 py-2 w-full text-sm md:text-base cursor-text focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20'
+						className='border border-border bg-card rounded px-3 py-2 w-full text-sm md:text-base cursor-text focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20'
 					/>
 				</div>
 
@@ -59,7 +59,7 @@ export default function AddTimeSlotForm({
 						type='time'
 						value={endTime}
 						onChange={e => onEndTimeChange(e.target.value)}
-						className='border border-input bg-card rounded px-3 py-2 w-full text-sm md:text-base cursor-text focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20'
+						className='border border-border bg-card rounded px-3 py-2 w-full text-sm md:text-base cursor-text focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20'
 					/>
 				</div>
 

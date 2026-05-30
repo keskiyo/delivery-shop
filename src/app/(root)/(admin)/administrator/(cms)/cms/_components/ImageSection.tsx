@@ -9,7 +9,6 @@ import { SEO_LIMITS } from '../utils/SEO_LIMITS'
 
 export const ImageSection = ({
 	type,
-	errors = {},
 	charCount,
 	onInputChange,
 	onFileChange,
@@ -172,11 +171,7 @@ export const ImageSection = ({
 								)
 							}
 							disabled={isSubmitting}
-							className={`w-full px-3 py-2.5 bg-card border rounded focus:outline-none focus:ring-3 transition-custom ${
-								errors.imageAlt
-									? 'border-danger focus:border-danger focus:ring-danger/20'
-									: 'border-input focus:border-brand focus:ring-brand/20'
-							} disabled:opacity-50 disabled:bg-surface-subtle placeholder:text-muted-foreground`}
+							className='w-full px-3 py-2.5 bg-card border rounded focus:outline-none focus:ring-3 transition-custom border-border focus:border-brand focus:ring-brand/20 disabled:opacity-50 disabled:bg-surface-subtle placeholder:text-muted-foreground'
 							placeholder='Например: Соки и напитки в ассортименте'
 						/>
 					</div>

@@ -1,6 +1,6 @@
-import { FormFields } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/FormFields'
+import { CategoryFormFields } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/CategoryFormFields'
+import { CategorySubmitSection } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/CategorySubmitSection'
 import { ImageSection } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/ImageSection'
-import { SubmitSection } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/SubmitSection'
 import {
 	CategoryFormProps,
 	CharCount,
@@ -81,12 +81,12 @@ export const CategoryForm = ({
 					onFileChange={handleFileChange}
 					onRemoveImage={onRemoveImage}
 				/>
-				<FormFields
+				<CategoryFormFields
 					charCount={charCount}
 					onInputChange={handleInputChange}
 					onGenerateSlug={handleGenerateSlug}
 				/>
-				<SubmitSection onCancel={onCancel} />
+				<CategorySubmitSection onCancel={onCancel} />
 			</form>
 		</div>
 	)

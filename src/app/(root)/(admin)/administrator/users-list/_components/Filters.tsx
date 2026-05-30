@@ -24,7 +24,7 @@ const Filters = ({
 	}
 
 	const inputClasses =
-		'w-full p-2 border border-input bg-card rounded focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20'
+		'w-full p-2 border border-border bg-card rounded focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20'
 
 	return (
 		<div className='bg-card p-4 rounded-lg shadow-md border border-border'>

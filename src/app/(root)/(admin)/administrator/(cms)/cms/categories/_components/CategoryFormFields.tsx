@@ -3,20 +3,14 @@ import { useCategoryStore } from '@/store/categoryStore'
 import { RotateCcw } from 'lucide-react'
 import { SEO_LIMITS } from '../../utils/SEO_LIMITS'
 
-export const FormFields = ({
+export const CategoryFormFields = ({
 	charCount,
 	onInputChange,
 	onGenerateSlug,
 }: FormFieldsProps) => {
 	const { isSubmitting, formData } = useCategoryStore()
 	const inputClasses =
-		'w-full px-3 py-2.5 border rounded focus:outline-none focus:ring-3 duration-300 border-input bg-card focus:border-brand focus:ring-brand/20 disabled:opacity-50 disabled:bg-surface-hover placeholder:text-muted-foreground'
-	const countClass = (isError: boolean, isWarning = false) =>
-		isError
-			? 'text-danger'
-			: isWarning
-				? 'text-warning'
-				: 'text-muted-foreground'
+		'w-full px-3 py-2.5 border rounded focus:outline-none focus:ring-3 duration-300 border-border bg-card focus:border-brand focus:ring-brand/20 disabled:opacity-50 disabled:bg-surface-hover placeholder:text-muted-foreground'
 
 	return (
 		<div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
@@ -27,9 +21,7 @@ export const FormFields = ({
 						Название категории{' '}
 						<span className='text-danger'>*</span>
 					</label>
-					<span
-						className={`text-xs ${countClass(charCount.name > SEO_LIMITS.name.max)}`}
-					>
+					<span className='text-xs text-muted-foreground'>
 						{charCount.name}/{SEO_LIMITS.name.max}
 					</span>
 				</div>
@@ -56,13 +48,11 @@ export const FormFields = ({
 					<label className='block text-sm font-medium'>
 						Алиас (slug) <span className='text-danger'>*</span>
 					</label>
-					<span
-						className={`text-xs ${countClass(charCount.slug > SEO_LIMITS.slug.max)}`}
-					>
+					<span className='text-xs text-muted-foreground'>
 						{charCount.slug}/{SEO_LIMITS.slug.max}
 					</span>
 				</div>
-				<div className='flex gap-2'>
+				<div className='flex flex-wrap gap-2'>
 					<input
 						type='text'
 						value={formData.slug}
@@ -82,7 +72,7 @@ export const FormFields = ({
 					<button
 						type='button'
 						onClick={onGenerateSlug}
-						className='flex items-center gap-1 px-4 py-2.5 bg-surface-hover text-foreground rounded hover:bg-surface-pressed text-sm whitespace-nowrap cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-border hover:border-text-soft focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand'
+						className='flex w-full items-center gap-1 px-4 py-2.5 bg-surface-hover text-foreground rounded hover:bg-surface-pressed text-sm whitespace-nowrap cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-border hover:border-text-soft focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand'
 						title='Сгенерировать из названия'
 					>
 						<RotateCcw className='w-4 h-4' />
@@ -100,14 +90,7 @@ export const FormFields = ({
 					<label className='block text-sm font-medium'>
 						Описание (мета-описание)
 					</label>
-					<span
-						className={`text-xs ${countClass(
-							charCount.description > SEO_LIMITS.description.max,
-							charCount.description <
-								SEO_LIMITS.description.min &&
-								charCount.description > 0,
-						)}`}
-					>
+					<span className='text-xs text-muted-foreground'>
 						{charCount.description}/{SEO_LIMITS.description.max}
 					</span>
 				</div>
@@ -137,9 +120,7 @@ export const FormFields = ({
 					<label className='block text-sm font-medium'>
 						Ключевые слова (через запятую)
 					</label>
-					<span
-						className={`text-xs ${countClass(charCount.keywords > SEO_LIMITS.keywords.maxLength)}`}
-					>
+					<span className='text-xs text-muted-foreground'>
 						{charCount.keywords}/{SEO_LIMITS.keywords.maxLength}
 					</span>
 				</div>

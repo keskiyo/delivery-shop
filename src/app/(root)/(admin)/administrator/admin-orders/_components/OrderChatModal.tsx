@@ -157,7 +157,7 @@ const OrderChatModal = ({
 							value={message}
 							onChange={e => setMessage(e.target.value)}
 							placeholder='Введите сообщение...'
-							className='flex-1 border border-input bg-surface rounded px-2 py-1 h-25.5 focus:outline-none focus:border-brand focus:shadow-button-default caret-brand resize-none text-foreground'
+							className='flex-1 border border-border bg-surface rounded px-2 py-1 h-25.5 focus:outline-none focus:border-brand focus:shadow-button-default caret-brand resize-none text-foreground'
 							disabled={isSending}
 							rows={4}
 						/>

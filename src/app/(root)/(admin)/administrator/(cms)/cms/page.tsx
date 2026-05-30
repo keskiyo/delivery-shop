@@ -29,5 +29,3 @@ const AdminDashboardPage = () => {
 }
 
 export default AdminDashboardPage
-
-// В blog поправить стили и cms articles и проверь другие компоненты чтобы корректно было для темной и светлой темы

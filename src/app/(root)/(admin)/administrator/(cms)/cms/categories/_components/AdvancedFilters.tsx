@@ -32,7 +32,7 @@ export const AdvancedFilters = () => {
 						onChange={e =>
 							setFilterType(e.target.value as FilterType)
 						}
-						className='text-sm w-full border border-input bg-card rounded px-3 py-2 focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none'
+						className='text-sm w-full border border-border bg-card rounded px-3 py-2 focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none'
 					>
 						<option value='all'>Во всех полях</option>
 						<option value='name'>Название</option>
@@ -53,7 +53,7 @@ export const AdvancedFilters = () => {
 						onChange={e =>
 							handleSortFieldChange(e.target.value as SortField)
 						}
-						className='text-sm w-full border border-input bg-card rounded px-3 py-2 focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none'
+						className='text-sm w-full border border-border bg-card rounded px-3 py-2 focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none'
 					>
 						<option value='numericId'>ID</option>
 						<option value='name'>Название</option>

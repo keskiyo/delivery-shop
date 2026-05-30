@@ -11,8 +11,10 @@ export const FormField = ({
 	showCommaHint = false,
 	disabled = false,
 }: FormFieldProps) => {
-	const inputClasses = `w-full px-3 py-2 border border-input bg-card rounded focus:outline-none focus:ring-2 focus:ring-brand/40 focus:border-brand shadow-sm ${
-		disabled ? 'bg-surface-hover cursor-not-allowed opacity-60 text-text-soft' : ''
+	const inputClasses = `w-full px-3 py-2 border border-border bg-card rounded focus:outline-none focus:ring-2 focus:ring-brand/40 focus:border-brand shadow-sm ${
+		disabled
+			? 'bg-surface-hover cursor-not-allowed opacity-60 text-text-soft'
+			: ''
 	}`
 
 	return (
