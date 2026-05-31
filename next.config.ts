@@ -12,6 +12,18 @@ const nextConfig: NextConfig = {
 			{
 				pathname: '/images/**',
 			},
+			// Temporary article images uploaded from the editor
+			{
+				pathname: '/temp/**',
+			},
+			// Static uploaded images from the public folder
+			{
+				pathname: '/uploads/**',
+			},
+			// Article images served through API routes
+			{
+				pathname: '/api/uploads/**',
+			},
 			// Category images uploaded from the CMS
 			{
 				pathname: '/blogCategories/**',

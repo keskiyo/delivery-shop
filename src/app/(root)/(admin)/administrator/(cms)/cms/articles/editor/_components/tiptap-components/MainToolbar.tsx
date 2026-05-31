@@ -20,6 +20,17 @@ const MainToolbar = ({ editor, onImageDragOverChange }: MainToolbarProps) => {
 		e: React.DragEvent<HTMLDivElement>,
 		groupId: string,
 	) => {
+		const target = e.target as HTMLElement | null
+		const isInteractiveTarget = target?.closest(
+			'button,input,textarea,select,[role="dialog"],.table-modal-overlay,.table-modal-content',
+		)
+
+		if (isInteractiveTarget) {
+			e.preventDefault()
+			e.stopPropagation()
+			return
+		}
+
 		e.dataTransfer.setData('text/plain', groupId)
 		e.dataTransfer.effectAllowed = 'move'
 		setDraggingGroupId(groupId)
@@ -109,20 +120,18 @@ const MainToolbar = ({ editor, onImageDragOverChange }: MainToolbarProps) => {
 				{groups.map(group => (
 					<div
 						key={group.id}
-						draggable
-						onDragStart={e => handleDragStart(e, group.id)}
 						onDragOver={handleDragOver}
 						onDragEnter={() => handleDragEnter(group.id)}
 						onDragLeave={handleDragLeave}
 						onDrop={e => handleDrop(e, group.id)}
 						onDragEnd={resetDragState}
 						className={`
-              flex items-center gap-1 px-2 py-1.5 rounded-lg border duration-300 cursor-pointer
+              flex items-center gap-1 px-2 py-1.5 rounded-lg border duration-300
               min-h-14 box-content
               ${
 					draggingGroupId === group.id
 						? 'border-brand bg-brand-soft opacity-60 cursor-grabbing scale-95'
-						: 'border-border hover:border-brand cursor-grab'
+						: 'border-border hover:border-brand'
 				}
               ${
 					dragOverGroupId === group.id && draggingGroupId !== group.id
@@ -131,7 +140,12 @@ const MainToolbar = ({ editor, onImageDragOverChange }: MainToolbarProps) => {
 				}
             `}
 					>
-						<div className='text-muted-foreground opacity-60 hover:opacity-100 transition-opacity -ml-1 mr-0.5'>
+						<div
+							draggable
+							onDragStart={e => handleDragStart(e, group.id)}
+							className='text-muted-foreground opacity-60 hover:opacity-100 transition-opacity -ml-1 mr-0.5 cursor-grab active:cursor-grabbing'
+							title='Перетащить группу'
+						>
 							<GripVertical className='w-3.5 h-3.5' />
 						</div>
 						<div className='flex items-center gap-0.5'>

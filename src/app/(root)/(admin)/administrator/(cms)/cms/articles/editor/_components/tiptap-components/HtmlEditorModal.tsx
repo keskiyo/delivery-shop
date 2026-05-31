@@ -3,6 +3,7 @@ import Editor from '@monaco-editor/react'
 import { Check, Copy, Save, X } from 'lucide-react'
 import type * as monaco from 'monaco-editor'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import '../css/html-preview.css'
 
 export const HtmlEditorModal = ({
 	editor,
@@ -243,6 +244,7 @@ export const HtmlEditorModal = ({
 								ref={previewRef}
 							>
 								<div
+									className='html-preview'
 									dangerouslySetInnerHTML={{
 										__html:
 											htmlContent ||

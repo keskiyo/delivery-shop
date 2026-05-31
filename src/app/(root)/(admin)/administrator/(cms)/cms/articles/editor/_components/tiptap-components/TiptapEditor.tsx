@@ -1,21 +1,101 @@
 'use client'
 
 import { TiptapEditorProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/articles/types/tiptap'
+import { Extension } from '@tiptap/core'
 import FileHandler from '@tiptap/extension-file-handler'
 import Image from '@tiptap/extension-image'
 import { TableKit } from '@tiptap/extension-table'
 import TextAlign from '@tiptap/extension-text-align'
 import { TextStyleKit } from '@tiptap/extension-text-style'
 import { CharacterCount, Placeholder } from '@tiptap/extensions'
+import { NodeSelection, Plugin, TextSelection } from '@tiptap/pm/state'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { Loader2, Upload } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { handleImageUpload } from '../../../utils/upload-image'
 import '../css/editor.css'
 import { AllowHtmlAttributes } from './AllowHtmlAttributes'
 import { Counter } from './Counter'
 import MainToolbar from './MainToolbar'
+
+const InsertTextAfterSelectedImage = Extension.create({
+	name: 'insertTextAfterSelectedImage',
+
+	addProseMirrorPlugins() {
+		return [
+			new Plugin({
+				props: {
+					handleTextInput(view, _from, _to, text) {
+						const { selection } = view.state
+
+						if (
+							!(selection instanceof NodeSelection) ||
+							selection.node.type.name !== 'image'
+						) {
+							return false
+						}
+
+						let transaction = view.state.tr
+						const resolvedPosition = transaction.doc.resolve(selection.to)
+						const textPosition = resolvedPosition.parent.inlineContent
+							? selection.to
+							: selection.to + 1
+
+						if (!resolvedPosition.parent.inlineContent) {
+							const paragraph = view.state.schema.nodes.paragraph?.create()
+
+							if (!paragraph) {
+								return false
+							}
+
+							transaction = transaction.insert(selection.to, paragraph)
+						}
+
+						transaction = transaction
+							.setSelection(TextSelection.create(transaction.doc, textPosition))
+							.insertText(text)
+							.scrollIntoView()
+
+						view.dispatch(transaction)
+						return true
+					},
+
+					handleKeyDown(view, event) {
+						const { selection, schema } = view.state
+
+						if (
+							!(selection instanceof NodeSelection) ||
+							selection.node.type.name !== 'image' ||
+							event.key !== 'Enter'
+						) {
+							return false
+						}
+
+						const paragraph = schema.nodes.paragraph?.create()
+
+						if (!paragraph) {
+							return false
+						}
+
+						const transaction = view.state.tr
+							.insert(selection.to, paragraph)
+							.setSelection(
+								TextSelection.create(
+									view.state.tr.doc,
+									selection.to + paragraph.nodeSize - 1
+								)
+							)
+							.scrollIntoView()
+
+						view.dispatch(transaction)
+						return true
+					},
+				},
+			}),
+		]
+	},
+})
 
 export const TiptapEditor = ({
 	content,
@@ -48,6 +128,7 @@ export const TiptapEditor = ({
 				placeholder: 'Начните писать статью здесь …',
 			}),
 			AllowHtmlAttributes,
+			InsertTextAfterSelectedImage,
 			TableKit,
 			Image.configure({
 				resize: {
@@ -121,6 +202,27 @@ export const TiptapEditor = ({
 			setStats({ characters, words })
 		},
 	})
+
+	useEffect(() => {
+		if (!editor) return
+
+		const nextContent = content || ''
+		const currentContent = editor.isEmpty ? '' : editor.getHTML()
+
+		if (currentContent === nextContent) return
+
+		editor.commands.setContent(nextContent, {
+			emitUpdate: false,
+			parseOptions: {
+				preserveWhitespace: 'full',
+			},
+		})
+
+		const characters = editor.storage.characterCount.characters()
+		const words = editor.storage.characterCount.words()
+
+		setStats({ characters, words })
+	}, [content, editor])
 
 	if (!editor) {
 		return (

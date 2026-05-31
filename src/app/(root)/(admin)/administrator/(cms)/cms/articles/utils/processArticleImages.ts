@@ -4,11 +4,11 @@ import path from "path";
 export async function processArticleImages(
   content: string,
 ): Promise<string> {
-  const tempImages = content.match(/\/temp\/temp_[^"']+\.(jpg|jpeg|png|webp)/gi) || [];
+  const tempImages = content.match(/(?:\/api\/uploads)?\/temp\/temp_[^"']+\.(jpg|jpeg|png|webp)/gi) || [];
   
   if (tempImages.length === 0) return content;
 
-  const tempDir = path.join(process.cwd(), "uploads", "temp");
+  const tempDir = path.join(process.cwd(), "public", "temp");
   const articlesDir = path.join(process.cwd(), "uploads", "articles");
   
   await fs.mkdir(articlesDir, { recursive: true });
@@ -35,9 +35,12 @@ export async function processArticleImages(
       
       await fs.unlink(oldPath);
       
-      const tempUrlPattern = `/temp/${tempFilename}`;
       const permanentUrl = `/api/uploads/articles/${permanentFilename}`;
-      content = content.replace(new RegExp(tempUrlPattern, "gi"), permanentUrl);
+      content = content
+        .split(`/temp/${tempFilename}`)
+        .join(permanentUrl)
+        .split(`/api/uploads/temp/${tempFilename}`)
+        .join(permanentUrl);
       
     } catch (error) {
       console.error(`Ошибка с файлом ${tempFilename}:`, error);

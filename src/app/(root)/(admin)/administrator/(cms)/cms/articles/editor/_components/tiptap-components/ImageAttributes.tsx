@@ -91,6 +91,75 @@ const parseStyles = (styleString: string): Record<string, string> => {
 	return styles
 }
 
+const syncResizeImageDom = (
+	editor: NonNullable<EditorProps['editor']>,
+	position: number,
+	attrs: {
+		alt: string
+		title: string
+		src: string
+		style: string
+	},
+	align: 'left' | 'right' | 'center' | 'none',
+) => {
+	const nodeDom = editor.view.nodeDOM(position)
+	const element = nodeDom instanceof HTMLElement ? nodeDom : null
+	const image = element?.matches('img')
+		? element
+		: element?.querySelector('img')
+	const resizeContainer = image?.closest('[data-resize-container]')
+	const resizeWrapper = image?.closest('[data-resize-wrapper]')
+
+	if (!(image instanceof HTMLImageElement)) {
+		return
+	}
+
+	image.src = attrs.src
+	image.alt = attrs.alt
+	image.title = attrs.title
+	image.setAttribute('style', attrs.style)
+	image.classList.add('tiptap-image')
+	image.style.float = 'none'
+	image.style.margin = '0'
+
+	if (resizeWrapper instanceof HTMLElement) {
+		resizeWrapper.style.float = 'none'
+		resizeWrapper.style.margin = '0'
+		resizeWrapper.style.width = 'fit-content'
+	}
+
+	if (!(resizeContainer instanceof HTMLElement)) {
+		return
+	}
+
+	resizeContainer.style.width = ''
+	resizeContainer.style.maxWidth = ''
+	resizeContainer.style.margin = ''
+	resizeContainer.style.float = ''
+	resizeContainer.style.display = ''
+
+	switch (align) {
+		case 'left':
+			resizeContainer.style.float = 'left'
+			resizeContainer.style.width = 'fit-content'
+			resizeContainer.style.maxWidth = '100%'
+			resizeContainer.style.margin = '0 15px 15px 0'
+			break
+		case 'right':
+			resizeContainer.style.float = 'right'
+			resizeContainer.style.width = 'fit-content'
+			resizeContainer.style.maxWidth = '100%'
+			resizeContainer.style.margin = '0 0 15px 15px'
+			break
+		case 'center':
+			resizeContainer.style.display = 'block'
+			resizeContainer.style.width = 'fit-content'
+			resizeContainer.style.maxWidth = '100%'
+			resizeContainer.style.margin = '15px auto'
+			break
+	}
+}
+
 export const ImageAttributes = ({ editor }: EditorProps) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const [currentImage, setCurrentImage] =
@@ -271,6 +340,15 @@ export const ImageAttributes = ({ editor }: EditorProps) => {
 			.setNodeSelection(selectedImage.pos)
 			.updateAttributes('image', newAttrs)
 			.run()
+
+		window.setTimeout(() => {
+			syncResizeImageDom(
+				editor,
+				selectedImage.pos,
+				newAttrs,
+				attributes.align
+			)
+		}, 0)
 
 		setIsOpen(false)
 	}, [

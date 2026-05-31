@@ -8,7 +8,6 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 	const [isUnderline, setIsUnderline] = useState(false)
 	const [isStrike, setIsStrike] = useState(false)
 
-	// Хук useEffect должен вызываться безусловно
 	useEffect(() => {
 		if (!editor) return
 

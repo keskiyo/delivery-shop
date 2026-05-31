@@ -8,8 +8,8 @@
   min-height: 100%;
   font-family: system-ui, -apple-system, sans-serif;
   line-height: 1.6;
-  color: #1f2937;
-  background-color: white;
+  color: var(--foreground);
+  background-color: var(--card);
 }
 
 /* Списки */
@@ -41,18 +41,19 @@
 
 .html-preview th,
 .html-preview td {
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border);
   padding: 0.75rem;
   text-align: left;
+  color: var(--foreground);
 }
 
 .html-preview th {
-  background-color: #f3f4f6;
+  background-color: var(--surface-hover);
   font-weight: 600;
 }
 
 .html-preview tr:nth-child(even) {
-  background-color: #f9fafb;
+  background-color: var(--surface-subtle);
 }
 
 /* Заголовки */
@@ -184,11 +185,11 @@
 
 /* Пустой контейнер */
 .html-preview-empty {
-  color: #6b7280;
+  color: var(--muted-foreground);
   font-style: italic;
   padding: 2rem;
   text-align: center;
-  background-color: #f9fafb;
+  background-color: var(--surface-subtle);
   border-radius: 0.5rem;
-  border: 2px dashed #d1d5db;
+  border: 2px dashed var(--border);
 }

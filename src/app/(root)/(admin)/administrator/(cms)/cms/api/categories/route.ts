@@ -150,7 +150,7 @@ export async function POST(request: Request) {
 			description: data.description?.trim() || '',
 			keywords: data.keywords || [],
 			image: data.image || '',
-			imageAlt: data.imageAlt || '',
+			imageAlt: data.imageAlt || name,
 			author: data.author || 'Неизвестен',
 			createdAt: new Date().toISOString(),
 			updatedAt: new Date().toISOString(),

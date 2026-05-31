@@ -151,7 +151,7 @@ export const TableMenu = ({ editor }: EditorProps) => {
 				</button>
 
 				{canModifyTable && (
-					<div>
+					<div className='table-menu-actions'>
 						<div className='table-menu-divider' />
 
 						<ColumnControls

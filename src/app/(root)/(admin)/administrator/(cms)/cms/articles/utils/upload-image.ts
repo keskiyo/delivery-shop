@@ -76,12 +76,17 @@ export const insertImageToEditor = (
 
   editor
     .chain()
-    .insertContentAt(insertPos, imageNode)
+    .insertContentAt(insertPos, [
+      imageNode,
+      {
+        type: 'paragraph' as const,
+      },
+    ])
     .focus()
     .run();
   
   setTimeout(() => {
-    editor.commands.setTextSelection(insertPos + 1);
+    editor.commands.setTextSelection(insertPos + 2);
   }, 10);
 };
 

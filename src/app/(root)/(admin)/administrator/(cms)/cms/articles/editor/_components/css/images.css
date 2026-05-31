@@ -103,27 +103,73 @@
 /* ===== ВЫРАВНИВАНИЕ ===== */
 
 /* Выравнивание влево */
+.ProseMirror [data-resize-container]:has(img.tiptap-image[style*="float: left"]),
+.ProseMirror [data-resize-container]:has(img.tiptap-image[style*="float:left"]) {
+  float: left;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 15px 15px 0;
+}
+
 .ProseMirror img.tiptap-image[style*="float: left"],
 .ProseMirror img.tiptap-image[style*="float:left"] {
   float: left;
   margin: 0 15px 15px 0;
 }
 
+.ProseMirror [data-resize-container]:has(img.tiptap-image[style*="float: left"]) [data-resize-wrapper],
+.ProseMirror [data-resize-container]:has(img.tiptap-image[style*="float:left"]) [data-resize-wrapper],
+.ProseMirror [data-resize-container]:has(img.tiptap-image[style*="float: left"]) img.tiptap-image,
+.ProseMirror [data-resize-container]:has(img.tiptap-image[style*="float:left"]) img.tiptap-image {
+  float: none !important;
+  margin: 0 !important;
+}
+
 /* Выравнивание вправо */
+.ProseMirror [data-resize-container]:has(img.tiptap-image[style*="float: right"]),
+.ProseMirror [data-resize-container]:has(img.tiptap-image[style*="float:right"]) {
+  float: right;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 15px 15px;
+}
+
 .ProseMirror img.tiptap-image[style*="float: right"],
 .ProseMirror img.tiptap-image[style*="float:right"] {
   float: right;
   margin: 0 0 15px 15px;
 }
 
+.ProseMirror [data-resize-container]:has(img.tiptap-image[style*="float: right"]) [data-resize-wrapper],
+.ProseMirror [data-resize-container]:has(img.tiptap-image[style*="float:right"]) [data-resize-wrapper],
+.ProseMirror [data-resize-container]:has(img.tiptap-image[style*="float: right"]) img.tiptap-image,
+.ProseMirror [data-resize-container]:has(img.tiptap-image[style*="float:right"]) img.tiptap-image {
+  float: none !important;
+  margin: 0 !important;
+}
+
 /* По центру */
+.ProseMirror [data-resize-container]:has(img.tiptap-image[style*="display: block"][style*="margin"][style*="auto"]) {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 15px auto;
+  float: none;
+}
+
 .ProseMirror img.tiptap-image[style*="display: block"][style*="margin"][style*="auto"] {
   display: block;
   margin: 15px auto;
   float: none;
 }
 
+.ProseMirror [data-resize-container]:has(img.tiptap-image[style*="display: block"][style*="margin"][style*="auto"]) img.tiptap-image {
+  margin: 0;
+}
+
 /* ===== ОЧИСТКА ОБТЕКАНИЯ ===== */
-.ProseMirror p {
+.ProseMirror::after {
+  content: "";
+  display: block;
   clear: both;
 }
