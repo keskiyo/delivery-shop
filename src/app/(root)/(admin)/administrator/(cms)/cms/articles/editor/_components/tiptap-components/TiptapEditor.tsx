@@ -37,23 +37,35 @@ const InsertTextAfterSelectedImage = Extension.create({
 						}
 
 						let transaction = view.state.tr
-						const resolvedPosition = transaction.doc.resolve(selection.to)
-						const textPosition = resolvedPosition.parent.inlineContent
+						const resolvedPosition = transaction.doc.resolve(
+							selection.to,
+						)
+						const textPosition = resolvedPosition.parent
+							.inlineContent
 							? selection.to
 							: selection.to + 1
 
 						if (!resolvedPosition.parent.inlineContent) {
-							const paragraph = view.state.schema.nodes.paragraph?.create()
+							const paragraph =
+								view.state.schema.nodes.paragraph?.create()
 
 							if (!paragraph) {
 								return false
 							}
 
-							transaction = transaction.insert(selection.to, paragraph)
+							transaction = transaction.insert(
+								selection.to,
+								paragraph,
+							)
 						}
 
 						transaction = transaction
-							.setSelection(TextSelection.create(transaction.doc, textPosition))
+							.setSelection(
+								TextSelection.create(
+									transaction.doc,
+									textPosition,
+								),
+							)
 							.insertText(text)
 							.scrollIntoView()
 
@@ -83,8 +95,8 @@ const InsertTextAfterSelectedImage = Extension.create({
 							.setSelection(
 								TextSelection.create(
 									view.state.tr.doc,
-									selection.to + paragraph.nodeSize - 1
-								)
+									selection.to + paragraph.nodeSize - 1,
+								),
 							)
 							.scrollIntoView()
 

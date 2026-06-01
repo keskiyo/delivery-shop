@@ -1,8 +1,8 @@
 'use client'
 
 import { articleSeoRecommendations } from '@/app/(root)/(admin)/administrator/(cms)/cms/utils/recommendations'
-import { showPromiseToast, showToast } from '@/lib/showToast'
 import { Loader } from '@/components/features/common/loader'
+import { showPromiseToast, showToast } from '@/lib/showToast'
 import { useArticleStore } from '@/store/articleStore'
 import { useAuthStore } from '@/store/authStore'
 import { useCategoryStore } from '@/store/categoryStore'

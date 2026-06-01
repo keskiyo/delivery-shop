@@ -35,7 +35,9 @@ export const ImageMenu = ({ editor, onDragOverChange }: ImageMenuProps) => {
 
 	return (
 		<div className='flex items-center gap-2'>
-			<span className='text-xs text-muted-foreground mr-1'>Изображения:</span>
+			<span className='text-xs text-muted-foreground mr-1'>
+				Изображения:
+			</span>
 
 			<div
 				className='relative group'
