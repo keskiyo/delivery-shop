@@ -1,4 +1,5 @@
 import { formStyles } from '@/app/(root)/(auth)/styles'
+import NumberInput from '@/components/ui/NumberInput'
 
 interface DiscountProps {
 	discount: string
@@ -17,12 +18,12 @@ const Discount = ({
 				Скидка (%){' '}
 				{required && <span className='text-danger'>*</span>}
 			</label>
-			<input
-				type='number'
+			<NumberInput
 				name='discountPercent'
 				required={required}
 				value={discount}
 				onChange={onChangeAction}
+				wrapperClassName='w-72 max-w-full'
 				className={`${formStyles.input} bg-card [&&]:w-full`}
 				min='0'
 				max='100'

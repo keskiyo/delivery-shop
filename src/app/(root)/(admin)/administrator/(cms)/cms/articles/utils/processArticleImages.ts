@@ -13,7 +13,7 @@ export async function processArticleImages(content: string): Promise<string> {
 	if (tempImages.length === 0) return content
 
 	const tempDir = path.join(process.cwd(), 'public', 'temp')
-	const articlesDir = path.join(process.cwd(), 'uploads', 'articles')
+	const articlesDir = path.join(process.cwd(), 'public', 'uploads', 'articles')
 
 	await fs.mkdir(articlesDir, { recursive: true })
 	await fs.mkdir(tempDir, { recursive: true })
@@ -42,7 +42,7 @@ export async function processArticleImages(content: string): Promise<string> {
 
 			await fs.unlink(oldPath)
 
-			const permanentUrl = `/api/uploads/articles/${permanentFilename}`
+			const permanentUrl = `/uploads/articles/${permanentFilename}`
 			content = content
 				.split(`/temp/${tempFilename}`)
 				.join(permanentUrl)

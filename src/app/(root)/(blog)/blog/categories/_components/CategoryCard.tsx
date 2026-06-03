@@ -1,4 +1,4 @@
-import { getColorFromName } from '@/app/(root)/(blog)/blog/categories/utils/getColorFromName'
+import { getColorFromName } from '../../../../../../../utils/getColorFromName'
 import { BlogCategoryCardProps } from '../types/categories.types'
 import CategoryContent from './CategoryContent'
 import CategoryHoverEffect from './CategoryHoverEffect'

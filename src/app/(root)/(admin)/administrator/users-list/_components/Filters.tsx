@@ -1,6 +1,7 @@
 'use client'
 
 import { buttonStyles } from '@/app/(root)/(auth)/styles'
+import NumberInput from '@/components/ui/NumberInput'
 import { FiltersState } from '@/types/filterState'
 
 interface FiltersProps {
@@ -139,8 +140,7 @@ const Filters = ({
 					<label className='block text-xs font-medium mb-1'>
 						Возраст от
 					</label>
-					<input
-						type='number'
+					<NumberInput
 						value={filters.minAge}
 						onChange={e =>
 							handleInputChange('minAge', e.target.value)
@@ -155,8 +155,7 @@ const Filters = ({
 					<label className='block text-xs font-medium mb-1'>
 						Возраст до
 					</label>
-					<input
-						type='number'
+					<NumberInput
 						value={filters.maxAge}
 						onChange={e =>
 							handleInputChange('maxAge', e.target.value)

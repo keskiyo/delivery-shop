@@ -1,8 +1,11 @@
-export interface ArticlesProps {
-	_id: string
-	id: number
-	img: string
-	title: string
-	text: string
-	createdAt: string
+export interface ArticleCardProps {
+	_id?: string
+	slug?: string
+	categorySlug?: string
+	categoryName?: string
+	image?: string
+	imageAlt?: string
+	name?: string
+	description?: string
+	publishedAt?: string
 }

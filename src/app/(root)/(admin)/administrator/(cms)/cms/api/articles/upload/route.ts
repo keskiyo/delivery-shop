@@ -27,7 +27,12 @@ export async function POST(request: NextRequest) {
 		const random = Math.floor(Math.random() * 10000)
 		const fileName = `${timestamp}_${random}.${originalExtension}`
 
-		const uploadsDir = path.join(process.cwd(), 'uploads', 'articles')
+		const uploadsDir = path.join(
+			process.cwd(),
+			'public',
+			'uploads',
+			'articles',
+		)
 
 		await fs.mkdir(uploadsDir, { recursive: true })
 
@@ -35,7 +40,7 @@ export async function POST(request: NextRequest) {
 
 		await fs.writeFile(filePath, buffer)
 
-		const publicUrl = `/api/uploads/articles/${fileName}`
+		const publicUrl = `/uploads/articles/${fileName}`
 
 		return NextResponse.json({
 			success: true,
@@ -54,17 +59,30 @@ export async function POST(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
 	try {
 		const { searchParams } = new URL(request.url)
-		const fileName = searchParams.get('file')
+		const fileNameParam = searchParams.get('file')
 
-		if (!fileName) {
+		if (!fileNameParam) {
 			return NextResponse.json(
 				{ error: 'Имя файла не указано' },
 				{ status: 400 },
 			)
 		}
 
-		const uploadsDir = path.join(process.cwd(), 'uploads', 'articles')
-		const filePath = path.join(uploadsDir, fileName)
+		const fileName = path.basename(fileNameParam)
+
+		const publicUploadsDir = path.join(
+			process.cwd(),
+			'public',
+			'uploads',
+			'articles',
+		)
+		const legacyUploadsDir = path.join(process.cwd(), 'uploads', 'articles')
+		const publicFilePath = path.join(publicUploadsDir, fileName)
+		const legacyFilePath = path.join(legacyUploadsDir, fileName)
+		const filePath = await fs
+			.access(publicFilePath)
+			.then(() => publicFilePath)
+			.catch(() => legacyFilePath)
 
 		try {
 			await fs.access(filePath)

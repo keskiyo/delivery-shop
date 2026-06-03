@@ -11,15 +11,20 @@ const fetchArticles = async (options?: {
 				options.articlesLimit.toString(),
 			)
 		} else if (options?.pagination) {
-			const { startIdx, perPage } = options.pagination
-			url.searchParams.append('startIdx', startIdx.toString())
-			url.searchParams.append('perPage', perPage.toString())
+			url.searchParams.append(
+				'startIdx',
+				options.pagination.startIdx.toString(),
+			)
+			url.searchParams.append(
+				'perPage',
+				options.pagination.perPage.toString(),
+			)
 		}
 
 		const res = await fetch(url.toString(), { next: { revalidate: 3600 } })
 
 		if (!res.ok) {
-			throw new Error('Ошибка получения статей')
+			throw new Error('Ошибка получения статей серверная')
 		}
 
 		const data = await res.json()

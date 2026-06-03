@@ -1,35 +1,90 @@
-import { ArticlesProps } from '@/types/articles'
-import { format } from 'date-fns'
-import { ru } from 'date-fns/locale'
+import { ArticleCardProps } from '@/types/articles'
 import Image from 'next/image'
+import Link from 'next/link'
+import { getColorFromName } from '../../../../utils/getColorFromName'
 
-const ArticleCard = ({ img, title, createdAt, text }: ArticlesProps) => {
+const ArticleCard = ({
+	slug,
+	categorySlug,
+	name,
+	image,
+	imageAlt,
+	categoryName,
+	description,
+	publishedAt,
+}: ArticleCardProps) => {
+	const articleTitle = name?.trim() || 'Статья'
+	const articleDescription =
+		description?.trim() || 'Описание статьи скоро появится'
+	const categoryLabel = categoryName?.trim() || 'Без категории'
+
+	const safeCategorySlug = categorySlug?.trim()
+	const safeSlug = slug?.trim()
+
+	const articleUrl =
+		safeCategorySlug && safeSlug
+			? `/blog/${safeCategorySlug}/${safeSlug}`
+			: '/blog'
+	const gradientClass = getColorFromName(articleTitle)
+	const formattedDate = publishedAt
+		? new Date(publishedAt).toLocaleDateString('ru-RU')
+		: ''
+
 	return (
-		<article className='bg-card h-full flex flex-col rounded overflow-hidden shadow-(--shadow-card) hover:shadow-(--shadow-article) duration-300'>
-			<div className='relative h-48 w-full'>
-				<Image
-					src={img}
-					alt={title}
-					fill
-					priority={false}
-					className='object-cover'
-					sizes='(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw'
-					unoptimized
-				/>
-			</div>
-			<div className='p-2 flex-1 flex flex-col gap-y-2 leading-normal'>
-				<time className='text-[8px] text-muted-foreground'>
-					{format(new Date(createdAt), 'dd.MM.yyyy', {
-						locale: ru,
-					})}
-				</time>
-				<h3 className=' text-base font-bold xl:text-lg'>{title}</h3>
-				<p className='line-clamp-3 text-xs xl:text-base text-muted-foreground'>{text}</p>
-				<button className='rounded mt-auto w-37.5 h-10 bg-success text-base text-white hover:shadow-(--shadow-button-default) active:shadow-(--shadow-button-active) duration-300 cursor-pointer'>
-					Подробнее
-				</button>
-			</div>
-		</article>
+		<Link href={articleUrl} className='block h-full'>
+			<article className='group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card shadow-(--shadow-default) transition duration-300 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-(--shadow-article)'>
+				<div className='relative h-48 w-full overflow-hidden bg-surface-subtle'>
+					{image ? (
+						<Image
+							src={image}
+							alt={imageAlt || articleTitle}
+							fill
+							priority={false}
+							className='object-cover transition duration-300 group-hover:scale-105'
+							sizes='(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw'
+							unoptimized
+						/>
+					) : (
+						<div
+							className={`flex h-full w-full items-center justify-center bg-linear-to-br ${gradientClass}`}
+						>
+							<div className='p-4 text-center text-white'>
+								<div className='px-4 text-xl font-semibold leading-tight'>
+									{articleTitle}
+								</div>
+							</div>
+						</div>
+					)}
+				</div>
+
+				<div className='flex flex-1 flex-col p-4'>
+					<div className='mb-3 flex items-center justify-between gap-3'>
+						<span className='max-w-[60%] truncate rounded bg-brand-soft px-2 py-1 text-xs font-medium text-brand'>
+							{categoryLabel}
+						</span>
+						{formattedDate && (
+							<time className='shrink-0 text-xs text-muted-foreground'>
+								{formattedDate}
+							</time>
+						)}
+					</div>
+
+					<h3 className='mb-2 line-clamp-2 text-lg font-bold text-foreground transition-colors group-hover:text-brand'>
+						{articleTitle}
+					</h3>
+
+					<p className='mb-4 line-clamp-3 flex-1 text-sm leading-6 text-muted-foreground'>
+						{articleDescription}
+					</p>
+
+					<div className='mt-auto'>
+						<div className='w-full rounded bg-brand-soft py-2 text-center text-sm font-medium text-brand transition duration-300 group-hover:bg-brand group-hover:text-brand-foreground'>
+							Подробнее
+						</div>
+					</div>
+				</div>
+			</article>
+		</Link>
 	)
 }
 

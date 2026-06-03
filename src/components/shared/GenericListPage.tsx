@@ -1,8 +1,7 @@
-
 import ProductsSections from '@/app/(root)/(products)/ProductsSections'
 import ErrorComponent from '@/components/features/common/ErrorComponent'
 import PaginationWrapper from '@/components/shared/PaginationWrapper'
-import { ArticlesProps } from '@/types/articles'
+import { ArticleCardProps } from '@/types/articles'
 import { GenericListPageProps } from '@/types/genericListPageProps'
 import { ProductCardProps } from '@/types/product'
 import { CONFIG } from '../../../config/config'
@@ -29,7 +28,7 @@ const GenericListPage = async ({
 	const perPage = Number(itemsPerPage)
 	const startIdx = (currentPage - 1) * perPage
 
-	let items: ProductCardProps[] | ArticlesProps[]
+	let items: ProductCardProps[] | ArticleCardProps[]
 	let totalCount: number
 
 	try {
@@ -37,7 +36,7 @@ const GenericListPage = async ({
 			pagination: { startIdx, perPage },
 		})
 
-		items = data.items as ProductCardProps[] | ArticlesProps[]
+		items = data.items as ProductCardProps[] | ArticleCardProps[]
 		totalCount = data.totalCount
 	} catch (error) {
 		return (
@@ -66,7 +65,7 @@ const GenericListPage = async ({
 			) : (
 				<ArticleSection
 					title={props.pageTitle || ''}
-					articles={items as ArticlesProps[]}
+					articles={items as ArticleCardProps[]}
 				/>
 			)}
 

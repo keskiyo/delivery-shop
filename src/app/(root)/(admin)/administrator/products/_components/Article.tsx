@@ -1,4 +1,5 @@
 import { formStyles } from '@/app/(root)/(auth)/styles'
+import NumberInput from '@/components/ui/NumberInput'
 
 interface ArticleProps {
 	article: string
@@ -11,8 +12,7 @@ const Article = ({ onChangeAction, article }: ArticleProps) => {
 			<label className='block text-sm font-medium mb-2'>
 				Артикул <span className='text-danger'>*</span>
 			</label>
-			<input
-				type='number'
+			<NumberInput
 				name='article'
 				min='0'
 				max='999999'

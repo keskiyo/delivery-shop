@@ -1,4 +1,5 @@
 import { formStyles } from '@/app/(root)/(auth)/styles'
+import NumberInput from '@/components/ui/NumberInput'
 
 interface BasePriceProps {
 	basePrice: string
@@ -11,13 +12,13 @@ const BasePrice = ({ onChangeAction, basePrice }: BasePriceProps) => {
 			<label className='block text-sm font-medium mb-2'>
 				Базовая цена (руб.) <span className='text-danger'>*</span>
 			</label>
-			<input
-				type='number'
+			<NumberInput
 				name='basePrice'
 				step='0.01'
 				required
 				value={basePrice}
 				onChange={onChangeAction}
+				wrapperClassName='w-72 max-w-full'
 				className={`${formStyles.input} bg-card [&&]:w-full`}
 			/>
 		</div>
