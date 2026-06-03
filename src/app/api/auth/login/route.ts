@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для авторизации по телефону и паролю.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: POST.
+
 import { getDB } from '@/lib/api-routes'
 import { randomBytes } from 'crypto'
 import { NextResponse } from 'next/server'
@@ -26,14 +29,11 @@ export async function POST(request: Request) {
 			)
 		}
 
-		// Создаем сессию как в Better-Auth
 		const sessionId = randomBytes(16).toString('hex')
 
-		// Устанавливаем время жизни сессии в секундах (30 дней)
 		const expiresIn = 30 * 24 * 60 * 60
 		const expiresAt = new Date(Date.now() + expiresIn * 1000)
 
-		// Вставляем новую запись сессии в коллекцию "session" MongoDB
 		await db.collection('session').insertOne({
 			token: sessionId,
 			userId: user._id.toString(),
@@ -50,13 +50,11 @@ export async function POST(request: Request) {
 			message: 'Авторизация успешна',
 		}
 
-		// Создаем HTTP response с JSON данными
 		const response = NextResponse.json(responseData)
 
-		// Устанавливаем сессионную куку
 		response.cookies.set('session', sessionId, {
-			httpOnly: true, //Защита от XSS
-			sameSite: 'lax', //Защита от CSRF
+			httpOnly: true,
+			sameSite: 'lax',
 			expires: expiresAt,
 			path: '/',
 		})

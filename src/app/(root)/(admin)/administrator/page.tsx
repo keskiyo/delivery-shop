@@ -9,9 +9,7 @@ type MenuItem = {
 	icon: IconName
 }
 
-/**
- * Главная страница админ-панели
- */
+
 const Icon = ({ name }: { name: IconName }) => {
 	const paths: Record<IconName, string> = {
 		users: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
@@ -41,7 +39,7 @@ const Icon = ({ name }: { name: IconName }) => {
 	)
 }
 
-// 🔹 Данные меню с явным типом
+
 const menuItems: MenuItem[] = [
 	{
 		href: '/administrator/users-list',
@@ -81,9 +79,7 @@ const menuItems: MenuItem[] = [
 	},
 ]
 
-/**
- * Главная страница админ-панели
- */
+
 const AdminPanel = () => {
 	return (
 		<div className='p-6 max-w-7xl mx-auto'>

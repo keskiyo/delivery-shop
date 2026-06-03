@@ -1,3 +1,6 @@
+// Назначение: конфигурация тулбаров редактора статей.
+// Как работает: Описывает группы инструментов и порядок их отображения.
+
 import { AlignmentMenu } from '../editor/_components/tiptap-components/AlignmentMenu'
 import { BgColorMenu } from '../editor/_components/tiptap-components/BgColorMenu'
 import { CodeEditorButton } from '../editor/_components/tiptap-components/CodeEditorButton'

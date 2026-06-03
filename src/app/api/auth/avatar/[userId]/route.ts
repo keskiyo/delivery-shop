@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для выдачи аватара пользователя.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: GET.
+
 import { getDB } from '@/lib/api-routes'
 import { GridFSBucket, ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'

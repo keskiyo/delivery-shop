@@ -1,3 +1,6 @@
+// Назначение: форматирование телефона для списка заказов.
+// Как работает: Очищает ввод и приводит номер к читаемой российской маске.
+
 export const formatPhoneNumber = (phone: string) => {
 	const cleaned = phone.replace(/\D/g, '')
 

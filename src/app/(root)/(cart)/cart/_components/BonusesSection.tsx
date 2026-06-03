@@ -2,22 +2,7 @@ import InStockToggle from '@/components/shared/InStockToggle'
 import { useCartStore } from '@/store/cartStore'
 import { CONFIG } from '../../../../../../config/config'
 
-/**
- * Компонент секции управления бонусами в корзине
- *
- * Функционал:
- * - Отображает количество доступных бонусов на карте
- * - Позволяет списать бонусы для оплаты (до 10% от суммы заказа)
- * - Переключатель активации/деактивации использования бонусов
- *
- * Логика:
- * - Максимум можно списать: min(доступные бонусы, 10% от суммы заказа)
- * - Если бонусов нет (maxBonusUse <= 0) - компонент не отображается
- * - После оформления заказа (isOrdered) переключатель блокируется
- *
- * Используется в:
- * - CartSideBar - боковая панель корзины
- */
+
 const BonusesSection = () => {
 	const { setUseBonuses, useBonuses, pricing, isOrdered } = useCartStore()
 	const { totalPrice, maxBonusUse } = pricing

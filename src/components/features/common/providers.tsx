@@ -5,7 +5,6 @@ import NextTopLoader from 'nextjs-toploader'
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
 
-// Разные провайдеры
 
 export const Providers: React.FC<React.PropsWithChildren> = ({ children }) => {
 	return (

@@ -1,4 +1,6 @@
-import { CONFIG_BLOG } from '@/app/(root)/(admin)/administrator/(cms)/cms/CONFIG_BLOG'
+// Назначение: API-маршрут для управления категориями CMS.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: GET, POST.
+
 import {
 	Category,
 	FilterType,
@@ -16,9 +18,7 @@ export async function GET(request: Request) {
 
 		const { searchParams } = new URL(request.url)
 		const page = parseInt(searchParams.get('pageToLoad') || '1')
-		const limit = parseInt(
-			searchParams.get('limit') || CONFIG_BLOG.ITEMS_PER_PAGE.toString(),
-		)
+		const limit = parseInt(searchParams.get('limit')!)
 		const sortBy: SortField = (searchParams.get('sortBy') ||
 			'numericId') as SortField
 		const sortOrder = searchParams.get('sortOrder') || 'desc'

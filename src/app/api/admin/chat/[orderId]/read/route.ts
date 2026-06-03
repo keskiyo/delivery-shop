@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для пометки чата заказа прочитанным.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: POST.
+
 import { getDB } from '@/lib/api-routes'
 import { NextResponse } from 'next/server'
 import { getServerUserId } from '../../../../../../../utils/getServerUserId'

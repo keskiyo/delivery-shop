@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для изменения времени доставки заказа.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: POST.
+
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
@@ -9,7 +12,6 @@ export async function POST(
 	try {
 		const { orderId } = await params
 
-		// Проверяем валидность orderId
 		if (!orderId) {
 			return NextResponse.json(
 				{ message: 'Требуется ID заказа' },
@@ -19,7 +21,6 @@ export async function POST(
 
 		const { deliveryDate, deliveryTimeSlot } = await request.json()
 
-		// Валидация данных
 		if (!deliveryDate || !deliveryTimeSlot) {
 			return NextResponse.json(
 				{
@@ -32,7 +33,6 @@ export async function POST(
 
 		const db = await getDB()
 
-		// Обновляем заказ
 		const result = await db.collection('orders').updateOne(
 			{ _id: new ObjectId(orderId) },
 			{

@@ -14,13 +14,13 @@ const clientPromise = client.connect()
 
 /**
  * Получает экземпляр базы данных MongoDB
- * 
+ *
  * Использует переменные окружения:
  * - FOOD_DELIVERY_DB_URL: URL подключения к MongoDB
  * - FOOD_DELIVERY_DB_NAME: Имя базы данных (обычно 'deliveryshop')
- * 
+ *
  * @returns Promise с экземпляром базы данных
- * 
+ *
  * @example
  * const db = await getDB()
  * const products = await db.collection('products').find({}).toArray()

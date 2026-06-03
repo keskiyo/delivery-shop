@@ -1,17 +1,13 @@
+// Назначение: управление расписанием доставки в админке.
+// Как работает: Загружает окно дат, проверяет пересечения слотов и сохраняет доступность через API.
+
 import { convertTimeToMinutes } from '@/app/(root)/(admin)/administrator/delivery-times/utils/convertTimeToMinuts'
 import { getDaysDates } from '@/app/(root)/(admin)/administrator/delivery-times/utils/getDaysDates'
 import { Schedule } from '@/types/deliverySchedule'
 import { useCallback, useState } from 'react'
 
-/**
- * Хук для управления графиком доставки в админ-панели
- * Позволяет создавать временные слоты, управлять их доступностью по дням
- * 
- * График работает на 3 дня вперед (сегодня + 2 дня)
- * Каждый временной слот имеет формат "08:00-14:00" и может быть свободен (true) или занят (false)
- */
 export function useDeliverySchedule() {
-	// Расписание: { "2026-04-16": { "08:00-14:00": true, "14:00-20:00": false } }
+
 	const [schedule, setSchedule] = useState<Schedule>({})
 	const [loading, setLoading] = useState(true)
 	const [saving, setSaving] = useState(false)
@@ -19,17 +15,15 @@ export function useDeliverySchedule() {
 	const [error, setError] = useState('')
 	const [startTime, setStartTime] = useState('08:00')
 	const [endTime, setEndTime] = useState('14:00')
-	// Список всех временных слотов (применяются ко всем дням)
+
 	const [timeSlots, setTimeSlots] = useState<string[]>([])
 
-	// Получаем массив дат на 3 дня вперед
 	const dates = getDaysDates()
 
 	const showMessage = useCallback((text: string) => {
 		setMessage(text)
 	}, [])
 
-	// Создает пустое расписание для всех дат (если в БД ничего нет)
 	const initializeEmptySchedule = useCallback(() => {
 		const emptySchedule: Schedule = {}
 
@@ -40,8 +34,6 @@ export function useDeliverySchedule() {
 		setSchedule(emptySchedule)
 	}, [dates])
 
-	// Загружает график доставки из БД
-	// Если график есть - загружает его, если нет - создает пустой
 	const fetchDeliveryTimes = useCallback(async () => {
 		try {
 			const response = await fetch('/api/delivery-times')
@@ -51,7 +43,6 @@ export function useDeliverySchedule() {
 				const loadedSchedule = data.schedule as Schedule
 				const updatedSchedule: Schedule = {}
 
-				// Обновляем расписание только для актуальных дат (3 дня)
 				dates.forEach(date => {
 					updatedSchedule[date] = loadedSchedule[date]
 						? { ...loadedSchedule[date] }
@@ -60,7 +51,6 @@ export function useDeliverySchedule() {
 
 				setSchedule(updatedSchedule)
 
-				// Собираем все уникальные временные слоты из всех дней
 				const slots = new Set(
 					dates.flatMap(date =>
 						Object.keys(updatedSchedule[date] || {}),
@@ -79,8 +69,6 @@ export function useDeliverySchedule() {
 		}
 	}, [dates, initializeEmptySchedule])
 
-	// Добавляет новый временной слот для всех дней
-	// Проверяет корректность времени и отсутствие пересечений с существующими слотами
 	const addTimeSlot = useCallback(() => {
 		setError('')
 
@@ -89,7 +77,6 @@ export function useDeliverySchedule() {
 			return
 		}
 
-		// Конвертируем время в минуты для сравнения (08:00 -> 480)
 		const startMinutes = convertTimeToMinutes(startTime)
 		const endMinutes = convertTimeToMinutes(endTime)
 
@@ -100,11 +87,7 @@ export function useDeliverySchedule() {
 
 		const timeSlotValue = `${startTime}-${endTime}`
 
-		// Проверяем, не пересекается ли новый слот с существующими
-		// Пересечение есть если:
-		// 1. Начало нового слота попадает в существующий
-		// 2. Конец нового слота попадает в существующий
-		// 3. Новый слот полностью покрывает существующий
+		// Сравниваем интервалы в минутах, чтобы корректно ловить частичные и полные пересечения.
 		const hasOverlap = timeSlots.some(existingSlot => {
 			const [existingStart, existingEnd] = existingSlot.split('-')
 			const existingStartMinutes = convertTimeToMinutes(existingStart)
@@ -130,7 +113,6 @@ export function useDeliverySchedule() {
 
 		const updatedSchedule: Schedule = { ...schedule }
 
-		// Добавляем новый слот для всех дней как свободный (true)
 		dates.forEach(date => {
 			if (!updatedSchedule[date]) updatedSchedule[date] = {}
 			updatedSchedule[date][timeSlotValue] = true
@@ -140,8 +122,7 @@ export function useDeliverySchedule() {
 		showMessage('Временной слот добавлен для всех дней')
 	}, [startTime, endTime, timeSlots, schedule, dates, showMessage])
 
-	// Обновляет статус временного слота для конкретного дня
-	// free: true - слот свободен, false - занят
+	// Меняем доступность конкретного слота, не затрагивая остальные дни.
 	const updateTimeSlotStatus = useCallback(
 		(date: string, timeSlot: string, free: boolean) => {
 			setSchedule(prev => ({
@@ -155,7 +136,7 @@ export function useDeliverySchedule() {
 		[],
 	)
 
-	// Удаляет временной слот из всех дней
+	// Удаление слота синхронно чистит общий список и расписание каждого дня.
 	const removeTimeSlot = useCallback(
 		(slotToRemove: string) => {
 			setError('')
@@ -167,7 +148,6 @@ export function useDeliverySchedule() {
 
 			const updatedSchedule: Schedule = { ...schedule }
 
-			// Удаляем слот из каждого дня
 			dates.forEach(date => {
 				if (updatedSchedule[date]) {
 					delete updatedSchedule[date][slotToRemove]
@@ -180,8 +160,7 @@ export function useDeliverySchedule() {
 		[timeSlots, schedule, dates, showMessage],
 	)
 
-	// Сохраняет график доставки в БД
-	// Отправляет только актуальные даты (3 дня) с их временными слотами
+	// Перед сохранением нормализуем расписание: отсутствующие значения считаются свободными.
 	const saveDeliveryTimes = useCallback(async () => {
 		setError('')
 		setSaving(true)
@@ -190,8 +169,6 @@ export function useDeliverySchedule() {
 		try {
 			const scheduleToSend: Schedule = {}
 
-			// Формируем расписание для отправки
-			// Если слот не отмечен как false - считаем его свободным (true)
 			dates.forEach(date => {
 				scheduleToSend[date] = {}
 				timeSlots.forEach(slot => {

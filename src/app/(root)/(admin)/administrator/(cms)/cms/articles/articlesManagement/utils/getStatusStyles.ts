@@ -1,3 +1,6 @@
+// Назначение: стили статуса статьи.
+// Как работает: Мапит технический статус публикации на цвет и подпись таблицы.
+
 import { ArticleStatus } from "../types";
 
 export const getStatusStyles = (status: ArticleStatus) => {

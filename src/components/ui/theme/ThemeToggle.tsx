@@ -1,22 +1,6 @@
 'use client'
 
-/**
- * Переключатель темы (светлая/темная)
- *
- * Визуально:
- * - Переключатель типа toggle (аналог iOS)
- * - Иконка солнца (light) / луны (dark) внутри кнопки
- * - Плавная анимация переключения (300ms)
- *
- * Использует хук useTheme() из ThemeProvider
- *
- * Встречается в:
- * - Header (Profile.tsx)
- * - Выпадающее меню профиля
- *
- * @example
- * <ThemeToggle /> // кнопка переключения темы
- */
+
 import { useTheme } from './ThemeProvider'
 
 export function ThemeToggle() {
@@ -59,7 +43,7 @@ export function ThemeToggle() {
 							viewBox='0 0 24 24'
 							fill='none'
 							stroke='currentColor'
-							strokeWidth='2.5' // Увеличили толщину линий
+							strokeWidth='2.5'
 							strokeLinecap='round'
 							strokeLinejoin='round'
 							className='w-5 h-5 m-1'
@@ -72,13 +56,13 @@ export function ThemeToggle() {
 							<path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z' />
 						</svg>
 					) : (
-						// Sun icon - Размер w-5 h-5 (20px) и толще линии (strokeWidth="2.5")
+
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							viewBox='0 0 24 24'
 							fill='none'
 							stroke='currentColor'
-							strokeWidth='2.5' // Увеличили толщину линий
+							strokeWidth='2.5'
 							strokeLinecap='round'
 							strokeLinejoin='round'
 							className='w-5 h-5 m-1'

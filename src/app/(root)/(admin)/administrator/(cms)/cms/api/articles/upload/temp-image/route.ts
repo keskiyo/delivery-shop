@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для загрузки временных изображений статьи.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: POST.
+
 import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
@@ -6,7 +9,7 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
     const file = formData.get('image') as File;
-    
+
     if (!file) {
       return NextResponse.json(
         { error: 'Файл не выбран' },
@@ -23,10 +26,10 @@ export async function POST(request: NextRequest) {
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    
+
     const originalName = file.name.replace(/\.[^/.]+$/, "");
     const extension = path.extname(file.name).toLowerCase();
-    
+
     const allowedExtensions = ['.jpg', '.jpeg', '.png', '.webp'];
     if (!allowedExtensions.includes(extension)) {
       return NextResponse.json(
@@ -34,33 +37,33 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-    
+
     const timestamp = Date.now();
     const random = Math.random().toString(36).substring(2, 9);
     const filename = `temp_${timestamp}_${random}${extension}`;
-    
+
     const uploadDir = path.join(process.cwd(), 'public', 'temp');
     const filepath = path.join(uploadDir, filename);
-    
+
     await mkdir(uploadDir, { recursive: true });
-    
+
     await writeFile(filepath, buffer);
-    
+
     const url = `/temp/${filename}`;
-    
-    return NextResponse.json({ 
+
+    return NextResponse.json({
       success: true,
-      url, 
+      url,
       filename: filename,
       originalName: originalName,
       fullOriginalName: file.name,
       size: file.size
     });
-    
+
   } catch (error) {
     console.error('Ошибка загрузки изображения:', error);
     return NextResponse.json(
-      { 
+      {
         error: 'Не удалось загрузить изображение',
         message: error instanceof Error ? error.message : 'Неизвестная ошибка'
       },

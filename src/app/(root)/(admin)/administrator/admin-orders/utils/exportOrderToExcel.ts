@@ -1,3 +1,6 @@
+// Назначение: экспорт заказа в Excel.
+// Как работает: Подготавливает данные заказа, вызывает генератор xlsx и запускает скачивание файла.
+
 import {
 	downloadOrderExcel,
 	generateOrderExcel,
@@ -23,16 +26,10 @@ interface EnrichedOrderItem extends Omit<OrderItem, 'name' | 'title'> {
 	totalPrice: number
 }
 
-/**
- * Получает имя товара с приоритетами
- */
 const getProductName = (productData?: ProductData): string => {
 	return productData?.title || 'Неизвестный товар'
 }
 
-/**
- * Загружает данные о продукте
- */
 const productCache = new Map<string, ProductData>()
 
 const fetchProductDetails = async (productId: string): Promise<ProductData> => {
@@ -52,9 +49,6 @@ const fetchProductDetails = async (productId: string): Promise<ProductData> => {
 	}
 }
 
-/**
- * Обогащает данные товара информацией о продукте
- */
 const enrichOrderItem = async (item: OrderItem): Promise<EnrichedOrderItem> => {
 	const productData = await fetchProductDetails(item.productId)
 
@@ -103,9 +97,6 @@ const prepareExcelData = (
 	})),
 })
 
-/**
- * Экспорт заказа в Excel
- */
 export const exportOrderToExcel = async (order: Order): Promise<void> => {
 	try {
 		const enrichedItems = await Promise.all(

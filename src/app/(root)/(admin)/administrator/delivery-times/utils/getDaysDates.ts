@@ -1,3 +1,6 @@
+// Назначение: даты для расписания доставки.
+// Как работает: Создает список из сегодняшней даты и следующих дней в формате YYYY-MM-DD.
+
 export const getDaysDates = (): string[] => {
 	const dates: string[] = []
 	const today = new Date()

@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для изменения порядка категорий CMS.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: PUT.
+
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
 
@@ -16,7 +19,6 @@ export async function PUT(request: Request) {
 			)
 		}
 
-		// Валидация данных
 		for (const item of items) {
 			if (!item._id || typeof item.numericId !== 'number') {
 				return NextResponse.json(
@@ -26,7 +28,6 @@ export async function PUT(request: Request) {
 			}
 		}
 
-		// Обновляем numericId для всех категорий
 		const bulkOperations = items.map(item => ({
 			updateOne: {
 				filter: { _id: new ObjectId(item._id) },

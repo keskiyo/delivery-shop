@@ -50,7 +50,7 @@ export const PhonePasswordResetVerify = ({
 		setErrorAction(null)
 
 		try {
-			// 1. Сначала проверяем OTP через BetterAuth
+
 			const { error: resetError } =
 				await authClient.phoneNumber.resetPassword({
 					phoneNumber: phone.replace(/\D/g, ''),
@@ -78,7 +78,7 @@ export const PhonePasswordResetVerify = ({
 				throw new Error(resetError.message || 'Неверный OTP код')
 			}
 
-			// 2. Если OTP верный, обновляем пароль в нашей БД
+
 			const response = await fetch('/api/auth/reset-phone-pass', {
 				method: 'POST',
 				headers: {

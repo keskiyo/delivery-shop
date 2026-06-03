@@ -1,3 +1,6 @@
+// Назначение: сортировка статей в менеджере CMS.
+// Как работает: Принимает новый порядок, отправляет его в API и обновляет локальный список.
+
 import { useArticlesManagementStore } from "@/store/articlesManagementStore";
 import type { ApiResponse } from "../types";
 

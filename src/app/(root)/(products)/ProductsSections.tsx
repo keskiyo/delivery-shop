@@ -46,7 +46,7 @@ const ProductsSections = ({
 								className={
 									applyIndexStyles
 										? `${index >= mobileItemsLimit ? 'hidden md:block' : ''}
-										${index >= 3 ? 'md:hidden xl:block' : ''} 
+										${index >= 3 ? 'md:hidden xl:block' : ''}
 										${index >= 4 ? 'xl:hidden' : ''}`
 										: ''
 								}

@@ -11,24 +11,7 @@ import { showPromiseToast, showToast } from '@/lib/showToast'
 import { useCartStore } from '@/store/cartStore'
 import { useState } from 'react'
 
-/**
- * Кнопка добавления товара в корзину с управлением количеством
- *
- * Функционал:
- * - Показывает кнопку "В корзину" если товара нет в корзине
- * - После добавления показывает селектор количества (-, количество, +)
- * - Обновляет количество товара с оптимистичным UI (сначала обновляет локально, потом на сервере)
- * - При количестве = 0 удаляет товар из корзины
- * - Показывает сообщения об ошибках
- *
- * Логика работы:
- * 1. Проверяет наличие товара в корзине через cartItems из Zustand store
- * 2. При клике "В корзину" вызывает addToCartAction (server action)
- * 3. После успешного добавления обновляет корзину через fetchCart
- * 4. При изменении количества сначала обновляет локальный store (оптимистичный UI)
- * 5. Затем отправляет запрос на сервер для сохранения изменений
- * 6. После завершения операции перезагружает корзину для синхронизации
- */
+
 const AddToCartButton = ({
 	productId,
 	availableQuantity,
@@ -42,7 +25,7 @@ const AddToCartButton = ({
 
 	const { fetchCart, cartItems, updateCart } = useCartStore()
 
-	// Находим товар в корзине и получаем его количество
+
 	const cartItem = cartItems.find(item => item.productId === productId)
 	const currentQuantity = cartItem ? cartItem.quantity : 0
 	const isInCart = currentQuantity > 0
@@ -172,7 +155,7 @@ const AddToCartButton = ({
 				/>
 			)}
 			{isInCart && !isOutOfStock ? (
-				// Селектор количества (показывается когда товар уже в корзине)
+
 				<div className='absolute flex justify-center bottom-2 left-2 right-2'>
 					<QuantitySelector
 						quantity={displayQuantity}
@@ -184,7 +167,7 @@ const AddToCartButton = ({
 					/>
 				</div>
 			) : (
-				// Кнопка "В корзину" (показывается когда товара нет в корзине)
+
 				<button
 					onClick={handleAddToCart}
 					disabled={

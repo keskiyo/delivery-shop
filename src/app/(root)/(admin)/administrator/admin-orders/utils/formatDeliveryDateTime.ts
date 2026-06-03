@@ -1,3 +1,6 @@
+// Назначение: форматирование даты и времени доставки заказа.
+// Как работает: Объединяет дату и слот в строку для админской карточки заказа.
+
 export const formatDeliveryDateTime = (
 	dateString: string,
 	timeSlot: string,

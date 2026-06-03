@@ -7,7 +7,7 @@ import { CartItem } from '../types/cart'
  * Управляет товарами в корзине, ценами, бонусами и картой лояльности
  */
 export const useCartStore = create<CartState>(set => ({
-	// Товары в корзине
+
 	cartItems: [],
 	totalItems: 0,
 	isLoading: false,
@@ -40,7 +40,7 @@ export const useCartStore = create<CartState>(set => ({
 
 			const cartItems = await response.json()
 
-			// Подсчитываем общее количество товаров
+
 			const totalItems = cartItems.reduce(
 				(sum: number, item: CartItem) => sum + item.quantity,
 				0,

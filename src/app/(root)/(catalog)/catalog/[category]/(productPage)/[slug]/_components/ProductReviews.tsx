@@ -86,12 +86,12 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
 	}
 
 	const handleLoadMore = () => {
-		// Загружаем еще 5 отзывов
+
 		fetchReviews(5, reviews.length, true)
 	}
 
 	const handleShowLess = () => {
-		// Скрываем последние 5 отзывов
+
 		const newCount = Math.max(5, displayCount - 5)
 		setDisplayCount(newCount)
 		setReviews(prev => prev.slice(0, newCount))

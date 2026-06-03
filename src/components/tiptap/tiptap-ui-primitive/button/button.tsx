@@ -2,14 +2,14 @@
 
 import { forwardRef, Fragment, useMemo } from "react"
 
-// --- Tiptap UI Primitive ---
+
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/tiptap/tiptap-ui-primitive/tooltip"
 
-// --- Lib ---
+
 import { cn, parseShortcutKeys } from "@/lib/tiptap-utils"
 
 import "@/components/tiptap/tiptap-ui-primitive/button/button-colors.scss"

@@ -1,26 +1,11 @@
-/**
- * Валидирует дату рождения пользователя
- * 
- * Проверки:
- * - Формат даты: дд.мм.гггг (10 символов)
- * - Корректность даты (существует ли такая дата)
- * - Дата не раньше 1900 года
- * - Дата не в будущем
- * - Возраст не менее 14 лет
- * 
- * @param dateStr - Дата в формате "дд.мм.гггг"
- * @returns Объект с флагом валидности и текстом ошибки (если есть)
- * 
- * @example
- * validateBirthDate('15.05.1990') // { isValid: true }
- * validateBirthDate('32.13.2000') // { isValid: false, error: 'Некорректная дата' }
- * validateBirthDate('15.05.2020') // { isValid: false, error: 'Вам должно быть не меньше 14 лет' }
- * validateBirthDate('15.05')      // { isValid: false, error: 'Введите полную дату в формате дд.мм.гггг' }
- */
+// Назначение: проверка даты рождения.
+// Как работает: Принимает dd.mm.yyyy, отсекает невозможные даты и возраст младше 14 лет.
+
 export function validateBirthDate(dateStr: string): {
 	isValid: boolean
 	error?: string
 } {
+
 	if (!dateStr || dateStr.length < 10) {
 		return {
 			isValid: false,

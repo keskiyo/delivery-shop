@@ -68,7 +68,7 @@ export const TableMenu = ({ editor }: EditorProps) => {
 
 			const canMergeCells = editor.can().mergeCells()
 
-			// Получаем текущее состояние заголовков таблицы
+
 			const hasHeaderRow = editor.isActive('table', { headerRow: true })
 			const hasHeaderColumn = editor.isActive('table', {
 				headerColumn: true,

@@ -73,7 +73,7 @@ const PasswordInput = ({
 					onBlur={() => setIsFocused(false)}
 					placeholder={placeholder}
 					className={`${formStyles.input} ${inputClass}`}
-					// autoComplete='off'
+
 				/>
 				<button
 					type='button'

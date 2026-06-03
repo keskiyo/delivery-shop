@@ -6,26 +6,7 @@ interface AddTimeSlotFormProps {
 	onAddTimeSlot: () => void
 }
 
-/**
- * Компонент формы добавления временного слота доставки
- *
- * Функционал:
- * - Ввод времени начала и окончания слота
- * - Кнопка добавления слота для всех дней
- *
- * Используется в:
- * - Страница управления графиком доставки (administrator/delivery-times)
- *
- * Логика:
- * - Слот добавляется сразу для всех дней (сегодня + 2 дня)
- * - Валидация и проверка пересечений выполняется в родительском компоненте (useDeliverySchedule)
- *
- * @param startTime - Время начала слота (формат HH:MM)
- * @param endTime - Время окончания слота (формат HH:MM)
- * @param onStartTimeChange - Callback изменения времени начала
- * @param onEndTimeChange - Callback изменения времени окончания
- * @param onAddTimeSlot - Callback добавления слота
- */
+
 export default function AddTimeSlotForm({
 	startTime,
 	endTime,

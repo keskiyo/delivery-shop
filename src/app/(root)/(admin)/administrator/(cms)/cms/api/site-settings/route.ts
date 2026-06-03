@@ -1,18 +1,19 @@
+// Назначение: API-маршрут для чтения и сохранения SEO-настроек сайта.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: GET, PUT.
+
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
 import { SiteSettings } from '../../types/site-settings'
 
-// GET - Получение настроек (с атомарным созданием если нет)
 export async function GET() {
 	try {
 		const db = await getDB()
 
-		// Атомарно находим или создаем настройки
 		const result = await db
 			.collection<SiteSettings>('site-settings')
 			.findOneAndUpdate(
-				{}, // пустой фильтр → ищем ЛЮБОЙ документ (предполагается, что он один)
+				{},
 				{
 					$setOnInsert: {
 						siteKeywords: ['ваш', 'сайт', 'ключевые', 'слова'],
@@ -23,13 +24,13 @@ export async function GET() {
 					},
 				},
 				{
-					upsert: true, // создать если нет
-					returnDocument: 'after', // вернуть документ после операции
+					upsert: true,
+					returnDocument: 'after',
 				},
 			)
 
 		if (!result) {
-			// Если по какой-то причине документ не создался
+
 			const defaultSettings: SiteSettings = {
 				_id: new ObjectId(),
 				siteKeywords: ['ваш', 'сайт', 'ключевые', 'слова'],
@@ -68,17 +69,15 @@ export async function GET() {
 	}
 }
 
-// PUT - Обновление настроек
 export async function PUT(request: Request) {
 	try {
 		const db = await getDB()
 		const data = await request.json()
 
-		// Атомарное обновление или создание
 		const result = await db
 			.collection<SiteSettings>('site-settings')
 			.findOneAndUpdate(
-				{}, // ищем любой документ
+				{},
 				{
 					$set: {
 						siteKeywords: data.siteKeywords || [],
@@ -89,8 +88,8 @@ export async function PUT(request: Request) {
 					},
 				},
 				{
-					upsert: true, // создать если нет
-					returnDocument: 'after', // вернуть обновленный документ
+					upsert: true,
+					returnDocument: 'after',
 				},
 			)
 

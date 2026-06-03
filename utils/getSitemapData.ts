@@ -1,3 +1,6 @@
+// Назначение: получение данных для sitemap.
+// Как работает: Запрашивает публичные страницы, товары, категории и статьи для карты сайта.
+
 import { SitemapDataResponse } from '@/types/sitemap'
 import { baseUrl } from './baseUrl'
 

@@ -49,7 +49,6 @@ export const CategoryTable = ({
 			return
 		}
 
-		// Находим категории
 		const draggedCategory = categories.find(
 			cat => cat._id.toString() === draggedId,
 		)
@@ -63,7 +62,6 @@ export const CategoryTable = ({
 			return
 		}
 
-		// Меняем местами numericId
 		const tempNumericId = draggedCategory.numericId
 		const updatedDraggedCategory = {
 			...draggedCategory,
@@ -74,7 +72,6 @@ export const CategoryTable = ({
 			numericId: tempNumericId,
 		}
 
-		// Обновляем локальное состояние
 		const updatedCategories = categories
 			.map(cat => {
 				if (cat._id.toString() === draggedId) {
@@ -85,11 +82,10 @@ export const CategoryTable = ({
 				}
 				return cat
 			})
-			.sort((a, b) => a.numericId - b.numericId) // Сортируем по новым numericId
+			.sort((a, b) => a.numericId - b.numericId)
 
 		setCategories(updatedCategories)
 
-		// Отправляем на сервер обновление двух категорий
 		if (onReorder) {
 			onReorder([updatedDraggedCategory, updatedDroppedCategory])
 		}

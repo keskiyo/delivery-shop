@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для загрузки постоянных изображений статьи.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: POST, DELETE.
+
 import fs from 'fs/promises'
 import { NextRequest, NextResponse } from 'next/server'
 import path from 'path'

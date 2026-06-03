@@ -1,3 +1,6 @@
+// Назначение: загрузка и сохранение настроек сайта в CMS.
+// Как работает: Держит форму SEO-настроек, синхронизирует ее с API и возвращает состояния загрузки.
+
 import { showPromiseToast } from '@/lib/showToast'
 import { useEffect, useState } from 'react'
 import { FormData, SiteSettings } from '../types/site-settings'

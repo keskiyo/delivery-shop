@@ -1,3 +1,6 @@
+// Назначение: подготовка данных заказа из корзины.
+// Как работает: Собирает позиции, суммы, бонусы и доставку в payload для API заказа.
+
 import { CartItem } from '@/types/cart'
 import { CartItemWithPrice, CreateOrderRequest } from '@/types/order'
 import { ProductCardProps } from '@/types/product'

@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для получения карточек избранных товаров.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: GET.
+
 import { getDB } from '@/lib/api-routes'
 import { ProductCardProps } from '@/types/product'
 import { Filter, ObjectId } from 'mongodb'

@@ -1,3 +1,6 @@
+// Назначение: подготовка числовых показателей CMS-дашборда.
+// Как работает: Собирает статистику из данных CMS и возвращает значения для карточек.
+
 import { useCategoryStore } from '@/store/categoryStore'
 import { useEffect } from 'react'
 import { useSiteSettings } from './useSiteSettings'

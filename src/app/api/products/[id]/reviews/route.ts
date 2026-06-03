@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для чтения и создания отзывов товара.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: GET, POST.
+
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { revalidateTag } from 'next/cache'
@@ -13,22 +16,18 @@ export async function GET(
 		const { id } = await params
 		const db = await getDB()
 
-		// Получаем параметры пагинации из query string
 		const url = new URL(request.url)
 		const limit = parseInt(url.searchParams.get('limit') || '5')
 		const skip = parseInt(url.searchParams.get('skip') || '0')
 
-		// Получаем общее количество отзывов
 		const total = await db
 			.collection('reviews')
 			.countDocuments({ productId: id })
 
-		// Aggregation pipeline для получения отзывов с данными о пользователе и аватаре
 		const pipeline = [
 			{ $match: { productId: id } },
 			{ $sort: { createdAt: -1 } },
 
-			// Lookup для получения gender из коллекции users
 			{
 				$lookup: {
 					from: 'users',
@@ -46,7 +45,6 @@ export async function GET(
 				},
 			},
 
-			// Lookup для проверки наличия аватара
 			{
 				$lookup: {
 					from: 'avatars.files',
@@ -67,7 +65,6 @@ export async function GET(
 				},
 			},
 
-			// Добавляем поля userGender и hasAvatar
 			{
 				$addFields: {
 					userGender: { $arrayElemAt: ['$userInfo.gender', 0] },
@@ -75,7 +72,6 @@ export async function GET(
 				},
 			},
 
-			// Убираем временные поля
 			{
 				$project: {
 					userInfo: 0,
@@ -83,7 +79,6 @@ export async function GET(
 				},
 			},
 
-			// Пагинация
 			{ $skip: skip },
 			{ $limit: limit },
 		]
@@ -124,7 +119,6 @@ export async function POST(
 
 		const db = await getDB()
 
-		// Проверяем существующий отзыв
 		const existingReview = await db.collection('reviews').findOne({
 			productId,
 			userId,
@@ -137,7 +131,6 @@ export async function POST(
 			)
 		}
 
-		// Получаем текущий продукт чтобы обновить distribution
 		const product = await db.collection('products').findOne({
 			id: parseInt(productId),
 		})
@@ -148,19 +141,16 @@ export async function POST(
 			)
 		}
 
-		// Получаем gender пользователя из коллекции users
 		const user = await db.collection('users').findOne({
 			_id: new ObjectId(userId),
 		})
 
-		// ОБНОВЛЯЕМ DISTRIBUTION В КОЛЛЕКЦИИ PRODUCTS
 		const newDistribution = { ...product.rating.distribution }
 		const ratingKey = rating.toString() as keyof typeof newDistribution
 		newDistribution[ratingKey] += 1
 
 		const newCount = product.rating.count + 1
 
-		// Пересчитываем средний рейтинг на основе distribution
 		const totalRating =
 			newDistribution['1'] * 1 +
 			newDistribution['2'] * 2 +
@@ -169,7 +159,6 @@ export async function POST(
 			newDistribution['5'] * 5
 		const newAverage = Math.round((totalRating / newCount) * 10) / 10
 
-		// ОБНОВЛЯЕМ ПРОДУКТ В КОЛЛЕКЦИИ PRODUCTS
 		await db.collection('products').updateOne(
 			{ id: parseInt(productId) },
 			{
@@ -182,7 +171,6 @@ export async function POST(
 			},
 		)
 
-		// СОЗДАЕМ ОТЗЫВ В КОЛЛЕКЦИИ REVIEWS
 		const newReview = {
 			productId,
 			userId,

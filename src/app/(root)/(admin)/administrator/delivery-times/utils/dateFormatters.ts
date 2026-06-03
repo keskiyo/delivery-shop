@@ -1,3 +1,6 @@
+// Назначение: форматирование дат админки доставки.
+// Как работает: Готовит короткие и полные подписи дней на русском языке.
+
 export const formatDateFull = (dateString: string): string => {
 	const [year, month, day] = dateString.split('-').map(Number)
 	const date = new Date(year, month - 1, day)

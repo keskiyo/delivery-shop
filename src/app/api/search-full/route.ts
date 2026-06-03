@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для полного поиска товаров.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: GET.
+
 import { ProductCardProps } from '@/types/product'
 import { NextResponse } from 'next/server'
 import { getDB } from '../../../lib/api-routes'

@@ -8,7 +8,7 @@ import { getServerUserId } from '../../utils/getServerUserId'
 
 /**
  * Получает корзину пользователя для страницы оформления заказа
- * 
+ *
  * @returns Массив товаров в корзине или пустой массив
  */
 export async function getOrderCartAction(): Promise<OrderCartItem[]> {
@@ -34,7 +34,7 @@ export async function getOrderCartAction(): Promise<OrderCartItem[]> {
 /**
  * Получает количество бонусов пользователя и наличие карты лояльности
  * Используется для расчета цен в корзине
- * 
+ *
  * @returns Объект с количеством бонусов и флагом наличия карты
  */
 export async function getUserBonusesAction(): Promise<{
@@ -54,7 +54,7 @@ export async function getUserBonusesAction(): Promise<{
 		})
 
 		const bonusesCount = user?.bonusesCount || 0
-		// Карта лояльности есть, если поле card заполнено (не пустая строка)
+
 		const hasLoyaltyCard = !!(user?.card && user.card !== '')
 
 		return { bonusesCount, hasLoyaltyCard }
@@ -67,7 +67,7 @@ export async function getUserBonusesAction(): Promise<{
 /**
  * Обновляет количество конкретного товара в корзине
  * Используется при изменении количества через инпут или кнопки +/-
- * 
+ *
  * @param productId - ID товара (строка)
  * @param quantity - Новое количество товара
  * @returns Объект с флагом успеха и сообщением
@@ -85,7 +85,7 @@ export async function updateOrderItemQuantityAction(
 
 		const db = await getDB()
 
-		// Используем позиционный оператор $ для обновления конкретного элемента массива
+
 		const result = await db.collection('user').updateOne(
 			{
 				_id: ObjectId.createFromHexString(userId),
@@ -111,7 +111,7 @@ export async function updateOrderItemQuantityAction(
 /**
  * Удаляет несколько товаров из корзины одновременно
  * Используется для удаления недоступных товаров (нет в наличии)
- * 
+ *
  * @param productIds - Массив ID товаров для удаления
  * @returns Объект с флагом успеха и сообщением
  */
@@ -135,7 +135,7 @@ export async function removeMultipleOrderItemsAction(
 			return { success: false, message: 'Пользователь не найден' }
 		}
 
-		// Фильтруем корзину, оставляя только товары, которых нет в списке на удаление
+
 		const updatedCart = user.cart.filter(
 			(item: OrderCartItem) => !productIds.includes(item.productId),
 		)

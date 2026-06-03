@@ -9,10 +9,7 @@ import { Suspense } from 'react'
 import { baseUrl } from '../../../../../../utils/baseUrl'
 import { TRANSLATIONS } from '../../../../../../utils/translations'
 
-/**
- * Генерация метаданных для страницы категории
- * Использует переводы названий категорий из TRANSLATIONS
- */
+
 export async function generateMetadata({
 	params,
 }: {
@@ -31,33 +28,7 @@ export async function generateMetadata({
 	}
 }
 
-/**
- * Страница категории товаров с фильтрацией и пагинацией
- *
- * Функционал:
- * - Отображение товаров выбранной категории
- * - Фильтрация по тегам (новинки, акции, здоровая еда и т.д.)
- * - Фильтрация по цене (от-до)
- * - Фильтр "В наличии"
- * - Сортировка товаров
- * - Пагинация результатов
- *
- * Логика работы:
- * 1. Получает категорию из URL параметра
- * 2. Применяет фильтры из query параметров
- * 3. Загружает товары через fetchProductsByCategory
- * 4. Отображает результаты с возможностью изменения фильтров
- *
- * Компоненты фильтрации:
- * - DropFilter: выпадающий фильтр для мобильных устройств
- * - FilterButtons: кнопки быстрых фильтров (десктоп)
- * - PriceFilter: фильтр по диапазону цен (десктоп)
- * - FilterControls: элементы управления сортировкой
- *
- * @route /catalog/[category]
- * @param category - Название категории (например: "meat", "dairy", "vegetables")
- * @param searchParams - Query параметры фильтрации и пагинации
- */
+
 const CategoryPage = async ({
 	params,
 	searchParams,

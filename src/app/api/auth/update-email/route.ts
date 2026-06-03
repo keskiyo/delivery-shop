@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для обновления email пользователя.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: POST.
+
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
@@ -15,7 +18,6 @@ export async function POST(request: NextRequest) {
 			)
 		}
 
-		// Конвертируем userId в ObjectId
 		let objectId
 		try {
 			objectId = ObjectId.createFromHexString(userId)

@@ -4,10 +4,10 @@ import { useCallback, useEffect, useState } from "react"
 import { type Editor } from "@tiptap/react"
 import { NodeSelection, TextSelection } from "@tiptap/pm/state"
 
-// --- Hooks ---
+
 import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
-// --- Lib ---
+
 import {
   findNodePosition,
   getSelectedBlockNodes,
@@ -17,7 +17,7 @@ import {
   selectionWithinConvertibleTypes,
 } from "@/lib/tiptap-utils"
 
-// --- Icons ---
+
 import { HeadingOneIcon } from "@/components/tiptap/tiptap-icons/heading-one-icon"
 import { HeadingTwoIcon } from "@/components/tiptap/tiptap-icons/heading-two-icon"
 import { HeadingThreeIcon } from "@/components/tiptap/tiptap-icons/heading-three-icon"
@@ -89,7 +89,7 @@ export function canToggle(
       : editor.can().setNode("heading")
   }
 
-  // Ensure selection is in nodes we're allowed to convert
+
   if (
     !selectionWithinConvertibleTypes(editor, [
       "paragraph",
@@ -103,8 +103,7 @@ export function canToggle(
   )
     return false
 
-  // Either we can set heading directly on the selection,
-  // or we can clear formatting/nodes to arrive at a heading.
+
   return level
     ? editor.can().setNode("heading", { level }) || editor.can().clearNodes()
     : editor.can().setNode("heading") || editor.can().clearNodes()
@@ -149,9 +148,7 @@ export function toggleHeading(
 
     const blocks = getSelectedBlockNodes(editor)
 
-    // In case a selection contains multiple blocks, we only allow
-    // toggling to nide if there's exactly one block selected
-    // we also dont block the canToggle since it will fall back to the bottom logic
+
     const isPossibleToTurnInto =
       selectionWithinConvertibleTypes(editor, [
         "paragraph",
@@ -163,7 +160,7 @@ export function toggleHeading(
         "codeBlock",
       ]) && blocks.length === 1
 
-    // No selection, find the the cursor position
+
     if (
       (state.selection.empty || state.selection instanceof TextSelection) &&
       isPossibleToTurnInto
@@ -182,7 +179,7 @@ export function toggleHeading(
     const selection = state.selection
     let chain = editor.chain().focus()
 
-    // Handle NodeSelection
+
     if (selection instanceof NodeSelection) {
       const firstChild = selection.node.firstChild?.firstChild
       const lastChild = selection.node.lastChild?.lastChild
@@ -249,7 +246,7 @@ export function shouldShowButton(props: {
  *
  * @example
  * ```tsx
- * // Simple usage
+ *
  * function MySimpleHeadingButton() {
  *   const { isVisible, isActive, handleToggle, Icon } = useHeading({ level: 1 })
  *
@@ -266,7 +263,7 @@ export function shouldShowButton(props: {
  *   )
  * }
  *
- * // Advanced usage with configuration
+ *
  * function MyAdvancedHeadingButton() {
  *   const { isVisible, isActive, handleToggle, label, Icon } = useHeading({
  *     level: 2,

@@ -14,30 +14,9 @@ interface CheckoutFormProps {
 	}) => void
 }
 
-/**
- * Компонент формы оформления заказа
- *
- * Управляет:
- * - Адресом доставки (город, улица, дом, квартира, дополнительная информация)
- * - Временем доставки (дата и временной слот)
- * - Валидацией формы
- *
- * Логика работы:
- * 1. Хранит состояние адреса и времени доставки
- * 2. При каждом изменении проверяет валидность формы
- * 3. Передает данные и статус валидности родительскому компоненту
- * 4. Форма валидна если заполнены: город, улица, дом, дата и временной слот
- *
- * Валидация:
- * - Обязательные поля адреса: city, street, house
- * - Необязательные поля: apartment, additional
- * - Обязательные поля времени: date, timeSlot
- *
- * Используется в:
- * - Страница корзины (cart/page.tsx) для оформления заказа
- */
+
 const CheckoutForm = ({ onFormDataChange }: CheckoutFormProps) => {
-	// Состояние адреса доставки
+
 	const [deliveryFormData, setDeliveryFormData] =
 		useState<DeliveryAddressType>({
 			city: '',
@@ -47,31 +26,28 @@ const CheckoutForm = ({ onFormDataChange }: CheckoutFormProps) => {
 			additional: '',
 		})
 
-	// Состояние времени доставки
+
 	const [deliveryTime, setDeliveryTime] = useState<DeliveryTimeType>({
 		date: '',
 		timeSlot: '',
 	})
 
-	/**
-	 * Эффект для валидации формы и передачи данных родителю
-	 * Срабатывает при каждом изменении адреса или времени
-	 */
+
 	useEffect(() => {
-		// Проверяем заполненность обязательных полей адреса
+
 		const isAddressValid = Boolean(
 			deliveryFormData.city &&
 			deliveryFormData.street &&
 			deliveryFormData.house,
 		)
 
-		// Проверяем заполненность времени доставки
+
 		const isTimeValid = Boolean(deliveryTime.date && deliveryTime.timeSlot)
 
-		// Форма валидна только если заполнены все обязательные поля
+
 		const isValid = isAddressValid && isTimeValid
 
-		// Передаем данные и статус валидности родителю
+
 		onFormDataChange({
 			address: deliveryFormData,
 			time: deliveryTime,
@@ -79,10 +55,7 @@ const CheckoutForm = ({ onFormDataChange }: CheckoutFormProps) => {
 		})
 	}, [deliveryFormData, deliveryTime, onFormDataChange])
 
-	/**
-	 * Обработчик изменения полей адреса
-	 * Обновляет конкретное поле в состоянии адреса
-	 */
+
 	const handleFormDataChange = (
 		field: keyof DeliveryAddressType,
 		value: string,
@@ -93,9 +66,7 @@ const CheckoutForm = ({ onFormDataChange }: CheckoutFormProps) => {
 		}))
 	}
 
-	/**
-	 * Обработчик изменения даты доставки
-	 */
+
 	const handleDateChange = (date: string) => {
 		setDeliveryTime(prev => ({
 			...prev,
@@ -103,9 +74,7 @@ const CheckoutForm = ({ onFormDataChange }: CheckoutFormProps) => {
 		}))
 	}
 
-	/**
-	 * Обработчик изменения временного слота доставки
-	 */
+
 	const handleTimeSlotChange = (timeSlot: string) => {
 		setDeliveryTime(prev => ({
 			...prev,

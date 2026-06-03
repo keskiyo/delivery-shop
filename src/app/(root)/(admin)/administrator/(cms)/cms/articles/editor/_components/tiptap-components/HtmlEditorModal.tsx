@@ -16,7 +16,7 @@ export const HtmlEditorModal = ({
 	const modalRef = useRef<HTMLDivElement>(null)
 	const previewRef = useRef<HTMLDivElement>(null)
 
-	// Обработчик сохранения
+
 	const handleUpdate = useCallback(() => {
 		if (!editor || !htmlContent.trim()) return
 
@@ -33,7 +33,7 @@ export const HtmlEditorModal = ({
 		onCloseAction()
 	}, [editor, htmlContent, onCloseAction])
 
-	// Глобальные обработчики клавиш
+
 	useEffect(() => {
 		const handleEscape = (e: KeyboardEvent) => {
 			if (e.key === 'Escape') {
@@ -59,7 +59,7 @@ export const HtmlEditorModal = ({
 		}
 	}, [isOpen, onCloseAction, handleUpdate])
 
-	// Инициализация содержимого
+
 	useEffect(() => {
 		if (isOpen && editor) {
 			const html = editor.getHTML()
@@ -67,7 +67,7 @@ export const HtmlEditorModal = ({
 		}
 	}, [isOpen, editor])
 
-	// Копирование
+
 	const handleCopy = async () => {
 		try {
 			await navigator.clipboard.writeText(htmlContent)
@@ -78,18 +78,18 @@ export const HtmlEditorModal = ({
 		}
 	}
 
-	// Обработчик изменения
+
 	const handleEditorChange = (value: string | undefined) => {
 		setHtmlContent(value || '')
 	}
 
-	// Обработчик монтирования
+
 	const handleEditorDidMount = (
 		editorInstance: monaco.editor.IStandaloneCodeEditor,
 	) => {
 		editorRef.current = editorInstance
 
-		// Фокус и выделение
+
 		setTimeout(() => {
 			editorInstance.focus()
 			const model = editorInstance.getModel()
@@ -106,9 +106,9 @@ export const HtmlEditorModal = ({
 		}, 100)
 	}
 
-	// Обработчик beforeMount для установки темы
+
 	const handleBeforeMount = (monacoInstance: typeof monaco) => {
-		// Определяем темную тему
+
 		monacoInstance.editor.defineTheme('dark-theme', {
 			base: 'vs-dark',
 			inherit: true,

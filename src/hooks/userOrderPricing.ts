@@ -1,25 +1,12 @@
+// Назначение: расчет сумм заказа в личном кабинете.
+// Как работает: Собирает цены позиций заказа и возвращает итоговые значения для UI.
+
 import { CustomCartItem, CustomPricing } from '@/types/cart'
 import { Order } from '@/types/order'
 import { CurrentProduct, ProductsData } from '@/types/userOrder'
 import { useMemo } from 'react'
 import { CONFIG } from '../../config/config'
 
-/**
- * Хук для расчета цен в историческом заказе пользователя
- * 
- * Отличается от usePricing тем, что работает с данными уже оформленного заказа:
- * - Использует цены из самого заказа (могут отличаться от текущих)
- * - Не позволяет использовать бонусы (maxBonusUse = 0)
- * - Всегда считается что минимальная сумма достигнута
- * 
- * @param order - Объект заказа из истории
- * @param currentProducts - Текущие данные о товарах (для проверки наличия)
- * 
- * @returns Объект с:
- * - cartItemsForSummary: товары для отображения в итогах заказа
- * - productsData: данные о ценах товаров для usePricing
- * - customPricing: рассчитанные итоговые суммы
- */
 export const useOrderPricing = (
 	order: Order,
 	currentProducts: CurrentProduct[],

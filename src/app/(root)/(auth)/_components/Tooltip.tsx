@@ -26,15 +26,15 @@ const Tooltip = ({
 				{/* Треугольник внизу, если position="top" */}
 				{position === 'top' ? (
 					<div
-						className='absolute left-1/2 -bottom-0.75 transform -translate-x-1/2 w-0 h-0 
-                     border-l-[6px] border-r-[6px] border-t-4 
+						className='absolute left-1/2 -bottom-0.75 transform -translate-x-1/2 w-0 h-0
+                     border-l-[6px] border-r-[6px] border-t-4
                      border-l-transparent border-r-transparent border-t-danger'
 					></div>
 				) : (
-					// Треугольник вверху (по умолчанию)
+
 					<div
-						className='absolute left-1/2 -top-0.75 transform -translate-x-1/2 w-0 h-0 
-                     border-l-[6px] border-r-[6px] border-b-4 
+						className='absolute left-1/2 -top-0.75 transform -translate-x-1/2 w-0 h-0
+                     border-l-[6px] border-r-[6px] border-b-4
                      border-l-transparent border-r-transparent border-b-danger'
 					></div>
 				)}

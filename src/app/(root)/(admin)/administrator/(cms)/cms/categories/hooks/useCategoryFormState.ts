@@ -1,5 +1,8 @@
 'use client'
 
+// Назначение: состояние формы категории CMS.
+// Как работает: Инициализирует поля категории, обновляет значения и готовит payload для API.
+
 import { showToast } from '@/lib/showToast'
 import { useCategoryStore } from '@/store/categoryStore'
 import { useCallback, useState } from 'react'

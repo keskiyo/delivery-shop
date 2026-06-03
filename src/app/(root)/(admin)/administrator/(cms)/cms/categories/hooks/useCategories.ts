@@ -1,3 +1,6 @@
+// Назначение: управление списком категорий CMS.
+// Как работает: Загружает категории и выполняет операции создания, обновления и удаления.
+
 import { useCategoryStore } from "@/store/categoryStore";
 import { useEffect } from "react";
 import { CategoryFormData, UpdateCategoryData } from "../types";

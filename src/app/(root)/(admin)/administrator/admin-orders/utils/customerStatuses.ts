@@ -1,3 +1,6 @@
+// Назначение: статусы заказов для администратора.
+// Как работает: Задает подписи, значения и порядок отображения статусов в UI.
+
 export const CUSTOMER_STATUSES = [
 	{ value: 'pending', icon: '/icons-orders/icon-bag.svg', label: 'Новый' },
 	{

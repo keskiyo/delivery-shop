@@ -1,3 +1,6 @@
+// Назначение: фильтрация доступных слотов доставки.
+// Как работает: Берет расписание и исключает занятые или уже недоступные интервалы.
+
 import { isTimeSlotPassed } from '@/app/(root)/(cart)/cart/utils/isTimeSlotPassed'
 import { Schedule } from '@/types/deliverySchedule'
 import { formatDateToLocalYYYYMMDD } from '../../../../../../utils/formatDateToLocalYYYYMMDD'

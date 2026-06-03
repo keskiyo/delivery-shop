@@ -1,3 +1,6 @@
+// Назначение: управление списком статей CMS.
+// Как работает: Загружает статьи, хранит состояния загрузки и предоставляет операции обновления списка.
+
 import { ArticleApiResponse } from "../../types/entities.types";
 import { ArticleFormData } from "../types";
 

@@ -22,7 +22,7 @@ const UserAvatar = ({
 	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
-		// Определяем источник аватара
+
 		if (hasAvatar) {
 			setAvatarSrc(`/api/auth/avatar/${userId}?t=${Date.now()}`)
 		} else {

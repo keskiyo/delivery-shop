@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для сброса пароля по телефону.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: POST.
+
 import { getDB } from '@/lib/api-routes'
 import bcrypt from 'bcrypt'
 import { NextRequest, NextResponse } from 'next/server'

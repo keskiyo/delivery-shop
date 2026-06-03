@@ -1,20 +1,6 @@
-/**
- * Проверяет наличие загруженного аватара у пользователя
- *
- * Отправляет запрос на API для проверки существования аватара в GridFS
- * Используется для определения, показывать ли дефолтный аватар или загруженный
- *
- * @param userId - ID пользователя
- * @returns true если аватар существует, false если нет или произошла ошибка
- *
- * @example
- * const hasAvatar = await checkAvatarExist(user.id)
- * if (hasAvatar) {
- *   Загружаем аватар с сервера
- * } else {
- *   Показываем дефолтный аватар
- * }
- */
+// Назначение: проверка наличия аватара.
+// Как работает: Обращается к API аватара и возвращает простой boolean для UI.
+
 export const checkAvatarExist = async (userId: string): Promise<boolean> => {
 	try {
 		const response = await fetch(`/api/auth/avatar/${userId}/check`)

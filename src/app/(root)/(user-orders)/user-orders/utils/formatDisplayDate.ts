@@ -1,3 +1,6 @@
+// Назначение: человекочитаемая дата заказа.
+// Как работает: Возвращает дату с учетом русской локали для карточек заказа.
+
 export const formatDisplayDate = (date: Date): string => {
 	const today = new Date()
 	const tomorrow = new Date()

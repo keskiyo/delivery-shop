@@ -18,23 +18,7 @@ import { DeliveryAddress, DeliveryTime } from '@/types/order'
 import { ProductCardProps } from '@/types/product'
 import { useCallback, useEffect, useState } from 'react'
 
-/**
- * Страница корзины и оформления заказа
- * 
- * Функционал:
- * - Отображение товаров в корзине с возможностью изменения количества
- * - Выбор товаров для удаления (множественное выделение)
- * - Расчет цен с учетом скидок, карты лояльности и бонусов
- * - Форма оформления заказа (адрес доставки, время доставки)
- * - Боковая панель с итоговой информацией о заказе
- * 
- * Состояния:
- * - Режим корзины: просмотр и редактирование товаров
- * - Режим оформления (isCheckout): заполнение данных доставки
- * - Режим успешного заказа (isOrdered): показ сообщения об успехе
- * 
- * @route /cart
- */
+
 const CartPage = () => {
 	const [selectedItems, setSelectedItems] = useState<string[]>([])
 	const [productsData, setProductsData] = useState<{
@@ -92,7 +76,7 @@ const CartPage = () => {
 		useBonuses,
 	})
 
-	// Асинхронная функция загрузки данных корзины и товаров
+
 	const fetchCartAndProducts = async () => {
 		setIsCartLoading(true)
 
@@ -151,7 +135,7 @@ const CartPage = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	// Функция обновления количества товара
+
 	const handleQuantityUpdate = useCallback(
 		async (productId: string, newQuantity: number) => {
 			const updatedCartItems = cartItems.map(item =>
@@ -171,7 +155,7 @@ const CartPage = () => {
 		[cartItems, updateCart],
 	)
 
-	// Функция удаления выбранных товаров
+
 	const handleRemoveSelected = async () => {
 		if (selectedItems.length === 0) return
 
@@ -194,17 +178,17 @@ const CartPage = () => {
 		}
 	}
 
-	// Выделить все товары в корзине
+
 	const selectAllItems = () => {
 		setSelectedItems(visibleCartItems.map(item => item.productId))
 	}
 
-	// Снять выделение со всех товаров
+
 	const deselectAllItems = () => {
 		setSelectedItems([])
 	}
 
-	// Обработчик выбора/снятия выбора отдельного товара
+
 	const handleItemSelection = useCallback(
 		(productId: string, isSelected: boolean) => {
 			if (isSelected) {
@@ -216,7 +200,7 @@ const CartPage = () => {
 		[],
 	)
 
-	// Проверка, выбраны ли все товары в корзине
+
 	const isAllSelected =
 		selectedItems.length > 0 &&
 		selectedItems.length === visibleCartItems.length

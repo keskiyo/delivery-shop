@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для изменения статуса публикации статьи.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: PATCH.
+
 import { NextRequest, NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
 import { getDB } from "@/lib/api-routes";

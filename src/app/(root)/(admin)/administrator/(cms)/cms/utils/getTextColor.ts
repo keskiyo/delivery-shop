@@ -1,3 +1,6 @@
+// Назначение: цвет текста CMS-элемента.
+// Как работает: Мапит ключ темы на CSS-класс текста.
+
 export const getTextColor = (color: string): string => {
 	const colors: Record<string, string> = {
 		blue: 'text-brand',

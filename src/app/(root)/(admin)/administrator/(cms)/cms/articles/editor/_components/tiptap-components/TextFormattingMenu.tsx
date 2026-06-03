@@ -11,7 +11,7 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 	useEffect(() => {
 		if (!editor) return
 
-		// Обновляем состояния при изменении редактора
+
 		const updateStates = () => {
 			setIsBold(editor.isActive('bold'))
 			setIsItalic(editor.isActive('italic'))
@@ -19,14 +19,14 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 			setIsStrike(editor.isActive('strike'))
 		}
 
-		// Подписываемся на события редактора
+
 		editor.on('selectionUpdate', updateStates)
 		editor.on('transaction', updateStates)
 
-		// Инициализация
+
 		updateStates()
 
-		// Обработчик горячих клавиш
+
 		const handleKeyDown = (event: KeyboardEvent) => {
 			if (event.ctrlKey && event.shiftKey && event.code === 'KeyS') {
 				event.preventDefault()
@@ -105,7 +105,7 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 				onClick={handleBold}
 				disabled={!canBold}
 				className={`
-          p-2 rounded duration-300 
+          p-2 rounded duration-300
           ${
 				!canBold
 					? 'opacity-40 cursor-not-allowed text-muted-foreground'
@@ -125,7 +125,7 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 				onClick={handleItalic}
 				disabled={!canItalic}
 				className={`
-          p-2 rounded duration-300 
+          p-2 rounded duration-300
           ${
 				!canItalic
 					? 'opacity-40 cursor-not-allowed text-muted-foreground'
@@ -145,7 +145,7 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 				onClick={handleUnderline}
 				disabled={!canUnderline}
 				className={`
-          p-2 rounded duration-300 
+          p-2 rounded duration-300
           ${
 				!canUnderline
 					? 'opacity-40 cursor-not-allowed text-muted-foreground'
@@ -165,7 +165,7 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 				onClick={handleStrike}
 				disabled={!canStrike}
 				className={`
-          p-2 rounded duration-300 
+          p-2 rounded duration-300
           ${
 				!canStrike
 					? 'opacity-40 cursor-not-allowed text-muted-foreground'

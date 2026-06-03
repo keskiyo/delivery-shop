@@ -3,56 +3,56 @@ import { Check, Palette } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 const TEXT_COLORS = [
-	'#000000', // Черный
-	'#FFFFFF', // Белый
-	'#FF0000', // Красный
-	'#00FF00', // Зеленый
-	'#0000FF', // Синий
-	'#FFFF00', // Желтый
-	'#FF00FF', // Пурпурный
-	'#00FFFF', // Голубой
-	'#FFA500', // Оранжевый
-	'#800080', // Фиолетовый
-	'#008000', // Темно-зеленый
-	'#000080', // Темно-синий
-	'#800000', // Темно-красный
-	'#808000', // Оливковый
-	'#008080', // Бирюзовый
-	'#808080', // Серый
-	'#C0C0C0', // Светло-серый
+	'#000000',
+	'#FFFFFF',
+	'#FF0000',
+	'#00FF00',
+	'#0000FF',
+	'#FFFF00',
+	'#FF00FF',
+	'#00FFFF',
+	'#FFA500',
+	'#800080',
+	'#008000',
+	'#000080',
+	'#800000',
+	'#808000',
+	'#008080',
+	'#808080',
+	'#C0C0C0',
 ]
 
 export const TextColorMenu = ({ editor }: EditorProps) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const [customColor, setCustomColor] = useState('#000000')
-	const [currentColor, setCurrentColor] = useState('#000000') // Добавлено состояние для текущего цвета
+	const [currentColor, setCurrentColor] = useState('#000000')
 
 	const dropdownRef = useRef<HTMLDivElement>(null)
 	const buttonRef = useRef<HTMLButtonElement>(null)
 
-	// Функция для получения текущего цвета текста
+
 	const getCurrentColor = useCallback(() => {
 		if (!editor) return '#000000'
 		const attrs = editor.getAttributes('textStyle')
 		return attrs?.color || '#000000'
 	}, [editor])
 
-	// Функция для обновления состояния
+
 	const updateColor = useCallback(() => {
 		const color = getCurrentColor()
 		setCurrentColor(color)
 
-		// Если цвет не из предопределенных и не черный (по умолчанию), обновляем customColor
+
 		if (color !== '#000000' && !TEXT_COLORS.includes(color)) {
 			setCustomColor(color)
 		}
 	}, [getCurrentColor])
 
-	// Подписка на события редактора
+
 	useEffect(() => {
 		if (!editor) return
 
-		// Подписываемся на изменения редактора
+
 		const handleUpdate = () => {
 			updateColor()
 		}
@@ -60,17 +60,17 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 		editor.on('selectionUpdate', handleUpdate)
 		editor.on('transaction', handleUpdate)
 
-		// Инициализация при монтировании
+
 		updateColor()
 
-		// Отписываемся при размонтировании
+
 		return () => {
 			editor.off('selectionUpdate', handleUpdate)
 			editor.off('transaction', handleUpdate)
 		}
 	}, [editor, updateColor])
 
-	// Также обновляем при открытии меню
+
 	useEffect(() => {
 		if (isOpen && editor) {
 			updateColor()
@@ -99,7 +99,7 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 			if (color !== '#000000' && !TEXT_COLORS.includes(color)) {
 				setCustomColor(color)
 			}
-			setCurrentColor(color) // Инициализируем currentColor
+			setCurrentColor(color)
 		}
 	}, [editor, getCurrentColor])
 
@@ -107,10 +107,10 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 		if (!editor) return
 
 		if (color === '#000000') {
-			// Если выбрали черный (по умолчанию) - сбрасываем цвет
+
 			editor.chain().focus().unsetColor().run()
 		} else {
-			// Иначе устанавливаем выбранный цвет
+
 			editor.chain().focus().setColor(color).run()
 		}
 
@@ -118,13 +118,13 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 			setCustomColor(color)
 		}
 
-		// Обновляем состояние после изменения
+
 		setTimeout(updateColor, 10)
 	}
 
 	const resetColor = () => {
 		if (!editor) return
-		// Используем unsetColor как в документации
+
 		editor.chain().focus().unsetColor().run()
 		setIsOpen(false)
 		setTimeout(updateColor, 10)

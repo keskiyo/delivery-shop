@@ -1,19 +1,11 @@
+// Назначение: API-маршрут для очистки корзины после заказа.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: POST.
+
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
 import { getServerUserId } from '../../../../../utils/getServerUserId'
 
-/**
- * API route для очистки корзины пользователя
- * POST /api/orders/clear-cart
- * 
- * Используется после успешного оформления заказа
- * Удаляет все товары из корзины текущего авторизованного пользователя
- * 
- * Требует авторизации через cookie (better-auth или кастомную сессию)
- * 
- * @returns JSON с флагом успеха и сообщением
- */
 export async function POST() {
 	try {
 		const db = await getDB()

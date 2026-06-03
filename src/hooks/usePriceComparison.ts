@@ -1,3 +1,6 @@
+// Назначение: сравнение базовой и итоговой цены товара.
+// Как работает: Считает наличие скидки и готовит значения для блока цены.
+
 import { useAuthStore } from '@/store/authStore'
 import { Order } from '@/types/order'
 import { ProductCardProps } from '@/types/product'
@@ -5,26 +8,6 @@ import { CurrentProduct, PriceComparison } from '@/types/userOrder'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { CONFIG } from '../../config/config'
 
-/**
- * Хук для сравнения цен в историческом заказе с актуальными ценами
- * 
- * Используется на странице детального просмотра заказа для:
- * - Показа пользователю, изменились ли цены с момента заказа
- * - Отображения списка товаров с измененными ценами
- * - Расчета разницы в итоговой сумме
- * 
- * Сравнение учитывает:
- * - Изменение базовой цены товара
- * - Изменение скидки товара
- * - Наличие/отсутствие карты лояльности (6% скидка)
- * 
- * @param order - Объект исторического заказа
- * @param productsData - Текущие данные о товарах из API
- * 
- * @returns Объект с:
- * - currentProducts: массив товаров с текущими ценами
- * - priceComparison: объект с результатами сравнения цен
- */
 export const usePriceComparison = (
 	order: Order,
 	productsData: ProductCardProps[],

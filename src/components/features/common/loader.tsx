@@ -1,51 +1,25 @@
-/**
- * Компонент индикатора загрузки (Loader)
- * 
- * Отображает анимированный спиннер (круговая анимация):
- * - Серый круг (track) - фон
- * - Оранжевый круг (active) - анимированная часть
- * 
- * @param text - Опциональный текст для отображения (например, "товаров")
- * @param className - Дополнительные CSS классы
- * 
- * @example
- * <Loader /> // просто спиннер
- * <Loader text="товаров" /> // спиннер + "Загрузка товаров..."
- * <Loader className="mt-10" /> // с дополнительными стилями
- */
 interface LoaderProps {
 	text?: string
 	className?: string
 }
 
+const loaderItems = Array.from({ length: 4 }, (_, index) => index)
+
 export const Loader = ({ text = '', className = '' }: LoaderProps) => (
 	<div
 		className={`flex flex-col items-center justify-center gap-3 pt-20 ${className}`}
+		role='status'
+		aria-live='polite'
+		aria-label={text ? `Загрузка ${text}` : 'Загрузка'}
 	>
-		<svg
-			xmlns='http://www.w3.org/2000/svg'
-			viewBox='0 0 384 384'
-			className='loader'
-		>
-			<circle
-				r='176'
-				cy='192'
-				cx='192'
-				strokeWidth='32'
-				fill='transparent'
-				pathLength='360'
-				className='active'
-			></circle>
-			<circle
-				r='176'
-				cy='192'
-				cx='192'
-				strokeWidth='32'
-				fill='transparent'
-				pathLength='360'
-				className='track'
-			></circle>
-		</svg>
+		<div className='app-loader' aria-hidden='true'>
+			{loaderItems.map(item => (
+				<div className='app-loader-circle' key={item}>
+					<div className='app-loader-dot' />
+					<div className='app-loader-outline' />
+				</div>
+			))}
+		</div>
 		{text && <p className='text-brand'>Загрузка {text}...</p>}
 	</div>
 )

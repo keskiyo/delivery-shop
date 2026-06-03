@@ -1,5 +1,8 @@
 'use client'
 
+// Назначение: загрузка, показ и обновление аватара пользователя.
+// Как работает: Берет изображение из API, подставляет дефолт по полу и освобождает blob URL при смене аватара.
+
 import { useAuthStore } from '@/store/authStore'
 import { useCallback, useEffect, useState } from 'react'
 import { getAvatarByGender } from '../../utils/getAvatar'
@@ -9,24 +12,6 @@ interface UseAvatarProps {
 	gender?: string
 }
 
-/**
- * Хук для управления аватаром пользователя
- * Загружает аватар из API или использует дефолтный по полу
- * Предоставляет функционал загрузки нового аватара
- * 
- * @param userId - ID пользователя для загрузки аватара
- * @param gender - Пол пользователя для дефолтного аватара ('male' | 'female')
- * @returns Объект с URL аватара, состоянием загрузки и методами управления
- * 
- * @example
- * const { displayAvatar, uploadAvatar, isLoading } = useAvatar({ 
- *   userId: user.id, 
- *   gender: user.gender 
- * })
- * 
- * // Загрузить новый аватар
- * await uploadAvatar(file)
- */
 const useAvatar = ({ userId, gender = 'male' }: UseAvatarProps) => {
 	const [currentAvatar, setCurrentAvatar] = useState<string>('')
 	const [isLoading, setIsLoading] = useState(false)
@@ -37,6 +22,7 @@ const useAvatar = ({ userId, gender = 'male' }: UseAvatarProps) => {
 	}, [currentAvatar, gender])
 
 	const loadAvatar = useCallback(async () => {
+
 		if (!userId) {
 			setCurrentAvatar(getAvatarByGender(gender))
 			return
@@ -73,6 +59,7 @@ const useAvatar = ({ userId, gender = 'male' }: UseAvatarProps) => {
 	}, [loadAvatar])
 
 	useEffect(() => {
+		// Blob URL создается в браузере вручную, поэтому его нужно освобождать при замене аватара.
 		return () => {
 			if (currentAvatar && currentAvatar.startsWith('blob:')) {
 				URL.revokeObjectURL(currentAvatar)
@@ -97,6 +84,7 @@ const useAvatar = ({ userId, gender = 'male' }: UseAvatarProps) => {
 			setIsLoading(true)
 
 			try {
+				// После загрузки перечитываем аватар и профиль, чтобы все места в UI получили новое изображение.
 				const formData = new FormData()
 				formData.append('avatar', file)
 				formData.append('userId', userId)

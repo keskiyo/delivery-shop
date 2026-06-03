@@ -1,3 +1,6 @@
+// Назначение: цвет статуса заказа.
+// Как работает: Мапит технический статус на CSS-класс или визуальный вариант.
+
 import { Order } from '@/types/order'
 
 export const getStatusColor = (order: Order) => {

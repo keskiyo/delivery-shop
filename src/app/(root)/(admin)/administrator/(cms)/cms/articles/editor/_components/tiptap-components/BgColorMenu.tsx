@@ -3,23 +3,23 @@ import { Check, Highlighter } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 const BG_COLORS = [
-	'transparent', // Прозрачный
-	'#FFFFFF', // Белый
-	'#FFFFCC', // Светло-желтый
-	'#CCFFFF', // Светло-голубой
-	'#FFCCCC', // Светло-красный
-	'#CCFFCC', // Светло-зеленый
-	'#CCCCFF', // Светло-синий
-	'#FFE5CC', // Светло-оранжевый
-	'#E5CCFF', // Светло-фиолетовый
-	'#FFCCE5', // Светло-розовый
-	'#FFFF99', // Желтый
-	'#99FFFF', // Голубой
-	'#FF9999', // Красный
-	'#99FF99', // Зеленый
-	'#9999FF', // Синий
-	'#FFCC99', // Оранжевый
-	'#CC99FF', // Фиолетовый
+	'transparent',
+	'#FFFFFF',
+	'#FFFFCC',
+	'#CCFFFF',
+	'#FFCCCC',
+	'#CCFFCC',
+	'#CCCCFF',
+	'#FFE5CC',
+	'#E5CCFF',
+	'#FFCCE5',
+	'#FFFF99',
+	'#99FFFF',
+	'#FF9999',
+	'#99FF99',
+	'#9999FF',
+	'#FFCC99',
+	'#CC99FF',
 ]
 
 export const BgColorMenu = ({ editor }: EditorProps) => {
@@ -30,29 +30,24 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 	const dropdownRef = useRef<HTMLDivElement>(null)
 	const buttonRef = useRef<HTMLButtonElement>(null)
 
-	// Функция для получения текущего цвета фона
 	const getCurrentColor = useCallback(() => {
 		if (!editor) return 'transparent'
 		const attrs = editor.getAttributes('textStyle')
 		return attrs?.backgroundColor || 'transparent'
 	}, [editor])
 
-	// Функция для обновления состояния
 	const updateColor = useCallback(() => {
 		const color = getCurrentColor()
 		setCurrentColor(color)
 
-		// Если цвет не из предопределенных и не прозрачный, обновляем customColor
 		if (color !== 'transparent' && !BG_COLORS.includes(color)) {
 			setCustomColor(color)
 		}
 	}, [getCurrentColor])
 
-	// Подписка на события редактора
 	useEffect(() => {
 		if (!editor) return
 
-		// Подписываемся на изменения редактора
 		const handleUpdate = () => {
 			updateColor()
 		}
@@ -60,17 +55,14 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 		editor.on('selectionUpdate', handleUpdate)
 		editor.on('transaction', handleUpdate)
 
-		// Инициализация при монтировании
 		updateColor()
 
-		// Отписываемся при размонтировании
 		return () => {
 			editor.off('selectionUpdate', handleUpdate)
 			editor.off('transaction', handleUpdate)
 		}
 	}, [editor, updateColor])
 
-	// Также обновляем при открытии меню
 	useEffect(() => {
 		if (isOpen && editor) {
 			updateColor()
@@ -83,7 +75,7 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 			if (color !== 'transparent' && !BG_COLORS.includes(color)) {
 				setCustomColor(color)
 			}
-			setCurrentColor(color) // Инициализируем currentColor
+			setCurrentColor(color)
 		}
 	}, [editor, getCurrentColor])
 
@@ -107,10 +99,8 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 		if (!editor) return
 
 		if (color === 'transparent') {
-			// Если выбрали прозрачный - сбрасываем цвет фона
 			editor.chain().focus().unsetBackgroundColor().run()
 		} else {
-			// Иначе устанавливаем выбранный цвет фона
 			editor.chain().focus().setBackgroundColor(color).run()
 		}
 
@@ -118,13 +108,12 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 			setCustomColor(color)
 		}
 
-		// Обновляем состояние после изменения
 		setTimeout(updateColor, 10)
 	}
 
 	const resetColor = () => {
 		if (!editor) return
-		// Используем unsetBackgroundColor как в документации
+
 		editor.chain().focus().unsetBackgroundColor().run()
 		setIsOpen(false)
 		setTimeout(updateColor, 10)
@@ -140,7 +129,6 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 	const applyCustomColor = () => {
 		if (!editor) return
 
-		// Если выбрали прозрачный или белый, сбрасываем
 		if (customColor === 'transparent' || customColor === '#FFFFFF') {
 			editor.chain().focus().unsetBackgroundColor().run()
 		} else {
@@ -299,7 +287,9 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 
 						{/* Текущий цвет */}
 						<div className='flex items-center justify-between p-1 bg-surface-subtle rounded text-xs mb-2'>
-							<div className='text-muted-foreground'>Текущий:</div>
+							<div className='text-muted-foreground'>
+								Текущий:
+							</div>
 							<div className='flex items-center gap-1'>
 								<div
 									className='w-4 h-4 rounded border border-border'

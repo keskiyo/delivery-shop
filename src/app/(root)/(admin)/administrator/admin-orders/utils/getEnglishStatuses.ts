@@ -1,10 +1,13 @@
+// Назначение: перевод русских статусов заказа в технические значения.
+// Как работает: Учитывает способ оплаты и возвращает status вместе с paymentStatus при необходимости.
+
 import { Order } from '@/types/order'
 
 export const getEnglishStatuses = (
 	russianStatus: string,
 	order: Order,
 ): { status: string; paymentStatus?: string } => {
-	// Для онлайн оплаты
+
 	if (order.paymentMethod === 'online') {
 		switch (russianStatus) {
 			case 'Подтвержден':
@@ -16,7 +19,6 @@ export const getEnglishStatuses = (
 		}
 	}
 
-	// Для оплаты при доставке
 	if (order.paymentMethod === 'cash_on_delivery') {
 		switch (russianStatus) {
 			case 'Подтвержден':
@@ -26,7 +28,6 @@ export const getEnglishStatuses = (
 		}
 	}
 
-	// Общий маппинг
 	const statusMap: { [key: string]: string } = {
 		Новый: 'pending',
 		Собран: 'collected',

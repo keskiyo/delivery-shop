@@ -1,8 +1,11 @@
+// Назначение: единый статус заказа для UI.
+// Как работает: Учитывает status, paymentStatus и способ оплаты, возвращая понятную подпись администратора.
+
 import { Order } from '@/types/order'
 import { CUSTOMER_STATUSES } from './customerStatuses'
 
 export const getMappedStatus = (order: Order): string => {
-	// При оплате онлайн
+
 	if (order.paymentMethod === 'online') {
 		if (order.paymentStatus === 'paid' && order.status === 'confirmed') {
 			return 'Подтвержден'
@@ -19,7 +22,6 @@ export const getMappedStatus = (order: Order): string => {
 		}
 	}
 
-	// При оплате наличными
 	if (order.paymentMethod === 'cash_on_delivery') {
 		if (order.status === 'pending' && order.paymentStatus === 'pending') {
 			return 'Новый'
@@ -28,7 +30,6 @@ export const getMappedStatus = (order: Order): string => {
 		}
 	}
 
-	// Базовый маппинг
 	const statusFromValue = CUSTOMER_STATUSES.find(
 		status => status.value === order.status,
 	)

@@ -1,3 +1,6 @@
+// Назначение: стабильный цвет по имени категории.
+// Как работает: Мапит строку на один из подготовленных цветов.
+
 export function getColorFromName(name: string) {
 	const colors = [
 		'from-blue-500 to-cyan-500',

@@ -16,9 +16,9 @@ export const formStyles = {
 }
 
 export const verificationButtonStyles = `
-    w-60 md:w-80 group relative flex flex-col items-center justify-center p-3 
+    w-60 md:w-80 group relative flex flex-col items-center justify-center p-3
     border-2 border-border rounded-xl hover:border-promo
-    hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) 
+    hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active)
     cursor-pointer duration-300
   `
 

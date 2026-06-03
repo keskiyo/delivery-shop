@@ -1,3 +1,6 @@
+// Назначение: цвет фона CMS-элемента.
+// Как работает: Мапит ключ темы на CSS-класс фона.
+
 export const getBgColor = (color: string): string => {
 	const colors: Record<string, string> = {
 		blue: 'bg-brand-soft',

@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react"
 import type { Editor } from "@tiptap/react"
 
-// --- Hooks ---
+
 import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
-// --- Icons ---
+
 import { HeadingIcon } from "@/components/tiptap/tiptap-icons/heading-icon"
 
-// --- Tiptap UI ---
+
 import {
   headingIcons,
   type Level,
@@ -54,7 +54,7 @@ export function getActiveHeadingLevel(
  *
  * @example
  * ```tsx
- * // Simple usage
+ *
  * function MyHeadingDropdown() {
  *   const {
  *     isVisible,
@@ -68,12 +68,12 @@ export function getActiveHeadingLevel(
  *
  *   return (
  *     <DropdownMenu>
- *       // dropdown content
+ *
  *     </DropdownMenu>
  *   )
  * }
  *
- * // Advanced usage with configuration
+ *
  * function MyAdvancedHeadingDropdown() {
  *   const {
  *     isVisible,
@@ -84,7 +84,7 @@ export function getActiveHeadingLevel(
  *     hideWhenUnavailable: true,
  *   })
  *
- *   // component implementation
+ *
  * }
  * ```
  */

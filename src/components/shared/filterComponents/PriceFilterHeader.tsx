@@ -1,17 +1,6 @@
 'use client'
 
-/**
- * Заголовок блока фильтра по цене
- *
- * Содержит:
- * - Надпись "Цена"
- * - Кнопка "Очистка" для сброса ценового диапазона
- *
- * @param resetPriceFitlter - Функция сброса ценового фильтра
- *
- * Используется в:
- * - PriceFilter.tsx
- */
+
 const PriceFilterHeader = ({
 	resetPriceFitlter,
 }: {

@@ -18,17 +18,7 @@ interface PasswordInputWithGenerateProps {
 	onPasswordGenerate?: (password: string) => void
 }
 
-/**
- * Компонент поля ввода пароля с кнопкой автогенерации
- *
- * Используется только на странице регистрации.
- * Расширяет стандартный PasswordInput добавлением кнопки генерации пароля.
- *
- * При нажатии на кнопку генерации:
- * - Создается случайный пароль длиной 8 символов
- * - Пароль соответствует всем требованиям валидации
- * - Вызывается callback onPasswordGenerate для обновления обоих полей (пароль и подтверждение)
- */
+
 const PasswordInputWithGenerate = ({
 	id,
 	label,
@@ -44,7 +34,7 @@ const PasswordInputWithGenerate = ({
 	const handleGenerate = () => {
 		const newPassword = generatePassword(8)
 
-		// Создаем синтетическое событие для обновления поля
+
 		const syntheticEvent = {
 			target: {
 				id,
@@ -55,7 +45,7 @@ const PasswordInputWithGenerate = ({
 
 		onChangeAction(syntheticEvent)
 
-		// Вызываем callback для обновления поля подтверждения пароля
+
 		if (onPasswordGenerate) {
 			onPasswordGenerate(newPassword)
 		}

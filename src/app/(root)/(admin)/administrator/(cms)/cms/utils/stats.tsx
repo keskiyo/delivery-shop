@@ -1,3 +1,6 @@
+// Назначение: статистические блоки CMS.
+// Как работает: Хранит конфигурацию карточек и показателей дашборда.
+
 import { BarChart3, FileText, Folder, Search } from 'lucide-react'
 
 export const stats = [

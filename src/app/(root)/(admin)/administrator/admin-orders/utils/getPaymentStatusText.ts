@@ -1,3 +1,6 @@
+// Назначение: текст статуса оплаты.
+// Как работает: Переводит технический paymentStatus в русскую подпись.
+
 import { Order } from '@/types/order'
 
 export const getPaymentStatusText = (

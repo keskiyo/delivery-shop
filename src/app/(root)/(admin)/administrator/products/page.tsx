@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-// 🔹 Типы для иконок и элементов меню
+
 type IconName = 'plus' | 'list'
 
 type MenuItem = {
@@ -10,7 +10,7 @@ type MenuItem = {
 	icon: IconName
 }
 
-// 🔹 Компонент иконки с типизацией
+
 const Icon = ({ name }: { name: IconName }) => {
 	const paths: Record<IconName, string> = {
 		plus: 'M12 4v16m8-8H4',
@@ -35,7 +35,7 @@ const Icon = ({ name }: { name: IconName }) => {
 	)
 }
 
-// 🔹 Данные меню
+
 const menuItems: MenuItem[] = [
 	{
 		href: '/administrator/products/add-product',
@@ -51,9 +51,7 @@ const menuItems: MenuItem[] = [
 	},
 ]
 
-/**
- * Страница управления товарами
- */
+
 const AdminProducts = () => {
 	return (
 		<div className='p-6 max-w-4xl mx-auto'>

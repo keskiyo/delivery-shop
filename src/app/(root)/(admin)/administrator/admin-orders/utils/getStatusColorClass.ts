@@ -1,3 +1,6 @@
+// Назначение: CSS-класс статуса заказа.
+// Как работает: Мапит технический статус на цвет бейджа в админке.
+
 export const getStatusColorClass = (
 	statusLabel: string,
 	isSelected: boolean = false,

@@ -19,27 +19,7 @@ interface DeliveryTimeProps {
 	onTimeSlotChange: (timeSlot: string) => void
 }
 
-/**
- * Компонент выбора даты и времени доставки
- *
- * Функционал:
- * - Загружает график доставки из API
- * - Отображает доступные даты (сегодня + 2 дня)
- * - Показывает временные слоты для выбранной даты
- * - Блокирует занятые и прошедшие слоты
- * - Показывает тултипы для недоступных слотов
- *
- * Логика работы:
- * 1. При монтировании загружает график доставки из /api/delivery-times
- * 2. Генерирует список дат (сегодня + 2 дня) в формате DD.MM.YYYY
- * 3. Для выбранной даты получает все временные слоты
- * 4. Проверяет каждый слот: свободен ли (true/false) и не прошел ли (для сегодняшнего дня)
- * 5. Блокирует недоступные слоты и показывает причину в тултипе
- *
- * Форматирование времени:
- * - Мобильная версия: "8-14" (без ведущих нулей и :00)
- * - Десктоп версия: "08.00 - 14.00" (с ведущими нулями и точками вместо двоеточий)
- */
+
 const DeliveryTime = ({
 	selectedDate,
 	selectedTimeSlot,
@@ -53,7 +33,7 @@ const DeliveryTime = ({
 	const [schedule, setSchedule] = useState<Schedule>({})
 	const [loading, setLoading] = useState(true)
 
-	// Загружает график доставки из API при монтировании компонента
+
 	useEffect(() => {
 		const fetchDeliveryTimes = async () => {
 			try {
@@ -73,8 +53,8 @@ const DeliveryTime = ({
 		fetchDeliveryTimes()
 	}, [])
 
-	// Генерирует список доступных дат (сегодня + 2 дня)
-	// Преобразует формат из YYYY-MM-DD в DD.MM.YYYY для отображения
+
+
 	useEffect(() => {
 		const dates = getDaysDates().map(dateString => {
 			const [year, month, day] = dateString.split('-')
@@ -88,39 +68,29 @@ const DeliveryTime = ({
 
 		setAvailableDates(dates)
 
-		// Автоматически выбираем первую дату, если ничего не выбрано
+
 		if (!selectedDate && dates.length > 0) {
 			onDateChange(dates[0].value)
 		}
 	}, [selectedDate, onDateChange])
 
-	/**
-	 * Получает все временные слоты для выбранной даты
-	 *
-	 * Для каждого слота определяет:
-	 * - free: доступен ли слот (не занят и не прошел)
-	 * - passed: прошло ли время слота (только для сегодняшнего дня)
-	 * - mobileLabel: формат для мобильных ("8-14")
-	 * - desktopLabel: формат для десктопа ("08.00 - 14.00")
-	 *
-	 * @returns Массив слотов с информацией о доступности
-	 */
+
 	const getAllTimeSlots = () => {
 		if (!schedule[selectedDate]) return []
 
 		const daySchedule = schedule[selectedDate]
 		const slots = Object.keys(daySchedule)
 			.sort((a, b) => {
-				// Сортируем слоты по времени начала
+
 				const [startA] = a.split('-')
 				const [startB] = b.split('-')
 				return startA.localeCompare(startB)
 			})
 			.map(slot => {
 				const formatted = formatTimeSlot(slot)
-				const isFree = daySchedule[slot] !== false // true = свободен, false = занят
-				const isPassed = isTimeSlotPassed(slot, selectedDate) // Прошло ли время
-				const isAvailable = isFree && !isPassed // Доступен только если свободен и не прошел
+				const isFree = daySchedule[slot] !== false
+				const isPassed = isTimeSlotPassed(slot, selectedDate)
+				const isAvailable = isFree && !isPassed
 
 				return {
 					value: slot,
@@ -133,10 +103,7 @@ const DeliveryTime = ({
 		return slots
 	}
 
-	/**
-	 * Обработчик клика по временному слоту
-	 * Выбирает слот только если он доступен (свободен и не прошел)
-	 */
+
 	const handleTimeSlotClick = (slot: {
 		value: string
 		free: boolean
@@ -190,7 +157,7 @@ const DeliveryTime = ({
 								<div
 									key={slot.value}
 									className='relative'
-									// Показываем тултип при наведении на недоступный слот
+
 									onMouseEnter={() =>
 										(!slot.free || slot.passed) &&
 										setTooltipSlot(slot.value)

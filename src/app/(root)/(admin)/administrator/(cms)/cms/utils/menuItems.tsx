@@ -1,3 +1,6 @@
+// Назначение: пункты меню CMS.
+// Как работает: Хранит ссылки, подписи и иконки навигации администратора.
+
 import { FileText, FolderTree, Home, Plus, Tags } from 'lucide-react'
 
 export const menuItems = [

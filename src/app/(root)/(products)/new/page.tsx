@@ -8,15 +8,7 @@ export const metadata = {
 	description: 'Новые товары магазина "Фудмаркет"',
 }
 
-/**
- * Страница всех новинок
- * 
- * Отображает список всех товаров с тегом "new"
- * Использует GenericListPage для пагинации и отображения товаров
- * 
- * @route /new
- * @param searchParams - Query параметры (page, itemsPerPage)
- */
+
 const AllNew = async ({
 	searchParams,
 }: {

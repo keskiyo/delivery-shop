@@ -1,3 +1,6 @@
+// Назначение: повторение старого заказа пользователя.
+// Как работает: Берет позиции заказа, добавляет доступные товары в корзину и сообщает результат.
+
 import { DeliveryData } from '@/types/cart'
 import { DeliveryAddress } from '@/types/order'
 import { useState } from 'react'

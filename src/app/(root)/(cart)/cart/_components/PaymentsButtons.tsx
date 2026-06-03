@@ -19,7 +19,7 @@ const PaymentsButtons = ({
 	orderNumber: string | null
 }) => {
 	if (isOrdered && paymentType === 'cash_on_delivery') {
-		// Сообщение об успешном оформлении заказа
+
 		return <OrderSuccessMessage orderNumber={orderNumber} />
 	}
 

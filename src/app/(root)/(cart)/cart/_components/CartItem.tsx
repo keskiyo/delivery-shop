@@ -18,31 +18,7 @@ import {
 } from '../../../../../../utils/calcPrices'
 import { formatPrice } from '../../../../../../utils/formatPrice'
 
-/**
- * Компонент элемента корзины
- *
- * Отображает:
- * - Чекбокс для выбора товара (для массового удаления)
- * - Изображение товара
- * - Название и описание товара (ссылка на страницу товара)
- * - Цены (базовая, со скидкой, с картой лояльности)
- * - Бейдж скидки (если есть)
- * - Селектор количества (-, количество, +)
- * - Итоговую стоимость товара
- *
- * Логика работы:
- * 1. Рассчитывает цены с учетом скидки товара и карты лояльности
- * 2. При изменении количества проверяет наличие на складе
- * 3. Если количество превышает доступное - показывает тултип
- * 4. Использует оптимистичный UI (сначала обновляет локально, потом на сервере)
- * 5. При ошибке откатывает изменения
- * 6. Для товаров "нет в наличии" скрывает селектор количества
- *
- * Особенности:
- * - Обернут в memo для оптимизации рендеринга
- * - Адаптивная верстка (мобильная/десктоп)
- * - Визуальная индикация товаров без наличия (opacity-60)
- */
+
 const CartItem = memo(function CartItem({
 	item,
 	productData,
@@ -65,27 +41,14 @@ const CartItem = memo(function CartItem({
 		}
 	}, [quantity, productData, onQuantityUpdate, item.productId])
 
-	/**
-	 * Обработчик изменения количества товара
-	 *
-	 * Валидация:
-	 * - Не позволяет отрицательные значения
-	 * - Проверяет наличие на складе
-	 * - Показывает тултип если превышен лимит
-	 *
-	 * Оптимистичный UI:
-	 * 1. Сохраняет предыдущее значение
-	 * 2. Обновляет локальное состояние
-	 * 3. Вызывает callback для обновления на сервере
-	 * 4. При ошибке откатывает к предыдущему значению
-	 */
+
 	const handleQuantityChange = async (newQuantity: number) => {
 		if (newQuantity < 0) return
 		if (!productData) return
 
 		const maxQuantity = productData.quantity
 
-		// Проверяем, не превышает ли новое количество доступное
+
 		if (newQuantity > maxQuantity) {
 			setShowTooltip(true)
 			setTimeout(() => setShowTooltip(false), 3000)
@@ -100,30 +63,30 @@ const CartItem = memo(function CartItem({
 			onQuantityUpdate(item.productId, newQuantity)
 		} catch (error) {
 			console.error('Ошибка обновления количества:', error)
-			// Откатываем изменения при ошибке
+
 			setQuantity(previousQuantity)
 		} finally {
 			setIsUpdating(false)
 		}
 	}
 
-	// Показываем скелетон если данные товара не загружены
+
 	if (!productData) {
 		return <CartSkeletons />
 	}
 
-	// Рассчитываем цены с учетом скидок
+
 	const priceWithDiscount = calculateFinalPrice(
 		productData?.basePrice || 0,
 		productData?.discountPercent || 0,
 	)
 
-	// Применяем скидку по карте лояльности (если есть)
+
 	const finalPrice = hasLoyaltyCard
 		? calculatePriceByCard(priceWithDiscount, CONFIG.CARD_DISCOUNT_PERCENT)
 		: priceWithDiscount
 
-	// Итоговые цены с учетом количества
+
 	const totalFinalPrice = finalPrice * quantity
 	const totalPriceWithoutCard = priceWithDiscount * quantity
 

@@ -17,7 +17,7 @@ const OrderChatModal = ({
 	const messagesEndRef = useRef<HTMLDivElement>(null)
 	const { user } = useAuthStore()
 
-	// Получаем сообщения через RTK Query с polling
+
 	const { data: messages = [] } = useGetOrderMessagesQuery(orderId, {
 		skip: !isOpen || !orderId,
 		pollingInterval: isOpen ? 3000 : 0,
@@ -27,12 +27,12 @@ const OrderChatModal = ({
 		return msg.userRole || 'courier'
 	}
 
-	// Автопрокрутка к новым сообщениям
+
 	useEffect(() => {
 		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
 	}, [messages])
 
-	// Отправка сообщения через fetch
+
 	const handleSendMessage = async (e: React.SyntheticEvent) => {
 		e.preventDefault()
 		if (!message.trim() || isSending) return
@@ -86,7 +86,7 @@ const OrderChatModal = ({
 						const roleDisplayName = getRoleDisplayName(role)
 						const isCurrentUser = user?.id === msg.userId
 
-						// Стили пузыря в зависимости от отправителя
+
 						const bubbleBase =
 							'relative max-w-[85%] md:max-w-[75%] px-4 py-2.5 rounded-2xl shadow-sm transition-all hover:shadow-md'
 

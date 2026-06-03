@@ -1,3 +1,6 @@
+// Назначение: уникальные города из заказов.
+// Как работает: Собирает города адресов доставки и убирает дубли для фильтра.
+
 import { Order } from '@/types/order'
 
 export const getUniqueCities = (orders: Order[]) => {

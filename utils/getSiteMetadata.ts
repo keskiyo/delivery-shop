@@ -1,3 +1,6 @@
+// Назначение: загрузка SEO-настроек сайта.
+// Как работает: Читает настройки и возвращает значения для metadata.
+
 import { getDB } from '@/lib/api-routes'
 import { unstable_cache } from 'next/cache'
 import { baseUrl } from './baseUrl'

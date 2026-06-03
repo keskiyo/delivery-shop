@@ -1,3 +1,6 @@
+// Назначение: карточки дашборда CMS.
+// Как работает: Хранит метаданные карточек, иконки и ключи статистики.
+
 import { FileText, FolderTree, Plus, Tags } from 'lucide-react'
 import { DashboardCard } from '../types/dashboard'
 

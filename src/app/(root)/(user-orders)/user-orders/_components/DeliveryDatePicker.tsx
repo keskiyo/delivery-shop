@@ -46,12 +46,12 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 		}
 	}
 
-	// Функция для преобразования Date в строку формата "YYYY-MM-DD"
+
 	const formatDateToString = (date: Date): string => {
 		return date.toISOString().split('T')[0]
 	}
 
-	// Получаем доступные временные слоты для выбранной даты
+
 	const availableTimeSlots = selectedDate
 		? getAvailableTimeSlots(selectedDate, schedule)
 		: []

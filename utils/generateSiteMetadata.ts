@@ -1,3 +1,6 @@
+// Назначение: формирование metadata для страниц сайта.
+// Как работает: Берет настройки сайта и данные страницы, затем собирает title, description и SEO-поля Next.js.
+
 import { Metadata } from 'next'
 import { baseUrl } from './baseUrl'
 import { getSiteMetadata } from './getSiteMetadata'

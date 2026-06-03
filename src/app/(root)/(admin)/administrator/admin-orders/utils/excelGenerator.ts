@@ -1,3 +1,6 @@
+// Назначение: создание Excel-файла заказа для администратора.
+// Как работает: Формирует листы заказа, товаров и сводки через ExcelJS.
+
 import { SimplifiedOrderData } from '@/types/excel'
 import ExcelJS from 'exceljs'
 
@@ -6,9 +9,8 @@ const toArrayBuffer = (buffer: Buffer | ArrayBuffer): ArrayBuffer => {
 		return buffer
 	}
 
-	// Проверяем, является ли это Node.js Buffer
 	if (typeof Buffer !== 'undefined' && Buffer.isBuffer(buffer)) {
-		// Создаём новый ArrayBuffer и копируем данные
+
 		const arrayBuffer = new ArrayBuffer(buffer.length)
 		const view = new Uint8Array(arrayBuffer)
 		for (let i = 0; i < buffer.length; i++) {
@@ -17,7 +19,6 @@ const toArrayBuffer = (buffer: Buffer | ArrayBuffer): ArrayBuffer => {
 		return arrayBuffer
 	}
 
-	// Fallback для других случаев
 	if ('byteLength' in buffer) {
 		return buffer as unknown as ArrayBuffer
 	}
@@ -29,7 +30,6 @@ export const generateOrderExcel = async (data: SimplifiedOrderData) => {
 	const workbook = new ExcelJS.Workbook()
 	const { order, items } = data
 
-	// === ЛИСТ 1: ОСНОВНАЯ ИНФОРМАЦИЯ О ЗАКАЗЕ ===
 	const formatDate = (dateString: string): string => {
 		if (!dateString) return 'Не указано'
 		try {
@@ -111,7 +111,6 @@ export const generateOrderExcel = async (data: SimplifiedOrderData) => {
 	const orderSheet = workbook.addWorksheet('📋 Заказ')
 	orderSheet.addRows(orderSummary)
 
-	// === ЛИСТ 2: ТОВАРЫ В ЗАКАЗЕ ===
 	const productsHeader = [
 		'№',
 		'ID товара',
@@ -136,7 +135,6 @@ export const generateOrderExcel = async (data: SimplifiedOrderData) => {
 		item.manufacturer || 'Не указан',
 	])
 
-	// Подсчет общего веса
 	const totalWeight = items.reduce((sum, item) => {
 		return sum + (item.weight || 0) * item.quantity
 	}, 0)
@@ -156,7 +154,6 @@ export const generateOrderExcel = async (data: SimplifiedOrderData) => {
 	const productsSheet = workbook.addWorksheet('📦 Товары')
 	productsSheet.addRows([productsHeader, ...productsData, totalRow])
 
-	// === ЛИСТ 3: СВОДКА ПО ЗАКАЗУ ===
 	const summaryData = [
 		['📊 СВОДКА ПО ЗАКАЗУ', ''],
 		['Номер заказа', order.orderNumber],
@@ -179,11 +176,10 @@ export const generateOrderExcel = async (data: SimplifiedOrderData) => {
 	const summarySheet = workbook.addWorksheet('📊 Сводка')
 	summarySheet.addRows(summaryData)
 
-	// Генерация буфера (асинхронная операция)
 	return await workbook.xlsx.writeBuffer()
 }
 
-// Обертка для совместимости с существующим кодом
+// Готовый Excel-буфер скачивается через временную ссылку, чтобы не держать файл на сервере.
 export const downloadOrderExcel = async (
 	buffer: ArrayBuffer | Buffer,
 	fileName: string,
@@ -204,7 +200,7 @@ export const downloadOrderExcel = async (
 		link.click()
 		document.body.removeChild(link)
 
-		URL.revokeObjectURL(url) // Освобождаем память
+		URL.revokeObjectURL(url)
 	} catch (error) {
 		console.error('Ошибка скачивания Excel:', error)
 		throw error

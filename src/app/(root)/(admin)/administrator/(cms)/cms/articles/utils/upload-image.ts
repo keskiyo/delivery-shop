@@ -1,3 +1,6 @@
+// Назначение: загрузка изображения из CMS-редактора.
+// Как работает: Отправляет FormData в API и возвращает URL загруженного файла.
+
 import { showPromiseToast, showToast } from '@/lib/showToast';
 import { Editor } from '@tiptap/react';
 import { UploadResult } from '../types';
@@ -49,11 +52,11 @@ export const uploadToServer = async (file: File): Promise<UploadResult> => {
 const getInsertPosition = (editor: Editor): number => {
 
   const { from, to } = editor.state.selection;
-  
+
   if (from !== to) {
     return Math.max(from, to);
   }
-  
+
   return from;
 };
 
@@ -64,7 +67,7 @@ export const insertImageToEditor = (
   title?: string,
 ) => {
   const insertPos = getInsertPosition(editor);
-  
+
   const imageNode = {
     type: 'image' as const,
     attrs: {
@@ -84,7 +87,7 @@ export const insertImageToEditor = (
     ])
     .focus()
     .run();
-  
+
   setTimeout(() => {
     editor.commands.setTextSelection(insertPos + 2);
   }, 10);

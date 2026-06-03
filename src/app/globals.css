@@ -458,6 +458,147 @@ body {
 	}
 }
 
+/* APP LOADER */
+
+.app-loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 160px;
+	min-height: 48px;
+	--loader-animation: 2s ease-in-out infinite;
+}
+
+.app-loader-circle {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	margin: 0 10px;
+	border: 2px solid transparent;
+	border-radius: 999px;
+	background-color: transparent;
+	animation: app-loader-circle var(--loader-animation);
+}
+
+.app-loader-dot {
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	border-radius: 999px;
+	background-color: var(--loader-color);
+	animation: app-loader-dot var(--loader-animation);
+}
+
+.app-loader-outline {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border-radius: 999px;
+	animation: app-loader-outline var(--loader-animation);
+}
+
+.app-loader-circle:nth-child(1) {
+	--loader-color: #4285f4;
+	border-color: var(--loader-color);
+}
+
+.app-loader-circle:nth-child(2) {
+	--loader-color: #ea4335;
+	border-color: var(--loader-color);
+	animation-delay: 0.3s;
+}
+
+.app-loader-circle:nth-child(2) .app-loader-dot {
+	animation-delay: 0.3s;
+}
+
+.app-loader-circle:nth-child(3) {
+	--loader-color: #fbbc05;
+	border-color: var(--loader-color);
+	animation-delay: 0.6s;
+}
+
+.app-loader-circle:nth-child(3) .app-loader-dot {
+	animation-delay: 0.6s;
+}
+
+.app-loader-circle:nth-child(4) {
+	--loader-color: #34a853;
+	border-color: var(--loader-color);
+	animation-delay: 0.9s;
+}
+
+.app-loader-circle:nth-child(4) .app-loader-dot {
+	animation-delay: 0.9s;
+}
+
+.app-loader-circle:nth-child(1) .app-loader-outline {
+	animation-delay: 0.9s;
+}
+
+.app-loader-circle:nth-child(2) .app-loader-outline {
+	animation-delay: 1.2s;
+}
+
+.app-loader-circle:nth-child(3) .app-loader-outline {
+	animation-delay: 1.5s;
+}
+
+.app-loader-circle:nth-child(4) .app-loader-outline {
+	animation-delay: 1.8s;
+}
+
+@keyframes app-loader-circle {
+	0%,
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	50% {
+		opacity: 0.5;
+		transform: scale(1.5);
+	}
+}
+
+@keyframes app-loader-dot {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(0);
+	}
+}
+
+@keyframes app-loader-outline {
+	0% {
+		opacity: 1;
+		outline: solid 20px var(--loader-color);
+		outline-offset: 0;
+		transform: scale(0);
+	}
+
+	100% {
+		opacity: 0;
+		outline: solid 0 transparent;
+		outline-offset: 20px;
+		transform: scale(1);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.app-loader-circle,
+	.app-loader-dot,
+	.app-loader-outline {
+		animation-duration: 3.5s;
+	}
+}
+
 /* PASSWORD ANIMATION */
 
 @keyframes fadeIn {

@@ -1,3 +1,6 @@
+// Назначение: загрузка изображений из редактора статей.
+// Как работает: Отправляет файл в CMS API и возвращает URL для вставки в HTML-контент.
+
 import { Editor } from '@tiptap/react'
 import { useCallback, useState } from 'react'
 import { UseImageUploadReturn } from '../types'

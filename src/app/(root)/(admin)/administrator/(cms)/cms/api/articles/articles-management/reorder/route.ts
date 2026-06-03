@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для изменения порядка статей CMS.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: PUT.
+
 import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
 import { getDB } from "@/lib/api-routes";

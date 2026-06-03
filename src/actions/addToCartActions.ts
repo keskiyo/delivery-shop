@@ -26,7 +26,7 @@ export async function addToCartAction(
 			return { success: false, message: 'ID продукта не указан' }
 		}
 
-		// Получаем ID пользователя из сессии (поддерживает оба типа сессий)
+
 		const userId = await getServerUserId()
 
 		if (!userId) {
@@ -35,7 +35,7 @@ export async function addToCartAction(
 
 		const db = await getDB()
 
-		// Получаем данные пользователя с его корзиной
+
 		const user = await db.collection('user').findOne({
 			_id: ObjectId.createFromHexString(userId),
 		})
@@ -46,7 +46,7 @@ export async function addToCartAction(
 
 		const productIdNumber = parseInt(productId)
 
-		// Проверяем существование товара
+
 		const product = await db.collection('products').findOne({
 			id: productIdNumber,
 		})
@@ -57,23 +57,23 @@ export async function addToCartAction(
 
 		const cartItems: CartItem[] = user.cart || []
 
-		// Проверяем, нет ли товара уже в корзине
+
 		const existingItem = cartItems.find(
 			(item: CartItem) => item.productId === productId,
 		)
 
 		if (existingItem) {
-			// Товар уже в корзине - не добавляем повторно
+
 			return {
 				success: false,
 				message: 'Товар уже в корзине',
 			}
 		}
 
-		// Проверяем наличие товара на складе
+
 		const productQuantity = product.quantity || 0
 
-		// Если товар есть в наличии - добавляем с quantity=1, иначе с quantity=0
+
 		const initialQuantity = productQuantity > 0 ? 1 : 0
 
 		const newCartItem: CartItem = {
@@ -84,7 +84,7 @@ export async function addToCartAction(
 
 		const newCartItems = [...cartItems, newCartItem]
 
-		// Обновляем корзину пользователя в БД
+
 		await db
 			.collection('user')
 			.updateOne(

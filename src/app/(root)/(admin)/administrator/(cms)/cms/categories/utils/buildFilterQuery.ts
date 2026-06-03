@@ -1,3 +1,6 @@
+// Назначение: фильтр MongoDB из параметров UI.
+// Как работает: Добавляет поиск, статус и дополнительные условия только при наличии значений.
+
 import { FilterType } from "../types";
 
 export const buildFilterQuery = (searchQuery: string, filterBy: FilterType) => {

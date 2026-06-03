@@ -1,3 +1,6 @@
+// Назначение: значение статистики CMS по ключу.
+// Как работает: Изолирует мапинг карточек дашборда от структуры объекта статистики.
+
 export const getStatValue = (
 	statTitle: string,
 	categoriesCount: string,

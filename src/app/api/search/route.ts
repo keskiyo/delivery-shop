@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для быстрого поиска по сайту.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: GET.
+
 import { SearchProduct } from '@/types/searchProduct'
 import { NextResponse } from 'next/server'
 import { getDB } from '../../../lib/api-routes'

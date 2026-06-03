@@ -1,3 +1,6 @@
+// Назначение: форматирование даты заказа.
+// Как работает: Приводит дату к ru-RU и заменяет разделители на точки.
+
 export const formatOrderDate = (dateString: string): string => {
 	const date = new Date(dateString)
 

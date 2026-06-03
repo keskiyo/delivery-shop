@@ -1,6 +1,6 @@
 import { EditorProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/articles/types/tiptap'
 import { Type } from 'lucide-react'
-import { useEffect } from 'react' // Добавлен useEffect
+import { useEffect } from 'react'
 
 export const ParagraphButton = ({ editor }: EditorProps) => {
 	useEffect(() => {
@@ -8,7 +8,7 @@ export const ParagraphButton = ({ editor }: EditorProps) => {
 			if (
 				event.ctrlKey &&
 				event.altKey &&
-				(event.code === 'Digit0' || event.code === 'Numpad0') // 0 на основной клавиатуре или на цифровом блоке
+				(event.code === 'Digit0' || event.code === 'Numpad0')
 			) {
 				if (editor && editor.can().setParagraph()) {
 					editor.chain().focus().setParagraph().run()

@@ -21,28 +21,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { CONFIG } from '../../../../../../config/config'
 
-/**
- * Компонент итоговой информации о заказе и оформления оплаты
- *
- * Отображает:
- * - Количество товаров и общую стоимость
- * - Скидки (от товаров и карты лояльности)
- * - Итоговую сумму к оплате
- * - Начисляемые бонусы
- * - Кнопки оформления заказа и выбора способа оплаты
- *
- * Логика работы:
- * 1. Показывает кнопку "Оформить заказ" если не в режиме checkout
- * 2. После нажатия показывает кнопки выбора способа оплаты
- * 3. При оплате наличными создает заказ через API
- * 4. После успешного оформления показывает сообщение с номером заказа
- *
- * Валидация:
- * - Минимальная сумма заказа
- * - Наличие товаров в корзине
- * - Заполненность адреса доставки (город, улица, дом)
- * - Выбор даты и времени доставки
- */
+
 const CartSummary = ({
 	deliveryData,
 	productsData = {},
@@ -80,7 +59,7 @@ const CartSummary = ({
 		updatePricing,
 	} = useCartStore()
 
-	// Фильтруем только товары с quantity > 0 (доступные для заказа)
+
 	const visibleCartItems =
 		isRepeatOrder && customCartItems
 			? customCartItems
@@ -99,7 +78,7 @@ const CartSummary = ({
 		isMinimumReached,
 	} = currentPricing
 
-	// Рассчитываем использованные бонусы (не больше 10% от суммы заказа)
+
 	const usedBonuses = Math.min(
 		maxBonusUse,
 		Math.floor((totalPrice * CONFIG.MAX_BONUSES_PERCENT) / 100),
@@ -203,16 +182,7 @@ const CartSummary = ({
 		}
 	}
 
-	/**
-	 * Обработчик оплаты наличными при получении
-	 *
-	 * Процесс:
-	 * 1. Проверяет наличие данных доставки
-	 * 2. Формирует массив товаров с финальными ценами (с учетом скидок и карты)
-	 * 3. Отправляет заказ на сервер через createOrderAction
-	 * 4. При успехе сохраняет номер заказа и переключает в режим "заказ оформлен"
-	 * 5. При ошибке показывает alert с описанием проблемы
-	 */
+
 	const handleCashPayment = async () => {
 		try {
 			await showPromiseToast(handlePaymentResult('cash_on_delivery'), {
@@ -225,9 +195,7 @@ const CartSummary = ({
 		}
 	}
 
-	/**
-	 * Обработчик онлайн-оплаты на сайте
-	 */
+
 	const handleOnlinePayment = async () => {
 		if (!deliveryData) {
 			console.error('Данные доставки не заполнены')
@@ -295,15 +263,7 @@ const CartSummary = ({
 		router.push('/user-orders')
 	}
 
-	/**
-	 * Проверяет валидность формы заказа
-	 *
-	 * Проверяет:
-	 * - Заполненность адреса (город, улица, дом)
-	 * - Выбор даты и времени доставки
-	 * - Достижение минимальной суммы заказа
-	 * - Наличие товаров в корзине
-	 */
+
 	const isFormValid = (): boolean => {
 		if (!deliveryData) {
 			return false
@@ -311,17 +271,17 @@ const CartSummary = ({
 
 		const { address, time } = deliveryData
 
-		// Проверяем обязательные поля адреса
+
 		const isAddressValid = Boolean(
 			address.city?.trim() &&
 			address.street?.trim() &&
 			address.house?.trim(),
 		)
 
-		// Проверяем время доставки
+
 		const isTimeValid = Boolean(time.date?.trim() && time.timeSlot?.trim())
 
-		// Используем отфильтрованные товары
+
 		const isValidForm =
 			isAddressValid &&
 			isTimeValid &&
@@ -331,10 +291,7 @@ const CartSummary = ({
 		return isValidForm
 	}
 
-	/**
-	 * Проверяет возможность перехода к оплате
-	 * Форма должна быть валидна и не должна быть в процессе обработки
-	 */
+
 	const canProceedWithPayment = (): boolean => {
 		return isFormValid() && !isProcessing
 	}
@@ -354,7 +311,7 @@ const CartSummary = ({
 				{/* Предупреждение о минимальной сумме заказа */}
 				<MinimumOrderWarning isMinimumReached={isMinimumReached} />
 				{isRepeatOrder || isCheckout ? (
-					// Кнопки выбора способа оплаты (второй шаг)
+
 					<PaymentsButtons
 						isOrdered={isOrdered}
 						isProcessing={isProcessing}
@@ -365,7 +322,7 @@ const CartSummary = ({
 						paymentType={paymentType}
 					/>
 				) : (
-					// Кнопка "Оформить заказ" (первый шаг)
+
 					<CheckoutButton
 						isCheckout={isCheckout}
 						isMinimumReached={isMinimumReached}

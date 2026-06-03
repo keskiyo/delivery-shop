@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для управления списком пользователей в админке.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: GET.
+
 import { getDB } from '@/lib/api-routes'
 import { Document, Filter } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
@@ -19,7 +22,6 @@ export async function GET(request: NextRequest) {
 		const sortBy = searchParams.get('sortBy') || 'createdAt'
 		const sortDirection = searchParams.get('sortDirection') || 'desc'
 
-		// filters
 		const id = searchParams.get('id')
 		const name = searchParams.get('name')
 		const surname = searchParams.get('surname')

@@ -1,9 +1,12 @@
+// Назначение: API-маршрут для завершения текущей сессии.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: POST.
+
 import { getDB } from '@/lib/api-routes'
 import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
 	try {
-		// Очищаем кастомную сессию
+
 		const sessionCookie = request.headers
 			.get('cookie')
 			?.split(';')
@@ -15,7 +18,6 @@ export async function POST(request: Request) {
 			await db.collection('session').deleteOne({ token: sessionCookie })
 		}
 
-		// Очищаем куку
 		const response = NextResponse.json({ success: true })
 		response.cookies.set('session', '', {
 			expires: new Date(0),

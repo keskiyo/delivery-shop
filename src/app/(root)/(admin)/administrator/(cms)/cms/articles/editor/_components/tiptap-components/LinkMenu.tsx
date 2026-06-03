@@ -18,7 +18,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 		setOpenInNewTab(true)
 	}, [])
 
-	// Подписываемся на изменения редактора для определения активности ссылки
+
 	useEffect(() => {
 		if (!editor) return
 
@@ -30,7 +30,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 		editor.on('selectionUpdate', updateLinkActive)
 		editor.on('transaction', updateLinkActive)
 
-		// Инициализация
+
 		updateLinkActive()
 
 		return () => {
@@ -39,7 +39,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 		}
 	}, [editor])
 
-	// Обработчик для предотвращения перехода по ссылкам в редакторе
+
 	useEffect(() => {
 		if (!editor) return
 
@@ -49,7 +49,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 				event.preventDefault()
 				event.stopPropagation()
 
-				// Устанавливаем курсор на ссылку
+
 				const pos = editor.view.posAtDOM(target, 0)
 				if (pos >= 0) {
 					editor.chain().focus().setTextSelection(pos).run()
@@ -277,8 +277,8 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 											setOpenInNewTab(!openInNewTab)
 										}
 										className={`
-                      relative inline-flex h-6 w-11 items-center rounded-full 
-                      transition-colors focus:outline-none focus:ring-2 
+                      relative inline-flex h-6 w-11 items-center rounded-full
+                      transition-colors focus:outline-none focus:ring-2
                       focus:ring-brand focus:ring-offset-2 cursor-pointer duration-300
                       ${openInNewTab ? 'bg-brand' : 'bg-surface-pressed'}
                     `}

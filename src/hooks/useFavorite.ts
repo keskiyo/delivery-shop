@@ -1,30 +1,18 @@
 'use client'
 
+// Назначение: управление избранными товарами пользователя.
+// Как работает: Загружает id избранного, переключает товар через API и держит локальное состояние кнопок.
+
 import { useAuthStore } from '@/store/authStore'
 import { useEffect, useState } from 'react'
 
-/**
- * Хук для управления избранными товарами пользователя
- * Загружает список избранного из API и предоставляет методы для добавления/удаления товаров
- * 
- * @returns Объект с методами управления избранным и состоянием загрузки
- * 
- * @example
- * const { toggleFavorite, isFavorite, isLoading } = useFavorites()
- * 
- * // Проверить, находится ли товар в избранном
- * if (isFavorite('product-id-123')) { ... }
- * 
- * // Добавить/удалить товар из избранного
- * await toggleFavorite('product-id-123')
- */
 export const useFavorites = () => {
 	const { user } = useAuthStore()
 	const [favorites, setFavorites] = useState<string[]>([])
 	const [isLoading, setIsLoading] = useState(false)
 
-	// Получение избранного
 	useEffect(() => {
+
 		const loadFavorites = async () => {
 			if (!user?.id) {
 				setFavorites([])
@@ -54,6 +42,7 @@ export const useFavorites = () => {
 	const toggleFavorite = async (productId: string) => {
 		if (!user?.id) return
 
+		// После успешного API-запроса обновляем локальный список без повторной загрузки страницы.
 		const isCurrentlyFavorite = favorites.includes(productId)
 		const action = isCurrentlyFavorite ? 'remove' : 'add'
 

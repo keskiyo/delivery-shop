@@ -1,3 +1,6 @@
+// Назначение: порядок тулбаров редактора статей.
+// Как работает: Читает сохраненный порядок, применяет перетаскивание и возвращает группы инструментов.
+
 import { ToolbarGroup } from '@/app/(root)/(admin)/administrator/(cms)/cms/articles/types/tiptap'
 import { useEffect, useState } from 'react'
 import {

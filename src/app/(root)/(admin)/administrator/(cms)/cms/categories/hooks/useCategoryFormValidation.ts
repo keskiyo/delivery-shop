@@ -1,3 +1,6 @@
+// Назначение: валидация формы категории CMS.
+// Как работает: Проверяет обязательные поля, SEO-ограничения и возвращает ошибки формы.
+
 import { useState } from "react";
 import { SEO_LIMITS } from "../../utils/SEO_LIMITS";
 import { CategoryFormData } from "../types";

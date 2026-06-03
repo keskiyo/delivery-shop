@@ -2,10 +2,10 @@
 
 import { forwardRef, useCallback } from "react"
 
-// --- Lib ---
+
 import { parseShortcutKeys } from "@/lib/tiptap-utils"
 
-// --- Tiptap UI ---
+
 import type {
   Level,
   UseHeadingConfig,
@@ -15,7 +15,7 @@ import {
   useHeading,
 } from "@/components/tiptap/tiptap-ui/heading-button"
 
-// --- UI Primitives ---
+
 import type { ButtonProps } from "@/components/tiptap/tiptap-ui-primitive/button"
 import { Button } from "@/components/tiptap/tiptap-ui-primitive/button"
 import { Badge } from "@/components/tiptap/tiptap-ui-primitive/badge"
@@ -24,14 +24,9 @@ import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 export interface HeadingButtonProps
   extends Omit<ButtonProps, "type">,
     UseHeadingConfig {
-  /**
-   * Optional text to display alongside the icon.
-   */
+
   text?: string
-  /**
-   * Optional show shortcut keys in the button.
-   * @default false
-   */
+
   showShortcut?: boolean
 }
 
@@ -45,11 +40,7 @@ export function HeadingShortcutBadge({
   return <Badge>{parseShortcutKeys({ shortcutKeys })}</Badge>
 }
 
-/**
- * Button component for toggling heading in a Tiptap editor.
- *
- * For custom button implementations, use the `useHeading` hook instead.
- */
+
 export const HeadingButton = forwardRef<HTMLButtonElement, HeadingButtonProps>(
   (
     {

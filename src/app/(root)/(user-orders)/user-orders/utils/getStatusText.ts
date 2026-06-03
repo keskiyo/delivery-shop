@@ -1,7 +1,10 @@
+// Назначение: текст статуса заказа для пользователя.
+// Как работает: Переводит технический статус заказа в подпись личного кабинета.
+
 import { Order } from '@/types/order'
 
 export const getStatusText = (order: Order): string => {
-	// 1. Сначала проверяем особые случаи с оплатой
+
 	if (order.paymentMethod === 'online') {
 		if (order.paymentStatus === 'failed') {
 			return 'Не оплачен'
@@ -26,7 +29,6 @@ export const getStatusText = (order: Order): string => {
 		}
 	}
 
-	// 2. Базовые статусы
 	const statusMap: { [key: string]: string } = {
 		pending: 'В процессе',
 		refund: 'Возврат',

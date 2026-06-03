@@ -2,8 +2,8 @@ export const labelStyles = `text-base text-muted-foreground block`
 
 export const additionalStyles = `
     [&&]:bg-input
-    [&&]:h-10 
-    [&&]:px-4 
+    [&&]:h-10
+    [&&]:px-4
     [&&]:py-2
     [&&]:w-full
   `

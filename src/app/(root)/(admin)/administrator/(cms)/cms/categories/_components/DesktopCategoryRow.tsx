@@ -11,6 +11,9 @@ export const DesktopCategoryRow = ({
 	onEdit,
 	isDragging = false,
 }: SortableItemProps) => {
+	const [imageError, setImageError] = React.useState(false)
+	const showImage = category.image && !imageError
+
 	const handleEdit = (e: React.MouseEvent) => {
 		e.stopPropagation()
 		window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -44,7 +47,7 @@ export const DesktopCategoryRow = ({
 				</div>
 
 				<div className='flex items-center justify-center'>
-					{category.image ? (
+					{showImage ? (
 						<Image
 							src={category.image}
 							alt={category.imageAlt || category.name}
@@ -52,6 +55,8 @@ export const DesktopCategoryRow = ({
 							height={50}
 							className='object-cover rounded border border-border'
 							title={category.imageAlt}
+							onError={() => setImageError(true)}
+							loading='lazy'
 						/>
 					) : (
 						<div className='w-10 h-10 rounded flex items-center justify-center'>

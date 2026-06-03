@@ -1,3 +1,6 @@
+// Назначение: доступные даты доставки.
+// Как работает: Читает расписание и возвращает даты, где есть свободные слоты.
+
 import { getDaysDates } from '@/app/(root)/(admin)/administrator/delivery-times/utils/getDaysDates'
 import { AvailableDate } from '@/types/availableDate'
 import { Schedule } from '@/types/deliverySchedule'

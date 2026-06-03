@@ -1,3 +1,6 @@
+// Назначение: очистка HTML статьи.
+// Как работает: Оставляет разрешенные теги и атрибуты, убирая опасные вставки.
+
 import DOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
 

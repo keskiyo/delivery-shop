@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для поиска товаров для подсказок.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: GET.
+
 import { getDB } from '@/lib/api-routes'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -36,7 +39,7 @@ export async function GET(request: NextRequest) {
 				quantity: 1,
 				categories: 1,
 			})
-			.sort({ title: 1 }) // Сортировка по названию
+			.sort({ title: 1 })
 			.toArray()
 
 		return NextResponse.json({

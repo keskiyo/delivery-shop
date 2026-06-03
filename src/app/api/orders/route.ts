@@ -1,29 +1,17 @@
+// Назначение: API-маршрут для создания заказа и получения истории заказов.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: POST, GET.
+
 import { getDB } from '@/lib/api-routes'
 import { Order } from '@/types/order'
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
 import { getServerUserId } from '../../../../utils/getServerUserId'
 
-/**
- * API Route для создания заказа (POST /api/orders)
- *
- * Процесс создания заказа:
- * 1. Проверяет авторизацию пользователя
- * 2. Получает данные пользователя из БД
- * 3. Округляет все денежные значения (бонусы, цены)
- * 4. Создает объект заказа с уникальным номером
- * 5. Сохраняет заказ в коллекцию orders
- *
- * Статусы заказа:
- * - status: 'pending' (ожидает обработки)
- * - paymentStatus: 'pending' (для наличных) или 'waiting' (для онлайн-оплаты)
- */
 export async function POST(request: Request) {
 	try {
 		const db = await getDB()
 		const orderData = await request.json()
 
-		// Получаем ID текущего пользователя из сессии (поддерживает оба типа сессий)
 		const userId = await getServerUserId()
 
 		if (!userId) {
@@ -33,7 +21,6 @@ export async function POST(request: Request) {
 			)
 		}
 
-		// Находим пользователя по его ID для получения персональных данных
 		const user = await db.collection('user').findOne({
 			_id: ObjectId.createFromHexString(userId),
 		})
@@ -45,42 +32,40 @@ export async function POST(request: Request) {
 			)
 		}
 
-		// Округляем бонусы до целых чисел (нельзя использовать дробные бонусы)
 		const roundedUsedBonuses = Math.floor(orderData.usedBonuses || 0)
 		const roundedEarnedBonuses = Math.floor(orderData.totalBonuses || 0)
 
-		// Округляем денежные суммы до копеек (2 знака после запятой)
 		const roundedTotalAmount =
 			Math.round((orderData.finalPrice || 0) * 100) / 100
 		const roundedDiscountAmount =
 			Math.round((orderData.totalDiscount || 0) * 100) / 100
 
-		// Формируем объект заказа
 		const order = {
 			userId: user._id,
-			// Уникальный номер заказа: timestamp + случайное 3-значное число
+
 			orderNumber: `${Date.now()}-${Math.floor(Math.random() * 900 + 100)}`,
-			status: 'pending', // Статус заказа (pending, processing, completed, cancelled)
-			paymentMethod: orderData.paymentMethod, // cash_on_delivery или online
-			// Статус оплаты зависит от способа оплаты
+			status: 'pending',
+			paymentMethod: orderData.paymentMethod,
+
 			paymentStatus:
 				orderData.paymentMethod === 'cash_on_delivery'
-					? 'pending' // Наличные - оплата при получении
-					: 'waiting', // Онлайн - ожидает оплаты
-			totalAmount: roundedTotalAmount, // Итоговая сумма к оплате
-			discountAmount: roundedDiscountAmount, // Скидка от карты лояльности
-			usedBonuses: roundedUsedBonuses, // Использовано бонусов
-			earnedBonuses: roundedEarnedBonuses, // Будет начислено бонусов
-			deliveryAddress: orderData.deliveryAddress, // Адрес доставки
-			deliveryDate: orderData.deliveryTime.date, // Дата доставки (YYYY-MM-DD)
-			deliveryTimeSlot: orderData.deliveryTime.timeSlot, // Временной слот (08:00-14:00)
-			// Персональные данные пользователя (копируются из профиля)
+					? 'pending'
+					: 'waiting',
+			totalAmount: roundedTotalAmount,
+			discountAmount: roundedDiscountAmount,
+			usedBonuses: roundedUsedBonuses,
+			earnedBonuses: roundedEarnedBonuses,
+			deliveryAddress: orderData.deliveryAddress,
+			deliveryDate: orderData.deliveryTime.date,
+			deliveryTimeSlot: orderData.deliveryTime.timeSlot,
+
 			surname: user.surname,
 			name: user.name,
 			phone: user.phoneNumber,
 			gender: user.gender,
 			birthday: user.birthdayDate,
-			// Товары в заказе с ценами и скидками
+
+			// В позициях заказа фиксируем цену на момент оформления.
 			items: orderData.cartItems.map(
 				(item: {
 					productId: string
@@ -92,15 +77,15 @@ export async function POST(request: Request) {
 					productId: item.productId,
 					quantity: item.quantity,
 					price: Math.round((item.price || 0) * 100) / 100,
-					discountPercent: item.discountPercent, // Скидка товара
-					hasLoyaltyDiscount: item.hasLoyaltyDiscount, // Применена ли карта лояльности
+					discountPercent: item.discountPercent,
+					hasLoyaltyDiscount: item.hasLoyaltyDiscount,
 				}),
 			),
 			createdAt: new Date(),
 			updatedAt: new Date(),
 		}
 
-		// Сохраняем заказ в БД
+		// После оплаты отдельный endpoint обновит склад, бонусы и финальный статус заказа.
 		const result = await db.collection('orders').insertOne(order)
 
 		return NextResponse.json({

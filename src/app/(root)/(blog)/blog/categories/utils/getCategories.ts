@@ -1,3 +1,6 @@
+// Назначение: загрузка категорий блога.
+// Как работает: Обращается к API категорий и возвращает список для страницы блога.
+
 import { BlogCategory } from '../types/categories.types'
 
 export async function getCategories(): Promise<BlogCategory[]> {

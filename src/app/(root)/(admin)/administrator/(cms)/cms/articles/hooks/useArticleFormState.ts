@@ -1,5 +1,8 @@
 'use client'
 
+// Назначение: состояние формы статьи CMS.
+// Как работает: Инициализирует поля, отслеживает изменения и помогает сбрасывать или сохранять контент.
+
 import { showToast } from '@/lib/showToast'
 import { useArticleStore } from '@/store/articleStore'
 import { useCallback, useState } from 'react'

@@ -1,22 +1,6 @@
 'use client'
 
-/**
- * Верхнее меню навигации в header (иконки + названия)
- *
- * Ссылки:
- * - Каталог (мобильная версия) - /catalog
- * - Избранное (только для обычных пользователей) - /favorites
- * - Заказы (обычные: /user-orders, админ/менеджер: /administrator/admin-orders)
- * - Корзина (только для обычных пользователей) - /cart
- *
- * Функционал:
- * - Подсветка активной страницы (оранжевый цвет)
- * - Бейдж с количеством товаров на корзине (показывает 99+ если >99)
- * - Скрытие избранного и корзины для admin/manager
- *
- * Используется в:
- * - components/layout/header/UserBlock.tsx
- */
+
 import IconBox from '@/components/svg/IconBox'
 import IconCart from '@/components/svg/iconCart'
 import IconHeart from '@/components/svg/IconHeart'

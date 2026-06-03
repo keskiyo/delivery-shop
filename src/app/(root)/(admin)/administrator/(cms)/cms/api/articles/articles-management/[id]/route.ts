@@ -1,3 +1,6 @@
+// Назначение: API-маршрут для управления конкретной статьей CMS.
+// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: GET.
+
 import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
 import { getDB } from "@/lib/api-routes";
@@ -7,7 +10,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params; 
+    const { id } = await params;
     const db = await getDB();
 
     if (!ObjectId.isValid(id)) {

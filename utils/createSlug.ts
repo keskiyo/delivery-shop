@@ -1,3 +1,6 @@
+// Назначение: создание SEO-slug.
+// Как работает: Транслитерирует название, очищает лишние символы и добавляет id для уникальности.
+
 import { transliterate } from './transliterate'
 
 export function createSlug(text: string, id: number): string {

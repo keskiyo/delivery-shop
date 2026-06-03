@@ -26,30 +26,7 @@ import Tags from '../../_components/Tags'
 import Title from '../../_components/Title'
 import Weight from '../../_components/Weight'
 
-/**
- * Страница редактирования существующего товара в админ-панели
- * 
- * Функционал:
- * - Загрузка данных товара по ID из URL параметра
- * - Форма редактирования всех полей товара
- * - Загрузка нового изображения (опционально)
- * - Валидация формы (обязательные поля, специальные правила)
- * - Сохранение изменений на сервере
- * 
- * Логика работы:
- * 1. При монтировании загружаются данные товара по ID
- * 2. Форма заполняется существующими данными
- * 3. Пользователь редактирует нужные поля
- * 4. При наличии тега "Акции" обязательно указание скидки
- * 5. При отправке сначала загружается новое изображение (если выбрано)
- * 6. Затем обновляются данные товара через API /api/update-product
- * 
- * Обработка ошибок:
- * - 404: товар не найден
- * - Ошибка загрузки: показ сообщения с кнопкой возврата
- * 
- * @route /administrator/products/edit-product/[id]
- */
+
 export default function EditProductPage() {
 	const params = useParams()
 	const productId = params.id as string
@@ -63,10 +40,7 @@ export default function EditProductPage() {
 	const [existingImage, setExistingImage] = useState<string>('')
 	const [error, setError] = useState<string | null>(null)
 
-	/**
-	 * Эффект загрузки данных товара при монтировании компонента
-	 * Получает данные товара по ID и заполняет форму
-	 */
+
 	useEffect(() => {
 		const fetchProduct = async () => {
 			try {
@@ -114,12 +88,7 @@ export default function EditProductPage() {
 		}
 	}, [productId])
 
-	/**
-	 * Загрузка нового изображения товара на сервер
-	 * 
-	 * @param imageFile - Файл изображения
-	 * @returns true при успехе, false при ошибке
-	 */
+
 	const uploadImage = async (imageFile: File | null): Promise<boolean> => {
 		if (!imageFile) return false
 
@@ -147,15 +116,7 @@ export default function EditProductPage() {
 
 	const hasActionsTag = formData.tags.includes('actions')
 
-	/**
-	 * Обработчик отправки формы обновления товара
-	 * 
-	 * Последовательность действий:
-	 * 1. Валидация: проверка обязательной скидки для товаров с тегом "Акции"
-	 * 2. Загрузка нового изображения (если выбрано)
-	 * 3. Отправка обновленных данных товара на API /api/update-product
-	 * 4. При успехе показ уведомления
-	 */
+
 	const handleSubmit = async (e: SyntheticEvent) => {
 		e.preventDefault()
 		if (

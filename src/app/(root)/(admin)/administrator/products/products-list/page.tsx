@@ -62,7 +62,7 @@ export default function ProductsListPage() {
 		}
 	}
 
-	// Поиск при нажатии Enter
+
 	const handleKeyPress = (e: React.KeyboardEvent) => {
 		if (e.key === 'Enter' && searchTerm.trim().length >= 3) {
 			handleSearch()

@@ -1,3 +1,6 @@
+// Назначение: преобразование даты в локальный формат YYYY-MM-DD.
+// Как работает: Берет локальные части даты, чтобы не получить сдвиг из-за UTC.
+
 export const formatDateToLocalYYYYMMDD = (date: Date): string => {
 	const year = date.getFullYear()
 	const month = String(date.getMonth() + 1).padStart(2, '0')

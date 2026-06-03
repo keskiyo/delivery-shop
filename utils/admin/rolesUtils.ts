@@ -1,16 +1,8 @@
+// Назначение: подписи и стили ролей пользователей.
+// Как работает: Мапит роли admin, manager и user в читаемый текст и визуальный вариант.
+
 import { UserRole } from '@/types/userData'
 
-/**
- * Возвращает CSS классы для стилизации бейджа роли пользователя
- * 
- * @param role - Роль пользователя ('admin' | 'manager' | 'user')
- * @returns Строка с Tailwind CSS классами для фона и цвета текста
- * 
- * @example
- * getRoleStyles('admin')   // danger-токены
- * getRoleStyles('manager') // success-токены
- * getRoleStyles('user')    // neutral-токены
- */
 export const getRoleStyles = (role: UserRole) => {
 	switch (role) {
 		case 'admin':
@@ -22,17 +14,6 @@ export const getRoleStyles = (role: UserRole) => {
 	}
 }
 
-/**
- * Возвращает русское название роли пользователя
- * 
- * @param role - Роль пользователя ('admin' | 'manager' | 'user')
- * @returns Русское название роли
- * 
- * @example
- * getRoleLabel('admin')   // "Администратор"
- * getRoleLabel('manager') // "Менеджер"
- * getRoleLabel('user')    // "Пользователь"
- */
 export const getRoleLabel = (role: UserRole) => {
 	switch (role) {
 		case 'admin':

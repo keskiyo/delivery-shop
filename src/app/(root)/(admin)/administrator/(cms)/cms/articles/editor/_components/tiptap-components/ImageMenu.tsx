@@ -1,6 +1,6 @@
 import { ImageMenuProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/articles/types/tiptap'
 import { ImagePlus, Upload } from 'lucide-react'
-import { ChangeEvent, useCallback, useRef } from 'react' // Добавим useState
+import { ChangeEvent, useCallback, useRef } from 'react'
 import { useImageUpload } from '../../../hooks/useImageUpload'
 
 export const ImageMenu = ({ editor, onDragOverChange }: ImageMenuProps) => {

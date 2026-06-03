@@ -10,77 +10,37 @@ import {
 	isValidCardNumber,
 } from '../../../../../utils/validation/validProfileCard'
 
-/**
- * Компонент управления картой лояльности в профиле пользователя
- * 
- * Функционал:
- * - Отображение номера карты лояльности (скрыт звездочками в режиме просмотра)
- * - Редактирование номера карты с валидацией
- * - Сохранение изменений на сервере
- * - Форматирование номера карты (группы по 4 цифры)
- * 
- * Логика работы:
- * 1. В режиме просмотра показывает карту как **** **** **** 1234
- * 2. В режиме редактирования показывает полный номер с маской ввода
- * 3. При сохранении валидирует номер (должен быть 16 цифр)
- * 4. Отправляет запрос на /api/users/update-card
- * 5. После успешного сохранения обновляет данные пользователя
- * 
- * Валидация:
- * - Номер карты не может быть пустым
- * - Номер карты должен содержать ровно 16 цифр
- * - Принимаются только цифры (остальные символы игнорируются)
- * 
- * Особенности:
- * - Использует InputMask для форматированного ввода
- * - Автоматически очищает номер от пробелов и дефисов
- * - Показывает подсказку если карта не добавлена
- * - Кнопки "Отмена" и "Сохранить" видны только в режиме редактирования
- * 
- * @param isEditing - Флаг режима редактирования (управляется родительским компонентом)
- */
+
 const ProfileCard = ({ isEditing }: { isEditing: boolean }) => {
 	const { user, fetchUserData } = useAuthStore()
 	const [cardNumber, setCardNumber] = useState(user?.card || '')
 	const [isLoading, setIsLoading] = useState(false)
 	const [error, setError] = useState('')
 
-	// Синхронизируем локальное состояние с данными пользователя
+
 	useEffect(() => {
 		if (user) {
 			setCardNumber(user.card || '')
 		}
 	}, [user])
 
-	/**
-	 * Обработчик отмены редактирования
-	 * Возвращает номер карты к исходному значению
-	 */
+
 	const handleCancel = () => {
 		setCardNumber(user?.card || '')
 		setError('')
 	}
 
-	/**
-	 * Обработчик сохранения номера карты
-	 * 
-	 * Процесс:
-	 * 1. Очищает номер от пробелов и дефисов
-	 * 2. Валидирует номер (не пустой и 16 цифр)
-	 * 3. Отправляет запрос на сервер
-	 * 4. При успехе обновляет данные пользователя
-	 * 5. При ошибке показывает сообщение
-	 */
+
 	const handleSave = async () => {
 		const cleanedCardNumber = cleanCardNumber(cardNumber)
 
-		// Валидация: номер не может быть пустым
+
 		if (!cleanedCardNumber.trim()) {
 			setError('Номер карты не может быть пустым')
 			return
 		}
 
-		// Валидация: номер должен содержать 16 цифр
+
 		if (!isValidCardNumber(cleanedCardNumber)) {
 			setError('Номер карты должен содержать 16 цифр')
 			return
@@ -119,7 +79,7 @@ const ProfileCard = ({ isEditing }: { isEditing: boolean }) => {
 					error: 'Ошибка при обновлении карты',
 				},
 			)
-			// Обновляем данные пользователя после успешного сохранения
+
 			fetchUserData()
 		} catch (error) {
 			console.error(error)
@@ -133,10 +93,7 @@ const ProfileCard = ({ isEditing }: { isEditing: boolean }) => {
 		}
 	}
 
-	/**
-	 * Обработчик изменения номера карты
-	 * Очищает ввод от нецифровых символов и ограничивает до 16 цифр
-	 */
+
 	const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (!isEditing) return
 
@@ -145,7 +102,7 @@ const ProfileCard = ({ isEditing }: { isEditing: boolean }) => {
 		setCardNumber(cleanValue)
 	}
 
-	// Форматируем номер для отображения (с пробелами или звездочками)
+
 	const displayValue = formatCardNumber(cardNumber, isEditing)
 
 	return (
@@ -205,7 +162,7 @@ const ProfileCard = ({ isEditing }: { isEditing: boolean }) => {
 						disabled={isLoading}
 					/>
 				) : (
-					/* Режим просмотра: disabled поле */
+
 					<input
 						type='text'
 						value={displayValue || 'Не указана'}

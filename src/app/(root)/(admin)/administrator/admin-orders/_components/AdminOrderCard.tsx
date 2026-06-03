@@ -224,7 +224,7 @@ const AdminOrderCard = ({ orderId }: AdminOrderCardProps) => {
 							/>
 						</div>
 					) : (
-						// Показываем иконку чата для остальных статусов
+
 						<button
 							className='relative bg-surface-hover hover:shadow-button-secondary w-10 h-10 px-2 flex justify-center items-center gap-2 rounded duration-300 cursor-pointer text-foreground'
 							onClick={handleOpenChat}

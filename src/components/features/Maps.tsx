@@ -1,22 +1,6 @@
 'use client'
 
-/**
- * Компонент карты магазинов (Yandex Maps)
- * 
- * Функционал:
- * - Отображает интерактивную карту с точками магазинов
- * - Кнопки переключения между городами (Барнаул, Москва, etc.)
- * - Маркеры магазинов на карте (кастомная иконка)
- * - Подсказки при клике на маркер (название магазина)
- * 
- * Использует:
- * - Библиотека: @iminside/react-yandex-maps
- * - Данные: src/data/locations.ts (координаты и названия магазинов)
- * - API ключ Yandex Maps (зашит в коде)
- * 
- * Используется на:
- * - Странице контактов или главной странице
- */
+
 import { locations } from '@/data/locations'
 import { Map, Placemark, YMaps } from '@iminside/react-yandex-maps'
 import { useState } from 'react'
@@ -31,7 +15,7 @@ const Maps = () => {
 			query={{
 				lang: 'ru_RU',
 				apikey: '851b4ba9-1554-4325-8250-70775f167344',
-				// load: 'package.full',
+
 			}}
 		>
 			<section>

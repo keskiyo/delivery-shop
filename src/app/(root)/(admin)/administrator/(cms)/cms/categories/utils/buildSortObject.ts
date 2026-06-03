@@ -1,3 +1,6 @@
+// Назначение: объект сортировки для MongoDB.
+// Как работает: Переводит выбранное поле и направление из UI в формат запроса к базе.
+
 import { SortField } from "../types";
 
 export const buildSortObject = (
