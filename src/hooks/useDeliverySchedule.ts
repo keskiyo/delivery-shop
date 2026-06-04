@@ -1,5 +1,5 @@
-// Назначение: управление расписанием доставки в админке.
-// Как работает: Загружает окно дат, проверяет пересечения слотов и сохраняет доступность через API.
+// Назначение: React-хук useDeliverySchedule.
+// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
 
 import { convertTimeToMinutes } from '@/app/(root)/(admin)/administrator/delivery-times/utils/convertTimeToMinuts'
 import { getDaysDates } from '@/app/(root)/(admin)/administrator/delivery-times/utils/getDaysDates'

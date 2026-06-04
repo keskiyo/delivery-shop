@@ -1,3 +1,6 @@
+// Назначение: утилита fetchArticle.
+// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
 import { getUserById } from '../../../../../../../utils/auth-helpers'
 import { baseUrl } from '../../../../../../../utils/baseUrl'
 import { getServerUserId } from '../../../../../../../utils/getServerUserId'
@@ -8,10 +11,10 @@ export async function fetchArticlePageData(
 	categorySlug: string,
 	articleSlug: string,
 ): Promise<ArticlePageData | { error: string }> {
+	// 1. Определяем текущего пользователя, чтобы API понял уровень доступа к статье.
 	const currentUserId = await getServerUserId()
 	let currentUserData = null
 
-	// Роль нужна API, чтобы администраторы и менеджеры могли видеть материалы с ограниченным статусом.
 	if (currentUserId) {
 		try {
 			currentUserData = await getUserById(currentUserId)
@@ -23,7 +26,7 @@ export async function fetchArticlePageData(
 	const currentUserRole = currentUserData?.role || 'user'
 
 	try {
-		// Кешируем публичные данные статьи на час, а роль передаем query-параметром для серверной проверки доступа.
+		// 2. Загружаем статью и передаем роль query-параметром для серверной проверки доступа.
 		const response = await fetch(
 			`${baseUrl}/api/blog/${categorySlug}/${articleSlug}?role=${currentUserRole}`,
 			{
@@ -32,7 +35,7 @@ export async function fetchArticlePageData(
 		)
 
 		if (!response.ok) {
-			// API может вернуть человекочитаемую ошибку, сохраняем ее для страницы.
+			// 3. API может вернуть человекочитаемую ошибку, сохраняем ее для страницы.
 			const errorData = await response.json().catch(() => ({}))
 
 			if (response.status === 404) {
@@ -42,6 +45,7 @@ export async function fetchArticlePageData(
 			return { error: errorData.error || `Ошибка ${response.status}` }
 		}
 
+		// 4. Возвращаем данные статьи и категории для страницы /blog/[category]/[slug].
 		const data: ArticlePageData = await response.json()
 		return data
 	} catch (error) {

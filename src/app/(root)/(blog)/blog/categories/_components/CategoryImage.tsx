@@ -14,7 +14,7 @@ export default function CategoryImage({
 	const imagePath = getImagePath(hasImage ? image : '')
 
 	return (
-		<div className='relative w-full h-48'>
+		<div className='relative h-48 w-full border-b border-border bg-surface-subtle'>
 			{hasImage ? (
 				<Image
 					src={imagePath}
@@ -28,10 +28,10 @@ export default function CategoryImage({
 				/>
 			) : (
 				<div
-					className={`w-full h-full flex items-center justify-center bg-linear-to-br ${gradientClass} rounded-t`}
+					className={`flex h-full w-full items-center justify-center bg-linear-to-br ${gradientClass}`}
 				>
 					<div className='text-center p-4'>
-						<div className='text-xl font-semibold leading-tight px-4'>
+						<div className='px-4 text-xl font-semibold leading-tight text-primary-foreground'>
 							{name}
 						</div>
 					</div>

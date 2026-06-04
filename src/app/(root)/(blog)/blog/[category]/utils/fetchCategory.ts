@@ -1,3 +1,6 @@
+// Назначение: утилита fetchCategory.
+// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
 import { baseUrl } from '../../../../../../../utils/baseUrl'
 import { ApiError, CategoryPageResponse } from '../../types'
 
@@ -8,7 +11,7 @@ export async function fetchCategoryPageData(
 	itemsPerPage: number = 3,
 ): Promise<CategoryPageResponse | ApiError> {
 	try {
-		// Серверный fetch кешируется Next.js на час, чтобы страница категории не дергала API при каждом запросе.
+		// 1. Получаем категорию, статьи и пагинацию одним API-запросом.
 		const response = await fetch(
 			`${baseUrl}/api/blog/${encodeURIComponent(categorySlug)}?page=${page}&itemsPerPage=${itemsPerPage}`,
 			{
@@ -19,13 +22,14 @@ export async function fetchCategoryPageData(
 		)
 
 		if (!response.ok) {
-			// UI ожидает объект с error, поэтому не бросаем исключение для известных ошибок API.
+			// 2. UI ожидает объект с error, поэтому не бросаем исключение для известных ошибок API.
 			if (response.status === 404) {
 				return { error: 'Категория не найдена' }
 			}
 			return { error: 'Ошибка сервера' }
 		}
 
+		// 3. Возвращаем ответ API как есть: тип данных описан в CategoryPageResponse.
 		return await response.json()
 	} catch (error) {
 		console.error('Ошибка при запросе категории:', error)

@@ -1,3 +1,6 @@
+// Назначение: утилита getRelatedArticles.
+// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { CONFIG } from '../../../../../../../config/config'
@@ -10,9 +13,10 @@ export async function getRelatedArticles(
 	limit: number = CONFIG.ARTICLES_PER_ARTICLE_PAGE,
 ): Promise<RelatedArticle[]> {
 	try {
+		// 1. Подключаемся напрямую к MongoDB, потому что связанные статьи нужны только на сервере.
 		const db = await getDB()
 
-		// Берем только поля, которые нужны карточкам, чтобы не тянуть полный HTML-контент статьи.
+		// 2. Берем только поля карточки и исключаем текущую статью из выдачи.
 		const articles = await db
 			.collection('articles')
 			.find(
@@ -44,7 +48,7 @@ export async function getRelatedArticles(
 			.limit(limit)
 			.toArray()
 
-		// Mongo ObjectId и даты приводятся к строкам, потому что компоненты страницы работают с serializable-данными.
+		// 3. ObjectId и даты приводим к строкам, чтобы данные были serializable для React-компонентов.
 		return articles.map(article => ({
 			...article,
 			_id: article._id.toString(),

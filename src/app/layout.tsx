@@ -1,3 +1,5 @@
+import { ArticleProvider } from '@/app/contexts/ArticleContext'
+import { CategoryProvider } from '@/app/contexts/CategoryContext'
 import { RegFormProvider } from '@/app/contexts/RegFormContext'
 import StoreProvider from '@/app/provider'
 import { Providers } from '@/components/features/common/providers'
@@ -5,9 +7,9 @@ import StatesProvider from '@/store/StatesProvider'
 import type { Metadata } from 'next'
 import { Rubik } from 'next/font/google'
 import { cookies } from 'next/headers'
+import 'react-toastify/dist/ReactToastify.css'
 import { generateSiteMetadata } from '../../utils/generateSiteMetadata'
 import './globals.css'
-import 'react-toastify/dist/ReactToastify.css'
 
 const rubik = Rubik({
 	variable: '--font-rubik',
@@ -40,7 +42,11 @@ export default async function RootLayout({
 				<StoreProvider>
 					<StatesProvider>
 						<RegFormProvider>
-							<Providers>{children}</Providers>
+							<CategoryProvider>
+								<ArticleProvider>
+									<Providers>{children}</Providers>
+								</ArticleProvider>
+							</CategoryProvider>
 						</RegFormProvider>
 					</StatesProvider>
 				</StoreProvider>

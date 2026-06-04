@@ -1,5 +1,5 @@
-// Назначение: фильтрация доступных слотов доставки.
-// Как работает: Берет расписание и исключает занятые или уже недоступные интервалы.
+// Назначение: утилита getAvailableTimeSlots.
+// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
 
 import { isTimeSlotPassed } from '@/app/(root)/(cart)/cart/utils/isTimeSlotPassed'
 import { Schedule } from '@/types/deliverySchedule'

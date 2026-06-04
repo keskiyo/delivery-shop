@@ -1,20 +1,20 @@
-import { Menu } from "lucide-react";
-import { FloatingMenuButtonProps } from "../types/sidebar.types";
+import { Menu } from 'lucide-react'
+import { FloatingMenuButtonProps } from '../types/sidebar.types'
 
 export default function FloatingMenuButton({
   onClick,
   categoriesCount,
 }: FloatingMenuButtonProps) {
-  return (
-    <button
-      onClick={onClick}
-      className="fixed right-6 bottom-6 z-40 w-14 h-14 rounded-full bg-brand text-white shadow-xl hover:bg-brand-hover hover:shadow-2xl hover:scale-105 active:scale-95 duration-300 flex items-center justify-center group animate-float cursor-pointer"
-      aria-label="Открыть меню категорий"
-    >
-      <Menu className="w-6 h-6 transition-transform group-hover:rotate-90" />
-      <span className="absolute -top-1 -right-1 w-5 h-5 bg-danger text-white rounded-full text-xs font-bold flex items-center justify-center animate-pulse">
-        {categoriesCount}
-      </span>
-    </button>
-  );
+	return (
+		<button
+			onClick={onClick}
+			className='group fixed bottom-6 right-6 z-40 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-brand text-brand-foreground shadow-(--shadow-button-default) duration-300 hover:scale-105 hover:bg-brand-hover active:scale-95'
+			aria-label='Открыть меню категорий'
+		>
+			<Menu className='h-6 w-6 transition-transform group-hover:rotate-90' />
+			<span className='absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-danger text-xs font-bold text-danger-foreground'>
+				{categoriesCount}
+			</span>
+		</button>
+	)
 }

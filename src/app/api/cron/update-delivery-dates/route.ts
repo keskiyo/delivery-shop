@@ -1,5 +1,5 @@
-// Назначение: API-маршрут для автоматического обновления дат доставки.
-// Как работает: Читает параметры запроса, обращается к базе данных или файлам проекта и возвращает JSON-ответ с результатом или ошибкой. Методы: GET.
+// Назначение: API-маршрут cron/update-delivery-dates.
+// Как работает: Методы: GET. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
 
 import { getDaysDates } from '@/app/(root)/(admin)/administrator/delivery-times/utils/getDaysDates'
 import { getDB } from '@/lib/api-routes'

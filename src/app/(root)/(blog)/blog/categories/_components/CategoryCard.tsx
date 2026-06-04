@@ -15,7 +15,7 @@ export default function CategoryCard({
 		category.description || 'Исследуйте материалы по этой теме'
 
 	return (
-		<article className='group bg-card h-full flex flex-col rounded overflow-hidden shadow-md hover:shadow-lg duration-300 hover:-translate-y-0.5'>
+		<article className='group relative flex h-full flex-col overflow-hidden rounded-md border border-border bg-card shadow-(--shadow-default) duration-300 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-(--shadow-article)'>
 			<CategoryNewBadge createdAt={category.createdAt} />
 			<CategoryImage
 				hasImage={hasImage}

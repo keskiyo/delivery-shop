@@ -1,5 +1,5 @@
 export default function CategoryHoverEffect() {
-  return (
-    <div className="absolute inset-0 border-2 border-transparent group-hover:border-green-200 rounded pointer-events-none duration-500" />
-  );
+	return (
+		<div className='pointer-events-none absolute inset-0 rounded-md border border-transparent duration-300 group-hover:border-brand/30' />
+	)
 }

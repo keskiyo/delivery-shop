@@ -1,6 +1,6 @@
 # Delivery Shop - справка по проекту
 
-Обновлено: 30 мая 2026.
+Обновлено: 4 июня 2026.
 
 Этот файл описывает структуру и ключевые особенности проекта `delivery-shop`.
 
@@ -86,18 +86,18 @@
 
 ## Корневая структура
 
-| Путь                      | Комментарий                                 |
-| ------------------------- | ------------------------------------------- |
-| `package.json`            | Скрипты проекта и зависимости.              |
-| `tsconfig.json`           | Конфигурация TypeScript.                    |
-| `next.config.ts`          | Конфигурация Next.js.                       |
+| Путь                      | Комментарий                                                                                                                                                                |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `package.json`            | Скрипты проекта и зависимости.                                                                                                                                             |
+| `tsconfig.json`           | Конфигурация TypeScript.                                                                                                                                                   |
+| `next.config.ts`          | Конфигурация Next.js.                                                                                                                                                      |
 | `eslint.config.mjs`       | Конфигурация ESLint. CommonJS configs/migrations исключены из `no-require-imports`; `react-hooks/set-state-in-effect` отключен как шумное правило для текущей архитектуры. |
-| `tailwind.config.js`      | Дополнительная конфигурация Tailwind.       |
-| `postcss.config.mjs`      | PostCSS-конфигурация для Tailwind CSS 4.    |
-| `components.json`         | Конфигурация shadcn.                        |
-| `INFO_SITE.md`            | Этот файл с обзором проекта.                |
-| `migrate-mongo-config.js` | Конфигурация миграций MongoDB.              |
-| `seed-db*.ts`             | Скрипты наполнения базы начальными данными. |
+| `tailwind.config.js`      | Дополнительная конфигурация Tailwind.                                                                                                                                      |
+| `postcss.config.mjs`      | PostCSS-конфигурация для Tailwind CSS 4.                                                                                                                                   |
+| `components.json`         | Конфигурация shadcn.                                                                                                                                                       |
+| `INFO_SITE.md`            | Этот файл с обзором проекта.                                                                                                                                               |
+| `migrate-mongo-config.js` | Конфигурация миграций MongoDB.                                                                                                                                             |
+| `seed-db*.ts`             | Скрипты наполнения базы начальными данными.                                                                                                                                |
 
 ## `config/`
 
@@ -121,21 +121,23 @@
 
 ## `public/`
 
-| Путь                                  | Комментарий                                  |
-| ------------------------------------- | -------------------------------------------- |
-| `public/robots.txt`                   | Правила индексации для поисковых роботов.    |
-| `public/og-image.jpeg`                | Изображение для Open Graph.                  |
-| `public/web-app-manifest-192x192.png` | Иконка PWA manifest.                         |
-| `public/images/products/`             | Изображения товаров.                         |
-| `public/images/categories/`           | Изображения категорий.                       |
-| `public/images/graphics/`             | Слайдеры, фоны, дефолтные аватары и графика. |
-| `public/images/banners/`              | Баннеры для промо-блоков.                    |
-| `public/images/articles/`             | Изображения статей.                          |
-| `public/blogCategories/`              | Загруженные изображения категорий блога/CMS. |
-| `public/icons-footer/`                | SVG-иконки футера.                           |
-| `public/icons-orders/`                | SVG-иконки статусов и действий по заказам.   |
+| Путь                                  | Комментарий                                                                           |
+| ------------------------------------- | ------------------------------------------------------------------------------------- |
+| `public/robots.txt`                   | Правила индексации для поисковых роботов.                                             |
+| `public/og-image.jpeg`                | Изображение для Open Graph.                                                           |
+| `public/web-app-manifest-192x192.png` | Иконка PWA manifest.                                                                  |
+| `public/images/products/`             | Изображения товаров.                                                                  |
+| `public/images/categories/`           | Изображения категорий.                                                                |
+| `public/images/graphics/`             | Слайдеры, фоны, дефолтные аватары и графика.                                          |
+| `public/images/banners/`              | Баннеры для промо-блоков.                                                             |
+| `public/images/articles/`             | Изображения статей.                                                                   |
+| `public/temp/`                        | Временные изображения HTML/Tiptap-редактора статей до сохранения статьи.              |
+| `public/uploads/articles/`            | Постоянные изображения, которые переносятся из `public/temp` после сохранения статьи. |
+| `public/blogCategories/`              | Загруженные изображения категорий блога/CMS.                                          |
+| `public/icons-footer/`                | SVG-иконки футера.                                                                    |
+| `public/icons-orders/`                | SVG-иконки статусов и действий по заказам.                                            |
 
-Комментарий: новые пользовательские загрузки и публичные статичные ассеты должны иметь понятные имена. Случайные имена допустимы для загруженных файлов, но для системных ассетов лучше использовать семантические названия.
+Комментарий: временные картинки редактора статей доступны как `/temp/...`. После сохранения статьи `processArticleImages.ts` переносит их в `public/uploads/articles` и заменяет URL на `/uploads/articles/...`. Не смешивайте временные и постоянные загрузки без явной причины.
 
 ## `src/app/` - маршруты и layouts
 
@@ -164,7 +166,8 @@
 | `(auth)`         | Login, registration, OTP, reset password и общие auth-компоненты.                     |
 | `(cart)`         | Корзина, оформление заказа, выбор адреса, времени доставки и оплаты.                  |
 | `(catalog)`      | Каталог, категории, карточка товара, отзывы, похожие товары.                          |
-| `(articles)`     | Блог и статьи.                                                                        |
+| `(articles)`     | Старый публичный блок статей и карточки для главной.                                  |
+| `(blog)`         | Новый публичный блог: список категорий, страницы категорий и детальные статьи.        |
 | `(products)`     | Подборки товаров: акции, новинки и общие product sections.                            |
 | `(search)`       | Страница результатов поиска.                                                          |
 | `(user)`         | Избранное и покупки пользователя.                                                     |
@@ -202,27 +205,40 @@
 
 CMS находится в `src/app/(root)/(admin)/administrator/(cms)/cms/`.
 
-| Путь                                  | Комментарий                                                                                                |
-| ------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `cms/page.tsx`                        | Главная страница CMS.                                                                                      |
-| `cms/layout.tsx`                      | Layout CMS-раздела.                                                                                        |
-| `cms/CONFIG_BLOG.ts`                  | Конфигурация CMS/блога.                                                                                    |
-| `cms/_components/`                    | Dashboard cards, header, pagination, SEO recommendations, stats и skeleton states.                         |
-| `cms/categories/page.tsx`             | Управление категориями.                                                                                    |
-| `cms/categories/_components/`         | Форма категории, таблица, drag-and-drop, поиск, фильтры, статистика, desktop/mobile карточки.              |
-| `cms/semantic-core/page.tsx`          | Управление SEO/семантическим ядром и настройками сайта.                                                    |
-| `cms/semantic-core/_components/`      | SEOForm, CurrentSettings, FormField и кнопки формы.                                                        |
-| `cms/sidebarMenu/`                    | Компоненты бокового меню CMS.                                                                              |
-| `cms/hooks/`                          | Хуки категорий, формы категории, настроек сайта и статистики.                                              |
-| `cms/types/`                          | Типы моделей, таблиц, форм, UI, DnD, dashboard и sidebar.                                                  |
-| `cms/utils/`                          | SEO limits, рекомендации, dashboard cards, menu items, статистика, цвета, сортировка и фильтры.            |
-| `cms/api/categories/route.ts`         | API списка и создания категорий CMS.                                                                       |
-| `cms/api/categories/[id]/route.ts`    | API конкретной категории.                                                                                  |
-| `cms/api/categories/reorder/route.ts` | API сохранения порядка категорий.                                                                          |
-| `cms/api/categories/upload/route.ts`  | API загрузки изображений категорий.                                                                        |
-| `cms/api/site-settings/route.ts`      | API настроек сайта и SEO.                                                                                  |
+| Путь                                                 | Комментарий                                                                                     |
+| ---------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `cms/page.tsx`                                       | Главная страница CMS.                                                                           |
+| `cms/layout.tsx`                                     | Layout CMS-раздела.                                                                             |
+| `cms/CONFIG_BLOG.ts`                                 | Конфигурация CMS/блога.                                                                         |
+| `cms/_components/`                                   | Dashboard cards, header, pagination, SEO recommendations, stats и skeleton states.              |
+| `cms/categories/page.tsx`                            | Управление категориями.                                                                         |
+| `cms/categories/_components/`                        | Форма категории, таблица, drag-and-drop, поиск, фильтры, статистика, desktop/mobile карточки.   |
+| `cms/semantic-core/page.tsx`                         | Управление SEO/семантическим ядром и настройками сайта.                                         |
+| `cms/semantic-core/_components/`                     | SEOForm, CurrentSettings, FormField и кнопки формы.                                             |
+| `cms/sidebarMenu/`                                   | Компоненты бокового меню CMS.                                                                   |
+| `cms/hooks/`                                         | Хуки категорий, формы категории, настроек сайта и статистики.                                   |
+| `cms/types/`                                         | Типы моделей, таблиц, форм, UI, DnD, dashboard и sidebar.                                       |
+| `cms/utils/`                                         | SEO limits, рекомендации, dashboard cards, menu items, статистика, цвета, сортировка и фильтры. |
+| `cms/api/categories/route.ts`                        | API списка и создания категорий CMS.                                                            |
+| `cms/api/categories/[id]/route.ts`                   | API конкретной категории.                                                                       |
+| `cms/api/categories/reorder/route.ts`                | API сохранения порядка категорий.                                                               |
+| `cms/api/categories/upload/route.ts`                 | API загрузки изображений категорий.                                                             |
+| `cms/api/site-settings/route.ts`                     | API настроек сайта и SEO.                                                                       |
+| `cms/articles/page.tsx`                              | Входная страница CMS-статей.                                                                    |
+| `cms/articles/editor/page.tsx`                       | Страница создания/редактирования статьи.                                                        |
+| `cms/articles/editor/_components/`                   | Форма статьи, выбор категории, submit-блок и Tiptap/HTML-редактор.                              |
+| `cms/articles/editor/_components/tiptap-components/` | Панели форматирования, таблицы, списки, изображения, HTML-редактор и модалки предпросмотра.     |
+| `cms/articles/editor/_components/css/`               | Стили редактора: таблицы, изображения, предпросмотр HTML, модалки и тулбар.                     |
+| `cms/articles/articlesManagement/page.tsx`           | Управление списком статей: фильтры, поиск, сортировка, reorder, desktop/mobile отображение.     |
+| `cms/articles/articlesManagement/_components/`       | Таблица, строки, карточки, advanced filters, search bar, stats и empty state.                   |
+| `cms/articles/hooks/`                                | Хуки формы статьи, списка статей, загрузки изображений и порядка тулбара.                       |
+| `cms/articles/utils/`                                | Конфиг тулбара, цвета, размеры шрифта, загрузка и перенос изображений статьи.                   |
+| `cms/api/articles/route.ts`                          | API создания и получения CMS-статей.                                                            |
+| `cms/api/articles/upload/temp-image/route.ts`        | Загрузка временной картинки статьи в `public/temp`.                                             |
+| `cms/api/articles/upload/route.ts`                   | Загрузка постоянной картинки статьи в `public/uploads/articles`.                                |
+| `cms/api/articles/articles-management/*`             | API списка, статусов, featured, reorder и операций над статьями в менеджере статей.             |
 
-Комментарий: в CMS сейчас много логики разделено на маленькие компоненты и типы. При изменениях категории лучше начинать с `useCategories.ts`, `categoryStore.ts`, `CategoryTable.tsx` и API `cms/api/categories`.
+Комментарий: в CMS сейчас много логики разделено на маленькие компоненты и типы. При изменениях категорий начинайте с `useCategories.ts`, `categoryStore.ts`, `CategoryTable.tsx` и API `cms/api/categories`. При изменениях статей сначала смотрите `cms/articles/editor`, `cms/articles/articlesManagement` и API `cms/api/articles`.
 
 ## Авторизация
 
@@ -317,14 +333,23 @@ CMS находится в `src/app/(root)/(admin)/administrator/(cms)/cms/`.
 
 ## Статьи
 
-| Путь                                            | Комментарий                          |
-| ----------------------------------------------- | ------------------------------------ |
-| `src/app/(root)/(articles)/articles/page.tsx`   | Страница списка статей.              |
-| `src/app/(root)/(articles)/Articles.tsx`        | Компонент отображения списка статей. |
-| `src/app/(root)/(articles)/ArticleCard.tsx`     | Карточка статьи.                     |
-| `src/app/(root)/(articles)/ArticlesSection.tsx` | Блок статей на главной.              |
-| `src/app/(root)/(articles)/fetchArticles.ts`    | Загрузка статей.                     |
-| `src/app/api/articles/route.ts`                 | API статей.                          |
+| Путь                                                               | Комментарий                                                                             |
+| ------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| `src/app/(root)/(articles)/articles/page.tsx`                      | Старый публичный список статей.                                                         |
+| `src/app/(root)/(articles)/Articles.tsx`                           | Компонент отображения списка статей на старом маршруте.                                 |
+| `src/app/(root)/(articles)/ArticleCard.tsx`                        | Карточка статьи для главной и публичных подборок; должна переживать пустые поля автора. |
+| `src/app/(root)/(articles)/ArticlesSection.tsx`                    | Блок статей на главной.                                                                 |
+| `src/app/(root)/(articles)/fetchArticles.ts`                       | Загрузка статей для старого публичного блока.                                           |
+| `src/app/(root)/(blog)/blog/page.tsx`                              | Главная страница блога с поиском и ссылкой на категории.                                |
+| `src/app/(root)/(blog)/blog/BlogSearch.tsx`                        | Поиск по статьям блога с темизированными стилями.                                       |
+| `src/app/(root)/(blog)/blog/categories/`                           | Страница всех категорий блога, sidebar, карточки, анимации и helpers.                   |
+| `src/app/(root)/(blog)/blog/[category]/page.tsx`                   | Страница категории блога со списком опубликованных статей.                              |
+| `src/app/(root)/(blog)/blog/[category]/_components/`               | Header категории, изображение, статистика, список статей и empty state.                 |
+| `src/app/(root)/(blog)/blog/[category]/utils/`                     | Получение категории, статьи и связанных статей.                                         |
+| `src/app/(root)/(blog)/blog/[category]/[slug]/page.tsx`            | Детальная страница статьи блога.                                                        |
+| `src/app/(root)/(blog)/blog/[category]/[slug]/_components/`        | Заголовок, meta, автор, изображение, контент, edit-link и archive notice.               |
+| `src/app/(root)/(blog)/blog/[category]/[slug]/css/page.module.css` | CSS для HTML-контента статьи, включая таблицы и обтекание изображений.                  |
+| `src/app/api/articles/route.ts`                                    | Публичный API статей.                                                                   |
 
 ## Оплата
 
@@ -337,37 +362,37 @@ CMS находится в `src/app/(root)/(admin)/administrator/(cms)/cms/`.
 
 ## API routes
 
-| Группа      | Основные маршруты                                                                   | Комментарий                                                                               |
-| ----------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| Auth        | `/api/auth/*`                                                                       | Better Auth, кастомный login/logout, avatar, reset password, update email/phone/location. |
-| Cart        | `/api/cart`                                                                         | Получение и обновление корзины.                                                           |
-| Orders      | `/api/orders/*`                                                                     | Создание заказа, смена статуса, обновление после оплаты, очистка корзины.                 |
-| Admin users | `/api/admin/users/*`                                                                | Пользователи, роли, заказы пользователей.                                                 |
-| Admin chat  | `/api/admin/chat/*`                                                                 | Чат по заказам, read/unread state.                                                        |
-| Catalog     | `/api/catalog`, `/api/category`                                                     | Каталог и категории.                                                                      |
-| Products    | `/api/products/*`, `/api/add-product`, `/api/update-product`, `/api/delete-product` | Товары, отзывы, бренды, похожие товары и CRUD админки.                                    |
-| Search      | `/api/search`, `/api/search-full`, `/api/search-products`                           | Поиск по сайту и товарам.                                                                 |
-| Articles    | `/api/articles`                                                                     | CRUD/получение статей.                                                                    |
-| Users       | `/api/users/*`                                                                      | Избранное, покупки, карта лояльности.                                                     |
-| Delivery    | `/api/delivery-times`                                                               | Слоты доставки.                                                                           |
-| Cron        | `/api/cron/update-delivery-dates`                                                   | Обновление дат доставки, требуется `secret`.                                              |
-| Sitemap     | `/api/sitemap-data`                                                                 | Данные для sitemap.                                                                       |
-| Upload      | `/api/upload-image`                                                                 | Загрузка изображений.                                                                     |
+| Группа      | Основные маршруты                                                                   | Комментарий                                                                                                |
+| ----------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Auth        | `/api/auth/*`                                                                       | Better Auth, кастомный login/logout, avatar, reset password, update email/phone/location.                  |
+| Cart        | `/api/cart`                                                                         | Получение и обновление корзины.                                                                            |
+| Orders      | `/api/orders/*`                                                                     | Создание заказа, смена статуса, обновление после оплаты, очистка корзины.                                  |
+| Admin users | `/api/admin/users/*`                                                                | Пользователи, роли, заказы пользователей.                                                                  |
+| Admin chat  | `/api/admin/chat/*`                                                                 | Чат по заказам, read/unread state.                                                                         |
+| Catalog     | `/api/catalog`, `/api/category`                                                     | Каталог и категории.                                                                                       |
+| Products    | `/api/products/*`, `/api/add-product`, `/api/update-product`, `/api/delete-product` | Товары, отзывы, бренды, похожие товары и CRUD админки.                                                     |
+| Search      | `/api/search`, `/api/search-full`, `/api/search-products`                           | Поиск по сайту и товарам.                                                                                  |
+| Articles    | `/api/articles`, CMS `/cms/api/articles/*`                                          | Публичное чтение статей и CMS CRUD/менеджер статей.                                                        |
+| Users       | `/api/users/*`                                                                      | Избранное, покупки, карта лояльности.                                                                      |
+| Delivery    | `/api/delivery-times`                                                               | Слоты доставки.                                                                                            |
+| Cron        | `/api/cron/update-delivery-dates`                                                   | Обновление дат доставки, требуется `secret`.                                                               |
+| Sitemap     | `/api/sitemap-data`                                                                 | Данные для sitemap.                                                                                        |
+| Upload      | `/api/upload-image`, `/api/uploads/[...path]`, CMS upload routes                    | Загрузка товаров, fallback старых uploads и изображения статей из `public/temp`/`public/uploads/articles`. |
 
 ## `src/components/`
 
-| Путь                                        | Комментарий                                                                                |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Путь                                        | Комментарий                                                                                   |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `src/components/features/common/`           | Breadcrumbs, ErrorComponent, loader, providers. В `providers.tsx` подключен `ToastContainer`. |
-| `src/components/features/slider/`           | Компоненты слайдера главной страницы.                                                      |
-| `src/components/features/Maps.tsx`          | Карта магазинов.                                                                           |
-| `src/components/features/SpacialOffers.tsx` | Блок спецпредложений.                                                                      |
-| `src/components/layout/header/`             | Header, меню, профиль, поиск и выпадающий каталог.                                         |
-| `src/components/layout/footer/`             | Footer сайта.                                                                              |
-| `src/components/shared/`                    | ProductCard, AddToCartButton, FavoriteButton, Pagination, GenericListPage и общие фильтры. |
-| `src/components/shared/filterComponents/`   | PriceFilter, PriceRangeSlider, DropFilter, кнопки фильтров и controls.                     |
-| `src/components/ui/`                        | UI-примитивы и тема.                                                                       |
-| `src/components/svg/`                       | Локальные SVG React-компоненты.                                                            |
+| `src/components/features/slider/`           | Компоненты слайдера главной страницы.                                                         |
+| `src/components/features/Maps.tsx`          | Карта магазинов.                                                                              |
+| `src/components/features/SpacialOffers.tsx` | Блок спецпредложений.                                                                         |
+| `src/components/layout/header/`             | Header, меню, профиль, поиск и выпадающий каталог.                                            |
+| `src/components/layout/footer/`             | Footer сайта.                                                                                 |
+| `src/components/shared/`                    | ProductCard, AddToCartButton, FavoriteButton, Pagination, GenericListPage и общие фильтры.    |
+| `src/components/shared/filterComponents/`   | PriceFilter, PriceRangeSlider, DropFilter, кнопки фильтров и controls.                        |
+| `src/components/ui/`                        | UI-примитивы и тема.                                                                          |
+| `src/components/svg/`                       | Локальные SVG React-компоненты.                                                               |
 
 Комментарий: для новых общих компонентов сначала проверьте `shared` и `ui`. Если компонент привязан к конкретному экрану, лучше держать его рядом с route group в `_components`.
 
@@ -399,6 +424,8 @@ CMS находится в `src/app/(root)/(admin)/administrator/(cms)/cms/`.
 | `useRepeatOrder.ts`       | Повтор заказа.                                        |
 | `usePricing.ts`           | Расчеты корзины, скидок, бонусов и минимальной суммы. |
 | `redux.ts`                | Типизированные Redux hooks.                           |
+
+Комментарий: в папках `api`, `hooks` и `utils` у файлов есть короткий верхний блок `// Назначение` и `// Как работает`. Это рабочая подсказка для разработчика, а не место для длинной документации.
 
 ## `src/lib/`
 
@@ -462,26 +489,30 @@ CMS находится в `src/app/(root)/(admin)/administrator/(cms)/cms/`.
 4. Если меняете повтор заказа, смотрите `useRepeatOrder.ts`, `usePriceComparison.ts`, компоненты `user-orders` и API заказов.
 5. Если меняете каталог или карточку товара, проверьте API товара, типы `src/types/product.ts`, общую карточку `ProductCard.tsx` и product page components.
 6. Если меняете CMS категории, проверьте `categoryStore.ts`, `cms/hooks/useCategories.ts`, `cms/categories/_components/*` и CMS API routes.
-7. Если добавляете новые изображения, проверьте, должны ли они лежать в `public/` как статичные ассеты или загружаться через существующий upload API.
-8. Если меняете SEO, проверьте `src/app/sitemap.ts`, `/api/sitemap-data`, `utils/getSitemapData.ts`, CMS `semantic-core` и site metadata helpers.
-9. Если включаете реальную SMS-отправку, раскомментируйте/обновите `sendOTP` в `src/lib/auth.ts` и проверьте `SMS_API_ID`.
-10. Если подключаете реальную оплату, не полагайтесь на текущий `FakePaymentModal`; нужна отдельная серверная валидация платежа и идемпотентность callbacks.
-11. Если добавляете уведомление, используйте `src/lib/showToast.ts`. Для фоновых async-действий предпочтителен `showPromiseToast()` с состояниями `pending`, `success`, `error`.
-12. Если меняете Excel-выгрузку, используйте `exceljs`. Пакет `xlsx` удален из зависимостей из-за advisory и отсутствия использования.
+7. Если меняете CMS статьи, проверяйте `cms/articles/editor`, `cms/articles/articlesManagement`, `cms/api/articles/*` и `processArticleImages.ts`.
+8. Если добавляете изображения в редактор статьи, временные файлы должны идти в `public/temp`, а после сохранения статьи - в `public/uploads/articles`.
+9. Если меняете публичный блог, проверяйте сразу `/blog`, `/blog/categories`, `/blog/[category]`, `/blog/[category]/[slug]` и CSS HTML-контента статьи.
+10. Если меняете SEO, проверьте `src/app/sitemap.ts`, `/api/sitemap-data`, `utils/getSitemapData.ts`, CMS `semantic-core` и site metadata helpers.
+11. Если включаете реальную SMS-отправку, раскомментируйте/обновите `sendOTP` в `src/lib/auth.ts` и проверьте `SMS_API_ID`.
+12. Если подключаете реальную оплату, не полагайтесь на текущий `FakePaymentModal`; нужна отдельная серверная валидация платежа и идемпотентность callbacks.
+13. Если добавляете уведомление, используйте `src/lib/showToast.ts`. Для фоновых async-действий предпочтителен `showPromiseToast()` с состояниями `pending`, `success`, `error`.
+14. Если меняете Excel-выгрузку, используйте `exceljs`. Пакет `xlsx` удален из зависимостей из-за advisory и отсутствия использования.
 
 ## Известные особенности
 
-| Особенность             | Комментарий                                                             |
-| ----------------------- | ----------------------------------------------------------------------- |
-| Две auth-системы        | Better Auth и кастомная phone+password сессия живут параллельно.        |
-| Временные email         | Для phone registration используется домен `@delivery-shop.ru`.          |
-| OTP в консоли           | SMS отправка отключена, код пишется в server console.                   |
-| Mock payment            | Оплата имитируется, реального платежного провайдера нет.                |
-| Admin/manager           | Обе роли видят админку, но бизнес-доступы могут различаться.            |
-| Mongo singleton         | Для API routes используется общий `MongoClient` через `getDB()`.        |
-| CMS активно развивается | В CMS есть новые компоненты фильтрации, сортировки и reorder категорий. |
-| Toast notifications     | Уведомления централизованы через React-Toastify и helpers в `src/lib/showToast.ts`. |
-| Excel export            | Выгрузка заказов работает через ExcelJS; зависимость `xlsx` не используется. |
+| Особенность             | Комментарий                                                                                                                         |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Две auth-системы        | Better Auth и кастомная phone+password сессия живут параллельно.                                                                    |
+| Временные email         | Для phone registration используется домен `@delivery-shop.ru`.                                                                      |
+| OTP в консоли           | SMS отправка отключена, код пишется в server console.                                                                               |
+| Mock payment            | Оплата имитируется, реального платежного провайдера нет.                                                                            |
+| Admin/manager           | Обе роли видят админку, но бизнес-доступы могут различаться.                                                                        |
+| Mongo singleton         | Для API routes используется общий `MongoClient` через `getDB()`.                                                                    |
+| CMS активно развивается | В CMS есть новые компоненты фильтрации, сортировки и reorder категорий.                                                             |
+| Blog route migration    | В проекте есть старый `(articles)` и новый `(blog)/blog`; перед удалением старого маршрута проверьте главную страницу и SEO-ссылки. |
+| Article image storage   | Временные изображения статей лежат в `public/temp`, постоянные - в `public/uploads/articles`.                                       |
+| Toast notifications     | Уведомления централизованы через React-Toastify и helpers в `src/lib/showToast.ts`.                                                 |
+| Excel export            | Выгрузка заказов работает через ExcelJS; зависимость `xlsx` не используется.                                                        |
 
 ## Проверка после изменений
 

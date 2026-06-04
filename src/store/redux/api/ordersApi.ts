@@ -1,5 +1,5 @@
-// Назначение: утилита ordersApi.
-// Как работает: Выносит повторяемое преобразование данных из компонентов в отдельную функцию.
+// Назначение: RTK Query API-срез ordersApi.
+// Как работает: Описывает клиентские запросы к API, кеширование и типизированные хуки для компонентов.
 
 import { OrdersResponse } from '@/types/reduxApi'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'

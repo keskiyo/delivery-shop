@@ -1,7 +1,7 @@
 'use client'
 
-// Назначение: состояние формы категории CMS.
-// Как работает: Инициализирует поля категории, обновляет значения и готовит payload для API.
+// Назначение: React-хук useCategoryFormState.
+// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
 
 import { showToast } from '@/lib/showToast'
 import { useCategoryStore } from '@/store/categoryStore'

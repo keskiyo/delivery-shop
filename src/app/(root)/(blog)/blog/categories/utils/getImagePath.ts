@@ -1,20 +1,23 @@
-// Назначение: путь изображения категории блога.
-// Как работает: Возвращает корректный URL или запасное изображение.
+// Назначение: утилита getImagePath.
+// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
 
 export function getImagePath(image: string): string {
-  if (!image || image.trim() === "") {
-    return "";
-  }
+	// 1. Пустой путь оставляем пустым, чтобы компонент мог показать fallback.
+	if (!image || image.trim() === '') {
+		return ''
+	}
 
-  let imagePath = image;
+	let imagePath = image
 
-  if (imagePath.startsWith("/")) {
-    imagePath = imagePath.substring(1);
-  }
+	// 2. Убираем ведущий slash, чтобы не получить двойной путь при сборке URL.
+	if (imagePath.startsWith('/')) {
+		imagePath = imagePath.substring(1)
+	}
 
-  if (!imagePath.startsWith("blogCategories/")) {
-    imagePath = `blogCategories/${imagePath}`;
-  }
+	// 3. Старые записи могут хранить только имя файла, поэтому добавляем папку категорий.
+	if (!imagePath.startsWith('blogCategories/')) {
+		imagePath = `blogCategories/${imagePath}`
+	}
 
-  return `/${imagePath}`;
+	return `/${imagePath}`
 }

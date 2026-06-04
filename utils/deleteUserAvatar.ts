@@ -1,5 +1,5 @@
-// Назначение: удаление аватара пользователя из GridFS.
-// Как работает: Ищет файл по metadata.userId и удаляет его из bucket avatars при удалении аккаунта.
+// Назначение: утилита deleteUserAvatar.
+// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
 
 import { getDB } from '@/lib/api-routes'
 import { GridFSBucket, ObjectId } from 'mongodb'

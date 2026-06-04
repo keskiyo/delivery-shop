@@ -1,5 +1,5 @@
-// Назначение: сортировка статей в менеджере CMS.
-// Как работает: Принимает новый порядок, отправляет его в API и обновляет локальный список.
+// Назначение: React-хук useArticlesReorder.
+// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
 
 import { useArticlesManagementStore } from "@/store/articlesManagementStore";
 import type { ApiResponse } from "../types";

@@ -25,10 +25,10 @@ const CategoryImage = ({
     <div
       className={`flex h-52 w-full items-center justify-center overflow-hidden rounded-md border border-border bg-linear-to-br shadow-(--shadow-default) sm:h-64 ${gradientColor}`}
     >
-      <div className="max-w-2xl px-6 text-center text-white">
+			<div className="max-w-2xl px-6 text-center text-primary-foreground">
         <h2 className="mb-3 text-2xl font-bold sm:text-3xl">{category.name}</h2>
         {category.description && (
-          <p className="text-base leading-7 text-white/90 sm:text-lg">
+					<p className="text-base leading-7 text-primary-foreground/90 sm:text-lg">
             {category.description}
           </p>
         )}

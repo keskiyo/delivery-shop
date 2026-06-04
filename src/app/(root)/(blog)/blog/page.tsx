@@ -48,7 +48,7 @@ export default async function BlogPage() {
 	const categories = await getCategories()
 
 	return (
-		<div className='min-h-screen py-8 px-4'>
+		<div className='min-h-screen px-4 py-8 text-foreground'>
 			<div className='container mx-auto'>
 				<PageHeader />
 				{categories.length === 0 ? (

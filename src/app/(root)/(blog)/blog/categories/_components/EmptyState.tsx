@@ -2,11 +2,11 @@ import { FolderX } from 'lucide-react'
 
 export default function EmptyState() {
 	return (
-		<div className='text-center py-16 bg-card rounded shadow-xl'>
-			<div className='w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center'>
-				<FolderX className='w-12 h-12' strokeWidth={1.5} />
+		<div className='rounded-md border border-border bg-card px-6 py-16 text-center shadow-(--shadow-default)'>
+			<div className='mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-surface-subtle text-muted-foreground'>
+				<FolderX className='h-12 w-12' strokeWidth={1.5} />
 			</div>
-			<h2 className='text-2xl font-semibold mb-2'>
+			<h2 className='mb-2 text-2xl font-semibold text-foreground'>
 				Категории не найдены
 			</h2>
 			<p className='text-muted-foreground'>
