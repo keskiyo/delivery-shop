@@ -4,65 +4,114 @@
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
+import {
+	getOptionalBoolean,
+	getOptionalString,
+	getRequiredString,
+	getStringArray,
+	isRecord,
+} from '../../../../../../../../../utils/apiValidation'
 import { sanitizeArticleHTML } from '../../../../../../../../../utils/sanitizeArticleHTML'
 import { processArticleImages } from '../../articles/utils/processArticleImages'
 
 export async function POST(request: Request) {
 	try {
-		const data = await request.json()
+		const data: unknown = await request.json()
 
-		if (!data.name?.trim()) {
+		if (!isRecord(data)) {
 			return NextResponse.json(
-				{ success: false, message: 'Название статьи обязательно' },
+				{ success: false, message: 'Некорректные данные статьи' },
 				{ status: 400 },
 			)
 		}
 
-		if (!data.slug?.trim()) {
+		const nameResult = getRequiredString(
+			data,
+			'name',
+			'Название статьи обязательно',
+		)
+		if (!nameResult.ok) {
 			return NextResponse.json(
-				{ success: false, message: 'Алиас (slug) статьи обязателен' },
+				{ success: false, message: nameResult.message },
 				{ status: 400 },
 			)
 		}
 
-		if (!data.author?.trim()) {
+		const slugResult = getRequiredString(
+			data,
+			'slug',
+			'Алиас (slug) статьи обязателен',
+		)
+		if (!slugResult.ok) {
 			return NextResponse.json(
-				{ success: false, message: 'Автор статьи обязателен' },
+				{ success: false, message: slugResult.message },
 				{ status: 400 },
 			)
 		}
 
-		if (!data.categoryId?.trim()) {
+		const authorResult = getRequiredString(
+			data,
+			'author',
+			'Автор статьи обязателен',
+		)
+		if (!authorResult.ok) {
 			return NextResponse.json(
-				{ success: false, message: 'Категория статьи обязательна' },
+				{ success: false, message: authorResult.message },
 				{ status: 400 },
 			)
 		}
 
-		const name = data.name.trim()
-		const slug = data.slug.trim().toLowerCase()
-		const description = data.description?.trim() || ''
-		const keywords = Array.isArray(data.keywords)
-			? data.keywords
-			: (data.keywords || '')
-					.split(',')
-					.map((k: string) => k.trim())
-					.filter(Boolean)
-		const image = data.image || ''
-		const imageAlt = data.imageAlt || name
-		const author = data.author.trim()
-		const categoryId = data.categoryId.trim()
-		const categoryName = data.categoryName?.trim() || ''
-		const categorySlug = data.categorySlug?.trim() || ''
-		const isFeatured = data.isFeatured || false
-		const status = data.status || 'draft'
+		const categoryIdResult = getRequiredString(
+			data,
+			'categoryId',
+			'Категория статьи обязательна',
+		)
+		if (!categoryIdResult.ok) {
+			return NextResponse.json(
+				{ success: false, message: categoryIdResult.message },
+				{ status: 400 },
+			)
+		}
+
+		const name = nameResult.value
+		const slug = slugResult.value.toLowerCase()
+		const description = getOptionalString(data, 'description')
+		const keywords = getStringArray(data.keywords)
+		const image = getOptionalString(data, 'image')
+		const imageAlt = getOptionalString(data, 'imageAlt', name)
+		const author = authorResult.value
+		const categoryId = categoryIdResult.value
+		const categoryName = getOptionalString(data, 'categoryName')
+		const categorySlug = getOptionalString(data, 'categorySlug')
+		const isFeatured = getOptionalBoolean(data, 'isFeatured')
+		const statusValue = getOptionalString(data, 'status', 'draft')
+		const status = ['published', 'draft', 'archived', 'deleted'].includes(
+			statusValue,
+		)
+			? statusValue
+			: 'draft'
+		const articleId = getOptionalString(data, '_id')
+
+		if (articleId && !ObjectId.isValid(articleId)) {
+			return NextResponse.json(
+				{ success: false, message: 'Неверный ID статьи' },
+				{ status: 400 },
+			)
+		}
+
+		if (!ObjectId.isValid(categoryId)) {
+			return NextResponse.json(
+				{ success: false, message: 'Неверный ID категории' },
+				{ status: 400 },
+			)
+		}
 
 		const db = await getDB()
 
 		const query: Record<string, unknown> = { slug }
 
-		if (data._id && data._id.trim()) {
-			query._id = { $ne: ObjectId.createFromHexString(data._id) }
+		if (articleId) {
+			query._id = { $ne: ObjectId.createFromHexString(articleId) }
 		}
 
 		const existingArticle = await db.collection('articles').findOne(query)
@@ -93,13 +142,15 @@ export async function POST(request: Request) {
 			}
 		}
 
-		const sanitizedContent = sanitizeArticleHTML(data.content || '')
+		const sanitizedContent = sanitizeArticleHTML(
+			getOptionalString(data, 'content'),
+		)
 
 		const finalContent = await processArticleImages(sanitizedContent)
 
-		if (data._id && data._id.trim()) {
+		if (articleId) {
 			try {
-				const objectId = ObjectId.createFromHexString(data._id)
+				const objectId = ObjectId.createFromHexString(articleId)
 
 				const updateData = {
 					name,

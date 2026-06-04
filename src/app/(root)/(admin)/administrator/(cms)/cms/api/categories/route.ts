@@ -11,6 +11,12 @@ import { buildSortObject } from '@/app/(root)/(admin)/administrator/(cms)/cms/ut
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
+import {
+	getOptionalString,
+	getRequiredString,
+	getStringArray,
+	isRecord,
+} from '../../../../../../../../../utils/apiValidation'
 
 export async function GET(request: Request) {
 	try {
@@ -81,27 +87,41 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
 	try {
-		const data: Category = await request.json()
+		const data: unknown = await request.json()
 
-		if (!data.name?.trim()) {
+		if (!isRecord(data)) {
 			return NextResponse.json(
-				{ success: false, message: 'Название категории обязательно' },
+				{ success: false, message: 'Некорректные данные категории' },
 				{ status: 400 },
 			)
 		}
 
-		if (!data.slug?.trim()) {
+		const nameResult = getRequiredString(
+			data,
+			'name',
+			'Название категории обязательно',
+		)
+		if (!nameResult.ok) {
 			return NextResponse.json(
-				{
-					success: false,
-					message: 'Алиас (slug) категории обязателен',
-				},
+				{ success: false, message: nameResult.message },
 				{ status: 400 },
 			)
 		}
 
-		const name = data.name.trim()
-		const slug = data.slug.trim().toLowerCase()
+		const slugResult = getRequiredString(
+			data,
+			'slug',
+			'Алиас (slug) категории обязателен',
+		)
+		if (!slugResult.ok) {
+			return NextResponse.json(
+				{ success: false, message: slugResult.message },
+				{ status: 400 },
+			)
+		}
+
+		const name = nameResult.value
+		const slug = slugResult.value.toLowerCase()
 
 		const db = await getDB()
 
@@ -147,11 +167,11 @@ export async function POST(request: Request) {
 			numericId: newNumericId,
 			name,
 			slug,
-			description: data.description?.trim() || '',
-			keywords: data.keywords || [],
-			image: data.image || '',
-			imageAlt: data.imageAlt || name,
-			author: data.author || 'Неизвестен',
+			description: getOptionalString(data, 'description'),
+			keywords: getStringArray(data.keywords),
+			image: getOptionalString(data, 'image'),
+			imageAlt: getOptionalString(data, 'imageAlt', name),
+			author: getOptionalString(data, 'author', 'Неизвестен'),
 			createdAt: new Date().toISOString(),
 			updatedAt: new Date().toISOString(),
 		}

@@ -4,6 +4,12 @@
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
+import {
+	getOptionalString,
+	getRequiredString,
+	getStringArray,
+	isRecord,
+} from '../../../../../../../../../../utils/apiValidation'
 
 export async function PUT(
 	request: Request,
@@ -13,7 +19,7 @@ export async function PUT(
 		const db = await getDB()
 		const { id } = await params
 
-		const rawData = await request.json()
+		const rawData: unknown = await request.json()
 
 		if (!ObjectId.isValid(id)) {
 			return NextResponse.json(
@@ -22,26 +28,44 @@ export async function PUT(
 			)
 		}
 
-		if (!rawData.name?.trim()) {
+		if (!isRecord(rawData)) {
 			return NextResponse.json(
-				{ success: false, message: 'Название категории обязательно' },
+				{ success: false, message: 'Некорректные данные категории' },
 				{ status: 400 },
 			)
 		}
 
-		if (!rawData.slug?.trim()) {
+		const nameResult = getRequiredString(
+			rawData,
+			'name',
+			'Название категории обязательно',
+		)
+		if (!nameResult.ok) {
 			return NextResponse.json(
-				{
-					success: false,
-					message: 'Алиас (slug) категории обязателен',
-				},
+				{ success: false, message: nameResult.message },
 				{ status: 400 },
 			)
 		}
 
-		const name = rawData.name.trim()
-		const slug = rawData.slug.trim().toLowerCase()
+		const slugResult = getRequiredString(
+			rawData,
+			'slug',
+			'Алиас (slug) категории обязателен',
+		)
+		if (!slugResult.ok) {
+			return NextResponse.json(
+				{ success: false, message: slugResult.message },
+				{ status: 400 },
+			)
+		}
+
+		const name = nameResult.value
+		const slug = slugResult.value.toLowerCase()
 		const categoryId = new ObjectId(id)
+
+		const description = getOptionalString(rawData, 'description')
+		const image = getOptionalString(rawData, 'image')
+		const imageAlt = getOptionalString(rawData, 'imageAlt')
 
 		const existingCategory = await db
 			.collection('article-category')
@@ -60,37 +84,14 @@ export async function PUT(
 			)
 		}
 
-		const processKeywords = (keywords: unknown): string[] => {
-			if (!keywords) return []
-
-			if (Array.isArray(keywords)) {
-				return keywords
-					.map(k =>
-						typeof k === 'string' ? k.trim() : String(k).trim(),
-					)
-					.filter(k => k.length > 0)
-			}
-
-			return []
-		}
-
 		const updateFields = {
 			name,
 			slug,
+			description,
+			keywords: getStringArray(rawData.keywords),
+			image,
+			imageAlt,
 			updatedAt: new Date().toISOString(),
-
-			...(rawData.description !== undefined && {
-				description: rawData.description.trim(),
-			}),
-			...(rawData.keywords !== undefined && {
-				keywords: processKeywords(rawData.keywords),
-			}),
-			...(rawData.image !== undefined && {
-				image: rawData.image,
-			}),
-			...(rawData.imageAlt !== undefined && {
-				imageAlt: rawData.imageAlt,
-			}),
 		}
 
 		const updateFilter = {
