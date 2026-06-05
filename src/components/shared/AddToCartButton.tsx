@@ -173,7 +173,7 @@ const AddToCartButton = ({
 					disabled={
 						isLoading || hasReachedMaxQuantity || isOutOfStock
 					}
-					className={`absolute border bottom-2 left-2 right-2 h-10 rounded justify-center items-center duration-300 select-none ${
+					className={`absolute bottom-2 left-2 right-2 flex h-10 items-center justify-center rounded border duration-300 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 ${
 						isOutOfStock || hasReachedMaxQuantity
 							? 'bg-muted text-white border-muted cursor-not-allowed'
 							: 'border-brand text-brand hover:text-white hover:bg-brand hover:border-transparent active:shadow-button-active cursor-pointer'

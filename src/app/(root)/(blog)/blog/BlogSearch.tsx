@@ -97,11 +97,11 @@ export default function BlogSearch() {
 							disabled={
 								isSearching || searchTerm.trim().length < 3
 							}
-							className='flex cursor-pointer items-center gap-2 rounded bg-brand px-6 py-3 text-brand-foreground duration-300 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50'
+							className='flex cursor-pointer items-center gap-2 rounded bg-brand px-6 py-3 text-white duration-300 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50'
 						>
 							{isSearching ? (
 								<>
-									<div className='h-5 w-5 animate-spin rounded-full border-2 border-brand-foreground border-t-transparent' />
+									<div className='h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent' />
 									<span>Поиск...</span>
 								</>
 							) : (

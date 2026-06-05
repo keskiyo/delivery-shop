@@ -12,12 +12,13 @@ const Header = () => {
 				<div className='flex flex-row gap-4 xl:gap-10 items-center w-full lg:w-auto grow px-2'>
 					<Link
 						href='/'
-						className='flex flex-row gap-3 items-center cursor-pointer shrink-0'
+						className='flex shrink-0 flex-row items-center gap-3 rounded cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40'
+						aria-label='На главную страницу'
 					>
 						<div className='relative w-16 h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24'>
 							<Image
 								src='/web-app-manifest-192x192.png'
-								alt='logo'
+								alt='Фудмаркет'
 								fill
 								sizes='96px'
 								loading='eager'

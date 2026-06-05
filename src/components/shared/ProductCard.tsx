@@ -19,6 +19,7 @@ const cardDiscountPercent = CONFIG.CARD_DISCOUNT_PERCENT
 const ProductCard = ({
 	id,
 	img,
+	title,
 	description,
 	basePrice,
 	discountPercent = 0,
@@ -47,10 +48,11 @@ const ProductCard = ({
 	const productUrl = `/catalog/${encodeURIComponent(mainCategory)}/${productId}`
 
 	const isPriorityImage = index < 4
+	const productTitle = title?.trim() || description?.trim() || 'Товар'
 
 	return (
 		<div
-			className={`relative flex flex-col justify-between w-40 rounded overflow-hidden bg-card md:w-56 xl:w-68 ${isAdminOrderPage ? 'h-auto' : 'h-87.25'} align-top p-0 hover:shadow-article duration-300`}
+			className={`relative flex w-40 flex-col justify-between overflow-hidden rounded bg-card align-top duration-300 hover:shadow-article md:w-56 xl:w-68 ${isAdminOrderPage ? 'h-auto' : 'min-h-87.25'} p-0`}
 		>
 			{orderQuantity && (
 				<div className='absolute top-2 left-2 flex items-center p-1 bg-surface/90 rounded justify-center gap-1 text-lg font-bold z-10 text-text-soft'>
@@ -61,7 +63,7 @@ const ProductCard = ({
 
 			{(isLowStock || insufficientStock) && (
 				<div
-					className={`absolute top-3 left-1/2 transform -translate-x-1/2 p-1 rounded text-[8px] md:px-2 md:text-xs z-10 ${
+					className={`absolute top-3 left-1/2 transform -translate-x-1/2 p-1 rounded text-[10px] md:px-2 md:text-xs z-10 ${
 						insufficientStock
 							? 'bg-danger text-white'
 							: 'bg-promo text-white'
@@ -75,11 +77,15 @@ const ProductCard = ({
 			{!isAdminOrderPage && (
 				<FavoriteButton productId={productId.toString()} />
 			)}
-			<Link href={productUrl}>
+			<Link
+				href={productUrl}
+				className='block rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40'
+				aria-label={`Открыть товар ${productTitle}`}
+			>
 				<div className='w-40 h-40 md:w-56 xl:w-68 aspect-square relative bg-white'>
 					<Image
 						src={img}
-						alt='Товар'
+						alt={productTitle}
 						fill
 						className='object-contain p-2'
 						priority={isPriorityImage}
@@ -96,7 +102,7 @@ const ProductCard = ({
 				</div>
 
 				<div
-					className={`flex flex-col p-2 bg-card ${isAdminOrderPage ? 'h-auto' : 'h-47.25'} `}
+					className={`flex flex-col bg-card p-2 ${isAdminOrderPage ? 'h-auto' : 'min-h-47.25'} `}
 				>
 					{!isAdminOrderPage && (
 						<div className='flex flex-row justify-between items-start h-11.25'>
@@ -106,7 +112,7 @@ const ProductCard = ({
 									<span>₽</span>
 								</div>
 								{showTwoPrices && (
-									<p className='text-muted-foreground text-[8px] md:text-xs'>
+									<p className='text-muted-foreground text-[10px] md:text-xs'>
 										С картой
 									</p>
 								)}
@@ -117,7 +123,7 @@ const ProductCard = ({
 										<span>{formatPrice(finalPrice)}</span>
 										<span>₽</span>
 									</div>
-									<p className='text-muted-foreground text-[8px] md:text-xs text-right'>
+									<p className='text-muted-foreground text-[10px] md:text-xs text-right'>
 										Обычная
 									</p>
 								</div>
@@ -129,8 +135,13 @@ const ProductCard = ({
 							{TRANSLATIONS[categories[0]]}
 						</div>
 					)}
-					<div className='h-13.5 text-xs md:text-base line-clamp-3 md:line-clamp-2 leading-normal'>
-						{description}
+					<div
+						className='min-h-13.5 text-xs leading-normal md:text-base'
+						title={productTitle}
+					>
+						<span className='line-clamp-3 md:line-clamp-2'>
+							{description}
+						</span>
 					</div>
 					{!isAdminOrderPage && (
 						<StarRating rating={rating?.rate || 5.0} />

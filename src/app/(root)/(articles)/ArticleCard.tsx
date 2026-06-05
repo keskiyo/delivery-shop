@@ -31,7 +31,11 @@ const ArticleCard = ({
 		: ''
 
 	return (
-		<Link href={articleUrl} className='block h-full'>
+		<Link
+			href={articleUrl}
+			className='block h-full rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40'
+			aria-label={`Открыть статью ${articleTitle}`}
+		>
 			<article className='group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card shadow-(--shadow-default) transition duration-300 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-(--shadow-article)'>
 				<div className='relative h-48 w-full overflow-hidden bg-surface-subtle'>
 					{image ? (
@@ -78,7 +82,7 @@ const ArticleCard = ({
 					</p>
 
 					<div className='mt-auto'>
-						<div className='w-full rounded bg-brand-soft py-2 text-center text-sm font-medium text-brand transition duration-300 group-hover:bg-brand group-hover:text-brand-foreground'>
+						<div className='w-full rounded bg-brand-soft py-2 text-center text-sm font-medium text-brand transition duration-300 group-hover:bg-brand group-hover:text-white'>
 							Подробнее
 						</div>
 					</div>

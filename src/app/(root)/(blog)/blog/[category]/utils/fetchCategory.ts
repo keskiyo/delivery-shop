@@ -13,7 +13,7 @@ export async function fetchCategoryPageData(
 	try {
 		// 1. Получаем категорию, статьи и пагинацию одним API-запросом.
 		const response = await fetch(
-			`${baseUrl}/api/blog/${encodeURIComponent(categorySlug)}?page=${page}&itemsPerPage=${itemsPerPage}`,
+			`${baseUrl}/api/blog/category/${encodeURIComponent(categorySlug)}?page=${page}&itemsPerPage=${itemsPerPage}`,
 			{
 				next: {
 					revalidate: 3600,

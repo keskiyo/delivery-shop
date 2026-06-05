@@ -26,7 +26,7 @@ export default function Home() {
 					},
 					{
 						component: <SpecialOffers />,
-						text: 'специальных приложений',
+						text: 'специальных предложений',
 					},
 					{ component: <Maps />, text: 'карты' },
 					{ component: <Articles />, text: 'статей' },

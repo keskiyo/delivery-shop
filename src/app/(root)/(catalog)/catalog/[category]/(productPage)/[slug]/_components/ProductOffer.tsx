@@ -14,7 +14,7 @@ const ProductOffer = ({ discountedPrice, cardPrice }: ProductOfferProps) => {
 				<p className='text-xl md:text-lg xl:text-2xl mb-1.5'>
 					{formatPrice(discountedPrice)} ₽
 				</p>
-				<p className='text-muted-foreground text-[8px] md:text-xs'>
+				<p className='text-muted-foreground text-[10px] md:text-xs'>
 					Обычная цена
 				</p>
 			</div>
@@ -24,7 +24,7 @@ const ProductOffer = ({ discountedPrice, cardPrice }: ProductOfferProps) => {
 					{formatPrice(cardPrice)} ₽
 				</p>
 				<div className='flex flex-row gap-x-1 items-center relative'>
-					<p className='text-muted-foreground text-[8px] md:text-xs'>
+					<p className='text-muted-foreground text-[10px] md:text-xs'>
 						С картой Фудмаркет
 					</p>
 					<div className='group relative cursor-help'>

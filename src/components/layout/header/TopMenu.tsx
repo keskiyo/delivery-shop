@@ -35,11 +35,11 @@ const TopMenu = () => {
 	}, [user, isManagerOrAdmin, fetchCart])
 
 	return (
-		<ul className='flex flex-row gap-x-6 items-end'>
+		<ul className='flex flex-row items-end gap-x-5 sm:gap-x-6'>
 			<li>
 				<Link
 					href='/catalog'
-					className='flex flex-col items-center gap-2 lg:hidden w-11'
+					className='flex w-12 flex-col items-center gap-1.5 rounded px-1 py-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 lg:hidden'
 				>
 					<IconMenuMob isCatalogPage={isCatalogPage} />
 					<span
@@ -58,7 +58,7 @@ const TopMenu = () => {
 				<li>
 					<Link
 						href='/favorites'
-						className='flex flex-col items-center gap-2 w-11'
+						className='flex w-12 flex-col items-center gap-1.5 rounded px-1 py-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40'
 					>
 						<IconHeart
 							isActive={isFavoritesPage}
@@ -80,7 +80,7 @@ const TopMenu = () => {
 			<li>
 				<Link
 					href={ordersLink}
-					className='flex flex-col items-center w-11'
+					className='flex w-12 flex-col items-center gap-1.5 rounded px-1 py-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40'
 				>
 					<IconBox isActive={isOrderPage} />
 					<span
@@ -99,7 +99,7 @@ const TopMenu = () => {
 				<li className='relative'>
 					<Link
 						href='/cart'
-						className='flex flex-col items-center gap-2 w-11'
+						className='flex w-12 flex-col items-center gap-1.5 rounded px-1 py-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40'
 					>
 						<IconCart isActive={isCartPage} />
 

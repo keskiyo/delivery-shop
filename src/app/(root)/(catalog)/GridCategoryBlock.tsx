@@ -11,7 +11,7 @@ const GridCategoryBlock = ({
 	return (
 		<Link
 			href={`/catalog/${slug}`}
-			className='block relative h-full overflow-hidden group min-w-40 md:min-w-56 xl:min-w-68.5'
+			className='group relative block h-full min-w-40 overflow-hidden rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/50 md:min-w-56 xl:min-w-68.5'
 		>
 			<Image
 				src={img}

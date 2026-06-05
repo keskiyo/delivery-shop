@@ -102,7 +102,7 @@ const Calendar = ({
 					}}
 					modifiersStyles={{
 						selected: {
-							color: 'var(--promo-foreground)',
+							color: '#fff',
 							backgroundColor: 'var(--promo)',
 							border: 'none',
 						},

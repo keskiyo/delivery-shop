@@ -12,7 +12,7 @@ export default function SidebarHeader({
 		<div className='sticky top-0 z-10 border-b border-border bg-card p-6'>
 			<div className='mb-6 flex items-center justify-between'>
 				<div className='flex items-center gap-3'>
-					<div className='rounded-md bg-brand p-2 text-brand-foreground'>
+					<div className='rounded-md bg-brand p-2 text-white'>
 						<Folder className='h-6 w-6' />
 					</div>
 					<div>

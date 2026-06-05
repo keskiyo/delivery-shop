@@ -11,10 +11,39 @@ const createDOMPurify = () => {
 
 const purify = createDOMPurify()
 
+export function stripArticleBackgroundStyles(html: string): string {
+	if (!html) return ''
+
+	const dom = new JSDOM(`<body>${html}</body>`)
+	const { document } = dom.window
+
+	document.querySelectorAll<HTMLElement>('[style]').forEach(element => {
+		const safeStyles = element
+			.getAttribute('style')!
+			.split(';')
+			.map(rule => rule.trim())
+			.filter(Boolean)
+			.filter(rule => {
+				const property = rule.split(':')[0]?.trim().toLowerCase()
+				return property !== 'background' && property !== 'background-color'
+			})
+
+		if (safeStyles.length > 0) {
+			element.setAttribute('style', safeStyles.join('; '))
+		} else {
+			element.removeAttribute('style')
+		}
+	})
+
+	return document.body.innerHTML
+}
+
 export function sanitizeArticleHTML(html: string): string {
 	if (!html) return ''
 
-	return purify.sanitize(html, {
+	const htmlWithoutBackground = stripArticleBackgroundStyles(html)
+
+	return purify.sanitize(htmlWithoutBackground, {
 		ALLOWED_TAGS: [
 			'p',
 			'br',

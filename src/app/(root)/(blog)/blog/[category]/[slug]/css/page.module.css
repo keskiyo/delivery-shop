@@ -1,8 +1,9 @@
 .content {
-  max-width: 900px;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.7;
   color: var(--foreground);
   margin-bottom: 3rem;
 }
@@ -51,7 +52,7 @@
 
 .content p {
   margin-bottom: 1.2rem;
-  line-height: 1.5;
+  line-height: 1.7;
 }
 
 .content ul {
@@ -69,6 +70,7 @@
 .content li {
   list-style-position: inside;
   margin-bottom: 0.9rem;
+  line-height: 1.65;
   display: list-item;
 }
 

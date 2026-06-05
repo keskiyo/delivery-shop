@@ -28,7 +28,7 @@ export async function fetchArticlePageData(
 	try {
 		// 2. Загружаем статью и передаем роль query-параметром для серверной проверки доступа.
 		const response = await fetch(
-			`${baseUrl}/api/blog/${categorySlug}/${articleSlug}?role=${currentUserRole}`,
+			`${baseUrl}/api/blog/category/${categorySlug}/${articleSlug}?role=${currentUserRole}`,
 			{
 				next: { revalidate: 3600 },
 			},

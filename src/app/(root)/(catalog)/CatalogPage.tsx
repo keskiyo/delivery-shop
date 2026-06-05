@@ -187,9 +187,16 @@ const CatalogPage = () => {
 					resetLayout={resetLayout}
 				/>
 			)}
-			<h1 className='mb-4 md:mb-8 xl:mb-10 flex flex-row text-4xl mb:text-5xl xl:text-[64px] font-bold'>
-				Каталог
-			</h1>
+			<div className='mb-6 md:mb-8 xl:mb-10'>
+				<h1 className='mb-2 flex flex-row text-4xl font-bold mb:text-5xl xl:text-[64px]'>
+					Каталог
+				</h1>
+				<p className='max-w-2xl text-sm leading-6 text-muted-foreground md:text-base'>
+					{categories.length > 0
+						? `${categories.length} разделов для быстрого выбора продуктов и товаров на каждый день.`
+						: 'Разделы каталога появятся после загрузки.'}
+				</p>
+			</div>
 			<CatalogGrid
 				categories={categories}
 				isEditing={isEditing}

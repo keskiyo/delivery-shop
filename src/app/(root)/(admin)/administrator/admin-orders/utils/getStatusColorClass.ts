@@ -46,15 +46,15 @@ export const getStatusIconColorClass = (statusLabel: string): string => {
 		case 'Новый':
 			return 'bg-muted text-foreground'
 		case 'Собран':
-			return 'bg-brand text-brand-foreground'
+			return 'bg-brand text-white'
 		case 'Доставляется':
 			return 'bg-sky-500 text-white'
 		case 'Подтвержден':
-			return 'bg-success text-success-foreground'
+			return 'bg-success text-white'
 		case 'Не подтвердили':
-			return 'bg-warning text-warning-foreground'
+			return 'bg-warning text-white'
 		case 'Возврат':
-			return 'bg-danger text-danger-foreground'
+			return 'bg-danger text-white'
 		case 'Вернули':
 			return 'bg-purple-500 text-white'
 		default:
