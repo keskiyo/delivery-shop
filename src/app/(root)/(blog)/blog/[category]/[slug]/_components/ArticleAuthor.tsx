@@ -4,7 +4,7 @@ const ArticleAuthor = ({ author }: { author: string }) => {
 	}
 
 	return (
-		<div className='mt-35 border-t border-border pt-6 text-muted-foreground'>
+		<div className='mt-40 border-t border-border pt-6 text-muted-foreground'>
 			<span className='italic'>Автор: {author}</span>
 		</div>
 	)

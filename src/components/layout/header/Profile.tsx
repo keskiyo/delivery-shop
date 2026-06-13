@@ -121,7 +121,7 @@ const Profile = () => {
 
 	if (!isAuth) {
 		return (
-			<>
+			<div className='flex items-center gap-3'>
 				<Link
 					href='/login'
 					className='w-10 xl:w-30 flex justify-between items-center gap-x-2 p-2 rounded text-white text-base bg-promo hover:bg-promo-hover hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) duration-300 cursor-pointer'
@@ -131,8 +131,8 @@ const Profile = () => {
 					</div>
 					<LogIn size={24} />
 				</Link>
-				<ThemeToggle />
-			</>
+				<ThemeToggle className='hidden lg:flex' />
+			</div>
 		)
 	}
 
@@ -189,7 +189,9 @@ const Profile = () => {
 							Панель управления
 						</Link>
 					)}
-					<ThemeToggle />
+					<div className='hidden w-full justify-center border-t border-site-chrome-muted/30 px-3 py-3 lg:flex'>
+						<ThemeToggle />
+					</div>
 					<button
 						onClick={handleLogout}
 						disabled={isLoggingOut}

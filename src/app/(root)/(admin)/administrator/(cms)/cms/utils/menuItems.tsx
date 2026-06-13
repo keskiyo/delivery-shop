@@ -26,7 +26,7 @@ export const menuItems = [
 		description: 'Просмотр и управление статьями',
 		icon: <FileText className='w-6 h-6' />,
 		shadow: 'shadow-lg shadow-indigo-500/20',
-		path: '/administrator/cms/all-articles',
+		path: '/administrator/cms/articles/articlesManagement',
 	},
 	{
 		id: 'categories',

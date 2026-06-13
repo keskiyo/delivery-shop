@@ -1,4 +1,5 @@
 
+import { ThemeToggle } from '@/components/ui/theme/ThemeToggle'
 import Profile from './Profile'
 import TopMenu from './TopMenu'
 
@@ -9,6 +10,7 @@ const UserBlock = () => {
 				<TopMenu />
 
 				<div className='flex items-center gap-3 shrink-0'>
+					<ThemeToggle variant='mobileDropdown' />
 					<Profile />
 				</div>
 			</div>

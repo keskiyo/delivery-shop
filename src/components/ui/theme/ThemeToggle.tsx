@@ -1,89 +1,142 @@
 'use client'
 
+import { Monitor, Moon, Sun, type LucideIcon } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { ThemeMode, useTheme } from './ThemeProvider'
 
-import { useTheme } from './ThemeProvider'
+const THEME_OPTIONS: Array<{
+	mode: ThemeMode
+	label: string
+	icon: LucideIcon
+}> = [
+	{ mode: 'dark', label: 'Темная тема', icon: Moon },
+	{ mode: 'light', label: 'Светлая тема', icon: Sun },
+	{ mode: 'system', label: 'Как в системе', icon: Monitor },
+]
 
-export function ThemeToggle() {
-	const { theme, toggleTheme } = useTheme()
+interface ThemeToggleProps {
+	variant?: 'inline' | 'mobileDropdown'
+	className?: string
+}
 
-	const thumbPosition = theme === 'dark' ? 24 : 0
-
-	const moonOpacity = theme === 'dark' ? 1 : 0
-	const sunOpacity = theme === 'dark' ? 0 : 1
-
-	const title = theme === 'light' ? 'Светлая тема' : 'Тёмная тема'
-
-	const thumbBgClass =
-		theme === 'dark'
-			? 'bg-site-chrome text-site-chrome-foreground'
-			: 'bg-card text-promo'
-	const trackBgClass =
-		theme === 'dark' ? 'bg-surface-pressed' : 'bg-surface-hover'
-
+function ThemeOptionButton({
+	mode,
+	label,
+	icon: Icon,
+	isActive,
+	onClick,
+}: {
+	mode: ThemeMode
+	label: string
+	icon: LucideIcon
+	isActive: boolean
+	onClick: (mode: ThemeMode) => void
+}) {
 	return (
 		<button
-			onClick={toggleTheme}
-			className='p-2 text-site-chrome-muted hover:text-site-chrome-hover cursor-pointer transition-colors'
-			aria-label={title}
-			title={title}
+			type='button'
+			onClick={() => onClick(mode)}
+			className={`flex size-8 cursor-pointer items-center justify-center rounded-full transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 ${
+				isActive
+					? 'bg-white/15 text-white shadow-inner'
+					: 'text-white/45 hover:bg-white/10 hover:text-white'
+			}`}
+			aria-label={label}
+			aria-pressed={isActive}
+			title={label}
 		>
-			{/* Track (container) - h-8 и ширина w-14 */}
-			<div
-				className={`relative w-14 h-8 rounded-full overflow-hidden transition-colors duration-300 ${trackBgClass}`}
-			>
-				{/* Thumb - w-6 h-6 (24px), чтобы иконки были крупнее */}
-				<div
-					className={`absolute top-1 left-1 w-6 h-6 rounded-full transition-transform duration-300 flex items-center justify-center ${thumbBgClass}`}
-					style={{ transform: `translateX(${thumbPosition}px)` }}
-				>
-					{/* Moon icon - Размер w-5 h-5 (20px) и толще линии (strokeWidth="2.5") */}
-					{theme === 'dark' ? (
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							viewBox='0 0 24 24'
-							fill='none'
-							stroke='currentColor'
-							strokeWidth='2.5'
-							strokeLinecap='round'
-							strokeLinejoin='round'
-							className='w-5 h-5 m-1'
-							style={{
-								opacity: moonOpacity,
-								transition: 'opacity 0.3s ease',
-								transform: 'translateX(-1px)',
-							}}
-						>
-							<path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z' />
-						</svg>
-					) : (
+			<Icon className='size-4.5' strokeWidth={1.8} />
+		</button>
+	)
+}
 
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							viewBox='0 0 24 24'
-							fill='none'
-							stroke='currentColor'
-							strokeWidth='2.5'
-							strokeLinecap='round'
-							strokeLinejoin='round'
-							className='w-5 h-5 m-1'
-							style={{
-								opacity: sunOpacity,
-								transition: 'opacity 0.3s ease',
+export function ThemeToggle({
+	variant = 'inline',
+	className = '',
+}: ThemeToggleProps) {
+	const { theme, setTheme, mounted } = useTheme()
+	const [isOpen, setIsOpen] = useState(false)
+	const dropdownRef = useRef<HTMLDivElement>(null)
+
+	useEffect(() => {
+		if (!isOpen) return
+
+		const handleClickOutside = (event: MouseEvent) => {
+			if (
+				dropdownRef.current &&
+				!dropdownRef.current.contains(event.target as Node)
+			) {
+				setIsOpen(false)
+			}
+		}
+
+		document.addEventListener('mousedown', handleClickOutside)
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside)
+		}
+	}, [isOpen])
+
+	if (!mounted) return null
+
+	const activeOption =
+		THEME_OPTIONS.find(option => option.mode === theme) ?? THEME_OPTIONS[0]
+	const ActiveIcon = activeOption.icon
+
+	if (variant === 'mobileDropdown') {
+		return (
+			<div
+				ref={dropdownRef}
+				className={`relative lg:hidden ${className}`}
+			>
+				<button
+					type='button'
+					onClick={() => setIsOpen(prev => !prev)}
+					className='flex size-10 cursor-pointer items-center justify-center rounded-full border border-site-chrome-muted/30 bg-site-chrome-muted/15 text-site-chrome-foreground transition duration-200 hover:bg-site-chrome-muted/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40'
+					aria-label='Переключение темы'
+					aria-expanded={isOpen}
+					title='Переключение темы'
+				>
+					<ActiveIcon className='size-5' strokeWidth={1.8} />
+				</button>
+
+				<div
+					className={`absolute bottom-full right-0 mb-3 flex w-11 flex-col items-center gap-1.5 rounded-full border border-white/10 bg-[#1b1913] p-1.5 shadow-lg shadow-black/25 backdrop-blur transition duration-200 ${
+						isOpen
+							? 'translate-y-0 opacity-100'
+							: 'pointer-events-none translate-y-2 opacity-0'
+					}`}
+					aria-label='Переключение темы'
+				>
+					{THEME_OPTIONS.map(option => (
+						<ThemeOptionButton
+							key={option.mode}
+							{...option}
+							isActive={theme === option.mode}
+							onClick={mode => {
+								setTheme(mode)
+								setIsOpen(false)
 							}}
-						>
-							<circle cx='12' cy='12' r='4' />
-							<path d='M12 2v2' />
-							<path d='M12 20v2' />
-							<path d='m4.93 4.93 1.41 1.41' />
-							<path d='m17.66 17.66 1.41 1.41' />
-							<path d='M2 12h2' />
-							<path d='M20 12h2' />
-							<path d='m6.34 17.66-1.41 1.41' />
-							<path d='m19.07 4.93-1.41 1.41' />
-						</svg>
-					)}
+						/>
+					))}
 				</div>
 			</div>
-		</button>
+		)
+	}
+
+	return (
+		<div
+			className={`flex items-center gap-1.5 rounded-full border border-white/10 bg-[#1b1913] p-1.5 shadow-lg shadow-black/20 ${className}`}
+			aria-label='Переключение темы'
+		>
+			{THEME_OPTIONS.map(option => (
+				<ThemeOptionButton
+					key={option.mode}
+					{...option}
+					isActive={theme === option.mode}
+					onClick={setTheme}
+				/>
+			))}
+		</div>
 	)
 }

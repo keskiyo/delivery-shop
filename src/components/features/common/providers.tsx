@@ -9,7 +9,9 @@ import { ToastContainer } from 'react-toastify'
 export const Providers: React.FC<React.PropsWithChildren> = ({ children }) => {
 	return (
 		<>
-			<ThemeProvider>{children}</ThemeProvider>
+			<ThemeProvider>
+				{children}
+			</ThemeProvider>
 			<ToastContainer
 				position='top-center'
 				autoClose={5000}

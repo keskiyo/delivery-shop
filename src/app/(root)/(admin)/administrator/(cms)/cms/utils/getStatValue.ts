@@ -5,6 +5,8 @@ export const getStatValue = (
 	statTitle: string,
 	categoriesCount: string,
 	keywordsCount: string,
+	publishedCount: string,
+	viewsCount: string,
 ) => {
 	switch (statTitle) {
 		case 'Категорий':
@@ -12,9 +14,9 @@ export const getStatValue = (
 		case 'Ключевых слов':
 			return keywordsCount
 		case 'Опубликовано':
-			return '0'
+			return publishedCount
 		case 'Просмотров':
-			return '0'
+			return viewsCount
 		default:
 			return '0'
 	}

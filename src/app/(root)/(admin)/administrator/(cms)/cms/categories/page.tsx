@@ -289,7 +289,6 @@ const CategoriesPage = () => {
 					error: 'Ошибка обновления порядка',
 				},
 			)
-
 		} catch (error) {
 			console.error('Ошибка:', error)
 		} finally {
@@ -336,7 +335,7 @@ const CategoriesPage = () => {
 				onEdit={startEdit}
 				onReorder={handleReorder}
 			/>
-			{totalPages > 1 && <Pagination />}
+			{totalPages > 1 && <Pagination type='categories' />}
 			<SEORecommendations recommendations={categorySeoRecommendations} />
 		</div>
 	)

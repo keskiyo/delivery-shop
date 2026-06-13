@@ -177,7 +177,6 @@ const EditorPage = () => {
 			console.error('Неожиданная ошибка:', error)
 		} finally {
 			setIsSubmitting(false)
-			window.scroll({ top: 0, behavior: 'smooth' })
 		}
 	}
 

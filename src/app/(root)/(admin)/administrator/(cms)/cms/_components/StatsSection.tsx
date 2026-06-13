@@ -7,14 +7,19 @@ import { useCategoryStore } from '@/store/categoryStore'
 import { stats } from '../utils/stats'
 
 export const StatsSection = () => {
-	const { categoriesCount, keywordsCount } = useStatsValues()
+	const {
+		categoriesCount,
+		keywordsCount,
+		publishedCount,
+		viewsCount,
+		loading,
+	} = useStatsValues()
 	const { loading: settingsLoading } = useSiteSettings()
 	const { loading: categoriesLoading } = useCategoryStore()
 
-	const loading = settingsLoading || categoriesLoading
-	console.log('Кол-во categoriesCount: ', categoriesCount)
+	const isLoading = settingsLoading || categoriesLoading || loading
 
-	if (loading) return <StatsSkeleton />
+	if (isLoading) return <StatsSkeleton />
 	return (
 		<div className='bg-card rounded-xl shadow-md border border-border p-6'>
 			<h2 className='text-xl font-semibold mb-6'>Общая статистика</h2>
@@ -27,6 +32,8 @@ export const StatsSection = () => {
 							stat.title,
 							categoriesCount.toString(),
 							keywordsCount.toString(),
+							publishedCount.toString(),
+							viewsCount.toString(),
 						)}
 					/>
 				))}
