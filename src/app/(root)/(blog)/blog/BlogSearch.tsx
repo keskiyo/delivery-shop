@@ -78,7 +78,7 @@ export default function BlogSearch() {
 									setError('')
 								}}
 								placeholder='Название или описание статьи'
-								className='w-full rounded border border-border bg-input py-3 pl-10 pr-10 text-foreground outline-none transition placeholder:text-muted-foreground focus:border-brand focus:ring-2 focus:ring-brand/30'
+								className='w-full text-xs md:text-base rounded border border-border bg-input py-3 pl-10 pr-10 text-foreground outline-none transition placeholder:text-muted-foreground focus:border-brand focus:ring-2 focus:ring-brand/30'
 								disabled={isSearching}
 							/>
 							{searchTerm && (

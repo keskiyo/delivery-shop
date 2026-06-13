@@ -12,9 +12,11 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 	try {
 		const { category, slug } = await params
 
+		const url = new URL(request.url)
+		const role = url.searchParams.get('role')
+
 		const db = await getDB()
 
-		// 1. Находим категорию
 		const categoryDoc = await db.collection('article-category').findOne({
 			slug: category,
 		})
@@ -26,11 +28,10 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 			)
 		}
 
-		// 2. Находим статью в этой категории
 		const articleDoc = await db.collection('articles').findOne({
 			categoryId: categoryDoc._id.toString(),
 			slug: slug,
-			status: 'published',
+			status: { $in: ['published', 'archived'] },
 		})
 
 		if (!articleDoc) {
@@ -40,12 +41,15 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 			)
 		}
 
-		// 3. Увеличиваем счетчик просмотров (атомарная операция)
+		const shouldIncrementViews = !(role === 'admin' || role === 'manager')
+
 		const result = await db.collection('articles').findOneAndUpdate(
 			{ _id: articleDoc._id },
-			{
-				$inc: { views: 1 },
-			},
+			shouldIncrementViews
+				? {
+						$inc: { views: 1 },
+					}
+				: { $set: {} },
 			{
 				returnDocument: 'after',
 				projection: {
@@ -57,6 +61,9 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 					imageAlt: 1,
 					description: 1,
 					content: 1,
+					status: 1,
+					createdAt: 1,
+					updatedAt: 1,
 					publishedAt: 1,
 					author: 1,
 					views: 1,
@@ -94,7 +101,10 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 			imageAlt: updatedArticle.imageAlt,
 			description: updatedArticle.description,
 			content: updatedArticle.content,
+			status: updatedArticle.status,
 			publishedAt: updatedArticle.publishedAt,
+			createdAt: updatedArticle.createddAt,
+			updatedAt: updatedArticle.updatedAt,
 			author: updatedArticle.author,
 			views: updatedArticle.views || 0,
 		}

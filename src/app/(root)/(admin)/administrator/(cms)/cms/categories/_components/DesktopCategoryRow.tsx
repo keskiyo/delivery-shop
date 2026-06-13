@@ -124,6 +124,15 @@ export const DesktopCategoryRow = ({
 					</div>
 				</div>
 
+				<div className='min-w-0 flex justify-center'>
+					<div
+						className='text-xs wrap-break-word text-center'
+						title={category.articlesCount || 'Нет'}
+					>
+						{category.articlesCount || <span>—</span>}
+					</div>
+				</div>
+
 				<div className='min-w-0'>
 					<div
 						className='text-xs wrap-break-word'

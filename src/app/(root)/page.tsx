@@ -5,10 +5,9 @@ import Purchases from '@/app/(root)/(user)/Purchases'
 import { Loader } from '@/components/features/common/loader'
 import Maps from '@/components/features/Maps'
 import Slider from '@/components/features/slider/Slider'
-import SpecialOffers from '@/components/features/SpacialOffers'
+import SpecialOffers from '@/components/features/SpecialOffers'
 import { Suspense } from 'react'
 export const dynamic = 'force-dynamic'
-
 
 export default function Home() {
 	return (

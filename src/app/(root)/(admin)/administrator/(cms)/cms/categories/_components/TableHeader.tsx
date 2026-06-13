@@ -40,8 +40,8 @@ export const TableHeader = () => {
 
 	return (
 		<div className='hidden lg:block border border-border'>
-			<div className='grid grid-cols-[0.3fr_0.5fr_1fr_2fr_2fr_2fr_2fr_1fr_1fr_2fr] gap-2 px-2 py-4 bg-card border-b border-border text-xs font-medium uppercase tracking-wider'>
-				<div></div>
+			<div className='grid lg:grid-cols-[32px_40px_50px_100px_80px_120px_120px_80px_80px_80px_100px]  xl:grid-cols-[32px_40px_50px_120px_80px_160px_160px_80px_80px_80px_100px] gap-2 items-center justify-between'>
+				<div className='w-8'></div>
 				<div
 					className='text-center cursor-pointer hover:text-text-soft flex items-center justify-center'
 					title='Сортировать по ID'
@@ -78,6 +78,13 @@ export const TableHeader = () => {
 					onClick={() => handleSort('author')}
 				>
 					Автор {renderSortItem('author')}
+				</div>
+				<div
+					className='cursor-pointer hover:text-text-soft flex items-center'
+					title='Сортировать по кол-ву статей'
+					onClick={() => handleSort('articles')}
+				>
+					Статей {renderSortItem('articles')}
 				</div>
 				<div
 					className='cursor-pointer hover:text-text-soft flex items-center'

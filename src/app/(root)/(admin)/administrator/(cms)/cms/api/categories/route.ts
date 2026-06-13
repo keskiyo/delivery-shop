@@ -23,21 +23,107 @@ export async function GET(request: Request) {
 		const db = await getDB()
 
 		const { searchParams } = new URL(request.url)
+
 		const page = parseInt(searchParams.get('pageToLoad') || '1')
 		const limit = parseInt(searchParams.get('limit')!)
+
 		const sortBy: SortField = (searchParams.get('sortBy') ||
 			'numericId') as SortField
-		const sortOrder = searchParams.get('sortOrder') || 'desc'
+		const sortOrder = searchParams.get('sortOrder') || 'asc'
+
 		const search = searchParams.get('search') || ''
+
 		const filterBy: FilterType = (searchParams.get('filterBy') ||
 			'all') as FilterType
 
 		const validPage = Math.max(1, page)
+
 		const validLimit = Math.max(1, Math.min(limit, 100))
+
+		const filterQuery = buildFilterQuery(search, filterBy)
+
 		const skip = (validPage - 1) * validLimit
 
+		if (sortBy === 'articles') {
+			const order = sortOrder === 'asc' ? 1 : -1
+
+			const aggregationPipeline = [
+				{ $match: filterQuery },
+				{
+					$lookup: {
+						from: 'articles',
+						let: { categoryId: { $toString: '$_id' } },
+						pipeline: [
+							{
+								$match: {
+									$expr: {
+										$eq: [
+											'$categoryId',
+											{ $toString: '$$categoryId' },
+										],
+									},
+								},
+							},
+						],
+						as: 'categoryArticles',
+					},
+				},
+				{
+					$addFields: {
+						articlesCount: { $size: '$categoryArticles' },
+					},
+				},
+				{ $sort: { articlesCount: order } },
+				{ $skip: skip },
+				{ $limit: validLimit },
+				{
+					$project: {
+						categoryArticles: 0,
+					},
+				},
+			]
+
+			const categories = await db
+				.collection<Category>('article-category')
+				.aggregate(aggregationPipeline)
+				.toArray()
+
+			const totalInDB = await db
+				.collection<Category>('article-category')
+				.countDocuments({})
+
+			const totalFiltered = await db
+				.collection<Category>('article-category')
+				.countDocuments(filterQuery)
+
+			const totalPages = Math.ceil(totalFiltered / validLimit)
+
+			// Формирование ответа
+			const response = {
+				success: true,
+				data: {
+					categories: categories.map(cat => ({
+						...cat,
+						_id: cat._id.toString(),
+						articlesCount:
+							(cat as Category & { articlesCount: number })
+								.articlesCount || 0,
+					})),
+					totalInDB,
+					pagination: {
+						page: validPage,
+						limit: validLimit,
+						total: totalFiltered,
+						totalAll: totalInDB,
+						totalPages,
+					},
+				},
+			}
+
+			return NextResponse.json(response)
+		}
+
 		const sortObject = buildSortObject(sortBy, sortOrder)
-		const filterQuery = buildFilterQuery(search, filterBy)
 
 		const categories = await db
 			.collection<Category>('article-category')
@@ -46,6 +132,39 @@ export async function GET(request: Request) {
 			.skip(skip)
 			.limit(validLimit)
 			.toArray()
+
+		const categoryIds = categories.map(cat => cat._id.toString())
+
+		const articlesCounts: Record<string, number> = {}
+
+		if (categoryIds.length > 0) {
+			const counts = await db
+				.collection('articles')
+				.aggregate<{ _id: string; count: number }>([
+					{
+						$match: {
+							categoryId: { $in: categoryIds },
+						},
+					},
+					{
+						$group: {
+							_id: '$categoryId',
+							count: { $sum: 1 },
+						},
+					},
+				])
+				.toArray()
+
+			counts.forEach(item => {
+				articlesCounts[item._id] = item.count
+			})
+		}
+
+		const categoriesWithCounts = categories.map(cat => ({
+			...cat,
+			_id: cat._id.toString(),
+			articlesCount: articlesCounts[cat._id.toString()] || 0,
+		}))
 
 		const totalInDB = await db
 			.collection<Category>('article-category')
@@ -60,10 +179,7 @@ export async function GET(request: Request) {
 		const response = {
 			success: true,
 			data: {
-				categories: categories.map(category => ({
-					...category,
-					_id: category._id.toString(),
-				})),
+				categories: categoriesWithCounts,
 				totalInDB,
 				pagination: {
 					page: validPage,
@@ -77,9 +193,12 @@ export async function GET(request: Request) {
 
 		return NextResponse.json(response)
 	} catch (error) {
-		console.error('Ошибка загрузки категорий:', error)
+		console.error('Ошибка получения категорий:', error)
 		return NextResponse.json(
-			{ success: false, message: 'Ошибка загрузки категорий' },
+			{
+				success: false,
+				message: 'Ошибка получения категорий',
+			},
 			{ status: 500 },
 		)
 	}

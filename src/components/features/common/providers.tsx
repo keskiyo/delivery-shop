@@ -5,16 +5,13 @@ import NextTopLoader from 'nextjs-toploader'
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
 
-
 export const Providers: React.FC<React.PropsWithChildren> = ({ children }) => {
 	return (
 		<>
-			<ThemeProvider>
-				{children}
-			</ThemeProvider>
+			<ThemeProvider>{children}</ThemeProvider>
 			<ToastContainer
-				position='top-center'
-				autoClose={5000}
+				position='top-right'
+				autoClose={3000}
 				hideProgressBar={false}
 				newestOnTop
 				closeOnClick

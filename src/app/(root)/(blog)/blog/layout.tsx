@@ -1,4 +1,5 @@
 import BlogSearch from '@/app/(root)/(blog)/blog/BlogSearch'
+import BlogShareButtons from '@/app/(root)/(blog)/blog/BlogShareButtons'
 import { ReactNode } from 'react'
 
 export default function BlogLayout({ children }: { children: ReactNode }) {
@@ -9,6 +10,7 @@ export default function BlogLayout({ children }: { children: ReactNode }) {
 			</div>
 
 			{children}
+			<BlogShareButtons />
 		</div>
 	)
 }

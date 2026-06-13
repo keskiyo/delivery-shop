@@ -6,12 +6,12 @@ export async function GET() {
 		const db = await getDB()
 
 		const publishedCount = await db.collection('articles').countDocuments({
-			status: 'published',
+			status: { $in: ['published', 'archived'] },
 		})
 
 		const articles = await db
 			.collection('articles')
-			.find({ status: 'published' }, { projection: { views: 1 } })
+			.find({}, { projection: { views: 1 } })
 			.toArray()
 
 		let totalViews = 0

@@ -1,4 +1,3 @@
-
 import Image from 'next/image'
 
 const SpecialOffers = () => {
@@ -10,16 +9,14 @@ const SpecialOffers = () => {
 				</h2>
 				<div className='flex justify-center md:flex-row gap-4 items-center xl:w-auto '>
 					<button className='relative w-full md:w-88.25 xl:w-146 h-42.5 xl:h-50 rounded overflow-hidden cursor-pointer hover:shadow-(--shadow-button-default) duration-300'>
-						{/* Баннер акций - десктопная версия */}
-						<div className='w-full h-full'>
+						<div className='w-full h-full relative'>
 							<Image
 								src='/images/banners/banner-action-desk.jpeg'
 								alt='Акционные товары'
-								width={584}
-								height={200}
+								fill
 								className='w-full h-full object-cover rounded'
 								priority
-								unoptimized
+								sizes='(max-width: 767px) 100vw, 353px'
 							/>
 						</div>
 					</button>

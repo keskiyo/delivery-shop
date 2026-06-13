@@ -13,10 +13,8 @@ export async function getRelatedArticles(
 	limit: number = CONFIG.ARTICLES_PER_ARTICLE_PAGE,
 ): Promise<RelatedArticle[]> {
 	try {
-		// 1. Подключаемся напрямую к MongoDB, потому что связанные статьи нужны только на сервере.
 		const db = await getDB()
 
-		// 2. Берем только поля карточки и исключаем текущую статью из выдачи.
 		const articles = await db
 			.collection('articles')
 			.find(
@@ -48,7 +46,6 @@ export async function getRelatedArticles(
 			.limit(limit)
 			.toArray()
 
-		// 3. ObjectId и даты приводим к строкам, чтобы данные были serializable для React-компонентов.
 		return articles.map(article => ({
 			...article,
 			_id: article._id.toString(),

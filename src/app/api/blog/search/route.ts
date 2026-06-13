@@ -22,12 +22,12 @@ export async function GET(request: NextRequest) {
 			.collection('articles')
 			.find({
 				$and: [
-					{ status: 'published' },
+					{ status: { $in: ['published', 'archived'] } },
 					{
 						$or: [
 							{ name: { $regex: query, $options: 'i' } },
 							{ description: { $regex: query, $options: 'i' } },
-							{ slug: { $regex: query, $options: 'i' } },
+							{ content: { $regex: query, $options: 'i' } },
 						],
 					},
 				],
