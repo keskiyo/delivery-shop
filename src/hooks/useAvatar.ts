@@ -22,7 +22,6 @@ const useAvatar = ({ userId, gender = 'male' }: UseAvatarProps) => {
 	}, [currentAvatar, gender])
 
 	const loadAvatar = useCallback(async () => {
-
 		if (!userId) {
 			setCurrentAvatar(getAvatarByGender(gender))
 			return
@@ -31,9 +30,7 @@ const useAvatar = ({ userId, gender = 'male' }: UseAvatarProps) => {
 		setIsLoading(true)
 
 		try {
-			const response = await fetch(
-				`/api/auth/avatar/${userId}?t=${Date.now()}`,
-			)
+			const response = await fetch(`/api/auth/avatar/${userId}`)
 
 			if (response.ok) {
 				const blob = await response.blob()

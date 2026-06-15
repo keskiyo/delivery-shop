@@ -1,19 +1,34 @@
 'use client'
 
-import { useCategoryStore } from '@/store/categoryStore'
+import { StoreType } from '@/app/(root)/(admin)/administrator/(cms)/cms/comments/types/comments.types'
 import { useArticlesManagementStore } from '@/store/articlesManagementStore'
-import { CONFIG_BLOG } from '../CONFIG_BLOG'
+import { useCategoryStore } from '@/store/categoryStore'
+import { useCommentsStore } from '@/store/commentsStore'
+import { useCardsStore } from '@/store/useCardsStore'
+import { CONFIG_BLOG } from '../(cms)/cms/CONFIG_BLOG'
 
-export const Pagination = ({ type = 'categories' }: { type?: 'categories' | 'articles' }) => {
-	const categoryPagination = useCategoryStore()
-	const articlePagination = useArticlesManagementStore()
+export const Pagination = ({ type = 'categories' }) => {
+	const stores: Record<string, StoreType> = {
+		articles: useArticlesManagementStore(),
+		categories: useCategoryStore(),
+		comments: useCommentsStore(),
+		cards: useCardsStore(),
+	}
+
+	const store = stores[type]
+
+	if (!store) {
+		console.error(`Неизвестный тип для пагинации: ${type}`)
+		return null
+	}
+
 	const {
 		totalPages,
 		totalItems,
 		currentPage,
 		itemsPerPage,
 		setCurrentPage,
-	} = type === 'articles' ? articlePagination : categoryPagination
+	} = store
 
 	const startItem = (currentPage - 1) * itemsPerPage + 1
 	const endItem = Math.min(currentPage * itemsPerPage, totalItems)
@@ -87,9 +102,7 @@ export const Pagination = ({ type = 'categories' }: { type?: 'categories' | 'art
 						{totalItems}
 					</span>{' '}
 					элементов
-					<span className='mx-2 text-muted-foreground'>
-						•
-					</span>
+					<span className='mx-2 text-muted-foreground'>•</span>
 					Страница{' '}
 					<span className='font-medium text-foreground'>
 						{currentPage}

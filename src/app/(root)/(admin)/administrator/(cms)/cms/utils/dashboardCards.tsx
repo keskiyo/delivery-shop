@@ -1,7 +1,7 @@
 // Назначение: утилита dashboardCards.
 // Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
 
-import { FileText, FolderTree, Plus, Tags } from 'lucide-react'
+import { FileText, FolderTree, MessageSquare, Plus, Tags } from 'lucide-react'
 import { DashboardCard } from '../types/dashboard'
 
 export const dashboardCards: DashboardCard[] = [
@@ -10,7 +10,11 @@ export const dashboardCards: DashboardCard[] = [
 		title: 'Новая статья',
 		description: 'Создать статью в редакторе',
 		icon: <Plus className='w-6 h-6' />,
-		color: 'blue',
+		colors: {
+			iconBg: 'bg-brand-soft',
+			iconText: 'text-brand',
+			buttonBg: 'bg-brand',
+		},
 		path: '/administrator/cms/articles/editor',
 		actionText: 'Создать',
 	},
@@ -19,7 +23,11 @@ export const dashboardCards: DashboardCard[] = [
 		title: 'Все статьи',
 		description: 'Просмотр и управление статьями',
 		icon: <FileText className='w-6 h-6' />,
-		color: 'indigo',
+		colors: {
+			iconBg: 'bg-brand-soft',
+			iconText: 'text-brand',
+			buttonBg: 'bg-brand',
+		},
 		path: '/administrator/cms/articles/articlesManagement',
 		actionText: 'Перейти',
 	},
@@ -28,7 +36,11 @@ export const dashboardCards: DashboardCard[] = [
 		title: 'Категории',
 		description: 'Управление категориями блога',
 		icon: <FolderTree className='w-6 h-6' />,
-		color: 'green',
+		colors: {
+			iconBg: 'bg-success-soft',
+			iconText: 'text-success',
+			buttonBg: 'bg-success',
+		},
 		path: '/administrator/cms/categories',
 		actionText: 'Управлять',
 	},
@@ -37,8 +49,25 @@ export const dashboardCards: DashboardCard[] = [
 		title: 'Семантическое ядро',
 		description: 'Ключевые слова и SEO',
 		icon: <Tags className='w-6 h-6' />,
-		color: 'purple',
+		colors: {
+			iconBg: 'bg-promo-soft',
+			iconText: 'text-promo',
+			buttonBg: 'bg-promo',
+		},
 		path: '/administrator/cms/semantic-core',
 		actionText: 'Настроить',
+	},
+	{
+		id: 'comments',
+		title: 'Управление комментариями',
+		description: 'Проверка комментариев и управление пользователями',
+		icon: <MessageSquare className='w-6 h-6' />,
+		colors: {
+			iconBg: 'bg-surface-hover',
+			iconText: 'text-text-soft',
+			buttonBg: 'bg-brand',
+		},
+		path: '/administrator/cms/comments',
+		actionText: 'Проверить',
 	},
 ]

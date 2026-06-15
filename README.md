@@ -1,88 +1,191 @@
-# Delivery Shop
+<div align="center">
 
-Full-stack приложение для доставки еды: витрина с каталогом, корзиной и заказами, личный кабинет пользователя, админ-панель и CMS для управления категориями, товарами, заказами и SEO.
+# 🛒 Delivery Shop
 
-## Stack
+**Платформа доставки еды** — каталог, корзина и заказы, бонусная система, блог с комментариями, CMS и админ-панель.
 
-- Next.js 16, React 19, TypeScript
-- Tailwind CSS 4, shadcn/Radix UI, Lucide Icons, Framer Motion
-- MongoDB, Better Auth
-- Zustand, Redux Toolkit, React Context
-- React Email, Resend
-- React-Toastify для пользовательских уведомлений
-- ExcelJS для выгрузки заказов в `.xlsx`
+</div>
 
-## Features
+---
 
-- Каталог с категориями, поиском, фильтрами, карточками товаров и страницами продукта.
-- Корзина, оформление заказа, бонусы, минимальная сумма заказа и выбор времени доставки.
-- Авторизация по email/паролю и телефону, профиль, история заказов, избранное и покупки.
-- Админка для товаров, пользователей, заказов, календаря заказов и слотов доставки.
-- CMS для категорий: сортировка, изображения, SEO-поля, рекомендации и пагинация.
-- Красивые toast-уведомления для действий пользователя и фоновых async-операций.
-- Выгрузка заказов в Excel через ExcelJS.
-- Email-шаблоны для подтверждений, восстановления пароля и смены email.
-- Cron endpoint для обновления доступных дат доставки.
+## 📑 Содержание
 
-## Quick Start
+- [О проекте](#-о-проекте)
+- [Возможности](#-возможности)
+- [Стек](#-стек)
+- [Быстрый старт](#-быстрый-старт)
+- [Переменные окружения](#-переменные-окружения)
+- [Скрипты](#-скрипты)
+- [Структура проекта](#-структура-проекта)
+- [Бизнес-настройки](#-бизнес-настройки)
+- [Дорожная карта](#-дорожная-карта)
+
+---
+
+## 🚀 О проекте
+
+Full-stack приложение интернет-магазина доставки еды на **Next.js 16 (App Router)** и **React 19**. Покрывает полный путь: от просмотра каталога и оформления заказа до управления контентом и заказами через админ-панель и CMS.
+
+- 🛍️ Витрина: каталог, поиск, фильтры, страницы товаров
+- 🛒 Корзина, оформление заказа, бонусы и карта лояльности
+- 📝 Блог со статьями, комментариями и лайками
+- ⚙️ CMS: редактор статей, категории, модерация, баны
+- 👤 Личный кабинет: профиль, избранное, история покупок
+- 🔧 Админка: пользователи, товары, заказы, чат и расписание доставки
+
+---
+
+## ✨ Возможности
+
+| Раздел               | Что умеет                                                                                 |
+| -------------------- | ----------------------------------------------------------------------------------------- |
+| **Каталог**          | Категории, полнотекстовый поиск, фильтры по цене и бренду, похожие товары                 |
+| **Корзина и заказы** | Корзина пользователя, оформление с выбором даты/слота доставки, статусы, выгрузка в Excel |
+| **Бонусы**           | Скидка по карте лояльности, начисление бонусов, частичная оплата бонусами                 |
+| **Блог**             | Статьи по категориям, счётчик просмотров, комментарии с ответами и лайками                |
+| **CMS**              | Rich-text редактор (TipTap), управление категориями и SEO, модерация комментариев, баны   |
+| **Админка**          | Управление ролями, товарами, заказами по датам, чат с клиентом по заказу                  |
+| **Доставка**         | Управление слотами + cron-обновление доступных дат                                        |
+| **Авторизация**      | Email/пароль и телефон/OTP, верификация, восстановление пароля                            |
+
+---
+
+## 🛠 Стек
+
+- **Фреймворк:** Next.js 16 (App Router, React Compiler), React 19, TypeScript 5
+- **База данных:** MongoDB 7 (нативный драйвер `mongodb`), миграции через `migrate-mongo`
+- **Авторизация:** [better-auth](https://www.better-auth.com/) (email/пароль + телефон/OTP)
+- **Состояние:** Redux Toolkit + RTK Query, Zustand, React Context
+- **UI:** TailwindCSS 4, SASS, Radix UI, Lucide Icons, Framer Motion
+- **Контент:** TipTap (редактор), DOMPurify (санитизация)
+- **Почта:** React Email + Resend
+- **Прочее:** Yandex Maps, Sharp, ExcelJS, react-toastify
+
+---
+
+## ⚡ Быстрый старт
+
+### Требования
+
+- Node.js 20+
+- MongoDB 7+ (локально или [MongoDB Atlas](https://www.mongodb.com/atlas))
+
+### Установка
 
 ```bash
+# 1. Клонировать репозиторий
+git clone <repo-url>
+cd delivery-shop
+
+# 2. Установить зависимости
 npm install
+
+# 3. Создать .env (см. раздел ниже)
+cp .env.example .env   # затем заполнить значения
+
+# 4. Применить миграции (создаст коллекции и стартовые данные)
+npx migrate-mongo up
+
+# 5. (опционально) Сиды
+npx ts-node seed-db.ts
+
+# 6. Запустить dev-сервер
 npm run dev
 ```
 
-Dev server: `http://localhost:3000`
+Приложение поднимется на **http://localhost:3000**.
 
-## Scripts
+---
 
-```bash
-npm run dev                    # development server
-npm run build                  # production build
-npm run start                  # start production server
-npm run lint                   # ESLint
-npm audit                      # dependency security audit
-npm run update-delivery-dates  # call delivery dates cron endpoint
-```
+## 🔐 Переменные окружения
 
-## Environment
-
-Проект ожидает следующие переменные окружения:
+Создайте файл `.env` в корне проекта:
 
 ```env
-FOOD_DELIVERY_DB_URL=
-FOOD_DELIVERY_DB_NAME=
-RESEND_API_KEY=
-BETTER_AUTH_SECRET=
-BETTER_AUTH_URL=
-SMS_API_ID=
-CRON_SECRET=
+# База данных
+FOOD_DELIVERY_DB_URL=mongodb://localhost:27017
+FOOD_DELIVERY_DB_NAME=deliveryshop
+
+# Почта (Resend)
+RESEND_API_KEY=your_resend_key
+
+# Приложение
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+# Авторизация (better-auth)
+BETTER_AUTH_SECRET=your_random_secret
+BETTER_AUTH_URL=http://localhost:3000
+
+# Cron
+CRON_SECRET=your_cron_secret
 ```
 
-Для локальной MongoDB обычно используется база `deliveryshop`.
+> ℹ️ SMS/OTP по умолчанию отключены — код подтверждения выводится в консоль сервера.
 
-## Project Structure
+---
 
-```text
-src/app/                 routes, layouts, API routes
-src/actions/             server actions
-src/components/          shared UI and layout components
-src/contexts/            React contexts
-src/hooks/               reusable hooks
-src/lib/                 auth, db and utility code
-src/store/               Zustand and Redux state
-src/types/               shared TypeScript types
-src/data/                static app data
-```
-
-## Build
+## 📜 Скрипты
 
 ```bash
-npm run lint
-npm audit
-npm run build
+npm run dev                    # dev-сервер
+npm run build                  # прод-сборка
+npm run start                  # запуск прод-сборки
+npm run lint                   # ESLint
+npm audit                      # аудит зависимостей
+npm run update-delivery-dates  # cron: обновление доступных дат доставки
 ```
 
-## Notes
+---
 
-- Уведомления централизованы в `src/lib/showToast.ts`: `showToast` для обычных сообщений и `showPromiseToast` для async-действий через `toast.promise`.
-- `xlsx` удален из зависимостей из-за audit advisory; выгрузка Excel работает через `exceljs`.
+## 📂 Структура проекта
+
+```
+config/config.ts          # Единое место бизнес-настроек
+migrations/               # migrate-mongo: миграции + стартовые данные
+seed-db*.ts               # Скрипты сидирования
+src/
+├── app/
+│   ├── (root)/           # Публичный layout (Header, Footer, Breadcrumbs)
+│   │   ├── (auth)/       # Логин, регистрация, верификация, сброс пароля
+│   │   ├── (catalog)/    # Каталог, категории, страница товара
+│   │   ├── (cart)/       # Корзина и оформление заказа
+│   │   ├── (blog)/       # Блог, статьи, комментарии
+│   │   ├── (user)/       # Избранное, покупки
+│   │   ├── (user-profile)/  # Профиль и заказы пользователя
+│   │   └── (admin)/      # Админка и CMS
+│   └── api/              # API-роуты
+├── actions/              # Серверные экшены
+├── lib/                  # auth, подключение к БД (getDB), утилиты
+├── store/                # Zustand + Redux (RTK Query)
+├── components/           # Общие компоненты
+└── contexts/ · hooks/ · types/ · constants/ · data/
+```
+
+Колокация: рядом со страницей живут `_components/`, `utils/`, `types/`.
+
+---
+
+## ⚙️ Бизнес-настройки
+
+Переиспользуемые константы вынесены в [`config/config.ts`](config/config.ts):
+
+| Настройка                  | Значение |
+| -------------------------- | -------- |
+| Скидка по карте лояльности | 6%       |
+| Начисление бонусов         | 5%       |
+| Макс. оплата бонусами      | 10%      |
+| Минимальная сумма заказа   | 700 ₽    |
+| Попытки ввода OTP          | 3        |
+| Время жизни OTP            | 180 с    |
+
+---
+
+## 🗺 Дорожная карта
+
+- [ ] Покрытие тестами и настройка CI
+- [ ] Интеграция реального SMS-провайдера для OTP
+- [ ] Вынос конфигурируемых ключей (карты, URL) в переменные окружения
+- [ ] Подключение платёжного провайдера
+- [ ] Скриншоты и демо-стенд
+
+---

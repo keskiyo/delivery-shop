@@ -1,0 +1,183 @@
+'use client'
+
+import {
+	IComment,
+	SortOrder,
+} from '@/app/(root)/(blog)/blog/types/comments.types'
+import { Loader } from '@/components/features/common/loader'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { CONFIG } from '../../../../../../../../../../config/config'
+import CommentForm from './CommentForm'
+import { CommentItem } from './CommentItem'
+import { CommentSortButtons } from './CommentSortButtons'
+import { LoadMoreComments } from './LoadMoreComments'
+
+export const Comments = ({ articleId }: { articleId: string }) => {
+	const [comments, setComments] = useState<IComment[]>([])
+	const [sortOrder, setSortOrder] = useState<SortOrder>('newest')
+	const [visibleCommentsCount, setVisibleCommentsCount] = useState(
+		CONFIG.COMMENTS_PER_ARTICLE_PAGE,
+	)
+	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState('')
+
+	const buildCommentTree = (flatComments: IComment[]): IComment[] => {
+		const commentMap = new Map<string, IComment>()
+		const rootComments: IComment[] = []
+
+		flatComments.forEach(comment => {
+			commentMap.set(comment._id, { ...comment, replies: [] })
+		})
+
+		flatComments.forEach(comment => {
+			const node = commentMap.get(comment._id)
+			if (!node) return
+
+			if (comment.parentId && commentMap.has(comment.parentId)) {
+				const parent = commentMap.get(comment.parentId)
+				if (parent) {
+					parent.replies.push(node)
+				}
+			} else {
+				rootComments.push(node)
+			}
+		})
+
+		return rootComments.sort(
+			(a, b) =>
+				new Date(b.createdAt).getTime() -
+				new Date(a.createdAt).getTime(),
+		)
+	}
+
+	const fetchComments = useCallback(async () => {
+		try {
+			setLoading(true)
+			setError('')
+
+			const response = await fetch(`/api/comments?articleId=${articleId}`)
+
+			if (!response.ok) {
+				throw new Error('Не удалось загрузить комментарии')
+			}
+
+			const data = await response.json()
+			const commentTree = buildCommentTree(data.comments || [])
+			setComments(commentTree)
+		} catch (err) {
+			setError(err instanceof Error ? err.message : 'Ошибка загрузки')
+		} finally {
+			setLoading(false)
+		}
+	}, [articleId])
+
+	useEffect(() => {
+		if (articleId) {
+			fetchComments()
+		}
+	}, [articleId, fetchComments])
+
+	const sortedComments = useMemo(() => {
+		const sorted = [...comments]
+
+		if (sortOrder === 'newest') {
+			sorted.sort(
+				(a, b) =>
+					new Date(b.createdAt).getTime() -
+					new Date(a.createdAt).getTime(),
+			)
+		} else {
+			sorted.sort(
+				(a, b) =>
+					new Date(a.createdAt).getTime() -
+					new Date(b.createdAt).getTime(),
+			)
+		}
+
+		return sorted
+	}, [comments, sortOrder])
+
+	const visibleComments = useMemo(() => {
+		return sortedComments.slice(0, visibleCommentsCount)
+	}, [sortedComments, visibleCommentsCount])
+
+	const totalRootComments = comments.length
+
+	const hasMoreComments = visibleCommentsCount < totalRootComments
+
+	const remainingComments = totalRootComments - visibleCommentsCount
+
+	const handleCommentChange = () => {
+		fetchComments()
+	}
+
+	const handleSortChange = (order: SortOrder) => {
+		setSortOrder(order)
+		setVisibleCommentsCount(CONFIG.COMMENTS_PER_ARTICLE_PAGE)
+	}
+
+	const handleLoadMore = () => {
+		setVisibleCommentsCount(prev => prev + CONFIG.COMMENTS_PER_ARTICLE_PAGE)
+	}
+
+	if (loading) return <Loader />
+
+	return (
+		<div className='pt-8 mt-12 border-t border-border'>
+			<div className='flex flex-wrap items-center justify-center gap-4 mb-6 md:justify-between'>
+				<h2 className='text-2xl font-bold text-foreground'>
+					Комментарии {comments.length > 0 && `(${comments.length})`}
+				</h2>
+				<CommentSortButtons
+					sortOrder={sortOrder}
+					onSortChange={handleSortChange}
+				/>
+			</div>
+
+			{error && (
+				<div className='px-4 py-3 mb-6 text-danger border border-danger/30 rounded bg-danger-soft'>
+					{error}
+				</div>
+			)}
+
+			<div className='mb-8'>
+				<CommentForm
+					articleId={articleId}
+					parentId={null}
+					onSuccess={handleCommentChange}
+				/>
+			</div>
+			<div className='space-y-6'>
+				{comments.length === 0 ? (
+					<div className='py-8 text-center text-muted-foreground'>
+						Пока нет комментариев. Будьте первым!
+					</div>
+				) : (
+					<div>
+						{visibleComments.map(comment => (
+							<CommentItem
+								key={comment._id}
+								comment={comment}
+								articleId={articleId}
+								onCommentChange={handleCommentChange}
+								depth={0}
+							/>
+						))}
+						<LoadMoreComments
+							hasMore={hasMoreComments}
+							remainingCount={remainingComments}
+							onLoadMore={handleLoadMore}
+							totalRootComments={totalRootComments}
+						/>
+
+						{!hasMoreComments && totalRootComments > 5 && (
+							<div className='pt-4 text-sm text-center text-muted-foreground'>
+								Загружены все комментарии
+							</div>
+						)}
+					</div>
+				)}
+			</div>
+		</div>
+	)
+}

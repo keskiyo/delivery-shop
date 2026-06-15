@@ -1,24 +1,26 @@
 'use client'
 
 import { Header } from '@/app/(root)/(admin)/administrator/(cms)/cms/_components/Header'
-import { Pagination } from '@/app/(root)/(admin)/administrator/(cms)/cms/_components/Pagination'
 import { SEORecommendations } from '@/app/(root)/(admin)/administrator/(cms)/cms/_components/SEORecommendations'
 import { CategoryForm } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/CategoryForm'
 import { CategoryTable } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/CategoryTable'
 import { HeaderActions } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/HeaderActions'
-import { ItemsPerPageSelector } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/ItemPerPageSelector'
 import { ReorderStatus } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/ReorderStatus'
 import { WarningAlert } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/WarningAlert'
 import { useCategories } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/hooks/useCategories'
 import { useCategoryFormState } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/hooks/useCategoryFormState'
 import type { Category } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
 import { categorySeoRecommendations } from '@/app/(root)/(admin)/administrator/(cms)/cms/utils/recommendations'
+import { ItemsPerPageSelector } from '@/app/(root)/(admin)/administrator/_components/ItemPerPageSelector'
+import { Pagination } from '@/app/(root)/(admin)/administrator/_components/Pagination'
+import { useConfirm } from '@/components/ui/confirm/ConfirmProvider'
 import { showPromiseToast } from '@/lib/showToast'
 import { useAuthStore } from '@/store/authStore'
 import { useCategoryStore } from '@/store/categoryStore'
 import { useEffect } from 'react'
 
 const CategoriesPage = () => {
+	const confirmDialog = useConfirm()
 	const { user } = useAuthStore()
 	const author = `${user?.surname} ${user?.name}`.trim() || 'Неизвестен'
 	const {
@@ -219,7 +221,14 @@ const CategoriesPage = () => {
 	}
 
 	const handleDelete = async (id: string) => {
-		if (!confirm('Вы уверены, что хотите удалить эту категорию?')) return
+		const confirmed = await confirmDialog({
+			title: 'Удалить категорию',
+			description: 'Вы уверены, что хотите удалить эту категорию?',
+			confirmText: 'Удалить',
+			variant: 'danger',
+		})
+
+		if (!confirmed) return
 
 		const categoryToDelete = categories.find(c => c._id.toString() === id)
 

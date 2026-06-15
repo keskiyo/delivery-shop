@@ -1,6 +1,5 @@
 'use client'
 
-
 import { Loader } from '@/components/features/common/loader'
 import { ThemeToggle } from '@/components/ui/theme/ThemeToggle'
 import { useAuthStore } from '@/store/authStore'
@@ -49,9 +48,7 @@ const Profile = () => {
 					const exists = await checkAvatarExist(user.id)
 
 					if (exists) {
-						setAvatarSrc(
-							`/api/auth/avatar/${user.id}?t=${lastUpdate}`,
-						)
+						setAvatarSrc(`/api/auth/avatar/${user.id}`)
 					} else {
 						setAvatarSrc(getAvatarByGender(user.gender))
 					}

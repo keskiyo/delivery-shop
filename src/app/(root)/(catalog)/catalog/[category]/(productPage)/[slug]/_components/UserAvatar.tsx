@@ -22,9 +22,8 @@ const UserAvatar = ({
 	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
-
 		if (hasAvatar) {
-			setAvatarSrc(`/api/auth/avatar/${userId}?t=${Date.now()}`)
+			setAvatarSrc(`/api/auth/avatar/${userId}`)
 		} else {
 			setAvatarSrc(getAvatarByGender(userGender || 'male'))
 		}

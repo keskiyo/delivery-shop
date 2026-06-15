@@ -1,6 +1,7 @@
 'use client'
 
 import { ThemeProvider } from '@/components/ui/theme/ThemeProvider'
+import { ConfirmProvider } from '@/components/ui/confirm/ConfirmProvider'
 import NextTopLoader from 'nextjs-toploader'
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
@@ -8,7 +9,9 @@ import { ToastContainer } from 'react-toastify'
 export const Providers: React.FC<React.PropsWithChildren> = ({ children }) => {
 	return (
 		<>
-			<ThemeProvider>{children}</ThemeProvider>
+			<ThemeProvider>
+				<ConfirmProvider>{children}</ConfirmProvider>
+			</ThemeProvider>
 			<ToastContainer
 				position='top-right'
 				autoClose={3000}

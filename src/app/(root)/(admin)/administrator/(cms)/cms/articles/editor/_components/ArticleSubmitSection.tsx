@@ -1,3 +1,4 @@
+import { useConfirm } from '@/components/ui/confirm/ConfirmProvider'
 import { useArticleStore } from '@/store/articleStore'
 import { Eye, EyeOff, FileText, Globe, Save, Star } from 'lucide-react'
 import { useEffect, useState } from 'react'
@@ -6,6 +7,7 @@ import './css/modal-preview.css'
 import { ArticlePreviewModal } from './tiptap-components/ArticlePreviewModal'
 
 export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
+	const confirmDialog = useConfirm()
 	const { updateFormField, isSubmitting, isUploading, formData } =
 		useArticleStore()
 
@@ -40,7 +42,7 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 		updateFormField('isFeatured', featured)
 	}
 
-	const handleCancelWithConfirm = () => {
+	const handleCancelWithConfirm = async () => {
 		const hasData =
 			formData.name.trim() !== '' ||
 			formData.slug.trim() !== '' ||
@@ -51,9 +53,13 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 			formData.categoryId !== ''
 
 		if (hasData) {
-			const confirmCancel = confirm(
-				'Вы уверены, что хотите отменить создание статьи? Все введенные данные будут потеряны.',
-			)
+			const confirmCancel = await confirmDialog({
+				title: 'Отменить создание статьи',
+				description:
+					'Вы уверены, что хотите отменить создание статьи? Все введенные данные будут потеряны.',
+				confirmText: 'Отменить',
+				variant: 'warning',
+			})
 
 			if (confirmCancel) {
 				onCancel()

@@ -1,7 +1,4 @@
 import { DashboardCardProps } from '../types/dashboard'
-import { getBgColor } from '../utils/getBgColor'
-import { getButtonColor } from '../utils/getButtonColor'
-import { getTextColor } from '../utils/getTextColor'
 
 export const DashboardCard = ({ card, navigateTo }: DashboardCardProps) => {
 	return (
@@ -11,14 +8,14 @@ export const DashboardCard = ({ card, navigateTo }: DashboardCardProps) => {
 		>
 			<div className='flex flex-col h-full'>
 				<div
-					className={`p-3 ${getBgColor(card.color)} rounded-lg w-fit mb-4 group-hover:scale-105 transition-transform duration-300`}
+					className={`p-3 ${card.colors.iconBg} rounded-lg w-fit mb-4 group-hover:scale-105 transition-transform duration-300`}
 				>
-					<div className={getTextColor(card.color)}>{card.icon}</div>
+					<div className={card.colors.iconText}>{card.icon}</div>
 				</div>
 				<h3 className='text-lg font-semibold mb-2'>{card.title}</h3>
 				<p className='text-sm mb-4 grow'>{card.description}</p>
 				<button
-					className={`w-full py-2 ${getButtonColor(card.color)} text-white rounded-lg hover:opacity-90 transition-opacity duration-300 cursor-pointer mt-auto`}
+					className={`w-full py-2 ${card.colors.buttonBg} text-white rounded-lg hover:opacity-90 transition-opacity duration-300 cursor-pointer mt-auto`}
 				>
 					{card.actionText}
 				</button>

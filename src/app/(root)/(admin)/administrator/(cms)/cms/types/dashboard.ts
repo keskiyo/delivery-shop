@@ -5,7 +5,11 @@ export interface DashboardCard {
   title: string;
   description: string;
   icon: React.ReactNode;
-  color: string;
+  colors: {
+    iconBg: string;
+    iconText: string;
+    buttonBg: string;
+  };
   path: string;
   actionText: string;
 }

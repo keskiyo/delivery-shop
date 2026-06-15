@@ -135,7 +135,7 @@ export const CategoryFormFields = ({
 						)
 					}
 					disabled={isSubmitting}
-					className={inputClasses}
+					className={`${inputClasses} text-xs`}
 					placeholder='мясо, напитки, польза и вред'
 				/>
 			</div>

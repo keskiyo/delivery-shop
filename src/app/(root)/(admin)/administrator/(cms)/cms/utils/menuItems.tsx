@@ -1,7 +1,14 @@
 // Назначение: утилита menuItems.
 // Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
 
-import { FileText, FolderTree, Home, Plus, Tags } from 'lucide-react'
+import {
+	FileText,
+	FolderTree,
+	Home,
+	MessageSquare,
+	Plus,
+	Tags,
+} from 'lucide-react'
 
 export const menuItems = [
 	{
@@ -43,5 +50,15 @@ export const menuItems = [
 		icon: <Tags className='w-6 h-6' />,
 		shadow: 'shadow-lg shadow-purple-500/20',
 		path: '/administrator/cms/semantic-core',
+	},
+	{
+		id: 'comments',
+		title: 'Комментарии',
+		description: 'Управление комментариями',
+		icon: <MessageSquare className='w-6 h-6' />,
+		color: 'from-gray-500 to-gray-600',
+		hoverColor: 'hover:from-gray-600 hover:to-gray-700',
+		shadow: 'shadow-lg shadow-gray-500/20',
+		path: '/administrator/cms/comments',
 	},
 ]

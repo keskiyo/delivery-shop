@@ -2,6 +2,7 @@ export type UserRole = 'user' | 'admin' | 'manager'
 
 export interface UserData {
 	id: string
+	_id?: string
 	name: string
 	surname: string
 	email: string

@@ -25,7 +25,7 @@ export const useStatsValues = () => {
 				const data = await response.json()
 
 				setPublishedCount(data.publishedCount || 0)
-				setViewsCount(data.viewsCount || 0)
+				setViewsCount(data.totalViews || 0)
 			} catch (error) {
 				console.error('Ошибка загрузки статистики:', error)
 			} finally {
