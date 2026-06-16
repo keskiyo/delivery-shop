@@ -34,7 +34,7 @@ const TableHeader = ({ sortBy, sortDirection, onSort }: TableHeaderProps) => {
 							sortable
 								? 'cursor-default'
 								: 'cursor-not-allowed opacity-50'
-						} duration-300`}
+						} transition-custom`}
 					>
 						<div className='flex justify-center items-center gap-1'>
 							{label}

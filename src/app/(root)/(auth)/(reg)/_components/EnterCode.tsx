@@ -12,7 +12,6 @@ import { useEffect, useState } from 'react'
 import { CONFIG } from '../../../../../../config/config'
 import { buttonStyles } from '../../styles'
 
-
 export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 	const [code, setCode] = useState('')
 	const [error, setError] = useState('')
@@ -64,23 +63,24 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 				throw new Error(errorData.error || 'Ошибка установки пароля')
 			}
 
-			let userDataToUpdate = { ...regFormData }
-
-			if (verifyData.user.phoneNumberVerified) {
-				const {
-					email: omittedEmail,
-					phoneNumber: omittedPhoneNumber,
-					...rest
-				} = userDataToUpdate
-
-				void omittedEmail
-				void omittedPhoneNumber
-
-				userDataToUpdate = rest as typeof regFormData
+			const updateData = {
+				surname: regFormData.surname,
+				name: regFormData.name,
+				birthdayDate: regFormData.birthdayDate,
+				region: regFormData.region,
+				location: regFormData.location,
+				gender: regFormData.gender,
+				...(regFormData.card && { card: regFormData.card }),
+				...(regFormData.hasCard !== undefined && {
+					hasCard: regFormData.hasCard,
+				}),
 			}
 
-			const { error: updateError } =
-				await authClient.updateUser(userDataToUpdate)
+			const { error: updateError } = await (
+				authClient.updateUser as (
+					data: unknown,
+				) => ReturnType<typeof authClient.updateUser>
+			)(updateData)
 
 			if (updateError) throw updateError
 
@@ -179,7 +179,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 
 				<Link
 					href='/register'
-					className='h-8 text-xs text-muted-foreground hover:text-foreground w-30 flex items-center justify-center gap-x-2 mx-auto duration-300 cursor-pointer'
+					className='h-8 text-xs text-muted-foreground hover:text-foreground w-30 flex items-center justify-center gap-x-2 mx-auto transition-custom cursor-pointer'
 				>
 					<ArrowLeft size={24} />
 					Вернуться

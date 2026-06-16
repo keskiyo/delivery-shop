@@ -26,7 +26,6 @@ import Tags from '../../_components/Tags'
 import Title from '../../_components/Title'
 import Weight from '../../_components/Weight'
 
-
 export default function EditProductPage() {
 	const params = useParams()
 	const productId = params.id as string
@@ -39,7 +38,6 @@ export default function EditProductPage() {
 	const [image, setImage] = useState<File | null>(null)
 	const [existingImage, setExistingImage] = useState<string>('')
 	const [error, setError] = useState<string | null>(null)
-
 
 	useEffect(() => {
 		const fetchProduct = async () => {
@@ -88,7 +86,6 @@ export default function EditProductPage() {
 		}
 	}, [productId])
 
-
 	const uploadImage = async (imageFile: File | null): Promise<boolean> => {
 		if (!imageFile) return false
 
@@ -116,7 +113,6 @@ export default function EditProductPage() {
 
 	const hasActionsTag = formData.tags.includes('actions')
 
-
 	const handleSubmit = async (e: SyntheticEvent) => {
 		e.preventDefault()
 		if (
@@ -135,11 +131,14 @@ export default function EditProductPage() {
 
 		try {
 			if (image) {
-				const uploadResult = await showPromiseToast(uploadImage(image), {
-					pending: 'Загружаем изображение товара...',
-					success: 'Изображение товара загружено',
-					error: 'Ошибка загрузки изображения',
-				})
+				const uploadResult = await showPromiseToast(
+					uploadImage(image),
+					{
+						pending: 'Загружаем изображение товара...',
+						success: 'Изображение товара загружено',
+						error: 'Ошибка загрузки изображения',
+					},
+				)
 				if (!uploadResult) {
 					showToast({
 						type: 'error',
@@ -223,7 +222,7 @@ export default function EditProductPage() {
 				<div className='text-danger text-lg mb-4'>{error}</div>
 				<Link
 					href='/administrator/products-list'
-					className='bg-brand hover:bg-brand-hover text-white py-2 px-4 rounded duration-300'
+					className='bg-brand hover:bg-brand-hover text-white py-2 px-4 rounded transition-custom'
 				>
 					Вернуться к списку продуктов
 				</Link>
@@ -324,7 +323,7 @@ export default function EditProductPage() {
 				<button
 					type='submit'
 					disabled={loading || uploading}
-					className='w-full bg-brand hover:bg-brand-hover hover:shadow-button-default active:shadow-button-active text-white py-3 px-4 mb-5 rounded disabled:opacity-50 cursor-pointer duration-300'
+					className='w-full bg-brand hover:bg-brand-hover hover:shadow-button-default active:shadow-button-active text-white py-3 px-4 mb-5 rounded disabled:opacity-50 cursor-pointer transition-custom'
 				>
 					{loading ? 'Обновление...' : 'Обновить товар'}
 				</button>

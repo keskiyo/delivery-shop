@@ -3,14 +3,14 @@ import Link from 'next/link'
 import { BlogCategoryItemProps } from '../types/sidebar.types'
 
 export default function CategoryItem({
-  category,
-  index,
-  onClick,
+	category,
+	index,
+	onClick,
 }: BlogCategoryItemProps) {
 	return (
 		<Link href={`/blog/${category.slug}`} onClick={onClick}>
 			<div
-				className='group my-1 animate-slide-in rounded-md border border-border p-4 duration-300 hover:border-brand hover:bg-surface-hover'
+				className='group my-1 animate-slide-in rounded-md border border-border p-4 transition-custom hover:border-brand hover:bg-surface-hover'
 				style={{ animationDelay: `${index * 0.03}s` }}
 			>
 				<div className='flex items-center justify-between gap-3'>
@@ -34,7 +34,7 @@ export default function CategoryItem({
 							</div>
 						)}
 					</div>
-					<ChevronRight className='h-5 w-5 shrink-0 text-muted-foreground duration-300 group-hover:translate-x-1 group-hover:text-brand' />
+					<ChevronRight className='h-5 w-5 shrink-0 text-muted-foreground transition-custom group-hover:translate-x-1 group-hover:text-brand' />
 				</div>
 			</div>
 		</Link>

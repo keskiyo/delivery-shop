@@ -15,7 +15,6 @@ import { TRANSLATIONS } from '../../../utils/translations'
 
 const cardDiscountPercent = CONFIG.CARD_DISCOUNT_PERCENT
 
-
 const ProductCard = ({
 	id,
 	img,
@@ -52,7 +51,7 @@ const ProductCard = ({
 
 	return (
 		<div
-			className={`relative flex w-40 flex-col justify-between overflow-hidden rounded bg-card align-top duration-300 hover:shadow-article md:w-56 xl:w-68 ${isAdminOrderPage ? 'h-auto' : 'min-h-87.25'} p-0`}
+			className={`relative flex w-40 flex-col justify-between overflow-hidden rounded bg-card align-top transition-custom hover:shadow-article md:w-56 xl:w-68 ${isAdminOrderPage ? 'h-auto' : 'min-h-87.25'} p-0`}
 		>
 			{orderQuantity && (
 				<div className='absolute top-2 left-2 flex items-center p-1 bg-surface/90 rounded justify-center gap-1 text-lg font-bold z-10 text-text-soft'>

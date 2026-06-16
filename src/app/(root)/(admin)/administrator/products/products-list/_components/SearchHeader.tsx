@@ -15,7 +15,7 @@ const SearchHeader = () => {
 
 				<Link
 					href='/administrator/products/add-product'
-					className='bg-brand hover:bg-brand-hover hover:shadow-button-default active:shadow-button-active rounded text-white cursor-pointer duration-300 px-4 py-2 flex flex-row gap-2 items-center justify-center'
+					className='bg-brand hover:bg-brand-hover hover:shadow-button-default active:shadow-button-active rounded text-white cursor-pointer transition-custom px-4 py-2 flex flex-row gap-2 items-center justify-center'
 				>
 					<Plus size={16} />
 					Добавить товар

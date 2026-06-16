@@ -26,7 +26,7 @@ export const CodeEditorButton = ({ editor }: EditorProps) => {
 			<button
 				type='button'
 				onClick={() => setIsHtmlModalOpen(true)}
-				className='p-2 rounded duration-300 cursor-pointer text-foreground hover:bg-surface-hover'
+				className='p-2 rounded transition-custom cursor-pointer text-foreground hover:bg-surface-hover'
 				title='Редактор HTML (Ctrl+Shift+H)'
 			>
 				<FileCode className='w-4 h-4' />

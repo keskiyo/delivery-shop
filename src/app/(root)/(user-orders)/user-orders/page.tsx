@@ -88,7 +88,7 @@ const UserOrdersPage = () => {
 
 					<Link
 						href='/login'
-						className='rounded bg-promo px-6 py-3 text-white duration-300 hover:bg-promo-hover'
+						className='rounded bg-promo px-6 py-3 text-white transition-custom hover:bg-promo-hover'
 					>
 						Войти
 					</Link>

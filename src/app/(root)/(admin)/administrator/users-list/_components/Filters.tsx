@@ -25,7 +25,7 @@ const Filters = ({
 	}
 
 	const inputClasses =
-		'w-full p-2 border border-border bg-card hover:bg-surface-hover rounded duration-200 focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20'
+		'w-full p-2 border border-border bg-card hover:bg-surface-hover rounded transition-custom focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20'
 
 	return (
 		<div className='bg-card p-4 rounded-lg shadow-md border border-border'>
@@ -40,7 +40,7 @@ const Filters = ({
 					</button>
 					<button
 						onClick={onClearFilters}
-						className='px-3 py-2 text-xs justify-center text-text-soft items-center active:shadow-(--shadow-button-active) border-none rounded cursor-pointer transition-colors duration-300 bg-surface-hover hover:shadow-(--shadow-button-secondary)'
+						className='px-3 py-2 text-xs justify-center text-text-soft items-center active:shadow-(--shadow-button-active) border-none rounded cursor-pointer transition-colors transition-custom bg-surface-hover hover:shadow-(--shadow-button-secondary)'
 					>
 						Очистить
 					</button>

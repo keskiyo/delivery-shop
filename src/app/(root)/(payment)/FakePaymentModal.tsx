@@ -244,7 +244,7 @@ const FakePaymentModal = ({
 							type='button'
 							onClick={onClose}
 							disabled={isProcessing}
-							className='flex-1 py-2 px-4 border border-border rounded text-white hover:bg-promo bg-site-chrome disabled:opacity-50 duration-300 cursor-pointer'
+							className='flex-1 py-2 px-4 border border-border rounded text-white hover:bg-promo bg-site-chrome disabled:opacity-50 transition-custom cursor-pointer'
 						>
 							Отмена
 						</button>
@@ -257,7 +257,7 @@ const FakePaymentModal = ({
 								!cvc ||
 								!cardholder
 							}
-							className='flex-1 py-2 px-4 bg-brand text-white rounded hover:bg-brand-hover disabled:opacity-50 disabled:cursor-not-allowed duration-300 cursor-pointer'
+							className='flex-1 py-2 px-4 bg-brand text-white rounded hover:bg-brand-hover disabled:opacity-50 disabled:cursor-not-allowed transition-custom cursor-pointer'
 						>
 							{isProcessing
 								? 'Обработка...'

@@ -38,14 +38,14 @@ export function DeleteConfirmationModal({
 						<button
 							onClick={onClose}
 							disabled={isDeleting}
-							className='px-4 py-2 border border-border rounded hover:bg-surface-hover disabled:opacity-50 cursor-pointer text-foreground duration-300'
+							className='px-4 py-2 border border-border rounded hover:bg-surface-hover disabled:opacity-50 cursor-pointer text-foreground transition-custom'
 						>
 							Отмена
 						</button>
 						<button
 							onClick={onConfirm}
 							disabled={isDeleting}
-							className='px-4 py-2 bg-danger text-white rounded hover:bg-danger/90 disabled:opacity-50 flex items-center gap-2 cursor-pointer duration-300'
+							className='px-4 py-2 bg-danger text-white rounded hover:bg-danger/90 disabled:opacity-50 flex items-center gap-2 cursor-pointer transition-custom'
 						>
 							{isDeleting ? (
 								<>

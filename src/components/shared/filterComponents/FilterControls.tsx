@@ -1,6 +1,5 @@
 'use client'
 
-
 import { X } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
@@ -61,12 +60,12 @@ function FilterControlsContent({
 	return (
 		<div className='flex flex-warp flex-row gap-4'>
 			<div
-				className={`h-8 p-2 rounded text-xs flex justify-center items-center duration-300 cursor-not-allowed gap-x-2 border:bg-promo border ${(activeFilter && activeFilter.length > 0) || hasPriceFilter ? 'bg-brand text-white' : 'bg-surface text-text-soft'}`}
+				className={`h-8 p-2 rounded text-xs flex justify-center items-center transition-custom cursor-not-allowed gap-x-2 border:bg-promo border ${(activeFilter && activeFilter.length > 0) || hasPriceFilter ? 'bg-brand text-white' : 'bg-surface text-text-soft'}`}
 			>
 				{filterButtonText}
 			</div>
 			{hasPriceFilter && (
-				<div className='h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-brand text-white'>
+				<div className='h-8 p-2 rounded text-xs flex justify-center items-center transition-custom gap-x-2 bg-brand text-white'>
 					<Link
 						href={buildClearPriceFilterLink()}
 						className='flex items-center gap-x-2'
@@ -78,7 +77,7 @@ function FilterControlsContent({
 				</div>
 			)}
 			{activeFilterCount > 0 && (
-				<div className='h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-brand text-white'>
+				<div className='h-8 p-2 rounded text-xs flex justify-center items-center transition-custom gap-x-2 bg-brand text-white'>
 					<Link
 						href={buildClearFiltersLink()}
 						className='flex items-center gap-x-2'

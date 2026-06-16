@@ -7,7 +7,6 @@ import { Crop } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 import { ImageAttributesModal } from './ImageAttributesModal'
 
-
 const extractStyleValue = (style: string, property: string): string | null => {
 	if (!style) return null
 
@@ -16,7 +15,6 @@ const extractStyleValue = (style: string, property: string): string | null => {
 	const match = normalizedStyle.match(regex)
 	return match ? match[1].trim() : null
 }
-
 
 const getAlignFromStyle = (
 	style: string,
@@ -72,7 +70,6 @@ const getAlignFromStyle = (
 
 	return 'none'
 }
-
 
 const parseStyles = (styleString: string): Record<string, string> => {
 	const styles: Record<string, string> = {}
@@ -172,7 +169,6 @@ export const ImageAttributes = ({ editor }: EditorProps) => {
 		align: 'none' as 'left' | 'right' | 'center' | 'none',
 	})
 	const [isImageSelected, setIsImageSelected] = useState(false)
-
 
 	useEffect(() => {
 		if (!editor) return
@@ -346,7 +342,7 @@ export const ImageAttributes = ({ editor }: EditorProps) => {
 				editor,
 				selectedImage.pos,
 				newAttrs,
-				attributes.align
+				attributes.align,
 			)
 		}, 0)
 
@@ -394,7 +390,7 @@ export const ImageAttributes = ({ editor }: EditorProps) => {
 			<button
 				type='button'
 				onClick={openModal}
-				className={`p-2 rounded duration-300 cursor-pointer flex items-center gap-1 ${
+				className={`p-2 rounded transition-custom cursor-pointer flex items-center gap-1 ${
 					isImageSelected
 						? 'hover:bg-surface-pressed text-muted-foreground'
 						: 'text-muted-foreground cursor-not-allowed opacity-50'

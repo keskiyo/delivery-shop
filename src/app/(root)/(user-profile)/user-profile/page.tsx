@@ -15,7 +15,6 @@ import { useEffect, useState } from 'react'
 import ProfileHeader from '../_components/ProfileHeader'
 import SecuritySection from '../_components/SecuritySection'
 
-
 const ProfilePage = () => {
 	const { user, isAuth, checkAuth } = useAuthStore()
 	const [isCheckingAuth, setIsCheckingAuth] = useState(true)
@@ -69,7 +68,7 @@ const ProfilePage = () => {
 
 	return (
 		<div className='px-4 md:px-6 xl:px-8 max-w-5xl mx-auto'>
-			<div className='animate-slide-in opacity translate-y-8 bg-card rounded-xl shadow-xl overflow-hidden duration-300 ease-out'>
+			<div className='animate-slide-in opacity translate-y-8 bg-card rounded-xl shadow-xl overflow-hidden transition-custom ease-out'>
 				<ProfileHeader name={user.name} surname={user.surname} />
 
 				<div className='p-6 md:p-8'>

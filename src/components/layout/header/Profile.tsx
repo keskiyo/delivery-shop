@@ -121,7 +121,7 @@ const Profile = () => {
 			<div className='flex items-center gap-3'>
 				<Link
 					href='/login'
-					className='w-10 xl:w-30 flex justify-between items-center gap-x-2 p-2 rounded text-white text-base bg-promo hover:bg-promo-hover hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) duration-300 cursor-pointer'
+					className='w-10 xl:w-30 flex justify-between items-center gap-x-2 p-2 rounded text-white text-base bg-promo hover:bg-promo-hover hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) transition-custom cursor-pointer'
 				>
 					<div className='w-27 justify-center hidden xl:flex'>
 						<p>Войти</p>
@@ -159,20 +159,20 @@ const Profile = () => {
 						isMenuOpen
 							? 'opacity-100 translate-y-0'
 							: 'opacity-0 -translate-y-2 pointer-events-none'
-					} transition-all duration-300 min-w-40 ${
+					}  transition-custom min-w-40 ${
 						isMobile ? 'bottom-full top-auto mb-6' : 'top-full mt-6'
 					}`}
 				>
 					<Link
 						href='/user-profile'
-						className='block px-4 py-3 hover:text-promo duration-300'
+						className='block px-4 py-3 hover:text-promo transition-custom'
 						onClick={() => setIsMenuOpen(false)}
 					>
 						Профиль
 					</Link>
 					<Link
 						href='/'
-						className='block px-4 py-3 hover:text-promo duration-300'
+						className='block px-4 py-3 hover:text-promo transition-custom'
 						onClick={() => setIsMenuOpen(false)}
 					>
 						Главная
@@ -180,7 +180,7 @@ const Profile = () => {
 					{isManagerOrAdmin() && (
 						<Link
 							href='/administrator'
-							className='block px-4 py-3 hover:text-promo duration-300'
+							className='block px-4 py-3 hover:text-promo transition-custom'
 							onClick={() => setIsMenuOpen(false)}
 						>
 							Панель управления
@@ -192,7 +192,7 @@ const Profile = () => {
 					<button
 						onClick={handleLogout}
 						disabled={isLoggingOut}
-						className='w-full text-center px-4 py-3 hover:text-promo duration-300 border-t border-site-chrome-muted/30 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
+						className='w-full text-center px-4 py-3 hover:text-promo transition-custom border-t border-site-chrome-muted/30 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
 					>
 						{isLoggingOut ? 'Выход...' : 'Выйти'}
 					</button>

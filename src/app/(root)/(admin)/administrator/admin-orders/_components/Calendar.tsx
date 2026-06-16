@@ -62,14 +62,14 @@ const Calendar = ({
 				<div className='flex gap-x-4 justify-center'>
 					<button
 						onClick={handlePreviousMonth}
-						className='p-2 bg-surface-hover hover:bg-brand hover:text-white rounded duration-300 cursor-pointer'
+						className='p-2 bg-surface-hover hover:bg-brand hover:text-white rounded transition-custom cursor-pointer'
 					>
 						<ChevronLeft className='w-6 h-6' />
 					</button>
 
 					<button
 						onClick={handleNextMonth}
-						className='p-2 bg-surface-hover hover:bg-brand hover:text-white rounded duration-300 cursor-pointer'
+						className='p-2 bg-surface-hover hover:bg-brand hover:text-white rounded transition-custom cursor-pointer'
 					>
 						<ChevronRight className='w-6 h-6' />
 					</button>
@@ -95,7 +95,7 @@ const Calendar = ({
 						head_cell: 'font-normal py-2 text-sm',
 						row: 'border-b',
 						cell: 'h-10 text-center',
-						day: 'size-10 rounded-full text-text-soft hover:text-white hover:bg-promo duration-300 cursor-pointer mx-auto',
+						day: 'size-10 rounded-full text-text-soft hover:text-white hover:bg-promo transition-custom cursor-pointer mx-auto',
 						day_selected: 'bg-promo !text-white',
 						day_today: 'bg-promo-soft !text-promo',
 						day_outside: 'text-muted-foreground opacity-50',

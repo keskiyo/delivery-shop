@@ -12,7 +12,7 @@ const VerificationMethodModal = () => {
 
 	const iconContainerStyles = `
     p-3 mb-4 rounded-full bg-promo-soft
-    group-hover:bg-promo duration-300
+    group-hover:bg-promo transition-custom
   `
 
 	return (

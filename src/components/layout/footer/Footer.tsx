@@ -38,7 +38,7 @@ const Footer = () => {
 										alt='VKontakte'
 										width={24}
 										height={24}
-										className='hover:opacity-80 transition-opacity duration-300'
+										className='hover:opacity-80 transition-opacity transition-custom'
 									/>
 								</a>
 								<a
@@ -52,7 +52,7 @@ const Footer = () => {
 										alt='Odnoklassniki'
 										width={24}
 										height={24}
-										className='hover:opacity-80 transition-opacity duration-300'
+										className='hover:opacity-80 transition-opacity transition-custom'
 									/>
 								</a>
 							</div>
@@ -68,7 +68,7 @@ const Footer = () => {
 										alt='WhatsApp'
 										width={24}
 										height={24}
-										className='hover:opacity-80 transition-opacity duration-300'
+										className='hover:opacity-80 transition-opacity transition-custom'
 									/>
 								</a>
 								<a
@@ -82,7 +82,7 @@ const Footer = () => {
 										alt='Telegram'
 										width={24}
 										height={24}
-										className='hover:opacity-80 transition-opacity duration-300'
+										className='hover:opacity-80 transition-opacity transition-custom'
 									/>
 								</a>
 							</div>
@@ -91,10 +91,10 @@ const Footer = () => {
 						<div className='phone flex items-center'>
 							<a
 								href='tel:+78007773333'
-								className='flex items-center gap-x-2 hover:opacity-80 transition-opacity duration-300'
+								className='flex items-center gap-x-2 hover:opacity-80 transition-opacity transition-custom'
 							>
 								<Phone size={20} />
-								<p className='text-base hover:text-site-chrome-hover duration-300'>
+								<p className='text-base hover:text-site-chrome-hover transition-custom'>
 									8 800 777 33 33
 								</p>
 							</a>

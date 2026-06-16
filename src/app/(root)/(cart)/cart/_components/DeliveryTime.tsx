@@ -19,7 +19,6 @@ interface DeliveryTimeProps {
 	onTimeSlotChange: (timeSlot: string) => void
 }
 
-
 const DeliveryTime = ({
 	selectedDate,
 	selectedTimeSlot,
@@ -32,7 +31,6 @@ const DeliveryTime = ({
 	const [tooltipSlot, setTooltipSlot] = useState<string | null>(null)
 	const [schedule, setSchedule] = useState<Schedule>({})
 	const [loading, setLoading] = useState(true)
-
 
 	useEffect(() => {
 		const fetchDeliveryTimes = async () => {
@@ -53,8 +51,6 @@ const DeliveryTime = ({
 		fetchDeliveryTimes()
 	}, [])
 
-
-
 	useEffect(() => {
 		const dates = getDaysDates().map(dateString => {
 			const [year, month, day] = dateString.split('-')
@@ -68,12 +64,10 @@ const DeliveryTime = ({
 
 		setAvailableDates(dates)
 
-
 		if (!selectedDate && dates.length > 0) {
 			onDateChange(dates[0].value)
 		}
 	}, [selectedDate, onDateChange])
-
 
 	const getAllTimeSlots = () => {
 		if (!schedule[selectedDate]) return []
@@ -81,7 +75,6 @@ const DeliveryTime = ({
 		const daySchedule = schedule[selectedDate]
 		const slots = Object.keys(daySchedule)
 			.sort((a, b) => {
-
 				const [startA] = a.split('-')
 				const [startB] = b.split('-')
 				return startA.localeCompare(startB)
@@ -102,7 +95,6 @@ const DeliveryTime = ({
 			})
 		return slots
 	}
-
 
 	const handleTimeSlotClick = (slot: {
 		value: string
@@ -157,7 +149,6 @@ const DeliveryTime = ({
 								<div
 									key={slot.value}
 									className='relative'
-
 									onMouseEnter={() =>
 										(!slot.free || slot.passed) &&
 										setTooltipSlot(slot.value)
@@ -174,7 +165,7 @@ const DeliveryTime = ({
 										onClick={() =>
 											handleTimeSlotClick(slot)
 										}
-										className={`p-2 rounded justify-center items-center w-full h-10 duration-300  ${
+										className={`p-2 rounded justify-center items-center w-full h-10 transition-custom  ${
 											selectedTimeSlot === slot.value &&
 											slot.free &&
 											!slot.passed

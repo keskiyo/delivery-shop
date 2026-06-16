@@ -24,7 +24,7 @@ const CartControls = ({
 					}
 					className='hidden'
 				/>
-				<div className='w-6 h-6 bg-brand border border-brand rounded flex items-center justify-center duration-300'>
+				<div className='w-6 h-6 bg-brand border border-brand rounded flex items-center justify-center transition-custom'>
 					{isAllSelected ? (
 						<div className='w-3.75 h-px bg-white'></div>
 					) : (

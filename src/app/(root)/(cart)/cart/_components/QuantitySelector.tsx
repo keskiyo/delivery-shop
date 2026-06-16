@@ -9,7 +9,6 @@ interface QuantitySelectorProps {
 	onProductCard?: boolean
 }
 
-
 const QuantitySelector = memo(function QuantitySelector({
 	quantity,
 	isUpdating,
@@ -28,7 +27,7 @@ const QuantitySelector = memo(function QuantitySelector({
 			<button
 				onClick={onDecrement}
 				disabled={quantity < 0 || isUpdating || isOutOfStock}
-				className='w-6 h-6 rounded flex items-center justify-center duration-300 cursor-pointer disabled:opacity-50'
+				className='w-6 h-6 rounded flex items-center justify-center transition-custom cursor-pointer disabled:opacity-50'
 			>
 				{/* Горизонтальная линия (минус) */}
 				<div className='w-3.75 h-px bg-white'></div>
@@ -43,7 +42,7 @@ const QuantitySelector = memo(function QuantitySelector({
 			<button
 				onClick={onIncrement}
 				disabled={isUpdating || isOutOfStock}
-				className='w-6 h-6 rounded flex items-center justify-center duration-300 cursor-pointer disabled:opacity-50'
+				className='w-6 h-6 rounded flex items-center justify-center transition-custom cursor-pointer disabled:opacity-50'
 			>
 				{/* Иконка плюса (две пересекающиеся линии) */}
 				<div className='relative w-3.75 h-3.75'>

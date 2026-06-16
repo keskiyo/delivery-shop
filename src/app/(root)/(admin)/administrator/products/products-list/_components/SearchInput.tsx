@@ -29,13 +29,13 @@ const SearchInput = ({
 						value={searchTerm}
 						onChange={e => onSearchTermChange(e.target.value)}
 						onKeyDown={onKeyPress}
-						className='w-full pl-10 pr-4 py-2 rounded outline-none border border-border bg-card focus:border-brand focus:shadow-button-default duration-300 text-foreground placeholder:text-muted-foreground'
+						className='w-full pl-10 pr-4 py-2 rounded outline-none border border-border bg-card focus:border-brand focus:shadow-button-default transition-custom text-foreground placeholder:text-muted-foreground'
 					/>
 				</div>
 				<button
 					onClick={onSearch}
 					disabled={loading || searchTerm.trim().length < 3}
-					className='bg-brand hover:bg-brand-hover hover:shadow-button-default active:shadow-button-active rounded text-white duration-300 px-4 py-2 flex flex-row gap-2 items-center justify-center disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed'
+					className='bg-brand hover:bg-brand-hover hover:shadow-button-default active:shadow-button-active rounded text-white transition-custom px-4 py-2 flex flex-row gap-2 items-center justify-center disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed'
 				>
 					{loading ? (
 						<Loader size={18} className='animate-spin' />

@@ -16,7 +16,6 @@ export const HtmlEditorModal = ({
 	const modalRef = useRef<HTMLDivElement>(null)
 	const previewRef = useRef<HTMLDivElement>(null)
 
-
 	const handleUpdate = useCallback(() => {
 		if (!editor || !htmlContent.trim()) return
 
@@ -32,7 +31,6 @@ export const HtmlEditorModal = ({
 
 		onCloseAction()
 	}, [editor, htmlContent, onCloseAction])
-
 
 	useEffect(() => {
 		const handleEscape = (e: KeyboardEvent) => {
@@ -59,14 +57,12 @@ export const HtmlEditorModal = ({
 		}
 	}, [isOpen, onCloseAction, handleUpdate])
 
-
 	useEffect(() => {
 		if (isOpen && editor) {
 			const html = editor.getHTML()
 			setHtmlContent(html)
 		}
 	}, [isOpen, editor])
-
 
 	const handleCopy = async () => {
 		try {
@@ -78,17 +74,14 @@ export const HtmlEditorModal = ({
 		}
 	}
 
-
 	const handleEditorChange = (value: string | undefined) => {
 		setHtmlContent(value || '')
 	}
-
 
 	const handleEditorDidMount = (
 		editorInstance: monaco.editor.IStandaloneCodeEditor,
 	) => {
 		editorRef.current = editorInstance
-
 
 		setTimeout(() => {
 			editorInstance.focus()
@@ -106,9 +99,7 @@ export const HtmlEditorModal = ({
 		}, 100)
 	}
 
-
 	const handleBeforeMount = (monacoInstance: typeof monaco) => {
-
 		monacoInstance.editor.defineTheme('dark-theme', {
 			base: 'vs-dark',
 			inherit: true,
@@ -160,7 +151,7 @@ export const HtmlEditorModal = ({
 						</div>
 						<button
 							onClick={handleCopy}
-							className={`px-3 py-1.5 rounded-lg flex items-center gap-2 text-sm duration-300 cursor-pointer ${
+							className={`px-3 py-1.5 rounded-lg flex items-center gap-2 text-sm transition-custom cursor-pointer ${
 								copied
 									? 'bg-green-600 text-white'
 									: 'bg-gray-800 text-muted-foreground hover:bg-gray-700'
@@ -180,7 +171,7 @@ export const HtmlEditorModal = ({
 						</button>
 						<button
 							onClick={onCloseAction}
-							className='p-2 text-muted-foreground hover:text-white hover:bg-gray-800 rounded-lg duration-300 cursor-pointer'
+							className='p-2 text-muted-foreground hover:text-white hover:bg-gray-800 rounded-lg transition-custom cursor-pointer'
 							title='Закрыть (Esc)'
 						>
 							<X className='w-5 h-5' />
@@ -279,14 +270,14 @@ export const HtmlEditorModal = ({
 						<div className='flex items-center gap-3'>
 							<button
 								onClick={onCloseAction}
-								className='px-4 py-2 text-sm font-medium text-muted-foreground bg-gray-800 hover:bg-gray-700 rounded-lg duration-300 cursor-pointer'
+								className='px-4 py-2 text-sm font-medium text-muted-foreground bg-gray-800 hover:bg-gray-700 rounded-lg transition-custom cursor-pointer'
 							>
 								Отмена (Esc)
 							</button>
 							<button
 								onClick={handleUpdate}
 								disabled={!htmlContent.trim()}
-								className={`px-4 py-2 text-sm font-medium rounded-lg flex items-center gap-2 duration-300 cursor-pointer ${
+								className={`px-4 py-2 text-sm font-medium rounded-lg flex items-center gap-2 transition-custom cursor-pointer ${
 									htmlContent.trim()
 										? 'bg-brand text-white hover:bg-brand-hover'
 										: 'bg-gray-800 text-muted-foreground cursor-not-allowed'

@@ -11,7 +11,6 @@ import PasswordInput from '../../_components/PasswordInput'
 import Tooltip from '../../_components/Tooltip'
 import { buttonStyles } from '../../styles'
 
-
 const EnterPasswordPage = () => {
 	return (
 		<Suspense
@@ -169,7 +168,7 @@ const EnterPasswordContent = () => {
 				<div className='flex flex-row flex-wrap mx-auto text-xs'>
 					<button
 						onClick={() => router.replace('/login')}
-						className='h-8 text-muted-foreground hover:text-foreground w-30 flex items-center justify-center gap-x-2 duration-300 cursor-pointer'
+						className='h-8 text-muted-foreground hover:text-foreground w-30 flex items-center justify-center gap-x-2 transition-custom cursor-pointer'
 					>
 						<ArrowLeft size={24} />
 						Вернуться
@@ -177,7 +176,7 @@ const EnterPasswordContent = () => {
 
 					<button
 						onClick={handleForgotPassword}
-						className='h-8 text-muted-foreground hover:text-foreground w-30 flex items-center justify-center duration-300'
+						className='h-8 text-muted-foreground hover:text-foreground w-30 flex items-center justify-center transition-custom'
 					>
 						Забыли пароль?
 					</button>

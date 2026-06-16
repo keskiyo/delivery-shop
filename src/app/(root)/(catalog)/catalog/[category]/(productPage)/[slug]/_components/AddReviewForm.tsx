@@ -9,7 +9,6 @@ interface AddReviewFormProps {
 	onReviewAdded: () => void
 }
 
-
 const AddReviewForm = ({ productId, onReviewAdded }: AddReviewFormProps) => {
 	const [rating, setRating] = useState(0)
 	const [hoverRating, setHoverRating] = useState(0)
@@ -143,7 +142,7 @@ const AddReviewForm = ({ productId, onReviewAdded }: AddReviewFormProps) => {
 						submitting
 							? 'cursor-not-allowed bg-promo-soft text-promo'
 							: 'text-base bg-promo text-white hover:shadow-(--shadow-article)'
-					} w-47 p-2 flex items-center justify-center rounded duration-300 cursor-pointer`}
+					} w-47 p-2 flex items-center justify-center rounded transition-custom cursor-pointer`}
 				>
 					{submitting ? 'Отправка...' : 'Отправить отзыв'}
 				</button>

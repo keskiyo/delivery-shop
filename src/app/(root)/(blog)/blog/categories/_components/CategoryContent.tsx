@@ -11,7 +11,7 @@ export default function CategoryContent({
 	return (
 		<div className='flex flex-1 flex-col p-5 md:p-6'>
 			<CategoryMeta createdAt={createdAt} author={author} />
-			<h2 className='mb-3 line-clamp-2 text-xl font-bold text-foreground transition-colors duration-300 group-hover:text-brand md:text-2xl'>
+			<h2 className='mb-3 line-clamp-2 text-xl font-bold text-foreground transition-colors transition-custom group-hover:text-brand md:text-2xl'>
 				{name}
 			</h2>
 
@@ -24,10 +24,10 @@ export default function CategoryContent({
 					<div className='text-xs text-muted-foreground'>
 						К статье
 					</div>
-					<div className='inline-flex items-center justify-center gap-2 rounded bg-brand px-5 py-2.5 text-sm font-semibold text-white duration-300 group-hover:bg-brand-hover'>
+					<div className='inline-flex items-center justify-center gap-2 rounded bg-brand px-5 py-2.5 text-sm font-semibold text-white transition-custom group-hover:bg-brand-hover'>
 						<span>Подробнее</span>
 						<ArrowRight
-							className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1'
+							className='h-4 w-4 transition-transform transition-custom group-hover:translate-x-1'
 							strokeWidth={2}
 						/>
 					</div>

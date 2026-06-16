@@ -6,24 +6,19 @@ export const ListMenu = ({ editor }: EditorProps) => {
 	const [isBulletListActive, setIsBulletListActive] = useState(false)
 	const [isOrderedListActive, setIsOrderedListActive] = useState(false)
 
-
 	useEffect(() => {
 		if (!editor) return
 
 		const updateActiveStates = () => {
-
 			const bulletActive = editor.isActive('bulletList')
 			setIsBulletListActive(bulletActive)
-
 
 			const orderedActive = editor.isActive('orderedList')
 			setIsOrderedListActive(orderedActive)
 		}
 
-
 		editor.on('selectionUpdate', updateActiveStates)
 		editor.on('transaction', updateActiveStates)
-
 
 		updateActiveStates()
 
@@ -37,7 +32,6 @@ export const ListMenu = ({ editor }: EditorProps) => {
 		const handleKeyDown = (event: KeyboardEvent) => {
 			if (!editor) return
 
-
 			if (
 				event.ctrlKey &&
 				event.shiftKey &&
@@ -48,10 +42,7 @@ export const ListMenu = ({ editor }: EditorProps) => {
 				event.preventDefault()
 				event.stopPropagation()
 				editor.chain().focus().toggleBulletList().run()
-			}
-
-
-			else if (
+			} else if (
 				event.ctrlKey &&
 				event.shiftKey &&
 				(event.code === 'Digit9' ||
@@ -101,7 +92,7 @@ export const ListMenu = ({ editor }: EditorProps) => {
 					type='button'
 					onClick={button.action}
 					className={`
-            p-2 rounded duration-300 cursor-pointer
+            p-2 rounded transition-custom cursor-pointer
             ${
 				button.isActive
 					? 'bg-brand text-white hover:bg-brand-hover'

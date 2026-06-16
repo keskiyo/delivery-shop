@@ -11,7 +11,6 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 	useEffect(() => {
 		if (!editor) return
 
-
 		const updateStates = () => {
 			setIsBold(editor.isActive('bold'))
 			setIsItalic(editor.isActive('italic'))
@@ -19,13 +18,10 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 			setIsStrike(editor.isActive('strike'))
 		}
 
-
 		editor.on('selectionUpdate', updateStates)
 		editor.on('transaction', updateStates)
 
-
 		updateStates()
-
 
 		const handleKeyDown = (event: KeyboardEvent) => {
 			if (event.ctrlKey && event.shiftKey && event.code === 'KeyS') {
@@ -105,7 +101,7 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 				onClick={handleBold}
 				disabled={!canBold}
 				className={`
-          p-2 rounded duration-300
+          p-2 rounded transition-custom
           ${
 				!canBold
 					? 'opacity-40 cursor-not-allowed text-muted-foreground'
@@ -125,7 +121,7 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 				onClick={handleItalic}
 				disabled={!canItalic}
 				className={`
-          p-2 rounded duration-300
+          p-2 rounded transition-custom
           ${
 				!canItalic
 					? 'opacity-40 cursor-not-allowed text-muted-foreground'
@@ -145,7 +141,7 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 				onClick={handleUnderline}
 				disabled={!canUnderline}
 				className={`
-          p-2 rounded duration-300
+          p-2 rounded transition-custom
           ${
 				!canUnderline
 					? 'opacity-40 cursor-not-allowed text-muted-foreground'
@@ -165,7 +161,7 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 				onClick={handleStrike}
 				disabled={!canStrike}
 				className={`
-          p-2 rounded duration-300
+          p-2 rounded transition-custom
           ${
 				!canStrike
 					? 'opacity-40 cursor-not-allowed text-muted-foreground'

@@ -7,7 +7,6 @@ interface DeleteAccountModalProps {
 	error?: string | null
 }
 
-
 const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({
 	isOpen,
 	onClose,
@@ -37,13 +36,13 @@ const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({
 				<div className='flex justify-end gap-3'>
 					<button
 						onClick={onClose}
-						className='flex-1 bg-site-chrome border-none text-white rounded flex hover:shadow-button-secondary p-2 justify-center items-center active:shadow-(--shadow-button-active) duration-300 cursor-pointer'
+						className='flex-1 bg-site-chrome border-none text-white rounded flex hover:shadow-button-secondary p-2 justify-center items-center active:shadow-(--shadow-button-active) transition-custom cursor-pointer'
 					>
 						Отмена
 					</button>
 					<button
 						onClick={onConfirm}
-						className='flex-1 px-4 py-2 bg-danger text-white rounded hover:shadow-button-cancel duration-300 cursor-pointer'
+						className='flex-1 px-4 py-2 bg-danger text-white rounded hover:shadow-button-cancel transition-custom cursor-pointer'
 					>
 						Удалить
 					</button>

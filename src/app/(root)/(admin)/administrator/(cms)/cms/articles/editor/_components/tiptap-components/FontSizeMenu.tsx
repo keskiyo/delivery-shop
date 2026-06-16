@@ -24,7 +24,6 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
 	const dropdownRef = useRef<HTMLDivElement>(null)
 	const buttonRef = useRef<HTMLButtonElement>(null)
 
-
 	const extractFontSizeFromStyle = useCallback(
 		(style: string): string | null => {
 			const match = style.match(/font-size:\s*([^;]+)/i)
@@ -32,7 +31,6 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
 		},
 		[],
 	)
-
 
 	const findFontSizeInSelection = useCallback(() => {
 		if (!editor) return DEFAULT_SIZE
@@ -42,20 +40,16 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
 
 		let foundSize = null
 
-
 		const textStyleAttrs = editor.getAttributes('textStyle')
 		foundSize = textStyleAttrs?.fontSize
 
-
 		if (!foundSize) {
 			try {
-
 				const pos = Math.min(from, state.doc.content.size - 1)
 				const domPos = view.domAtPos(pos)
 				const node = domPos.node as HTMLElement
 
 				if (node) {
-
 					let currentElement: HTMLElement | null =
 						node.nodeType === 3 ? node.parentElement : node
 
@@ -80,20 +74,16 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
 		return foundSize || DEFAULT_SIZE
 	}, [editor, extractFontSizeFromStyle])
 
-
 	const updateSize = useCallback(() => {
 		if (!editor) return
 
 		const size = findFontSizeInSelection()
 
-
 		const finalSize = !size || size === 'unset' ? DEFAULT_SIZE : size
-
 
 		const normalizedSize = finalSize.includes('px')
 			? finalSize
 			: `${finalSize}px`
-
 
 		if (finalSize === 'unset' || !finalSize) {
 			setDisplaySize('16')
@@ -102,17 +92,14 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
 		}
 	}, [editor, findFontSizeInSelection])
 
-
 	useEffect(() => {
 		if (!editor) return
-
 
 		const handleUpdate = () => {
 			updateSize()
 		}
 
 		editor.on('selectionUpdate', handleUpdate)
-
 
 		editor.on('transaction', ({ transaction }) => {
 			if (transaction.selectionSet || transaction.docChanged) {
@@ -122,16 +109,13 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
 			}
 		})
 
-
 		updateSize()
-
 
 		return () => {
 			editor.off('selectionUpdate', handleUpdate)
 			editor.off('transaction', handleUpdate)
 		}
 	}, [editor, updateSize])
-
 
 	useEffect(() => {
 		if (isOpen && editor) {
@@ -158,7 +142,6 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
 	const handleSizeChange = (size: string) => {
 		if (!editor) return
 
-
 		editor.chain().focus()
 
 		if (size === 'unset') {
@@ -178,7 +161,6 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
 
 	if (!editor) return null
 
-
 	const checkIsActive = (sizeValue: string) => {
 		const currentSize = findFontSizeInSelection()
 
@@ -188,7 +170,6 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
 				: `${currentSize}px`
 			return !currentSize || normalizedCurrent === DEFAULT_SIZE
 		}
-
 
 		const normalizedCurrent = currentSize.includes('px')
 			? currentSize
@@ -207,7 +188,7 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
 				type='button'
 				onClick={handleButtonClick}
 				className={`
-          flex items-center gap-1 px-3 py-1.5 text-sm border rounded-md duration-300 cursor-pointer
+          flex items-center gap-1 px-3 py-1.5 text-sm border rounded-md transition-custom cursor-pointer
           ${
 				isOpen
 					? 'bg-brand text-white border-brand'
@@ -218,7 +199,7 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
 			>
 				<span className='text-xs font-mono'>{displaySize}</span>
 				<ChevronDown
-					className={`w-3 h-3 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+					className={`w-3 h-3 transition-transform transition-custom ${isOpen ? 'rotate-180' : ''}`}
 				/>
 			</button>
 
@@ -249,7 +230,7 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
 										handleSizeChange(size.value)
 									}}
 									className={`
-                    w-full text-left px-3 py-2.5 text-sm hover:bg-surface-subtle flex justify-between items-center duration-300 cursor-pointer
+                    w-full text-left px-3 py-2.5 text-sm hover:bg-surface-subtle flex justify-between items-center transition-custom cursor-pointer
                     ${
 						isActive
 							? 'bg-brand text-white border-r-2 border-brand'

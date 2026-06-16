@@ -71,7 +71,7 @@ export const AdvancedFilters = () => {
 					<div className='flex gap-2 text-sm'>
 						<button
 							onClick={() => handleSortDirectionChange('asc')}
-							className={`flex-1 px-4 py-2 border rounded cursor-pointer duration-300 ${
+							className={`flex-1 px-4 py-2 border rounded cursor-pointer transition-custom ${
 								sortDirection === 'asc'
 									? 'bg-brand-soft border-brand text-brand'
 									: 'border-border hover:bg-surface-hover'
@@ -81,7 +81,7 @@ export const AdvancedFilters = () => {
 						</button>
 						<button
 							onClick={() => handleSortDirectionChange('desc')}
-							className={`flex-1 px-4 py-2 border rounded cursor-pointer duration-300 ${
+							className={`flex-1 px-4 py-2 border rounded cursor-pointer transition-custom ${
 								sortDirection === 'desc'
 									? 'bg-brand-soft border-brand text-brand'
 									: 'border-border hover:bg-surface-hover'

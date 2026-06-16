@@ -103,7 +103,7 @@ export default function ImageUploader({
 	return (
 		<div className='w-full'>
 			<div
-				className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer duration-300 ${
+				className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-custom ${
 					isDragging
 						? 'border-brand bg-brand-soft'
 						: 'border-border hover:border-text-soft'
@@ -154,7 +154,7 @@ export default function ImageUploader({
 						) : (
 							<>
 								Перетащите изображение или{' '}
-								<span className='font-medium text-brand hover:text-brand-hover duration-300'>
+								<span className='font-medium text-brand hover:text-brand-hover transition-custom'>
 									выберите файл
 								</span>
 							</>

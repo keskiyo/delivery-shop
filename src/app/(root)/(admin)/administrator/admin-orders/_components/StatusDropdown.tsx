@@ -48,7 +48,7 @@ const StatusDropdown = ({
 					!isUpdating && setIsDropdownOpen(!isDropdownOpen)
 				}
 				disabled={isUpdating}
-				className={`w-50 h-10 flex items-center justify-between p-2 rounded text-base border-none outline-none duration-300 cursor-pointer ${getStatusColorClass(
+				className={`w-50 h-10 flex items-center justify-between p-2 rounded text-base border-none outline-none transition-custom cursor-pointer ${getStatusColorClass(
 					currentStatusLabel,
 					true,
 				)} ${isUpdating ? 'opacity-50 cursor-not-allowed' : ''}`}
@@ -92,7 +92,7 @@ const StatusDropdown = ({
 								onStatusChange(status.label)
 								setIsDropdownOpen(false)
 							}}
-							className={`flex items-center gap-3 w-full rounded px-2 py-2 text-left duration-300 cursor-pointer ${getStatusColorClass(
+							className={`flex items-center gap-3 w-full rounded px-2 py-2 text-left transition-custom cursor-pointer ${getStatusColorClass(
 								status.label,
 								false,
 							)}`}

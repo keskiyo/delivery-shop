@@ -85,7 +85,7 @@ export default function BlogSearch() {
 								<button
 									type='button'
 									onClick={handleClear}
-									className='absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer rounded p-0.5 text-muted-foreground duration-300 hover:bg-surface-hover hover:text-foreground'
+									className='absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer rounded p-0.5 text-muted-foreground transition-custom hover:bg-surface-hover hover:text-foreground'
 									aria-label='Очистить поиск'
 								>
 									<X className='h-5 w-5' />
@@ -97,7 +97,7 @@ export default function BlogSearch() {
 							disabled={
 								isSearching || searchTerm.trim().length < 3
 							}
-							className='flex cursor-pointer items-center gap-2 rounded bg-brand px-6 py-3 text-white duration-300 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50'
+							className='flex cursor-pointer items-center gap-2 rounded bg-brand px-6 py-3 text-white transition-custom hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50'
 						>
 							{isSearching ? (
 								<>
@@ -139,7 +139,7 @@ export default function BlogSearch() {
 								</h3>
 								<button
 									onClick={closeResults}
-									className='cursor-pointer rounded p-1 text-muted-foreground duration-300 hover:bg-surface-hover hover:text-foreground'
+									className='cursor-pointer rounded p-1 text-muted-foreground transition-custom hover:bg-surface-hover hover:text-foreground'
 									aria-label='Закрыть результаты'
 								>
 									<X className='h-5 w-5' />
@@ -153,7 +153,7 @@ export default function BlogSearch() {
 											<Link
 												key={article._id}
 												href={`/blog/${article.category?.slug}/${article.slug}`}
-												className='block p-4 duration-300 hover:bg-surface-hover'
+												className='block p-4 transition-custom hover:bg-surface-hover'
 												onClick={closeResults}
 											>
 												<div className='flex items-start gap-3'>

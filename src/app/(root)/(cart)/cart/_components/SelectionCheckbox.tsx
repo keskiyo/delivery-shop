@@ -11,7 +11,7 @@ const SelectionCheckbox = memo(function SelectionCheckbox({
 	onSelectionChange,
 }: SelectionCheckboxProps) {
 	return (
-		<label className='rounded bg-card p-1.5 flex items-center cursor-pointer z-20 absolute top-2 transition-all duration-300'>
+		<label className='rounded bg-card p-1.5 flex items-center cursor-pointer z-20 absolute top-2  transition-custom'>
 			<input
 				type='checkbox'
 				checked={isSelected}
@@ -20,7 +20,7 @@ const SelectionCheckbox = memo(function SelectionCheckbox({
 			/>
 			<span
 				className={`
-          w-5 h-5 border rounded flex items-center justify-center duration-300
+          w-5 h-5 border rounded flex items-center justify-center transition-custom
           ${isSelected ? 'bg-brand border-brand' : 'bg-card border-border'}
         `}
 			>

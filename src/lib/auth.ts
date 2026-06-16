@@ -1,57 +1,63 @@
-/**
- * Конфигурация аутентификации через better-auth
- *
- * Настройки:
- * - Сессия: 30 дней (expiresIn), обновление каждые 24ч (updateAge)
- * - Email/password: с подтверждением email, сброс пароля на 1 день
- * - Phone: OTP на 4 цифры, 3 попытки, срок 5 минут
- * - Доп. поля: phoneNumber, surname, birthdayDate, region, location, gender, card, role
- *
- * Важные примечания:
- * - При входе email+password: сессия создается от better-auth
- * - При входе phone+password: сессия создается кастомно (см. api/auth/login)
- * - SMS отправка закомментирована, OTP выводится в консоль
- * - Email отправляется через Resend (нужен API ключ в .env)
- *
- * База данных: MongoDB 'deliveryshop'
- * Адаптер: mongodbAdapter из better-auth/adapters/mongodb
- */
+import DeleteVerify from '@/app/(root)/(auth)/(reg)/_components/DeleteVerify'
 import VerifyEmail from '@/app/(root)/(auth)/(reg)/_components/VerifyEmail'
 import PasswordResetEmail from '@/app/(root)/(auth)/(update-pass)/_components/PasswordResetEmail'
 import EmailChangeVerification from '@/app/(root)/(user-profile)/_components/EmailChangeVerification'
+import { render } from '@react-email/render'
 import { betterAuth } from 'better-auth'
 import { mongodbAdapter } from 'better-auth/adapters/mongodb'
 import { admin, phoneNumber } from 'better-auth/plugins'
 import { MongoClient } from 'mongodb'
-import { Resend } from 'resend'
+import nodemailer from 'nodemailer'
 import { CONFIG } from '../../config/config'
 import { deleteUserAvatar } from '../../utils/deleteUserAvatar'
 
-const client = new MongoClient(process.env.FOOD_DELIVERY_DB_URL!)
-const db = client.db('deliveryshop')
-const resend = new Resend(process.env.RESEND_API_KEY)
+const client = new MongoClient(process.env.DB_CONNECTION_STRING!)
+const db = client.db(process.env.DBNAME)
 
+const transporter = nodemailer.createTransport({
+	host: process.env.SMTP_HOST,
+	port: Number(process.env.SMTP_PORT),
+	secure: process.env.SMTP_SECURE === 'true',
+	auth: {
+		user: process.env.SMTP_USER!,
+		pass: process.env.SMTP_PASSWORD!,
+	},
+})
 
+interface SendEmailParams {
+	from: string
+	to: string
+	subject: string
+	react: React.ReactElement
+}
 
-
+const smtpEmail = {
+	send: async ({ from, to, subject, react }: SendEmailParams) => {
+		const html = await render(react)
+		await transporter.sendMail({
+			from,
+			to,
+			subject,
+			html,
+		})
+	},
+}
 
 export const auth = betterAuth({
 	database: mongodbAdapter(db),
-
 	session: {
 		expiresIn: 60 * 60 * 24 * 30,
 		updateAge: 60 * 60 * 24,
 	},
-
 	emailAndPassword: {
 		enabled: true,
 		requireEmailVerification: true,
 		resetPasswordTokenExpiresIn: 86400,
 		sendResetPassword: async ({ user, url }) => {
-			await resend.emails.send({
-				from: 'Acme <onboarding@resend.dev>',
+			await smtpEmail.send({
+				from: `${process.env.SMTP_FROM_NAME} <${process.env.SMTP_FROM_EMAIL}>`,
 				to: user.email,
-				subject: 'Сброс пароля для аккаунта "Фудмаркета"',
+				subject: 'Сброс пароля для Фудмаркет',
 				react: PasswordResetEmail({
 					username: user.name,
 					resetUrl: url,
@@ -59,46 +65,53 @@ export const auth = betterAuth({
 			})
 		},
 	},
-
 	emailVerification: {
 		sendVerificationEmail: async ({ user, url }) => {
-			await resend.emails.send({
-				from: 'Acme <onboarding@resend.dev>',
+			await smtpEmail.send({
+				from: `${process.env.SMTP_FROM_NAME} <${process.env.SMTP_FROM_EMAIL}>`,
 				to: user.email,
 				subject: 'Подтвердите email',
-				react: VerifyEmail({
-					username: user.name,
-					verifyUrl: url,
-				}),
+				react: VerifyEmail({ username: user.name, verifyUrl: url }),
 			})
 		},
 		expiresIn: 86400,
 		autoSignInAfterVerification: false,
 	},
-
 	plugins: [
 		phoneNumber({
 			sendOTP: async ({ phoneNumber, code }) => {
-				console.log(`[DEBUG] Отправка OTP: ${code} для ${phoneNumber}`)
+				try {
+					const cleanPhone = phoneNumber.replace(/\D/g, '')
+
+					const url =
+						`https://sms.ru/sms/send` +
+						`?api_id=${process.env.SMS_API_ID}` +
+						`&to=${cleanPhone}` +
+						`&msg=Ваш код подтверждения от "Фудмаркет": ${code}` +
+						`&json=1`
+
+					const response = await fetch(url)
+					const result = await response.json()
+
+					if (result.status !== 'OK') {
+						if (result.sms) {
+							for (const phone in result.sms) {
+								if (result.sms[phone].status !== 'OK') {
+									throw new Error(
+										`Ошибка для номера ${phone}: ${result.sms[phone].status_text || 'Неизвестная ошибка'}`,
+									)
+								}
+							}
+						}
+						throw new Error(
+							result.status_text || 'Ошибка отправки SMS',
+						)
+					}
+				} catch (error) {
+					console.error('Ошибка отправки SMS:', error)
+					throw error
+				}
 			},
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			signUpOnVerification: {
 				getTempEmail: phoneNumber => {
 					return `${phoneNumber}${CONFIG.TEMPORARY_EMAIL_DOMAIN}`
@@ -114,26 +127,22 @@ export const auth = betterAuth({
 		}),
 		admin(),
 	],
-
 	user: {
 		changeEmail: {
 			enabled: true,
-			sendChangeEmailVerificationEmail: async ({
+			sendChangeEmailVerification: async ({
 				user,
 				newEmail,
 				url,
 			}: {
-				user: {
-					name: string
-					email: string
-				}
+				user: { email: string; name: string }
 				newEmail: string
 				url: string
 			}) => {
-				await resend.emails.send({
-					from: 'Фудмаркет <onboarding@resend.dev>',
+				await smtpEmail.send({
+					from: `${process.env.SMTP_FROM_NAME} <${process.env.SMTP_FROM_EMAIL}>`,
 					to: user.email,
-					subject: 'Подтвердите изменение email в Фудмаркете',
+					subject: 'Подтверждение смены email в Фудмаркете',
 					react: EmailChangeVerification({
 						username: user.name,
 						currentEmail: user.email,
@@ -145,6 +154,23 @@ export const auth = betterAuth({
 		},
 		deleteUser: {
 			enabled: true,
+			sendDeleteAccountVerification: async ({
+				user,
+				url,
+			}: {
+				user: { email: string; name: string }
+				url: string
+			}) => {
+				await smtpEmail.send({
+					from: `${process.env.SMTP_FROM_NAME} <${process.env.SMTP_FROM_EMAIL}>`,
+					to: user.email,
+					subject: 'Удаление аккаунта',
+					react: DeleteVerify({
+						username: user.name,
+						verifyUrl: url,
+					}),
+				})
+			},
 			afterDelete: async user => {
 				await deleteUserAvatar(user.id)
 			},
@@ -167,183 +193,3 @@ export const auth = betterAuth({
 		},
 	},
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,6 +1,5 @@
 'use client'
 
-
 import { X } from 'lucide-react'
 import { useState } from 'react'
 import FilterButtons from './FilterButtons'
@@ -24,12 +23,12 @@ const DropFilter = ({
 		<div className='xl:hidden'>
 			<button
 				onClick={() => setIsFilterOpen(true)}
-				className='ml-3 xl:hidden w-32 h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-brand text-white cursor-pointer'
+				className='ml-3 xl:hidden w-32 h-8 p-2 rounded text-xs flex justify-center items-center transition-custom gap-x-2 bg-brand text-white cursor-pointer'
 			>
 				Фильтр
 			</button>
 			<div
-				className={`xl:hidden flex flex-col gap-y-10 fixed top-0 left-0 bg-card h-screen w-full max-w-90 z-50 p-4 overflow-y-auto shadow-(--shadow-article) transform origin-left transition-all duration-300 ease-in-out ${isFilterOpen ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}
+				className={`xl:hidden flex flex-col gap-y-10 fixed top-0 left-0 bg-card h-screen w-full max-w-90 z-50 p-4 overflow-y-auto shadow-(--shadow-article) transform origin-left  transition-custom ease-in-out ${isFilterOpen ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}
 			>
 				<div className='flex justify-between items-center mb-4 h-11 rounded text-base font-bold p-2'>
 					<h3 className='flex justify-start items-center'>Фильтр</h3>

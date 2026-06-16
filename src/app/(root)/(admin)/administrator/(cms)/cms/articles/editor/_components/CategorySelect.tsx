@@ -26,7 +26,7 @@ export const CategorySelect = ({ value, onChange }: CategorySelectProps) => {
 				<button
 					type='button'
 					onClick={() => setIsOpen(!isOpen)}
-					className='w-full px-3 py-2.5 bg-card border border-border rounded focus:outline-none focus:ring-3 focus:ring-brand/20 focus:border-brand duration-300 text-left flex justify-between items-center'
+					className='w-full px-3 py-2.5 bg-card border border-border rounded focus:outline-none focus:ring-3 focus:ring-brand/20 focus:border-brand transition-custom text-left flex justify-between items-center'
 				>
 					<span
 						className={
@@ -40,7 +40,7 @@ export const CategorySelect = ({ value, onChange }: CategorySelectProps) => {
 							: 'Выберите категорию'}
 					</span>
 					<ChevronDown
-						className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+						className={`w-4 h-4 text-muted-foreground transition-transform transition-custom ${isOpen ? 'rotate-180' : ''}`}
 					/>
 				</button>
 

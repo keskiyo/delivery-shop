@@ -32,7 +32,7 @@ export const ParagraphButton = ({ editor }: EditorProps) => {
 	return (
 		<button
 			onClick={() => editor.chain().focus().setParagraph().run()}
-			className={`p-2 rounded duration-300 cursor-pointer ${
+			className={`p-2 rounded transition-custom cursor-pointer ${
 				isActive
 					? 'bg-brand text-white hover:bg-brand-hover'
 					: 'text-foreground hover:bg-surface-hover'

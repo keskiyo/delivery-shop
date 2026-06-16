@@ -4,7 +4,6 @@ import { PaginationProps } from '@/types/paginationProps'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 
-
 const createPageUrl = (
 	basePath: string,
 	params: URLSearchParams,
@@ -14,7 +13,6 @@ const createPageUrl = (
 	newParams.set('page', page.toString())
 	return `${basePath}?${newParams.toString()}`
 }
-
 
 const getVisiblePages = (totalPages: number, currentPage: number) => {
 	if (totalPages <= 5) {
@@ -45,7 +43,6 @@ const getVisiblePages = (totalPages: number, currentPage: number) => {
 	return pages
 }
 
-
 const Pagination = ({
 	totalItems,
 	currentPage,
@@ -58,7 +55,7 @@ const Pagination = ({
 	const visiblePages = getVisiblePages(totalPages, currentPage)
 
 	const buttonSize =
-		'w-5 h-5 md:w-10 md:h-10 flex items-center justify-center rounded duration-300'
+		'w-5 h-5 md:w-10 md:h-10 flex items-center justify-center rounded transition-custom'
 	const buttonActive = 'text-text-soft hover:text-promo'
 	const buttonDisabled = 'hidden cursor-not-allowed'
 	const pageButtonClass = `${buttonSize}`

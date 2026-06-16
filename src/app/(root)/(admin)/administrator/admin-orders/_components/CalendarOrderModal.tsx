@@ -84,7 +84,8 @@ const CalendarOrderModal = ({
 		try {
 			await showPromiseToast(
 				(async () => {
-					const formattedDate = formatDateToLocalYYYYMMDD(selectedDate)
+					const formattedDate =
+						formatDateToLocalYYYYMMDD(selectedDate)
 
 					const response = await fetch(
 						`/api/admin/orders/${orderId}/delivery-time`,
@@ -124,7 +125,7 @@ const CalendarOrderModal = ({
 	if (!isOpen) return null
 	return (
 		<div className='absolute left-1/2 top-full z-50 mt-3 -translate-x-1/2'>
-			<div className='animate-in fade-in-0 slide-in-from-top-2 duration-200 px-5 py-5 w-92 max-w-[calc(100vw-2rem)] bg-card rounded shadow-button-secondary text-foreground border border-border'>
+			<div className='animate-in fade-in-0 slide-in-from-top-2 transition-custom px-5 py-5 w-92 max-w-[calc(100vw-2rem)] bg-card rounded shadow-button-secondary text-foreground border border-border'>
 				<div className='flex justify-between items-center pb-6'>
 					<h4 className='text-lg'>Изменить время</h4>
 					<button
@@ -189,7 +190,7 @@ const CalendarOrderModal = ({
 															slot,
 														)
 													}
-													className={`py-2 px-3 rounded text-sm duration-300 cursor-pointer ${
+													className={`py-2 px-3 rounded text-sm transition-custom cursor-pointer ${
 														shouldHighlight
 															? 'bg-brand text-white'
 															: 'bg-surface-hover hover:bg-brand hover:text-white'

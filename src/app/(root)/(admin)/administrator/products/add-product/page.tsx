@@ -25,7 +25,6 @@ import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react'
 
-
 export default function AddProductPage() {
 	const [formData, setFormData] =
 		useState<AddProductFormData>(initialProductData)
@@ -36,11 +35,9 @@ export default function AddProductPage() {
 		null,
 	)
 
-
 	const generateProductId = useCallback(() => {
 		return Math.floor(Math.random() * 1000000000000000)
 	}, [])
-
 
 	const uploadImage = async (
 		imageFile: File | null,
@@ -76,7 +73,6 @@ export default function AddProductPage() {
 	}
 
 	const hasActionsTag = formData.tags.includes('actions')
-
 
 	const handleSubmit = async (e: SyntheticEvent) => {
 		e.preventDefault()
@@ -284,7 +280,7 @@ export default function AddProductPage() {
 				<button
 					type='submit'
 					disabled={loading || uploading}
-					className='w-full bg-brand hover:bg-brand-hover hover:shadow-button-default active:shadow-button-active text-white py-3 px-4 mb-5 rounded disabled:opacity-50 cursor-pointer duration-300'
+					className='w-full bg-brand hover:bg-brand-hover hover:shadow-button-default active:shadow-button-active text-white py-3 px-4 mb-5 rounded disabled:opacity-50 cursor-pointer transition-custom'
 				>
 					{loading ? 'Добавление...' : 'Добавить товар'}
 				</button>

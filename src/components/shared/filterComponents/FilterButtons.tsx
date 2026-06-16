@@ -1,6 +1,5 @@
 'use client'
 
-
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
@@ -41,7 +40,7 @@ function FilterButtonsContent({ basePath }: { basePath: string }) {
 				<Link
 					key={filter.key}
 					href={buildFilterLink(filter.key)}
-					className={`h-8 p-2 text-xs flex justify-center items-center duration-300 cursor-pointer rounded-2xl ${
+					className={`h-8 p-2 text-xs flex justify-center items-center transition-custom cursor-pointer rounded-2xl ${
 						isFilterActive(filter.key)
 							? 'bg-brand text-white  hover:shadow-(--shadow-button-default) active:shadow-(--shadow-button-active)'
 							: 'bg-surface hover:shadow-(--shadow-button-secondary) active:shadow-(--shadow-button-active) border:bg-promo border'

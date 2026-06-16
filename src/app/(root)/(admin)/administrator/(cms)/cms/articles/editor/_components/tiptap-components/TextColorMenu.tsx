@@ -30,28 +30,23 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 	const dropdownRef = useRef<HTMLDivElement>(null)
 	const buttonRef = useRef<HTMLButtonElement>(null)
 
-
 	const getCurrentColor = useCallback(() => {
 		if (!editor) return '#000000'
 		const attrs = editor.getAttributes('textStyle')
 		return attrs?.color || '#000000'
 	}, [editor])
 
-
 	const updateColor = useCallback(() => {
 		const color = getCurrentColor()
 		setCurrentColor(color)
-
 
 		if (color !== '#000000' && !TEXT_COLORS.includes(color)) {
 			setCustomColor(color)
 		}
 	}, [getCurrentColor])
 
-
 	useEffect(() => {
 		if (!editor) return
-
 
 		const handleUpdate = () => {
 			updateColor()
@@ -60,16 +55,13 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 		editor.on('selectionUpdate', handleUpdate)
 		editor.on('transaction', handleUpdate)
 
-
 		updateColor()
-
 
 		return () => {
 			editor.off('selectionUpdate', handleUpdate)
 			editor.off('transaction', handleUpdate)
 		}
 	}, [editor, updateColor])
-
 
 	useEffect(() => {
 		if (isOpen && editor) {
@@ -107,17 +99,14 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 		if (!editor) return
 
 		if (color === '#000000') {
-
 			editor.chain().focus().unsetColor().run()
 		} else {
-
 			editor.chain().focus().setColor(color).run()
 		}
 
 		if (!TEXT_COLORS.includes(color)) {
 			setCustomColor(color)
 		}
-
 
 		setTimeout(updateColor, 10)
 	}
@@ -164,7 +153,7 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 					setIsOpen(!isOpen)
 				}}
 				className={`
-          p-2 rounded duration-300 border cursor-pointer
+          p-2 rounded transition-custom border cursor-pointer
           ${
 				isOpen
 					? 'bg-brand text-white border-brand'
@@ -213,7 +202,7 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 										setIsOpen(false)
 									}}
 									className={`
-                    w-5 h-5 rounded border hover:scale-110 transition-transform relative duration-300 cursor-pointer
+                    w-5 h-5 rounded border hover:scale-110 transition-transform relative transition-custom cursor-pointer
                     ${color === '#000000' ? 'border-2' : 'border border-border'}
                   `}
 									style={{ backgroundColor: color }}
@@ -261,7 +250,7 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 								<button
 									type='button'
 									onClick={applyCustomColor}
-									className='w-full px-2 py-1 text-xs bg-brand text-white rounded hover:bg-brand-hover duration-300 cursor-pointer'
+									className='w-full px-2 py-1 text-xs bg-brand text-white rounded hover:bg-brand-hover transition-custom cursor-pointer'
 								>
 									Применить цвет
 								</button>
@@ -269,7 +258,9 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 						</div>
 
 						<div className='flex items-center justify-between p-1 bg-surface-subtle rounded text-xs mb-2'>
-							<div className='text-muted-foreground'>Текущий:</div>
+							<div className='text-muted-foreground'>
+								Текущий:
+							</div>
 							<div className='flex items-center gap-1'>
 								<div
 									className='w-4 h-4 rounded border border-border'
@@ -287,7 +278,7 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 					<button
 						type='button'
 						onClick={resetColor}
-						className='w-full px-2 py-1 text-xs rounded duration-300 cursor-pointer bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 hover:border-red-300'
+						className='w-full px-2 py-1 text-xs rounded transition-custom cursor-pointer bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 hover:border-red-300'
 					>
 						Сбросить цвет
 					</button>

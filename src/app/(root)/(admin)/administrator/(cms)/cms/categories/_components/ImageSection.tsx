@@ -59,7 +59,7 @@ export const ImageSection = ({
 								type='button'
 								onClick={handleRemoveImage}
 								disabled={isUploading || isSubmitting}
-								className='flex items-center gap-1 px-3 py-1.5 text-sm bg-danger-soft text-danger rounded hover:bg-danger hover:text-white cursor-pointer duration-300 disabled:opacity-50 disabled:cursor-not-allowed border border-danger/30 hover:border-danger'
+								className='flex items-center gap-1 px-3 py-1.5 text-sm bg-danger-soft text-danger rounded hover:bg-danger hover:text-white cursor-pointer transition-custom disabled:opacity-50 disabled:cursor-not-allowed border border-danger/30 hover:border-danger'
 							>
 								<XCircle className='w-4 h-4' />
 								Удалить изображение
@@ -85,7 +85,7 @@ export const ImageSection = ({
 									disabled={isUploading || isSubmitting}
 									className='hidden'
 								/>
-								<div className='w-full px-3 py-2 text-sm border border-border rounded focus-within:border-brand focus-within:ring-3 focus-within:ring-brand/20 duration-300 disabled:opacity-50 disabled:bg-surface-hover hover:bg-surface-hover'>
+								<div className='w-full px-3 py-2 text-sm border border-border rounded focus-within:border-brand focus-within:ring-3 focus-within:ring-brand/20 transition-custom disabled:opacity-50 disabled:bg-surface-hover hover:bg-surface-hover'>
 									<div className='flex items-center gap-2 text-muted-foreground'>
 										<Upload className='w-4 h-4' />
 										<span>Выберите файл</span>
@@ -142,7 +142,7 @@ export const ImageSection = ({
 								)
 							}
 							disabled={isSubmitting}
-							className='w-full px-3 py-2.5 border rounded focus:outline-none focus:ring-3 duration-300 border-border bg-card focus:border-brand focus:ring-brand/20 disabled:opacity-50 disabled:bg-surface-hover placeholder:text-muted-foreground'
+							className='w-full px-3 py-2.5 border rounded focus:outline-none focus:ring-3 transition-custom border-border bg-card focus:border-brand focus:ring-brand/20 disabled:opacity-50 disabled:bg-surface-hover placeholder:text-muted-foreground'
 							placeholder='Например: Соки и напитки в ассортименте'
 						/>
 					</div>

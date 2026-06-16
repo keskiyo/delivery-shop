@@ -3,7 +3,7 @@ import { MenuOverlayProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/t
 export const MenuOverlay = ({ isOpen, onClose }: MenuOverlayProps) => {
 	return (
 		<div
-			className={`fixed inset-0 bg-muted/80 backdrop-blur-sm z-40 transition-all duration-700 ease-out ${
+			className={`fixed inset-0 bg-muted/80 backdrop-blur-sm z-40  transition-custom ease-out ${
 				isOpen
 					? 'opacity-100 pointer-events-auto'
 					: 'opacity-0 pointer-events-none'

@@ -10,7 +10,7 @@ export const CategoryFormFields = ({
 }: FormFieldsProps) => {
 	const { isSubmitting, formData } = useCategoryStore()
 	const inputClasses =
-		'w-full px-3 py-2.5 border rounded focus:outline-none focus:ring-3 duration-300 border-border bg-card focus:border-brand focus:ring-brand/20 disabled:opacity-50 disabled:bg-surface-hover placeholder:text-muted-foreground'
+		'w-full px-3 py-2.5 border rounded focus:outline-none focus:ring-3 transition-custom border-border bg-card focus:border-brand focus:ring-brand/20 disabled:opacity-50 disabled:bg-surface-hover placeholder:text-muted-foreground'
 
 	return (
 		<div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
@@ -72,7 +72,7 @@ export const CategoryFormFields = ({
 					<button
 						type='button'
 						onClick={onGenerateSlug}
-						className='flex w-full items-center gap-1 px-4 py-2.5 bg-surface-hover text-foreground rounded hover:bg-surface-pressed text-sm whitespace-nowrap cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-border hover:border-text-soft focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand'
+						className='flex w-full items-center gap-1 px-4 py-2.5 bg-surface-hover text-foreground rounded hover:bg-surface-pressed text-sm whitespace-nowrap cursor-pointer transition-custom disabled:opacity-50 disabled:cursor-not-allowed border border-border hover:border-text-soft focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand'
 						title='Сгенерировать из названия'
 					>
 						<RotateCcw className='w-4 h-4' />

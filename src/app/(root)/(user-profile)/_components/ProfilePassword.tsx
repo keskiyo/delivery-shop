@@ -4,7 +4,6 @@ import { ArrowRight, Key, X } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-
 const ProfilePassword = () => {
 	const { user, logout } = useAuthStore()
 	const router = useRouter()
@@ -73,9 +72,12 @@ const ProfilePassword = () => {
 							</h3>
 							<button
 								onClick={handleCancel}
-								className='rounded duration-300 cursor-pointer mb-8 bg-surface hover:bg-surface-hover absolute top-0 right-0 m-3'
+								className='rounded transition-custom cursor-pointer mb-8 bg-surface hover:bg-surface-hover absolute top-0 right-0 m-3'
 							>
-								<X size={24} className='text-muted-foreground' />
+								<X
+									size={24}
+									className='text-muted-foreground'
+								/>
 							</button>
 						</div>
 

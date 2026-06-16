@@ -18,7 +18,7 @@ export const CategorySubmitSection = ({ onCancel }: SubmitSectionProps) => {
 				<button
 					type='submit'
 					disabled={isUploading || isSubmitting}
-					className='flex w-full items-center gap-1 text-xs md:text-base px-4 py-2.5 bg-brand text-white rounded hover:bg-brand-hover cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium focus:outline-none focus:ring-3 focus:ring-brand/30'
+					className='flex w-full items-center gap-1 text-xs md:text-base px-4 py-2.5 bg-brand text-white rounded hover:bg-brand-hover cursor-pointer transition-custom disabled:opacity-50 disabled:cursor-not-allowed font-medium focus:outline-none focus:ring-3 focus:ring-brand/30'
 				>
 					<Save className='w-4 h-4 shrink-0' />
 					{isSubmitting
@@ -31,7 +31,7 @@ export const CategorySubmitSection = ({ onCancel }: SubmitSectionProps) => {
 					type='button'
 					onClick={onCancel}
 					disabled={isUploading || isSubmitting}
-					className='px-4 py-2.5 w-full border border-border rounded cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium focus:outline-none focus:ring-3 focus:ring-brand/20 hover:bg-surface-hover'
+					className='px-4 py-2.5 w-full border border-border rounded cursor-pointer transition-custom disabled:opacity-50 disabled:cursor-not-allowed font-medium focus:outline-none focus:ring-3 focus:ring-brand/20 hover:bg-surface-hover'
 				>
 					Отмена
 				</button>

@@ -32,7 +32,7 @@ export const ArticleFormFields = ({
 					}
 					required
 					disabled={isSubmitting}
-					className='w-full px-3 py-2.5 border border-border rounded focus:outline-none focus:ring-3 duration-300
+					className='w-full px-3 py-2.5 border border-border rounded focus:outline-none focus:ring-3 transition-custom
            bg-card focus:border-brand focus:ring-brand/20
           disabled:opacity-50 disabled:bg-surface-subtle placeholder:text-muted-foreground'
 					placeholder='Например: Соки'
@@ -61,14 +61,14 @@ export const ArticleFormFields = ({
 						}}
 						required
 						disabled={isSubmitting}
-						className='flex-1 px-3 py-2.5 rounded focus:outline-none focus:ring-3 duration-300 bg-card focus:border-brand focus:ring-brand/20 disabled:opacity-50 disabled:bg-surface-subtle placeholder:text-muted-foreground border border-border'
+						className='flex-1 px-3 py-2.5 rounded focus:outline-none focus:ring-3 transition-custom bg-card focus:border-brand focus:ring-brand/20 disabled:opacity-50 disabled:bg-surface-subtle placeholder:text-muted-foreground border border-border'
 						placeholder='soki'
 					/>
 					<button
 						type='button'
 						onClick={onGenerateSlug}
 						disabled={isSubmitting}
-						className='flex w-full items-center gap-1 px-4 py-2.5 rounded hover:bg-surface-hover text-sm whitespace-nowrap cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-border  focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand'
+						className='flex w-full items-center gap-1 px-4 py-2.5 rounded hover:bg-surface-hover text-sm whitespace-nowrap cursor-pointer transition-custom disabled:opacity-50 disabled:cursor-not-allowed border border-border  focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand'
 						title='Сгенерировать из названия'
 					>
 						<RotateCcw className='w-4 h-4' />
@@ -102,7 +102,7 @@ export const ArticleFormFields = ({
 					}
 					rows={3}
 					disabled={isSubmitting}
-					className='w-full px-3 py-2.5 border border-border rounded focus:outline-none focus:ring-3 duration-300 resize-none bg-card focus:border-brand focus:ring-brand/20
+					className='w-full px-3 py-2.5 border border-border rounded focus:outline-none focus:ring-3 transition-custom resize-none bg-card focus:border-brand focus:ring-brand/20
           disabled:opacity-50 disabled:bg-surface-subtle placeholder:text-muted-foreground'
 					placeholder='Краткое описание категории для поисковых систем (10-160 символов)'
 				/>
@@ -132,7 +132,7 @@ export const ArticleFormFields = ({
 						)
 					}
 					disabled={isSubmitting}
-					className='text-xs w-full px-3 py-2.5 border border-border rounded focus:outline-none focus:ring-3 duration-300 bg-card focus:border-brand focus:ring-brand/20 disabled:opacity-50 disabled:bg-surface-subtle placeholder:text-muted-foreground'
+					className='text-xs w-full px-3 py-2.5 border border-border rounded focus:outline-none focus:ring-3 transition-custom bg-card focus:border-brand focus:ring-brand/20 disabled:opacity-50 disabled:bg-surface-subtle placeholder:text-muted-foreground'
 					placeholder='мясо, напитки, польза и вред'
 				/>
 			</div>

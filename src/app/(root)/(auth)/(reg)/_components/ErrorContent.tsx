@@ -40,7 +40,7 @@ export const ErrorContent = ({
 				{primaryAction && (
 					<button
 						onClick={primaryAction.onClick}
-						className={`w-full py-3 px-4 bg-danger text-white rounded shadow-md hover:shadow-lg duration-300 flex items-center justify-center space-x-2 cursor-pointer ${primaryAction.className}`}
+						className={`w-full py-3 px-4 bg-danger text-white rounded shadow-md hover:shadow-lg transition-custom flex items-center justify-center space-x-2 cursor-pointer ${primaryAction.className}`}
 					>
 						<span>{primaryAction.label}</span>
 					</button>
@@ -49,7 +49,7 @@ export const ErrorContent = ({
 				{secondaryAction && (
 					<button
 						onClick={secondaryAction.onClick}
-						className={`w-full py-3 px-4 border bg-surface border-border text-foreground rounded hover:bg-surface-hover duration-300 flex items-center justify-center space-x-2 cursor-pointer ${secondaryAction.className}`}
+						className={`w-full py-3 px-4 border bg-surface border-border text-foreground rounded hover:bg-surface-hover transition-custom flex items-center justify-center space-x-2 cursor-pointer ${secondaryAction.className}`}
 					>
 						<RotateCw size={24} />
 						<span>{secondaryAction.label}</span>

@@ -55,7 +55,7 @@ export const ImageMenu = ({ editor, onDragOverChange }: ImageMenuProps) => {
 				<button
 					type='button'
 					onClick={() => fileInputRef.current?.click()}
-					className={`px-1 py-2 rounded duration-300 cursor-pointer flex items-center gap-1 relative ${
+					className={`px-1 py-2 rounded transition-custom cursor-pointer flex items-center gap-1 relative ${
 						isUploading
 							? 'bg-surface-hover text-muted-foreground cursor-not-allowed'
 							: 'hover:bg-surface-pressed text-muted-foreground'
@@ -75,7 +75,7 @@ export const ImageMenu = ({ editor, onDragOverChange }: ImageMenuProps) => {
 			<button
 				type='button'
 				onClick={insertByUrl}
-				className='p-2 rounded hover:bg-surface-pressed duration-300 cursor-pointer text-muted-foreground'
+				className='p-2 rounded hover:bg-surface-pressed transition-custom cursor-pointer text-muted-foreground'
 				title='Вставить по URL'
 				disabled={isUploading}
 			>

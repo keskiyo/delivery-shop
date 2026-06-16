@@ -33,7 +33,7 @@ export const ArticlePreviewModal = ({
 					</div>
 					<button
 						onClick={onClose}
-						className='p-2 text-muted-foreground hover:text-foreground hover:bg-surface-hover rounded duration-300 cursor-pointer'
+						className='p-2 text-muted-foreground hover:text-foreground hover:bg-surface-hover rounded transition-custom cursor-pointer'
 						aria-label='Закрыть'
 					>
 						<X className='w-5 h-5' />
@@ -77,7 +77,7 @@ export const ArticlePreviewModal = ({
 						<div className='flex gap-3'>
 							<button
 								onClick={onClose}
-								className='px-5 py-2.5 bg-brand text-white rounded hover:bg-brand-hover font-medium duration-300 cursor-pointer focus:outline-none focus:ring-3 focus:ring-brand/20'
+								className='px-5 py-2.5 bg-brand text-white rounded hover:bg-brand-hover font-medium transition-custom cursor-pointer focus:outline-none focus:ring-3 focus:ring-brand/20'
 							>
 								Закрыть предпросмотр
 							</button>

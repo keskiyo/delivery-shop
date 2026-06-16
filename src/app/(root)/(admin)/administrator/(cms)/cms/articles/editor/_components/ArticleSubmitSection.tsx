@@ -93,9 +93,9 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 						type='button'
 						onClick={() => setShowPreview(true)}
 						disabled={!canPreview || isUploading || isSubmitting}
-						className={`flex items-center justify-center gap-2 px-2 md:px-6 py-3 rounded-lg cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium whitespace-nowrap shadow-lg ${
+						className={`flex items-center justify-center gap-2 px-2 md:px-6 py-3 rounded-lg cursor-pointer transition-custom disabled:opacity-50 disabled:cursor-not-allowed font-medium whitespace-nowrap shadow-lg ${
 							canPreview
-								? 'bg-brand text-white hover:bg-brand-hover transform hover:-translate-y-0.5 transition-all'
+								? 'bg-brand text-white hover:bg-brand-hover transform hover:-translate-y-0.5 '
 								: 'bg-surface-pressed text-white'
 						}`}
 						title={
@@ -129,7 +129,7 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 							type='button'
 							onClick={() => handleFeaturedChange(false)}
 							disabled={isUploading || isSubmitting}
-							className={`flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
+							className={`flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer transition-custom disabled:opacity-50 disabled:cursor-not-allowed ${
 								!isFeatured
 									? 'bg-card border-brand shadow-sm'
 									: 'bg-card border-border hover:bg-surface-hover'
@@ -150,7 +150,7 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 							type='button'
 							onClick={() => handleFeaturedChange(true)}
 							disabled={isUploading || isSubmitting}
-							className={`flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
+							className={`flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer transition-custom disabled:opacity-50 disabled:cursor-not-allowed ${
 								isFeatured
 									? 'bg-warning text-white border-warning shadow-sm'
 									: 'bg-card border-border hover:bg-surface-hover'
@@ -210,7 +210,7 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 							type='button'
 							onClick={() => handleStatusChange('draft')}
 							disabled={isUploading || isSubmitting}
-							className={`flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
+							className={`flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer transition-custom disabled:opacity-50 disabled:cursor-not-allowed ${
 								articleStatus === 'draft'
 									? 'bg-warning text-white border-warning shadow-sm'
 									: 'bg-card border-border hover:bg-surface-hover'
@@ -229,7 +229,7 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 							type='button'
 							onClick={() => handleStatusChange('published')}
 							disabled={isUploading || isSubmitting}
-							className={`flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
+							className={`flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer transition-custom disabled:opacity-50 disabled:cursor-not-allowed ${
 								articleStatus === 'published'
 									? 'bg-brand text-white border-brand shadow-sm'
 									: 'bg-card border-border hover:bg-surface-hover'
@@ -285,7 +285,7 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 				<button
 					type='submit'
 					disabled={isUploading || isSubmitting}
-					className={`flex items-center justify-center gap-2 px-5 py-3 rounded-lg cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium flex-1 ${
+					className={`flex items-center justify-center gap-2 px-5 py-3 rounded-lg cursor-pointer transition-custom disabled:opacity-50 disabled:cursor-not-allowed font-medium flex-1 ${
 						articleStatus === 'published'
 							? isFeatured
 								? 'bg-warning text-white hover:bg-warning/90'
@@ -311,7 +311,7 @@ export const ArticleSubmitSection = ({ onCancel }: SubmitSectionProps) => {
 					type='button'
 					onClick={handleCancelWithConfirm}
 					disabled={isUploading || isSubmitting}
-					className='px-5 py-3 border border-border rounded-lg hover:bg-surface-hover cursor-pointer duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium'
+					className='px-5 py-3 border border-border rounded-lg hover:bg-surface-hover cursor-pointer transition-custom disabled:opacity-50 disabled:cursor-not-allowed font-medium'
 				>
 					Отмена
 				</button>

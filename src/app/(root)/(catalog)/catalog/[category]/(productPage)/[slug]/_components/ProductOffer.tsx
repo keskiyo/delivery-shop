@@ -29,7 +29,7 @@ const ProductOffer = ({ discountedPrice, cardPrice }: ProductOfferProps) => {
 					</p>
 					<div className='group relative cursor-help'>
 						<Info size={16} className='select-none opacity-70' />
-						<div className='absolute right-0 bottom-full mb-2 w-48 p-3 bg-popover text-popover-foreground border border-border shadow-lg rounded-md text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50'>
+						<div className='absolute right-0 bottom-full mb-2 w-48 p-3 bg-popover text-popover-foreground border border-border shadow-lg rounded-md text-xs opacity-0 group-hover:opacity-100 transition-opacity transition-custom pointer-events-none z-50'>
 							Скидка {CONFIG.CARD_DISCOUNT_PERCENT}% по карте
 							лояльности «Фудмаркета». Оформите карту на кассе или
 							закажите с курьером!

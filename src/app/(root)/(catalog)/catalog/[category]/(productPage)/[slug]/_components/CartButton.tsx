@@ -6,7 +6,6 @@ import { useCartStore } from '@/store/cartStore'
 import { ShoppingCart } from 'lucide-react'
 import { useState } from 'react'
 
-
 const CartButton = ({ productId }: { productId: string }) => {
 	const [isLoading, setIsLoading] = useState(false)
 	const [showTooltip, setShowTooltip] = useState(false)
@@ -47,7 +46,7 @@ const CartButton = ({ productId }: { productId: string }) => {
 				<button
 					type='submit'
 					disabled={isLoading}
-					className='mb-2 h-10 md:h-15 w-full bg-promo text-white text-base md:text-2xl p-4 flex justify-center items-center rounded hover:shadow-article active:shadow-button-active duration-300 cursor-pointer relative disabled:opacity-60 disabled:cursor-not-allowed'
+					className='mb-2 h-10 md:h-15 w-full bg-promo text-white text-base md:text-2xl p-4 flex justify-center items-center rounded hover:shadow-article active:shadow-button-active transition-custom cursor-pointer relative disabled:opacity-60 disabled:cursor-not-allowed'
 				>
 					<ShoppingCart className='absolute right-4 h-8 w-8' />
 

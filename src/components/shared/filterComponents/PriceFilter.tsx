@@ -21,7 +21,6 @@ type PriceRange = {
 	max: number
 }
 
-
 function PriceFilterContent(props: {
 	basePath: string
 	category: string
@@ -44,11 +43,9 @@ function PriceFilterContent(props: {
 	const router = useRouter()
 	const searchParams = useSearchParams()
 
-
 	const urlPriceFrom = searchParams.get('priceFrom') || ''
 	const urlPriceTo = searchParams.get('priceTo') || ''
 	const urlInStock = searchParams.get('inStock') === 'true'
-
 
 	const [inputValues, setInputValues] = useState({
 		from: urlPriceFrom,
@@ -60,7 +57,6 @@ function PriceFilterContent(props: {
 	const [priceRange, setPriceRange] = useState<PriceRange>(
 		CONFIG.FALLBACK_PRICE_RANGE,
 	)
-
 
 	const fetchPriceData = useCallback(async () => {
 		setIsLoading(true)
@@ -86,14 +82,12 @@ function PriceFilterContent(props: {
 			const data = await response.json()
 			const receivedRange = data.priceRange || CONFIG.FALLBACK_PRICE_RANGE
 
-
 			const roundedRange = {
 				min: Math.floor(Number(receivedRange.min)),
 				max: Math.ceil(Number(receivedRange.max)),
 			}
 
 			setPriceRange(roundedRange)
-
 
 			setInputValues({
 				from: urlPriceFrom || roundedRange.min.toString(),
@@ -121,17 +115,14 @@ function PriceFilterContent(props: {
 		fetchPriceData()
 	}, [fetchPriceData])
 
-
 	const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		applyPriceFilter()
 		if (setIsFilterOpenAction) setIsFilterOpenAction(false)
 	}
 
-
 	const applyPriceFilter = useCallback(() => {
 		const params = new URLSearchParams(searchParams.toString())
-
 
 		let fromValue = Math.max(
 			priceRange.min,
@@ -141,7 +132,6 @@ function PriceFilterContent(props: {
 			priceRange.max,
 			parseInt(inputValues.to) || priceRange.max,
 		)
-
 
 		if (fromValue > toValue) [fromValue, toValue] = [toValue, fromValue]
 
@@ -163,12 +153,10 @@ function PriceFilterContent(props: {
 		basePath,
 	])
 
-
 	const sliderValues = [
 		parseInt(inputValues.from) || priceRange.min,
 		parseInt(inputValues.to) || priceRange.max,
 	]
-
 
 	const handleSliderChange = useCallback((values: [number, number]) => {
 		setInputValues({
@@ -176,7 +164,6 @@ function PriceFilterContent(props: {
 			to: values[1].toString(),
 		})
 	}, [])
-
 
 	const resetPriceFitlter = useCallback(() => {
 		setInputValues({
@@ -240,14 +227,13 @@ function PriceFilterContent(props: {
 			{/* Кнопка применения фильтра */}
 			<button
 				type='submit'
-				className='bg-promo text-white hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) h-10 rounded justify-center items-center duration-300 cursor-pointer'
+				className='bg-promo text-white hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) h-10 rounded justify-center items-center transition-custom cursor-pointer'
 			>
 				Применить
 			</button>
 		</form>
 	)
 }
-
 
 const PriceFilter = (props: {
 	basePath: string

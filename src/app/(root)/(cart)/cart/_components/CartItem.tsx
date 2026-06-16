@@ -18,7 +18,6 @@ import {
 } from '../../../../../../utils/calcPrices'
 import { formatPrice } from '../../../../../../utils/formatPrice'
 
-
 const CartItem = memo(function CartItem({
 	item,
 	productData,
@@ -41,13 +40,11 @@ const CartItem = memo(function CartItem({
 		}
 	}, [quantity, productData, onQuantityUpdate, item.productId])
 
-
 	const handleQuantityChange = async (newQuantity: number) => {
 		if (newQuantity < 0) return
 		if (!productData) return
 
 		const maxQuantity = productData.quantity
-
 
 		if (newQuantity > maxQuantity) {
 			setShowTooltip(true)
@@ -70,22 +67,18 @@ const CartItem = memo(function CartItem({
 		}
 	}
 
-
 	if (!productData) {
 		return <CartSkeletons />
 	}
-
 
 	const priceWithDiscount = calculateFinalPrice(
 		productData?.basePrice || 0,
 		productData?.discountPercent || 0,
 	)
 
-
 	const finalPrice = hasLoyaltyCard
 		? calculatePriceByCard(priceWithDiscount, CONFIG.CARD_DISCOUNT_PERCENT)
 		: priceWithDiscount
-
 
 	const totalFinalPrice = finalPrice * quantity
 	const totalPriceWithoutCard = priceWithDiscount * quantity
@@ -96,7 +89,7 @@ const CartItem = memo(function CartItem({
 	return (
 		<div
 			className={`
-        bg-card rounded flex shadow-cart-item hover:shadow-article relative duration-300
+        bg-card rounded flex shadow-cart-item hover:shadow-article relative transition-custom
         ${isOutOfStock ? 'opacity-60' : ''}
       `}
 		>

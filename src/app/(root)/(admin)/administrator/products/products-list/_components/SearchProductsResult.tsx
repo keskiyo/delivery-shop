@@ -67,7 +67,7 @@ const SearchProductResult = ({
 							<div className='flex gap-2 ml-4'>
 								<Link
 									href={`/administrator/products/edit-product/${product.id}`}
-									className='bg-brand hover:bg-brand-hover hover:shadow-button-default active:shadow-button-active rounded text-white cursor-pointer duration-300 px-4 py-2 flex flex-row gap-2 items-center justify-center'
+									className='bg-brand hover:bg-brand-hover hover:shadow-button-default active:shadow-button-active rounded text-white cursor-pointer transition-custom px-4 py-2 flex flex-row gap-2 items-center justify-center'
 								>
 									<Edit size={16} />
 									Редактировать
@@ -81,7 +81,7 @@ const SearchProductResult = ({
 										)
 									}
 									disabled={deletingId === product.id}
-									className='bg-danger hover:bg-danger/90 text-white px-4 py-2 rounded flex items-center gap-2 disabled:opacity-50 cursor-pointer duration-300'
+									className='bg-danger hover:bg-danger/90 text-white px-4 py-2 rounded flex items-center gap-2 disabled:opacity-50 cursor-pointer transition-custom'
 								>
 									<Trash2 size={16} />
 									Удалить

@@ -7,13 +7,13 @@ export const FormButtons = ({ saving, disabled = false }: FormButtonsProps) => {
 			<button
 				type='submit'
 				disabled={saving || disabled}
-				className='px-4 py-2 bg-brand text-white rounded hover:bg-brand-hover disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer duration-300'
+				className='px-4 py-2 bg-brand text-white rounded hover:bg-brand-hover disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-custom'
 			>
 				{saving ? 'Сохранение...' : 'Сохранить настройки'}
 			</button>
 			<Link
 				href='/administrator/cms'
-				className='px-4 py-2 border border-border rounded hover:bg-surface-hover hover:text-foreground cursor-pointer duration-300'
+				className='px-4 py-2 border border-border rounded hover:bg-surface-hover hover:text-foreground cursor-pointer transition-custom'
 			>
 				Назад к панели инструментов
 			</Link>

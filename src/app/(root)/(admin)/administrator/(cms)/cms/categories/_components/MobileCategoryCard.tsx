@@ -15,7 +15,7 @@ export const MobileCategoryCard = ({
 	const [isExpanded, setIsExpended] = useState(false)
 	return (
 		<div
-			className={`p-4 hover:bg-surface-hover text-sm duration-200 ${
+			className={`p-4 hover:bg-surface-hover text-sm transition-custom ${
 				isDragging
 					? 'opacity-60 bg-brand-soft shadow-lg border-2 border-brand transform scale-[0.995]'
 					: 'hover:shadow-sm'
@@ -33,9 +33,9 @@ export const MobileCategoryCard = ({
 					</div>
 				</div>
 
-				<button className='ml-2 cursor-pointer duration-300 shrink-0 mt-1'>
+				<button className='ml-2 cursor-pointer transition-custom shrink-0 mt-1'>
 					<ChevronDown
-						className={`w-5 h-5 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+						className={`w-5 h-5 transition-transform transition-custom ${isExpanded ? 'rotate-180' : ''}`}
 					/>
 				</button>
 			</div>

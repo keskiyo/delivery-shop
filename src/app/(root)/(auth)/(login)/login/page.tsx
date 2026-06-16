@@ -12,7 +12,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-
 const EnterLoginPage = () => {
 	const [loginType, setLoginType] = useState<'email' | 'phone'>('email')
 	const [login, setLogin] = useState('')
@@ -245,7 +244,7 @@ const EnterLoginPage = () => {
 					: 'bg-promo text-white hover:shadow-(--shadow-article)'
 			}
             active:shadow-(--shadow-button-active)
-           duration-300
+           transition-custom
 
           `}
 				>
@@ -262,7 +261,7 @@ const EnterLoginPage = () => {
 
 					<button
 						onClick={handleForgotPassword}
-						className='h-8 text-muted-foreground hover:text-foreground w-30 flex items-center justify-center duration-300 cursor-pointer'
+						className='h-8 text-muted-foreground hover:text-foreground w-30 flex items-center justify-center transition-custom cursor-pointer'
 					>
 						Забыли пароль?
 					</button>

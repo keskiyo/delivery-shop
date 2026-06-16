@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react'
 export const AlignmentMenu = ({ editor }: EditorProps) => {
 	const [, setUpdate] = useState(0)
 
-
 	useEffect(() => {
 		if (!editor) return
 
@@ -30,7 +29,6 @@ export const AlignmentMenu = ({ editor }: EditorProps) => {
 
 			if (event.ctrlKey && event.shiftKey) {
 				event.preventDefault()
-
 
 				editor.commands.focus()
 
@@ -64,7 +62,6 @@ export const AlignmentMenu = ({ editor }: EditorProps) => {
 	if (!editor) return null
 
 	const setAlignment = (align: 'left' | 'center' | 'right' | 'justify') => {
-
 		editor.commands.focus()
 
 		editor.commands.setTextAlign(align)
@@ -107,7 +104,7 @@ export const AlignmentMenu = ({ editor }: EditorProps) => {
 						type='button'
 						onClick={() => setAlignment(button.align)}
 						className={`
-              p-2 rounded duration-300 cursor-pointer
+              p-2 rounded transition-custom cursor-pointer
               ${
 					isActive
 						? 'bg-brand text-white hover:bg-brand-hover'

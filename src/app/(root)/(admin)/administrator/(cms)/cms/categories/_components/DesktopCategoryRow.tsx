@@ -26,7 +26,7 @@ export const DesktopCategoryRow = ({
 	}
 	return (
 		<div
-			className={`p-4 hover:bg-surface-hover text-sm duration-200 ${
+			className={`p-4 hover:bg-surface-hover text-sm transition-custom ${
 				isDragging
 					? 'opacity-60 bg-brand-soft shadow-lg border-2 border-brand transform scale-[0.995]'
 					: 'hover:shadow-sm'
@@ -148,14 +148,14 @@ export const DesktopCategoryRow = ({
 					<div className='flex gap-2 justify-center'>
 						<button
 							onClick={handleEdit}
-							className='p-2 bg-brand text-white rounded hover:bg-brand-hover flex items-center justify-center cursor-pointer duration-300 shrink-0'
+							className='p-2 bg-brand text-white rounded hover:bg-brand-hover flex items-center justify-center cursor-pointer transition-custom shrink-0'
 							title='Редактировать категорию'
 						>
 							<Edit className='w-4 h-4' />
 						</button>
 						<button
 							onClick={handleDelete}
-							className='p-2 bg-danger text-white rounded hover:bg-danger/90 flex items-center justify-center cursor-pointer duration-300 shrink-0'
+							className='p-2 bg-danger text-white rounded hover:bg-danger/90 flex items-center justify-center cursor-pointer transition-custom shrink-0'
 							title='Удалить категорию'
 						>
 							<Trash2 className='w-4 h-4' />

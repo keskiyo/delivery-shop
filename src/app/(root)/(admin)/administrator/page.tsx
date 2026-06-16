@@ -102,7 +102,7 @@ const AdminPanel = () => {
 					<Link
 						key={item.href}
 						href={item.href}
-						className='group relative flex flex-col items-start p-6 bg-card rounded-xl border border-border hover:border-brand hover:bg-surface-hover transition-all duration-300 hover:shadow-lg hover:-translate-y-1'
+						className='group relative flex flex-col items-start p-6 bg-card rounded-xl border border-border hover:border-brand hover:bg-surface-hover  transition-custom hover:shadow-lg hover:-translate-y-1'
 					>
 						<div className='p-3 bg-surface-subtle rounded-lg mb-4 text-muted-foreground group-hover:text-brand group-hover:bg-brand-soft transition-colors'>
 							<Icon name={item.icon} />
@@ -116,7 +116,7 @@ const AdminPanel = () => {
 							{item.desc}
 						</p>
 
-						<div className='absolute top-6 right-6 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand'>
+						<div className='absolute top-6 right-6 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0  text-brand'>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
 								className='h-5 w-5'

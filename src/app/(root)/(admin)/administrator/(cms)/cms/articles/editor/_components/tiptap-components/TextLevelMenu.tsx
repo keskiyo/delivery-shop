@@ -90,7 +90,7 @@ export const TextLevelMenu = ({ editor }: { editor: Editor | null }) => {
 				type='button'
 				onClick={handleButtonClick}
 				className={`
-          flex items-center gap-1 px-3 py-1.5 text-sm border rounded-md duration-300 cursor-pointer
+          flex items-center gap-1 px-3 py-1.5 text-sm border rounded-md transition-custom cursor-pointer
           ${
 				isOpen
 					? 'bg-brand text-white border-brand'
@@ -101,7 +101,7 @@ export const TextLevelMenu = ({ editor }: { editor: Editor | null }) => {
 			>
 				<span className='text-xs font-medium'>{currentLabel}</span>
 				<ChevronDown
-					className={`w-3 h-3 transition-transform duration-200 ${
+					className={`w-3 h-3 transition-transform transition-custom ${
 						isOpen ? 'rotate-180' : ''
 					}`}
 				/>
@@ -128,7 +128,7 @@ export const TextLevelMenu = ({ editor }: { editor: Editor | null }) => {
 								setIsOpen(false)
 							}}
 							className={`
-                w-full text-left px-3 py-2.5 text-sm hover:bg-surface-subtle flex justify-between items-center duration-300 cursor-pointer
+                w-full text-left px-3 py-2.5 text-sm hover:bg-surface-subtle flex justify-between items-center transition-custom cursor-pointer
                 ${
 					isActiveParagraph
 						? 'bg-brand text-white border-r-2 border-brand'
@@ -154,7 +154,7 @@ export const TextLevelMenu = ({ editor }: { editor: Editor | null }) => {
 										level={level as 1 | 2 | 3 | 4 | 5 | 6}
 										editor={editor}
 										className={`
-								  w-full text-left px-3 py-2.5 text-sm hover:bg-surface-subtle flex justify-between items-center duration-300 cursor-pointer
+								  w-full text-left px-3 py-2.5 text-sm hover:bg-surface-subtle flex justify-between items-center transition-custom cursor-pointer
 								  ${
 										isActive
 											? 'bg-brand text-white border-r-2 border-brand'

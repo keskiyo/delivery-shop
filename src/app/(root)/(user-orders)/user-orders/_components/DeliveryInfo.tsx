@@ -17,7 +17,7 @@ export const DeliveryInfo: React.FC<DeliveryInfoProps> = ({
 				{delivery.time.timeSlot}
 			</p>
 			<button
-				className='mt-2 underline text-sm cursor-pointer text-promo hover:text-promo-hover duration-300'
+				className='mt-2 underline text-sm cursor-pointer text-promo hover:text-promo-hover transition-custom'
 				onClick={onEdit}
 			>
 				Изменить время доставки

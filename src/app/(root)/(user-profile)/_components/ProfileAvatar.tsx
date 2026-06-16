@@ -10,7 +10,6 @@ import { useEffect, useRef, useState } from 'react'
 import { getAvatarByGender } from '../../../../../utils/getAvatar'
 import { optimizeImage } from '../../../../../utils/optimizeImage'
 
-
 const ProfileAvatar = ({ gender }: { gender: string }) => {
 	const { user } = useAuthStore()
 	const [previewUrl, setPreviewUrl] = useState<string>('')
@@ -123,7 +122,7 @@ const ProfileAvatar = ({ gender }: { gender: string }) => {
 						<div className='animate-spin rounded-full h-8 w-8 border-b-2 border-white'></div>
 					</div>
 				)}
-				<label className='absolute bottom-0 right-0 bg-brand text-white p-2 rounded-full cursor-pointer shadow-md hover:shadow-(--shadow-button-default) duration-300'>
+				<label className='absolute bottom-0 right-0 bg-brand text-white p-2 rounded-full cursor-pointer shadow-md hover:shadow-(--shadow-button-default) transition-custom'>
 					<input
 						ref={fileInputRef}
 						type='file'

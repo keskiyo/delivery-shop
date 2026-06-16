@@ -12,7 +12,7 @@ export const OrderActions: React.FC<OrderActionsProps> = ({
 	return (
 		<div className='flex justify-center mt-10'>
 			<button
-				className='bg-surface text-foreground hover:shadow-button-green-600 w-50 h-10 px-2 flex justify-center items-center gap-2 rounded duration-300 cursor-pointer'
+				className='bg-surface text-foreground hover:shadow-button-green-600 w-50 h-10 px-2 flex justify-center items-center gap-2 rounded transition-custom cursor-pointer'
 				onClick={onToggleDetails}
 			>
 				<IconVision showPassword={!showOrderDetails} />

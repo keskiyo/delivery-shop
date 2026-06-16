@@ -19,7 +19,6 @@ const PaymentsButtons = ({
 	orderNumber: string | null
 }) => {
 	if (isOrdered && paymentType === 'cash_on_delivery') {
-
 		return <OrderSuccessMessage orderNumber={orderNumber} />
 	}
 
@@ -44,7 +43,7 @@ const PaymentsButtons = ({
 			<button
 				disabled={!canProceedWithPayment}
 				onClick={onCashPayment}
-				className={`h-10 rounded w-full text-base items-center justify-center duration-300 ${
+				className={`h-10 rounded w-full text-base items-center justify-center transition-custom ${
 					canProceedWithPayment
 						? 'bg-brand hover:shadow-button-default active:shadow-button-active text-white cursor-pointer'
 						: 'bg-muted text-muted-foreground cursor-not-allowed'

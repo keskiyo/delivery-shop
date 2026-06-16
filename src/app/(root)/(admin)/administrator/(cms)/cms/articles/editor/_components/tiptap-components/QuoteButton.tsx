@@ -5,20 +5,16 @@ import { useEffect, useState } from 'react'
 export const QuoteButton = ({ editor }: EditorProps) => {
 	const [isActive, setIsActive] = useState(false)
 
-
 	useEffect(() => {
 		if (!editor) return
 
 		const updateActiveState = () => {
-
 			const active = editor.isActive('blockquote')
 			setIsActive(active)
 		}
 
-
 		editor.on('selectionUpdate', updateActiveState)
 		editor.on('transaction', updateActiveState)
-
 
 		updateActiveState()
 
@@ -60,7 +56,7 @@ export const QuoteButton = ({ editor }: EditorProps) => {
 			type='button'
 			onClick={handleQuoteToggle}
 			className={`
-        p-2 rounded duration-300 cursor-pointer
+        p-2 rounded transition-custom cursor-pointer
         ${
 			isActive
 				? 'bg-brand text-white hover:bg-brand-hover'

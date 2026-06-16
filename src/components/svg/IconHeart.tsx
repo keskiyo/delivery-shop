@@ -1,6 +1,5 @@
 'use client'
 
-
 import { Heart } from 'lucide-react'
 
 interface HeartIconProps {
@@ -18,7 +17,7 @@ const IconHeart = ({ isActive, variant }: HeartIconProps) => {
 		<Heart
 			size={24}
 			fill={isActive ? iconColor : 'none'}
-			className={`transition-all duration-300 ${
+			className={` transition-custom ${
 				isActive
 					? variant === 'orange'
 						? 'text-promo'

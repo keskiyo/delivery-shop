@@ -86,12 +86,10 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
 	}
 
 	const handleLoadMore = () => {
-
 		fetchReviews(5, reviews.length, true)
 	}
 
 	const handleShowLess = () => {
-
 		const newCount = Math.max(5, displayCount - 5)
 		setDisplayCount(newCount)
 		setReviews(prev => prev.slice(0, newCount))
@@ -138,7 +136,9 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
 			<h2 className='text-xl font-bold mb-4'>Отзывы</h2>
 
 			{reviews.length === 0 ? (
-				<p className='text-base text-muted-foreground'>Пока нет отзывов. Будьте первым!</p>
+				<p className='text-base text-muted-foreground'>
+					Пока нет отзывов. Будьте первым!
+				</p>
 			) : (
 				<div className='flex flex-col gap-y-10'>
 					{reviews.map(review => {
@@ -153,7 +153,9 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
 										hasAvatar={review.hasAvatar}
 										size={36}
 									/>
-									<span className='text-lg font-medium'>{userName}</span>
+									<span className='text-lg font-medium'>
+										{userName}
+									</span>
 								</div>
 
 								<div className='flex flex-row items-center gap-x-4 mb-2'>
@@ -181,14 +183,14 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
 						<button
 							onClick={handleLoadMore}
 							disabled={loadingMore}
-							className='px-6 py-2 bg-promo text-white rounded hover:shadow-(--shadow-article) transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed'
+							className='px-6 py-2 bg-promo text-white rounded hover:shadow-(--shadow-article)  transition-custom disabled:opacity-50 disabled:cursor-not-allowed'
 						>
 							{loadingMore ? 'Загрузка...' : 'Показать еще'}
 						</button>
 					) : displayCount > 5 ? (
 						<button
 							onClick={handleShowLess}
-							className='px-6 py-2 bg-surface text-text-soft rounded hover:bg-surface-hover transition-all duration-300'
+							className='px-6 py-2 bg-surface text-text-soft rounded hover:bg-surface-hover  transition-custom'
 						>
 							Показать меньше
 						</button>

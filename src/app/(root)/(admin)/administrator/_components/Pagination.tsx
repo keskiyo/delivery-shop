@@ -38,7 +38,7 @@ export const Pagination = ({ type = 'categories' }) => {
 	}
 
 	const baseButtonClass =
-		'flex items-center justify-center rounded-lg border text-sm font-medium cursor-pointer transition-all duration-300 ' +
+		'flex items-center justify-center rounded-lg border text-sm font-medium cursor-pointer  transition-custom ' +
 		'focus:outline-none focus:ring-2 focus:ring-brand/40 ' +
 		'disabled:cursor-not-allowed disabled:opacity-45'
 

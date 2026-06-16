@@ -27,7 +27,7 @@ const UserOrdersList = ({ orders }: { orders: Order[] }) => {
 			{hasMoreOrders && (
 				<div className='flex justify-center mt-15'>
 					<button
-						className='hover:shadow-button-secondary w-50 h-10 px-2 flex justify-center items-center gap-2 rounded duration-300 cursor-pointer'
+						className='hover:shadow-button-secondary w-50 h-10 px-2 flex justify-center items-center gap-2 rounded transition-custom cursor-pointer'
 						onClick={handleShowMore}
 					>
 						Показать еще

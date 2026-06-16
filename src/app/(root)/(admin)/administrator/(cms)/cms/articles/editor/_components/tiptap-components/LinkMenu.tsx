@@ -18,7 +18,6 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 		setOpenInNewTab(true)
 	}, [])
 
-
 	useEffect(() => {
 		if (!editor) return
 
@@ -30,7 +29,6 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 		editor.on('selectionUpdate', updateLinkActive)
 		editor.on('transaction', updateLinkActive)
 
-
 		updateLinkActive()
 
 		return () => {
@@ -38,7 +36,6 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 			editor.off('transaction', updateLinkActive)
 		}
 	}, [editor])
-
 
 	useEffect(() => {
 		if (!editor) return
@@ -48,7 +45,6 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 			if (target.tagName === 'A' && editor.view.dom.contains(target)) {
 				event.preventDefault()
 				event.stopPropagation()
-
 
 				const pos = editor.view.posAtDOM(target, 0)
 				if (pos >= 0) {
@@ -176,7 +172,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 					type='button'
 					onClick={handleOpenModal}
 					className={`
-            p-2 rounded duration-300 cursor-pointer
+            p-2 rounded transition-custom cursor-pointer
             ${
 				isLinkActive
 					? 'bg-brand text-white hover:bg-brand-hover'
@@ -194,7 +190,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 					onClick={handleRemoveLink}
 					disabled={!canRemoveLink}
 					className={`
-            p-2 rounded duration-300
+            p-2 rounded transition-custom
             ${
 				canRemoveLink
 					? 'text-red-600 hover:bg-red-50 hover:text-red-700 cursor-pointer'
@@ -279,7 +275,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 										className={`
                       relative inline-flex h-6 w-11 items-center rounded-full
                       transition-colors focus:outline-none focus:ring-2
-                      focus:ring-brand focus:ring-offset-2 cursor-pointer duration-300
+                      focus:ring-brand focus:ring-offset-2 cursor-pointer transition-custom
                       ${openInNewTab ? 'bg-brand' : 'bg-surface-pressed'}
                     `}
 										aria-pressed={openInNewTab}
@@ -287,7 +283,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 										<span
 											className={`
                         inline-block h-4 w-4 transform rounded-full bg-card
-                        transition-transform duration-200
+                        transition-transform transition-custom
                         ${openInNewTab ? 'translate-x-6' : 'translate-x-1'}
                       `}
 										/>
@@ -315,7 +311,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 								<button
 									type='button'
 									onClick={handleCloseModal}
-									className='px-4 py-2 text-sm font-medium text-foreground bg-surface-hover hover:bg-surface-pressed rounded-md duration-300 cursor-pointer'
+									className='px-4 py-2 text-sm font-medium text-foreground bg-surface-hover hover:bg-surface-pressed rounded-md transition-custom cursor-pointer'
 								>
 									Отмена
 								</button>
@@ -324,7 +320,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 									onClick={handleAddLink}
 									disabled={!url.trim()}
 									className={`
-                    px-4 py-2 text-sm font-medium text-white rounded-md duration-300
+                    px-4 py-2 text-sm font-medium text-white rounded-md transition-custom
                     ${
 						url.trim()
 							? 'bg-brand hover:bg-brand-hover cursor-pointer'

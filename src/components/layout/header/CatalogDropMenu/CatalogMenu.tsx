@@ -1,4 +1,3 @@
-
 import ErrorComponent from '@/components/features/common/ErrorComponent'
 import { Loader } from '@/components/features/common/loader'
 import SearchBlock from '@/components/layout/header/SearchBlock'
@@ -58,7 +57,7 @@ const CatalogMenu = ({
 									<Link
 										key={category.slug}
 										href={`/catalog/${category.slug}`}
-										className='block px-4 py-2 text-site-chrome-muted hover:text-promo font-bold duration-300 hover:border-b hover:border-promo border-b border-site-chrome'
+										className='block px-4 py-2 text-site-chrome-muted hover:text-promo font-bold transition-custom hover:border-b hover:border-promo border-b border-site-chrome'
 										onClick={() => setIsCatalogOpen(false)}
 									>
 										{category.title}

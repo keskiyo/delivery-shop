@@ -13,7 +13,6 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { CONFIG } from '../../../../../../../config/config'
 
-
 const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 	const [code, setCode] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
@@ -23,12 +22,10 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 	const router = useRouter()
 	const { login } = useAuthStore()
 
-
 	useEffect(() => {
 		startTimer()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
-
 
 	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault()
@@ -37,7 +34,6 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 		setIsLoading(true)
 
 		try {
-
 			const { error: verifyError } = await authClient.phoneNumber.verify({
 				phoneNumber,
 				code,
@@ -46,9 +42,7 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 
 			if (verifyError) throw verifyError
 
-
 			setAttemptsLeft(CONFIG.MAX_ATTEMPTS)
-
 
 			const response = await fetch('/api/auth/check-phone', {
 				method: 'POST',
@@ -61,16 +55,13 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 				throw new Error('Данные не получены')
 			}
 
-
 			login()
-
 
 			router.replace('/')
 		} catch (error) {
 			console.error('Ошибка верификации телефона:', error)
 			setCode('')
 			setAttemptsLeft(prev => prev - 1)
-
 
 			if (attemptsLeft <= 1) {
 				setError(
@@ -84,7 +75,6 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 			setIsLoading(false)
 		}
 	}
-
 
 	const handleResend = async () => {
 		if (!canResend) return
@@ -109,7 +99,6 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 			setError('Ошибка при отправке кода')
 		}
 	}
-
 
 	if (isLoading) {
 		return (
@@ -174,7 +163,7 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 				{/* Ссылка возврата на страницу регистрации */}
 				<Link
 					href='/register'
-					className='h-8 text-xs text-muted-foreground hover:text-foreground w-30 flex items-center justify-center gap-x-2 mx-auto duration-300 cursor-pointer'
+					className='h-8 text-xs text-muted-foreground hover:text-foreground w-30 flex items-center justify-center gap-x-2 mx-auto transition-custom cursor-pointer'
 				>
 					<ArrowLeft size={24} />
 					Вернуться

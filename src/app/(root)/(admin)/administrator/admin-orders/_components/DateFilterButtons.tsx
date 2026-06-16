@@ -25,7 +25,7 @@ const DateFilterButtons = ({
 					<button
 						key={date}
 						onClick={() => onDateSelect(date)}
-						className={`p-4 w-46 h-15 rounded duration-300 cursor-pointer text-base md:text-lg xl:text-xl flex justify-between items-center gap-2 ${
+						className={`p-4 w-46 h-15 rounded transition-custom cursor-pointer text-base md:text-lg xl:text-xl flex justify-between items-center gap-2 ${
 							selectedDate === date
 								? 'items-center bg-brand text-white relative gap-2 justify-between'
 								: 'active:shadow-button-active bg-surface-hover hover:shadow-button-secondary text-foreground'

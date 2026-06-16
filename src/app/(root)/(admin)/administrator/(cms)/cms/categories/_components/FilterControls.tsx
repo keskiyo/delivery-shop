@@ -45,8 +45,10 @@ export const FilterControls = ({ onToggleFilters }: FilterControlsProps) => {
 		<div className='flex items-center gap-2'>
 			<button
 				onClick={handleToggleFilters}
-				className={`flex items-center gap-2 px-4 py-2 border rounded cursor-pointer duration-300 border-border ${
-					localShowFilters ? 'bg-surface-hover' : 'hover:bg-surface-hover'
+				className={`flex items-center gap-2 px-4 py-2 border rounded cursor-pointer transition-custom border-border ${
+					localShowFilters
+						? 'bg-surface-hover'
+						: 'hover:bg-surface-hover'
 				}`}
 				title={localShowFilters ? 'Скрыть фильтры' : 'Показать фильтры'}
 			>
@@ -57,7 +59,7 @@ export const FilterControls = ({ onToggleFilters }: FilterControlsProps) => {
 			{hasActiveFilters && (
 				<button
 					onClick={resetFilters}
-					className='flex items-center gap-2 px-4 py-2 border border-border rounded hover:bg-surface-hover cursor-pointer duration-300'
+					className='flex items-center gap-2 px-4 py-2 border border-border rounded hover:bg-surface-hover cursor-pointer transition-custom'
 					title='Сбросить все фильтры'
 				>
 					<X className='w-4 h-4' />

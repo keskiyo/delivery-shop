@@ -46,11 +46,9 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 		}
 	}
 
-
 	const formatDateToString = (date: Date): string => {
 		return date.toISOString().split('T')[0]
 	}
-
 
 	const availableTimeSlots = selectedDate
 		? getAvailableTimeSlots(selectedDate, schedule)
@@ -76,7 +74,7 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 								<button
 									key={item.dateString}
 									onClick={() => handleDateSelect(item.date)}
-									className={`py-2 px-3 rounded text-sm duration-300 cursor-pointer ${
+									className={`py-2 px-3 rounded text-sm transition-custom cursor-pointer ${
 										isSelected
 											? 'bg-brand text-white'
 											: 'bg-site-chrome text-white hover:bg-promo'
@@ -114,7 +112,7 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 											handleTimeSlotSelect(slot)
 										}
 										disabled={isCreatingOrder}
-										className='bg-site-chrome hover:bg-brand py-2 px-3 text-white rounded text-sm duration-300 cursor-pointer disabled:opacity-50'
+										className='bg-site-chrome hover:bg-brand py-2 px-3 text-white rounded text-sm transition-custom cursor-pointer disabled:opacity-50'
 									>
 										<span className='xl:hidden'>
 											{formatted.mobileLabel}
@@ -137,7 +135,7 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
 				<div className='flex gap-2 mt-4'>
 					<button
 						onClick={onCancel}
-						className='flex-1 bg-site-chrome text-white py-2 rounded hover:bg-promo duration-300 cursor-pointer'
+						className='flex-1 bg-site-chrome text-white py-2 rounded hover:bg-promo transition-custom cursor-pointer'
 						disabled={isCreatingOrder}
 					>
 						Отмена

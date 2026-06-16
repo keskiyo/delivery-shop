@@ -7,7 +7,6 @@ import { useAuthStore } from '@/store/authStore'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-
 const FavoriteButton = ({
 	productId,
 	variant,
@@ -24,7 +23,8 @@ const FavoriteButton = ({
 		if (!isAuth) {
 			showToast({
 				type: 'error',
-				message: 'Войдите в аккаунт, чтобы добавлять товары в избранное',
+				message:
+					'Войдите в аккаунт, чтобы добавлять товары в избранное',
 			})
 			router.push('/login')
 			return
@@ -58,7 +58,7 @@ const FavoriteButton = ({
 			return `${baseClasses} w-auto h-6`
 		}
 
-		return `${baseClasses} w-8 h-8 p-2 bg-surface hover:bg-promo-soft absolute top-2 right-2 rounded duration-300 z-10 hover:scale-110`
+		return `${baseClasses} w-8 h-8 p-2 bg-surface hover:bg-promo-soft absolute top-2 right-2 rounded transition-custom z-10 hover:scale-110`
 	}
 
 	return (

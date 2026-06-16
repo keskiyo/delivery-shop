@@ -1,6 +1,5 @@
 import Link from 'next/link'
 
-
 type IconName = 'plus' | 'list'
 
 type MenuItem = {
@@ -9,7 +8,6 @@ type MenuItem = {
 	desc: string
 	icon: IconName
 }
-
 
 const Icon = ({ name }: { name: IconName }) => {
 	const paths: Record<IconName, string> = {
@@ -35,7 +33,6 @@ const Icon = ({ name }: { name: IconName }) => {
 	)
 }
 
-
 const menuItems: MenuItem[] = [
 	{
 		href: '/administrator/products/add-product',
@@ -51,12 +48,13 @@ const menuItems: MenuItem[] = [
 	},
 ]
 
-
 const AdminProducts = () => {
 	return (
 		<div className='p-6 max-w-4xl mx-auto'>
 			<div className='flex items-center justify-between mb-8'>
-				<h1 className='text-3xl font-bold text-foreground'>Управление товарами</h1>
+				<h1 className='text-3xl font-bold text-foreground'>
+					Управление товарами
+				</h1>
 
 				{/* Кнопка "Назад" (опционально, для удобства навигации) */}
 				<Link
@@ -73,7 +71,7 @@ const AdminProducts = () => {
 					<Link
 						key={item.href}
 						href={item.href}
-						className='group relative flex flex-col items-start p-8 bg-card rounded-xl border border-border hover:border-brand hover:bg-surface-hover transition-all duration-300 hover:shadow-lg hover:-translate-y-1'
+						className='group relative flex flex-col items-start p-8 bg-card rounded-xl border border-border hover:border-brand hover:bg-surface-hover  transition-custom hover:shadow-lg hover:-translate-y-1'
 					>
 						{/* Иконка */}
 						<div className='p-4 bg-surface-subtle rounded-xl mb-5 text-muted-foreground group-hover:text-brand group-hover:bg-brand-soft transition-colors'>
@@ -90,7 +88,7 @@ const AdminProducts = () => {
 						</p>
 
 						{/* Стрелочка */}
-						<div className='absolute top-6 right-6 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand'>
+						<div className='absolute top-6 right-6 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0  text-brand'>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
 								className='h-5 w-5'

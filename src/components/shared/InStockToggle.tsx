@@ -1,6 +1,5 @@
 'use client'
 
-
 const InStockToggle = ({
 	checked,
 	handleInStockChange,
@@ -20,7 +19,7 @@ const InStockToggle = ({
 					onChange={e => handleInStockChange(e.target.checked)}
 					className='sr-only peer'
 				/>
-				<div className='w-11.5 h-6 bg-surface-hover rounded-full peer peer-checked:bg-brand transition-colors duration-200'>
+				<div className='w-11.5 h-6 bg-surface-hover rounded-full peer peer-checked:bg-brand transition-colors transition-custom'>
 					<div
 						className={`
                 absolute top-0.5 left-0
@@ -29,7 +28,7 @@ const InStockToggle = ({
                 rounded-full
                 shadow-[0px_1px_1px_rgba(0,0,0,0.08),0px_2px_6px_rgba(0,0,0,0.15)]
                 bg-card
-                transition-transform duration-300
+                transition-transform transition-custom
                 ${
 					checked
 						? 'transform translate-x-6'

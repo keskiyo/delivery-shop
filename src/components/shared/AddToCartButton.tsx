@@ -11,7 +11,6 @@ import { showPromiseToast, showToast } from '@/lib/showToast'
 import { useCartStore } from '@/store/cartStore'
 import { useState } from 'react'
 
-
 const AddToCartButton = ({
 	productId,
 	availableQuantity,
@@ -24,7 +23,6 @@ const AddToCartButton = ({
 	const [tooltipMessage, setTooltipMessage] = useState('')
 
 	const { fetchCart, cartItems, updateCart } = useCartStore()
-
 
 	const cartItem = cartItems.find(item => item.productId === productId)
 	const currentQuantity = cartItem ? cartItem.quantity : 0
@@ -155,7 +153,6 @@ const AddToCartButton = ({
 				/>
 			)}
 			{isInCart && !isOutOfStock ? (
-
 				<div className='absolute flex justify-center bottom-2 left-2 right-2'>
 					<QuantitySelector
 						quantity={displayQuantity}
@@ -167,13 +164,12 @@ const AddToCartButton = ({
 					/>
 				</div>
 			) : (
-
 				<button
 					onClick={handleAddToCart}
 					disabled={
 						isLoading || hasReachedMaxQuantity || isOutOfStock
 					}
-					className={`absolute bottom-2 left-2 right-2 flex h-10 items-center justify-center rounded border duration-300 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 ${
+					className={`absolute bottom-2 left-2 right-2 flex h-10 items-center justify-center rounded border transition-custom select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 ${
 						isOutOfStock || hasReachedMaxQuantity
 							? 'bg-muted text-white border-muted cursor-not-allowed'
 							: 'border-brand text-brand hover:text-white hover:bg-brand hover:border-transparent active:shadow-button-active cursor-pointer'

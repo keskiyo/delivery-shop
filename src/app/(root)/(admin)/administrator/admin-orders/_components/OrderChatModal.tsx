@@ -17,7 +17,6 @@ const OrderChatModal = ({
 	const messagesEndRef = useRef<HTMLDivElement>(null)
 	const { user } = useAuthStore()
 
-
 	const { data: messages = [] } = useGetOrderMessagesQuery(orderId, {
 		skip: !isOpen || !orderId,
 		pollingInterval: isOpen ? 3000 : 0,
@@ -27,11 +26,9 @@ const OrderChatModal = ({
 		return msg.userRole || 'courier'
 	}
 
-
 	useEffect(() => {
 		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
 	}, [messages])
-
 
 	const handleSendMessage = async (e: React.SyntheticEvent) => {
 		e.preventDefault()
@@ -72,7 +69,7 @@ const OrderChatModal = ({
 			<div className='max-w-150 w-full relative bg-card text-foreground rounded shadow-auth-form max-h-[calc(100vh-80px)] flex flex-col px-25 pb-15 border border-border'>
 				<button
 					onClick={onClose}
-					className='bg-surface-hover rounded w-8 h-8 mb-8 absolute top-0 right-0 flex justify-center items-center duration-300 cursor-pointer m-2'
+					className='bg-surface-hover rounded w-8 h-8 mb-8 absolute top-0 right-0 flex justify-center items-center transition-custom cursor-pointer m-2'
 				>
 					<X size={24} className='text-text-soft' />
 				</button>
@@ -86,9 +83,8 @@ const OrderChatModal = ({
 						const roleDisplayName = getRoleDisplayName(role)
 						const isCurrentUser = user?.id === msg.userId
 
-
 						const bubbleBase =
-							'relative max-w-[85%] md:max-w-[75%] px-4 py-2.5 rounded-2xl shadow-sm transition-all hover:shadow-md'
+							'relative max-w-[85%] md:max-w-[75%] px-4 py-2.5 rounded-2xl shadow-sm  hover:shadow-md'
 
 						const bubbleClass = isCurrentUser
 							? 'bg-brand text-white rounded-br-md'
@@ -164,7 +160,7 @@ const OrderChatModal = ({
 						<button
 							type='submit'
 							disabled={!message.trim() || isSending}
-							className='bg-promo-soft text-promo text-2xl px-4 py-2 h-17 rounded hover:bg-promo hover:text-white disabled:cursor-not-allowed cursor-pointer duration-300'
+							className='bg-promo-soft text-promo text-2xl px-4 py-2 h-17 rounded hover:bg-promo hover:text-white disabled:cursor-not-allowed cursor-pointer transition-custom'
 						>
 							{isSending ? '...' : 'Отправить'}
 						</button>
