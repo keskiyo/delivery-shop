@@ -44,7 +44,10 @@ export const BanUserModal = ({
 							</span>
 						</p>
 						<p className='font-mono text-xs text-muted-foreground'>
-							ID: <span className='text-muted-foreground'>{userId}</span>
+							ID:{' '}
+							<span className='text-muted-foreground'>
+								{userId}
+							</span>
 						</p>
 					</div>
 
@@ -99,8 +102,8 @@ export const BanUserModal = ({
 					) : (
 						<>
 							<p className='p-3 mb-6 text-sm border rounded text-warning-foreground bg-warning-soft border-warning/30'>
-								<AlertCircle className='w-4 h-4 mb-2 shrink-0' />
-								<span className='font-medium '>
+								<AlertCircle className='w-4 h-4 mb-2 shrink-0 text-white' />
+								<span className='font-medium text-white'>
 									Заблокированный пользователь не сможет
 									оставлять комментарии.
 								</span>

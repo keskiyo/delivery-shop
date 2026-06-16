@@ -13,7 +13,6 @@ const EMPTY_SITEMAP_DATA: SitemapDataResponse = {
 
 export async function getSitemapData(): Promise<SitemapDataResponse> {
 	try {
-		// 1. Получаем агрегированные данные через внутренний API, чтобы sitemap не дублировал MongoDB-запросы.
 		const res = await fetch(`${baseUrl}/api/sitemap-data`)
 
 		if (!res.ok) {
@@ -25,7 +24,6 @@ export async function getSitemapData(): Promise<SitemapDataResponse> {
 
 		const data = await res.json()
 
-		// 2. Приводим каждую секцию к массиву, чтобы генерация sitemap не падала на неполном ответе API.
 		return {
 			categories: Array.isArray(data.categories) ? data.categories : [],
 			products: Array.isArray(data.products) ? data.products : [],
@@ -35,7 +33,6 @@ export async function getSitemapData(): Promise<SitemapDataResponse> {
 			articles: Array.isArray(data.articles) ? data.articles : [],
 		}
 	} catch (error) {
-		// 3. При ошибке сети оставляем sitemap со статическими страницами вместо падения build.
 		console.error('Ошибка при получении данных для карты сайта:', error)
 		return EMPTY_SITEMAP_DATA
 	}

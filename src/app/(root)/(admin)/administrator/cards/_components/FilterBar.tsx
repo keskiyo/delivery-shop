@@ -32,7 +32,7 @@ export const FilterBar = ({
 		document.addEventListener('mousedown', handleClickOutside)
 
 		return () => {
-			document.removeEventListener('mousedown', handleClickOutside) // Было addEventListener
+			document.removeEventListener('mousedown', handleClickOutside)
 		}
 	}, [])
 

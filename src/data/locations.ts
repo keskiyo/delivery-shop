@@ -2,7 +2,7 @@ import { Locations } from '@/types/shops'
 
 export const locations: Locations = {
 	barnaul: {
-		name: 'Барнаул',
+		name: 'Восход',
 		center: [53.35087, 83.656392],
 		shops: [
 			{
@@ -13,7 +13,7 @@ export const locations: Locations = {
 		],
 	},
 	severinsk: {
-		name: 'Северинск',
+		name: 'Парус',
 		center: [53.354783, 83.681276],
 		shops: [
 			{
@@ -24,7 +24,7 @@ export const locations: Locations = {
 		],
 	},
 	vtornik: {
-		name: 'Вторник',
+		name: 'Рябинушка',
 		center: [53.360216, 83.660022],
 		shops: [
 			{
@@ -35,7 +35,7 @@ export const locations: Locations = {
 		],
 	},
 	chetverg: {
-		name: 'Четверг',
+		name: 'Пелысь',
 		center: [53.370785, 83.689675],
 		shops: [
 			{
