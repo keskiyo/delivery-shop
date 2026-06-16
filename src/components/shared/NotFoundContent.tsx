@@ -8,12 +8,32 @@ export default function NotFoundContent() {
 	const [glitchText, setGlitchText] = useState('404')
 	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 	const [windowSize, setWindowSize] = useState({ width: 1000, height: 1000 })
+	const [stars, setStars] = useState<
+		Array<{
+			initialX: number
+			initialY: number
+			targetX: number
+			targetY: number
+			duration: number
+		}>
+	>([])
 
 	useEffect(() => {
-		setWindowSize({
+		const nextWindowSize = {
 			width: window.innerWidth,
 			height: window.innerHeight,
-		})
+		}
+
+		setWindowSize(nextWindowSize)
+		setStars(
+			Array.from({ length: 50 }, () => ({
+				initialX: Math.random() * nextWindowSize.width,
+				initialY: Math.random() * nextWindowSize.height,
+				targetX: Math.random() * nextWindowSize.width,
+				targetY: Math.random() * nextWindowSize.height,
+				duration: Math.random() * 5 + 5,
+			})),
+		)
 
 		const glitchInterval = setInterval(() => {
 			if (Math.random() > 0.7) {
@@ -43,21 +63,21 @@ export default function NotFoundContent() {
 
 	return (
 		<div className='relative flex items-center justify-center min-h-screen overflow-hidden bg-linear-to-br from-purple-900 via-black to-blue-900'>
-			{[...Array(50)].map((_, i) => (
+			{stars.map((star, i) => (
 				<motion.div
 					key={i}
 					className='absolute w-1 h-1 bg-white rounded-full'
 					initial={{
-						x: Math.random() * windowSize.width,
-						y: Math.random() * windowSize.height,
+						x: star.initialX,
+						y: star.initialY,
 					}}
 					animate={{
-						x: Math.random() * windowSize.width,
-						y: Math.random() * windowSize.height,
+						x: star.targetX,
+						y: star.targetY,
 						opacity: [0, 1, 0],
 					}}
 					transition={{
-						duration: Math.random() * 5 + 5,
+						duration: star.duration,
 						repeat: Infinity,
 						ease: 'linear',
 					}}

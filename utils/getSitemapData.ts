@@ -1,6 +1,3 @@
-// Назначение: утилита getSitemapData.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
-
 import { SitemapDataResponse } from '@/types/sitemap'
 import { baseUrl } from './baseUrl'
 

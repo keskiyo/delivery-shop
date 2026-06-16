@@ -11,15 +11,15 @@ async function addArticleField() {
 		const db = client.db(process.env.FOOD_DELIVERY_DB_NAME!)
 		const productsCollection = db.collection('products')
 
-		// 1. Получаем все существующие продукты
+		
 		const existingProducts = await productsCollection.find({}).toArray()
 		console.log(
 			`Найдено ${existingProducts.length} продуктов для изменения`,
 		)
 
-		// 2. Подготавливаем операции обновления
+		
 		const bulkUpdateOps = existingProducts.map(product => {
-			// Генерируем шестизначное число с ведущими нулями
+			
 			const articleNumber = faker.number.int({ min: 0, max: 999999 })
 			const article = articleNumber.toString().padStart(6, '0')
 
@@ -35,7 +35,7 @@ async function addArticleField() {
 			}
 		})
 
-		// 3. Выполняем массовое обновление
+		
 		if (bulkUpdateOps.length > 0) {
 			const result = await productsCollection.bulkWrite(bulkUpdateOps)
 			console.log(`Обновлено ${result.modifiedCount} продуктов`)
@@ -54,4 +54,4 @@ async function addArticleField() {
 
 addArticleField()
 
-// Команды для запуска: npx tsc seed-db-article.ts // node seed-db-article.js
+

@@ -1,5 +1,5 @@
-// Назначение: React-хук useStatsValues.
-// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
+
+
 
 import { useCategoryStore } from '@/store/categoryStore'
 import { useEffect, useState } from 'react'

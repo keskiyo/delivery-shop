@@ -297,8 +297,7 @@ const CartSummary = ({
 	}
 	return (
 		<>
-			{/* Блок с информацией о стоимости */}
-			<PriceSummary
+						<PriceSummary
 				visibleCartItems={visibleCartItems}
 				totalMaxPrice={totalMaxPrice}
 				totalDiscount={totalDiscount}
@@ -306,10 +305,8 @@ const CartSummary = ({
 				totalBonuses={totalBonuses}
 			/>
 
-			{/* Блок с итоговой суммой и кнопками оформления */}
-			<div className='w-full'>
-				{/* Предупреждение о минимальной сумме заказа */}
-				<MinimumOrderWarning isMinimumReached={isMinimumReached} />
+						<div className='w-full'>
+								<MinimumOrderWarning isMinimumReached={isMinimumReached} />
 				{isRepeatOrder || isCheckout ? (
 
 					<PaymentsButtons

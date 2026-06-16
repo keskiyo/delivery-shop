@@ -1,11 +1,12 @@
-// Назначение: React-хук useArticles.
-// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
+
+
 
 import { ArticleApiResponse } from "../../types/entities.types";
 import { ArticleFormData } from "../types";
+import { useCallback } from "react";
 
 export const useArticles = () => {
-  const createArticle = async (
+  const createArticle = useCallback(async (
     articleData: Omit<ArticleFormData, "keywords">,
   ): Promise<ArticleApiResponse> => {
     try {
@@ -44,9 +45,9 @@ export const useArticles = () => {
             : "Ошибка сети при создании статьи",
       };
     }
-  };
+  }, []);
 
-  const getArticle = async (id: string): Promise<ArticleApiResponse> => {
+  const getArticle = useCallback(async (id: string): Promise<ArticleApiResponse> => {
     try {
       const response = await fetch(
         `/administrator/cms/api/articles/articles-management/${id}`,
@@ -76,7 +77,7 @@ export const useArticles = () => {
         message: "Ошибка сети при загрузке статьи",
       };
     }
-  };
+  }, []);
 
   return {
     createArticle,

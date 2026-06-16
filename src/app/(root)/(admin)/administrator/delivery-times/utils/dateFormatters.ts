@@ -1,5 +1,5 @@
-// Назначение: утилита dateFormatters.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 export const formatDateFull = (dateString: string): string => {
 	const [year, month, day] = dateString.split('-').map(Number)

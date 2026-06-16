@@ -6,11 +6,7 @@ import { ObjectId } from 'mongodb'
 import { revalidatePath } from 'next/cache'
 import { getServerUserId } from '../../utils/getServerUserId'
 
-/**
- * Получает корзину пользователя для страницы оформления заказа
- *
- * @returns Массив товаров в корзине или пустой массив
- */
+
 export async function getOrderCartAction(): Promise<OrderCartItem[]> {
 	try {
 		const userId = await getServerUserId()
@@ -31,12 +27,7 @@ export async function getOrderCartAction(): Promise<OrderCartItem[]> {
 	}
 }
 
-/**
- * Получает количество бонусов пользователя и наличие карты лояльности
- * Используется для расчета цен в корзине
- *
- * @returns Объект с количеством бонусов и флагом наличия карты
- */
+
 export async function getUserBonusesAction(): Promise<{
 	bonusesCount: number
 	hasLoyaltyCard: boolean
@@ -64,14 +55,7 @@ export async function getUserBonusesAction(): Promise<{
 	}
 }
 
-/**
- * Обновляет количество конкретного товара в корзине
- * Используется при изменении количества через инпут или кнопки +/-
- *
- * @param productId - ID товара (строка)
- * @param quantity - Новое количество товара
- * @returns Объект с флагом успеха и сообщением
- */
+
 export async function updateOrderItemQuantityAction(
 	productId: string,
 	quantity: number,
@@ -108,13 +92,7 @@ export async function updateOrderItemQuantityAction(
 	}
 }
 
-/**
- * Удаляет несколько товаров из корзины одновременно
- * Используется для удаления недоступных товаров (нет в наличии)
- *
- * @param productIds - Массив ID товаров для удаления
- * @returns Объект с флагом успеха и сообщением
- */
+
 export async function removeMultipleOrderItemsAction(
 	productIds: string[],
 ): Promise<{ success: boolean; message: string }> {

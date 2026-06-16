@@ -81,8 +81,7 @@ export const ArticleFormFields = ({
 				</p>
 			</div>
 
-			{/* Описание */}
-			<div className='md:col-span-2'>
+						<div className='md:col-span-2'>
 				<div className='flex justify-between items-center mb-1'>
 					<label className='block text-sm font-medium'>
 						Описание (мета-описание)
@@ -108,8 +107,7 @@ export const ArticleFormFields = ({
 				/>
 			</div>
 
-			{/* Ключевые слова */}
-			<div className='md:col-span-2'>
+						<div className='md:col-span-2'>
 				<div className='flex justify-between items-center mb-1'>
 					<label className='block text-sm font-medium'>
 						Ключевые слова

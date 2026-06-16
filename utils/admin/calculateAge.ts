@@ -1,5 +1,5 @@
-// Назначение: утилита calculateAge.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 export const calculateAge = (birthday: string): number => {
 	if (!birthday) return 0

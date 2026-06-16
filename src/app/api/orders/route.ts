@@ -1,5 +1,5 @@
-// Назначение: API-маршрут orders.
-// Как работает: Методы: POST, GET. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { getDB } from '@/lib/api-routes'
 import { Order } from '@/types/order'
@@ -65,7 +65,7 @@ export async function POST(request: Request) {
 			gender: user.gender,
 			birthday: user.birthdayDate,
 
-			// В позициях заказа фиксируем цену на момент оформления.
+			
 			items: orderData.cartItems.map(
 				(item: {
 					productId: string
@@ -85,7 +85,7 @@ export async function POST(request: Request) {
 			updatedAt: new Date(),
 		}
 
-		// После оплаты отдельный endpoint обновит склад, бонусы и финальный статус заказа.
+		
 		const result = await db.collection('orders').insertOne(order)
 
 		return NextResponse.json({

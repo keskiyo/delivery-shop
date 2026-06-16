@@ -1,5 +1,5 @@
-// Назначение: утилита excelGenerator.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 import { SimplifiedOrderData } from '@/types/excel'
 import ExcelJS from 'exceljs'
@@ -179,7 +179,7 @@ export const generateOrderExcel = async (data: SimplifiedOrderData) => {
 	return await workbook.xlsx.writeBuffer()
 }
 
-// Готовый Excel-буфер скачивается через временную ссылку, чтобы не держать файл на сервере.
+
 export const downloadOrderExcel = async (
 	buffer: ArrayBuffer | Buffer,
 	fileName: string,

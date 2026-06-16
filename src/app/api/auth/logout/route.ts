@@ -1,5 +1,5 @@
-// Назначение: API-маршрут auth/logout.
-// Как работает: Методы: POST. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { getDB } from '@/lib/api-routes'
 import { NextResponse } from 'next/server'

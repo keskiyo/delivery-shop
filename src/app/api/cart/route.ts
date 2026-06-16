@@ -1,5 +1,5 @@
-// Назначение: API-маршрут cart.
-// Как работает: Методы: GET. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { getOrderCartAction } from '@/actions/orderActions'
 import { NextResponse } from 'next/server'

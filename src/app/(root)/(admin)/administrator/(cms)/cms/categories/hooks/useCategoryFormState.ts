@@ -1,7 +1,7 @@
 'use client'
 
-// Назначение: React-хук useCategoryFormState.
-// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
+
+
 
 import { showToast } from '@/lib/showToast'
 import { useCategoryStore } from '@/store/categoryStore'

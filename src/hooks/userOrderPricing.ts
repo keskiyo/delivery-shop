@@ -1,5 +1,5 @@
-// Назначение: React-хук userOrderPricing.
-// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
+
+
 
 import { CustomCartItem, CustomPricing } from '@/types/cart'
 import { Order } from '@/types/order'

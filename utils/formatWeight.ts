@@ -1,6 +1,3 @@
-// Назначение: утилита formatWeight.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
-
 export const formatWeight = (weight: number): string => {
 	if (weight < 1) {
 		const grams = weight * 1000

@@ -62,8 +62,7 @@ const ProfilePassword = () => {
 				<Key className='absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground' />
 			</div>
 
-			{/* Модальное окно */}
-			{isModalOpen && (
+						{isModalOpen && (
 				<div className='absolute inset-0 z-100 flex items-center justify-center bg-muted/80 min-h-screen py-10 px-3 backdrop-blur-sm'>
 					<div className='relative bg-card rounded shadow-auth-form) max-h-[calc(100vh-80px)] w-full flex flex-col p-6'>
 						<div className='flex justify-between items-center mb-4'>

@@ -1,5 +1,5 @@
-// Назначение: утилита orderHelpers.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 import { CartItem } from '@/types/cart'
 import { CartItemWithPrice, CreateOrderRequest } from '@/types/order'

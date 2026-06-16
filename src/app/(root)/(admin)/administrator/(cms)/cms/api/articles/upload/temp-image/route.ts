@@ -1,5 +1,5 @@
-// Назначение: API-маршрут articles/upload/temp-image.
-// Как работает: Методы: POST. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir } from 'fs/promises';

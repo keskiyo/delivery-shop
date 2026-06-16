@@ -1,5 +1,5 @@
-// Назначение: утилита validProfileCard.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 export const cleanCardNumber = (cardNumber: string): string => {
 	return cardNumber.replace(/\D/g, '')

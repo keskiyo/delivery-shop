@@ -1,5 +1,5 @@
-// Назначение: React-хук redux.
-// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
+
+
 
 import { AppDispatch, AppStore, RootState } from '@/store/redux'
 import { useDispatch, useSelector, useStore } from 'react-redux'

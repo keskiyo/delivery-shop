@@ -134,8 +134,7 @@ export const HtmlEditorModal = ({
 			}}
 		>
 			<div className='bg-gray-900 rounded-xl shadow-2xl w-full max-w-6xl border border-gray-800 overflow-hidden max-h-[90vh] flex flex-col'>
-				{/* Заголовок */}
-				<div className='px-6 py-4 border-b border-gray-800 bg-gray-900 flex justify-between items-center'>
+								<div className='px-6 py-4 border-b border-gray-800 bg-gray-900 flex justify-between items-center'>
 					<div>
 						<h3 className='text-lg font-semibold text-white'>
 							HTML редактор
@@ -179,11 +178,9 @@ export const HtmlEditorModal = ({
 					</div>
 				</div>
 
-				{/* Основной контент */}
-				<div className='overflow-hidden flex flex-col h-[calc(90vh-120px)]'>
+								<div className='overflow-hidden flex flex-col h-[calc(90vh-120px)]'>
 					<div className='grid grid-cols-2 flex-1 min-h-0'>
-						{/* Левая часть - редактор */}
-						<div className='border-r border-gray-800 flex flex-col min-h-0'>
+												<div className='border-r border-gray-800 flex flex-col min-h-0'>
 							<div className='px-4 py-3 bg-gray-800 border-b border-gray-700 shrink-0'>
 								<span className='text-sm font-medium text-muted-foreground'>
 									Редактор HTML
@@ -223,8 +220,7 @@ export const HtmlEditorModal = ({
 							</div>
 						</div>
 
-						{/* Правая часть - предпросмотр */}
-						<div className='flex flex-col min-h-0'>
+												<div className='flex flex-col min-h-0'>
 							<div className='border-l border-l-gray-700 px-4 py-3 bg-gray-800 border-b border-gray-700 shrink-0'>
 								<span className='text-sm font-medium text-muted-foreground'>
 									Предпросмотр HTML
@@ -247,8 +243,7 @@ export const HtmlEditorModal = ({
 					</div>
 				</div>
 
-				{/* Подвал */}
-				<div className='px-6 py-4 border-t border-gray-800 bg-gray-900'>
+								<div className='px-6 py-4 border-t border-gray-800 bg-gray-900'>
 					<div className='flex justify-between items-center'>
 						<div className='text-sm text-muted-foreground'>
 							<div className='flex items-center gap-4'>

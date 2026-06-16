@@ -116,8 +116,7 @@ const DeliveryTime = ({
 		<div>
 			<h2 className='text-2xl xl:text-4xl font-bold mb-6'>Когда</h2>
 			<div className='relative flex flex-col gap-y-4 md:flex-row md:flex-nowrap md:gap-x-8 xl:gap-x-10'>
-				{/* Выбор даты */}
-				<div>
+								<div>
 					<label className={`${labelStyles} text-sm xl:text-base`}>
 						Дата
 					</label>
@@ -134,8 +133,7 @@ const DeliveryTime = ({
 					</select>
 				</div>
 
-				{/* Выбор времени */}
-				<div className='flex flex-col w-full'>
+								<div className='flex flex-col w-full'>
 					<label className={`${labelStyles} text-sm xl:text-base`}>
 						Время
 					</label>
@@ -176,19 +174,16 @@ const DeliveryTime = ({
 										}`}
 										disabled={!slot.free || slot.passed}
 									>
-										{/* Мобильная версия: "8-14" */}
-										<span className='xl:hidden text-sm'>
+																				<span className='xl:hidden text-sm'>
 											{slot.mobileLabel}
 										</span>
 
-										{/* Десктоп версия: "08.00 - 14.00" */}
-										<span className='hidden xl:block text-base'>
+																				<span className='hidden xl:block text-base'>
 											{slot.desktopLabel}
 										</span>
 									</button>
 
-									{/* Тултип для занятых или прошедших слотов */}
-									{(!slot.free || slot.passed) &&
+																		{(!slot.free || slot.passed) &&
 										tooltipSlot === slot.value && (
 											<div className='absolute z-50 bottom-full left-1/2 transform -translate-x-1/2 mb-2'>
 												<div className='bg-popover text-popover-foreground text-sm rounded-[5px] p-2 flex items-center gap-2 whitespace-nowrap shadow-lg'>

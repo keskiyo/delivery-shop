@@ -145,8 +145,7 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 
 	return (
 		<div className='relative inline-block'>
-			{/* Кнопка открытия меню */}
-			<button
+						<button
 				ref={buttonRef}
 				type='button'
 				onClick={() => {
@@ -186,8 +185,7 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 				</div>
 			</button>
 
-			{/* Выпадающее меню - уменьшенная версия */}
-			{isOpen && (
+						{isOpen && (
 				<div
 					ref={dropdownRef}
 					className='absolute z-50 mt-1 left-0 bg-card border border-border rounded-lg shadow-lg p-2 max-w-[calc(100vw-20px)]'
@@ -199,14 +197,12 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 					}}
 					onClick={e => e.stopPropagation()}
 				>
-					{/* Заголовок */}
-					<div className='mb-2'>
+										<div className='mb-2'>
 						<div className='text-xs font-medium text-foreground mb-1'>
 							Цвет фона
 						</div>
 
-						{/* Предопределенные цвета */}
-						<div className='grid grid-cols-6 gap-1 mb-2'>
+												<div className='grid grid-cols-6 gap-1 mb-2'>
 							{BG_COLORS.map(color => (
 								<button
 									key={color}
@@ -251,8 +247,7 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 							))}
 						</div>
 
-						{/* Пользовательский цвет */}
-						<div className='mb-2'>
+												<div className='mb-2'>
 							<div className='text-xs text-muted-foreground mb-1'>
 								Свой цвет:
 							</div>
@@ -285,8 +280,7 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 							</div>
 						</div>
 
-						{/* Текущий цвет */}
-						<div className='flex items-center justify-between p-1 bg-surface-subtle rounded text-xs mb-2'>
+												<div className='flex items-center justify-between p-1 bg-surface-subtle rounded text-xs mb-2'>
 							<div className='text-muted-foreground'>
 								Текущий:
 							</div>
@@ -317,8 +311,7 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 						</div>
 					</div>
 
-					{/* Кнопка сброса */}
-					<button
+										<button
 						type='button'
 						onClick={resetColor}
 						className='w-full px-2 py-1 text-xs rounded transition-custom cursor-pointer bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 hover:border-red-300'

@@ -1,5 +1,5 @@
-// Назначение: утилита birthdaySoon.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 export const isBirthdaySoon = (birthdayDate: string): boolean => {
 	try {

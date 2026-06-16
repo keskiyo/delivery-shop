@@ -1,5 +1,5 @@
-// Назначение: API-маршрут articles/articles-management/[id].
-// Как работает: Методы: GET. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";

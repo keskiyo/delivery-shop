@@ -1,6 +1,3 @@
-// Назначение: утилита proxy-redirects.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
-
 import { NextRequest, NextResponse } from 'next/server'
 import { baseUrl } from './baseUrl'
 import { createSlug } from './createSlug'
@@ -37,7 +34,6 @@ function createRedirectUrl(
 	return `/catalog/${targetCategory}/${slug}`
 }
 
-// Поддержка старых ссылок вида /catalog/product/59.
 export async function handleCatalogProductRedirect(
 	request: NextRequest,
 ): Promise<NextResponse | null> {
@@ -62,7 +58,6 @@ export async function handleCatalogProductRedirect(
 	return null
 }
 
-// Поддержка старых ссылок вида /catalog/category/59.
 export async function handleOldProductRedirect(
 	request: NextRequest,
 ): Promise<NextResponse | null> {

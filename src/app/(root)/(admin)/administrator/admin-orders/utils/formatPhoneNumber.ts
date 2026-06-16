@@ -1,5 +1,5 @@
-// Назначение: утилита formatPhoneNumber.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 export const formatPhoneNumber = (phone: string) => {
 	const cleaned = phone.replace(/\D/g, '')

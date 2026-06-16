@@ -1,5 +1,5 @@
-// Назначение: React-хук useOrderProductsData.
-// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
+
+
 
 import { Order } from '@/types/order'
 import { ProductCardProps } from '@/types/product'

@@ -1,4 +1,4 @@
-/* ===== МАРКЕРЫ РЕСАЙЗА ===== */
+
 [data-resize-handle] {
   position: absolute;
   background: rgba(59, 130, 246, 0.8);
@@ -86,7 +86,7 @@
   border-radius: 4px;
 }
 
-/* ===== СТИЛИ ДЛЯ ИЗОБРАЖЕНИЙ ===== */
+
 
 .ProseMirror img.tiptap-image[width] {
   width: var(--img-width, attr(width)) !important;
@@ -100,9 +100,9 @@
   width: auto;
 }
 
-/* ===== ВЫРАВНИВАНИЕ ===== */
 
-/* Выравнивание влево */
+
+
 .ProseMirror [data-resize-container]:has(img.tiptap-image[style*="float: left"]),
 .ProseMirror [data-resize-container]:has(img.tiptap-image[style*="float:left"]) {
   float: left;
@@ -125,7 +125,7 @@
   margin: 0 !important;
 }
 
-/* Выравнивание вправо */
+
 .ProseMirror [data-resize-container]:has(img.tiptap-image[style*="float: right"]),
 .ProseMirror [data-resize-container]:has(img.tiptap-image[style*="float:right"]) {
   float: right;
@@ -148,7 +148,7 @@
   margin: 0 !important;
 }
 
-/* По центру */
+
 .ProseMirror [data-resize-container]:has(img.tiptap-image[style*="display: block"][style*="margin"][style*="auto"]) {
   display: block;
   width: fit-content;
@@ -167,7 +167,7 @@
   margin: 0;
 }
 
-/* ===== ОЧИСТКА ОБТЕКАНИЯ ===== */
+
 .ProseMirror::after {
   content: "";
   display: block;

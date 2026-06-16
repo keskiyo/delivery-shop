@@ -1,5 +1,5 @@
-// Назначение: утилита avatarUtils.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 export const checkAvatarExist = async (userId: string): Promise<boolean> => {
 	try {

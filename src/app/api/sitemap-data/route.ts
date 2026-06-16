@@ -1,5 +1,5 @@
-// Назначение: API-маршрут sitemap-data.
-// Как работает: Методы: GET. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { getDB } from '@/lib/api-routes'
 import { NextResponse } from 'next/server'
@@ -10,10 +10,10 @@ export async function GET() {
 	try {
 		const db = await getDB()
 
-		// 1. Параллельно получаем все данные для скорости
+		
 		const [dbCategories, dbProducts, dbArticleCategories, dbArticles] =
 			await Promise.all([
-				// Категории продуктов (существующий запрос)
+				
 				db
 					.collection('catalog')
 					.find({})
@@ -21,7 +21,7 @@ export async function GET() {
 					.sort({ order: 1 })
 					.toArray(),
 
-				// Товары (существующий запрос)
+				
 				db
 					.collection('products')
 					.find(
@@ -38,7 +38,7 @@ export async function GET() {
 					.limit(30000)
 					.toArray(),
 
-				// Категории статей (новый запрос)
+				
 				db
 					.collection('article-category')
 					.find({})
@@ -46,7 +46,7 @@ export async function GET() {
 					.sort({ name: 1 })
 					.toArray(),
 
-				// Статьи (новый запрос) - только опубликованные
+				
 				db
 					.collection('articles')
 					.find(
@@ -65,12 +65,12 @@ export async function GET() {
 					.toArray(),
 			])
 
-		// 2. Форматируем категории продуктов
+		
 		const categories = dbCategories.map(cat => ({
 			slug: cat.slug,
 		}))
 
-		// 3. Форматируем товары
+		
 		const products = dbProducts.map(product => ({
 			id: product.id,
 			title: product.title || '',
@@ -78,13 +78,13 @@ export async function GET() {
 			categorySlug: product.categories?.[0],
 		}))
 
-		// 4. Форматируем категории статей
+		
 		const articleCategories = dbArticleCategories.map(cat => ({
 			slug: cat.slug,
 			updatedAt: cat.updatedAt,
 		}))
 
-		// 5. Форматируем статьи
+		
 		const articles = dbArticles.map(article => ({
 			slug: article.slug,
 			name: article.name || '',
@@ -93,7 +93,7 @@ export async function GET() {
 			updatedAt: article.updatedAt,
 		}))
 
-		// 6. Возвращаем все данные
+		
 		return NextResponse.json({
 			categories,
 			products,

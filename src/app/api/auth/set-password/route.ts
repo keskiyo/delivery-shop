@@ -1,5 +1,5 @@
-// Назначение: API-маршрут auth/set-password.
-// Как работает: Методы: POST. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { getDB } from '@/lib/api-routes'
 import bcrypt from 'bcrypt'

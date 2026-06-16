@@ -120,15 +120,13 @@ const AddReviewForm = ({ productId, onReviewAdded }: AddReviewFormProps) => {
 						/>
 					</div>
 
-					{/* Сообщение о необходимости заполнить все поля */}
-					{showValidationError && (
+										{showValidationError && (
 						<div className='text-danger text-sm p-2 bg-danger-soft rounded mb-2'>
 							Пожалуйста, поставьте оценку и напишите отзыв
 						</div>
 					)}
 
-					{/* Сообщение об ошибке авторизации или сервера */}
-					{error && (
+										{error && (
 						<div className='text-danger text-sm p-2 bg-danger-soft rounded mb-2'>
 							{error}
 						</div>

@@ -5,19 +5,7 @@ import { ObjectId } from 'mongodb'
 import { getServerUserId } from '../../utils/getServerUserId'
 import { CartItem } from '../types/cart'
 
-/**
- * Server Action для добавления товара в корзину
- *
- * Логика работы:
- * 1. Проверяет авторизацию пользователя
- * 2. Проверяет существование товара в БД
- * 3. Проверяет, нет ли товара уже в корзине (если есть - не добавляет)
- * 4. Проверяет наличие товара на складе
- * 5. Добавляет товар с quantity=1 (если есть в наличии) или quantity=0 (если нет)
- *
- * @param productId - ID товара (строка)
- * @returns Объект с флагом успеха и сообщением
- */
+
 export async function addToCartAction(
 	productId: string,
 ): Promise<{ success: boolean; message: string; loyaltyPrice?: number }> {

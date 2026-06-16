@@ -1,5 +1,5 @@
-// Назначение: утилита dashboardCards.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 import { FileText, FolderTree, MessageSquare, Plus, Tags } from 'lucide-react'
 import { DashboardCard } from '../types/dashboard'

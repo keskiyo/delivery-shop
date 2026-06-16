@@ -1,5 +1,5 @@
-// Назначение: утилита formatBirthday.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 export const formatBirthday = (birthdayDate: string): string => {
 	const date = new Date(birthdayDate)

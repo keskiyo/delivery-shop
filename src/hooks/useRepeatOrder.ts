@@ -1,5 +1,5 @@
-// Назначение: React-хук useRepeatOrder.
-// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
+
+
 
 import { DeliveryData } from '@/types/cart'
 import { DeliveryAddress } from '@/types/order'

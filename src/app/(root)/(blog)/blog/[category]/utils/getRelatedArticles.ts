@@ -1,12 +1,12 @@
-// Назначение: утилита getRelatedArticles.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { CONFIG } from '../../../../../../../config/config'
 import { RelatedArticle } from '../../types'
 
-// Возвращает опубликованные статьи из той же категории, исключая текущую статью.
+
 export async function getRelatedArticles(
 	categoryId: string | ObjectId,
 	excludeSlug: string,

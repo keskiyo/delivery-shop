@@ -84,14 +84,12 @@ const CheckoutForm = ({ onFormDataChange }: CheckoutFormProps) => {
 
 	return (
 		<div className='flex-1 space-y-10'>
-			{/* Форма адреса доставки */}
-			<DeliveryAddress
+						<DeliveryAddress
 				formData={deliveryFormData}
 				onFormDataChange={handleFormDataChange}
 			/>
 
-			{/* Выбор даты и времени доставки */}
-			<DeliveryTime
+						<DeliveryTime
 				selectedDate={deliveryTime.date}
 				selectedTimeSlot={deliveryTime.timeSlot}
 				onDateChange={handleDateChange}

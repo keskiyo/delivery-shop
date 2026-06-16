@@ -1,6 +1,3 @@
-// Назначение: утилита sanitizeArticleHTML.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
-
 import DOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
 
@@ -25,7 +22,9 @@ export function stripArticleBackgroundStyles(html: string): string {
 			.filter(Boolean)
 			.filter(rule => {
 				const property = rule.split(':')[0]?.trim().toLowerCase()
-				return property !== 'background' && property !== 'background-color'
+				return (
+					property !== 'background' && property !== 'background-color'
+				)
 			})
 
 		if (safeStyles.length > 0) {

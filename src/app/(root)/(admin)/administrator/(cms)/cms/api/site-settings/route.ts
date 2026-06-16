@@ -1,5 +1,5 @@
-// Назначение: API-маршрут site-settings.
-// Как работает: Методы: GET, PUT. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'

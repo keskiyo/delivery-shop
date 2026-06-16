@@ -1,7 +1,7 @@
-// Назначение: React-хук useTimer.
-// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
 
-import { useEffect, useState } from 'react'
+
+
+import { useCallback, useEffect, useState } from 'react'
 
 const useTimer = (initialTime: number) => {
 	const [timeLeft, setTimeLeft] = useState(initialTime)
@@ -25,10 +25,10 @@ const useTimer = (initialTime: number) => {
 		return () => clearInterval(timer)
 	}, [isTimerActive])
 
-	const startTimer = () => {
+	const startTimer = useCallback(() => {
 		setTimeLeft(initialTime)
 		setIsTimerActive(true)
-	}
+	}, [initialTime])
 
 	return { timeLeft, canResend: !isTimerActive, startTimer }
 }

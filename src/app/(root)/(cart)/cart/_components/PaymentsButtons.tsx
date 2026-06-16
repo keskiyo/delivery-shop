@@ -26,8 +26,7 @@ const PaymentsButtons = ({
 
 	return (
 		<div className='flex flex-col gap-3'>
-			{/* Онлайн-оплата (пока не реализована) */}
-			<button
+						<button
 				disabled={!canProceedWithPayment}
 				onClick={onOnlinePayment}
 				className={`rounded w-full text-xl h-15 items-center justify-center ${
@@ -39,8 +38,7 @@ const PaymentsButtons = ({
 				{isProcessing ? 'Обработка...' : 'Оплатить на сайте'}
 			</button>
 
-			{/* Оплата наличными при получении */}
-			<button
+						<button
 				disabled={!canProceedWithPayment}
 				onClick={onCashPayment}
 				className={`h-10 rounded w-full text-base items-center justify-center transition-custom ${

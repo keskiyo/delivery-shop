@@ -1,5 +1,5 @@
-// Назначение: API-маршрут articles/upload.
-// Как работает: Методы: POST, DELETE. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import fs from 'fs/promises'
 import { NextRequest, NextResponse } from 'next/server'

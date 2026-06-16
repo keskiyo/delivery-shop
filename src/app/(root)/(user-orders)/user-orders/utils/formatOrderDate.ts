@@ -1,6 +1,3 @@
-// Назначение: утилита formatOrderDate.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
-
 export const formatOrderDate = (dateString: string): string => {
 	const date = new Date(dateString)
 
@@ -10,5 +7,5 @@ export const formatOrderDate = (dateString: string): string => {
 			month: '2-digit',
 			year: 'numeric',
 		})
-		.replace(/\//g, '.')
+		.replaceAll('/', '.')
 }

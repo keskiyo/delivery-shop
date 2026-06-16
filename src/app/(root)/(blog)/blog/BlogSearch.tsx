@@ -128,8 +128,7 @@ export default function BlogSearch() {
 				{showResults && searchResults.searchTerm && (
 					<div className='mt-4'>
 						<div className='overflow-hidden rounded border border-border bg-card shadow-(--shadow-default)'>
-							{/* Заголовок результатов */}
-							<div className='flex items-center justify-between border-b border-border bg-surface-subtle px-4 py-3'>
+														<div className='flex items-center justify-between border-b border-border bg-surface-subtle px-4 py-3'>
 								<h3 className='font-semibold text-foreground'>
 									{searchResults.articles === null
 										? 'Ошибка поиска'

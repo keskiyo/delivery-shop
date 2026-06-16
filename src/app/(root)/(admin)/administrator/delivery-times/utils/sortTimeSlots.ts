@@ -1,5 +1,5 @@
-// Назначение: утилита sortTimeSlots.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 import { convertTimeToMinutes } from '@/app/(root)/(admin)/administrator/delivery-times/utils/convertTimeToMinuts'
 

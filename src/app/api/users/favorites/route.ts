@@ -1,5 +1,5 @@
-// Назначение: API-маршрут users/favorites.
-// Как работает: Методы: GET, POST. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'

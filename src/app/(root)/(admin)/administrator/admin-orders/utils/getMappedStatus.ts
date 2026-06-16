@@ -1,5 +1,5 @@
-// Назначение: утилита getMappedStatus.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 import { Order } from '@/types/order'
 import { CUSTOMER_STATUSES } from './customerStatuses'

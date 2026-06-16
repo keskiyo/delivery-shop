@@ -1,5 +1,5 @@
-// Назначение: API-маршрут admin/users/orders.
-// Как работает: Методы: GET. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { getDB } from '@/lib/api-routes'
 import { NextResponse } from 'next/server'

@@ -1,5 +1,5 @@
-// Назначение: утилита getShortDecimalId.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 export const getShortDecimalId = (id: string): string => {
 	if (id.length < 4) return id

@@ -1,5 +1,5 @@
-// Назначение: React-хук useImageUpload.
-// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
+
+
 
 import { Editor } from '@tiptap/react'
 import { useCallback, useState } from 'react'

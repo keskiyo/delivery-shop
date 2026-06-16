@@ -153,8 +153,7 @@ const Profile = () => {
 					</p>
 				</div>
 
-				{/* Выпадающее меню */}
-				<div
+								<div
 					className={`absolute right-0 bg-site-chrome text-site-chrome-foreground rounded shadow-button-secondary overflow-hidden flex flex-col items-center z-50 ${
 						isMenuOpen
 							? 'opacity-100 translate-y-0'

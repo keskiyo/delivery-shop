@@ -18,29 +18,17 @@ import {
   shouldShowButton,
 } from "@/components/tiptap/tiptap-ui/heading-button"
 
-/**
- * Configuration for the heading dropdown menu functionality
- */
+
 export interface UseHeadingDropdownMenuConfig {
-  /**
-   * The Tiptap editor instance.
-   */
+  
   editor?: Editor | null
-  /**
-   * Available heading levels to show in the dropdown
-   * @default [1, 2, 3, 4, 5, 6]
-   */
+  
   levels?: Level[]
-  /**
-   * Whether the dropdown should hide when headings are not available.
-   * @default false
-   */
+  
   hideWhenUnavailable?: boolean
 }
 
-/**
- * Gets the currently active heading level from the available levels
- */
+
 export function getActiveHeadingLevel(
   editor: Editor | null,
   levels: Level[] = [1, 2, 3, 4, 5, 6]
@@ -49,45 +37,7 @@ export function getActiveHeadingLevel(
   return levels.find((level) => isHeadingActive(editor, level))
 }
 
-/**
- * Custom hook that provides heading dropdown menu functionality for Tiptap editor
- *
- * @example
- * ```tsx
- *
- * function MyHeadingDropdown() {
- *   const {
- *     isVisible,
- *     activeLevel,
- *     isAnyHeadingActive,
- *     canToggle,
- *     levels,
- *   } = useHeadingDropdownMenu()
- *
- *   if (!isVisible) return null
- *
- *   return (
- *     <DropdownMenu>
- *
- *     </DropdownMenu>
- *   )
- * }
- *
- *
- * function MyAdvancedHeadingDropdown() {
- *   const {
- *     isVisible,
- *     activeLevel,
- *   } = useHeadingDropdownMenu({
- *     editor: myEditor,
- *     levels: [1, 2, 3],
- *     hideWhenUnavailable: true,
- *   })
- *
- *
- * }
- * ```
- */
+
 export function useHeadingDropdownMenu(config?: UseHeadingDropdownMenuConfig) {
   const {
     editor: providedEditor,

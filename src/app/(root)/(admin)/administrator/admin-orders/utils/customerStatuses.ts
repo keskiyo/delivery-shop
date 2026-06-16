@@ -1,5 +1,5 @@
-// Назначение: утилита customerStatuses.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 export const CUSTOMER_STATUSES = [
 	{ value: 'pending', icon: '/icons-orders/icon-bag.svg', label: 'Новый' },

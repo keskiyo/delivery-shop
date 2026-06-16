@@ -1,7 +1,7 @@
 'use client'
 
-// Назначение: React-хук useFavorite.
-// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
+
+
 
 import { useAuthStore } from '@/store/authStore'
 import { useEffect, useState } from 'react'
@@ -42,7 +42,7 @@ export const useFavorites = () => {
 	const toggleFavorite = async (productId: string) => {
 		if (!user?.id) return
 
-		// После успешного API-запроса обновляем локальный список без повторной загрузки страницы.
+		
 		const isCurrentlyFavorite = favorites.includes(productId)
 		const action = isCurrentlyFavorite ? 'remove' : 'add'
 

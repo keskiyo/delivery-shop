@@ -1,5 +1,5 @@
-// Назначение: API-маршрут auth/avatar/[userId].
-// Как работает: Методы: GET. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { getDB } from '@/lib/api-routes'
 import { GridFSBucket, ObjectId } from 'mongodb'

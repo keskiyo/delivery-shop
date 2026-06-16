@@ -1,5 +1,5 @@
-// Назначение: API-маршрут cron/update-delivery-dates.
-// Как работает: Методы: GET. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { getDaysDates } from '@/app/(root)/(admin)/administrator/delivery-times/utils/getDaysDates'
 import { getDB } from '@/lib/api-routes'

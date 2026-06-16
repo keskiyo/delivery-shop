@@ -1,10 +1,10 @@
-// Назначение: React-хук useDeliverySchedule.
-// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
+
+
 
 import { convertTimeToMinutes } from '@/app/(root)/(admin)/administrator/delivery-times/utils/convertTimeToMinuts'
 import { getDaysDates } from '@/app/(root)/(admin)/administrator/delivery-times/utils/getDaysDates'
 import { Schedule } from '@/types/deliverySchedule'
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 export function useDeliverySchedule() {
 
@@ -18,7 +18,7 @@ export function useDeliverySchedule() {
 
 	const [timeSlots, setTimeSlots] = useState<string[]>([])
 
-	const dates = getDaysDates()
+	const dates = useMemo(() => getDaysDates(), [])
 
 	const showMessage = useCallback((text: string) => {
 		setMessage(text)
@@ -87,7 +87,7 @@ export function useDeliverySchedule() {
 
 		const timeSlotValue = `${startTime}-${endTime}`
 
-		// Сравниваем интервалы в минутах, чтобы корректно ловить частичные и полные пересечения.
+		
 		const hasOverlap = timeSlots.some(existingSlot => {
 			const [existingStart, existingEnd] = existingSlot.split('-')
 			const existingStartMinutes = convertTimeToMinutes(existingStart)
@@ -122,7 +122,7 @@ export function useDeliverySchedule() {
 		showMessage('Временной слот добавлен для всех дней')
 	}, [startTime, endTime, timeSlots, schedule, dates, showMessage])
 
-	// Меняем доступность конкретного слота, не затрагивая остальные дни.
+	
 	const updateTimeSlotStatus = useCallback(
 		(date: string, timeSlot: string, free: boolean) => {
 			setSchedule(prev => ({
@@ -136,7 +136,7 @@ export function useDeliverySchedule() {
 		[],
 	)
 
-	// Удаление слота синхронно чистит общий список и расписание каждого дня.
+	
 	const removeTimeSlot = useCallback(
 		(slotToRemove: string) => {
 			setError('')
@@ -160,7 +160,7 @@ export function useDeliverySchedule() {
 		[timeSlots, schedule, dates, showMessage],
 	)
 
-	// Перед сохранением нормализуем расписание: отсутствующие значения считаются свободными.
+	
 	const saveDeliveryTimes = useCallback(async () => {
 		setError('')
 		setSaving(true)

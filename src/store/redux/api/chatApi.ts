@@ -1,5 +1,5 @@
-// Назначение: RTK Query API-срез chatApi.
-// Как работает: Описывает клиентские запросы к API, кеширование и типизированные хуки для компонентов.
+
+
 
 import { ChatMessage } from '@/types/chat'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'

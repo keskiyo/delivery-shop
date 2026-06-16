@@ -1,5 +1,5 @@
-// Назначение: утилита validateBirthDate.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 export function validateBirthDate(dateStr: string): {
 	isValid: boolean

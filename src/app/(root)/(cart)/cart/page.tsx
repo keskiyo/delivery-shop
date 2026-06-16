@@ -77,7 +77,7 @@ const CartPage = () => {
 	})
 
 
-	const fetchCartAndProducts = async () => {
+	const fetchCartAndProducts = useCallback(async () => {
 		setIsCartLoading(true)
 
 		try {
@@ -120,7 +120,7 @@ const CartPage = () => {
 		} finally {
 			setIsCartLoading(false)
 		}
-	}
+	}, [setHasLoyaltyCard, updateCart])
 
 	useEffect(() => {
 		if (isCheckout) {
@@ -132,8 +132,7 @@ const CartPage = () => {
 
 	useEffect(() => {
 		fetchCartAndProducts()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [fetchCartAndProducts])
 
 
 	const handleQuantityUpdate = useCallback(

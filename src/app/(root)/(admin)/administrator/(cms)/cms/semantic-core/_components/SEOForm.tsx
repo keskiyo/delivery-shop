@@ -17,8 +17,7 @@ export const SEOForm = ({
 			onSubmit={handleSave}
 			className='bg-card rounded-lg shadow-sm p-6 relative'
 		>
-			{/* Индикатор перезагрузки в блоке текущих настроек */}
-			{reloading && settings && (
+						{reloading && settings && (
 				<div className='absolute inset-0 bg-background/50 flex items-center justify-center z-10'>
 					<Loader className='animate-spin text-brand' />
 				</div>

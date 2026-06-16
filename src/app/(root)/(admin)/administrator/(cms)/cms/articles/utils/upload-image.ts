@@ -1,5 +1,5 @@
-// Назначение: утилита upload-image.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 import { showPromiseToast, showToast } from '@/lib/showToast';
 import { Editor } from '@tiptap/react';

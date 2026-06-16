@@ -1,6 +1,3 @@
-// Назначение: утилита generatePassword.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
-
 export const generatePassword = (length: number = 8): string => {
 	const lowercase = 'abcdefghijklmnopqrstuvwxyz'
 	const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -14,12 +11,17 @@ export const generatePassword = (length: number = 8): string => {
 	]
 
 	for (let i = passwordChars.length; i < length; i++) {
-		passwordChars.push(allChars[Math.floor(Math.random() * allChars.length)])
+		passwordChars.push(
+			allChars[Math.floor(Math.random() * allChars.length)],
+		)
 	}
 
 	for (let i = passwordChars.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1))
-		;[passwordChars[i], passwordChars[j]] = [passwordChars[j], passwordChars[i]]
+		;[passwordChars[i], passwordChars[j]] = [
+			passwordChars[j],
+			passwordChars[i],
+		]
 	}
 
 	return passwordChars.join('')

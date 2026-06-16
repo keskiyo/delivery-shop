@@ -1,6 +1,3 @@
-// Назначение: утилита getColorFromName.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
-
 export function getColorFromName(name?: string | null) {
 	const colors = [
 		'from-blue-500 to-cyan-500',

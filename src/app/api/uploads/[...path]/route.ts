@@ -1,5 +1,5 @@
-// Назначение: API-маршрут uploads/[...path].
-// Как работает: Методы: GET. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import fs from 'fs'
 import { NextRequest, NextResponse } from 'next/server'

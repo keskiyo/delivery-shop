@@ -20,8 +20,7 @@ const ImagesBlock = ({ product }: { product: ProductWithImages }) => {
 
 	return (
 		<div className='flex flex-row gap-x-4 h-62 xl:h-124 justify-center'>
-			{/* Миниатюры слева */}
-			<div className='flex flex-col gap-y-2 shrink-0'>
+						<div className='flex flex-col gap-y-2 shrink-0'>
 				{images.map((src, index) => (
 					<button
 						key={`${src}-${index}`}
@@ -45,8 +44,7 @@ const ImagesBlock = ({ product }: { product: ProductWithImages }) => {
 				))}
 			</div>
 
-			{/* Основное изображение */}
-			<div
+						<div
 				className='relative flex justify-center items-center shadow-image-block bg-white
                      h-62 xl:h-120
                      w-62 md:w-68 xl:w-120

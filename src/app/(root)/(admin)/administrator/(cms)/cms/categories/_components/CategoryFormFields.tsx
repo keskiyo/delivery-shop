@@ -14,8 +14,7 @@ export const CategoryFormFields = ({
 
 	return (
 		<div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-			{/* Название */}
-			<div>
+						<div>
 				<div className='flex justify-between items-center mb-1'>
 					<label className='block text-sm font-medium'>
 						Название категории{' '}
@@ -42,8 +41,7 @@ export const CategoryFormFields = ({
 				/>
 			</div>
 
-			{/* Slug */}
-			<div>
+						<div>
 				<div className='flex justify-between items-center mb-1'>
 					<label className='block text-sm font-medium'>
 						Алиас (slug) <span className='text-danger'>*</span>
@@ -84,8 +82,7 @@ export const CategoryFormFields = ({
 				</p>
 			</div>
 
-			{/* Описание */}
-			<div className='md:col-span-2'>
+						<div className='md:col-span-2'>
 				<div className='flex justify-between items-center mb-1'>
 					<label className='block text-sm font-medium'>
 						Описание (мета-описание)
@@ -114,8 +111,7 @@ export const CategoryFormFields = ({
 				</p>
 			</div>
 
-			{/* Ключевые слова */}
-			<div className='md:col-span-2'>
+						<div className='md:col-span-2'>
 				<div className='flex justify-between items-center mb-1'>
 					<label className='block text-sm font-medium'>
 						Ключевые слова (через запятую)

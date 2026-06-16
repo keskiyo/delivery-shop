@@ -11,13 +11,13 @@ async function seedDatabase() {
 		const db = client.db(process.env.FOOD_DELIVERY_DB_NAME!)
 		const productsCollection = db.collection('products')
 
-		// 1. Получаем все существующие продукты
+		
 		const existingProducts = await productsCollection.find({}).toArray()
 		console.log(
 			`Найдено ${existingProducts.length} продуктов для изменения`,
 		)
 
-		// 2. Подготавливаем операции обновления
+		
 		const bulkUpdateOps = existingProducts.map(product => ({
 			updateOne: {
 				filter: { _id: product._id },
@@ -35,7 +35,7 @@ async function seedDatabase() {
 			},
 		}))
 
-		// 3. Выполняем массовое обновление
+		
 		if (bulkUpdateOps.length > 0) {
 			const result = await productsCollection.bulkWrite(bulkUpdateOps)
 			console.log(`Обновлено ${result.modifiedCount} продуктов`)
@@ -43,7 +43,7 @@ async function seedDatabase() {
 			console.log('Нет продуктов для обновления')
 		}
 
-		// 4. Закрываем соединение
+		
 		await client.close()
 		console.log('Разорвано соединение с MongoDB')
 	} catch (error) {
@@ -52,7 +52,7 @@ async function seedDatabase() {
 	}
 }
 
-// Запускаем скрипт
+
 seedDatabase()
 
-// Команды для запуска: npx tsc seed-db.ts node seed-db.js
+

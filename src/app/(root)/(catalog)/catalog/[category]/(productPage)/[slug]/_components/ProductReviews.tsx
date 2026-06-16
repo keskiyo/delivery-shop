@@ -2,7 +2,7 @@
 
 import ErrorComponent from '@/components/features/common/ErrorComponent'
 import StarRating from '@/components/shared/StarRating'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import UserAvatar from './UserAvatar'
 
 interface Review {
@@ -40,7 +40,7 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
 		userMessage: string
 	} | null>(null)
 
-	const fetchReviews = async (
+	const fetchReviews = useCallback(async (
 		limit: number = 5,
 		skip: number = 0,
 		append: boolean = false,
@@ -83,7 +83,7 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
 			setLoading(false)
 			setLoadingMore(false)
 		}
-	}
+	}, [productId])
 
 	const handleLoadMore = () => {
 		fetchReviews(5, reviews.length, true)
@@ -98,8 +98,7 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
 
 	useEffect(() => {
 		fetchReviews()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [productId, refreshKey])
+	}, [fetchReviews, refreshKey])
 
 	if (loading) {
 		return (

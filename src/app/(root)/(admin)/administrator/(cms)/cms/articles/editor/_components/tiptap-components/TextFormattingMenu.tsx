@@ -95,8 +95,7 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 
 	return (
 		<div className='flex items-center gap-1'>
-			{/* Bold */}
-			<button
+						<button
 				type='button'
 				onClick={handleBold}
 				disabled={!canBold}
@@ -115,8 +114,7 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 				<Bold className='w-4 h-4' />
 			</button>
 
-			{/* Italic */}
-			<button
+						<button
 				type='button'
 				onClick={handleItalic}
 				disabled={!canItalic}
@@ -135,8 +133,7 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 				<Italic className='w-4 h-4' />
 			</button>
 
-			{/* Underline */}
-			<button
+						<button
 				type='button'
 				onClick={handleUnderline}
 				disabled={!canUnderline}
@@ -155,8 +152,7 @@ export const TextFormattingMenu = ({ editor }: EditorProps) => {
 				<Underline className='w-4 h-4' />
 			</button>
 
-			{/* Strike */}
-			<button
+						<button
 				type='button'
 				onClick={handleStrike}
 				disabled={!canStrike}

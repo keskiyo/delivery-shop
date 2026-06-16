@@ -24,8 +24,7 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 
 	useEffect(() => {
 		startTimer()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [startTimer])
 
 	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault()
@@ -119,8 +118,7 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 						className='w-65 mx-auto max-h-screen flex flex-col justify-center items-center'
 						autoComplete='off'
 					>
-						{/* Поле ввода 4-значного кода */}
-						<input
+												<input
 							type='text'
 							inputMode='numeric'
 							pattern='[0-9]{4}'
@@ -135,15 +133,13 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 							required
 						/>
 
-						{/* Сообщение об ошибке */}
-						{error && (
+												{error && (
 							<div className='text-danger text-center mt-2 text-sm'>
 								{error}
 							</div>
 						)}
 
-						{/* Кнопка подтверждения (активна только при 4 цифрах) */}
-						<button
+												<button
 							type='submit'
 							className={`${buttonStyles.base} ${code.length !== 4 ? buttonStyles.inactive : buttonStyles.active} [&&]:mt-8 mb-0`}
 							disabled={code.length !== 4 || attemptsLeft <= 0}
@@ -153,15 +149,13 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 					</form>
 				</div>
 
-				{/* Кнопка повторной отправки кода с таймером */}
-				<OTPResendCode
+								<OTPResendCode
 					canResend={canResend}
 					timeLeft={timeLeft}
 					onResendAction={handleResend}
 				/>
 
-				{/* Ссылка возврата на страницу регистрации */}
-				<Link
+								<Link
 					href='/register'
 					className='h-8 text-xs text-muted-foreground hover:text-foreground w-30 flex items-center justify-center gap-x-2 mx-auto transition-custom cursor-pointer'
 				>

@@ -1,5 +1,5 @@
-// Назначение: API-маршрут blog/search.
-// Как работает: Методы: GET. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { getDB } from '@/lib/api-routes'
 import { NextRequest, NextResponse } from 'next/server'

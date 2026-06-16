@@ -1,14 +1,12 @@
 "use client"
 
 import {
-  cloneElement,
   createContext,
   forwardRef,
   isValidElement,
   useContext,
   useMemo,
   useState,
-  version,
 } from "react"
 import {
   useFloating,
@@ -163,35 +161,32 @@ export function Tooltip({ children, ...props }: TooltipProviderProps) {
 export const TooltipTrigger = forwardRef<HTMLElement, TooltipTriggerProps>(
   function TooltipTrigger({ children, asChild = false, ...props }, propRef) {
     const context = useTooltipContext()
-    const childrenRef = isValidElement(children)
-      ? parseInt(version, 10) >= 19
-        ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (children as { props: { ref?: React.Ref<any> } }).props.ref
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (children as any).ref
-      : undefined
-    const ref = useMergeRefs([context.refs.setReference, propRef, childrenRef])
+    const mergedReferenceRef = useMergeRefs([
+      context.refs.setReference,
+      propRef,
+    ])
 
     if (asChild && isValidElement(children)) {
       const dataAttributes = {
         "data-tooltip-state": context.open ? "open" : "closed",
       }
 
-      return cloneElement(
-        children,
-        // eslint-disable-next-line react-hooks/refs
-        context.getReferenceProps({
-          ref,
-          ...props,
-          ...(typeof children.props === "object" ? children.props : {}),
-          ...dataAttributes,
-        })
+      return (
+        <span
+          ref={mergedReferenceRef}
+          {...context.getReferenceProps({
+            ...props,
+            ...dataAttributes,
+          })}
+        >
+          {children}
+        </span>
       )
     }
 
     return (
       <button
-        ref={ref}
+        ref={mergedReferenceRef}
         data-tooltip-state={context.open ? "open" : "closed"}
         {...context.getReferenceProps(props)}
       >

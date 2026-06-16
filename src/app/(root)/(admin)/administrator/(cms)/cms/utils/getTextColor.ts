@@ -1,5 +1,5 @@
-// Назначение: утилита getTextColor.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 export const getTextColor = (color: string): string => {
 	const colors: Record<string, string> = {

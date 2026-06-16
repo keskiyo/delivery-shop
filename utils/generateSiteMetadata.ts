@@ -1,6 +1,3 @@
-// Назначение: утилита generateSiteMetadata.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
-
 import { Metadata } from 'next'
 import { baseUrl } from './baseUrl'
 import { getSiteMetadata } from './getSiteMetadata'

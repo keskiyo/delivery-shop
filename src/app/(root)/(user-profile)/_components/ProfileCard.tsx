@@ -110,8 +110,7 @@ const ProfileCard = ({ isEditing }: { isEditing: boolean }) => {
 			<div className='flex flex-wrap justify-between items-center mb-4 gap-4'>
 				<h3 className={profileStyles.sectionTitle}>Карта</h3>
 
-				{/* Невидимые кнопки для сохранения layout в режиме просмотра */}
-				{!isEditing && (
+								{!isEditing && (
 					<div className='flex gap-2 invisible' aria-hidden='true'>
 						<button
 							className={profileStyles.cancelButton}
@@ -128,8 +127,7 @@ const ProfileCard = ({ isEditing }: { isEditing: boolean }) => {
 					</div>
 				)}
 
-				{/* Кнопки управления в режиме редактирования */}
-				{isEditing && (
+								{isEditing && (
 					<div className='flex gap-2'>
 						<button
 							onClick={handleCancel}
@@ -150,8 +148,7 @@ const ProfileCard = ({ isEditing }: { isEditing: boolean }) => {
 			</div>
 
 			<div className={profileStyles.inputContainer}>
-				{/* Режим редактирования: поле с маской ввода */}
-				{isEditing ? (
+								{isEditing ? (
 					<InputMask
 						mask='____ ____ ____ ____'
 						replacement={{ _: /\d/ }}
@@ -171,15 +168,12 @@ const ProfileCard = ({ isEditing }: { isEditing: boolean }) => {
 						readOnly
 					/>
 				)}
-				{/* Иконка карты */}
-				<CreditCard className='absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground' />
+								<CreditCard className='absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground' />
 			</div>
 
-			{/* Сообщение об ошибке */}
-			{error && <p className='text-danger text-sm mt-2'>{error}</p>}
+						{error && <p className='text-danger text-sm mt-2'>{error}</p>}
 
-			{/* Подсказка если карта не добавлена */}
-			{!user?.card && !isEditing && (
+						{!user?.card && !isEditing && (
 				<p className='text-muted-foreground text-sm mt-2'>
 					Добавьте номер карты лояльности для получения бонусов
 				</p>

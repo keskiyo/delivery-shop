@@ -10,15 +10,15 @@ async function updateProductsDistribution() {
 		const db = client.db(process.env.FOOD_DELIVERY_DB_NAME!)
 		const productsCollection = db.collection('products')
 
-		// 1. Получаем все существующие продукты
+		
 		const existingProducts = await productsCollection.find({}).toArray()
 		console.log(
 			`Найдено ${existingProducts.length} продуктов для изменения`,
 		)
 
-		// 2. Подготавливаем операции обновления
+		
 		const bulkUpdateOps = existingProducts.map(product => {
-			// Все значения оценок установлены в 0 внутри rating.distribution
+			
 			const distribution = {
 				'1': 0,
 				'2': 0,
@@ -32,16 +32,16 @@ async function updateProductsDistribution() {
 					filter: { _id: product._id },
 					update: {
 						$set: {
-							'rating.rate': 5.0, // Устанавливаем рейтинг 5.0
-							'rating.count': 0, // Обнуляем количество оценок
-							'rating.distribution': distribution, // Обнуляем распределение
+							'rating.rate': 5.0, 
+							'rating.count': 0, 
+							'rating.distribution': distribution, 
 						},
 					},
 				},
 			}
 		})
 
-		// 3. Выполняем массовое обновление
+		
 		if (bulkUpdateOps.length > 0) {
 			const result = await productsCollection.bulkWrite(bulkUpdateOps)
 			console.log(`Обновлено ${result.modifiedCount} продуктов`)
@@ -62,4 +62,4 @@ async function updateProductsDistribution() {
 
 updateProductsDistribution()
 
-//Команда для запуска: npx tsc seed-db-ratings.ts // node seed-db-ratings.js
+

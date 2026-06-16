@@ -1,5 +1,5 @@
-// Назначение: API-маршрут search.
-// Как работает: Методы: GET. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { SearchProduct } from '@/types/searchProduct'
 import { NextResponse } from 'next/server'

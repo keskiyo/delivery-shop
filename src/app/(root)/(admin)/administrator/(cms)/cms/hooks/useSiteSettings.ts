@@ -1,5 +1,5 @@
-// Назначение: React-хук useSiteSettings.
-// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
+
+
 
 import { showPromiseToast } from '@/lib/showToast'
 import { useEffect, useState } from 'react'

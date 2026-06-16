@@ -1,5 +1,5 @@
-// Назначение: API-маршрут categories/reorder.
-// Как работает: Методы: PUT. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'

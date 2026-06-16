@@ -23,8 +23,7 @@ const Tooltip = ({
 				}`}
 			>
 				<OctagonAlert size={21} className='mr-4 shrink-0' />
-				{/* Треугольник внизу, если position="top" */}
-				{position === 'top' ? (
+								{position === 'top' ? (
 					<div
 						className='absolute left-1/2 -bottom-0.75 transform -translate-x-1/2 w-0 h-0
                      border-l-[6px] border-r-[6px] border-t-4

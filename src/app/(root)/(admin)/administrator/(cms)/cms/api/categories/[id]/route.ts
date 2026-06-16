@@ -1,5 +1,5 @@
-// Назначение: API-маршрут categories/[id].
-// Как работает: Методы: PUT, DELETE. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'

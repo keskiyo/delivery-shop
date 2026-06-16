@@ -93,8 +93,7 @@ const CartItem = memo(function CartItem({
         ${isOutOfStock ? 'opacity-60' : ''}
       `}
 		>
-			{/* Чекбокс для выбора товара */}
-			<SelectionCheckbox
+						<SelectionCheckbox
 				isSelected={isSelected}
 				onSelectionChange={checked =>
 					onSelectionChange(item.productId, checked)
@@ -103,24 +102,20 @@ const CartItem = memo(function CartItem({
 
 			<div className='flex flex-row flex-wrap md:flex-row justify-between w-full md:flex-nowrap'>
 				<div className='flex flex-row flex-wrap md:flex-nowrap'>
-					{/* Изображение товара */}
-					<ProductImage
+										<ProductImage
 						productId={item.productId}
 						title={productData.title}
 					/>
 
-					{/* Информация о товаре */}
-					<div className='flex-1 flex min-w-56 md:flex-initial flex-col gap-y-2 p-2'>
-						{/* Ссылка на страницу товара */}
-						<Link
+										<div className='flex-1 flex min-w-56 md:flex-initial flex-col gap-y-2 p-2'>
+												<Link
 							className='text-base hover:text-promo cursor-pointer'
 							href={`/catalog/${productData.categories[0]}/${item.productId}`}
 						>
 							{productData.description}
 						</Link>
 
-						{/* Цены и бейдж скидки */}
-						<div className='flex flex-row gap-x-2 items-center'>
+												<div className='flex flex-row gap-x-2 items-center'>
 							<PriceDisplay
 								finalPrice={finalPrice}
 								priceWithDiscount={priceWithDiscount}
@@ -142,15 +137,12 @@ const CartItem = memo(function CartItem({
 					</div>
 				</div>
 
-				{/* Тултип при превышении доступного количества */}
-				{showTooltip && (
+								{showTooltip && (
 					<Tooltip text='Количество ограничено' position='top' />
 				)}
 
-				{/* Селектор количества и итоговая цена */}
-				<div className='flex flex-wrap justify-between items-center gap-2 w-full md:w-30 xl:w-59 p-2 md:flex-nowrap md:flex-col md:justify-normal md:items-end xl:flex-row xl:items-start xl:justify-end'>
-					{/* Селектор количества (скрыт для товаров без наличия) */}
-					{!isOutOfStock && (
+								<div className='flex flex-wrap justify-between items-center gap-2 w-full md:w-30 xl:w-59 p-2 md:flex-nowrap md:flex-col md:justify-normal md:items-end xl:flex-row xl:items-start xl:justify-end'>
+										{!isOutOfStock && (
 						<QuantitySelector
 							quantity={quantity}
 							isUpdating={isUpdating}
@@ -164,8 +156,7 @@ const CartItem = memo(function CartItem({
 						/>
 					)}
 
-					{/* Итоговая стоимость или "Нет в наличии" */}
-					<div
+										<div
 						className={`text-sm md:text-lg font-bold text-right ${isOutOfStock ? 'w-full flex justify-end' : 'w-26'}`}
 					>
 						{isOutOfStock ? (
@@ -175,8 +166,7 @@ const CartItem = memo(function CartItem({
 						) : (
 							<>
 								<p>{formatPrice(totalFinalPrice)} ₽</p>
-								{/* Старая цена и экономия (только на мобильных) */}
-								{hasDiscount && (
+																{hasDiscount && (
 									<div className='flex flex-row gap-x-2 md:hidden'>
 										<p className='line-through font-normal text-xs md:text-base text-muted-foreground'>
 											{formatPrice(totalPriceWithoutCard)}{' '}

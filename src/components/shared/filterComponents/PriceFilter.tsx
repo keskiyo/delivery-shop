@@ -192,11 +192,9 @@ function PriceFilterContent(props: {
 
 	return (
 		<form onSubmit={handleSubmit} className='flex flex-col gap-y-10'>
-			{/* Заголовок с кнопкой "Сбросить" */}
-			<PriceFilterHeader resetPriceFitlter={resetPriceFitlter} />
+						<PriceFilterHeader resetPriceFitlter={resetPriceFitlter} />
 
-			{/* Инпуты для ввода цены от и до */}
-			<PriceInputs
+						<PriceInputs
 				onFromChangeAction={(value: string) =>
 					setInputValues(prev => ({ ...prev, from: value }))
 				}
@@ -209,23 +207,20 @@ function PriceFilterContent(props: {
 				max={priceRange.max}
 			/>
 
-			{/* Слайдер для выбора диапазона цен */}
-			<PriceRangeFilter
+						<PriceRangeFilter
 				min={priceRange.min}
 				max={priceRange.max}
 				values={sliderValues}
 				handleSliderChange={handleSliderChange}
 			/>
 
-			{/* Чекбокс "В наличии" */}
-			<InStockToggle
+						<InStockToggle
 				checked={inStock}
 				handleInStockChange={setInStock}
 				labelText='В наличии'
 			/>
 
-			{/* Кнопка применения фильтра */}
-			<button
+						<button
 				type='submit'
 				className='bg-promo text-white hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) h-10 rounded justify-center items-center transition-custom cursor-pointer'
 			>

@@ -1,5 +1,5 @@
-// Назначение: API-маршрут articles/articles-management/status.
-// Как работает: Методы: PATCH. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { NextRequest, NextResponse } from "next/server";
 import { ObjectId } from "mongodb";

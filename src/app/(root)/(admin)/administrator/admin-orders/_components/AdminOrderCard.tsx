@@ -178,8 +178,7 @@ const AdminOrderCard = ({ orderId }: AdminOrderCardProps) => {
 					</div>
 				</div>
 				<div className='flex flex-wrap gap-5 items-center'>
-					{/* Телефон */}
-					<div className='flex items-center gap-2'>
+										<div className='flex items-center gap-2'>
 						<Phone className='w-6 h-6' />
 						<span className='underline'>{formattedPhone}</span>
 					</div>
@@ -208,8 +207,7 @@ const AdminOrderCard = ({ orderId }: AdminOrderCardProps) => {
 						</button>
 					)}
 
-					{/* Кнопка чата или календаря */}
-					{showCalendarIcon ? (
+										{showCalendarIcon ? (
 						<div className='relative'>
 							<button
 								className='relative bg-surface-hover hover:shadow-button-secondary w-10 h-10 px-2 flex justify-center items-center gap-2 rounded transition-custom cursor-pointer text-foreground'
@@ -238,8 +236,7 @@ const AdminOrderCard = ({ orderId }: AdminOrderCardProps) => {
 					)}
 				</div>
 			</div>
-			{/* Товары показываем когда showOrderDetails = true */}
-			{showOrderDetails && (
+						{showOrderDetails && (
 				<>
 					<OrderProductsLoader
 						orderItems={order.items}
@@ -248,8 +245,7 @@ const AdminOrderCard = ({ orderId }: AdminOrderCardProps) => {
 						showFullOrder={showFullOrder}
 					/>
 
-					{/* Полные детали заказа показываем когда showFullOrder = true */}
-					{showFullOrder && (
+										{showFullOrder && (
 						<OrderDetails
 							order={order}
 							totalWeight={totalOrderWeight}
@@ -258,8 +254,7 @@ const AdminOrderCard = ({ orderId }: AdminOrderCardProps) => {
 				</>
 			)}
 
-			{/* Нижняя кнопка Показать заказ/Скрыть */}
-			{showOrderDetails && !showFullOrder && (
+						{showOrderDetails && !showFullOrder && (
 				<div className='flex justify-center mt-10'>
 					<button
 						className='bg-surface-hover hover:shadow-button-secondary w-60 h-10 px-2 flex justify-center items-center gap-2 rounded transition-custom cursor-pointer text-foreground'

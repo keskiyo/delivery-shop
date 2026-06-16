@@ -1,5 +1,5 @@
-// Назначение: API-маршрут delivery-times.
-// Как работает: Методы: GET, POST. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { getDB } from '@/lib/api-routes'
 import { Schedule } from '@/types/deliverySchedule'

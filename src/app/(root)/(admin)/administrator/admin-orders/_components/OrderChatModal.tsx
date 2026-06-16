@@ -95,8 +95,7 @@ const OrderChatModal = ({
 								key={msg._id}
 								className={`flex flex-col ${isCurrentUser ? 'items-end' : 'items-start'} mb-4`}
 							>
-								{/* Мета информация (имя, роль, время, дата)*/}
-								<div
+																<div
 									className={`flex items-center mb-1.5 text-xs gap-1 ${
 										isCurrentUser ? '' : ''
 									}`}
@@ -134,10 +133,8 @@ const OrderChatModal = ({
 									</span>
 								</div>
 
-								{/* Пузырь сообщения */}
-								<div className={`${bubbleBase} ${bubbleClass}`}>
-									{/* Текст сообщения */}
-									<p className='text-sm leading-relaxed whitespace-pre-wrap wrap-break-word relative z-10'>
+																<div className={`${bubbleBase} ${bubbleClass}`}>
+																		<p className='text-sm leading-relaxed whitespace-pre-wrap wrap-break-word relative z-10'>
 										{msg.message}
 									</p>
 								</div>

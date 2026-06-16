@@ -69,8 +69,7 @@ const EditorPage = () => {
 		}
 
 		loadArticle()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchParams])
+	}, [getArticle, resetFormData, searchParams, setArticleData])
 
 	const {
 		generateSlug,

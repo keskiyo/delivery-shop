@@ -1,7 +1,7 @@
 @import "./table.css";
 @import "./images.css";
 
-/* Стили для редактора (ProseMirror) */
+
 .ProseMirror {
   min-height: 350px;
   padding: 1rem;
@@ -16,7 +16,7 @@
   outline: none;
 }
 
-/* Абзацы */
+
 .ProseMirror p {
   line-height: 1.5;
   font-size: 14px;
@@ -31,7 +31,7 @@
   height: 0;
 }
 
-/* Заголовки */
+
 .ProseMirror h1 {
   font-size: 2.25rem;
   font-weight: bold;
@@ -82,7 +82,7 @@
   letter-spacing: 0.05em;
 }
 
-/* Списки */
+
 .ProseMirror ul,
 .ProseMirror ol {
   padding-left: 1.5rem;
@@ -112,7 +112,7 @@
   display: inline-block;
 }
 
-/* Цитаты */
+
 .ProseMirror blockquote {
   border-left: 4px solid var(--brand);
   padding-left: 1.5rem;
@@ -121,7 +121,7 @@
   margin: 2rem 0;
 }
 
-/* Ссылки */
+
 .ProseMirror a {
   color: var(--brand);
 }
@@ -131,12 +131,12 @@
   text-decoration: underline;
 }
 
-/* Изображения */
+
 .ProseMirror img {
   border-radius: 4px;
 }
 
-/* Стили для таблиц (если используется table.css) */
+
 .ProseMirror table {
   border-collapse: collapse;
   margin: 1rem 0;
@@ -155,7 +155,7 @@
   font-weight: 600;
 }
 
-/* Стили для изображений с плавающей обтеканием */
+
 .ProseMirror img[style*="float: left"] {
   margin-right: 15px;
   margin-bottom: 15px;
@@ -166,7 +166,7 @@
   margin-bottom: 15px;
 }
 
-/* Стили для inline-кода */
+
 .ProseMirror code {
   background-color: var(--surface-subtle);
   padding: 0.2em 0.4em;
@@ -175,7 +175,7 @@
   font-size: 0.9em;
 }
 
-/* Стили для выделения */
+
 .ProseMirror mark {
   background-color: var(--warning-soft);
   padding: 0.1em 0.3em;

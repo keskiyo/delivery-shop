@@ -1,7 +1,7 @@
 'use client'
 
-// Назначение: React-хук useAvatar.
-// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
+
+
 
 import { useAuthStore } from '@/store/authStore'
 import { useCallback, useEffect, useState } from 'react'
@@ -56,7 +56,7 @@ const useAvatar = ({ userId, gender = 'male' }: UseAvatarProps) => {
 	}, [loadAvatar])
 
 	useEffect(() => {
-		// Blob URL создается в браузере вручную, поэтому его нужно освобождать при замене аватара.
+		
 		return () => {
 			if (currentAvatar && currentAvatar.startsWith('blob:')) {
 				URL.revokeObjectURL(currentAvatar)
@@ -81,7 +81,7 @@ const useAvatar = ({ userId, gender = 'male' }: UseAvatarProps) => {
 			setIsLoading(true)
 
 			try {
-				// После загрузки перечитываем аватар и профиль, чтобы все места в UI получили новое изображение.
+				
 				const formData = new FormData()
 				formData.append('avatar', file)
 				formData.append('userId', userId)

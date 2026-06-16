@@ -1,6 +1,3 @@
-// Назначение: утилита getServerUserId.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
-
 import { headers } from 'next/headers'
 import {
 	getBetterAuthSession,

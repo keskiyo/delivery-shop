@@ -145,8 +145,7 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 
 	return (
 		<div className='relative inline-block'>
-			{/* Кнопка открытия меню */}
-			<button
+						<button
 				ref={buttonRef}
 				type='button'
 				onClick={() => {
@@ -173,8 +172,7 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 				</div>
 			</button>
 
-			{/* Выпадающее меню */}
-			{isOpen && (
+						{isOpen && (
 				<div
 					ref={dropdownRef}
 					className='absolute z-50 mt-1 left-0 bg-card border border-border rounded-lg shadow-lg p-2 max-w-[calc(100vw-20px)]'
@@ -186,8 +184,7 @@ export const TextColorMenu = ({ editor }: EditorProps) => {
 					}}
 					onClick={e => e.stopPropagation()}
 				>
-					{/* Заголовок */}
-					<div className='mb-2'>
+										<div className='mb-2'>
 						<div className='text-xs font-medium text-foreground mb-1'>
 							Цвет текста
 						</div>

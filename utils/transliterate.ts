@@ -1,6 +1,3 @@
-// Назначение: утилита transliterate.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
-
 export const transliterate = (
 	text: string,
 	toSlug: boolean = false,

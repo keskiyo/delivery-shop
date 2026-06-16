@@ -167,8 +167,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 	return (
 		<>
 			<div className='flex items-center gap-1'>
-				{/* Кнопка добавления/редактирования ссылки */}
-				<button
+								<button
 					type='button'
 					onClick={handleOpenModal}
 					className={`
@@ -184,8 +183,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 					<LinkIcon className='w-4 h-4' />
 				</button>
 
-				{/* Кнопка удаления ссылки */}
-				<button
+								<button
 					type='button'
 					onClick={handleRemoveLink}
 					disabled={!canRemoveLink}
@@ -203,8 +201,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 				</button>
 			</div>
 
-			{/* Модальное окно */}
-			{isModalOpen && (
+						{isModalOpen && (
 				<div className='fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50 p-4'>
 					<div
 						ref={modalRef}
@@ -256,8 +253,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 									/>
 								</div>
 
-								{/* Переключатель для target="_blank" */}
-								<div className='flex items-center justify-between pt-2'>
+																<div className='flex items-center justify-between pt-2'>
 									<div className='flex items-center'>
 										<ExternalLink className='w-4 h-4 text-muted-foreground mr-2' />
 										<label
@@ -299,8 +295,7 @@ export const LinkMenu = ({ editor }: EditorProps) => {
 									/>
 								</div>
 
-								{/* Подсказка */}
-								<div className='text-xs text-muted-foreground mt-2 p-2 bg-surface-subtle rounded'>
+																<div className='text-xs text-muted-foreground mt-2 p-2 bg-surface-subtle rounded'>
 									{openInNewTab
 										? 'Ссылка будет открываться в новой вкладке (рекомендуется для внешних ссылок)'
 										: 'Ссылка будет открываться в текущей вкладке (рекомендуется для навигации по Вашему сайту)'}

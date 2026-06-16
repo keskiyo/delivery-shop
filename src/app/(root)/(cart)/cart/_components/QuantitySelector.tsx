@@ -23,33 +23,26 @@ const QuantitySelector = memo(function QuantitySelector({
 				onProductCard ? ' w-full justify-between' : 'w-25'
 			}`}
 		>
-			{/* Кнопка уменьшения количества (-) */}
-			<button
+						<button
 				onClick={onDecrement}
 				disabled={quantity < 0 || isUpdating || isOutOfStock}
 				className='w-6 h-6 rounded flex items-center justify-center transition-custom cursor-pointer disabled:opacity-50'
 			>
-				{/* Горизонтальная линия (минус) */}
-				<div className='w-3.75 h-px bg-white'></div>
+								<div className='w-3.75 h-px bg-white'></div>
 			</button>
 
-			{/* Отображение количества или индикатора загрузки */}
-			<span className='w-12 text-center text-base'>
+						<span className='w-12 text-center text-base'>
 				{isUpdating ? '...' : quantity}
 			</span>
 
-			{/* Кнопка увеличения количества (+) */}
-			<button
+						<button
 				onClick={onIncrement}
 				disabled={isUpdating || isOutOfStock}
 				className='w-6 h-6 rounded flex items-center justify-center transition-custom cursor-pointer disabled:opacity-50'
 			>
-				{/* Иконка плюса (две пересекающиеся линии) */}
-				<div className='relative w-3.75 h-3.75'>
-					{/* Горизонтальная линия */}
-					<div className='absolute top-1/2 left-0 w-full h-px bg-white transform -translate-y-1/2'></div>
-					{/* Вертикальная линия */}
-					<div className='absolute left-1/2 top-0 w-px h-full bg-white transform -translate-x-1/2'></div>
+								<div className='relative w-3.75 h-3.75'>
+										<div className='absolute top-1/2 left-0 w-full h-px bg-white transform -translate-y-1/2'></div>
+										<div className='absolute left-1/2 top-0 w-px h-full bg-white transform -translate-x-1/2'></div>
 				</div>
 			</button>
 		</div>

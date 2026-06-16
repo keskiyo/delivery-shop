@@ -1,7 +1,7 @@
 'use client'
 
-// Назначение: React-хук usePricing.
-// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
+
+
 
 import { useCartStore } from '@/store/cartStore'
 import { CalculatedItem, UsePricingProps } from '@/types/pricingProps'

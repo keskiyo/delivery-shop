@@ -1,5 +1,5 @@
-// Назначение: API-маршрут blog/categories.
-// Как работает: Методы: GET. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { BlogCategory } from '@/app/(root)/(blog)/blog/categories/types/categories.types'
 import { getDB } from '@/lib/api-routes'

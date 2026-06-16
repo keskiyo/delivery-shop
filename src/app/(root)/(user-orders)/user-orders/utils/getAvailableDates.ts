@@ -1,5 +1,5 @@
-// Назначение: утилита getAvailableDates.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 import { getDaysDates } from '@/app/(root)/(admin)/administrator/delivery-times/utils/getDaysDates'
 import { AvailableDate } from '@/types/availableDate'

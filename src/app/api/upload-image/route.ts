@@ -1,5 +1,5 @@
-// Назначение: API-маршрут upload-image.
-// Как работает: Методы: POST. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import fs from 'fs/promises'
 import { NextRequest, NextResponse } from 'next/server'

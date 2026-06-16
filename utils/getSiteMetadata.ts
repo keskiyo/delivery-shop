@@ -1,6 +1,3 @@
-// Назначение: утилита getSiteMetadata.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
-
 import { getDB } from '@/lib/api-routes'
 import { unstable_cache } from 'next/cache'
 import { baseUrl } from './baseUrl'

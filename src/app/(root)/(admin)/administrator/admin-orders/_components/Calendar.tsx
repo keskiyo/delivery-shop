@@ -54,8 +54,7 @@ const Calendar = ({
 		<div
 			className={`${isOrderDateChange ? '' : 'absolute top-17 left-0 z-50 bg-card border border-border rounded-lg shadow-lg p-4 w-92 text-foreground'}`}
 		>
-			{/* Кастомная навигация */}
-			<div className='flex justify-between items-center mb-4'>
+						<div className='flex justify-between items-center mb-4'>
 				<span className='text-lg font-bold text-foreground'>
 					{getMonthName(currentMoth)}
 				</span>

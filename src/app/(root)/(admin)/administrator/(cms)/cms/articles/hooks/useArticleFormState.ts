@@ -1,7 +1,7 @@
 'use client'
 
-// Назначение: React-хук useArticleFormState.
-// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
+
+
 
 import { showToast } from '@/lib/showToast'
 import { useArticleStore } from '@/store/articleStore'

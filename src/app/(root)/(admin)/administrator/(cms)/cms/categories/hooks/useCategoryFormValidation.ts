@@ -1,5 +1,5 @@
-// Назначение: React-хук useCategoryFormValidation.
-// Как работает: Инкапсулирует состояние, эффекты и обработчики, чтобы компоненты не дублировали эту логику.
+
+
 
 import { useState } from "react";
 import { SEO_LIMITS } from "../../utils/SEO_LIMITS";

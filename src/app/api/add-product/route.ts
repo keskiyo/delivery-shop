@@ -1,5 +1,5 @@
-// Назначение: API-маршрут add-product.
-// Как работает: Методы: POST. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import { getDB } from '@/lib/api-routes'
 import { NextRequest, NextResponse } from 'next/server'

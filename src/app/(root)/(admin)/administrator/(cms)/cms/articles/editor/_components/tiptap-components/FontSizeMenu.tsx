@@ -203,23 +203,20 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
 				/>
 			</button>
 
-			{/* Выпадающее меню */}
-			{isOpen && (
+						{isOpen && (
 				<div
 					ref={dropdownRef}
 					className='absolute z-50 mt-1 left-0 bg-card border border-border rounded-lg shadow-lg min-w-40'
 					onClick={e => e.stopPropagation()}
 				>
 					<div className='py-1'>
-						{/* Заголовок меню */}
-						<div className='px-3 py-2 border-b border-border'>
+												<div className='px-3 py-2 border-b border-border'>
 							<span className='text-xs font-medium text-muted-foreground'>
 								РАЗМЕР ШРИФТА
 							</span>
 						</div>
 
-						{/* Варианты размеров */}
-						{FONT_SIZES.map(size => {
+												{FONT_SIZES.map(size => {
 							const isActive = checkIsActive(size.value)
 
 							return (

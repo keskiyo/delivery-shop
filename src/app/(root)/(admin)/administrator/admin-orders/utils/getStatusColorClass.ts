@@ -1,5 +1,5 @@
-// Назначение: утилита getStatusColorClass.
-// Как работает: Содержит переиспользуемую бизнес-логику, форматирование, расчеты или подготовку данных.
+
+
 
 export const getStatusColorClass = (
 	statusLabel: string,

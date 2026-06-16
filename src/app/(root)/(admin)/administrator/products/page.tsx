@@ -56,8 +56,7 @@ const AdminProducts = () => {
 					Управление товарами
 				</h1>
 
-				{/* Кнопка "Назад" (опционально, для удобства навигации) */}
-				<Link
+								<Link
 					href='/administrator'
 					className='text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1'
 				>
@@ -65,21 +64,18 @@ const AdminProducts = () => {
 				</Link>
 			</div>
 
-			{/* Сетка карточек. 2 колонки идеально подходят для 2 элементов */}
-			<div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+						<div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
 				{menuItems.map(item => (
 					<Link
 						key={item.href}
 						href={item.href}
 						className='group relative flex flex-col items-start p-8 bg-card rounded-xl border border-border hover:border-brand hover:bg-surface-hover  transition-custom hover:shadow-lg hover:-translate-y-1'
 					>
-						{/* Иконка */}
-						<div className='p-4 bg-surface-subtle rounded-xl mb-5 text-muted-foreground group-hover:text-brand group-hover:bg-brand-soft transition-colors'>
+												<div className='p-4 bg-surface-subtle rounded-xl mb-5 text-muted-foreground group-hover:text-brand group-hover:bg-brand-soft transition-colors'>
 							<Icon name={item.icon} />
 						</div>
 
-						{/* Текст */}
-						<h3 className='text-xl font-semibold text-foreground mb-2 transition-colors'>
+												<h3 className='text-xl font-semibold text-foreground mb-2 transition-colors'>
 							{item.title}
 						</h3>
 
@@ -87,8 +83,7 @@ const AdminProducts = () => {
 							{item.desc}
 						</p>
 
-						{/* Стрелочка */}
-						<div className='absolute top-6 right-6 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0  text-brand'>
+												<div className='absolute top-6 right-6 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0  text-brand'>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
 								className='h-5 w-5'

@@ -1,5 +1,5 @@
-// Назначение: API-маршрут categories.
-// Как работает: Методы: GET, POST. Валидирует входные данные, обращается к нужным сервисам и возвращает JSON-ответ.
+
+
 
 import {
 	Category,
@@ -98,7 +98,7 @@ export async function GET(request: Request) {
 
 			const totalPages = Math.ceil(totalFiltered / validLimit)
 
-			// Формирование ответа
+			
 			const response = {
 				success: true,
 				data: {
