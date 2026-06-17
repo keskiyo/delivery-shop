@@ -14,19 +14,19 @@ const Footer = () => {
 
 	if (!isClient) {
 		return (
-			<footer className='bg-site-chrome text-site-chrome-muted mt-10 md:mt-15 xl:mt-20 w-full relative'>
-				<div className='px-7 py-10'></div>
+			<footer className='relative w-full mt-10 bg-site-chrome text-site-chrome-muted md:mt-15 xl:mt-20'>
+				<div className='py-10 px-7'></div>
 			</footer>
 		)
 	}
 
 	return (
-		<footer className='bg-site-chrome text-site-chrome-muted mt-10 md:mt-15 xl:mt-20 w-full relative'>
-			<div className='max-w-302 mx-auto px-7 py-10 pb-24'>
-				<div className='flex flex-col md:flex-row justify-between items-center gap-6 md:gap-10'>
-					<div className='flex flex-col md:flex-row items-center gap-6 md:gap-10'>
+		<footer className='relative w-full mt-10 bg-site-chrome text-site-chrome-muted md:mt-15 xl:mt-20'>
+			<div className='py-10 pb-24 mx-auto max-w-302 px-7'>
+				<div className='flex flex-col items-center justify-between gap-6 md:flex-row md:gap-10'>
+					<div className='flex flex-col items-center gap-6 md:flex-row md:gap-10'>
 						<div className='flex flex-row gap-5 md:flex-col xl:flex-row gap-y-3'>
-							<div className='flex gap-x-5 items-center'>
+							<div className='flex items-center gap-x-5'>
 								<a
 									href='https://vk.com'
 									target='_blank'
@@ -38,7 +38,7 @@ const Footer = () => {
 										alt='VKontakte'
 										width={24}
 										height={24}
-										className='hover:opacity-80 transition-opacity transition-custom'
+										className='transition-opacity hover:opacity-80 transition-custom'
 									/>
 								</a>
 								<a
@@ -52,11 +52,11 @@ const Footer = () => {
 										alt='Odnoklassniki'
 										width={24}
 										height={24}
-										className='hover:opacity-80 transition-opacity transition-custom'
+										className='transition-opacity hover:opacity-80 transition-custom'
 									/>
 								</a>
 							</div>
-							<div className='flex gap-x-5 items-center'>
+							<div className='flex items-center gap-x-5'>
 								<a
 									href='https://wa.me/78007773333'
 									target='_blank'
@@ -68,7 +68,7 @@ const Footer = () => {
 										alt='WhatsApp'
 										width={24}
 										height={24}
-										className='hover:opacity-80 transition-opacity transition-custom'
+										className='transition-opacity hover:opacity-80 transition-custom'
 									/>
 								</a>
 								<a
@@ -82,16 +82,16 @@ const Footer = () => {
 										alt='Telegram'
 										width={24}
 										height={24}
-										className='hover:opacity-80 transition-opacity transition-custom'
+										className='transition-opacity hover:opacity-80 transition-custom'
 									/>
 								</a>
 							</div>
 						</div>
 
-						<div className='phone flex items-center'>
+						<div className='flex items-center phone'>
 							<a
 								href='tel:+78007773333'
-								className='flex items-center gap-x-2 hover:opacity-80 transition-opacity transition-custom'
+								className='flex items-center transition-opacity gap-x-2 hover:opacity-80 transition-custom'
 							>
 								<Phone size={20} />
 								<p className='text-base hover:text-site-chrome-hover transition-custom'>
@@ -102,20 +102,20 @@ const Footer = () => {
 					</div>
 
 					<nav className='nav'>
-						<ul className='flex flex-wrap justify-center gap-x-8 text-xs gap-4 xl:gap-y-2 md:gap-x-10'>
-							<li className='hover:text-site-chrome-hover cursor-pointer'>
+						<ul className='flex flex-wrap justify-center gap-4 text-xs gap-x-8 xl:gap-y-2 md:gap-x-10'>
+							<li className='cursor-pointer hover:text-site-chrome-hover'>
 								<Link href='/about-us'>О компании</Link>
 							</li>
-							<li className='hover:text-site-chrome-hover cursor-pointer'>
+							<li className='cursor-pointer hover:text-site-chrome-hover'>
 								<Link href='/contacts'>Контакты</Link>
 							</li>
-							<li className='hover:text-site-chrome-hover cursor-pointer'>
+							<li className='cursor-pointer hover:text-site-chrome-hover'>
 								<Link href='/vacancies'>Вакансии</Link>
 							</li>
-							<li className='hover:text-site-chrome-hover cursor-pointer'>
+							<li className='cursor-pointer hover:text-site-chrome-hover'>
 								<Link href='/blog'>Статьи</Link>
 							</li>
-							<li className='hover:text-site-chrome-hover cursor-pointer'>
+							<li className='cursor-pointer hover:text-site-chrome-hover'>
 								<Link href='/privacy-policy'>
 									Политика обработки персональных данных
 								</Link>
