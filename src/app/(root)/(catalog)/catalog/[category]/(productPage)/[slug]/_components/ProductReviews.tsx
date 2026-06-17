@@ -40,50 +40,53 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
 		userMessage: string
 	} | null>(null)
 
-	const fetchReviews = useCallback(async (
-		limit: number = 5,
-		skip: number = 0,
-		append: boolean = false,
-	) => {
-		try {
-			if (append) {
-				setLoadingMore(true)
-			} else {
-				setLoading(true)
+	const fetchReviews = useCallback(
+		async (
+			limit: number = 5,
+			skip: number = 0,
+			append: boolean = false,
+		) => {
+			try {
+				if (append) {
+					setLoadingMore(true)
+				} else {
+					setLoading(true)
+				}
+
+				const response = await fetch(
+					`/api/products/${productId}/reviews?limit=${limit}&skip=${skip}`,
+				)
+
+				if (!response.ok) {
+					throw new Error('Не удалось загрузить отзывы')
+				}
+
+				const data: ReviewsResponse = await response.json()
+
+				if (append) {
+					setReviews(prev => [...prev, ...data.reviews])
+				} else {
+					setReviews(data.reviews)
+				}
+
+				setTotal(data.total)
+				setHasMore(data.hasMore)
+				setDisplayCount(skip + data.reviews.length)
+			} catch (error) {
+				setError({
+					error:
+						error instanceof Error
+							? error
+							: new Error('Неизвестная ошибка'),
+					userMessage: 'Не удалось загрузить отзывы',
+				})
+			} finally {
+				setLoading(false)
+				setLoadingMore(false)
 			}
-
-			const response = await fetch(
-				`/api/products/${productId}/reviews?limit=${limit}&skip=${skip}`,
-			)
-
-			if (!response.ok) {
-				throw new Error('Не удалось загрузить отзывы')
-			}
-
-			const data: ReviewsResponse = await response.json()
-
-			if (append) {
-				setReviews(prev => [...prev, ...data.reviews])
-			} else {
-				setReviews(data.reviews)
-			}
-
-			setTotal(data.total)
-			setHasMore(data.hasMore)
-			setDisplayCount(skip + data.reviews.length)
-		} catch (error) {
-			setError({
-				error:
-					error instanceof Error
-						? error
-						: new Error('Неизвестная ошибка'),
-				userMessage: 'Не удалось загрузить отзывы',
-			})
-		} finally {
-			setLoading(false)
-			setLoadingMore(false)
-		}
-	}, [productId])
+		},
+		[productId],
+	)
 
 	const handleLoadMore = () => {
 		fetchReviews(5, reviews.length, true)
@@ -182,7 +185,7 @@ const ProductReviews = ({ productId, refreshKey = 0 }: ProductReviewsProps) => {
 						<button
 							onClick={handleLoadMore}
 							disabled={loadingMore}
-							className='px-6 py-2 bg-promo text-white rounded hover:shadow-(--shadow-article)  transition-custom disabled:opacity-50 disabled:cursor-not-allowed'
+							className='px-6 py-2 bg-promo text-white rounded hover:shadow-article  transition-custom disabled:opacity-50 disabled:cursor-not-allowed'
 						>
 							{loadingMore ? 'Загрузка...' : 'Показать еще'}
 						</button>

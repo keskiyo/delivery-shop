@@ -1,5 +1,6 @@
 import ProductsSections from '@/app/(root)/(products)/ProductsSections'
 import { ProductCardProps } from '@/types/product'
+import { baseUrl } from '../../../../../../../../../utils/baseUrl'
 
 interface SameBrandProductsProps {
 	currentProduct: ProductCardProps
@@ -14,7 +15,7 @@ const SameBrandProducts = async ({
 
 	try {
 		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/brand?brand=${currentProduct.brand}&productId=${currentProduct.id}`,
+			`${baseUrl}/api/products/brand?brand=${currentProduct.brand}&productId=${currentProduct.id}`,
 			{
 				next: { revalidate: 3600 },
 			},

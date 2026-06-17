@@ -1,17 +1,14 @@
 import { ProductCardProps } from '@/types/product'
+import { baseUrl } from '../../../../../../../utils/baseUrl'
 
 export async function getProduct(id: string): Promise<ProductCardProps> {
 	try {
-		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${id}`,
-			{
-
-				next: {
-					revalidate: 300,
-					tags: [`product-${id}`],
-				},
+		const response = await fetch(`${baseUrl}/api/products/${id}`, {
+			next: {
+				revalidate: 300,
+				tags: [`product-${id}`],
 			},
-		)
+		})
 
 		if (!response.ok) {
 			throw new Error(`Ошибка HTTP: ${response.status}`)

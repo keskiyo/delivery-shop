@@ -13,7 +13,7 @@ export const ArticlePreviewModal = ({
 
 	const renderArticleContent = () => {
 		if (!formData.content) {
-			return '<p style="text-align: center; color: #9b9891; font-style: italic;">Контент статьи отсутствует</p>'
+			return '<p style="text-align: center; color: var(--muted-foreground); font-style: italic;">Контент статьи отсутствует</p>'
 		}
 
 		return formData.content
@@ -59,7 +59,7 @@ export const ArticlePreviewModal = ({
 									alt={formData.imageAlt || formData.name}
 									width={800}
 									height={450}
-									className='w-full h-full object-cover'
+									className='h-auto w-full object-cover'
 								/>
 							</div>
 						)}

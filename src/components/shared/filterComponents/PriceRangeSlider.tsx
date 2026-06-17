@@ -35,7 +35,7 @@ const PriceRangeFilter = ({
 						backgroundColor: 'var(--brand)',
 						border: '1px solid var(--card)',
 						borderRadius: '50%',
-						boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+						boxShadow: 'var(--shadow-button-active)',
 						marginTop: -8,
 						cursor: 'pointer',
 						opacity: 1,

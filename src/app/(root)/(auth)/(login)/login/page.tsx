@@ -241,9 +241,9 @@ const EnterLoginPage = () => {
 					login.replace(/\D/g, '').length < 11) ||
 				isLoading
 					? 'cursor-not-allowed bg-promo-soft text-promo'
-					: 'bg-promo text-white hover:shadow-(--shadow-article)'
+					: 'bg-promo text-white hover:shadow-article'
 			}
-            active:shadow-(--shadow-button-active)
+            active:shadow-button-active
            transition-custom
 
           `}

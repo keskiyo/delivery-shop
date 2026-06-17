@@ -1,6 +1,3 @@
-
-
-
 import fs from 'fs/promises'
 import { NextRequest, NextResponse } from 'next/server'
 import path from 'path'
@@ -40,20 +37,20 @@ export async function POST(request: NextRequest) {
 		}
 
 		const filename = `img-${imageId}.jpeg`
-		const imagePath = `/images/products/${filename}`
-		const publicDir = path.join(process.cwd(), 'public')
-		const imagesDir = path.join(publicDir, 'images', 'products')
-		const fullPath = path.join(imagesDir, filename)
+		const UploadDir = path.join(process.cwd(), 'uploads', 'products')
+		const fullPath = path.join(UploadDir, filename)
 
 		try {
-			await fs.access(imagesDir)
+			await fs.access(UploadDir)
 		} catch {
-			await fs.mkdir(imagesDir, { recursive: true })
+			await fs.mkdir(UploadDir, { recursive: true })
 		}
 
 		const bytes = await image.arrayBuffer()
 		const buffer = Buffer.from(bytes)
 		await fs.writeFile(fullPath, buffer)
+
+		const imagePath = `/api/uploads/products/${filename}`
 
 		return NextResponse.json({
 			success: true,

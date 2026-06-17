@@ -105,7 +105,7 @@ export const ImageAttributesModal = ({
 									className='block text-sm font-medium text-foreground mb-1'
 								>
 									Alt текст{' '}
-									<span className='text-red-500'>*</span>
+									<span className='text-danger'>*</span>
 								</label>
 								<input
 									id='alt-input'

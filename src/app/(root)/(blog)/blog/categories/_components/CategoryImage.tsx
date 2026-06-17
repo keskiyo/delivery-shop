@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
+import { getImagePath } from '../../../../../../../utils/getImagePath'
 import { CategoryImageProps } from '../types/categories.types'
-import { getImagePath } from '../utils/getImagePath'
 
 export default function CategoryImage({
 	hasImage,
@@ -11,10 +11,13 @@ export default function CategoryImage({
 	name,
 	priority,
 }: CategoryImageProps) {
-	const imagePath = getImagePath(hasImage ? image : '')
+	const imagePath =
+		hasImage && image
+			? `/api/uploads/blog-categories/${getImagePath(image)}`
+			: ''
 
 	return (
-		<div className='relative h-48 w-full border-b border-border bg-surface-subtle'>
+		<div className='relative w-full h-48 border-b border-border bg-surface-subtle'>
 			{hasImage ? (
 				<Image
 					src={imagePath}
@@ -30,7 +33,7 @@ export default function CategoryImage({
 				<div
 					className={`flex h-full w-full items-center justify-center bg-linear-to-br ${gradientClass}`}
 				>
-					<div className='text-center p-4'>
+					<div className='p-4 text-center'>
 						<div className='px-4 text-xl font-semibold leading-tight text-primary-foreground'>
 							{name}
 						</div>

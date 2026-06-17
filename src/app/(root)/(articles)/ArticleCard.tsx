@@ -36,7 +36,7 @@ const ArticleCard = ({
 			className='block h-full rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40'
 			aria-label={`Открыть статью ${articleTitle}`}
 		>
-			<article className='group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card shadow-(--shadow-default) transition transition-custom hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-(--shadow-article)'>
+			<article className='group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card shadow-default transition transition-custom hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-article'>
 				<div className='relative h-48 w-full overflow-hidden bg-surface-subtle'>
 					{image ? (
 						<Image

@@ -1,6 +1,7 @@
 import { ProductCardProps } from '@/types/product'
 import Image from 'next/image'
 import Link from 'next/link'
+import { baseUrl } from '../../../../../../../../../utils/baseUrl'
 
 interface SimilarProductsProps {
 	currentProduct: ProductCardProps
@@ -24,7 +25,7 @@ const SimilarProducts = async ({ currentProduct }: SimilarProductsProps) => {
 
 	try {
 		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/similar-products?productId=${currentProduct.id}&category=${category}&limit=4`,
+			`${baseUrl}/api/products/similar-products?productId=${currentProduct.id}&category=${category}&limit=4`,
 			{
 				next: { revalidate: 3600 },
 			},
@@ -51,14 +52,14 @@ const SimilarProducts = async ({ currentProduct }: SimilarProductsProps) => {
 	}
 
 	return (
-		<div className='mx-auto flex flex-col items-center'>
+		<div className='flex flex-col items-center mx-auto'>
 			<div className='w-full max-w-82 md:max-w-172 xl:max-w-42'>
-				<h3 className='text-sm md:text-lg font-semibold mb-2 text-left'>
+				<h3 className='mb-2 text-sm font-semibold text-left md:text-lg'>
 					Похожие
 				</h3>
 			</div>
 
-			<div className='flex flex-row xl:flex-col gap-2 md:gap-4 justify-center xl:justify-start'>
+			<div className='flex flex-row justify-center gap-2 xl:flex-col md:gap-4 xl:justify-start'>
 				{similarProducts.map(product => (
 					<Link
 						key={product.id}
@@ -71,7 +72,7 @@ const SimilarProducts = async ({ currentProduct }: SimilarProductsProps) => {
 								src={product.img}
 								alt={product.title}
 								fill
-								className='object-contain rounded p-1'
+								className='object-contain p-1 rounded'
 								sizes='(max-width: 768px) 78px, (max-width: 1280px) 172px, 168px'
 							/>
 						</div>
@@ -79,7 +80,7 @@ const SimilarProducts = async ({ currentProduct }: SimilarProductsProps) => {
 							<div className='text-[10px] md:text-sm leading-tight line-clamp-2'>
 								{product.title}
 							</div>
-							<div className='font-bold text-sm md:text-base'>
+							<div className='text-sm font-bold md:text-base'>
 								{calculatePrice(product)} ₽
 							</div>
 						</div>

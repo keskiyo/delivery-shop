@@ -105,7 +105,7 @@ export const MobileExpandableContent = ({
           <Star
             className={`w-5 h-5 ${
               article.isFeatured
-                ? "fill-yellow-400 text-yellow-400"
+                ? "fill-warning text-warning"
                 : "text-muted-foreground"
             }`}
           />

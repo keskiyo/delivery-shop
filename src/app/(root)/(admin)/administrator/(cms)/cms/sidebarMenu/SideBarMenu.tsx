@@ -70,7 +70,7 @@ export const SidebarMenu = ({ isOpen, onCloseAction }: SidebarMenuProps) => {
 			>
 				<div className='relative h-full w-full'>
 					<div className='absolute inset-0 border-l border-border bg-card' />
-					<div className='absolute inset-0 shadow-[inset_0_0_60px_-20px_rgba(59,130,246,0.1)]' />
+					<div className='absolute inset-0 shadow-[inset_0_0_60px_-20px_color-mix(in_oklch,var(--brand)_10%,transparent)]' />
 					<div className='relative h-full flex flex-col'>
 						<div className='shrink-0 pt-5 px-5'>
 							<MenuHeader

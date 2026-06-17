@@ -100,7 +100,7 @@
 
 
 .html-preview code {
-  background-color: #f3f4f6;
+  background-color: var(--surface-subtle);
   padding: 0.125rem 0.25rem;
   border-radius: 0.25rem;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
@@ -108,8 +108,8 @@
 }
 
 .html-preview pre {
-  background-color: #1f2937;
-  color: #f9fafb;
+  background-color: var(--site-chrome);
+  color: var(--site-chrome-foreground);
   padding: 1rem;
   border-radius: 0.5rem;
   overflow-x: auto;
@@ -125,28 +125,28 @@
 
 
 .html-preview blockquote {
-  border-left: 4px solid #d1d5db;
+  border-left: 4px solid var(--border);
   padding-left: 1rem;
   margin: 1rem 0;
-  color: #4b5563;
+  color: var(--muted-foreground);
   font-style: italic;
 }
 
 
 .html-preview hr {
   border: none;
-  border-top: 1px solid #d1d5db;
+  border-top: 1px solid var(--border);
   margin: 1.5rem 0;
 }
 
 
 .html-preview a {
-  color: #3b82f6;
+  color: var(--brand);
   text-decoration: underline;
 }
 
 .html-preview a:hover {
-  color: #2563eb;
+  color: var(--brand-hover);
 }
 
 
@@ -168,7 +168,7 @@
 
 
 .html-preview mark {
-  background-color: #fef3c7;
+  background-color: var(--warning-soft);
   padding: 0.125rem 0.25rem;
   border-radius: 0.25rem;
 }

@@ -174,7 +174,7 @@ const ResetPassword = () => {
 				<button
 					type='submit'
 					disabled={loading}
-					className={`text-white bg-brand hover:shadow-(--shadow-button-default) active:shadow-(--shadow-button-active) w-full max-w-65 mx-auto p-2 gap-4 cursor-pointer transition-custom rounded ${loading ? 'bg-muted text-muted-foreground' : 'bg-brand'}`}
+					className={`text-white bg-brand hover:shadow-button-default active:shadow-button-active w-full max-w-65 mx-auto p-2 gap-4 cursor-pointer transition-custom rounded ${loading ? 'bg-muted text-muted-foreground' : 'bg-brand'}`}
 				>
 					{loading ? 'Сохранение...' : 'Сохранить новый пароль'}
 				</button>

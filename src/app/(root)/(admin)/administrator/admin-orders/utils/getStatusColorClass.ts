@@ -16,8 +16,8 @@ export const getStatusColorClass = (
 				: 'text-brand hover:bg-brand-soft'
 		case 'Доставляется':
 			return isSelected
-				? 'bg-sky-500 text-white'
-				: 'text-sky-500 dark:text-sky-300 hover:bg-sky-500/10'
+				? 'bg-promo text-white'
+				: 'text-promo hover:bg-promo-soft'
 		case 'Подтвержден':
 			return isSelected
 				? 'bg-success text-white'
@@ -32,8 +32,8 @@ export const getStatusColorClass = (
 				: 'text-danger hover:bg-danger-soft'
 		case 'Вернули':
 			return isSelected
-				? 'bg-purple-500 text-white'
-				: 'text-purple-500 dark:text-purple-300 hover:bg-purple-500/10'
+				? 'bg-site-chrome text-white'
+				: 'text-site-chrome hover:bg-surface-hover'
 		default:
 			return isSelected
 				? 'bg-surface-hover text-foreground'
@@ -48,7 +48,7 @@ export const getStatusIconColorClass = (statusLabel: string): string => {
 		case 'Собран':
 			return 'bg-brand text-white'
 		case 'Доставляется':
-			return 'bg-sky-500 text-white'
+			return 'bg-promo text-white'
 		case 'Подтвержден':
 			return 'bg-success text-white'
 		case 'Не подтвердили':
@@ -56,7 +56,7 @@ export const getStatusIconColorClass = (statusLabel: string): string => {
 		case 'Возврат':
 			return 'bg-danger text-white'
 		case 'Вернули':
-			return 'bg-purple-500 text-white'
+			return 'bg-site-chrome text-white'
 		default:
 			return 'bg-surface-hover text-foreground'
 	}

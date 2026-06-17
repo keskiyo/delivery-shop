@@ -1,153 +1,150 @@
-
-
-
-import { showPromiseToast, showToast } from '@/lib/showToast';
-import { Editor } from '@tiptap/react';
-import { UploadResult } from '../types';
+import { showPromiseToast, showToast } from '@/lib/showToast'
+import { Editor } from '@tiptap/react'
+import { UploadResult } from '../types'
 
 export const validateImageFile = (file: File): string | null => {
-  const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
-  if (!allowedTypes.includes(file.type.toLowerCase())) {
-    return 'Недопустимый формат файла. Разрешены только JPG, PNG и WebP.';
-  }
+	const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
+	if (!allowedTypes.includes(file.type.toLowerCase())) {
+		return 'Недопустимый формат файла. Разрешены только JPG, PNG и WebP.'
+	}
 
-  const maxSize = 5 * 1024 * 1024;
-  if (file.size > maxSize) {
-    return `Файл слишком большой. Максимальный размер: 5MB.`;
-  }
+	const maxSize = 5 * 1024 * 1024
+	if (file.size > maxSize) {
+		return `Файл слишком большой. Максимальный размер: 5MB.`
+	}
 
-  return null;
-};
+	return null
+}
 
 export const uploadToServer = async (file: File): Promise<UploadResult> => {
-  const formData = new FormData();
-  formData.append('image', file);
+	const formData = new FormData()
+	formData.append('image', file)
 
-  const response = await fetch(
-    '/administrator/cms/api/articles/upload/temp-image',
-    {
-      method: 'POST',
-      body: formData,
-    }
-  );
+	const response = await fetch(
+		'/administrator/cms/api/articles/upload/temp-image',
+		{
+			method: 'POST',
+			body: formData,
+		},
+	)
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Ошибка загрузки: ${response.status} - ${errorText}`);
-  }
+	if (!response.ok) {
+		const errorText = await response.text()
+		throw new Error(`Ошибка загрузки: ${response.status} - ${errorText}`)
+	}
 
-  const data = await response.json();
+	const data = await response.json()
 
-  if (!data.success) {
-    throw new Error(data.error || 'Неизвестная ошибка');
-  }
+	if (!data.success) {
+		throw new Error(data.error || 'Неизвестная ошибка')
+	}
 
-  return {
-    url: data.url,
-    filename: data.filename,
-    originalName: data.originalName,
-  };
-};
+	return {
+		url: data.url,
+		filename: data.filename,
+		originalName: data.originalName,
+	}
+}
 
 const getInsertPosition = (editor: Editor): number => {
+	const { from, to } = editor.state.selection
 
-  const { from, to } = editor.state.selection;
+	if (from !== to) {
+		return Math.max(from, to)
+	}
 
-  if (from !== to) {
-    return Math.max(from, to);
-  }
-
-  return from;
-};
+	return from
+}
 
 export const insertImageToEditor = (
-  editor: Editor,
-  src: string,
-  alt: string,
-  title?: string,
+	editor: Editor,
+	src: string,
+	alt: string,
+	title?: string,
 ) => {
-  const insertPos = getInsertPosition(editor);
+	const insertPos = getInsertPosition(editor)
 
-  const imageNode = {
-    type: 'image' as const,
-    attrs: {
-      src,
-      alt,
-      title: title || alt,
-    },
-  };
+	const imageNode = {
+		type: 'image' as const,
+		attrs: {
+			src,
+			alt,
+			title: title || alt,
+		},
+	}
 
-  editor
-    .chain()
-    .insertContentAt(insertPos, [
-      imageNode,
-      {
-        type: 'paragraph' as const,
-      },
-    ])
-    .focus()
-    .run();
+	editor
+		.chain()
+		.insertContentAt(insertPos, [
+			imageNode,
+			{
+				type: 'paragraph' as const,
+			},
+		])
+		.focus()
+		.run()
 
-  setTimeout(() => {
-    editor.commands.setTextSelection(insertPos + 2);
-  }, 10);
-};
+	setTimeout(() => {
+		editor.commands.setTextSelection(insertPos + 2)
+	}, 10)
+}
 
 export const handleImageUpload = async (
-  file: File,
-  editor: Editor,
+	file: File,
+	editor: Editor,
 ): Promise<void> => {
-  const validationError = validateImageFile(file);
-  if (validationError) {
-    showToast({
-      type: 'error',
-      message: validationError,
-    });
-    return;
-  }
+	const validationError = validateImageFile(file)
+	if (validationError) {
+		showToast({
+			type: 'error',
+			message: validationError,
+		})
+		return
+	}
 
-  try {
-    const serverResult = await showPromiseToast(uploadToServer(file), {
-      pending: 'Загружаем изображение...',
-      success: 'Изображение загружено',
-      error: 'Ошибка при загрузке изображения',
-    });
+	try {
+		const serverResult = await showPromiseToast(uploadToServer(file), {
+			pending: 'Загружаем изображение...',
+			success: 'Изображение загружено',
+			error: 'Ошибка при загрузке изображения',
+		})
 
-    insertImageToEditor(
-      editor,
-      serverResult.url,
-      serverResult.originalName,
-      serverResult.filename,
-    );
-  } catch (error) {
-    console.error('Upload error:', error);
+		insertImageToEditor(
+			editor,
+			serverResult.url,
+			serverResult.originalName,
+			serverResult.filename,
+		)
+	} catch (error) {
+		console.error('Upload error:', error)
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      insertImageToEditor(
-        editor,
-        e.target?.result as string,
-        file.name,
-        file.name,
-      );
-    };
-    reader.readAsDataURL(file);
-  }
-};
+		const reader = new FileReader()
+		reader.onload = e => {
+			insertImageToEditor(
+				editor,
+				e.target?.result as string,
+				file.name,
+				file.name,
+			)
+		}
+		reader.readAsDataURL(file)
+	}
+}
 
 export const handleImageUrl = (editor: Editor): void => {
-  const url = prompt('Введите URL изображения:', 'https://');
+	const url = prompt('Введите URL изображения:', 'https://')
 
-  if (url && editor) {
-    if (!url.match(/\.(jpeg|jpg|png|webp)(\?.*)?$/i)) {
-      showToast({
-        type: 'error',
-        message: 'Недопустимый формат файла. Разрешены только JPG, PNG и WebP.',
-      });
-      return;
-    }
+	if (url && editor) {
+		if (!url.match(/\.(jpeg|jpg|png|webp)(\?.*)?$/i)) {
+			showToast({
+				type: 'error',
+				message:
+					'Недопустимый формат файла. Разрешены только JPG, PNG и WebP.',
+			})
+			return
+		}
 
-    const filename = url.split('/').pop() || 'Изображение';
-    insertImageToEditor(editor, url, filename);
-  }
-};
+		const filename = url.split('/').pop() || 'Изображение'
+		insertImageToEditor(editor, url, filename)
+	}
+}

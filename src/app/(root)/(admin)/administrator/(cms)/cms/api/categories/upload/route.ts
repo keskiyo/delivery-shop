@@ -1,6 +1,3 @@
-
-
-
 import fs from 'fs/promises'
 import { NextRequest, NextResponse } from 'next/server'
 import path from 'path'
@@ -67,13 +64,13 @@ export async function POST(request: NextRequest) {
 				.toBuffer()
 		}
 
-		const publicDir = path.join(process.cwd(), 'public', 'blogCategories')
-		await fs.mkdir(publicDir, { recursive: true })
+		const uploadDir = path.join(process.cwd(), 'uploads', 'blog-categories')
+		await fs.mkdir(uploadDir, { recursive: true })
 
-		const filePath = path.join(publicDir, fileName)
+		const filePath = path.join(uploadDir, fileName)
 		await fs.writeFile(filePath, optimizedBuffer)
 
-		const publicUrl = `/blogCategories/${fileName}`
+		const publicUrl = `/api/uploads/blog-categories/${fileName}`
 
 		return NextResponse.json({
 			success: true,
@@ -101,8 +98,8 @@ export async function DELETE(request: NextRequest) {
 			)
 		}
 
-		const publicDir = path.join(process.cwd(), 'public', 'blogCategories')
-		const filePath = path.join(publicDir, fileName)
+		const uploadDir = path.join(process.cwd(), 'uploads', 'blog-categories')
+		const filePath = path.join(uploadDir, fileName)
 
 		try {
 			await fs.access(filePath)

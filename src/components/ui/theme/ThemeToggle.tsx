@@ -36,10 +36,10 @@ function ThemeOptionButton({
 		<button
 			type='button'
 			onClick={() => onClick(mode)}
-			className={`flex size-8 cursor-pointer items-center justify-center rounded-full transition transition-custom focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 ${
+			className={`flex size-8 cursor-pointer items-center justify-center rounded-full transition transition-custom focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-site-chrome-foreground/50 ${
 				isActive
-					? 'bg-white/15 text-white shadow-inner'
-					: 'text-white/45 hover:bg-white/10 hover:text-white'
+					? 'bg-site-chrome-foreground/15 text-site-chrome-foreground shadow-inner'
+					: 'text-site-chrome-muted hover:bg-site-chrome-foreground/10 hover:text-site-chrome-foreground'
 			}`}
 			aria-label={label}
 			aria-pressed={isActive}
@@ -92,7 +92,7 @@ export function ThemeToggle({
 				<button
 					type='button'
 					onClick={() => setIsOpen(prev => !prev)}
-					className='flex size-10 cursor-pointer items-center justify-center rounded-full border border-site-chrome-muted/30 bg-site-chrome-muted/15 text-site-chrome-foreground transition transition-custom hover:bg-site-chrome-muted/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40'
+					className='flex size-10 cursor-pointer items-center justify-center rounded-full border border-site-chrome-muted/30 bg-site-chrome-muted/15 text-site-chrome-foreground transition transition-custom hover:bg-site-chrome-muted/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-site-chrome-foreground/40'
 					aria-label='Переключение темы'
 					aria-expanded={isOpen}
 					title='Переключение темы'
@@ -101,7 +101,7 @@ export function ThemeToggle({
 				</button>
 
 				<div
-					className={`absolute bottom-full right-0 mb-3 flex w-11 flex-col items-center gap-1.5 rounded-full border border-white/10 bg-[#1b1913] p-1.5 shadow-lg shadow-black/25 backdrop-blur transition transition-custom ${
+					className={`absolute bottom-full right-0 mb-3 flex w-11 flex-col items-center gap-1.5 rounded-full border border-site-chrome-muted/20 bg-site-chrome p-1.5 shadow-lg shadow-site-chrome/25 backdrop-blur transition transition-custom ${
 						isOpen
 							? 'translate-y-0 opacity-100'
 							: 'pointer-events-none translate-y-2 opacity-0'
@@ -126,7 +126,7 @@ export function ThemeToggle({
 
 	return (
 		<div
-			className={`flex items-center gap-1.5 rounded-full border border-white/10 bg-[#1b1913] p-1.5 shadow-lg shadow-black/20 ${className}`}
+			className={`flex items-center gap-1.5 rounded-full border border-site-chrome-muted/20 bg-site-chrome p-1.5 shadow-lg shadow-site-chrome/20 ${className}`}
 			aria-label='Переключение темы'
 		>
 			{THEME_OPTIONS.map(option => (

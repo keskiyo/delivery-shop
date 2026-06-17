@@ -60,7 +60,7 @@ export const CommentAvatar = ({ authorId, authorName }: CommentAvatarProps) => {
 	}
 
 	return (
-		<div className='w-8 h-8 rounded-full overflow-hidden shrink-0'>
+		<div className='relative h-8 w-8 shrink-0 overflow-hidden rounded-full'>
 			{avatarLoading ? (
 				<div className='w-full h-full bg-surface-pressed animate-pulse' />
 			) : (
@@ -69,9 +69,8 @@ export const CommentAvatar = ({ authorId, authorName }: CommentAvatarProps) => {
 						avatarSrc || '/images/graphics/defaultAvatars/male.png'
 					}
 					alt={authorName}
-					width={32}
-					height={32}
-					className='w-full h-full object-cover'
+					fill
+					className='object-cover'
 					onError={handleAvatarError}
 				/>
 			)}

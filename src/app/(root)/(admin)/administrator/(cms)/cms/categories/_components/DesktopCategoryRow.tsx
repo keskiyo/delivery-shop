@@ -2,6 +2,7 @@ import { SortableItemProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/
 import { Edit, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
+import { getImagePath } from '../../../../../../../../../utils/getImagePath'
 import { DragHandle } from './DragHandle'
 
 export const DesktopCategoryRow = ({
@@ -24,22 +25,26 @@ export const DesktopCategoryRow = ({
 		e.stopPropagation()
 		onDelete(category._id.toString())
 	}
+
+	const imagePath = category.image
+		? `/api/uploads/blog-categories/${getImagePath(category.image)}`
+		: ''
 	return (
 		<div
-			className={`p-4 hover:bg-surface-hover text-sm transition-custom ${
+			className={`p-4 hover:bg-surface-hover text-xs xl:text-sm transition-custom ${
 				isDragging
 					? 'opacity-60 bg-brand-soft shadow-lg border-2 border-brand transform scale-[0.995]'
 					: 'hover:shadow-sm'
 			}`}
 		>
-			<div className='grid grid-cols-[0.3fr_0.5fr_1fr_2fr_2fr_2fr_2fr_1fr_1fr_2fr] gap-2 items-center'>
+			<div className='grid lg:grid-cols-[32px_40px_50px_100px_80px_120px_120px_80px_80px_80px_100px]  xl:grid-cols-[32px_40px_50px_120px_80px_160px_160px_80px_80px_80px_100px] gap-2 items-center justify-between'>
 				<div>
 					<DragHandle />
 				</div>
 
 				<div className='flex justify-center'>
 					<span
-						className='inline-flex items-center justify-center w-8 h-8 rounded-full text-xs font-medium shrink-0'
+						className='inline-flex items-center justify-center w-8 h-8 text-xs font-medium rounded-full bg-surface-subtle shrink-0'
 						title='Порядковый номер'
 					>
 						{displayNumericId || '-'}
@@ -49,25 +54,27 @@ export const DesktopCategoryRow = ({
 				<div className='flex items-center justify-center'>
 					{showImage ? (
 						<Image
-							src={category.image}
+							src={imagePath}
 							alt={category.imageAlt || category.name}
 							width={50}
 							height={50}
-							className='object-cover rounded border border-border'
+							className='object-cover border rounded border-border'
 							title={category.imageAlt}
 							onError={() => setImageError(true)}
 							loading='lazy'
 						/>
 					) : (
-						<div className='w-10 h-10 rounded flex items-center justify-center'>
-							<span className='text-xs'>Нет</span>
+						<div className='flex items-center justify-center w-10 h-10 rounded bg-surface-subtle'>
+							<span className='text-xs text-muted-foreground'>
+								Нет
+							</span>
 						</div>
 					)}
 				</div>
 
 				<div className='min-w-0'>
 					<div
-						className='font-medium wrap-break-words'
+						className='font-medium text-foreground wrap-break-words'
 						title={category.name}
 					>
 						{category.name}
@@ -76,7 +83,7 @@ export const DesktopCategoryRow = ({
 
 				<div className='min-w-0'>
 					<div
-						className='text-xs px-2 py-1 rounded break-all font-mono'
+						className='px-2 py-1 font-mono text-xs break-all rounded bg-surface-subtle'
 						title={`Ссылка: ${category.slug}`}
 					>
 						{category.slug}
@@ -85,20 +92,22 @@ export const DesktopCategoryRow = ({
 
 				<div className='min-w-0'>
 					<div
-						className='wrap-break-words'
+						className='text-muted-foreground wrap-break-words'
 						title={category.description || 'Нет описания'}
 					>
-						{category.description || <span>—</span>}
+						{category.description || (
+							<span className='text-muted-foreground'>—</span>
+						)}
 					</div>
 				</div>
 
 				<div className='min-w-0'>
-					<div className='flex flex-wrap gap-1 justify-center'>
+					<div className='flex flex-wrap justify-center gap-1'>
 						{category.keywords && category.keywords.length > 0 ? (
 							category.keywords.map((keyword, index) => (
 								<span
 									key={index}
-									className='inline-flex items-center bg-success-soft text-success text-xs px-2 py-1 rounded wrap-break-word max-w-full'
+									className='inline-flex items-center max-w-full px-2 py-1 text-xs rounded text-success bg-success-soft wrap-break-word'
 									title={keyword}
 								>
 									{keyword}
@@ -106,7 +115,7 @@ export const DesktopCategoryRow = ({
 							))
 						) : (
 							<span
-								className='text-center'
+								className='text-center text-muted-foreground'
 								title='Нет ключевых слов'
 							>
 								—
@@ -115,27 +124,31 @@ export const DesktopCategoryRow = ({
 					</div>
 				</div>
 
-				<div className='min-w-0 flex justify-center'>
+				<div className='flex justify-center min-w-0'>
 					<div
-						className='text-xs wrap-break-word text-center'
+						className='text-xs text-center text-muted-foreground wrap-break-word'
 						title={category.author || 'Автор неизвестен'}
 					>
-						{category.author || <span>—</span>}
+						{category.author || (
+							<span className='text-muted-foreground'>—</span>
+						)}
 					</div>
 				</div>
 
-				<div className='min-w-0 flex justify-center'>
+				<div className='flex justify-center min-w-0'>
 					<div
-						className='text-xs wrap-break-word text-center'
+						className='text-xs text-center text-muted-foreground wrap-break-word'
 						title={category.articlesCount || 'Нет'}
 					>
-						{category.articlesCount || <span>—</span>}
+						{category.articlesCount || (
+							<span className='text-muted-foreground'>—</span>
+						)}
 					</div>
 				</div>
 
 				<div className='min-w-0'>
 					<div
-						className='text-xs wrap-break-word'
+						className='text-xs text-muted-foreground wrap-break-word'
 						title={`Дата создания: ${new Date(category.createdAt).toLocaleDateString('ru-RU')}`}
 					>
 						{new Date(category.createdAt).toLocaleDateString(
@@ -145,17 +158,17 @@ export const DesktopCategoryRow = ({
 				</div>
 
 				<div className='min-w-0'>
-					<div className='flex gap-2 justify-center'>
+					<div className='flex justify-center gap-2'>
 						<button
 							onClick={handleEdit}
-							className='p-2 bg-brand text-white rounded hover:bg-brand-hover flex items-center justify-center cursor-pointer transition-custom shrink-0'
+							className='flex items-center justify-center p-2 text-white rounded cursor-pointer bg-success hover:bg-brand-hover transition-custom shrink-0'
 							title='Редактировать категорию'
 						>
 							<Edit className='w-4 h-4' />
 						</button>
 						<button
 							onClick={handleDelete}
-							className='p-2 bg-danger text-white rounded hover:bg-danger/90 flex items-center justify-center cursor-pointer transition-custom shrink-0'
+							className='flex items-center justify-center p-2 text-white rounded cursor-pointer bg-danger hover:bg-danger/90 transition-custom shrink-0'
 							title='Удалить категорию'
 						>
 							<Trash2 className='w-4 h-4' />

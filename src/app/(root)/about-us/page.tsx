@@ -1,27 +1,26 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 import { baseUrl } from '../../../../utils/baseUrl'
-
 export const metadata: Metadata = {
-	title: 'О компании Фудмаркет | Наша история и миссия',
+	title: 'О компании Фудмаркета | Наша история и миссия',
 	description:
-		'Узнайте больше о компании Фудмаркет. Более 20 лет на рынке розничной торговли. Мы предлагаем качественные продукты местного производства по доступным ценам.',
+		'Узнайте больше о компании Фудмаркета. Более 20 лет на рынке розничной торговли. Мы предлагаем качественные продукты местного производства по доступным ценам.',
 	keywords:
-		'о компании, Фудмаркет, история, миссия, розничная торговля, местные продукты, качественные товары',
+		'о компании, Фудмаркета, история, миссия, розничная торговля, местные продукты, качественные товары',
 	alternates: {
 		canonical: `${baseUrl}/about-us`,
 	},
 	openGraph: {
-		title: 'О компании Фудмаркет',
+		title: 'О компании Фудмаркета',
 		description:
 			'Более 20 лет мы заботимся о наших клиентах и предлагаем лучшие местные продукты',
 		url: `${baseUrl}/about-us`,
-		siteName: 'Фудмаркет',
+		siteName: 'Фудмаркета',
 		images: {
 			url: '/og-images/about-us-og.jpg',
 			width: 512,
 			height: 512,
-			alt: 'О компании Фудмаркет',
+			alt: 'О компании Фудмаркета',
 		},
 	},
 }
@@ -38,7 +37,7 @@ const AboutUsPage = () => {
 						className='object-contain'
 					/>
 				</div>
-				<div className='md:hidden absolute z-4 w-full h-full inset-0'>
+				<div className='absolute inset-0 w-full h-full md:hidden z-4'>
 					<Image
 						src='/images/about-us/bg-top-mob.png'
 						alt='О нас'
@@ -81,7 +80,7 @@ const AboutUsPage = () => {
 				</div>
 			</div>
 
-			<div className='mx-3 text-sm flex flex-col gap-y-4 md:gap-y-8 mb-20 md:mb-25 lg:mb-30'>
+			<div className='flex flex-col mx-3 mb-20 text-sm gap-y-4 md:gap-y-8 md:mb-25 lg:mb-30'>
 				<div className='flex flex-col md:flex-row gap-y-4 md:gap-x-8'>
 					<div className='flex gap-x-2.5 items-start'>
 						<Image
@@ -91,7 +90,7 @@ const AboutUsPage = () => {
 							height={30}
 							className='shrink-0'
 						/>
-						<div className='flex flex-col gap-y-2 flex-1 wrap-break-word'>
+						<div className='flex flex-col flex-1 gap-y-2 wrap-break-word'>
 							<p className='lg:text-xl'>
 								Мы занимаемся розничной торговлей.
 							</p>
@@ -108,7 +107,7 @@ const AboutUsPage = () => {
 							height={30}
 							className='shrink-0'
 						/>
-						<div className='flex flex-col gap-y-2 flex-1 wrap-break-word'>
+						<div className='flex flex-col flex-1 gap-y-2 wrap-break-word'>
 							<p className='lg:text-xl'>
 								Основная миссия компании
 							</p>
@@ -130,7 +129,7 @@ const AboutUsPage = () => {
 						height={30}
 						className='shrink-0'
 					/>
-					<div className='flex flex-col gap-y-2 flex-1 wrap-break-word'>
+					<div className='flex flex-col flex-1 gap-y-2 wrap-break-word'>
 						<p className='lg:text-xl'>
 							Отличительная черта нашей сети
 						</p>

@@ -1,26 +1,7 @@
 import { EditorProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/articles/types/tiptap'
+import { BG_COLORS } from '@/app/(root)/(admin)/administrator/(cms)/cms/articles/utils/bgColors'
 import { Check, Highlighter } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-
-const BG_COLORS = [
-	'transparent',
-	'#FFFFFF',
-	'#FFFFCC',
-	'#CCFFFF',
-	'#FFCCCC',
-	'#CCFFCC',
-	'#CCCCFF',
-	'#FFE5CC',
-	'#E5CCFF',
-	'#FFCCE5',
-	'#FFFF99',
-	'#99FFFF',
-	'#FF9999',
-	'#99FF99',
-	'#9999FF',
-	'#FFCC99',
-	'#CC99FF',
-]
 
 export const BgColorMenu = ({ editor }: EditorProps) => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -145,7 +126,7 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 
 	return (
 		<div className='relative inline-block'>
-						<button
+			<button
 				ref={buttonRef}
 				type='button'
 				onClick={() => {
@@ -166,7 +147,7 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 				<div className='flex items-center gap-1'>
 					<Highlighter className='w-4 h-4' />
 					<div
-						className='w-3 h-3 rounded border border-border'
+						className='w-3 h-3 border rounded border-border'
 						style={{
 							backgroundColor:
 								currentColor === 'transparent'
@@ -185,7 +166,7 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 				</div>
 			</button>
 
-						{isOpen && (
+			{isOpen && (
 				<div
 					ref={dropdownRef}
 					className='absolute z-50 mt-1 left-0 bg-card border border-border rounded-lg shadow-lg p-2 max-w-[calc(100vw-20px)]'
@@ -197,12 +178,12 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 					}}
 					onClick={e => e.stopPropagation()}
 				>
-										<div className='mb-2'>
-						<div className='text-xs font-medium text-foreground mb-1'>
+					<div className='mb-2'>
+						<div className='mb-1 text-xs font-medium text-foreground'>
 							Цвет фона
 						</div>
 
-												<div className='grid grid-cols-6 gap-1 mb-2'>
+						<div className='grid grid-cols-6 gap-1 mb-2'>
 							{BG_COLORS.map(color => (
 								<button
 									key={color}
@@ -247,8 +228,8 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 							))}
 						</div>
 
-												<div className='mb-2'>
-							<div className='text-xs text-muted-foreground mb-1'>
+						<div className='mb-2'>
+							<div className='mb-1 text-xs text-muted-foreground'>
 								Свой цвет:
 							</div>
 							<div className='flex flex-col gap-1'>
@@ -257,7 +238,7 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 										type='color'
 										value={customColor}
 										onChange={handleCustomColorChange}
-										className='w-6 h-6 cursor-pointer rounded border border-border'
+										className='w-6 h-6 border rounded cursor-pointer border-border'
 										title='Выберите цвет фона'
 									/>
 									<input
@@ -273,20 +254,20 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 								<button
 									type='button'
 									onClick={applyCustomColor}
-									className='w-full px-2 py-1 text-xs bg-brand text-white rounded hover:bg-brand-hover transition-custom cursor-pointer'
+									className='w-full px-2 py-1 text-xs text-white rounded cursor-pointer bg-brand hover:bg-brand-hover transition-custom'
 								>
 									Применить цвет
 								</button>
 							</div>
 						</div>
 
-												<div className='flex items-center justify-between p-1 bg-surface-subtle rounded text-xs mb-2'>
+						<div className='flex items-center justify-between p-1 mb-2 text-xs rounded bg-surface-subtle'>
 							<div className='text-muted-foreground'>
 								Текущий:
 							</div>
 							<div className='flex items-center gap-1'>
 								<div
-									className='w-4 h-4 rounded border border-border'
+									className='w-4 h-4 border rounded border-border'
 									style={{
 										backgroundColor:
 											currentColor === 'transparent'
@@ -311,10 +292,10 @@ export const BgColorMenu = ({ editor }: EditorProps) => {
 						</div>
 					</div>
 
-										<button
+					<button
 						type='button'
 						onClick={resetColor}
-						className='w-full px-2 py-1 text-xs rounded transition-custom cursor-pointer bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 hover:border-red-300'
+						className='w-full px-2 py-1 text-xs text-red-700 border border-red-200 rounded cursor-pointer transition-custom bg-red-50 hover:bg-red-100 hover:border-red-300'
 					>
 						Сбросить цвет фона
 					</button>

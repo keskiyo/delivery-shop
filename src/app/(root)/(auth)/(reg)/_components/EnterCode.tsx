@@ -152,7 +152,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 								setCode(e.target.value)
 								setError('')
 							}}
-							className='flex justify-center w-27.5 h-15 text-center text-2xl px-4 py-3 border border-border bg-input text-foreground rounded focus:border-brand focus:shadow-(--shadow-button-default) focus:outline-none'
+							className='flex justify-center w-27.5 h-15 text-center text-2xl px-4 py-3 border border-border bg-input text-foreground rounded focus:border-brand focus:shadow-button-default focus:outline-none'
 							autoComplete='one-time-code'
 							required
 						/>

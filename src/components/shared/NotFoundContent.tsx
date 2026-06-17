@@ -62,11 +62,11 @@ export default function NotFoundContent() {
 	}
 
 	return (
-		<div className='relative flex items-center justify-center min-h-screen overflow-hidden bg-linear-to-br from-purple-900 via-black to-blue-900'>
+		<div className='relative flex items-center justify-center min-h-screen overflow-hidden bg-background'>
 			{stars.map((star, i) => (
 				<motion.div
 					key={i}
-					className='absolute w-1 h-1 bg-white rounded-full'
+					className='absolute w-1 h-1 bg-foreground rounded-full'
 					initial={{
 						x: star.initialX,
 						y: star.initialY,
@@ -96,7 +96,7 @@ export default function NotFoundContent() {
 				transition={{ type: 'spring', stiffness: 50, damping: 30 }}
 			>
 				<motion.h1
-					className='relative mb-4 font-bold text-white text-9xl'
+					className='relative mb-4 font-bold text-foreground text-9xl'
 					initial={{ opacity: 0, y: -50 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8, type: 'spring' }}
@@ -104,7 +104,7 @@ export default function NotFoundContent() {
 					<span className='relative inline-block'>
 						{glitchText}
 						<motion.span
-							className='absolute top-0 left-0 text-red-500 opacity-70'
+							className='absolute top-0 left-0 text-danger opacity-70'
 							animate={{
 								x: [0, -3, 2, -2, 0],
 								y: [0, 2, -3, 1, 0],
@@ -115,7 +115,7 @@ export default function NotFoundContent() {
 							{glitchText}
 						</motion.span>
 						<motion.span
-							className='absolute top-0 left-0 text-blue-500 opacity-70'
+							className='absolute top-0 left-0 text-brand opacity-70'
 							animate={{
 								x: [0, 3, -2, 2, 0],
 								y: [0, -2, 3, -1, 0],
@@ -133,13 +133,13 @@ export default function NotFoundContent() {
 					animate={{ opacity: 1, scale: 1 }}
 					transition={{ delay: 0.3, duration: 0.5 }}
 				>
-					<h2 className='mb-6 text-4xl font-bold text-transparent md:text-5xl bg-clip-text bg-linear-to-r from-pink-500 to-yellow-500'>
+					<h2 className='mb-6 text-4xl font-bold text-transparent md:text-5xl bg-clip-text bg-linear-to-r from-promo to-brand'>
 						Страница не найдена
 					</h2>
 				</motion.div>
 
 				<motion.p
-					className='max-w-2xl mx-auto mb-8 text-xl text-gray-300'
+					className='max-w-2xl mx-auto mb-8 text-xl text-muted-foreground'
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					transition={{ delay: 0.6, duration: 0.8 }}
@@ -152,7 +152,7 @@ export default function NotFoundContent() {
 							duration: 1.5,
 							ease: 'linear',
 						}}
-						className='inline-block overflow-hidden border-r-2 border-white whitespace-nowrap'
+						className='inline-block overflow-hidden border-r-2 border-border whitespace-nowrap'
 					>
 						Кажется, вы забрели в неизведанные дали...
 					</motion.span>
@@ -167,10 +167,10 @@ export default function NotFoundContent() {
 				>
 					<Link
 						href='/'
-						className='relative inline-flex items-center justify-center px-8 py-4 overflow-hidden text-lg font-bold text-white  transition-custom rounded-full shadow-2xl group bg-linear-to-r from-purple-600 to-pink-600 hover:shadow-purple-500/50'
+						className='relative inline-flex items-center justify-center px-8 py-4 overflow-hidden text-lg font-bold text-brand-foreground transition-custom rounded-full shadow-2xl group bg-linear-to-r from-brand to-promo hover:shadow-button-default'
 					>
 						<motion.span
-							className='absolute inset-0 bg-white'
+							className='absolute inset-0 bg-brand-foreground'
 							initial={{ x: '-100%' }}
 							whileHover={{ x: '100%' }}
 							transition={{ duration: 0.5 }}

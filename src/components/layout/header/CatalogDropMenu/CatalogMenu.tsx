@@ -39,7 +39,7 @@ const CatalogMenu = ({
 
 			{isCatalogOpen && (
 				<div
-					className='hidden md:block absolute top-full left-0 w-full bg-site-chrome z-50 shadow-(--shadow-category-block)'
+					className='hidden md:block absolute top-full left-0 w-full bg-site-chrome z-50 shadow-category-block'
 					ref={menuRef}
 				>
 					<div className='px-4 py-3 mx-auto'>

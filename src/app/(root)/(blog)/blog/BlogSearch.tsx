@@ -127,8 +127,8 @@ export default function BlogSearch() {
 
 				{showResults && searchResults.searchTerm && (
 					<div className='mt-4'>
-						<div className='overflow-hidden rounded border border-border bg-card shadow-(--shadow-default)'>
-														<div className='flex items-center justify-between border-b border-border bg-surface-subtle px-4 py-3'>
+						<div className='overflow-hidden rounded border border-border bg-card shadow-default'>
+							<div className='flex items-center justify-between border-b border-border bg-surface-subtle px-4 py-3'>
 								<h3 className='font-semibold text-foreground'>
 									{searchResults.articles === null
 										? 'Ошибка поиска'
@@ -157,7 +157,7 @@ export default function BlogSearch() {
 											>
 												<div className='flex items-start gap-3'>
 													{article.image ? (
-														<div className='h-16 w-16 shrink-0 overflow-hidden rounded border border-border bg-surface-subtle'>
+														<div className='relative h-16 w-16 shrink-0 overflow-hidden rounded border border-border bg-surface-subtle'>
 															<Image
 																src={
 																	article.image
@@ -166,9 +166,8 @@ export default function BlogSearch() {
 																	article.imageAlt ||
 																	article.name
 																}
-																width={64}
-																height={64}
-																className='h-full w-full object-cover'
+																fill
+																className='object-cover'
 															/>
 														</div>
 													) : (

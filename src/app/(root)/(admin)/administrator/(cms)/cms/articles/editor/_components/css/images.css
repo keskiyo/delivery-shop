@@ -1,15 +1,15 @@
 
 [data-resize-handle] {
   position: absolute;
-  background: rgba(59, 130, 246, 0.8);
-  border: 2px solid white;
+  background: color-mix(in oklch, var(--brand) 80%, transparent);
+  border: 2px solid var(--brand-foreground);
   border-radius: 2px;
   z-index: 10;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 4px color-mix(in oklch, var(--foreground) 30%, transparent);
 }
 
 [data-resize-handle]:hover {
-  background: rgba(59, 130, 246, 1);
+  background: var(--brand);
 }
 
 [data-resize-handle="top-left"],
@@ -82,7 +82,7 @@
 }
 
 [data-resize-state="resizing"] [data-resize-wrapper] {
-  outline: 2px dashed #3b82f6;
+  outline: 2px dashed var(--brand);
   border-radius: 4px;
 }
 

@@ -45,7 +45,7 @@ export default function SidebarContent({
 	return (
 		<div
 			ref={sidebarRef}
-			className={`fixed right-0 top-0 z-50 h-full w-full max-w-md transform border-l border-border bg-card text-card-foreground shadow-(--shadow-catalog-menu) transition-transform transition-custom ease-out ${
+			className={`fixed right-0 top-0 z-50 h-full w-full max-w-md transform border-l border-border bg-card text-card-foreground shadow-catalog-menu transition-transform transition-custom ease-out ${
 				isOpen ? 'translate-x-0' : 'translate-x-full'
 			}`}
 		>

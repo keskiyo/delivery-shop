@@ -6,12 +6,12 @@ export const getAuthorBadges = (comment: IComment) => {
   if (comment.authorRole === "admin") {
     badges.push({
       text: "Админ",
-      className: "bg-red-100 text-red-700 border border-red-200",
+      className: "bg-danger-soft text-danger border border-danger/30",
     });
   } else if (comment.authorRole === "manager") {
     badges.push({
       text: "Менеджер",
-      className: "bg-green-100 text-green-700 border border-green-200",
+      className: "bg-success-soft text-success border border-success/30",
     });
   }
   return badges;

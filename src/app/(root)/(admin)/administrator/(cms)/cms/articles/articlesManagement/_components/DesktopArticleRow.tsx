@@ -140,7 +140,7 @@ export const DesktopArticleRow = ({
             <Star
               className={`w-4 h-4 ${
                 article.isFeatured
-                  ? "fill-yellow-400 text-yellow-400"
+                  ? "fill-warning text-warning"
                   : "text-muted-foreground"
               }`}
             />

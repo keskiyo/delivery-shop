@@ -50,7 +50,6 @@ export const PhonePasswordResetVerify = ({
 		setErrorAction(null)
 
 		try {
-
 			const { error: resetError } =
 				await authClient.phoneNumber.resetPassword({
 					phoneNumber: phone.replace(/\D/g, ''),
@@ -77,7 +76,6 @@ export const PhonePasswordResetVerify = ({
 				}
 				throw new Error(resetError.message || 'Неверный OTP код')
 			}
-
 
 			const response = await fetch('/api/auth/reset-phone-pass', {
 				method: 'POST',
@@ -177,7 +175,7 @@ export const PhonePasswordResetVerify = ({
 								autoComplete='one-time-code'
 								value={otp}
 								onChange={handleOtpChange}
-								className='flex justify-center w-27.5 h-15 mx-auto text-center px-4 py-3 border border-border bg-input text-foreground rounded focus:border-brand focus:shadow-(--shadow-button-default) focus:bg-input focus:outline-none'
+								className='flex justify-center w-27.5 h-15 mx-auto text-center px-4 py-3 border border-border bg-input text-foreground rounded focus:border-brand focus:shadow-button-default focus:bg-input focus:outline-none'
 								required
 							/>
 						</div>

@@ -90,8 +90,8 @@ export const Pagination = ({ type = 'categories' }) => {
 	}
 
 	return (
-		<div className='border-t border-border px-6 py-4'>
-			<div className='flex flex-wrap gap-3 items-center justify-between'>
+		<div className='px-6 py-4 border-t border-border'>
+			<div className='flex flex-wrap items-center justify-between gap-3'>
 				<div className='text-sm text-muted-foreground'>
 					Показано{' '}
 					<span className='font-medium text-foreground'>

@@ -118,7 +118,7 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 						className='w-65 mx-auto max-h-screen flex flex-col justify-center items-center'
 						autoComplete='off'
 					>
-												<input
+						<input
 							type='text'
 							inputMode='numeric'
 							pattern='[0-9]{4}'
@@ -128,18 +128,18 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 								setCode(e.target.value)
 								setError('')
 							}}
-							className='flex justify-center w-27.5 h-15 text-center text-2xl px-4 py-3 border border-border rounded focus:border-brand focus:shadow-(--shadow-button-default) text-foreground bg-input focus:bg-input focus:outline-none'
+							className='flex justify-center w-27.5 h-15 text-center text-2xl px-4 py-3 border border-border rounded focus:border-brand focus:shadow-button-default text-foreground bg-input focus:bg-input focus:outline-none'
 							autoComplete='one-time-code'
 							required
 						/>
 
-												{error && (
+						{error && (
 							<div className='text-danger text-center mt-2 text-sm'>
 								{error}
 							</div>
 						)}
 
-												<button
+						<button
 							type='submit'
 							className={`${buttonStyles.base} ${code.length !== 4 ? buttonStyles.inactive : buttonStyles.active} [&&]:mt-8 mb-0`}
 							disabled={code.length !== 4 || attemptsLeft <= 0}
@@ -149,13 +149,13 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
 					</form>
 				</div>
 
-								<OTPResendCode
+				<OTPResendCode
 					canResend={canResend}
 					timeLeft={timeLeft}
 					onResendAction={handleResend}
 				/>
 
-								<Link
+				<Link
 					href='/register'
 					className='h-8 text-xs text-muted-foreground hover:text-foreground w-30 flex items-center justify-center gap-x-2 mx-auto transition-custom cursor-pointer'
 				>

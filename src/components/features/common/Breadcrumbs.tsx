@@ -89,7 +89,7 @@ function BreadcrumbsContent() {
 		<nav className='px-[max(12px,calc((100%-1208px)/2))] my-6'>
 			<ol className='flex flex-wrap items-center gap-4 text-[10px] md:text-xs'>
 				{breadcrumbs.map((item, index) => (
-					<li key={index} className='flex text-xs items-center gap-4'>
+					<li key={index} className='flex items-center gap-4 text-xs'>
 						<div
 							className={
 								item.isLast

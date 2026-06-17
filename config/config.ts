@@ -1,89 +1,37 @@
-
-
 export const CONFIG = {
-	
-
-	
-	
 	ITEMS_PER_PAGE: 3,
 
-	
-	
 	ITEMS_PER_PAGE_MAIN_PRODUCTS: 4,
 
-	
-	
 	ITEMS_PER_PAGE_MAIN_ARTICLES: 3,
 
-	
-	
 	ITEMS_PER_PAGE_CATEGORY: 6,
 
-	
-	
 	ITEMS_PER_ORDERS_PAGE: 4,
 
-	
-
-	
-	
 	ARTICLES_PER_BLOG_PAGE: 3,
 
-	
-	
 	ARTICLES_PER_ARTICLE_PAGE: 3,
 
-	
-	
 	COMMENTS_PER_ARTICLE_PAGE: 5,
 
-	
-
-	
-	
 	CARD_DISCOUNT_PERCENT: 6,
 
-	
-	
 	BONUSES_PERCENT: 5,
 
-	
-	
 	MAX_BONUSES_PERCENT: 10,
 
-	
-
-	
-	
 	FALLBACK_PRICE_RANGE: { min: 0, max: 3000 },
 
-	
-	
 	MIN_ORDER_PRICE: 700,
 
-	
+	SITE_URL: 'https://food-market22.ru',
 
-	
-	
-	SITE_URL: 'https://delivery-shop.ru',
+	TEMPORARY_EMAIL_DOMAIN: '@food-market22.ru',
 
-	
-	
-	TEMPORARY_EMAIL_DOMAIN: '@delivery-shop.ru',
-
-	
-
-	
-	
 	MAX_ATTEMPTS: 3,
 
-	
-	
 	TIMEOUT_PERIOD: 180,
 
-	
-
-	
-	
 	DEFAULT_PAGE_SIZE: 5,
 }

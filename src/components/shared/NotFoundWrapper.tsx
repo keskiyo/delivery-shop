@@ -11,7 +11,7 @@ const NotFoundContent = dynamic(
 
 export default function NotFoundWrapper() {
 	return (
-		<div className='fixed insert-0 z-50 bg-blue-950 w-full'>
+		<div className='fixed insert-0 z-50 bg-background w-full'>
 			<NotFoundContent />
 		</div>
 	)

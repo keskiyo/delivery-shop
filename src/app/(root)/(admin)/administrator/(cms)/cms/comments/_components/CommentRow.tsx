@@ -149,7 +149,7 @@ export const CommentRow = ({
 		<>
 			<div className='grid md:grid-cols-[48px_90px_140px_100px_80px_100px] lg:grid-cols-[48px_120px_300px_120px_80px_120px] xl:grid-cols-[48px_160px_300px_150px_200px_140px] gap-2 lg:gap-4 px-2 py-3 items-center justify-center md:justify-between'>
 				<div className='flex justify-center overflow-hidden shrink-0'>
-					<div className='w-8 h-8 overflow-hidden rounded-full'>
+					<div className='relative h-8 w-8 overflow-hidden rounded-full'>
 						{avatarLoading ? (
 							<div className='w-full h-full bg-surface-pressed animate-pulse' />
 						) : (
@@ -159,9 +159,8 @@ export const CommentRow = ({
 									'/icons-avatar/avatar-default.svg'
 								}
 								alt={comment.authorName}
-								width={32}
-								height={32}
-								className='object-cover w-full h-full'
+								fill
+								className='object-cover'
 								onError={handleAvatarError}
 							/>
 						)}

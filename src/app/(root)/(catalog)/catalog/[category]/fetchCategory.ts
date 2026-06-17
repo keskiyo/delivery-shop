@@ -1,3 +1,5 @@
+import { baseUrl } from '../../../../../../utils/baseUrl'
+
 const fetchProductsByCategory = async (
 	category: string,
 	options: {
@@ -10,7 +12,7 @@ const fetchProductsByCategory = async (
 ) => {
 	const { pagination, filter, priceFrom, priceTo, inStock } = options
 	try {
-		const url = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`)
+		const url = new URL(`${baseUrl}/api/category`)
 
 		url.searchParams.append('category', category)
 		url.searchParams.append('startIdx', pagination.startIdx.toString())

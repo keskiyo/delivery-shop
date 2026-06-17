@@ -8,11 +8,6 @@ import { useAuthStore } from '@/store/authStore'
 import { CatalogProps } from '@/types/catalog'
 import { useEffect, useState } from 'react'
 
-export const metadata = {
-	title: 'Каталог товаров магазина "Фудмаркет"',
-	description: 'Каталог всех товаров магазина "Фудмаркет"',
-}
-
 const CatalogPage = () => {
 	const [categories, setCategories] = useState<CatalogProps[]>([])
 	const [error, setError] = useState<{

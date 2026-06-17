@@ -3,26 +3,26 @@ import Image from 'next/image'
 import { baseUrl } from '../../../../utils/baseUrl'
 
 export const metadata: Metadata = {
-	title: 'Вакансии | Фудмаркет - работа в сети магазинов',
+	title: 'Вакансии | Фудмаркета - работа в сети магазинов',
 	description:
-		'Актуальные вакансии в компании Фудмаркет. Продавец-кассир, администратор, товаровед, грузчик, мерчандайзер и другие. Официальное трудоустройство, стабильная зарплата, дружный коллектив.',
+		'Актуальные вакансии в компании Фудмаркета. Продавец-кассир, администратор, товаровед, грузчик, мерчандайзер и другие. Официальное трудоустройство, стабильная зарплата, дружный коллектив.',
 	keywords:
-		'вакансии, работа, Фудмаркет, продавец-кассир, администратор, товаровед, грузчик, мерчандайзер, уборщица, трудоустройство, Архангельск',
+		'вакансии, работа, Фудмаркета, продавец-кассир, администратор, товаровед, грузчик, мерчандайзер, уборщица, трудоустройство, Архангельск',
 	alternates: {
 		canonical: `${baseUrl}/vacancies`,
 	},
 	openGraph: {
-		title: 'Вакансии | Фудмаркет',
+		title: 'Вакансии | Фудмаркета',
 		description:
-			'Работа в сети магазинов Фудмаркет. Актуальные вакансии с официальным трудоустройством и стабильной зарплатой.',
+			'Работа в сети магазинов Фудмаркета. Актуальные вакансии с официальным трудоустройством и стабильной зарплатой.',
 		url: `${baseUrl}/vacancies`,
-		siteName: 'Фудмаркет',
+		siteName: 'Фудмаркета',
 		images: [
 			{
 				url: '/og-images/vacancies-og.jpg',
 				width: 512,
 				height: 512,
-				alt: 'Вакансии Фудмаркет',
+				alt: 'Вакансии Фудмаркета',
 			},
 		],
 	},
@@ -36,7 +36,7 @@ export default function VacanciesPage() {
 					Вакансии
 				</h1>
 				<div className='grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-10'>
-					<div className='flex flex-col p-4 bg-card border border-border rounded-lg md:p-6 lg:p-8 shadow-vacation gap-y-4'>
+					<div className='flex flex-col p-4 border rounded-lg bg-card border-border md:p-6 lg:p-8 shadow-vacation gap-y-4'>
 						<h2 className='text-xl font-bold md:text-lg lg:text-2xl'>
 							Продавец-кассир
 						</h2>
@@ -95,7 +95,7 @@ export default function VacanciesPage() {
 						</div>
 					</div>
 
-					<div className='flex flex-col p-4 bg-card border border-border rounded-lg md:p-6 lg:p-8 shadow-vacation gap-y-4'>
+					<div className='flex flex-col p-4 border rounded-lg bg-card border-border md:p-6 lg:p-8 shadow-vacation gap-y-4'>
 						<h2 className='text-xl font-bold md:text-lg lg:text-2xl'>
 							Администратор магазина
 						</h2>
@@ -153,7 +153,7 @@ export default function VacanciesPage() {
 						</div>
 					</div>
 
-					<div className='flex flex-col p-4 bg-card border border-border rounded-lg md:p-6 lg:p-8 shadow-vacation gap-y-4'>
+					<div className='flex flex-col p-4 border rounded-lg bg-card border-border md:p-6 lg:p-8 shadow-vacation gap-y-4'>
 						<h2 className='text-xl font-bold md:text-lg lg:text-2xl'>
 							Товаровед
 						</h2>
@@ -209,7 +209,7 @@ export default function VacanciesPage() {
 						</div>
 					</div>
 
-					<div className='flex flex-col p-4 bg-card border border-border rounded-lg md:p-6 lg:p-8 shadow-vacation gap-y-4'>
+					<div className='flex flex-col p-4 border rounded-lg bg-card border-border md:p-6 lg:p-8 shadow-vacation gap-y-4'>
 						<h2 className='text-xl font-bold md:text-lg lg:text-2xl'>
 							Грузчик-комплектовщик
 						</h2>
@@ -265,7 +265,7 @@ export default function VacanciesPage() {
 						</div>
 					</div>
 
-					<div className='flex flex-col p-4 bg-card border border-border rounded-lg md:p-6 lg:p-8 shadow-vacation gap-y-4'>
+					<div className='flex flex-col p-4 border rounded-lg bg-card border-border md:p-6 lg:p-8 shadow-vacation gap-y-4'>
 						<h2 className='text-xl font-bold md:text-lg lg:text-2xl'>
 							Мерчандайзер
 						</h2>
@@ -323,7 +323,7 @@ export default function VacanciesPage() {
 						</div>
 					</div>
 
-					<div className='flex flex-col p-4 bg-card border border-border rounded-lg md:p-6 lg:p-8 shadow-vacation gap-y-4'>
+					<div className='flex flex-col p-4 border rounded-lg bg-card border-border md:p-6 lg:p-8 shadow-vacation gap-y-4'>
 						<h2 className='text-xl font-bold md:text-lg lg:text-2xl'>
 							Уборщица/уборщик торговых помещений
 						</h2>

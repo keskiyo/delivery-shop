@@ -121,7 +121,7 @@ const Profile = () => {
 			<div className='flex items-center gap-3'>
 				<Link
 					href='/login'
-					className='w-10 xl:w-30 flex justify-between items-center gap-x-2 p-2 rounded text-white text-base bg-promo hover:bg-promo-hover hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) transition-custom cursor-pointer'
+					className='w-10 xl:w-30 flex justify-between items-center gap-x-2 p-2 rounded text-white text-base bg-promo hover:bg-promo-hover hover:shadow-article active:shadow-button-active transition-custom cursor-pointer'
 				>
 					<div className='w-27 justify-center hidden xl:flex'>
 						<p>Войти</p>
@@ -153,7 +153,7 @@ const Profile = () => {
 					</p>
 				</div>
 
-								<div
+				<div
 					className={`absolute right-0 bg-site-chrome text-site-chrome-foreground rounded shadow-button-secondary overflow-hidden flex flex-col items-center z-50 ${
 						isMenuOpen
 							? 'opacity-100 translate-y-0'

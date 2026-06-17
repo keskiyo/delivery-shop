@@ -25,7 +25,7 @@ export async function fetchArticlePageData(
 
 	try {
 		const response = await fetch(
-			`${baseUrl}/api/blog/category/${categorySlug}/${articleSlug}?role=${currentUserRole}`,
+			`${baseUrl}/api/blog/${categorySlug}/${articleSlug}?role=${currentUserRole}`,
 			{
 				next: { revalidate: 3600 },
 			},

@@ -39,8 +39,11 @@ export async function generateMetadata({
 	const description = article.description || article.name
 	const keywords =
 		(article.keywords as string[])?.map(k => k.toLowerCase()) || []
-
 	const canonicalUrl = `${baseUrl}/blog/${categoryData.slug}/${article.slug}`
+
+	const ogImage = article.image
+		? `${baseUrl}${article.image}`
+		: `${baseUrl}/og-images/blog-og.jpg`
 
 	return {
 		metadataBase: new URL(baseUrl),
@@ -55,6 +58,7 @@ export async function generateMetadata({
 			description,
 			type: 'article',
 			url: canonicalUrl,
+			images: ogImage,
 		},
 		...(article.status === 'archived' && {
 			robots: {
@@ -79,7 +83,7 @@ export default async function ArticlePage({
 
 		if (error === 'Категория не найдена') {
 			return (
-				<div className='mx-auto max-w-3xl px-4 py-10 text-center text-foreground'>
+				<div className='max-w-3xl px-4 py-10 mx-auto text-center text-foreground'>
 					<h1 className='mb-4 text-2xl font-bold'>
 						Категория не найдена
 					</h1>
@@ -92,7 +96,7 @@ export default async function ArticlePage({
 
 		if (error === 'Статья не найдена') {
 			return (
-				<div className='mx-auto max-w-3xl px-4 py-10 text-center text-foreground'>
+				<div className='max-w-3xl px-4 py-10 mx-auto text-center text-foreground'>
 					<h1 className='mb-4 text-2xl font-bold'>
 						Статья не найдена
 					</h1>
@@ -105,7 +109,7 @@ export default async function ArticlePage({
 		}
 
 		return (
-			<div className='mx-auto max-w-3xl px-4 py-10 text-center text-foreground'>
+			<div className='max-w-3xl px-4 py-10 mx-auto text-center text-foreground'>
 				<h1 className='mb-4 text-2xl font-bold'>Ошибка загрузки</h1>
 				<p className='text-muted-foreground'>
 					Произошла ошибка при загрузке статьи: {error}
@@ -128,7 +132,7 @@ export default async function ArticlePage({
 	)
 
 	return (
-		<article className='mx-auto max-w-4xl px-4 py-6 text-foreground sm:py-8'>
+		<article className='max-w-4xl px-4 py-6 mx-auto text-foreground sm:py-8'>
 			{isArchived && <ArticleArchiveNotice updatedAt={updatedAt} />}
 			<ArticleHeader
 				articleTitle={article.name}
@@ -154,7 +158,7 @@ export default async function ArticlePage({
 
 			<Comments articleId={article._id!} />
 			{otherArticles.length > 0 && (
-				<div className='mt-12 border-t border-border pt-8'>
+				<div className='pt-8 mt-12 border-t border-border'>
 					<h2 className='mb-6 text-2xl font-bold text-foreground'>
 						Читайте также
 					</h2>

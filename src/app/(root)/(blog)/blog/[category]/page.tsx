@@ -33,7 +33,11 @@ export async function generateMetadata({
 		? `${categoryData.description} ${totalArticles > 0 ? `Читайте ${totalArticles} статей по теме.` : 'Статьи по данной теме.'}`
 		: `Читайте "${categoryData.name}". ${totalArticles > 0 ? `Доступно ${totalArticles} статей.` : ''}`
 
-	const keywords = [...(categoryData.keywords || [])]
+	const keywords = [...(categoryData.keywords || []), 'статьи', 'блог']
+
+	const ogImage = categoryData.image
+		? `${baseUrl}${categoryData.image}`
+		: `${baseUrl}/og-images/blog-og.jpg`
 
 	return {
 		metadataBase: new URL(`${baseUrl}/blog`),
@@ -46,8 +50,13 @@ export async function generateMetadata({
 		openGraph: {
 			title: `${categoryData.name}`,
 			description: description.substring(0, 200),
-			type: 'website',
 			url: `${baseUrl}/blog/${categoryData.slug}`,
+			images: {
+				url: ogImage,
+				alt: `${categoryData.name}`,
+				width: 512,
+				height: 512,
+			},
 		},
 	}
 }
@@ -73,7 +82,7 @@ export default async function BlogCategoryPage({
 
 	if ('error' in result) {
 		return (
-			<div className='mx-auto max-w-3xl px-4 py-10 text-center text-foreground'>
+			<div className='max-w-3xl px-4 py-10 mx-auto text-center text-foreground'>
 				<h1 className='mb-4 text-2xl font-bold'>
 					Категория не найдена
 				</h1>
@@ -100,7 +109,7 @@ export default async function BlogCategoryPage({
 	const searchQuery = `itemsPerPage=${itemsPerPage}&page=${currentPage}`
 
 	return (
-		<div className='mx-auto flex max-w-6xl flex-col gap-8 px-4 py-6 text-foreground sm:py-8'>
+		<div className='flex flex-col max-w-6xl gap-8 px-4 py-6 mx-auto text-foreground sm:py-8'>
 			<div className='flex flex-col items-center gap-4'>
 				<CategoryHeader
 					title={categoryData.name}

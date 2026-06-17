@@ -25,7 +25,7 @@ const Articles = async () => {
 	return (
 		<ArticlesSection
 			title='Статьи'
-			viewAllLink={{ text: 'Все статьи', href: 'blog' }}
+			viewAllLink={{ text: 'Все статьи', href: '/blog' }}
 			articles={items}
 		/>
 	)

@@ -1,6 +1,3 @@
-
-
-
 import { AlignmentMenu } from '../editor/_components/tiptap-components/AlignmentMenu'
 import { BgColorMenu } from '../editor/_components/tiptap-components/BgColorMenu'
 import { CodeEditorButton } from '../editor/_components/tiptap-components/CodeEditorButton'

@@ -184,7 +184,7 @@ const CommentsPage = () => {
 				getTodayDate={getTodayDate}
 			/>
 			<CommentsTableHeader />
-			<div className='border border-t-0 border-border rounded-b bg-card p-4'>
+			<div className='p-4 border border-t-0 rounded-b border-border bg-card'>
 				<CommentsList
 					comments={comments}
 					loading={loading}

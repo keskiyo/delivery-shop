@@ -11,14 +11,14 @@ const CatalogAdminControls = ({
 		<div className='flex justify-end mb-4'>
 			<button
 				onClick={toggleEditing}
-				className='text-sm md:text-base border border-border hover:text-white hover:bg-promo hover:border-transparent active:shadow-(--shadow-button-active) w-2/3 h-10 rounded p-2 justify-center items-center  transition-custom cursor-pointer select-none'
+				className='text-sm md:text-base border border-border hover:text-white hover:bg-promo hover:border-transparent active:shadow-button-active w-2/3 h-10 rounded p-2 justify-center items-center  transition-custom cursor-pointer select-none'
 			>
 				{isEditing ? 'Закончить редактирование' : 'Редактировать'}
 			</button>
 			{isEditing && (
 				<button
 					onClick={resetLayout}
-					className='ml-3 p-2 text-xs justify-center items-center active:shadow-(--shadow-button-active) rounded cursor-pointer transition-colors transition-custom hover:shadow-(--shadow-button-secondary) border border-border hover:text-white hover:bg-promo hover:border-transparent'
+					className='ml-3 p-2 text-xs justify-center items-center active:shadow-button-active rounded cursor-pointer transition-colors transition-custom hover:shadow-button-secondary border border-border hover:text-white hover:bg-promo hover:border-transparent'
 				>
 					Сбросить
 				</button>

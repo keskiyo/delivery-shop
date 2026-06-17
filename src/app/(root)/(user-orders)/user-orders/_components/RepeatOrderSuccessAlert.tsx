@@ -13,7 +13,7 @@ export const RepeatOrderSuccessAlert: React.FC = () => {
 				</p>
 				<button
 					onClick={handleRefresh}
-					className='ml-4 bg-success text-white px-4 py-2 rounded hover:shadow-(--shadow-button-default) transition-custom font-medium cursor-pointer'
+					className='ml-4 bg-success text-white px-4 py-2 rounded hover:shadow-button-default transition-custom font-medium cursor-pointer'
 				>
 					Обновить страницу
 				</button>

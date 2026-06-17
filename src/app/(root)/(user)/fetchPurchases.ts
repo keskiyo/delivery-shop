@@ -1,12 +1,12 @@
+import { baseUrl } from '../../../../utils/baseUrl'
+
 const fetchPurchases = async (options?: {
 	usersPurchasesLimit?: number
 	pagination?: { startIdx: number; perPage: number }
 	userId?: string
 }) => {
 	try {
-		const url = new URL(
-			`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/purchases`,
-		)
+		const url = new URL(`${baseUrl}/api/users/purchases`)
 
 		if (options?.usersPurchasesLimit) {
 			url.searchParams.append(

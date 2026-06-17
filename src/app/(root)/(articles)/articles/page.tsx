@@ -8,7 +8,6 @@ export const metadata = {
 	description: 'Читайте статьи на сайте магазина "Фудмаркет"',
 }
 
-
 const AllArticles = async ({
 	searchParams,
 }: {

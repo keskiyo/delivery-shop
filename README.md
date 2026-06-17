@@ -4,6 +4,8 @@
 
 **Платформа доставки еды** — каталог, корзина и заказы, бонусная система, блог с комментариями, CMS и админ-панель.
 
+🌐 Продакшен: **[food-market22.ru](https://food-market22.ru)**
+
 </div>
 
 ---
@@ -18,7 +20,6 @@
 - [Скрипты](#-скрипты)
 - [Структура проекта](#-структура-проекта)
 - [Бизнес-настройки](#-бизнес-настройки)
-- [Дорожная карта](#-дорожная-карта)
 
 ---
 
@@ -53,12 +54,12 @@ Full-stack приложение интернет-магазина доставк
 ## 🛠 Стек
 
 - **Фреймворк:** Next.js 16 (App Router, React Compiler), React 19, TypeScript 5
-- **База данных:** MongoDB 7 (нативный драйвер `mongodb`), миграции через `migrate-mongo`
-- **Авторизация:** [better-auth](https://www.better-auth.com/) (email/пароль + телефон/OTP)
+- **База данных:** MongoDB 7 (нативный драйвер `mongodb`)
+- **Авторизация:** [better-auth](https://www.better-auth.com/) (email/пароль + телефон/OTP через SMS.ru)
 - **Состояние:** Redux Toolkit + RTK Query, Zustand, React Context
 - **UI:** TailwindCSS 4, SASS, Radix UI, Lucide Icons, Framer Motion
 - **Контент:** TipTap (редактор), DOMPurify (санитизация)
-- **Почта:** React Email + Resend
+- **Почта:** React Email + Nodemailer (SMTP)
 - **Прочее:** Yandex Maps, Sharp, ExcelJS, react-toastify
 
 ---
@@ -83,13 +84,7 @@ npm install
 # 3. Создать .env (см. раздел ниже)
 cp .env.example .env   # затем заполнить значения
 
-# 4. Применить миграции (создаст коллекции и стартовые данные)
-npx migrate-mongo up
-
-# 5. (опционально) Сиды
-npx ts-node seed-db.ts
-
-# 6. Запустить dev-сервер
+# 4. Запустить dev-сервер
 npm run dev
 ```
 
@@ -103,24 +98,36 @@ npm run dev
 
 ```env
 # База данных
-FOOD_DELIVERY_DB_URL=mongodb://localhost:27017
-FOOD_DELIVERY_DB_NAME=deliveryshop
-
-# Почта (Resend)
-RESEND_API_KEY=your_resend_key
+DB_CONNECTION_STRING=mongodb://localhost:27017
+DBNAME=deliveryshop
 
 # Приложение
-NEXT_PUBLIC_BASE_URL=http://localhost:3000
+NEXT_PUBLIC_BASE_URL=https://food-market22.ru
 
 # Авторизация (better-auth)
 BETTER_AUTH_SECRET=your_random_secret
-BETTER_AUTH_URL=http://localhost:3000
+BETTER_AUTH_URL=https://food-market22.ru
+
+# Почта (Nodemailer / SMTP)
+SMTP_HOST=smtp.example.com
+SMTP_PORT=465
+SMTP_SECURE=true
+SMTP_USER=your_smtp_user
+SMTP_PASSWORD=your_smtp_password
+SMTP_FROM_NAME=Фудмаркет
+SMTP_FROM_EMAIL=no-reply@food-market22.ru
+
+# SMS / OTP (SMS.ru)
+SMS_API_ID=your_sms_ru_api_id
+
+# Карты
+NEXT_PUBLIC_YANDEX_MAPS_API_KEY=your_yandex_maps_key
 
 # Cron
 CRON_SECRET=your_cron_secret
 ```
 
-> ℹ️ SMS/OTP по умолчанию отключены — код подтверждения выводится в консоль сервера.
+> ℹ️ OTP отправляется через [SMS.ru](https://sms.ru) (`SMS_API_ID`). Без ключа отправка кода завершится ошибкой — логи смотрите в консоли сервера.
 
 ---
 
@@ -131,7 +138,7 @@ npm run dev                    # dev-сервер
 npm run build                  # прод-сборка
 npm run start                  # запуск прод-сборки
 npm run lint                   # ESLint
-npm audit                      # аудит зависимостей
+npm run cleanup                # удаление temp-картинок статей старше 3 дней
 npm run update-delivery-dates  # cron: обновление доступных дат доставки
 ```
 
@@ -141,8 +148,7 @@ npm run update-delivery-dates  # cron: обновление доступных �
 
 ```
 config/config.ts          # Единое место бизнес-настроек
-migrations/               # migrate-mongo: миграции + стартовые данные
-seed-db*.ts               # Скрипты сидирования
+cleanup.mjs               # Очистка temp-изображений статей
 src/
 ├── app/
 │   ├── (root)/           # Публичный layout (Header, Footer, Breadcrumbs)
@@ -177,15 +183,5 @@ src/
 | Минимальная сумма заказа   | 700 ₽    |
 | Попытки ввода OTP          | 3        |
 | Время жизни OTP            | 180 с    |
-
----
-
-## 🗺 Дорожная карта
-
-- [ ] Покрытие тестами и настройка CI
-- [ ] Интеграция реального SMS-провайдера для OTP
-- [ ] Вынос конфигурируемых ключей (карты, URL) в переменные окружения
-- [ ] Подключение платёжного провайдера
-- [ ] Скриншоты и демо-стенд
 
 ---

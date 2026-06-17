@@ -1,6 +1,8 @@
 # Delivery Shop Documentation
 
-Обновлено: 16 июня 2026.
+Обновлено: 17 июня 2026.
+
+Продакшен-домен: `https://food-market22.ru`.
 
 `delivery-shop` - интернет-магазин доставки продуктов на Next.js с публичным каталогом, корзиной, оформлением заказов, личным кабинетом, блогом, CMS и административной панелью.
 
@@ -16,6 +18,8 @@
 | Rich text  | TipTap, DOMPurify                                        |
 | UI helpers | Lucide React, React Toastify, Framer Motion              |
 | Maps       | Yandex Maps через `@iminside/react-yandex-maps`          |
+| Email      | Nodemailer (SMTP) + React Email шаблоны                  |
+| SMS/OTP    | SMS.ru через `SMS_API_ID`                                |
 
 Mongoose указан в зависимостях, но в проекте не используется. Новые Mongoose-модели добавлять не нужно.
 
@@ -23,10 +27,10 @@ Mongoose указан в зависимостях, но в проекте не �
 
 ```bash
 npm install
-npx migrate-mongo up
-npx ts-node seed-db.ts
 npm run dev
 ```
+
+Миграции и seed-скрипты удалены из репозитория; база наполняется вручную/через дамп.
 
 Локальный адрес по умолчанию: `http://localhost:3000`.
 
@@ -42,18 +46,17 @@ npm run build
 
 Основные переменные лежат в `.env`, файл не должен попадать в git.
 
-| Переменная                                                            | Назначение                                  |
-| --------------------------------------------------------------------- | ------------------------------------------- |
-| `FOOD_DELIVERY_DB_URL`                                                | MongoDB connection string                   |
-| `FOOD_DELIVERY_DB_NAME`                                               | Имя базы данных                             |
-| `BETTER_AUTH_SECRET`                                                  | Секрет Better Auth                          |
-| `BETTER_AUTH_URL`                                                     | Base URL для Better Auth                    |
-| `NEXT_PUBLIC_BASE_URL`                                                | Публичный URL сайта                         |
-| `RESEND_API_KEY`                                                      | API key для email, если используется Resend |
-| `CRON_SECRET`                                                         | Секрет cron endpoints                       |
-| `NEXT_PUBLIC_YANDEX_MAPS_API_KEY`                                     | Ключ Яндекс Карт                            |
-| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM_*` | SMTP-отправка писем                         |
-| `SMS_API_ID`                                                          | SMS.ru API key                              |
+| Переменная                                                                                                 | Назначение                           |
+| ---------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `DB_CONNECTION_STRING`                                                                                     | MongoDB connection string            |
+| `DBNAME`                                                                                                   | Имя базы данных                      |
+| `BETTER_AUTH_SECRET`                                                                                       | Секрет Better Auth                   |
+| `BETTER_AUTH_URL`                                                                                          | Base URL для Better Auth             |
+| `NEXT_PUBLIC_BASE_URL`                                                                                     | Публичный URL сайта                  |
+| `CRON_SECRET`                                                                                              | Секрет cron endpoints                |
+| `NEXT_PUBLIC_YANDEX_MAPS_API_KEY`                                                                          | Ключ Яндекс Карт                     |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM_NAME`, `SMTP_FROM_EMAIL` | SMTP-отправка писем через Nodemailer |
+| `SMS_API_ID`                                                                                               | SMS.ru API key для OTP               |
 
 ## Архитектура
 
@@ -132,7 +135,7 @@ npm run build
 | `cards`             | Карты лояльности                               |
 | `deliveryTimes`     | Слоты доставки                                 |
 
-Миграции находятся в `migrations`, конфиг миграций - `migrate-mongo-config.js`.
+Миграции и seed-скрипты (`migrate-mongo`, `seed-db*.ts`) удалены из репозитория. Коллекции создаются при первой записи; начальные данные заливаются вручную или дампом.
 
 ## CMS И Блог
 
@@ -191,17 +194,17 @@ src/app/(root)/(admin)/administrator/cards
 
 ## Изображения
 
-Правила хранения:
+Загружаемые файлы хранятся в корневой папке `uploads/` (вне `public`) и отдаются через API-роут `/api/uploads/[...path]`. В `next.config.ts` настроены rewrites: `/images/products/*` → `/api/uploads/products/*` и `/uploads/*` → `/api/uploads/*`.
 
-| Тип                           | Путь                      |
-| ----------------------------- | ------------------------- |
-| Временные изображения статей  | `public/temp`             |
-| Постоянные изображения статей | `public/uploads/articles` |
-| Изображения категорий CMS     | `public/blogCategories`   |
-| Общие картинки сайта          | `public/images`           |
-| Иконки                        | `public/icons-*`          |
+| Тип                           | Путь на диске                     | Публичный URL                      |
+| ----------------------------- | --------------------------------- | ---------------------------------- |
+| Временные изображения статей  | `uploads/temp`                    | `/api/uploads/temp/...`            |
+| Постоянные изображения статей | `uploads/articles`                | `/api/uploads/articles/...`        |
+| Изображения категорий CMS     | `uploads/blog-categories`         | `/api/uploads/blog-categories/...` |
+| Изображения товаров           | `uploads/products`                | `/images/products/...`             |
+| Статичные картинки/иконки     | `public/images`, `public/icons-*` | прямой путь                        |
 
-`next.config.ts` содержит local image patterns для `next/image`. Если добавляется новый публичный путь для изображений, проверьте конфиг.
+`next.config.ts` содержит `images.localPatterns` для `next/image`. При добавлении нового пути для изображений проверьте конфиг и rewrites.
 
 ## UI И Темы
 
@@ -298,15 +301,17 @@ src/app/(root)/(admin)/administrator/_components
 
 ## Известные Особенности
 
-| Особенность         | Детали                                                                 |
-| ------------------- | ---------------------------------------------------------------------- |
-| Две auth-схемы      | Better Auth и custom session существуют параллельно                    |
-| OTP/SMS             | SMS API подключён через `SMS_API_ID`, в dev возможен режим логирования |
-| Mongo singleton     | API routes должны использовать общий helper подключения                |
-| Article images      | Временные и постоянные изображения статей лежат в разных папках        |
-| Comments moderation | Бан пользователя влияет на возможность оставлять комментарии           |
-| Excel export        | Выгрузка заказов использует ExcelJS                                    |
-| Code comments       | Комментарии из кода удалены, документацию держать в `.md`              |
+| Особенность         | Детали                                                                  |
+| ------------------- | ----------------------------------------------------------------------- |
+| Две auth-схемы      | Better Auth и custom session существуют параллельно                     |
+| Email               | Письма отправляются через Nodemailer (SMTP), шаблоны — React Email      |
+| OTP/SMS             | OTP отправляется через SMS.ru (`SMS_API_ID`); без ключа отправка падает |
+| Mongo singleton     | API routes должны использовать общий helper подключения                 |
+| Uploads             | Загрузки лежат в корневом `uploads/` и отдаются через `/api/uploads`    |
+| Article images      | Временные (`uploads/temp`) и постоянные (`uploads/articles`) разделены  |
+| Comments moderation | Бан пользователя влияет на возможность оставлять комментарии            |
+| Excel export        | Выгрузка заказов использует ExcelJS                                     |
+| Code comments       | Комментарии из кода удалены, документацию держать в `.md`               |
 
 ## Практические Правила
 
@@ -314,7 +319,7 @@ src/app/(root)/(admin)/administrator/_components
 2. При изменении корзины проверяйте `cartStore`, `orderActions`, `/api/cart`, `/api/orders`, `usePricing`.
 3. При изменении товаров проверяйте типы в `src/types/product.ts`, API товаров и публичные карточки.
 4. При изменении CMS-статей проверяйте editor, articles management, upload routes и `processArticleImages`.
-5. При изменении изображений статей соблюдайте разделение `public/temp` и `public/uploads/articles`.
+5. При изменении изображений статей соблюдайте разделение `uploads/temp` и `uploads/articles`.
 6. При изменении SEO проверяйте sitemap, `/api/sitemap-data`, metadata helpers и CMS semantic-core.
 7. При добавлении UI используйте токены темы, а не прямые цвета Tailwind, если это не осознанный акцент.
 8. Перед деплоем запускайте `npx tsc --noEmit`, `npm run lint`, `npm run build`.

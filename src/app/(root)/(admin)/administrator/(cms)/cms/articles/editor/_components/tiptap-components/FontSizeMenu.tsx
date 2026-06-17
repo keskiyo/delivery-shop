@@ -1,19 +1,7 @@
 import { EditorProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/articles/types/tiptap'
+import { FONT_SIZES } from '@/app/(root)/(admin)/administrator/(cms)/cms/articles/utils/fontSisez'
 import { Check, ChevronDown } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-
-const FONT_SIZES = [
-	{ label: '10px', value: '10px' },
-	{ label: '12px', value: '12px' },
-	{ label: '14px', value: '14px' },
-	{ label: '16px', value: '16px' },
-	{ label: '18px', value: '18px' },
-	{ label: '20px', value: '20px' },
-	{ label: '24px', value: '24px' },
-	{ label: '28px', value: '28px' },
-	{ label: '32px', value: '32px' },
-	{ label: 'Сбросить', value: 'unset' },
-]
 
 const DEFAULT_SIZE = '16px'
 
@@ -197,26 +185,26 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
         `}
 				title='Размер шрифта'
 			>
-				<span className='text-xs font-mono'>{displaySize}</span>
+				<span className='font-mono text-xs'>{displaySize}</span>
 				<ChevronDown
 					className={`w-3 h-3 transition-transform transition-custom ${isOpen ? 'rotate-180' : ''}`}
 				/>
 			</button>
 
-						{isOpen && (
+			{isOpen && (
 				<div
 					ref={dropdownRef}
-					className='absolute z-50 mt-1 left-0 bg-card border border-border rounded-lg shadow-lg min-w-40'
+					className='absolute left-0 z-50 mt-1 border rounded-lg shadow-lg bg-card border-border min-w-40'
 					onClick={e => e.stopPropagation()}
 				>
 					<div className='py-1'>
-												<div className='px-3 py-2 border-b border-border'>
+						<div className='px-3 py-2 border-b border-border'>
 							<span className='text-xs font-medium text-muted-foreground'>
 								РАЗМЕР ШРИФТА
 							</span>
 						</div>
 
-												{FONT_SIZES.map(size => {
+						{FONT_SIZES.map(size => {
 							const isActive = checkIsActive(size.value)
 
 							return (
@@ -238,14 +226,14 @@ export const FontSizeMenu = ({ editor }: EditorProps) => {
 									<div className='flex items-center gap-2'>
 										{size.value !== 'unset' && (
 											<div
-												className='w-3 h-3 rounded-full border border-border'
+												className='w-3 h-3 border rounded-full border-border'
 												style={{
 													backgroundColor: isActive
-														? '#9674F9'
+														? 'var(--brand)'
 														: 'transparent',
 													borderColor: isActive
-														? '#9674F9'
-														: '#d1d5db',
+														? 'var(--brand)'
+														: 'var(--border)',
 												}}
 											/>
 										)}

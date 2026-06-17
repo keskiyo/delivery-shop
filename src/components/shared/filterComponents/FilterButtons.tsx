@@ -42,8 +42,8 @@ function FilterButtonsContent({ basePath }: { basePath: string }) {
 					href={buildFilterLink(filter.key)}
 					className={`h-8 p-2 text-xs flex justify-center items-center transition-custom cursor-pointer rounded-2xl ${
 						isFilterActive(filter.key)
-							? 'bg-brand text-white  hover:shadow-(--shadow-button-default) active:shadow-(--shadow-button-active)'
-							: 'bg-surface hover:shadow-(--shadow-button-secondary) active:shadow-(--shadow-button-active) border:bg-promo border'
+							? 'bg-brand text-white  hover:shadow-button-default active:shadow-button-active'
+							: 'bg-surface hover:shadow-button-secondary active:shadow-button-active border:bg-promo border'
 					} `}
 				>
 					{filter.label}

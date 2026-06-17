@@ -26,7 +26,7 @@ const InStockToggle = ({
                 w-5 h-5
                 border-[0.5px] border-border/40
                 rounded-full
-                shadow-[0px_1px_1px_rgba(0,0,0,0.08),0px_2px_6px_rgba(0,0,0,0.15)]
+                shadow-default
                 bg-card
                 transition-transform transition-custom
                 ${

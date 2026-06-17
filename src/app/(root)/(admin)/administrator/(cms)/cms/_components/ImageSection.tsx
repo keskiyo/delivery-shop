@@ -1,10 +1,10 @@
 import { ImageSectionProps } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/types'
-import { getImagePath } from '@/app/(root)/(blog)/blog/categories/utils/getImagePath'
 import { useArticleStore } from '@/store/articleStore'
 import { useCategoryStore } from '@/store/categoryStore'
 import { AlertCircle, Upload, XCircle } from 'lucide-react'
 import Image from 'next/image'
 import { useRef } from 'react'
+import { getImagePath } from '../../../../../../../../utils/getImagePath'
 import { SEO_LIMITS } from '../utils/SEO_LIMITS'
 
 export const ImageSection = ({
@@ -56,13 +56,12 @@ export const ImageSection = ({
 				{formData.image && (
 					<div className='bg-card p-4 rounded border border-border'>
 						<div className='flex flex-col lg:flex-row items-start gap-4'>
-							<div className='shrink-0'>
+							<div className='relative h-40 w-40 shrink-0 overflow-hidden rounded shadow-sm'>
 								<Image
 									src={imageSrc}
 									alt='Предпросмотр'
-									width={160}
-									height={160}
-									className='w-40 h-40 object-cover rounded shadow-sm'
+									fill
+									className='object-cover'
 									unoptimized={formData.image.startsWith(
 										'blob:',
 									)}

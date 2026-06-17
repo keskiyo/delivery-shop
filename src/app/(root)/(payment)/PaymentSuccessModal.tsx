@@ -16,28 +16,32 @@ const PaymentSuccessModal = ({
 	if (!isOpen || !successData) return null
 
 	return (
-		<div className='fixed inset-0 bg-muted/80 backdrop-blur-sm flex items-center justify-center z-50 p-4'>
-			<div className='bg-card rounded-lg max-w-md w-full p-6 text-center'>
-				<div className='w-16 h-16 bg-success-soft rounded-full flex items-center justify-center mx-auto mb-4'>
+		<div className='fixed inset-0 z-50 flex items-center justify-center p-4 bg-muted/80 backdrop-blur-sm'>
+			<div className='w-full max-w-md p-6 text-center rounded-lg bg-card'>
+				<div className='flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-success-soft'>
 					<Check
 						className='w-8 h-8 text-success shrink-0 '
 						strokeWidth={4}
 					/>
 				</div>
 
-				<h2 className='text-2xl font-bold mb-2'>
+				<h2 className='mb-2 text-2xl font-bold'>
 					Оплата прошла успешно!
 				</h2>
 
-				<div className='space-y-3 mb-6 text-left bg-surface p-4 rounded-lg'>
+				<div className='p-4 mb-6 space-y-3 text-left rounded-lg bg-surface'>
 					<div className='flex justify-between'>
-						<span className='text-muted-foreground'>Номер заказа:</span>
+						<span className='text-muted-foreground'>
+							Номер заказа:
+						</span>
 						<span className='font-semibold'>
 							{successData.orderNumber}
 						</span>
 					</div>
 					<div className='flex justify-between'>
-						<span className='text-muted-foreground'>ID платежа:</span>
+						<span className='text-muted-foreground'>
+							ID платежа:
+						</span>
 						<span className='font-mono text-sm'>
 							{successData.paymentId}
 						</span>
@@ -56,7 +60,7 @@ const PaymentSuccessModal = ({
 					</div>
 				</div>
 
-				<p className='text-muted-foreground mb-6'>
+				<p className='mb-6 text-muted-foreground'>
 					Ваш заказ успешно оплачен и передан в обработку. В ближайшее
 					время с Вами свяжется наш менеджер для подтверждения
 					доставки.
@@ -64,7 +68,7 @@ const PaymentSuccessModal = ({
 
 				<button
 					onClick={onClose}
-					className='w-full py-3 px-4 bg-brand text-white rounded-lg hover:bg-brand-hover transition-colors font-medium cursor-pointer'
+					className='w-full px-4 py-3 font-medium text-white transition-colors rounded-lg cursor-pointer bg-brand hover:bg-brand-hover'
 				>
 					Понятно
 				</button>

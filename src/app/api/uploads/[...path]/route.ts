@@ -1,6 +1,3 @@
-
-
-
 import fs from 'fs'
 import { NextRequest, NextResponse } from 'next/server'
 import path from 'path'
@@ -12,16 +9,7 @@ export async function GET(
 	try {
 		const resolvedParams = await params
 		const filePath = resolvedParams.path.join('/')
-		const publicFullPath = path.join(
-			process.cwd(),
-			'public',
-			'uploads',
-			filePath,
-		)
-		const legacyFullPath = path.join(process.cwd(), 'uploads', filePath)
-		const fullPath = fs.existsSync(publicFullPath)
-			? publicFullPath
-			: legacyFullPath
+		const fullPath = path.join(process.cwd(), 'uploads', filePath)
 
 		if (!fs.existsSync(fullPath)) {
 			return NextResponse.json(

@@ -1,6 +1,6 @@
+import { ImageSection } from '@/app/(root)/(admin)/administrator/(cms)/cms/_components/ImageSection'
 import { CategoryFormFields } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/CategoryFormFields'
 import { CategorySubmitSection } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/CategorySubmitSection'
-import { ImageSection } from '@/app/(root)/(admin)/administrator/(cms)/cms/categories/_components/ImageSection'
 import {
 	CategoryFormProps,
 	CharCount,
@@ -69,8 +69,8 @@ export const CategoryForm = ({
 	}
 
 	return (
-		<div className='mb-8 bg-card rounded shadow-sm p-6'>
-			<h2 className='text-xl font-semibold mb-4'>
+		<div className='p-6 mb-8 rounded shadow-sm bg-card'>
+			<h2 className='mb-4 text-xl font-semibold'>
 				Создание новой категории
 			</h2>
 			<form onSubmit={onSubmit}>
