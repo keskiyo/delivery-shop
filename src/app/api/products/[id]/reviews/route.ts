@@ -184,7 +184,7 @@ export async function POST(
 
 		await db.collection('reviews').insertOne(newReview)
 
-		revalidateTag(`product-${productId}`, 'default')
+		revalidateTag(`product-${productId}`, { expire: 0 })
 
 		return NextResponse.json({ success: true }, { status: 201 })
 	} catch (error) {

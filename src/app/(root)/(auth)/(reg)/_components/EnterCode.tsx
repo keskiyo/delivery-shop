@@ -20,6 +20,10 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 	const { timeLeft, canResend, startTimer } = useTimer(CONFIG.TIMEOUT_PERIOD)
 	const router = useRouter()
 	const [isLoading, setIsLoading] = useState(false)
+	const [verifiedSession, setVerifiedSession] = useState<{
+		userId: string
+		token: string
+	} | null>(null)
 
 	useEffect(() => {
 		startTimer()
@@ -31,29 +35,72 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 
 		setIsLoading(true)
 
+		let session = verifiedSession
+
+		if (!session) {
+			try {
+				const { data: verifyData, error: verifyError } =
+					await authClient.phoneNumber.verify({
+						phoneNumber,
+						code,
+						disableSession: false,
+						surname: regFormData.surname,
+						birthdayDate: regFormData.birthdayDate,
+						region: regFormData.region,
+						location: regFormData.location,
+						gender: regFormData.gender,
+						card: regFormData.card || '',
+						hasCard: regFormData.hasCard ?? false,
+					})
+
+				if (verifyError) throw verifyError
+				if (!verifyData?.user?.id || !verifyData.token) {
+					throw new Error('Сессия пользователя не создана')
+				}
+
+				session = {
+					userId: verifyData.user.id,
+					token: verifyData.token,
+				}
+				setVerifiedSession(session)
+				setAttemptsLeft(CONFIG.MAX_ATTEMPTS)
+			} catch (error) {
+				console.error('Ошибка верификации телефона:', error)
+				setCode('')
+				setAttemptsLeft(prev => prev - 1)
+
+				if (attemptsLeft <= 1) {
+					setError(
+						'Попытки исчерпаны. Пожалуйста, зарегистрируйтесь снова',
+					)
+					setTimeout(() => router.replace('/register'), 2000)
+				} else {
+					setError(
+						`Неверный код. Осталось попыток: ${attemptsLeft - 1}`,
+					)
+				}
+
+				setIsLoading(false)
+				return
+			}
+		}
+
 		try {
-			const { data: verifyData, error: verifyError } =
-				await authClient.phoneNumber.verify({
-					phoneNumber,
-					code,
-					disableSession: false,
+			const passwordResponse = await fetch('/api/auth/set-password', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					userId: session.userId,
+					sessionToken: session.token,
+					password: regFormData.password,
+					name: regFormData.name,
 					surname: regFormData.surname,
 					birthdayDate: regFormData.birthdayDate,
 					region: regFormData.region,
 					location: regFormData.location,
 					gender: regFormData.gender,
-				})
-
-			if (verifyError) throw verifyError
-
-			setAttemptsLeft(CONFIG.MAX_ATTEMPTS)
-
-			const passwordResponse = await fetch('/api/auth/set-password', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					userId: verifyData.user.id,
-					password: regFormData.password,
+					card: regFormData.card || '',
+					hasCard: regFormData.hasCard ?? false,
 				}),
 			})
 
@@ -63,41 +110,12 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 				throw new Error(errorData.error || 'Ошибка установки пароля')
 			}
 
-			const updateData = {
-				surname: regFormData.surname,
-				name: regFormData.name,
-				birthdayDate: regFormData.birthdayDate,
-				region: regFormData.region,
-				location: regFormData.location,
-				gender: regFormData.gender,
-				...(regFormData.card && { card: regFormData.card }),
-				...(regFormData.hasCard !== undefined && {
-					hasCard: regFormData.hasCard,
-				}),
-			}
-
-			const { error: updateError } = await (
-				authClient.updateUser as (
-					data: unknown,
-				) => ReturnType<typeof authClient.updateUser>
-			)(updateData)
-
-			if (updateError) throw updateError
-
 			router.replace('/login')
 		} catch (error) {
-			console.error('Ошибка верификации телефона:', error)
-			setCode('')
-			setAttemptsLeft(prev => prev - 1)
-
-			if (attemptsLeft <= 1) {
-				setError(
-					'Попытки исчерпаны. Пожалуйста, зарегистрируйтесь снова',
-				)
-				setTimeout(() => router.replace('/register'), 2000)
-			} else {
-				setError(`Неверный код. Осталось попыток: ${attemptsLeft - 1}`)
-			}
+			console.error('Ошибка завершения регистрации:', error)
+			setError(
+				'Код подтвержден, но данные не сохранены. Нажмите «Подтвердить» еще раз',
+			)
 		} finally {
 			setIsLoading(false)
 		}

@@ -15,6 +15,7 @@ export async function proxy(request: NextRequest) {
 	if (isProtectedPath) {
 		try {
 			const sessionCookie =
+				request.cookies.get('__Secure-better-auth.session_token') ||
 				request.cookies.get('better-auth.session_token') ||
 				request.cookies.get('session')
 

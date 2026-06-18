@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
-		"build": "next build",
+		"build": "next build --webpack",
 		"start": "next start",
 		"lint": "eslint",
 		"update-delivery-dates": "curl -X GET https://food-market22.ru/api/cron/update-delivery-dates?secret=6f0a80c1123c4f41985f2ad4ca960b398514c2bd3383a1ae0bc45860747723fa",
