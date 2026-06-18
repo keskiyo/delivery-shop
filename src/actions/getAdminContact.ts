@@ -19,7 +19,7 @@ export async function getAdminContact() {
 
 		if (!admin) {
 			return {
-				email: 'admin@example.com',
+				email: 'admin@food-market22.ru',
 				phone: '+7 (999) 123-45-67',
 			}
 		}
@@ -33,7 +33,7 @@ export async function getAdminContact() {
 	} catch (error) {
 		console.error('Ошибка получения контактов администратора:', error)
 		return {
-			email: 'admin@example.com',
+			email: 'admin@food-market22.ru',
 			phone: '+7 (999) 123-45-67',
 		}
 	}

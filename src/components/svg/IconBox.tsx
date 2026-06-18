@@ -3,7 +3,7 @@ const IconBox = ({ isActive = false }: { isActive?: boolean }) => {
 
 	return (
 		<svg
-			viewBox='0 0 29 31.2714'
+			viewBox='0 0 29 13'
 			width='29.000000'
 			height='31.271393'
 			fill='none'

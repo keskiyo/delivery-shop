@@ -5,12 +5,12 @@ import Link from 'next/link'
 
 const Header = () => {
 	return (
-		<header className='w-full bg-site-chrome relative z-50 shadow-default'>
-			<div className='flex flex-col lg:flex-row justify-between items-center p-2 lg:py-3 mx-auto max-w-7xl px-4 lg:px-6'>
-				<div className='flex flex-row gap-4 xl:gap-10 items-center w-full lg:w-auto grow px-2'>
+		<header className='relative z-50 w-full bg-site-chrome shadow-default'>
+			<div className='flex flex-col items-center justify-between p-2 px-4 mx-auto lg:flex-row lg:py-3 max-w-7xl lg:px-6'>
+				<div className='flex flex-row items-center w-full gap-4 px-2 xl:gap-10 lg:w-auto grow'>
 					<Link
 						href='/'
-						className='flex shrink-0 flex-row items-center gap-3 rounded cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40'
+						className='flex flex-row items-center gap-3 rounded cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40'
 						aria-label='На главную страницу'
 					>
 						<div className='relative w-16 h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24'>
@@ -26,7 +26,7 @@ const Header = () => {
 					</Link>
 					<CatalogMenuWrapper />
 				</div>
-				<div className='mt-4 lg:mt-0 w-full lg:w-auto flex justify-end '>
+				<div className='flex justify-end w-full mt-4 lg:mt-0 lg:w-auto '>
 					<UserBlock />
 				</div>
 			</div>

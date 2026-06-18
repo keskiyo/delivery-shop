@@ -6,9 +6,8 @@ import {
 	Hr,
 	Html,
 	Section,
-	Tailwind,
 	Text,
-} from 'react-email'
+} from '@react-email/components'
 
 interface VerifyEmailProps {
 	username: string
@@ -19,70 +18,156 @@ const VerifyEmail = (props: VerifyEmailProps) => {
 	const { username, verifyUrl } = props
 	return (
 		<Html lang='ru' dir='ltr'>
-			<Tailwind>
-				<Head />
-				<Body className='bg-[#f3f1ea] font-sans py-4 px-2'>
-					<Container className='bg-[#fffefa] rounded-md p-6 max-w-145 mx-auto'>
-						<Section>
-							<Text className='text-xl font-bold text-[#232820] mb-4 mt-0'>
-								Подтвердите Ваш email
-							</Text>
+			<Head />
+			<Body
+				style={{
+					backgroundColor: '#f3f4f6',
+					fontFamily: 'Arial, sans-serif',
+					padding: '16px 8px',
+					margin: 0,
+				}}
+			>
+				<Container
+					style={{
+						backgroundColor: '#ffffff',
+						borderRadius: '6px',
+						padding: '24px',
+						maxWidth: '580px',
+						margin: '0 auto',
+					}}
+				>
+					<Section>
+						<Text
+							style={{
+								fontSize: '20px',
+								fontWeight: 'bold',
+								color: '#111827',
+								margin: '0 0 16px 0',
+							}}
+						>
+							Подтвердите Ваш email
+						</Text>
 
-							<Text className='text-base text-[#3f493b] mb-4 mt-0 leading-5'>
-								Спасибо, {username}, за регистрацию! Чтобы
-								завершить процесс и активировать Ваш аккаунт,
-								пожалуйста, подтвердите Ваш email, нажав на
-								кнопку ниже.
-							</Text>
+						<Text
+							style={{
+								fontSize: '16px',
+								color: '#374151',
+								margin: '0 0 16px 0',
+								lineHeight: '1.25',
+							}}
+						>
+							Спасибо, {username}, за регистрацию! Чтобы завершить
+							процесс и активировать Ваш аккаунт, пожалуйста,
+							подтвердите Ваш email, нажав на кнопку ниже.
+						</Text>
 
-							<Section className='text-center mb-6'>
-								<Button
-									href={verifyUrl}
-									className='bg-[#4f9a3d] text-white px-6 py-2 rounded text-base font-medium no-underline'
-								>
-									Подтвердить Email
-								</Button>
-							</Section>
-
-							<Text className='text-sm text-[#5a6554] mb-4 mt-0 leading-5'>
-								Если кнопка не работает, скопируйте и вставьте
-								эту ссылку в адресную строку браузера:
-								<br />
-								<span className='break-all'>{verifyUrl}</span>
-							</Text>
-
-							<Text className='text-sm text-[#5a6554] mb-6 mt-0 leading-5'>
-								Ссылка для подтверждения будет активна в течение
-								24 часов. Если Вы не регистрировали аккаунт,
-								просто проигнорируйте это письмо.
-							</Text>
-
-							<Hr className='border-[#ddd8cd] my-4' />
-
-							<Text className='text-xs text-[#6e7768] m-0 leading-4'>
-								С уважением,
-								<br />
-								Команда &quot;Фудмаркета&quot;
-							</Text>
+						<Section
+							style={{
+								textAlign: 'center',
+								marginBottom: '24px',
+							}}
+						>
+							<Button
+								href={verifyUrl}
+								style={{
+									backgroundColor: '#70c05b',
+									color: '#ffffff',
+									padding: '8px 24px',
+									borderRadius: '4px',
+									fontSize: '16px',
+									fontWeight: 'medium',
+									textDecoration: 'none',
+								}}
+							>
+								Подтвердить Email
+							</Button>
 						</Section>
 
-						<Section className='mt-6 pt-4 border-t border-[#ddd8cd]'>
-							<Text className='text-xs text-[#858d7f] m-0 text-center leading-4'>
-								Фудмаркет
-								<br />
-								Россия, Барнаул, ул. Ленина, д.1
-								<br />
-								ИНН 0291234567520
-							</Text>
+						<Text
+							style={{
+								fontSize: '14px',
+								color: '#4b5563',
+								margin: '0 0 16px 0',
+								lineHeight: '1.25',
+							}}
+						>
+							Если кнопка не работает, скопируйте и вставьте эту
+							ссылку в адресную строку браузера:
+							<br />
+							<span style={{ wordBreak: 'break-all' }}>
+								{verifyUrl}
+							</span>
+						</Text>
 
-							<Text className='text-xs text-[#858d7f] m-0 text-center mt-2 leading-4'>
-								© {new Date().getFullYear()} Фудмаркет. Все
-								права защищены.
-							</Text>
-						</Section>
-					</Container>
-				</Body>
-			</Tailwind>
+						<Text
+							style={{
+								fontSize: '14px',
+								color: '#4b5563',
+								margin: '0 0 24px 0',
+								lineHeight: '1.25',
+							}}
+						>
+							Ссылка для подтверждения будет активна в течение 24
+							часов. Если Вы не регистрировали аккаунт, просто
+							проигнорируйте это письмо.
+						</Text>
+
+						<Hr
+							style={{ borderColor: '#e5e7eb', margin: '16px 0' }}
+						/>
+
+						<Text
+							style={{
+								fontSize: '12px',
+								color: '#6b7280',
+								margin: 0,
+								lineHeight: '1',
+							}}
+						>
+							С уважением,
+							<br />
+							Команда &quot;Фудмаркета&quot;
+						</Text>
+					</Section>
+
+					<Section
+						style={{
+							marginTop: '24px',
+							paddingTop: '16px',
+							borderTop: '1px solid #e5e7eb',
+						}}
+					>
+						<Text
+							style={{
+								fontSize: '12px',
+								color: '#9ca3af',
+								margin: '0 0 0 0',
+								textAlign: 'center',
+								lineHeight: '1',
+							}}
+						>
+							Фудмаркет
+							<br />
+							Россия, Барнаул, ул. Попова, д.14
+							<br />
+							ИНН 0291234569890
+						</Text>
+
+						<Text
+							style={{
+								fontSize: '12px',
+								color: '#9ca3af',
+								margin: '8px 0 0 0',
+								textAlign: 'center',
+								lineHeight: '1',
+							}}
+						>
+							© {new Date().getFullYear()} Фудмаркет. Все права
+							защищены.
+						</Text>
+					</Section>
+				</Container>
+			</Body>
 		</Html>
 	)
 }

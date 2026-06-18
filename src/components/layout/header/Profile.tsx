@@ -116,87 +116,92 @@ const Profile = () => {
 		)
 	}
 
-	if (!isAuth) {
-		return (
-			<div className='flex items-center gap-3'>
-				<Link
-					href='/login'
-					className='w-10 xl:w-30 flex justify-between items-center gap-x-2 p-2 rounded text-white text-base bg-promo hover:bg-promo-hover hover:shadow-article active:shadow-button-active transition-custom cursor-pointer'
-				>
-					<div className='w-27 justify-center hidden xl:flex'>
-						<p>Войти</p>
-					</div>
-					<LogIn size={24} />
-				</Link>
-				<ThemeToggle className='hidden lg:flex' />
-			</div>
-		)
-	}
-
 	return (
 		<>
-			<div className='relative text-site-chrome-foreground' ref={menuRef}>
-				<div
-					className='flex items-center gap-2 cursor-pointer'
-					onClick={toggleMenu}
-				>
-					<Image
-						src={avatarSrc || getAvatarByGender(user?.gender)}
-						alt='Ваш профиль'
-						width={40}
-						height={40}
-						onError={handleAvatarError}
-						className='min-w-10 min-h-10 md:block xl:block rounded-full object-cover'
-					/>
-					<p className='hidden xl:block text-base cursor-pointer p-2'>
-						{getDisplayName()}
-					</p>
-				</div>
+			{!isAuth ? (
+				<div className='relative flex items-center gap-3'>
+					<ThemeToggle variant='notAuth' />
 
+					<Link
+						href='/login'
+						className='flex items-center justify-between w-10 p-2 text-base text-white rounded cursor-pointer xl:w-30 gap-x-2 bg-promo hover:bg-promo-hover hover:shadow-article active:shadow-button-active transition-custom'
+					>
+						<div className='justify-center hidden w-27 xl:flex'>
+							<p>Войти</p>
+						</div>
+
+						<LogIn size={24} />
+					</Link>
+				</div>
+			) : (
 				<div
-					className={`absolute right-0 bg-site-chrome text-site-chrome-foreground rounded shadow-button-secondary overflow-hidden flex flex-col items-center z-50 ${
-						isMenuOpen
-							? 'opacity-100 translate-y-0'
-							: 'opacity-0 -translate-y-2 pointer-events-none'
-					}  transition-custom min-w-40 ${
-						isMobile ? 'bottom-full top-auto mb-6' : 'top-full mt-6'
-					}`}
+					className='relative text-site-chrome-foreground'
+					ref={menuRef}
 				>
-					<Link
-						href='/user-profile'
-						className='block px-4 py-3 hover:text-promo transition-custom'
-						onClick={() => setIsMenuOpen(false)}
+					<div
+						className='flex items-center gap-2 cursor-pointer'
+						onClick={toggleMenu}
 					>
-						Профиль
-					</Link>
-					<Link
-						href='/'
-						className='block px-4 py-3 hover:text-promo transition-custom'
-						onClick={() => setIsMenuOpen(false)}
+						<Image
+							src={avatarSrc || getAvatarByGender(user?.gender)}
+							alt='Ваш профиль'
+							width={40}
+							height={40}
+							onError={handleAvatarError}
+							className='object-cover rounded-full min-w-10 min-h-10 md:block xl:block'
+						/>
+						<p className='hidden p-2 text-base cursor-pointer xl:block'>
+							{getDisplayName()}
+						</p>
+					</div>
+
+					<div
+						className={`absolute right-0 bg-site-chrome text-site-chrome-foreground rounded shadow-button-secondary overflow-hidden flex flex-col items-center z-50 ${
+							isMenuOpen
+								? 'opacity-100 translate-y-0'
+								: 'opacity-0 -translate-y-2 pointer-events-none'
+						}  transition-custom min-w-40 ${
+							isMobile
+								? 'bottom-full top-auto mb-6'
+								: 'top-full mt-6'
+						}`}
 					>
-						Главная
-					</Link>
-					{isManagerOrAdmin() && (
 						<Link
-							href='/administrator'
+							href='/user-profile'
 							className='block px-4 py-3 hover:text-promo transition-custom'
 							onClick={() => setIsMenuOpen(false)}
 						>
-							Панель управления
+							Профиль
 						</Link>
-					)}
-					<div className='hidden w-full justify-center border-t border-site-chrome-muted/30 px-3 py-3 lg:flex'>
-						<ThemeToggle />
+						<Link
+							href='/'
+							className='block px-4 py-3 hover:text-promo transition-custom'
+							onClick={() => setIsMenuOpen(false)}
+						>
+							Главная
+						</Link>
+						{isManagerOrAdmin() && (
+							<Link
+								href='/administrator'
+								className='block px-4 py-3 hover:text-promo transition-custom'
+								onClick={() => setIsMenuOpen(false)}
+							>
+								Панель управления
+							</Link>
+						)}
+						<div className='justify-center hidden w-full px-3 py-3 border-t border-site-chrome-muted/30 lg:flex'>
+							<ThemeToggle />
+						</div>
+						<button
+							onClick={handleLogout}
+							disabled={isLoggingOut}
+							className='w-full px-4 py-3 text-center border-t cursor-pointer hover:text-promo transition-custom border-site-chrome-muted/30 disabled:opacity-50 disabled:cursor-not-allowed'
+						>
+							{isLoggingOut ? 'Выход...' : 'Выйти'}
+						</button>
 					</div>
-					<button
-						onClick={handleLogout}
-						disabled={isLoggingOut}
-						className='w-full text-center px-4 py-3 hover:text-promo transition-custom border-t border-site-chrome-muted/30 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
-					>
-						{isLoggingOut ? 'Выход...' : 'Выйти'}
-					</button>
 				</div>
-			</div>
+			)}
 		</>
 	)
 }

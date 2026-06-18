@@ -58,7 +58,7 @@ const DeleteVerify = (props: DeleteVerifyProps) => {
 							}}
 						>
 							Здравствуйте, {username}! Мы получили запрос на
-							удаление Вашего аккаунта в &quot;Фудмаркете&quot;.
+							удаление Вашего аккаунта в &quot;Северяночке&quot;.
 						</Text>
 
 						<Section
@@ -197,11 +197,11 @@ const DeleteVerify = (props: DeleteVerifyProps) => {
 								lineHeight: '1',
 							}}
 						>
-							Фудмаркета
+							Фудмаркет
 							<br />
-							Россия, Барнаул, ул. Попова, д.1
+							Россия, Барнаул, ул. Попова, д.14
 							<br />
-							ИНН 0291234567890
+							ИНН 0291234569890
 						</Text>
 
 						<Text

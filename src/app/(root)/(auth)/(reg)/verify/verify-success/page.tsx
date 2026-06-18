@@ -29,15 +29,15 @@ export default function VerifySuccessPage() {
 	return (
 		<AuthFormLayout>
 			<div className='p-8 text-center'>
-				<div className='mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-success mb-6'>
-					<CheckCircle className='h-10 w-10 text-white' />
+				<div className='flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-success'>
+					<CheckCircle className='w-10 h-10 text-white' />
 				</div>
 
-				<h1 className='text-2xl font-bold mb-2'>
+				<h1 className='mb-2 text-2xl font-bold'>
 					Email успешно подтвержден!
 				</h1>
 
-				<p className='text-muted-foreground mb-6'>
+				<p className='mb-6 text-muted-foreground'>
 					Ваш адрес электронной почты был успешно подтвержден. Теперь
 					Вы можете войти в свой аккаунт.
 				</p>
@@ -45,7 +45,7 @@ export default function VerifySuccessPage() {
 				<div className='space-y-4'>
 					<button
 						onClick={() => router.replace('/login')}
-						className={`${buttonStyles.active} px-4 py-2 rounded cursor-pointer`}
+						className={`${buttonStyles.active} px-4 py-2 rounded cursor-pointer w-full`}
 					>
 						Перейти к авторизации
 					</button>
@@ -65,8 +65,8 @@ export default function VerifySuccessPage() {
 				</div>
 			</div>
 
-			<div className='bg-surface px-8 py-4 border-t border-border'>
-				<p className='text-xs text-muted-foreground text-center'>
+			<div className='px-8 py-4 border-t bg-surface border-border'>
+				<p className='text-xs text-center text-muted-foreground'>
 					Нужна помощь?{' '}
 					<Link
 						href='/contacts'

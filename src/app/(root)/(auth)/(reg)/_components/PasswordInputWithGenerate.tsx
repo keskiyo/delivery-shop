@@ -2,7 +2,7 @@
 
 import PasswordInput from '@/app/(root)/(auth)/_components/PasswordInput'
 import { RefreshCw } from 'lucide-react'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { generatePassword } from '../../../../../../utils/generatePassword'
 
 interface PasswordInputWithGenerateProps {
@@ -18,7 +18,6 @@ interface PasswordInputWithGenerateProps {
 	onPasswordGenerate?: (password: string) => void
 }
 
-
 const PasswordInputWithGenerate = ({
 	id,
 	label,
@@ -31,9 +30,10 @@ const PasswordInputWithGenerate = ({
 	inputClass = '',
 	onPasswordGenerate,
 }: PasswordInputWithGenerateProps) => {
+	const [spinKey, setSpinKey] = useState(0)
 	const handleGenerate = () => {
 		const newPassword = generatePassword(8)
-
+		setSpinKey(prev => prev + 1)
 
 		const syntheticEvent = {
 			target: {
@@ -44,7 +44,6 @@ const PasswordInputWithGenerate = ({
 		} as ChangeEvent<HTMLInputElement>
 
 		onChangeAction(syntheticEvent)
-
 
 		if (onPasswordGenerate) {
 			onPasswordGenerate(newPassword)
@@ -67,10 +66,13 @@ const PasswordInputWithGenerate = ({
 			<button
 				type='button'
 				onClick={handleGenerate}
-				className='absolute right-12 top-[2.15rem] transform -translate-y-1/2 text-muted-foreground hover:text-brand transition-colors'
+				className='absolute transition-colors transform -translate-y-1/2 right-12 top-11 text-muted-foreground hover:text-brand'
 				title='Сгенерировать пароль'
 			>
-				<RefreshCw className='w-5 h-5 animate-spin' />
+				<RefreshCw
+					key={spinKey}
+					className='w-5 h-5 animate-spin-once'
+				/>
 			</button>
 		</div>
 	)

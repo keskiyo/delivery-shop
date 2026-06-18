@@ -15,7 +15,7 @@ const THEME_OPTIONS: Array<{
 ]
 
 interface ThemeToggleProps {
-	variant?: 'inline' | 'mobileDropdown'
+	variant?: 'inline' | 'mobileDropdown' | 'notAuth'
 	className?: string
 }
 
@@ -92,7 +92,7 @@ export function ThemeToggle({
 				<button
 					type='button'
 					onClick={() => setIsOpen(prev => !prev)}
-					className='flex size-10 cursor-pointer items-center justify-center rounded-full border border-site-chrome-muted/30 bg-site-chrome-muted/15 text-site-chrome-foreground transition transition-custom hover:bg-site-chrome-muted/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-site-chrome-foreground/40'
+					className='flex items-center justify-center transition border rounded-full cursor-pointer size-10 border-site-chrome-muted/30 bg-site-chrome-muted/15 text-site-chrome-foreground transition-custom hover:bg-site-chrome-muted/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-site-chrome-foreground/40'
 					aria-label='Переключение темы'
 					aria-expanded={isOpen}
 					title='Переключение темы'
@@ -106,6 +106,55 @@ export function ThemeToggle({
 							? 'translate-y-0 opacity-100'
 							: 'pointer-events-none translate-y-2 opacity-0'
 					}`}
+					aria-label='Переключение темы'
+				>
+					{THEME_OPTIONS.map(option => (
+						<ThemeOptionButton
+							key={option.mode}
+							{...option}
+							isActive={theme === option.mode}
+							onClick={mode => {
+								setTheme(mode)
+								setIsOpen(false)
+							}}
+						/>
+					))}
+				</div>
+			</div>
+		)
+	}
+
+	if (variant === 'notAuth') {
+		return (
+			<div
+				ref={dropdownRef}
+				className={`relative hidden md:block ${className}`}
+			>
+				<button
+					type='button'
+					onClick={() => setIsOpen(prev => !prev)}
+					className='flex items-center justify-center border rounded-full cursor-pointer size-10 border-site-chrome-muted/30 bg-site-chrome-muted/15 text-site-chrome-foreground transition-custom hover:bg-site-chrome-muted/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-site-chrome-foreground/40'
+					aria-label='Переключение темы'
+					aria-expanded={isOpen}
+					title='Переключение темы'
+				>
+					<ActiveIcon className='size-5' strokeWidth={1.8} />
+				</button>
+
+				<div
+					className={`absolute right-0 z-50
+                        top-full mt-3                         
+                        flex w-11 flex-col items-center gap-1.5
+                        rounded-full border border-site-chrome-muted/20
+                        bg-site-chrome p-1.5 shadow-lg
+                        shadow-site-chrome/25 backdrop-blur
+                        transition-custom
+                        ${
+							isOpen
+								? 'translate-y-0 opacity-100'
+								: 'pointer-events-none -translate-y-2 opacity-0'
+						}
+                    `}
 					aria-label='Переключение темы'
 				>
 					{THEME_OPTIONS.map(option => (

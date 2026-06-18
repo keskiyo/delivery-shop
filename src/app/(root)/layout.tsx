@@ -1,3 +1,4 @@
+import CookieConsent from '@/app/(root)/(user-profile)/_components/CookieConsent'
 import { ProductProvider } from '@/app/contexts/ProductContext'
 import Breadcrumbs from '@/components/features/common/Breadcrumbs'
 import Footer from '@/components/layout/footer/Footer'
@@ -15,6 +16,7 @@ export default function HomeLayout({
 				<Breadcrumbs />
 				<main className='min-h-screen'>{children}</main>
 				<Footer />
+				<CookieConsent />
 			</ProductProvider>
 		</>
 	)

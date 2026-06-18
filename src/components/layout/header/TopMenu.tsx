@@ -1,6 +1,5 @@
 'use client'
 
-
 import IconBox from '@/components/svg/IconBox'
 import IconCart from '@/components/svg/iconCart'
 import IconHeart from '@/components/svg/IconHeart'

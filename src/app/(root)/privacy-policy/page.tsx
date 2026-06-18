@@ -13,8 +13,7 @@ const PolicyPage = () => {
 							(далее — Политика) определяет порядок обработки и
 							защиты персональных данных физических лиц,
 							использующих сервисы, услуги, программы и сайты
-							(далее — Сайты), включая интернет-сайт
-							https:
+							(далее — Сайты), включая интернет-сайт https:
 							отношения в области сбора, хранения, распространения
 							и защиты персональных данных.
 						</p>
@@ -339,7 +338,7 @@ const PolicyPage = () => {
 									<span className='font-semibold'>
 										Email:
 									</span>{' '}
-									admin@delivery-shop22.ru
+									admin@food-market22.ru
 								</p>
 								<p>
 									<span className='font-semibold'>
@@ -351,7 +350,7 @@ const PolicyPage = () => {
 						</div>
 					</div>
 
-					<div className='pt-4 mt-8 text-sm text-muted-foreground border-t border-border'>
+					<div className='pt-4 mt-8 text-sm border-t text-muted-foreground border-border'>
 						<p>Дата вступления в силу: 01 января 2026 года</p>
 						<p>Последнее обновление: 16 июня 2026 года</p>
 					</div>

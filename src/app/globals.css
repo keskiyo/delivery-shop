@@ -285,6 +285,19 @@ body {
 	animation: spin 1s linear infinite;
 }
 
+@keyframes spin-once {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.animate-spin-once {
+	animation: spin-once 0.5s ease-in-out;
+}
+
 .loader {
 	width: 32px;
 	overflow: visible;
