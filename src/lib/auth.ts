@@ -6,7 +6,7 @@ import { render } from '@react-email/render'
 import { betterAuth } from 'better-auth'
 import { mongodbAdapter } from 'better-auth/adapters/mongodb'
 import { admin, phoneNumber } from 'better-auth/plugins'
-import { MongoClient } from 'mongodb'
+import { MongoClient, ObjectId } from 'mongodb'
 import nodemailer from 'nodemailer'
 import { CONFIG } from '../../config/config'
 import { deleteUserAvatar } from '../../utils/deleteUserAvatar'
@@ -116,9 +116,25 @@ export const auth = betterAuth({
 				getTempEmail: phoneNumber => {
 					return `${phoneNumber}${CONFIG.TEMPORARY_EMAIL_DOMAIN}`
 				},
-				getTempName: phoneNumber => {
-					return phoneNumber
+				getTempName: () => {
+					return 'Пользователь'
 				},
+			},
+			callbackOnVerification: async ({ user }, ctx) => {
+				const body = ctx?.body as Record<string, unknown> | undefined
+				const name = typeof body?.name === 'string' ? body.name.trim() : ''
+
+				if (!name || !ObjectId.isValid(user.id)) return
+
+				await db.collection('user').updateOne(
+					{ _id: ObjectId.createFromHexString(user.id) },
+					{
+						$set: {
+							name,
+							updatedAt: new Date(),
+						},
+					},
+				)
 			},
 			allowedAttempts: 3,
 			otpLength: 4,

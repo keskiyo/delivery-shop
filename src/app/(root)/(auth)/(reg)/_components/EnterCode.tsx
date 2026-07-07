@@ -44,6 +44,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
 						phoneNumber,
 						code,
 						disableSession: false,
+						name: regFormData.name,
 						surname: regFormData.surname,
 						birthdayDate: regFormData.birthdayDate,
 						region: regFormData.region,

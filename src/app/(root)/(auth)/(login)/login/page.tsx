@@ -19,6 +19,7 @@ const EnterLoginPage = () => {
 	const [error, setError] = useState<string | null>(null)
 	const [showUnverifiedEmail, setShowUnverifiedEmail] = useState(false)
 	const [showAuthMethodChoice, setShowAuthMethodChoice] = useState(false)
+	const [phoneHasPassword, setPhoneHasPassword] = useState(false)
 	const router = useRouter()
 
 	const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +58,7 @@ const EnterLoginPage = () => {
 				body: JSON.stringify({ login, loginType }),
 			})
 
-			const { exists, verified } = await response.json()
+			const { exists, verified, hasPassword } = await response.json()
 
 			if (!exists) {
 				setError(
@@ -79,6 +80,7 @@ const EnterLoginPage = () => {
 			}
 
 			if (loginType === 'phone') {
+				setPhoneHasPassword(!!hasPassword)
 				setShowAuthMethodChoice(true)
 			} else {
 				router.push(
@@ -159,6 +161,7 @@ const EnterLoginPage = () => {
 		return (
 			<AuthMethodSelector
 				phoneNumber={login}
+				hasPassword={phoneHasPassword}
 				onBackAction={handleBackFromMethodChoice}
 				onMethodSelectAction={handleAuthMethodSelect}
 			/>

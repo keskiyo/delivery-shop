@@ -6,21 +6,23 @@ import { ArrowLeft, Key, Smartphone } from 'lucide-react'
 
 interface AuthMethodSelectorProps {
 	phoneNumber: string
+	hasPassword?: boolean
 	onMethodSelectAction?: (method: 'password' | 'otp') => void
 	onBackAction?: () => void
 }
 
 export const AuthMethodSelector: React.FC<AuthMethodSelectorProps> = ({
 	phoneNumber,
+	hasPassword = true,
 	onMethodSelectAction = () => {},
 	onBackAction = () => {},
 }) => {
 	const buttonStyles = `
-    flex flex-col items-center justify-center
-    p-4 rounded-lg border border-border
-    hover:shadow-md transition-custom cursor-pointer
-    relative group w-full cursor-pointer transition-custom
-  `
+		flex flex-col items-center justify-center
+		p-4 rounded-lg border border-border
+		hover:shadow-md transition-custom cursor-pointer
+		relative group w-full
+	`
 
 	return (
 		<AuthFormLayout>
@@ -31,21 +33,22 @@ export const AuthMethodSelector: React.FC<AuthMethodSelectorProps> = ({
 							Выберите способ входа
 						</h2>
 						<p>
-							Для номера {phoneNumber} доступны следующие
-							варианты:
+							Для номера {phoneNumber} доступны следующие варианты:
 						</p>
 					</div>
 
 					<div className='space-y-4 w-full'>
-						<button
-							onClick={() => onMethodSelectAction('password')}
-							className={buttonStyles}
-						>
-							<div className={iconContainerStyles}>
-								<Key className='h-6 w-6 text-promo group-hover:text-white' />
-							</div>
-							<span className='font-medium'>Войти с паролем</span>
-						</button>
+						{hasPassword && (
+							<button
+								onClick={() => onMethodSelectAction('password')}
+								className={buttonStyles}
+							>
+								<div className={iconContainerStyles}>
+									<Key className='h-6 w-6 text-promo group-hover:text-white' />
+								</div>
+								<span className='font-medium'>Войти с паролем</span>
+							</button>
+						)}
 
 						<button
 							onClick={() => onMethodSelectAction('otp')}
@@ -54,9 +57,7 @@ export const AuthMethodSelector: React.FC<AuthMethodSelectorProps> = ({
 							<div className={iconContainerStyles}>
 								<Smartphone className='h-6 w-6 text-promo group-hover:text-white' />
 							</div>
-							<span className='font-medium'>
-								Войти по SMS-коду
-							</span>
+							<span className='font-medium'>Войти по SMS-коду</span>
 						</button>
 					</div>
 

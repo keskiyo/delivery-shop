@@ -9,7 +9,7 @@ import { isPasswordValid } from '../../../../../utils/validation/passwordValid'
  * /api/auth/set-password:
  *   post:
  *     tags: [Auth]
- *     summary: Завершить регистрацию — задать пароль и профиль (после OTP)
+ *     summary: Завершить регистрацию — задать пароль и профиль после OTP
  *     requestBody:
  *       required: true
  *       content:
@@ -88,49 +88,81 @@ export async function POST(request: NextRequest) {
 		const db = await getDB()
 		const session = await db.collection('session').findOne({
 			token: sessionToken,
-			userId,
-			expiresAt: { $gt: new Date() },
+			$or: [
+				{ userId },
+				{ userId: ObjectId.createFromHexString(userId) },
+			],
 		})
+		const sessionExpiresAt = session?.expiresAt
+			? new Date(session.expiresAt)
+			: null
 
-		if (!session) {
-			return Response.json({ error: 'Сессия регистрации истекла' }, { status: 401 })
+		if (
+			!session ||
+			!sessionExpiresAt ||
+			Number.isNaN(sessionExpiresAt.getTime()) ||
+			sessionExpiresAt <= new Date()
+		) {
+			return Response.json(
+				{ error: 'Сессия регистрации истекла' },
+				{ status: 401 },
+			)
 		}
 
 		const passwordHash = await bcrypt.hash(password, 10)
+		const now = new Date()
 
-		const result = await db
-			.collection('user')
-			.updateOne(
-				{
-					_id: ObjectId.createFromHexString(userId),
-					phoneNumberVerified: true,
+		const result = await db.collection('user').updateOne(
+			{
+				_id: ObjectId.createFromHexString(userId),
+				phoneNumberVerified: true,
+			},
+			{
+				$set: {
+					password: passwordHash,
+					name: name.trim(),
+					surname: surname.trim(),
+					birthdayDate: new Date(birthdayDate),
+					region: region.trim(),
+					location: location.trim(),
+					gender: gender.trim(),
+					card: card?.trim() || '',
+					hasCard: hasCard ?? false,
+					updatedAt: now,
 				},
-				{
-					$set: {
-						password: passwordHash,
-						name: name.trim(),
-						surname: surname.trim(),
-						birthdayDate: new Date(birthdayDate),
-						region: region.trim(),
-						location: location.trim(),
-						gender: gender.trim(),
-						card: card?.trim() || '',
-						hasCard: hasCard ?? false,
-						updatedAt: new Date(),
-					},
-				},
-			)
+			},
+		)
 
 		if (result.matchedCount === 0) {
 			return Response.json(
-				{ error: 'Подтвержденный пользователь не найден' },
+				{ error: 'Подтверждённый пользователь не найден' },
 				{ status: 404 },
 			)
 		}
 
+		await db.collection('account').updateOne(
+			{
+				userId: ObjectId.createFromHexString(userId),
+				providerId: 'credential',
+			},
+			{
+				$set: {
+					accountId: userId,
+					providerId: 'credential',
+					userId: ObjectId.createFromHexString(userId),
+					password: passwordHash,
+					updatedAt: now,
+				},
+				$setOnInsert: {
+					createdAt: now,
+				},
+			},
+			{ upsert: true },
+		)
+
 		return Response.json({ success: true }, { status: 200 })
 	} catch (error) {
-		console.error('Ошибка:', error)
+		console.error('Ошибка завершения регистрации:', error)
 		return Response.json(
 			{ error: 'Внутренняя ошибка сервера' },
 			{ status: 500 },

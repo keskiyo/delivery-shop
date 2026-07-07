@@ -1,0 +1,3588 @@
+{
+	"openapi": "3.0.3",
+	"info": {
+		"title": "Фудмаркет API",
+		"version": "1.0.0",
+		"description": "REST API интернет-магазина «Фудмаркет» (food-market22.ru). Авторизация — cookie-сессия better-auth."
+	},
+	"servers": [
+		{
+			"url": "/",
+			"description": "Текущий хост"
+		},
+		{
+			"url": "https://food-market22.ru",
+			"description": "Продакшен"
+		}
+	],
+	"components": {
+		"securitySchemes": {
+			"cookieAuth": {
+				"type": "apiKey",
+				"in": "cookie",
+				"name": "better-auth.session_token",
+				"description": "Cookie-сессия better-auth. Устанавливается после логина."
+			}
+		},
+		"schemas": {
+			"Error": {
+				"type": "object",
+				"properties": {
+					"error": {
+						"type": "string",
+						"example": "Описание ошибки"
+					}
+				}
+			},
+			"Rating": {
+				"type": "object",
+				"properties": {
+					"count": {
+						"type": "integer",
+						"example": 0
+					},
+					"rate": {
+						"type": "number",
+						"format": "float",
+						"example": 4.8
+					},
+					"average": {
+						"type": "number",
+						"format": "float",
+						"example": 4.8
+					},
+					"distribution": {
+						"type": "object",
+						"properties": {
+							"1": {
+								"type": "integer"
+							},
+							"2": {
+								"type": "integer"
+							},
+							"3": {
+								"type": "integer"
+							},
+							"4": {
+								"type": "integer"
+							},
+							"5": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			},
+			"Product": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"example": "6a4cd6c665ec480829b0e1ec"
+					},
+					"id": {
+						"type": "integer",
+						"example": 133
+					},
+					"img": {
+						"type": "string",
+						"example": "/images/products/img-133.png"
+					},
+					"title": {
+						"type": "string",
+						"example": "Мороженое Село Зеленое пломбир стаканчик 90 г"
+					},
+					"description": {
+						"type": "string"
+					},
+					"basePrice": {
+						"type": "number",
+						"format": "float",
+						"example": 74.99
+					},
+					"discountPercent": {
+						"type": "integer",
+						"example": 10
+					},
+					"rating": {
+						"$ref": "#/components/schemas/Rating"
+					},
+					"categories": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						},
+						"example": [
+							"frozen"
+						]
+					},
+					"weight": {
+						"type": "integer",
+						"example": 90
+					},
+					"quantity": {
+						"type": "integer",
+						"example": 44
+					},
+					"tags": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						},
+						"example": [
+							"actions",
+							"new"
+						]
+					},
+					"article": {
+						"type": "string",
+						"example": "614133"
+					},
+					"brand": {
+						"type": "string",
+						"example": "Село"
+					},
+					"manufacturer": {
+						"type": "string",
+						"example": "Россия"
+					},
+					"isHealthyFood": {
+						"type": "boolean"
+					},
+					"isNonGMO": {
+						"type": "boolean"
+					}
+				}
+			},
+			"User": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"surname": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string",
+						"format": "email"
+					},
+					"phoneNumber": {
+						"type": "string"
+					},
+					"emailVerified": {
+						"type": "boolean"
+					},
+					"phoneNumberVerified": {
+						"type": "boolean"
+					},
+					"gender": {
+						"type": "string"
+					},
+					"birthdayDate": {
+						"type": "string",
+						"format": "date"
+					},
+					"region": {
+						"type": "string"
+					},
+					"location": {
+						"type": "string"
+					},
+					"card": {
+						"type": "string"
+					},
+					"hasCard": {
+						"type": "boolean"
+					},
+					"role": {
+						"type": "string",
+						"enum": [
+							"user",
+							"admin"
+						],
+						"example": "user"
+					}
+				}
+			},
+			"Pagination": {
+				"type": "object",
+				"properties": {
+					"totalCount": {
+						"type": "integer",
+						"example": 61
+					},
+					"products": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Product"
+						}
+					}
+				}
+			}
+		}
+	},
+	"tags": [
+		{
+			"name": "Auth",
+			"description": "Авторизация и профиль"
+		},
+		{
+			"name": "Products",
+			"description": "Товары"
+		},
+		{
+			"name": "Catalog",
+			"description": "Категории каталога"
+		},
+		{
+			"name": "Category",
+			"description": "Товары категории + фильтры"
+		},
+		{
+			"name": "Cart",
+			"description": "Корзина"
+		},
+		{
+			"name": "Orders",
+			"description": "Заказы"
+		},
+		{
+			"name": "Users",
+			"description": "Пользовательские данные"
+		},
+		{
+			"name": "Favorites",
+			"description": "Избранное"
+		},
+		{
+			"name": "Comments",
+			"description": "Комментарии/отзывы"
+		},
+		{
+			"name": "Blog",
+			"description": "Блог"
+		},
+		{
+			"name": "Articles",
+			"description": "Статьи"
+		},
+		{
+			"name": "Admin",
+			"description": "Админ-панель (роль admin)"
+		},
+		{
+			"name": "Search",
+			"description": "Поиск"
+		},
+		{
+			"name": "Uploads",
+			"description": "Файлы"
+		},
+		{
+			"name": "Delivery",
+			"description": "Расписание доставки"
+		},
+		{
+			"name": "Cron",
+			"description": "Служебные задачи"
+		}
+	],
+	"security": [],
+	"paths": {
+		"/api/add-product": {
+			"post": {
+				"tags": [
+					"Products",
+					"Admin"
+				],
+				"summary": "Создать товар",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"id",
+									"title",
+									"description",
+									"basePrice",
+									"weight",
+									"quantity"
+								],
+								"properties": {
+									"id": {
+										"type": "integer"
+									},
+									"title": {
+										"type": "string"
+									},
+									"description": {
+										"type": "string"
+									},
+									"basePrice": {
+										"type": "number"
+									},
+									"weight": {
+										"type": "number"
+									},
+									"quantity": {
+										"type": "integer"
+									},
+									"discountPercent": {
+										"type": "integer"
+									},
+									"categories": {
+										"type": "array",
+										"items": {
+											"type": "string"
+										}
+									},
+									"tags": {
+										"type": "array",
+										"items": {
+											"type": "string"
+										}
+									},
+									"isHealthyFood": {
+										"type": "boolean"
+									},
+									"isNonGMO": {
+										"type": "boolean"
+									},
+									"article": {
+										"type": "string"
+									},
+									"brand": {
+										"type": "string"
+									},
+									"manufacturer": {
+										"type": "string"
+									},
+									"img": {
+										"type": "string",
+										"description": "Необязательно; по умолчанию /images/products/img-{id}.jpeg"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Товар создан (success + product)"
+					},
+					"400": {
+						"description": "Некорректные данные"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/admin/cards": {
+			"get": {
+				"tags": [
+					"Admin"
+				],
+				"summary": "Список карт лояльности с фильтрами (админ)",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "page",
+						"schema": {
+							"type": "integer",
+							"default": 1
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"in": "query",
+						"name": "filter",
+						"schema": {
+							"type": "string",
+							"enum": [
+								"all",
+								"active",
+								"inactive",
+								"free",
+								"assigned"
+							]
+						}
+					},
+					{
+						"in": "query",
+						"name": "searchCardNumber",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "searchOwner",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "{ cards, totalPages, totalItems, totalAllItems }"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"Admin"
+				],
+				"summary": "Добавить карту (16 цифр)",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"cardNumber"
+								],
+								"properties": {
+									"cardNumber": {
+										"type": "string",
+										"pattern": "^\\d{16}$"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Карта добавлена"
+					},
+					"400": {
+						"description": "Неверный номер / карта уже есть"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			},
+			"patch": {
+				"tags": [
+					"Admin"
+				],
+				"summary": "Активировать/деактивировать карту",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "cardNumber",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "action",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"enum": [
+								"activate",
+								"deactivate"
+							]
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Карта обновлена"
+					},
+					"400": {
+						"description": "Нет параметров / неверное действие"
+					},
+					"404": {
+						"description": "Карта не найдена"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			},
+			"delete": {
+				"tags": [
+					"Admin"
+				],
+				"summary": "Удалить карту (и отвязать от пользователя)",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "cardNumber",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Карта удалена"
+					},
+					"400": {
+						"description": "Не указан номер карты"
+					},
+					"404": {
+						"description": "Карта не найдена"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/admin/chat/{orderId}/read": {
+			"post": {
+				"tags": [
+					"Admin"
+				],
+				"summary": "Пометить сообщения заказа прочитанными",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "orderId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/admin/chat/{orderId}": {
+			"get": {
+				"tags": [
+					"Admin"
+				],
+				"summary": "Сообщения чата по заказу",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "orderId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Массив сообщений"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/admin/chat/{orderId}/unread": {
+			"get": {
+				"tags": [
+					"Admin"
+				],
+				"summary": "Есть ли непрочитанные сообщения по заказу",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "orderId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "boolean"
+					}
+				}
+			}
+		},
+		"/api/admin/chat": {
+			"post": {
+				"tags": [
+					"Admin"
+				],
+				"summary": "Отправить сообщение в чат заказа",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"orderId",
+									"message"
+								],
+								"properties": {
+									"orderId": {
+										"type": "string"
+									},
+									"message": {
+										"type": "string"
+									},
+									"userName": {
+										"type": "string"
+									},
+									"userRole": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Созданное сообщение"
+					},
+					"401": {
+						"description": "Не авторизован"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/admin/orders/{orderId}/delivery-time": {
+			"post": {
+				"tags": [
+					"Admin",
+					"Orders"
+				],
+				"summary": "Изменить дату/слот доставки заказа",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "orderId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"deliveryDate",
+									"deliveryTimeSlot"
+								],
+								"properties": {
+									"deliveryDate": {
+										"type": "string"
+									},
+									"deliveryTimeSlot": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Время доставки обновлено"
+					},
+					"400": {
+						"description": "Не хватает полей"
+					},
+					"404": {
+						"description": "Заказ не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/admin/users/{id}/role": {
+			"post": {
+				"tags": [
+					"Admin"
+				],
+				"summary": "Изменить роль пользователя",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"role"
+								],
+								"properties": {
+									"role": {
+										"type": "string",
+										"enum": [
+											"user",
+											"admin",
+											"manager"
+										]
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Роль обновлена"
+					},
+					"404": {
+						"description": "Пользователь не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/admin/users/orders": {
+			"get": {
+				"tags": [
+					"Admin",
+					"Orders"
+				],
+				"summary": "Заказы за период (месяц назад .. послезавтра) + статистика",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "{ orders, stats }"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/admin/users": {
+			"get": {
+				"tags": [
+					"Admin"
+				],
+				"summary": "Список пользователей с фильтрами/сортировкой (админ)",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "page",
+						"schema": {
+							"type": "integer",
+							"default": 1
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"in": "query",
+						"name": "role",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "sortBy",
+						"schema": {
+							"type": "string",
+							"default": "createdAt"
+						}
+					},
+					{
+						"in": "query",
+						"name": "sortDirection",
+						"schema": {
+							"type": "string",
+							"enum": [
+								"asc",
+								"desc"
+							]
+						}
+					},
+					{
+						"in": "query",
+						"name": "id",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "name",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "surname",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "email",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "phoneNumber",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "minAge",
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"in": "query",
+						"name": "maxAge",
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"in": "query",
+						"name": "startDate",
+						"schema": {
+							"type": "string",
+							"format": "date"
+						}
+					},
+					{
+						"in": "query",
+						"name": "endDate",
+						"schema": {
+							"type": "string",
+							"format": "date"
+						}
+					},
+					{
+						"in": "query",
+						"name": "isManager",
+						"schema": {
+							"type": "boolean"
+						}
+					},
+					{
+						"in": "query",
+						"name": "managerRegion",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "managerLocation",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "{ users, totalCount, totalPages }"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/articles": {
+			"get": {
+				"tags": [
+					"Articles"
+				],
+				"summary": "Статьи (лимит или пагинация)",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "articlesLimit",
+						"schema": {
+							"type": "integer"
+						},
+						"description": "Если задан — вернуть N последних статей массивом"
+					},
+					{
+						"in": "query",
+						"name": "startIdx",
+						"schema": {
+							"type": "integer",
+							"default": 0
+						}
+					},
+					{
+						"in": "query",
+						"name": "perPage",
+						"schema": {
+							"type": "integer"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Массив статей или '{ articles, totalCount }'"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/auth/{path}": {
+			"get": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Catch-all better-auth (GET)",
+				"description": "Все GET-эндпоинты better-auth: get-session, ok, list-sessions, verify-email, callback и т.д. Путь подставляется вместо {path}.\n",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"example": "get-session"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Ответ better-auth"
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Catch-all better-auth (POST)",
+				"description": "POST-эндпоинты better-auth: sign-in/email, sign-up/email, sign-out, phone-number/send-otp, phone-number/verify, forget-password, reset-password, change-email, delete-user, admin/* и т.д.\n",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"example": "sign-in/email"
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ответ better-auth"
+					},
+					"401": {
+						"description": "Не авторизован"
+					}
+				}
+			}
+		},
+		"/api/auth/avatar/{userId}/check": {
+			"get": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Есть ли у пользователя аватар",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "{ exists: boolean }"
+					}
+				}
+			}
+		},
+		"/api/auth/avatar/{userId}": {
+			"get": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Аватар пользователя (бинарный, из GridFS)",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Картинка аватара",
+						"content": {
+							"image/jpeg": {}
+						}
+					},
+					"400": {
+						"description": "Неверный userId"
+					},
+					"404": {
+						"description": "Аватар не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/auth/check-login": {
+			"post": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Проверить, существует ли логин и подтверждён ли он",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"login",
+									"loginType"
+								],
+								"properties": {
+									"login": {
+										"type": "string"
+									},
+									"loginType": {
+										"type": "string",
+										"enum": [
+											"email",
+											"phone"
+										]
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "{ exists, verified }"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/auth/check-phone": {
+			"post": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Проверить, зарегистрирован ли номер телефона",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"phoneNumber"
+								],
+								"properties": {
+									"phoneNumber": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "{ exists, userName? }"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/auth/check-session": {
+			"get": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Проверить, авторизован ли пользователь",
+				"description": "Проверяет better-auth сессию, затем кастомную cookie `session`.",
+				"responses": {
+					"200": {
+						"description": "{ isAuth: boolean }",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"isAuth": {
+											"type": "boolean"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/auth/delete-account": {
+			"post": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Удалить аккаунт пользователя (и аватар)",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"userId"
+								],
+								"properties": {
+									"userId": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Аккаунт удалён"
+					},
+					"404": {
+						"description": "Пользователь не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/auth/location": {
+			"post": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Обновить регион и город пользователя",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"userId"
+								],
+								"properties": {
+									"userId": {
+										"type": "string"
+									},
+									"region": {
+										"type": "string"
+									},
+									"location": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Данo обновлено"
+					},
+					"400": {
+						"description": "Нет userId"
+					},
+					"404": {
+						"description": "Пользователь не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/auth/login": {
+			"post": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Вход по телефону и паролю (кастомная сессия)",
+				"description": "Проверяет пароль (bcrypt), создаёт сессию и ставит cookie `session`.",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"phoneNumber",
+									"password"
+								],
+								"properties": {
+									"phoneNumber": {
+										"type": "string"
+									},
+									"password": {
+										"type": "string",
+										"format": "password"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Успешный вход, ставит cookie session"
+					},
+					"401": {
+						"description": "Неверный пароль"
+					},
+					"404": {
+						"description": "Пользователь не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/auth/logout": {
+			"post": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Выход (удаляет кастомную сессию и cookie)",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/auth/reset-phone-pass": {
+			"post": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Сбросить пароль по номеру телефона",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"phoneNumber",
+									"newPassword"
+								],
+								"properties": {
+									"phoneNumber": {
+										"type": "string"
+									},
+									"newPassword": {
+										"type": "string",
+										"format": "password"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Пароль обновлён"
+					},
+					"400": {
+						"description": "Не хватает данных"
+					},
+					"404": {
+						"description": "Пользователь не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/auth/set-password": {
+			"post": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Завершить регистрацию — задать пароль и профиль (после OTP)",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"userId",
+									"sessionToken",
+									"password",
+									"name",
+									"surname",
+									"birthdayDate",
+									"region",
+									"location",
+									"gender"
+								],
+								"properties": {
+									"userId": {
+										"type": "string"
+									},
+									"sessionToken": {
+										"type": "string"
+									},
+									"password": {
+										"type": "string",
+										"format": "password"
+									},
+									"name": {
+										"type": "string"
+									},
+									"surname": {
+										"type": "string"
+									},
+									"birthdayDate": {
+										"type": "string",
+										"format": "date"
+									},
+									"region": {
+										"type": "string"
+									},
+									"location": {
+										"type": "string"
+									},
+									"gender": {
+										"type": "string"
+									},
+									"card": {
+										"type": "string"
+									},
+									"hasCard": {
+										"type": "boolean"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Регистрация завершена"
+					},
+					"400": {
+						"description": "Некорректные данные"
+					},
+					"401": {
+						"description": "Сессия регистрации истекла"
+					},
+					"404": {
+						"description": "Подтверждённый пользователь не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/auth/update-email": {
+			"post": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Обновить email пользователя",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"email",
+									"userId"
+								],
+								"properties": {
+									"email": {
+										"type": "string",
+										"format": "email"
+									},
+									"userId": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Email обновлён"
+					},
+					"400": {
+						"description": "Не хватает данных / неверный userId"
+					},
+					"409": {
+						"description": "Email уже занят"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/auth/update-phone": {
+			"post": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Обновить номер телефона пользователя",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"phoneNumber",
+									"userId"
+								],
+								"properties": {
+									"phoneNumber": {
+										"type": "string"
+									},
+									"userId": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Телефон обновлён"
+					},
+					"400": {
+						"description": "Не хватает данных / неверный userId"
+					},
+					"409": {
+						"description": "Номер уже занят"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/auth/upload-avatar": {
+			"post": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Загрузить аватар пользователя (multipart, в GridFS)",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"avatar",
+									"userId"
+								],
+								"properties": {
+									"avatar": {
+										"type": "string",
+										"format": "binary"
+									},
+									"userId": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "{ success, avatarId }"
+					},
+					"400": {
+						"description": "Нет файла или userId"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/auth/user": {
+			"get": {
+				"tags": [
+					"Auth"
+				],
+				"summary": "Текущий пользователь (better-auth или кастомная сессия)",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Профиль пользователя",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/User"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Не авторизован"
+					},
+					"404": {
+						"description": "Пользователь не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/blog/{category}/{slug}": {
+			"get": {
+				"tags": [
+					"Blog"
+				],
+				"summary": "Статья по категории и slug (инкремент просмотров)",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "category",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "slug",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "role",
+						"schema": {
+							"type": "string"
+						},
+						"description": "admin/manager — не инкрементить просмотры"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "{ category, article }"
+					},
+					"404": {
+						"description": "Категория или статья не найдена"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/blog/{category}": {
+			"get": {
+				"tags": [
+					"Blog"
+				],
+				"summary": "Статьи категории блога (с пагинацией)",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "category",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"schema": {
+							"type": "integer",
+							"default": 1
+						}
+					},
+					{
+						"in": "query",
+						"name": "itemsPerPage",
+						"required": true,
+						"schema": {
+							"type": "integer"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "{ category, articles, totalArticles, totalPages, currentPage }"
+					},
+					"404": {
+						"description": "Категория не найдена"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/blog/categories": {
+			"get": {
+				"tags": [
+					"Blog"
+				],
+				"summary": "Категории блога",
+				"responses": {
+					"200": {
+						"description": "{ success, data }"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/blog/search": {
+			"get": {
+				"tags": [
+					"Blog"
+				],
+				"summary": "Поиск статей блога",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "q",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"minLength": 3
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "{ articles, count, query }"
+					},
+					"400": {
+						"description": "Запрос короче 3 символов"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/blog/user/{id}": {
+			"get": {
+				"tags": [
+					"Blog",
+					"Users"
+				],
+				"summary": "Публичные данные автора (имя, пол)",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "{ gender, fullName }"
+					},
+					"404": {
+						"description": "Пользователь не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/cart": {
+			"get": {
+				"tags": [
+					"Cart"
+				],
+				"summary": "Товары корзины текущего пользователя",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Массив позиций корзины"
+					},
+					"500": {
+						"description": "Ошибка сервера (возвращает [])"
+					}
+				}
+			}
+		},
+		"/api/catalog": {
+			"get": {
+				"tags": [
+					"Catalog"
+				],
+				"summary": "Список категорий каталога",
+				"responses": {
+					"200": {
+						"description": "Массив категорий"
+					},
+					"500": {
+						"description": "Ошибка сервера",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error"
+								}
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"Catalog"
+				],
+				"summary": "Обновить порядок и раскладку категорий (bulk)",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"_id": {
+											"type": "string"
+										},
+										"order": {
+											"type": "integer"
+										},
+										"title": {
+											"type": "string"
+										},
+										"img": {
+											"type": "string"
+										},
+										"colSpan": {
+											"type": "integer"
+										},
+										"tabletColSpan": {
+											"type": "integer"
+										},
+										"mobileColSpan": {
+											"type": "integer"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Число изменённых документов"
+					},
+					"500": {
+						"description": "Ошибка обновления"
+					}
+				}
+			}
+		},
+		"/api/category": {
+			"get": {
+				"tags": [
+					"Category"
+				],
+				"summary": "Товары категории с фильтрами и пагинацией",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "category",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"example": "drinks"
+					},
+					{
+						"in": "query",
+						"name": "startIdx",
+						"schema": {
+							"type": "integer",
+							"default": 0
+						}
+					},
+					{
+						"in": "query",
+						"name": "perPage",
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"in": "query",
+						"name": "filter",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"enum": [
+									"our-production",
+									"healthy-food",
+									"non-gmo"
+								]
+							}
+						},
+						"description": "Можно передавать несколько раз"
+					},
+					{
+						"in": "query",
+						"name": "priceFrom",
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"in": "query",
+						"name": "priceTo",
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"in": "query",
+						"name": "inStock",
+						"schema": {
+							"type": "boolean"
+						}
+					},
+					{
+						"in": "query",
+						"name": "getPriceRangeOnly",
+						"schema": {
+							"type": "boolean"
+						},
+						"description": "Вернуть только min/max цены категории"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Список товаров и totalCount (или priceRange)",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Pagination"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Не передан параметр category"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/comments/{id}/like": {
+			"post": {
+				"tags": [
+					"Comments"
+				],
+				"summary": "Лайк/анлайк комментария",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"userId"
+								],
+								"properties": {
+									"userId": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "{ liked, likeCount }"
+					},
+					"400": {
+						"description": "Не указан userId"
+					},
+					"404": {
+						"description": "Комментарий не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/comments/{id}": {
+			"delete": {
+				"tags": [
+					"Comments"
+				],
+				"summary": "Удалить комментарий (мягко)",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Комментарий помечен удалённым"
+					},
+					"404": {
+						"description": "Комментарий не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			},
+			"patch": {
+				"tags": [
+					"Comments"
+				],
+				"summary": "Редактировать комментарий (только автор)",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"content",
+									"userId"
+								],
+								"properties": {
+									"content": {
+										"type": "string"
+									},
+									"userId": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Комментарий обновлён"
+					},
+					"400": {
+						"description": "Пустой / удалённый комментарий"
+					},
+					"403": {
+						"description": "Нет прав на редактирование"
+					},
+					"404": {
+						"description": "Комментарий не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/comments": {
+			"get": {
+				"tags": [
+					"Comments"
+				],
+				"summary": "Комментарии статьи",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "articleId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "{ comments }"
+					},
+					"400": {
+						"description": "Не указан articleId"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"Comments"
+				],
+				"summary": "Создать комментарий к статье",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"articleId",
+									"content",
+									"authorId",
+									"authorName",
+									"authorRole"
+								],
+								"properties": {
+									"articleId": {
+										"type": "string"
+									},
+									"parentId": {
+										"type": "string",
+										"nullable": true
+									},
+									"content": {
+										"type": "string"
+									},
+									"authorId": {
+										"type": "string"
+									},
+									"authorName": {
+										"type": "string"
+									},
+									"authorRole": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Созданный комментарий"
+					},
+					"400": {
+						"description": "Не хватает данных"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/cron/update-delivery-dates": {
+			"get": {
+				"tags": [
+					"Cron"
+				],
+				"summary": "Пересчёт дат графика доставки (по секрету)",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "secret",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"description": "Значение CRON_SECRET"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Расписание обновлено"
+					},
+					"401": {
+						"description": "Неверный секрет"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/delete-product": {
+			"post": {
+				"tags": [
+					"Products",
+					"Admin"
+				],
+				"summary": "Удалить товар по id",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"id"
+								],
+								"properties": {
+									"id": {
+										"type": "integer"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Товар удалён"
+					},
+					"400": {
+						"description": "ID не передан"
+					},
+					"404": {
+						"description": "Продукт не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/delivery-times": {
+			"get": {
+				"tags": [
+					"Delivery"
+				],
+				"summary": "График доставки (слоты по датам)",
+				"responses": {
+					"200": {
+						"description": "{ schedule }"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"Delivery",
+					"Admin"
+				],
+				"summary": "Сохранить график доставки",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"schedule": {
+										"type": "object"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Сохранено"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/docs": {
+			"get": {
+				"tags": [
+					"Docs"
+				],
+				"summary": "OpenAPI-спека API (JSON)",
+				"description": "Сгенерированная из JSDoc-аннотаций спецификация OpenAPI 3.0.3.",
+				"responses": {
+					"200": {
+						"description": "OpenAPI-документ",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/orders/clear-cart": {
+			"post": {
+				"tags": [
+					"Orders",
+					"Cart"
+				],
+				"summary": "Очистить корзину пользователя",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Корзина очищена"
+					},
+					"401": {
+						"description": "Не авторизован"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/orders": {
+			"post": {
+				"tags": [
+					"Orders"
+				],
+				"summary": "Создать заказ",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"paymentMethod": {
+										"type": "string",
+										"example": "cash_on_delivery"
+									},
+									"finalPrice": {
+										"type": "number"
+									},
+									"totalDiscount": {
+										"type": "number"
+									},
+									"usedBonuses": {
+										"type": "number"
+									},
+									"totalBonuses": {
+										"type": "number"
+									},
+									"deliveryAddress": {
+										"type": "string"
+									},
+									"deliveryTime": {
+										"type": "object",
+										"properties": {
+											"date": {
+												"type": "string"
+											},
+											"timeSlot": {
+												"type": "string"
+											}
+										}
+									},
+									"cartItems": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"productId": {
+													"type": "string"
+												},
+												"quantity": {
+													"type": "integer"
+												},
+												"price": {
+													"type": "number"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Заказ создан (success + order + orderNumber)"
+					},
+					"401": {
+						"description": "Не авторизован"
+					},
+					"404": {
+						"description": "Пользователь не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			},
+			"get": {
+				"tags": [
+					"Orders"
+				],
+				"summary": "Заказы текущего пользователя",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "{ success, orders }"
+					},
+					"401": {
+						"description": "Не авторизован"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/orders/update-after-payment": {
+			"post": {
+				"tags": [
+					"Orders"
+				],
+				"summary": "Пост-оплата — списать бонусы/остатки, подтвердить заказ",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"orderId"
+								],
+								"properties": {
+									"orderId": {
+										"type": "string"
+									},
+									"usedBonuses": {
+										"type": "number"
+									},
+									"earnedBonuses": {
+										"type": "number"
+									},
+									"purchasedProductIds": {
+										"type": "array",
+										"items": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Оплата подтверждена"
+					},
+					"400": {
+						"description": "Нет orderId / неверный формат / недостаточно бонусов"
+					},
+					"401": {
+						"description": "Не авторизован"
+					},
+					"404": {
+						"description": "Заказ или пользователь не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/orders/update-status": {
+			"post": {
+				"tags": [
+					"Orders",
+					"Admin"
+				],
+				"summary": "Обновить статус заказа / статус оплаты",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"orderId"
+								],
+								"properties": {
+									"orderId": {
+										"type": "string"
+									},
+									"status": {
+										"type": "string"
+									},
+									"paymentStatus": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Статус обновлён"
+					},
+					"400": {
+						"description": "Не передан orderId или нет полей"
+					},
+					"404": {
+						"description": "Заказ не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/products/{id}/reviews": {
+			"get": {
+				"tags": [
+					"Comments"
+				],
+				"summary": "Отзывы товара (с пагинацией)",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"schema": {
+							"type": "integer",
+							"default": 5
+						}
+					},
+					{
+						"in": "query",
+						"name": "skip",
+						"schema": {
+							"type": "integer",
+							"default": 0
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "{ reviews, total, hasMore }"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"Comments"
+				],
+				"summary": "Оставить отзыв (обновляет рейтинг товара)",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"userId",
+									"userName",
+									"rating",
+									"comment"
+								],
+								"properties": {
+									"userId": {
+										"type": "string"
+									},
+									"userName": {
+										"type": "string"
+									},
+									"rating": {
+										"type": "integer",
+										"minimum": 1,
+										"maximum": 5
+									},
+									"comment": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Отзыв добавлен"
+					},
+					"400": {
+						"description": "Не все поля / повторный отзыв / товар не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/products/{id}": {
+			"get": {
+				"tags": [
+					"Products"
+				],
+				"summary": "Товар по числовому id",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "integer"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Товар",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Product"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Продукт не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/products/brand": {
+			"get": {
+				"tags": [
+					"Products"
+				],
+				"summary": "Рекомендованные товары («с этим товаром покупают»)",
+				"description": "Случайная подборка товаров в наличии, без дублей по названию, с исключением текущего товара и его копий. Параметр brand опционален и лишь приподнимает товары того же бренда в начале выборки.\n",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "productId",
+						"schema": {
+							"type": "integer"
+						},
+						"description": "Текущий товар (исключается вместе с товарами того же названия)"
+					},
+					{
+						"in": "query",
+						"name": "brand",
+						"schema": {
+							"type": "string"
+						},
+						"description": "Необязательно; товары этого бренда идут первыми"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "sameBrandProducts (уникальные по названию)"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/products": {
+			"get": {
+				"tags": [
+					"Products"
+				],
+				"summary": "Товары по тегу (с пагинацией / случайной выборкой)",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "tag",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"description": "Тег товара (например actions, new)"
+					},
+					{
+						"in": "query",
+						"name": "random",
+						"schema": {
+							"type": "boolean"
+						},
+						"description": "Случайная выборка вместо пагинации"
+					},
+					{
+						"in": "query",
+						"name": "startIdx",
+						"schema": {
+							"type": "integer",
+							"default": 0
+						}
+					},
+					{
+						"in": "query",
+						"name": "perPage",
+						"schema": {
+							"type": "integer"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Товары и общее число",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Pagination"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Не передан tag"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/products/similar-products": {
+			"get": {
+				"tags": [
+					"Products"
+				],
+				"summary": "Похожие товары из той же категории",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "productId",
+						"required": true,
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"in": "query",
+						"name": "category",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"schema": {
+							"type": "integer",
+							"default": 4
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "similarProducts"
+					},
+					"400": {
+						"description": "productId и category обязательны"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/search-full": {
+			"get": {
+				"tags": [
+					"Search"
+				],
+				"summary": "Полнотекстовый поиск товаров (карточки целиком)",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "query",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Массив товаров",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Product"
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Ошибка поиска"
+					}
+				}
+			}
+		},
+		"/api/search-products": {
+			"get": {
+				"tags": [
+					"Search"
+				],
+				"summary": "Поиск товаров для админки (по title/article/description)",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "query",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"minLength": 3
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success + products"
+					},
+					"400": {
+						"description": "Запрос короче 3 символов"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/search": {
+			"get": {
+				"tags": [
+					"Search"
+				],
+				"summary": "Поиск товаров, сгруппированных по категориям",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "query",
+						"schema": {
+							"type": "string"
+						},
+						"description": "Строка поиска (по title и description)"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Массив групп по категориям",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"category": {
+												"type": "string"
+											},
+											"products": {
+												"type": "array",
+												"items": {
+													"type": "object"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Ошибка поиска"
+					}
+				}
+			}
+		},
+		"/api/sitemap-data": {
+			"get": {
+				"tags": [
+					"Uploads"
+				],
+				"summary": "Данные для sitemap (категории, товары, статьи)",
+				"responses": {
+					"200": {
+						"description": "{ categories, products, articleCategories, articles }"
+					},
+					"500": {
+						"description": "Ошибка генерации"
+					}
+				}
+			}
+		},
+		"/api/update-product": {
+			"post": {
+				"tags": [
+					"Products",
+					"Admin"
+				],
+				"summary": "Обновить товар по id",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"id",
+									"title",
+									"description",
+									"basePrice",
+									"weight",
+									"quantity"
+								],
+								"properties": {
+									"id": {
+										"type": "integer"
+									},
+									"title": {
+										"type": "string"
+									},
+									"description": {
+										"type": "string"
+									},
+									"basePrice": {
+										"type": "number"
+									},
+									"weight": {
+										"type": "number"
+									},
+									"quantity": {
+										"type": "integer"
+									},
+									"discountPercent": {
+										"type": "integer"
+									},
+									"categories": {
+										"type": "array",
+										"items": {
+											"type": "string"
+										}
+									},
+									"tags": {
+										"type": "array",
+										"items": {
+											"type": "string"
+										}
+									},
+									"isHealthyFood": {
+										"type": "boolean"
+									},
+									"isNonGMO": {
+										"type": "boolean"
+									},
+									"article": {
+										"type": "string"
+									},
+									"brand": {
+										"type": "string"
+									},
+									"manufacturer": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Товар обновлён"
+					},
+					"400": {
+						"description": "Некорректные данные"
+					},
+					"404": {
+						"description": "Продукт не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/upload-image": {
+			"post": {
+				"tags": [
+					"Uploads",
+					"Admin"
+				],
+				"summary": "Загрузить картинку товара (multipart)",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"image",
+									"imageId"
+								],
+								"properties": {
+									"image": {
+										"type": "string",
+										"format": "binary"
+									},
+									"imageId": {
+										"type": "string",
+										"description": "id товара; сохраняется как img-{imageId}.jpeg"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "success + product (id, img, filename)"
+					},
+					"400": {
+						"description": "Нет файла / не изображение / >5MB"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/uploads/{path}": {
+			"get": {
+				"tags": [
+					"Uploads"
+				],
+				"summary": "Отдать загруженный файл (картинки товаров/аватары)",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"description": "Путь к файлу внутри uploads (например products/img-133.png)"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Бинарный файл",
+						"content": {
+							"image/png": {},
+							"image/jpeg": {},
+							"image/webp": {}
+						}
+					},
+					"404": {
+						"description": "Файл не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/users/favorites/products": {
+			"get": {
+				"tags": [
+					"Favorites"
+				],
+				"summary": "Избранные товары пользователя (карточки, с фильтрами)",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "startIdx",
+						"schema": {
+							"type": "integer",
+							"default": 0
+						}
+					},
+					{
+						"in": "query",
+						"name": "perPage",
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"in": "query",
+						"name": "filter",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"enum": [
+									"our-production",
+									"healthy-food",
+									"non-gmo"
+								]
+							}
+						}
+					},
+					{
+						"in": "query",
+						"name": "priceFrom",
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"in": "query",
+						"name": "priceTo",
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"in": "query",
+						"name": "inStock",
+						"schema": {
+							"type": "boolean"
+						}
+					},
+					{
+						"in": "query",
+						"name": "getPriceRangeOnly",
+						"schema": {
+							"type": "boolean"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "{ products, totalCount, priceRange }"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/users/favorites": {
+			"get": {
+				"tags": [
+					"Favorites"
+				],
+				"summary": "Список id избранных товаров пользователя",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "userId",
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "{ favorites: string[] }"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"Favorites"
+				],
+				"summary": "Добавить/убрать товар из избранного",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"userId",
+									"productId",
+									"action"
+								],
+								"properties": {
+									"userId": {
+										"type": "string"
+									},
+									"productId": {
+										"type": "string"
+									},
+									"action": {
+										"type": "string",
+										"enum": [
+											"add",
+											"remove"
+										]
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "success"
+					},
+					"400": {
+						"description": "Не хватает данных / неверное действие"
+					},
+					"404": {
+						"description": "Пользователь не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/users/purchases": {
+			"get": {
+				"tags": [
+					"Users"
+				],
+				"summary": "Ранее купленные товары пользователя",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "usersPurchasesLimit",
+						"schema": {
+							"type": "integer"
+						},
+						"description": "Если задан — вернуть N товаров массивом"
+					},
+					{
+						"in": "query",
+						"name": "startIdx",
+						"schema": {
+							"type": "integer",
+							"default": 0
+						}
+					},
+					{
+						"in": "query",
+						"name": "perPage",
+						"schema": {
+							"type": "integer"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Массив товаров или '{ products, totalCount }'"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		},
+		"/api/users/update-card": {
+			"post": {
+				"tags": [
+					"Users"
+				],
+				"summary": "Привязать/обновить карту лояльности",
+				"security": [
+					{
+						"cookieAuth": []
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"required": [
+									"userId",
+									"cardNumber"
+								],
+								"properties": {
+									"userId": {
+										"type": "string"
+									},
+									"cardNumber": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Карта обновлена"
+					},
+					"400": {
+						"description": "Не хватает данных / неверный userId"
+					},
+					"404": {
+						"description": "Пользователь не найден"
+					},
+					"500": {
+						"description": "Ошибка сервера"
+					}
+				}
+			}
+		}
+	}
+}

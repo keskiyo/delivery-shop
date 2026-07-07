@@ -1,6 +1,3 @@
-
-
-
 import { getDB } from '@/lib/api-routes'
 import bcrypt from 'bcrypt'
 import { NextRequest, NextResponse } from 'next/server'
@@ -43,25 +40,47 @@ export async function POST(request: NextRequest) {
 		}
 
 		const db = await getDB()
+		const user = await db.collection('user').findOne({ phoneNumber })
 
-		const hashedPassword = await bcrypt.hash(newPassword, 10)
-
-		const result = await db.collection('user').updateOne(
-			{ phoneNumber },
-			{
-				$set: {
-					password: hashedPassword,
-					updatedAt: new Date(),
-				},
-			},
-		)
-
-		if (result.matchedCount === 0) {
+		if (!user) {
 			return NextResponse.json(
 				{ error: 'Пользователь с таким номером не найден' },
 				{ status: 404 },
 			)
 		}
+
+		const hashedPassword = await bcrypt.hash(newPassword, 10)
+		const now = new Date()
+
+		await db.collection('user').updateOne(
+			{ _id: user._id },
+			{
+				$set: {
+					password: hashedPassword,
+					updatedAt: now,
+				},
+			},
+		)
+
+		await db.collection('account').updateOne(
+			{
+				userId: user._id,
+				providerId: 'credential',
+			},
+			{
+				$set: {
+					accountId: user._id.toString(),
+					providerId: 'credential',
+					userId: user._id,
+					password: hashedPassword,
+					updatedAt: now,
+				},
+				$setOnInsert: {
+					createdAt: now,
+				},
+			},
+			{ upsert: true },
+		)
 
 		return NextResponse.json({ success: true }, { status: 200 })
 	} catch (error) {

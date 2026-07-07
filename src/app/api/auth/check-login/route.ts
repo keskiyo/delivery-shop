@@ -48,7 +48,11 @@ export async function POST(request: Request) {
 				? !!user.emailVerified
 				: !!user.phoneNumberVerified
 
-		return NextResponse.json({ exists: true, verified })
+		return NextResponse.json({
+			exists: true,
+			verified,
+			hasPassword: !!user.password,
+		})
 	} catch (error) {
 		console.error('Ошибка при проверке логина:', error)
 		return NextResponse.json({ error: 'Ошибка сервера' }, { status: 500 })
