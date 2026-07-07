@@ -51,16 +51,16 @@ const CategoryPage = async ({
 	const inStock = resolveSearchParams.inStock === 'true'
 
 	return (
-		<div className='px-[max(12px,calc((100%-1208px)/2))] flex flex-col mx-auto'>
+		<div className='mx-auto flex flex-col px-[max(12px,calc((100%_-_1520px)/2))]'>
 			<h1 className='ml-3 xl:ml-0 text-4xl xl:text-5xl text-left font-bold mb-8 mb:mb-10 xl:mb-15 max-w-84 md:max-w-max leading-[150%]'>
 				{TRANSLATIONS[category] || category}
 			</h1>
 			<DropFilter basePath={`/catalog/${category}`} category={category} />
-			<div className='hidden xl:flex'>
+			<div className='hidden 2xl:flex'>
 				<FilterButtons basePath={`/catalog/${category}`} />
 			</div>
-			<div className='mt-6 flex flex-col xl:flex-row gap-x-10'>
-				<div className='hidden xl:flex flex-col w-68 gap-y-10 '>
+			<div className='mt-6 flex min-w-0 flex-col gap-x-10 2xl:flex-row'>
+				<div className='hidden w-68 shrink-0 flex-col gap-y-10 2xl:flex'>
 					<div className='h-11 rounded text-2xl font-bold flex items-center p-2'>
 						Фильтр
 					</div>
@@ -69,8 +69,8 @@ const CategoryPage = async ({
 						category={category}
 					/>
 				</div>
-				<div className='flex flex-col w-full'>
-					<div className='hidden xl:flex'>
+				<div className='flex min-w-0 flex-1 flex-col'>
+					<div className='hidden 2xl:flex'>
 						<FilterControls basePath={`/catalog/${category}`} />
 					</div>
 					<Suspense fallback={<Loader />}>

@@ -4,6 +4,28 @@
 import { getDB } from '@/lib/api-routes'
 import { NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/auth/check-login:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Проверить, существует ли логин и подтверждён ли он
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [login, loginType]
+ *             properties:
+ *               login: { type: string }
+ *               loginType: { type: string, enum: [email, phone] }
+ *     responses:
+ *       200:
+ *         description: '{ exists, verified }'
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: Request) {
 	try {
 		const { login, loginType } = await request.json()

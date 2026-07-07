@@ -9,6 +9,32 @@ interface RouteParams {
 	params: Promise<{ category: string }>
 }
 
+/**
+ * @swagger
+ * /api/blog/{category}:
+ *   get:
+ *     tags: [Blog]
+ *     summary: Статьи категории блога (с пагинацией)
+ *     parameters:
+ *       - in: path
+ *         name: category
+ *         required: true
+ *         schema: { type: string }
+ *       - in: query
+ *         name: page
+ *         schema: { type: integer, default: 1 }
+ *       - in: query
+ *         name: itemsPerPage
+ *         required: true
+ *         schema: { type: integer }
+ *     responses:
+ *       200:
+ *         description: '{ category, articles, totalArticles, totalPages, currentPage }'
+ *       404:
+ *         description: Категория не найдена
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(request: NextRequest, { params }: RouteParams) {
 	try {
 		const { category: categorySlug } = await params

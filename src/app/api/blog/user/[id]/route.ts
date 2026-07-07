@@ -2,6 +2,25 @@ import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/blog/user/{id}:
+ *   get:
+ *     tags: [Blog, Users]
+ *     summary: Публичные данные автора (имя, пол)
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: '{ gender, fullName }'
+ *       404:
+ *         description: Пользователь не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(
 	_request: NextRequest,
 	{ params }: { params: Promise<{ id: string }> },

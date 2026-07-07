@@ -2,6 +2,37 @@ import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/comments/{id}/like:
+ *   post:
+ *     tags: [Comments]
+ *     summary: Лайк/анлайк комментария
+ *     security: [{ cookieAuth: [] }]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: string }
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [userId]
+ *             properties:
+ *               userId: { type: string }
+ *     responses:
+ *       200:
+ *         description: '{ liked, likeCount }'
+ *       400:
+ *         description: Не указан userId
+ *       404:
+ *         description: Комментарий не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(
 	request: NextRequest,
 	{ params }: { params: Promise<{ id: string }> },

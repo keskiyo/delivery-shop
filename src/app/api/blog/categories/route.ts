@@ -5,6 +5,18 @@ import { BlogCategory } from '@/app/(root)/(blog)/blog/categories/types/categori
 import { getDB } from '@/lib/api-routes'
 import { NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/blog/categories:
+ *   get:
+ *     tags: [Blog]
+ *     summary: Категории блога
+ *     responses:
+ *       200:
+ *         description: '{ success, data }'
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET() {
 	try {
 		const db = await getDB()

@@ -7,6 +7,46 @@ import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
 export const revalidate = 3600
 
+/**
+ * @swagger
+ * /api/catalog:
+ *   get:
+ *     tags: [Catalog]
+ *     summary: Список категорий каталога
+ *     responses:
+ *       200:
+ *         description: Массив категорий
+ *       500:
+ *         description: Ошибка сервера
+ *         content:
+ *           application/json:
+ *             schema: { $ref: '#/components/schemas/Error' }
+ *   post:
+ *     tags: [Catalog]
+ *     summary: Обновить порядок и раскладку категорий (bulk)
+ *     security: [{ cookieAuth: [] }]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: array
+ *             items:
+ *               type: object
+ *               properties:
+ *                 _id: { type: string }
+ *                 order: { type: integer }
+ *                 title: { type: string }
+ *                 img: { type: string }
+ *                 colSpan: { type: integer }
+ *                 tabletColSpan: { type: integer }
+ *                 mobileColSpan: { type: integer }
+ *     responses:
+ *       200:
+ *         description: Число изменённых документов
+ *       500:
+ *         description: Ошибка обновления
+ */
 export async function GET() {
 	try {
 		const db = await getDB()

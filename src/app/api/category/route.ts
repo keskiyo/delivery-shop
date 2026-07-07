@@ -9,6 +9,52 @@ import { CONFIG } from '../../../../config/config'
 export const dynamic = 'force-dynamic'
 export const revalidate = 3600
 
+/**
+ * @swagger
+ * /api/category:
+ *   get:
+ *     tags: [Category]
+ *     summary: Товары категории с фильтрами и пагинацией
+ *     parameters:
+ *       - in: query
+ *         name: category
+ *         required: true
+ *         schema: { type: string }
+ *         example: drinks
+ *       - in: query
+ *         name: startIdx
+ *         schema: { type: integer, default: 0 }
+ *       - in: query
+ *         name: perPage
+ *         schema: { type: integer }
+ *       - in: query
+ *         name: filter
+ *         schema: { type: array, items: { type: string, enum: [our-production, healthy-food, non-gmo] } }
+ *         description: Можно передавать несколько раз
+ *       - in: query
+ *         name: priceFrom
+ *         schema: { type: integer }
+ *       - in: query
+ *         name: priceTo
+ *         schema: { type: integer }
+ *       - in: query
+ *         name: inStock
+ *         schema: { type: boolean }
+ *       - in: query
+ *         name: getPriceRangeOnly
+ *         schema: { type: boolean }
+ *         description: Вернуть только min/max цены категории
+ *     responses:
+ *       200:
+ *         description: Список товаров и totalCount (или priceRange)
+ *         content:
+ *           application/json:
+ *             schema: { $ref: '#/components/schemas/Pagination' }
+ *       400:
+ *         description: Не передан параметр category
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(request: Request) {
 	try {
 		const db = await getDB()

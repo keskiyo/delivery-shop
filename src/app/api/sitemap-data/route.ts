@@ -6,6 +6,18 @@ import { NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
 
+/**
+ * @swagger
+ * /api/sitemap-data:
+ *   get:
+ *     tags: [Uploads]
+ *     summary: Данные для sitemap (категории, товары, статьи)
+ *     responses:
+ *       200:
+ *         description: '{ categories, products, articleCategories, articles }'
+ *       500:
+ *         description: Ошибка генерации
+ */
 export async function GET() {
 	try {
 		const db = await getDB()

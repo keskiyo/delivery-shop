@@ -4,6 +4,43 @@ import { ObjectId } from 'mongodb'
 import { NextRequest } from 'next/server'
 import { isPasswordValid } from '../../../../../utils/validation/passwordValid'
 
+/**
+ * @swagger
+ * /api/auth/set-password:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Завершить регистрацию — задать пароль и профиль (после OTP)
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [userId, sessionToken, password, name, surname, birthdayDate, region, location, gender]
+ *             properties:
+ *               userId: { type: string }
+ *               sessionToken: { type: string }
+ *               password: { type: string, format: password }
+ *               name: { type: string }
+ *               surname: { type: string }
+ *               birthdayDate: { type: string, format: date }
+ *               region: { type: string }
+ *               location: { type: string }
+ *               gender: { type: string }
+ *               card: { type: string }
+ *               hasCard: { type: boolean }
+ *     responses:
+ *       200:
+ *         description: Регистрация завершена
+ *       400:
+ *         description: Некорректные данные
+ *       401:
+ *         description: Сессия регистрации истекла
+ *       404:
+ *         description: Подтверждённый пользователь не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: NextRequest) {
 	try {
 		const {

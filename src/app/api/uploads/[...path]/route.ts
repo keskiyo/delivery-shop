@@ -2,6 +2,30 @@ import fs from 'fs'
 import { NextRequest, NextResponse } from 'next/server'
 import path from 'path'
 
+/**
+ * @swagger
+ * /api/uploads/{path}:
+ *   get:
+ *     tags: [Uploads]
+ *     summary: Отдать загруженный файл (картинки товаров/аватары)
+ *     parameters:
+ *       - in: path
+ *         name: path
+ *         required: true
+ *         schema: { type: string }
+ *         description: Путь к файлу внутри uploads (например products/img-133.png)
+ *     responses:
+ *       200:
+ *         description: Бинарный файл
+ *         content:
+ *           image/png: {}
+ *           image/jpeg: {}
+ *           image/webp: {}
+ *       404:
+ *         description: Файл не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(
 	_request: NextRequest,
 	{ params }: { params: Promise<{ path: string[] }> },

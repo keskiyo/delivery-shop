@@ -1,6 +1,50 @@
 import { getDB } from '@/lib/api-routes'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/comments:
+ *   get:
+ *     tags: [Comments]
+ *     summary: Комментарии статьи
+ *     parameters:
+ *       - in: query
+ *         name: articleId
+ *         required: true
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: '{ comments }'
+ *       400:
+ *         description: Не указан articleId
+ *       500:
+ *         description: Ошибка сервера
+ *   post:
+ *     tags: [Comments]
+ *     summary: Создать комментарий к статье
+ *     security: [{ cookieAuth: [] }]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [articleId, content, authorId, authorName, authorRole]
+ *             properties:
+ *               articleId: { type: string }
+ *               parentId: { type: string, nullable: true }
+ *               content: { type: string }
+ *               authorId: { type: string }
+ *               authorName: { type: string }
+ *               authorRole: { type: string }
+ *     responses:
+ *       200:
+ *         description: Созданный комментарий
+ *       400:
+ *         description: Не хватает данных
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(request: NextRequest) {
 	try {
 		const searchParams = request.nextUrl.searchParams

@@ -86,7 +86,7 @@ function BreadcrumbsContent() {
 	})
 
 	return (
-		<nav className='px-[max(12px,calc((100%-1208px)/2))] my-6'>
+		<nav className='px-[max(12px,calc((100%_-_1208px)/2))] my-6'>
 			<ol className='flex flex-wrap items-center gap-4 text-[10px] md:text-xs'>
 				{breadcrumbs.map((item, index) => (
 					<li key={index} className='flex items-center gap-4 text-xs'>
@@ -117,7 +117,7 @@ const Breadcrumbs = () => {
 	return (
 		<Suspense
 			fallback={
-				<nav className='px-[max(12px,calc((100%-1208px)/2))] my-6'>
+				<nav className='px-[max(12px,calc((100%_-_1208px)/2))] my-6'>
 					<Loader />
 				</nav>
 			}

@@ -57,9 +57,7 @@ const GenericListPage = async ({
 				<ProductsSections
 					title={props.pageTitle}
 					products={items as ProductCardProps[]}
-					applyIndexStyles={
-						props.contentType === 'category' ? false : true
-					}
+					applyIndexStyles={false}
 					contentType={props.contentType}
 				/>
 			) : (

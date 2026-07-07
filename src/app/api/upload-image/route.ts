@@ -2,6 +2,31 @@ import fs from 'fs/promises'
 import { NextRequest, NextResponse } from 'next/server'
 import path from 'path'
 
+/**
+ * @swagger
+ * /api/upload-image:
+ *   post:
+ *     tags: [Uploads, Admin]
+ *     summary: Загрузить картинку товара (multipart)
+ *     security: [{ cookieAuth: [] }]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             required: [image, imageId]
+ *             properties:
+ *               image: { type: string, format: binary }
+ *               imageId: { type: string, description: 'id товара; сохраняется как img-{imageId}.jpeg' }
+ *     responses:
+ *       200:
+ *         description: success + product (id, img, filename)
+ *       400:
+ *         description: Нет файла / не изображение / >5MB
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: NextRequest) {
 	try {
 		const formData = await request.formData()

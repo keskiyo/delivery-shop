@@ -5,6 +5,33 @@ import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/users/update-card:
+ *   post:
+ *     tags: [Users]
+ *     summary: Привязать/обновить карту лояльности
+ *     security: [{ cookieAuth: [] }]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [userId, cardNumber]
+ *             properties:
+ *               userId: { type: string }
+ *               cardNumber: { type: string }
+ *     responses:
+ *       200:
+ *         description: Карта обновлена
+ *       400:
+ *         description: Не хватает данных / неверный userId
+ *       404:
+ *         description: Пользователь не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: NextRequest) {
 	const db = await getDB()
 

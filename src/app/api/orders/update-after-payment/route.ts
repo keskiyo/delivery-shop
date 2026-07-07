@@ -6,6 +6,37 @@ import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
 import { getServerUserId } from '../../../../../utils/getServerUserId'
 
+/**
+ * @swagger
+ * /api/orders/update-after-payment:
+ *   post:
+ *     tags: [Orders]
+ *     summary: Пост-оплата — списать бонусы/остатки, подтвердить заказ
+ *     security: [{ cookieAuth: [] }]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [orderId]
+ *             properties:
+ *               orderId: { type: string }
+ *               usedBonuses: { type: number }
+ *               earnedBonuses: { type: number }
+ *               purchasedProductIds: { type: array, items: { type: string } }
+ *     responses:
+ *       200:
+ *         description: Оплата подтверждена
+ *       400:
+ *         description: Нет orderId / неверный формат / недостаточно бонусов
+ *       401:
+ *         description: Не авторизован
+ *       404:
+ *         description: Заказ или пользователь не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: Request) {
 	try {
 		const db = await getDB()

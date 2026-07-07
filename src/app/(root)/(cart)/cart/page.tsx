@@ -220,7 +220,7 @@ const CartPage = () => {
 	}
 
 	return (
-		<div className='px-[max(12px,calc((100%-1208px)/2))] md:px-[max(16px,calc((100%-1208px)/2))] mx-auto'>
+		<div className='px-[max(12px,calc((100%_-_1208px)/2))] md:px-[max(16px,calc((100%_-_1208px)/2))] mx-auto'>
 			<CartHeader itemCount={visibleCartItems.length} title={title} />
 
 			<div className='flex flex-col md:flex-row gap-8 xl:gap-x-15'>

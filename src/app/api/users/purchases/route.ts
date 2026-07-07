@@ -7,6 +7,33 @@ import { NextResponse } from 'next/server'
 import { CONFIG } from '../../../../../config/config'
 export const dynamic = 'force-dynamic'
 
+/**
+ * @swagger
+ * /api/users/purchases:
+ *   get:
+ *     tags: [Users]
+ *     summary: Ранее купленные товары пользователя
+ *     parameters:
+ *       - in: query
+ *         name: userId
+ *         required: true
+ *         schema: { type: string }
+ *       - in: query
+ *         name: usersPurchasesLimit
+ *         schema: { type: integer }
+ *         description: Если задан — вернуть N товаров массивом
+ *       - in: query
+ *         name: startIdx
+ *         schema: { type: integer, default: 0 }
+ *       - in: query
+ *         name: perPage
+ *         schema: { type: integer }
+ *     responses:
+ *       200:
+ *         description: Массив товаров или '{ products, totalCount }'
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(request: Request) {
 	try {
 		const db = await getDB()

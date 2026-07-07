@@ -9,7 +9,7 @@ const SearchBlock = ({
 	onFocusChangeAction: (focused: boolean) => void
 }) => {
 	return (
-		<div className='flex flex-row gap-4 items-center grow text-site-chrome-foreground'>
+		<div className='flex min-w-0 flex-row gap-3 items-center grow text-site-chrome-foreground sm:gap-4'>
 			<Link
 				href='/catalog'
 				className='hidden lg:flex w-auto min-w-18 px-3 py-2 gap-2 items-center shrink-0 rounded transition-colors cursor-pointer bg-promo text-white hover:bg-promo-hover'

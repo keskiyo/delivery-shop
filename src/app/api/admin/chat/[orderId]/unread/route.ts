@@ -5,6 +5,22 @@ import { getDB } from '@/lib/api-routes'
 import { NextResponse } from 'next/server'
 import { getServerUserId } from '../../../../../../../utils/getServerUserId'
 
+/**
+ * @swagger
+ * /api/admin/chat/{orderId}/unread:
+ *   get:
+ *     tags: [Admin]
+ *     summary: Есть ли непрочитанные сообщения по заказу
+ *     security: [{ cookieAuth: [] }]
+ *     parameters:
+ *       - in: path
+ *         name: orderId
+ *         required: true
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: boolean
+ */
 export async function GET(
 	request: Request,
 	{ params }: { params: Promise<{ orderId: string }> },

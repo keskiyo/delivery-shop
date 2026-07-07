@@ -5,6 +5,38 @@ import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/admin/orders/{orderId}/delivery-time:
+ *   post:
+ *     tags: [Admin, Orders]
+ *     summary: Изменить дату/слот доставки заказа
+ *     security: [{ cookieAuth: [] }]
+ *     parameters:
+ *       - in: path
+ *         name: orderId
+ *         required: true
+ *         schema: { type: string }
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [deliveryDate, deliveryTimeSlot]
+ *             properties:
+ *               deliveryDate: { type: string }
+ *               deliveryTimeSlot: { type: string }
+ *     responses:
+ *       200:
+ *         description: Время доставки обновлено
+ *       400:
+ *         description: Не хватает полей
+ *       404:
+ *         description: Заказ не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(
 	request: NextRequest,
 	{ params }: { params: Promise<{ orderId: string }> },

@@ -5,6 +5,29 @@ import { getDB } from '@/lib/api-routes'
 import { GridFSBucket, ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/auth/avatar/{userId}:
+ *   get:
+ *     tags: [Auth]
+ *     summary: Аватар пользователя (бинарный, из GridFS)
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: Картинка аватара
+ *         content:
+ *           image/jpeg: {}
+ *       400:
+ *         description: Неверный userId
+ *       404:
+ *         description: Аватар не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(
 	request: NextRequest,
 	{ params }: { params: Promise<{ userId: string }> },

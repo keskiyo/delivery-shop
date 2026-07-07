@@ -5,6 +5,33 @@ import { getDB } from '@/lib/api-routes'
 import { randomBytes } from 'crypto'
 import { NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Вход по телефону и паролю (кастомная сессия)
+ *     description: Проверяет пароль (bcrypt), создаёт сессию и ставит cookie `session`.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [phoneNumber, password]
+ *             properties:
+ *               phoneNumber: { type: string }
+ *               password: { type: string, format: password }
+ *     responses:
+ *       200:
+ *         description: Успешный вход, ставит cookie session
+ *       401:
+ *         description: Неверный пароль
+ *       404:
+ *         description: Пользователь не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: Request) {
 	try {
 		const { phoneNumber, password } = await request.json()

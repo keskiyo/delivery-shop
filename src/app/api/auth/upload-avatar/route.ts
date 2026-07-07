@@ -5,6 +5,31 @@ import { getDB } from '@/lib/api-routes'
 import { GridFSBucket, ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/auth/upload-avatar:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Загрузить аватар пользователя (multipart, в GridFS)
+ *     security: [{ cookieAuth: [] }]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             required: [avatar, userId]
+ *             properties:
+ *               avatar: { type: string, format: binary }
+ *               userId: { type: string }
+ *     responses:
+ *       200:
+ *         description: '{ success, avatarId }'
+ *       400:
+ *         description: Нет файла или userId
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: NextRequest) {
 	const db = await getDB()
 

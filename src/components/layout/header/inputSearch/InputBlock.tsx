@@ -81,7 +81,7 @@ const InputBlock = ({
 	}
 	return (
 		<div
-			className='relative min-w-65.25 grow text-foreground'
+			className='relative min-w-0 grow text-foreground sm:min-w-65.25'
 			ref={searchRef}
 		>
 			<SearchInput

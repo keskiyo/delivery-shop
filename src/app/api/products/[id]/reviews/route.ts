@@ -8,6 +8,57 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
 
+/**
+ * @swagger
+ * /api/products/{id}/reviews:
+ *   get:
+ *     tags: [Comments]
+ *     summary: Отзывы товара (с пагинацией)
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: string }
+ *       - in: query
+ *         name: limit
+ *         schema: { type: integer, default: 5 }
+ *       - in: query
+ *         name: skip
+ *         schema: { type: integer, default: 0 }
+ *     responses:
+ *       200:
+ *         description: '{ reviews, total, hasMore }'
+ *       500:
+ *         description: Ошибка сервера
+ *   post:
+ *     tags: [Comments]
+ *     summary: Оставить отзыв (обновляет рейтинг товара)
+ *     security: [{ cookieAuth: [] }]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: string }
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [userId, userName, rating, comment]
+ *             properties:
+ *               userId: { type: string }
+ *               userName: { type: string }
+ *               rating: { type: integer, minimum: 1, maximum: 5 }
+ *               comment: { type: string }
+ *     responses:
+ *       201:
+ *         description: Отзыв добавлен
+ *       400:
+ *         description: Не все поля / повторный отзыв / товар не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(
 	request: NextRequest,
 	{ params }: { params: Promise<{ id: string }> },

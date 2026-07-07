@@ -4,6 +4,19 @@
 import { getDB } from '@/lib/api-routes'
 import { NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/auth/logout:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Выход (удаляет кастомную сессию и cookie)
+ *     security: [{ cookieAuth: [] }]
+ *     responses:
+ *       200:
+ *         description: success
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: Request) {
 	try {
 

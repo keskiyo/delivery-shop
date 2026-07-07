@@ -6,6 +6,21 @@ import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
 import { getServerUserId } from '../../../../../utils/getServerUserId'
 
+/**
+ * @swagger
+ * /api/orders/clear-cart:
+ *   post:
+ *     tags: [Orders, Cart]
+ *     summary: Очистить корзину пользователя
+ *     security: [{ cookieAuth: [] }]
+ *     responses:
+ *       200:
+ *         description: Корзина очищена
+ *       401:
+ *         description: Не авторизован
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST() {
 	try {
 		const db = await getDB()

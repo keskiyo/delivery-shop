@@ -20,15 +20,15 @@ const DropFilter = ({
 	const [isFilterOpen, setIsFilterOpen] = useState(false)
 
 	return (
-		<div className='xl:hidden'>
+		<div className='2xl:hidden'>
 			<button
 				onClick={() => setIsFilterOpen(true)}
-				className='ml-3 xl:hidden w-32 h-8 p-2 rounded text-xs flex justify-center items-center transition-custom gap-x-2 bg-brand text-white cursor-pointer'
+				className='ml-3 flex h-8 w-32 cursor-pointer items-center justify-center gap-x-2 rounded bg-brand p-2 text-xs text-white transition-custom 2xl:hidden'
 			>
 				Фильтр
 			</button>
 			<div
-				className={`xl:hidden flex flex-col gap-y-10 fixed top-0 left-0 bg-card h-screen w-full max-w-90 z-50 p-4 overflow-y-auto shadow-article transform origin-left  transition-custom ease-in-out ${isFilterOpen ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}
+				className={`fixed top-0 left-0 z-50 flex h-screen w-full max-w-90 origin-left transform flex-col gap-y-10 overflow-y-auto bg-card p-4 shadow-article transition-custom ease-in-out 2xl:hidden ${isFilterOpen ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}
 			>
 				<div className='flex justify-between items-center mb-4 h-11 rounded text-base font-bold p-2'>
 					<h3 className='flex justify-start items-center'>Фильтр</h3>

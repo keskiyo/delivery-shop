@@ -4,6 +4,32 @@
 import { getDB } from '@/lib/api-routes'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/delete-product:
+ *   post:
+ *     tags: [Products, Admin]
+ *     summary: Удалить товар по id
+ *     security: [{ cookieAuth: [] }]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [id]
+ *             properties:
+ *               id: { type: integer }
+ *     responses:
+ *       200:
+ *         description: Товар удалён
+ *       400:
+ *         description: ID не передан
+ *       404:
+ *         description: Продукт не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: NextRequest) {
 	try {
 		const db = await getDB()

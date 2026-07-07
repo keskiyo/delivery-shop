@@ -2,6 +2,7 @@ import { ProductCardProps } from '@/types/product'
 import Image from 'next/image'
 import Link from 'next/link'
 import { baseUrl } from '../../../../../../../../../utils/baseUrl'
+import { formatPrice } from '../../../../../../../../../utils/formatPrice'
 
 interface SimilarProductsProps {
 	currentProduct: ProductCardProps
@@ -81,7 +82,7 @@ const SimilarProducts = async ({ currentProduct }: SimilarProductsProps) => {
 								{product.title}
 							</div>
 							<div className='text-sm font-bold md:text-base'>
-								{calculatePrice(product)} ₽
+								{formatPrice(calculatePrice(product))} ₽
 							</div>
 						</div>
 					</Link>

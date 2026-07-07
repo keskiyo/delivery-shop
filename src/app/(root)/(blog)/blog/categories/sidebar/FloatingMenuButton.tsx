@@ -8,7 +8,7 @@ export default function FloatingMenuButton({
 	return (
 		<button
 			onClick={onClick}
-			className='fixed z-40 flex items-center justify-center text-white rounded-full cursor-pointer group bottom-16 md:bottom-6 right-6 h-14 w-14 bg-brand shadow-button-default transition-custom hover:scale-105 hover:bg-brand-hover active:scale-95'
+			className='fixed z-40 flex items-center justify-center text-white rounded-full cursor-pointer group bottom-20 md:bottom-6 right-6 h-14 w-14 bg-brand shadow-button-default transition-custom hover:scale-105 hover:bg-brand-hover active:scale-95'
 			aria-label='Открыть меню категорий'
 		>
 			<Menu className='w-6 h-6 transition-transform group-hover:rotate-90' />

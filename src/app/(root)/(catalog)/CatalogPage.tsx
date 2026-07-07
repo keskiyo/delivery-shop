@@ -174,7 +174,7 @@ const CatalogPage = () => {
 		)
 
 	return (
-		<section className='px-[max(12px,calc((100%-1208px)/2))] mx-auto'>
+		<section className='px-[max(12px,calc((100%_-_1208px)/2))] mx-auto'>
 			{isAdmin && (
 				<CatalogAdminControls
 					isEditing={isEditing}

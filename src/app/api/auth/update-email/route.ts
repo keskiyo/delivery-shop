@@ -5,6 +5,33 @@ import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/auth/update-email:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Обновить email пользователя
+ *     security: [{ cookieAuth: [] }]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [email, userId]
+ *             properties:
+ *               email: { type: string, format: email }
+ *               userId: { type: string }
+ *     responses:
+ *       200:
+ *         description: Email обновлён
+ *       400:
+ *         description: Не хватает данных / неверный userId
+ *       409:
+ *         description: Email уже занят
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: NextRequest) {
 	const db = await getDB()
 

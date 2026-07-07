@@ -27,7 +27,7 @@ const ShareButton = () => {
 	if (!mounted) return null
 
 	return (
-		<div className='fixed bg-card top-1/2 -translate-y-1/2 right-0 px-2 py-9 z-50 rounded-bl-[100px] rounded-tl-[100px] shadow-lg'>
+		<div className='fixed right-0 top-1/2 z-50 hidden -translate-y-1/2 rounded-bl-[100px] rounded-tl-[100px] bg-card px-2 py-9 shadow-lg md:block'>
 			<div className='flex flex-col gap-3'>
 				<TelegramShareButton
 					url={url}

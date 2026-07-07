@@ -4,6 +4,25 @@
 import { getDB } from '@/lib/api-routes'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/blog/search:
+ *   get:
+ *     tags: [Blog]
+ *     summary: Поиск статей блога
+ *     parameters:
+ *       - in: query
+ *         name: q
+ *         required: true
+ *         schema: { type: string, minLength: 3 }
+ *     responses:
+ *       200:
+ *         description: '{ articles, count, query }'
+ *       400:
+ *         description: Запрос короче 3 символов
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(request: NextRequest) {
 	try {
 		const { searchParams } = new URL(request.url)

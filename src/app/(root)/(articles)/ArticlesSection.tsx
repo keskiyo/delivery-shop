@@ -9,7 +9,7 @@ const ArticlesSection = ({
 }: ArticlesSectionsProps) => {
 	return (
 		<section>
-			<div className='flex flex-col px-[max(12px,calc((100%-1208px)/2))] mt-20'>
+			<div className='flex flex-col px-[max(12px,calc((100%_-_1208px)/2))] mt-20'>
 				<div className='mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between'>
 					<h2 className='text-2xl xl:text-4xl text-left font-bold'>
 						{title}

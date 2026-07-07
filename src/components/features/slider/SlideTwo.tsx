@@ -7,7 +7,6 @@ const SlideTwo = () => {
 				src='/images/graphics/slide-2.jpeg'
 				alt='Слайд'
 				fill
-				priority
 				className='object-cover'
 				unoptimized
 			/>

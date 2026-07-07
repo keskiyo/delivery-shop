@@ -8,6 +8,33 @@ interface RouteParams {
 	params: Promise<{ category: string; slug: string }>
 }
 
+/**
+ * @swagger
+ * /api/blog/{category}/{slug}:
+ *   get:
+ *     tags: [Blog]
+ *     summary: Статья по категории и slug (инкремент просмотров)
+ *     parameters:
+ *       - in: path
+ *         name: category
+ *         required: true
+ *         schema: { type: string }
+ *       - in: path
+ *         name: slug
+ *         required: true
+ *         schema: { type: string }
+ *       - in: query
+ *         name: role
+ *         schema: { type: string }
+ *         description: admin/manager — не инкрементить просмотры
+ *     responses:
+ *       200:
+ *         description: '{ category, article }'
+ *       404:
+ *         description: Категория или статья не найдена
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(request: NextRequest, { params }: RouteParams) {
 	try {
 		const { category, slug } = await params

@@ -2,6 +2,56 @@ import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/comments/{id}:
+ *   delete:
+ *     tags: [Comments]
+ *     summary: Удалить комментарий (мягко)
+ *     security: [{ cookieAuth: [] }]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: Комментарий помечен удалённым
+ *       404:
+ *         description: Комментарий не найден
+ *       500:
+ *         description: Ошибка сервера
+ *   patch:
+ *     tags: [Comments]
+ *     summary: Редактировать комментарий (только автор)
+ *     security: [{ cookieAuth: [] }]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: string }
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [content, userId]
+ *             properties:
+ *               content: { type: string }
+ *               userId: { type: string }
+ *     responses:
+ *       200:
+ *         description: Комментарий обновлён
+ *       400:
+ *         description: Пустой / удалённый комментарий
+ *       403:
+ *         description: Нет прав на редактирование
+ *       404:
+ *         description: Комментарий не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function DELETE(
 	_request: NextRequest,
 	{ params }: { params: Promise<{ id: string }> },

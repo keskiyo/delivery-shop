@@ -7,6 +7,29 @@ import { CONFIG } from '../../../../config/config'
 export const dynamic = 'force-dynamic'
 export const revalidate = 3600
 
+/**
+ * @swagger
+ * /api/articles:
+ *   get:
+ *     tags: [Articles]
+ *     summary: Статьи (лимит или пагинация)
+ *     parameters:
+ *       - in: query
+ *         name: articlesLimit
+ *         schema: { type: integer }
+ *         description: Если задан — вернуть N последних статей массивом
+ *       - in: query
+ *         name: startIdx
+ *         schema: { type: integer, default: 0 }
+ *       - in: query
+ *         name: perPage
+ *         schema: { type: integer }
+ *     responses:
+ *       200:
+ *         description: Массив статей или '{ articles, totalCount }'
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(request: Request) {
 	try {
 		const db = await getDB()

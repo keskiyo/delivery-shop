@@ -7,6 +7,60 @@ import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
 import { getServerUserId } from '../../../../utils/getServerUserId'
 
+/**
+ * @swagger
+ * /api/orders:
+ *   post:
+ *     tags: [Orders]
+ *     summary: Создать заказ
+ *     security: [{ cookieAuth: [] }]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               paymentMethod: { type: string, example: cash_on_delivery }
+ *               finalPrice: { type: number }
+ *               totalDiscount: { type: number }
+ *               usedBonuses: { type: number }
+ *               totalBonuses: { type: number }
+ *               deliveryAddress: { type: string }
+ *               deliveryTime:
+ *                 type: object
+ *                 properties:
+ *                   date: { type: string }
+ *                   timeSlot: { type: string }
+ *               cartItems:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     productId: { type: string }
+ *                     quantity: { type: integer }
+ *                     price: { type: number }
+ *     responses:
+ *       200:
+ *         description: Заказ создан (success + order + orderNumber)
+ *       401:
+ *         description: Не авторизован
+ *       404:
+ *         description: Пользователь не найден
+ *       500:
+ *         description: Ошибка сервера
+ *   get:
+ *     tags: [Orders]
+ *     summary: Заказы текущего пользователя
+ *     security: [{ cookieAuth: [] }]
+ *     responses:
+ *       200:
+ *         description: '{ success, orders }'
+ *       401:
+ *         description: Не авторизован
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: Request) {
 	try {
 		const db = await getDB()

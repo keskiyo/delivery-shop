@@ -8,6 +8,37 @@ import { CONFIG } from '../../../../../config/config'
 import { calculateAge } from '../../../../../utils/admin/calculateAge'
 import { getShortDecimalId } from '../../../../../utils/admin/getShortDecimalId'
 
+/**
+ * @swagger
+ * /api/admin/users:
+ *   get:
+ *     tags: [Admin]
+ *     summary: Список пользователей с фильтрами/сортировкой (админ)
+ *     security: [{ cookieAuth: [] }]
+ *     parameters:
+ *       - { in: query, name: page, schema: { type: integer, default: 1 } }
+ *       - { in: query, name: limit, schema: { type: integer } }
+ *       - { in: query, name: role, schema: { type: string } }
+ *       - { in: query, name: sortBy, schema: { type: string, default: createdAt } }
+ *       - { in: query, name: sortDirection, schema: { type: string, enum: [asc, desc] } }
+ *       - { in: query, name: id, schema: { type: string } }
+ *       - { in: query, name: name, schema: { type: string } }
+ *       - { in: query, name: surname, schema: { type: string } }
+ *       - { in: query, name: email, schema: { type: string } }
+ *       - { in: query, name: phoneNumber, schema: { type: string } }
+ *       - { in: query, name: minAge, schema: { type: integer } }
+ *       - { in: query, name: maxAge, schema: { type: integer } }
+ *       - { in: query, name: startDate, schema: { type: string, format: date } }
+ *       - { in: query, name: endDate, schema: { type: string, format: date } }
+ *       - { in: query, name: isManager, schema: { type: boolean } }
+ *       - { in: query, name: managerRegion, schema: { type: string } }
+ *       - { in: query, name: managerLocation, schema: { type: string } }
+ *     responses:
+ *       200:
+ *         description: '{ users, totalCount, totalPages }'
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(request: NextRequest) {
 	try {
 		const { searchParams } = new URL(request.url)

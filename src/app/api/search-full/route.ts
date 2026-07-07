@@ -5,6 +5,27 @@ import { ProductCardProps } from '@/types/product'
 import { NextResponse } from 'next/server'
 import { getDB } from '../../../lib/api-routes'
 
+/**
+ * @swagger
+ * /api/search-full:
+ *   get:
+ *     tags: [Search]
+ *     summary: Полнотекстовый поиск товаров (карточки целиком)
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: Массив товаров
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items: { $ref: '#/components/schemas/Product' }
+ *       500:
+ *         description: Ошибка поиска
+ */
 export async function GET(request: Request) {
 	try {
 		const { searchParams } = new URL(request.url)

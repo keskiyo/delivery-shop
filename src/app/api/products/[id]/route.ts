@@ -6,6 +6,28 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
 
+/**
+ * @swagger
+ * /api/products/{id}:
+ *   get:
+ *     tags: [Products]
+ *     summary: Товар по числовому id
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: integer }
+ *     responses:
+ *       200:
+ *         description: Товар
+ *         content:
+ *           application/json:
+ *             schema: { $ref: '#/components/schemas/Product' }
+ *       404:
+ *         description: Продукт не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(
 	request: NextRequest,
 	{ params }: { params: Promise<{ id: string }> },

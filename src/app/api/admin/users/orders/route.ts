@@ -6,6 +6,19 @@ import { NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
 
+/**
+ * @swagger
+ * /api/admin/users/orders:
+ *   get:
+ *     tags: [Admin, Orders]
+ *     summary: Заказы за период (месяц назад .. послезавтра) + статистика
+ *     security: [{ cookieAuth: [] }]
+ *     responses:
+ *       200:
+ *         description: '{ orders, stats }'
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET() {
 	try {
 		const db = await getDB()

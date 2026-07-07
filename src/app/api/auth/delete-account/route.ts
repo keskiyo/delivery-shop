@@ -6,6 +6,30 @@ import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 import { deleteUserAvatar } from '../../../../../utils/deleteUserAvatar'
 
+/**
+ * @swagger
+ * /api/auth/delete-account:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Удалить аккаунт пользователя (и аватар)
+ *     security: [{ cookieAuth: [] }]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [userId]
+ *             properties:
+ *               userId: { type: string }
+ *     responses:
+ *       200:
+ *         description: Аккаунт удалён
+ *       404:
+ *         description: Пользователь не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: NextRequest) {
 	try {
 		const db = await getDB()

@@ -44,6 +44,7 @@ const Actions = async ({
 			viewAllLink={{ text: 'Все акции', href: '/actions' }}
 			products={items}
 			mobileItemsLimit={mobileItemsLimit}
+			compact
 		/>
 	)
 }

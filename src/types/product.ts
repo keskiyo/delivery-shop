@@ -35,4 +35,5 @@ export interface ProductCardProps {
 	isOrderPage?: boolean
 	index?: number
 	isAdminOrderPage?: boolean
+	isCompactView?: boolean
 }

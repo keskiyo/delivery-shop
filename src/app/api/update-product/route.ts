@@ -13,6 +13,45 @@ import {
 	isRecord,
 } from '../../../../utils/apiValidation'
 
+/**
+ * @swagger
+ * /api/update-product:
+ *   post:
+ *     tags: [Products, Admin]
+ *     summary: Обновить товар по id
+ *     security: [{ cookieAuth: [] }]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [id, title, description, basePrice, weight, quantity]
+ *             properties:
+ *               id: { type: integer }
+ *               title: { type: string }
+ *               description: { type: string }
+ *               basePrice: { type: number }
+ *               weight: { type: number }
+ *               quantity: { type: integer }
+ *               discountPercent: { type: integer }
+ *               categories: { type: array, items: { type: string } }
+ *               tags: { type: array, items: { type: string } }
+ *               isHealthyFood: { type: boolean }
+ *               isNonGMO: { type: boolean }
+ *               article: { type: string }
+ *               brand: { type: string }
+ *               manufacturer: { type: string }
+ *     responses:
+ *       200:
+ *         description: Товар обновлён
+ *       400:
+ *         description: Некорректные данные
+ *       404:
+ *         description: Продукт не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: NextRequest) {
 	try {
 		const db = await getDB()

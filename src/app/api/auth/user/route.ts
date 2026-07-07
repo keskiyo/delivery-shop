@@ -9,6 +9,26 @@ import {
 	getValidCustomSession,
 } from '../../../../../utils/auth-helpers'
 
+/**
+ * @swagger
+ * /api/auth/user:
+ *   get:
+ *     tags: [Auth]
+ *     summary: Текущий пользователь (better-auth или кастомная сессия)
+ *     security: [{ cookieAuth: [] }]
+ *     responses:
+ *       200:
+ *         description: Профиль пользователя
+ *         content:
+ *           application/json:
+ *             schema: { $ref: '#/components/schemas/User' }
+ *       401:
+ *         description: Не авторизован
+ *       404:
+ *         description: Пользователь не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(request: Request) {
 	try {
 		const betterAuthSession = await getBetterAuthSession(request.headers)

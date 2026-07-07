@@ -15,13 +15,9 @@ function getItemsPerPAgeByWidth(contentType?: string) {
 		return width < 640 ? 1 : 3
 	}
 
-	if (contentType === 'category') {
-		return width < 768 ? 8 : 6
-	}
-
-	if (width < 768) return 2
-	if (width < 1280) return 3
-	return 4
+	if (width < 768) return 8
+	if (width < 1280) return 12
+	return 16
 }
 
 function PaginationWrapperContent({

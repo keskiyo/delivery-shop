@@ -11,6 +11,34 @@ interface UpdateData {
   paymentStatus?: string
 }
 
+/**
+ * @swagger
+ * /api/orders/update-status:
+ *   post:
+ *     tags: [Orders, Admin]
+ *     summary: Обновить статус заказа / статус оплаты
+ *     security: [{ cookieAuth: [] }]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [orderId]
+ *             properties:
+ *               orderId: { type: string }
+ *               status: { type: string }
+ *               paymentStatus: { type: string }
+ *     responses:
+ *       200:
+ *         description: Статус обновлён
+ *       400:
+ *         description: Не передан orderId или нет полей
+ *       404:
+ *         description: Заказ не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: Request) {
 	try {
 		const db = await getDB()

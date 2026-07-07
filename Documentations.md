@@ -1,6 +1,6 @@
 # Delivery Shop Documentation
 
-Обновлено: 17 июня 2026.
+Обновлено: 7 июля 2026.
 
 Продакшен-домен: `https://food-market22.ru`.
 
@@ -8,18 +8,19 @@
 
 ## Стек
 
-| Часть      | Используется                                             |
-| ---------- | -------------------------------------------------------- |
-| Frontend   | Next.js 16 App Router, React 19, TypeScript              |
-| Styling    | TailwindCSS 4, SASS, CSS tokens из `src/app/globals.css` |
-| Database   | MongoDB через native `mongodb` driver                    |
-| Auth       | Better Auth + кастомная phone/password session           |
-| State      | Redux Toolkit/RTK Query, Zustand, React Context          |
-| Rich text  | TipTap, DOMPurify                                        |
-| UI helpers | Lucide React, React Toastify, Framer Motion              |
-| Maps       | Yandex Maps через `@iminside/react-yandex-maps`          |
-| Email      | Nodemailer (SMTP) + React Email шаблоны                  |
-| SMS/OTP    | SMS.ru через `SMS_API_ID`                                |
+| Часть      | Используется                                                                         |
+| ---------- | ------------------------------------------------------------------------------------ |
+| Frontend   | Next.js 16 App Router, React 19, TypeScript                                          |
+| Styling    | TailwindCSS 4, SASS, CSS tokens из `src/app/globals.css`                             |
+| Database   | MongoDB через native `mongodb` driver                                                |
+| Auth       | Better Auth + кастомная phone/password session                                       |
+| State      | Redux Toolkit/RTK Query, Zustand, React Context                                      |
+| Rich text  | TipTap, DOMPurify                                                                    |
+| UI helpers | Lucide React, React Toastify, Framer Motion                                          |
+| Maps       | Yandex Maps через `@iminside/react-yandex-maps`                                      |
+| Email      | Nodemailer (SMTP) + React Email шаблоны                                              |
+| SMS/OTP    | SMS.ru через `SMS_API_ID`                                                            |
+| API-доки   | Swagger/OpenAPI: `next-swagger-doc` + `swagger-jsdoc`, UI из `swagger-ui-dist` (CDN) |
 
 Mongoose указан в зависимостях, но в проекте не используется. Новые Mongoose-модели добавлять не нужно.
 
@@ -81,28 +82,30 @@ npm run build
 
 ## Основные Маршруты
 
-| Маршрут                      | Назначение                  |
-| ---------------------------- | --------------------------- |
-| `/`                          | Главная страница            |
-| `/catalog`                   | Каталог                     |
-| `/catalog/[category]`        | Категория товаров           |
-| `/catalog/[category]/[slug]` | Страница товара             |
-| `/cart`                      | Корзина и оформление заказа |
-| `/user-profile`              | Профиль пользователя        |
-| `/user-orders`               | Заказы пользователя         |
-| `/favorites`                 | Избранное                   |
-| `/purchases`                 | Покупки                     |
-| `/blog`                      | Блог                        |
-| `/blog/[category]`           | Категория блога             |
-| `/blog/[category]/[slug]`    | Статья                      |
-| `/blog/rules`                | Правила сообщества          |
-| `/contacts`                  | Контакты и карта магазинов  |
-| `/about-us`                  | О компании                  |
-| `/vacancies`                 | Вакансии                    |
-| `/privacy-policy`            | Политика обработки данных   |
-| `/administrator`             | Административная панель     |
-| `/administrator/cms`         | CMS                         |
-| `/administrator/cards`       | Карты лояльности            |
+| Маршрут                      | Назначение                    |
+| ---------------------------- | ----------------------------- |
+| `/`                          | Главная страница              |
+| `/catalog`                   | Каталог                       |
+| `/catalog/[category]`        | Категория товаров             |
+| `/catalog/[category]/[slug]` | Страница товара               |
+| `/cart`                      | Корзина и оформление заказа   |
+| `/user-profile`              | Профиль пользователя          |
+| `/user-orders`               | Заказы пользователя           |
+| `/favorites`                 | Избранное                     |
+| `/purchases`                 | Покупки                       |
+| `/blog`                      | Блог                          |
+| `/blog/[category]`           | Категория блога               |
+| `/blog/[category]/[slug]`    | Статья                        |
+| `/blog/rules`                | Правила сообщества            |
+| `/contacts`                  | Контакты и карта магазинов    |
+| `/about-us`                  | О компании                    |
+| `/vacancies`                 | Вакансии                      |
+| `/privacy-policy`            | Политика обработки данных     |
+| `/administrator`             | Административная панель       |
+| `/administrator/cms`         | CMS                           |
+| `/administrator/cards`       | Карты лояльности              |
+| `/api-docs`                  | Swagger UI (документация API) |
+| `/api/docs`                  | OpenAPI 3.0.3 спека (JSON)    |
 
 ## Авторизация
 
@@ -115,27 +118,54 @@ npm run build
 
 Для серверной проверки пользователя используйте существующие helpers, например `getServerUserId`, вместо ручного чтения cookies в каждом месте.
 
+## API Документация (Swagger)
+
+API документируется через OpenAPI 3.0.3.
+
+| Часть           | Где                                                               |
+| --------------- | ----------------------------------------------------------------- |
+| Swagger UI      | Страница `/api-docs` (`src/app/api-docs/page.tsx`), UI из CDN     |
+| OpenAPI JSON    | `GET /api/docs` (`src/app/api/docs/route.ts`)                     |
+| Генератор спеки | `src/lib/swagger.ts` (`next-swagger-doc` → `createSwaggerSpec`)   |
+| Источник путей  | JSDoc-блоки `@swagger` над хендлерами в `src/app/api/**/route.ts` |
+
+Схема авторизации в спеке — `cookieAuth` (cookie `better-auth.session_token`). UI грузит `swagger-ui-dist` по CDN, что исключает конфликты peer-зависимостей с React 19. «Try it out» шлёт cookie-сессию (`withCredentials`), поэтому защищённые роуты вызываются из-под залогиненного браузера.
+
+При добавлении API-роута добавляйте блок `@swagger` над хендлером — путь автоматически попадёт в документацию. Переиспользуемые схемы (`Product`, `User`, `Error`, `Pagination`) и теги определены в `src/lib/swagger.ts`.
+
 ## Данные И MongoDB
 
 Проект использует native MongoDB driver. Общий helper подключения находится в `src/lib/api-routes.ts`.
 
 Основные коллекции:
 
-| Коллекция           | Назначение                                     |
-| ------------------- | ---------------------------------------------- |
-| `products`          | Товары                                         |
-| `category`          | Категории каталога                             |
-| `orders`            | Заказы                                         |
-| `cart`              | Корзины                                        |
-| `user`              | Пользователи Better Auth и дополнительные поля |
-| `articles`          | Статьи CMS/блога                               |
-| `articleCategories` | Категории блога                                |
-| `comments`          | Комментарии к статьям                          |
-| `siteSettings`      | SEO и настройки сайта                          |
-| `cards`             | Карты лояльности                               |
-| `deliveryTimes`     | Слоты доставки                                 |
+| Коллекция          | Назначение                                                                     |
+| ------------------ | ------------------------------------------------------------------------------ |
+| `products`         | Товары                                                                         |
+| `catalog`          | Категории каталога                                                             |
+| `orders`           | Заказы                                                                         |
+| `user`             | Пользователи Better Auth + доп. поля (в т.ч. `cart`, `favorites`, `purchases`) |
+| `session`          | Сессии (Better Auth и custom phone/password)                                   |
+| `articles`         | Статьи CMS/блога                                                               |
+| `article-category` | Категории блога                                                                |
+| `comments`         | Комментарии к статьям                                                          |
+| `reviews`          | Отзывы к товарам                                                               |
+| `cards`            | Карты лояльности                                                               |
+| `delivery-times`   | Слоты доставки                                                                 |
+| `chatMessages`     | Чат по заказу (админ ↔ клиент)                                                 |
+| `avatars.files`    | Аватары пользователей (GridFS, bucket `avatars`)                               |
 
-Миграции и seed-скрипты (`migrate-mongo`, `seed-db*.ts`) удалены из репозитория. Коллекции создаются при первой записи; начальные данные заливаются вручную или дампом.
+Миграции и общий bulk-seed (`migrate-mongo`, `seed-db*.ts`) удалены из репозитория. Коллекции создаются при первой записи; начальные данные заливаются вручную или дампом.
+
+Для наполнения товарами есть отдельный набор скриптов в gitignored-папке `scripts/` (правила — в `Parser.md`):
+
+| Скрипт                                 | Назначение                                                                          |
+| -------------------------------------- | ----------------------------------------------------------------------------------- |
+| `scripts/parse-kuper-products.mjs`     | Парсер каталога Kuper (Playwright) → чистый `kuper-products.json` + `kuper-images/` |
+| `scripts/lib/kuper-normalize.mjs`      | Общий модуль нормализации (title из slug, категория, бренд, вес, цена)              |
+| `scripts/reconcile-product-images.mjs` | Восстановление соответствия товар↔картинка в БД по MD5-хешу картинок                |
+
+Название товара берётся из slug ссылки, а не из текста страницы. Подробные правила — в `Parser.md`.
 
 ## CMS И Блог
 
@@ -297,6 +327,7 @@ src/app/(root)/(admin)/administrator/_components
 | `README.md`         | Обзор для GitHub                                           |
 | `Documentations.md` | Подробная документация проекта                             |
 | `INFO_STEK.md`      | Описание зависимостей из `package.json`                    |
+| `Parser.md`         | Правила для AI по созданию парсера каталога Kuper          |
 | `AGENTS.md`         | Локальные инструкции для AI-агентов, файл игнорируется git |
 
 ## Известные Особенности

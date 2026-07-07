@@ -11,6 +11,46 @@ interface UserDocument {
 	updatedAt: Date
 }
 
+/**
+ * @swagger
+ * /api/users/favorites:
+ *   get:
+ *     tags: [Favorites]
+ *     summary: Список id избранных товаров пользователя
+ *     parameters:
+ *       - in: query
+ *         name: userId
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: '{ favorites: string[] }'
+ *       500:
+ *         description: Ошибка сервера
+ *   post:
+ *     tags: [Favorites]
+ *     summary: Добавить/убрать товар из избранного
+ *     security: [{ cookieAuth: [] }]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [userId, productId, action]
+ *             properties:
+ *               userId: { type: string }
+ *               productId: { type: string }
+ *               action: { type: string, enum: [add, remove] }
+ *     responses:
+ *       200:
+ *         description: success
+ *       400:
+ *         description: Не хватает данных / неверное действие
+ *       404:
+ *         description: Пользователь не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(request: NextRequest) {
 	try {
 		const { searchParams } = new URL(request.url)

@@ -5,6 +5,34 @@ import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/auth/location:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Обновить регион и город пользователя
+ *     security: [{ cookieAuth: [] }]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [userId]
+ *             properties:
+ *               userId: { type: string }
+ *               region: { type: string }
+ *               location: { type: string }
+ *     responses:
+ *       200:
+ *         description: Данo обновлено
+ *       400:
+ *         description: Нет userId
+ *       404:
+ *         description: Пользователь не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: NextRequest) {
 	try {
 		const db = await getDB()

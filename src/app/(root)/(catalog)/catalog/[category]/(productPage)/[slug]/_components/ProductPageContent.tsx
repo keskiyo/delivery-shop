@@ -41,7 +41,7 @@ const ProductPageContent = ({ product }: { product: ProductCardProps }) => {
 	)
 
 	return (
-		<div className='px-[max(12px,calc((100%-1208px)/2))] md:px-[max(16px,calc((100%-1208px)/2))]'>
+		<div className='px-[max(12px,calc((100%_-_1208px)/2))] md:px-[max(16px,calc((100%_-_1208px)/2))]'>
 			<ProductTitle
 				title={product.title}
 				description={product.description}

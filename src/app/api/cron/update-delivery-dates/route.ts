@@ -5,6 +5,26 @@ import { getDaysDates } from '@/app/(root)/(admin)/administrator/delivery-times/
 import { getDB } from '@/lib/api-routes'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/cron/update-delivery-dates:
+ *   get:
+ *     tags: [Cron]
+ *     summary: Пересчёт дат графика доставки (по секрету)
+ *     parameters:
+ *       - in: query
+ *         name: secret
+ *         required: true
+ *         schema: { type: string }
+ *         description: Значение CRON_SECRET
+ *     responses:
+ *       200:
+ *         description: Расписание обновлено
+ *       401:
+ *         description: Неверный секрет
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(request: NextRequest) {
 	try {
 

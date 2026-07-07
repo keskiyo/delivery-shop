@@ -9,13 +9,13 @@ interface SameBrandProductsProps {
 const SameBrandProducts = async ({
 	currentProduct,
 }: SameBrandProductsProps) => {
-	if (!currentProduct.brand) return null
-
 	let sameBrandProducts: ProductCardProps[] = []
 
 	try {
 		const response = await fetch(
-			`${baseUrl}/api/products/brand?brand=${currentProduct.brand}&productId=${currentProduct.id}`,
+			`${baseUrl}/api/products/brand?brand=${encodeURIComponent(
+				currentProduct.brand || '',
+			)}&productId=${currentProduct.id}`,
 			{
 				next: { revalidate: 3600 },
 			},

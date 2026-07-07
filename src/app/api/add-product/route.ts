@@ -13,6 +13,44 @@ import {
 	isRecord,
 } from '../../../../utils/apiValidation'
 
+/**
+ * @swagger
+ * /api/add-product:
+ *   post:
+ *     tags: [Products, Admin]
+ *     summary: Создать товар
+ *     security: [{ cookieAuth: [] }]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [id, title, description, basePrice, weight, quantity]
+ *             properties:
+ *               id: { type: integer }
+ *               title: { type: string }
+ *               description: { type: string }
+ *               basePrice: { type: number }
+ *               weight: { type: number }
+ *               quantity: { type: integer }
+ *               discountPercent: { type: integer }
+ *               categories: { type: array, items: { type: string } }
+ *               tags: { type: array, items: { type: string } }
+ *               isHealthyFood: { type: boolean }
+ *               isNonGMO: { type: boolean }
+ *               article: { type: string }
+ *               brand: { type: string }
+ *               manufacturer: { type: string }
+ *               img: { type: string, description: 'Необязательно; по умолчанию /images/products/img-{id}.jpeg' }
+ *     responses:
+ *       200:
+ *         description: Товар создан (success + product)
+ *       400:
+ *         description: Некорректные данные
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: NextRequest) {
 	try {
 		const db = await getDB()

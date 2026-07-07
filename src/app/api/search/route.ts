@@ -5,6 +5,34 @@ import { SearchProduct } from '@/types/searchProduct'
 import { NextResponse } from 'next/server'
 import { getDB } from '../../../lib/api-routes'
 
+/**
+ * @swagger
+ * /api/search:
+ *   get:
+ *     tags: [Search]
+ *     summary: Поиск товаров, сгруппированных по категориям
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         schema: { type: string }
+ *         description: Строка поиска (по title и description)
+ *     responses:
+ *       200:
+ *         description: Массив групп по категориям
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   category: { type: string }
+ *                   products:
+ *                     type: array
+ *                     items: { type: object }
+ *       500:
+ *         description: Ошибка поиска
+ */
 export async function GET(request: Request) {
 	try {
 		const { searchParams } = new URL(request.url)

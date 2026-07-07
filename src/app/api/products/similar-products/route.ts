@@ -5,6 +5,32 @@ import { getDB } from '@/lib/api-routes'
 import { ProductCardProps } from '@/types/product'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/products/similar-products:
+ *   get:
+ *     tags: [Products]
+ *     summary: Похожие товары из той же категории
+ *     parameters:
+ *       - in: query
+ *         name: productId
+ *         required: true
+ *         schema: { type: integer }
+ *       - in: query
+ *         name: category
+ *         required: true
+ *         schema: { type: string }
+ *       - in: query
+ *         name: limit
+ *         schema: { type: integer, default: 4 }
+ *     responses:
+ *       200:
+ *         description: similarProducts
+ *       400:
+ *         description: productId и category обязательны
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(request: NextRequest) {
 	try {
 		const { searchParams } = new URL(request.url)

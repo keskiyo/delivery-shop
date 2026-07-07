@@ -8,6 +8,95 @@ interface CardFilter {
 	cardNumber?: { $regex: string; $options: string }
 }
 
+/**
+ * @swagger
+ * /api/admin/cards:
+ *   get:
+ *     tags: [Admin]
+ *     summary: Список карт лояльности с фильтрами (админ)
+ *     security: [{ cookieAuth: [] }]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema: { type: integer, default: 1 }
+ *       - in: query
+ *         name: limit
+ *         schema: { type: integer }
+ *       - in: query
+ *         name: filter
+ *         schema: { type: string, enum: [all, active, inactive, free, assigned] }
+ *       - in: query
+ *         name: searchCardNumber
+ *         schema: { type: string }
+ *       - in: query
+ *         name: searchOwner
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: '{ cards, totalPages, totalItems, totalAllItems }'
+ *       500:
+ *         description: Ошибка сервера
+ *   post:
+ *     tags: [Admin]
+ *     summary: Добавить карту (16 цифр)
+ *     security: [{ cookieAuth: [] }]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [cardNumber]
+ *             properties:
+ *               cardNumber: { type: string, pattern: '^\d{16}$' }
+ *     responses:
+ *       201:
+ *         description: Карта добавлена
+ *       400:
+ *         description: Неверный номер / карта уже есть
+ *       500:
+ *         description: Ошибка сервера
+ *   patch:
+ *     tags: [Admin]
+ *     summary: Активировать/деактивировать карту
+ *     security: [{ cookieAuth: [] }]
+ *     parameters:
+ *       - in: query
+ *         name: cardNumber
+ *         required: true
+ *         schema: { type: string }
+ *       - in: query
+ *         name: action
+ *         required: true
+ *         schema: { type: string, enum: [activate, deactivate] }
+ *     responses:
+ *       200:
+ *         description: Карта обновлена
+ *       400:
+ *         description: Нет параметров / неверное действие
+ *       404:
+ *         description: Карта не найдена
+ *       500:
+ *         description: Ошибка сервера
+ *   delete:
+ *     tags: [Admin]
+ *     summary: Удалить карту (и отвязать от пользователя)
+ *     security: [{ cookieAuth: [] }]
+ *     parameters:
+ *       - in: query
+ *         name: cardNumber
+ *         required: true
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: Карта удалена
+ *       400:
+ *         description: Не указан номер карты
+ *       404:
+ *         description: Карта не найдена
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(request: NextRequest) {
 	try {
 		const searchParams = request.nextUrl.searchParams

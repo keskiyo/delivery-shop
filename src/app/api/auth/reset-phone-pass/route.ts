@@ -5,6 +5,32 @@ import { getDB } from '@/lib/api-routes'
 import bcrypt from 'bcrypt'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/auth/reset-phone-pass:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Сбросить пароль по номеру телефона
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [phoneNumber, newPassword]
+ *             properties:
+ *               phoneNumber: { type: string }
+ *               newPassword: { type: string, format: password }
+ *     responses:
+ *       200:
+ *         description: Пароль обновлён
+ *       400:
+ *         description: Не хватает данных
+ *       404:
+ *         description: Пользователь не найден
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function POST(request: NextRequest) {
 	try {
 		const { phoneNumber, newPassword } = await request.json()

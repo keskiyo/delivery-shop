@@ -1,0 +1,148 @@
+import { createSwaggerSpec } from 'next-swagger-doc'
+
+export const getApiDocs = () => {
+	const spec = createSwaggerSpec({
+		apiFolder: 'src/app/api',
+		definition: {
+			openapi: '3.0.3',
+			info: {
+				title: 'Фудмаркет API',
+				version: '1.0.0',
+				description:
+					'REST API интернет-магазина «Фудмаркет» (food-market22.ru). ' +
+					'Авторизация — cookie-сессия better-auth.',
+			},
+			servers: [
+				{ url: '/', description: 'Текущий хост' },
+				{ url: 'https://food-market22.ru', description: 'Продакшн' },
+			],
+			components: {
+				securitySchemes: {
+					cookieAuth: {
+						type: 'apiKey',
+						in: 'cookie',
+						name: 'better-auth.session_token',
+						description:
+							'Cookie-сессия better-auth. Устанавливается после логина.',
+					},
+				},
+				schemas: {
+					Error: {
+						type: 'object',
+						properties: {
+							error: { type: 'string', example: 'Описание ошибки' },
+						},
+					},
+					Rating: {
+						type: 'object',
+						properties: {
+							count: { type: 'integer', example: 0 },
+							rate: { type: 'number', format: 'float', example: 4.8 },
+							average: { type: 'number', format: 'float', example: 4.8 },
+							distribution: {
+								type: 'object',
+								properties: {
+									'1': { type: 'integer' },
+									'2': { type: 'integer' },
+									'3': { type: 'integer' },
+									'4': { type: 'integer' },
+									'5': { type: 'integer' },
+								},
+							},
+						},
+					},
+					Product: {
+						type: 'object',
+						properties: {
+							_id: { type: 'string', example: '6a4cd6c665ec480829b0e1ec' },
+							id: { type: 'integer', example: 133 },
+							img: {
+								type: 'string',
+								example: '/images/products/img-133.png',
+							},
+							title: {
+								type: 'string',
+								example: 'Мороженое Село Зеленое пломбир стаканчик 90 г',
+							},
+							description: { type: 'string' },
+							basePrice: { type: 'number', format: 'float', example: 74.99 },
+							discountPercent: { type: 'integer', example: 10 },
+							rating: { $ref: '#/components/schemas/Rating' },
+							categories: {
+								type: 'array',
+								items: { type: 'string' },
+								example: ['frozen'],
+							},
+							weight: { type: 'integer', example: 90 },
+							quantity: { type: 'integer', example: 44 },
+							tags: {
+								type: 'array',
+								items: { type: 'string' },
+								example: ['actions', 'new'],
+							},
+							article: { type: 'string', example: '614133' },
+							brand: { type: 'string', example: 'Село' },
+							manufacturer: { type: 'string', example: 'Россия' },
+							isHealthyFood: { type: 'boolean' },
+							isNonGMO: { type: 'boolean' },
+						},
+					},
+					User: {
+						type: 'object',
+						properties: {
+							id: { type: 'string' },
+							name: { type: 'string' },
+							surname: { type: 'string' },
+							email: { type: 'string', format: 'email' },
+							phoneNumber: { type: 'string' },
+							emailVerified: { type: 'boolean' },
+							phoneNumberVerified: { type: 'boolean' },
+							gender: { type: 'string' },
+							birthdayDate: { type: 'string', format: 'date' },
+							region: { type: 'string' },
+							location: { type: 'string' },
+							card: { type: 'string' },
+							hasCard: { type: 'boolean' },
+							role: {
+								type: 'string',
+								enum: ['user', 'admin'],
+								example: 'user',
+							},
+						},
+					},
+					Pagination: {
+						type: 'object',
+						properties: {
+							totalCount: { type: 'integer', example: 61 },
+							products: {
+								type: 'array',
+								items: { $ref: '#/components/schemas/Product' },
+							},
+						},
+					},
+				},
+			},
+			tags: [
+				{ name: 'Auth', description: 'Авторизация и профиль' },
+				{ name: 'Products', description: 'Товары' },
+				{ name: 'Catalog', description: 'Категории каталога' },
+				{ name: 'Category', description: 'Товары категории + фильтры' },
+				{ name: 'Cart', description: 'Корзина' },
+				{ name: 'Orders', description: 'Заказы' },
+				{ name: 'Users', description: 'Пользовательские данные' },
+				{ name: 'Favorites', description: 'Избранное' },
+				{ name: 'Comments', description: 'Комментарии/отзывы' },
+				{ name: 'Blog', description: 'Блог' },
+				{ name: 'Articles', description: 'Статьи' },
+				{ name: 'Admin', description: 'Админ-панель (роль admin)' },
+				{ name: 'Search', description: 'Поиск' },
+				{ name: 'Uploads', description: 'Файлы' },
+				{ name: 'Delivery', description: 'Расписание доставки' },
+				{ name: 'Cron', description: 'Служебные задачи' },
+			],
+			security: [],
+		},
+	})
+
+	return spec
+}

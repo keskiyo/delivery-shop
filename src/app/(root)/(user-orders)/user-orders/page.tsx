@@ -126,7 +126,7 @@ const UserOrdersPage = () => {
 	}
 
 	return (
-		<div className='mx-auto px-[max(12px,calc((100%-1208px)/2))] py-8'>
+		<div className='mx-auto px-[max(12px,calc((100%_-_1208px)/2))] py-8'>
 			<h1 className='mb-6 flex flex-row text-4xl font-bold md:mb-8 md:text-5xl xl:mb-10 xl:text-[64px]'>
 				Заказы
 			</h1>

@@ -5,6 +5,21 @@ import { getDB } from '@/lib/api-routes'
 import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/auth/avatar/{userId}/check:
+ *   get:
+ *     tags: [Auth]
+ *     summary: Есть ли у пользователя аватар
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: '{ exists: boolean }'
+ */
 export async function GET(
 	request: NextRequest,
 	{ params }: { params: Promise<{ userId: string }> },

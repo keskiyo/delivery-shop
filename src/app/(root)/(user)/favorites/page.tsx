@@ -33,7 +33,7 @@ const FavoritesPage = async ({
 	const userId = await getServerUserId()
 
 	return (
-		<div className='px-[max(12px,calc((100%-1208px)/2))] flex flex-col mx-auto'>
+		<div className='px-[max(12px,calc((100%_-_1208px)/2))] flex flex-col mx-auto'>
 			<h1 className='ml-3 xl:ml-0 text-4xl md:text-5xl xl:text-6xl text-left font-bold mb-8 md:mb-10 xl:mb-15 max-w-84 md:max-w-max leading-[150%]'>
 				{TRANSLATIONS[category] || category}
 			</h1>

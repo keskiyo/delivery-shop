@@ -3,6 +3,25 @@
 
 import { getDB } from '@/lib/api-routes'
 import { NextResponse } from 'next/server'
+
+/**
+ * @swagger
+ * /api/admin/chat/{orderId}:
+ *   get:
+ *     tags: [Admin]
+ *     summary: Сообщения чата по заказу
+ *     security: [{ cookieAuth: [] }]
+ *     parameters:
+ *       - in: path
+ *         name: orderId
+ *         required: true
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: Массив сообщений
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(
 	request: Request,
 	{ params }: { params: Promise<{ orderId: string }> },

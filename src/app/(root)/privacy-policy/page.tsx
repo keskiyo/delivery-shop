@@ -1,6 +1,6 @@
 const PolicyPage = () => {
 	return (
-		<section className='w-full mx-auto px-[max(30px,calc((100%-1208px)/2))]'>
+		<section className='w-full mx-auto px-[max(30px,calc((100%_-_1208px)/2))]'>
 			<div className='w-full text-foreground'>
 				<h1 className='text-4xl md:text-5xl lg:text-[64px] font-bold leading-[150%] mb-8'>
 					Политика обработки персональных данных

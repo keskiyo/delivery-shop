@@ -8,6 +8,23 @@ import {
 	validateCustomSession,
 } from '../../../../../utils/auth-helpers'
 
+/**
+ * @swagger
+ * /api/auth/check-session:
+ *   get:
+ *     tags: [Auth]
+ *     summary: Проверить, авторизован ли пользователь
+ *     description: Проверяет better-auth сессию, затем кастомную cookie `session`.
+ *     responses:
+ *       200:
+ *         description: '{ isAuth: boolean }'
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 isAuth: { type: boolean }
+ */
 export async function GET(request: Request) {
 	try {
 		const betterAuthSession = await getBetterAuthSession(request.headers)

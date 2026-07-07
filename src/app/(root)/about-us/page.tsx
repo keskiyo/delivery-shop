@@ -46,7 +46,7 @@ const AboutUsPage = () => {
 					/>
 				</div>
 
-				<div className='px-[max(12px,calc((100%-1208px)/2))] flex flex-col mx-auto relative xl:block'>
+				<div className='px-[max(12px,calc((100%_-_1208px)/2))] flex flex-col mx-auto relative xl:block'>
 					<div className='max-w-167.25 w-full relative z-5 xl:ml-10 mt-10'>
 						<h1 className='text-4xl md:text-5xl lg:text-[64px] font-bold leading-[150%] mb-1 xl:mb-4'>
 							О компании

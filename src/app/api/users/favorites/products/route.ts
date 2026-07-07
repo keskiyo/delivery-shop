@@ -9,6 +9,44 @@ import { CONFIG } from '../../../../../../config/config'
 
 export const dynamic = 'force-dynamic'
 
+/**
+ * @swagger
+ * /api/users/favorites/products:
+ *   get:
+ *     tags: [Favorites]
+ *     summary: Избранные товары пользователя (карточки, с фильтрами)
+ *     parameters:
+ *       - in: query
+ *         name: userId
+ *         required: true
+ *         schema: { type: string }
+ *       - in: query
+ *         name: startIdx
+ *         schema: { type: integer, default: 0 }
+ *       - in: query
+ *         name: perPage
+ *         schema: { type: integer }
+ *       - in: query
+ *         name: filter
+ *         schema: { type: array, items: { type: string, enum: [our-production, healthy-food, non-gmo] } }
+ *       - in: query
+ *         name: priceFrom
+ *         schema: { type: integer }
+ *       - in: query
+ *         name: priceTo
+ *         schema: { type: integer }
+ *       - in: query
+ *         name: inStock
+ *         schema: { type: boolean }
+ *       - in: query
+ *         name: getPriceRangeOnly
+ *         schema: { type: boolean }
+ *     responses:
+ *       200:
+ *         description: '{ products, totalCount, priceRange }'
+ *       500:
+ *         description: Ошибка сервера
+ */
 export async function GET(request: Request) {
 	try {
 		const db = await getDB()
